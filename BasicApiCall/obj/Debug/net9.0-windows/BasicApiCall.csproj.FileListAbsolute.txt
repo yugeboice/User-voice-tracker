@@ -1,0 +1,1 @@
+C:\Users\yufanli\lumina-test\BasicApiCall\obj\Debug\net9.0-windows\BasicApiCall.csproj.AssemblyReference.cache
