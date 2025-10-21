@@ -1,0 +1,47 @@
+# Ignore BasicApiCall folder
+BasicApiCall/
+
+# .NET build artifacts
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.deps.json
+*.runtimeconfig.json
+
+# Visual Studio / VS Code
+.vs/
+.vscode/
+*.suo
+*.user
+*.sln.docstates
+
+# NuGet packages
+packages/
+*.nupkg
+*.snupkg
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows specific
+*.lnk
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
