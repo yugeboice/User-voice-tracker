@@ -1,6 +1,3 @@
-# Ignore BasicApiCall folder
-BasicApiCall/
-
 # .NET build artifacts
 bin/
 obj/
