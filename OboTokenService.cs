@@ -17,12 +17,16 @@ namespace LuminaSearchConsole
 
         public OboTokenService()
         {
+            var tokenCacheHelper = new TokenCacheHelper();
+            
             _app = PublicClientApplicationBuilder
                 .Create(ClientId)
                 .WithAuthority(new Uri($"https://login.microsoftonline.com/{TenantId}"))
                 .WithRedirectUri(RedirectUri)
-                .WithDefaultRedirectUri() // This helps avoid port conflicts
                 .Build();
+                
+            // Enable token cache persistence
+            tokenCacheHelper.EnableSerialization(_app.UserTokenCache);
         }
 
         /// <summary>
@@ -52,11 +56,10 @@ namespace LuminaSearchConsole
                     }
                 }
 
-                // Interactive login - force interactive mode, no device code flow
+                // Interactive login - use SelectAccount to show account picker
                 var interactiveResult = await _app
                     .AcquireTokenInteractive(new[] { LuminaScope })
-                    .WithPrompt(Prompt.ForceLogin) // Always force interactive login
-                    .WithParentActivityOrWindow(IntPtr.Zero) // Use system browser
+                    .WithPrompt(Prompt.SelectAccount) // Show account selection instead of forcing login
                     .ExecuteAsync();
 
                 return interactiveResult.AccessToken;
@@ -76,6 +79,74 @@ namespace LuminaSearchConsole
             foreach (var account in accounts)
             {
                 await _app.RemoveAsync(account);
+            }
+            
+            // Also clear the persistent cache file
+            try
+            {
+                var cacheFilePath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "LuminaSearchConsole",
+                    "msalcache.bin");
+                if (File.Exists(cacheFilePath))
+                {
+                    File.Delete(cacheFilePath);
+                }
+            }
+            catch
+            {
+                // Ignore cache deletion errors
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Helper class for token cache persistence
+    /// </summary>
+    public class TokenCacheHelper
+    {
+        private static readonly string CacheFilePath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            "LuminaSearchConsole",
+            "msalcache.bin");
+
+        public void EnableSerialization(ITokenCache tokenCache)
+        {
+            tokenCache.SetBeforeAccess(BeforeAccessNotification);
+            tokenCache.SetAfterAccess(AfterAccessNotification);
+        }
+
+        private void BeforeAccessNotification(TokenCacheNotificationArgs args)
+        {
+            if (File.Exists(CacheFilePath))
+            {
+                try
+                {
+                    var cacheData = File.ReadAllBytes(CacheFilePath);
+                    args.TokenCache.DeserializeMsalV3(cacheData);
+                }
+                catch
+                {
+                    // If cache is corrupted, delete it
+                    File.Delete(CacheFilePath);
+                }
+            }
+        }
+
+        private void AfterAccessNotification(TokenCacheNotificationArgs args)
+        {
+            if (args.HasStateChanged)
+            {
+                try
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(CacheFilePath));
+                    var cacheData = args.TokenCache.SerializeMsalV3();
+                    File.WriteAllBytes(CacheFilePath, cacheData);
+                }
+                catch
+                {
+                    // Ignore cache write errors
+                }
             }
         }
     }
