@@ -26,6 +26,10 @@ namespace LuminaSearchConsole
             // This service handles OAuth 2.0 token acquisition
             builder.Services.AddScoped<OboTokenService>();
 
+            // Register ApiLogService as singleton to track API calls across all requests
+            // This helps partners understand API usage patterns
+            builder.Services.AddSingleton<LuminaSearchConsole.Services.ApiLogService>();
+
             var app = builder.Build();
 
             // Configure error handling
