@@ -112,7 +112,10 @@ namespace LuminaSearchConsole.Controllers
 
             try
             {
-                _apiLogService.AddLog("Lumina Search", "BatchSearch", $"Executing batch search for: '{model.Query}', TopResults: {model.TopResults}");
+                var stockQuery = $"{model.Query} stock price";
+                var newsQuery = $"{model.Query} latest news";
+                _apiLogService.AddLog("Lumina Search", "BatchSearch", 
+                    $"Executing batch search for: '{model.Query}'\nQuery 1 (Stock): '{stockQuery}'\nQuery 2 (News): '{newsQuery}'\nTopResults per query: {model.TopResults}");
                 
                 var searchService = new LuminaSearchService(token);
                 
