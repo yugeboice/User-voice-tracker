@@ -55,12 +55,24 @@ namespace LuminaSearchConsole.Controllers
         {
             try
             {
-                _apiLogService.AddLog("MSAL Auth", "GetUserToken", "Requesting OAuth 2.0 access token...");
+                _apiLogService.AddLog("MSAL Auth", "GetUserToken", 
+                    "📋 OAuth 2.0 Configuration:\n" +
+                    "  TenantId: 72f988bf-86f1-41af-91ab-2d7cd011db47\n" +
+                    "  ClientId: 63696678-8070-4259-91d9-292979db05c4\n" +
+                    "  RedirectUri: http://localhost:8400\n" +
+                    "  Scopes: api://a2075f49-fffd-4cf2-b59d-0e3b1e8c964d/.default\n" +
+                    "  Cache: %LocalAppData%\\LuminaSearchConsole\\msalcache.bin\n" +
+                    "  Method: Silent token acquisition (with fallback to interactive)");
                 
                 var token = await _oboTokenService.GetUserTokenAsync();
                 HttpContext.Session.SetString("AccessToken", token);
                 
-                _apiLogService.AddLog("MSAL Auth", "GetUserToken", $"✅ Token acquired successfully. Length: {token.Length} chars");
+                var tokenPreview = token.Length > 50 ? token.Substring(0, 50) + "..." : token;
+                _apiLogService.AddLog("MSAL Auth", "GetUserToken", 
+                    $"✅ Token acquired successfully\n" +
+                    $"  Token length: {token.Length} chars\n" +
+                    $"  Token preview: {tokenPreview}\n" +
+                    $"  Storage: Session (30min timeout)");
                 
                 TempData["Message"] = "Successfully logged in! You can now search.";
                 return RedirectToAction("Index");
@@ -115,15 +127,40 @@ namespace LuminaSearchConsole.Controllers
                 var stockQuery = $"{model.Query} stock price";
                 var newsQuery = $"{model.Query} latest news";
                 _apiLogService.AddLog("Lumina Search", "BatchSearch", 
-                    $"Executing batch search for: '{model.Query}'\nQuery 1 (Stock): '{stockQuery}'\nQuery 2 (News): '{newsQuery}'\nTopResults per query: {model.TopResults}");
+                    $"📋 API Configuration:\n" +
+                    $"  Endpoint: https://luminaserviceapi-test-westus.copilotlumina.com\n" +
+                    $"  Method: POST /search\n" +
+                    $"  Auth: Bearer token (OAuth 2.0)\n\n" +
+                    $"📝 Batch Search Request:\n" +
+                    $"  Company: '{model.Query}'\n" +
+                    $"  Query 1 (Stock): '{stockQuery}'\n" +
+                    $"  Query 2 (News): '{newsQuery}'\n\n" +
+                    $"⚙️ Parameters:\n" +
+                    $"  TopN per query: {model.TopResults}\n" +
+                    $"  Source: WebWithBing\n" +
+                    $"  Market: en-US\n" +
+                    $"  Language: en\n" +
+                    $"  Recency: 7 days\n" +
+                    $"  MaxSemanticDocumentLength: 200");
                 
                 var searchService = new LuminaSearchService(token);
                 
                 // Execute batch search for company
+                var startTime = DateTime.Now;
                 var batchResult = await searchService.ExecuteBatchCompanySearchAsync(model.Query, model.TopResults);
+                var duration = (DateTime.Now - startTime).TotalMilliseconds;
+                
+                // Build result preview with first title from each category
+                var stockPreview = batchResult.StockResults.Count > 0 ? 
+                    $"\n  First stock result: {batchResult.StockResults[0].Title}" : "";
+                var newsPreview = batchResult.NewsResults.Count > 0 ? 
+                    $"\n  First news result: {batchResult.NewsResults[0].Title}" : "";
                 
                 _apiLogService.AddLog("Lumina Search", "BatchSearch", 
-                    $"✅ Found {batchResult.StockResults.Count} stock results and {batchResult.NewsResults.Count} news results");
+                    $"✅ Search completed\n" +
+                    $"  Stock results: {batchResult.StockResults.Count}\n" +
+                    $"  News results: {batchResult.NewsResults.Count}\n" +
+                    $"  Response time: {duration:F0}ms{stockPreview}{newsPreview}");
                 
                 model.BatchSearchResult = batchResult;
                 model.IsBatchSearch = true;
@@ -185,12 +222,29 @@ namespace LuminaSearchConsole.Controllers
 
             try
             {
-                _apiLogService.AddLog("Lumina Search", "WebSearch", $"Executing web search for: '{model.Query}', TopResults: {model.TopResults}");
+                _apiLogService.AddLog("Lumina Search", "WebSearch", 
+                    $"📋 API Configuration:\n" +
+                    $"  Endpoint: https://luminaserviceapi-test-westus.copilotlumina.com\n" +
+                    $"  Method: POST /search\n" +
+                    $"  Auth: Bearer token (OAuth 2.0)\n\n" +
+                    $"📝 Web Search Request:\n" +
+                    $"  Query: '{model.Query}'\n" +
+                    $"  TopN: {model.TopResults}\n" +
+                    $"  Source: WebWithBing\n" +
+                    $"  Market: en-US\n" +
+                    $"  Language: en");
                 
                 var searchService = new LuminaSearchService(token);
+                var startTime = DateTime.Now;
                 var results = await searchService.ExecuteWebSearchAsync(model.Query, model.TopResults);
+                var duration = (DateTime.Now - startTime).TotalMilliseconds;
                 
-                _apiLogService.AddLog("Lumina Search", "WebSearch", $"✅ Found {results.Count} results");
+                var firstResult = results.Count > 0 ? $"\n  First result: {results[0].Title}" : "";
+                
+                _apiLogService.AddLog("Lumina Search", "WebSearch", 
+                    $"✅ Search completed\n" +
+                    $"  Results found: {results.Count}\n" +
+                    $"  Response time: {duration:F0}ms{firstResult}");
                 
                 model.SearchResults = results;
                 model.IsBatchSearch = false;
@@ -255,32 +309,47 @@ namespace LuminaSearchConsole.Controllers
 
             try
             {
-                _apiLogService.AddLog("Lumina Open", "OpenContent", $"Opening content from URL: {request.Url}");
+                _apiLogService.AddLog("Lumina Open", "OpenContent", 
+                    $"📋 API Configuration:\n" +
+                    $"  Endpoint: https://luminaserviceapi-test-westus.copilotlumina.com\n" +
+                    $"  Method: POST /open\n" +
+                    $"  Auth: Bearer token (OAuth 2.0)\n\n" +
+                    $"📝 Open Request:\n" +
+                    $"  RefId (URL): {request.Url}\n" +
+                    $"  Purpose: Extract full page content");
                 
                 var searchService = new LuminaSearchService(token);
+                var startTime = DateTime.Now;
                 var content = await searchService.OpenContentAsync(request.Url);
+                var duration = (DateTime.Now - startTime).TotalMilliseconds;
                 
-                _apiLogService.AddLog("Lumina Open", "OpenContent", $"✅ Content retrieved. Length: {content.Length} chars");
+                var contentPreview = content.Length > 100 ? content.Substring(0, 100) + "..." : content;
                 
-                return Json(new { success = true, content = content });
+                _apiLogService.AddLog("Lumina Open", "OpenContent", 
+                    $"✅ Content retrieved\n" +
+                    $"  Content length: {content.Length} chars\n" +
+                    $"  Response time: {duration:F0}ms\n" +
+                    $"  Preview: {contentPreview}");
+                
+                return Json(new { success = true, content = content, logsUpdated = true });
             }
             catch (ArgumentException ex)
             {
                 _logger.LogWarning("Invalid URL parameter: {Message}", ex.Message);
                 _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Validation error: {ex.Message}", false);
-                return Json(new { success = false, error = ex.Message });
+                return Json(new { success = false, error = ex.Message, logsUpdated = true });
             }
             catch (HttpRequestException ex)
             {
                 _logger.LogError(ex, "Network error while opening content from: {Url}", request.Url);
                 _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Network error: {ex.Message}", false);
-                return Json(new { success = false, error = "Network error. Please check your internet connection and try again." });
+                return Json(new { success = false, error = "Network error. Please check your internet connection and try again.", logsUpdated = true });
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Open content failed for URL: {Url}", request.Url);
                 _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Error: {ex.Message}", false);
-                return Json(new { success = false, error = $"Failed to open content: {ex.Message}" });
+                return Json(new { success = false, error = $"Failed to open content: {ex.Message}", logsUpdated = true });
             }
         }
 

@@ -352,9 +352,19 @@
                         // Format and display content
                         const formattedContent = formatContent(data.content);
                         document.getElementById('contentBody').innerHTML = formattedContent;
+                        
+                        // Show notification about new logs if logs were updated
+                        if (data.logsUpdated) {
+                            showLogNotification();
+                        }
                     } else {
                         document.getElementById('contentBody').innerHTML = 
                             '<div class="alert alert-danger">Error: ' + data.error + '</div>';
+                        
+                        // Show notification about new logs even on error
+                        if (data.logsUpdated) {
+                            showLogNotification();
+                        }
                     }
                 })
                 .catch(error => {
@@ -362,6 +372,44 @@
                     document.getElementById('contentBody').innerHTML = 
                         '<div class="alert alert-danger">Error loading content: ' + error.message + '</div>';
                 });
+            }
+            
+            function showLogNotification() {
+                // Show a notification that logs have been updated
+                const logsSection = document.querySelector('.api-logs-section');
+                if (logsSection) {
+                    // Add a visual indicator
+                    const notification = document.createElement('div');
+                    notification.className = 'alert alert-info alert-dismissible fade show position-fixed';
+                    notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; max-width: 400px;';
+                    notification.innerHTML = `
+                        <strong>📋 API Logs Updated</strong><br>
+                        New Lumina Open API call logged. <a href="#" onclick="scrollToLogs(); return false;">View logs</a>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    `;
+                    document.body.appendChild(notification);
+                    
+                    // Auto-dismiss after 5 seconds
+                    setTimeout(() => {
+                        if (notification.parentElement) {
+                            notification.remove();
+                        }
+                    }, 5000);
+                }
+            }
+            
+            function scrollToLogs() {
+                const logsSection = document.querySelector('.api-logs-section');
+                if (logsSection) {
+                    logsSection.scrollIntoView({ behavior: 'smooth' });
+                    // Auto-expand if collapsed
+                    const logsBody = document.getElementById('apiLogsBody');
+                    const toggleIcon = document.getElementById('logsToggleIcon');
+                    if (logsBody.style.display === 'none') {
+                        logsBody.style.display = 'block';
+                        toggleIcon.textContent = '🔽';
+                    }
+                }
             }
             
             function formatContent(content) {
