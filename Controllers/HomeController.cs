@@ -379,6 +379,44 @@ namespace LuminaSearchConsole.Controllers
         #region Utility Methods
 
         /// <summary>
+        /// Get updated API logs as HTML for AJAX refresh
+        /// </summary>
+        [HttpGet]
+        public IActionResult GetLogs()
+        {
+            var logs = _apiLogService.GetLogs();
+            
+            if (logs == null || !logs.Any())
+            {
+                return Json(new { success = true, logsHtml = "<p class='text-muted'>No API calls logged yet.</p>" });
+            }
+
+            var logsHtml = new System.Text.StringBuilder();
+            logsHtml.AppendLine("<div class='api-logs'>");
+
+            foreach (var log in logs)
+            {
+                var statusClass = log.Success ? "success" : "danger";
+                var statusIcon = log.Success ? "✅" : "❌";
+                
+                logsHtml.AppendLine($@"
+                <div class='log-entry log-{statusClass}'>
+                    <div class='log-header'>
+                        <span class='log-icon'>{statusIcon}</span>
+                        <span class='log-time'>{log.Timestamp:HH:mm:ss.fff}</span>
+                        <span class='log-api badge bg-{statusClass}'>{System.Web.HttpUtility.HtmlEncode(log.ApiName)}</span>
+                        <span class='log-operation'>{System.Web.HttpUtility.HtmlEncode(log.Operation)}</span>
+                    </div>
+                    <div class='log-details'>{System.Web.HttpUtility.HtmlEncode(log.Details)}</div>
+                </div>");
+            }
+
+            logsHtml.AppendLine("</div>");
+            
+            return Json(new { success = true, logsHtml = logsHtml.ToString() });
+        }
+
+        /// <summary>
         /// Error page for unhandled exceptions
         /// </summary>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
