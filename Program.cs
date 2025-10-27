@@ -4,44 +4,44 @@ namespace LuminaSearchConsole
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("🚀 Lumina API 搜索控制台演示");
-            Console.WriteLine("=============================");
+            Console.WriteLine("🚀 Lumina API Search Console Demo");
+            Console.WriteLine("==================================");
             Console.WriteLine();
 
             try
             {
-                // Step 1: 用户身份验证获取token
-                Console.WriteLine("📋 Step 1: 用户身份验证");
-                Console.WriteLine("即将打开浏览器进行登录...");
+                // Step 1: User authentication to get token
+                Console.WriteLine("📋 Step 1: User Authentication");
+                Console.WriteLine("Opening browser for login...");
                 Console.WriteLine();
 
                 var oboTokenService = new OboTokenService();
                 var token = await oboTokenService.GetUserTokenAsync();
-                Console.WriteLine($"✅ Token获取成功!");
-                Console.WriteLine($"🔑 Token预览: {token[..Math.Min(50, token.Length)]}...");
+                Console.WriteLine($"✅ Token acquired successfully!");
+                Console.WriteLine($"🔑 Token preview: {token[..Math.Min(50, token.Length)]}...");
                 Console.WriteLine();
 
-                // Step 2 & 3: 初始化搜索服务并执行搜索
-                Console.WriteLine("📋 Step 2 & 3: 初始化搜索服务并执行搜索");
+                // Step 2 & 3: Initialize search service and execute search
+                Console.WriteLine("📋 Step 2 & 3: Initialize search service and execute search");
                 var searchService = new LuminaSearchService(token);
-                Console.WriteLine("✅ LuminaSearchService 初始化完成");
+                Console.WriteLine("✅ LuminaSearchService initialized successfully");
                 Console.WriteLine();
 
-                // 执行基础搜索 (按照文档Step 3示例)
+                // Execute basic search (following the Step 3 example from documentation)
                 await searchService.ExecuteBasicSearchAsync();
 
                 Console.WriteLine();
-                Console.WriteLine("🎉 演示完成!");
+                Console.WriteLine("🎉 Demo completed!");
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ 发生错误: {ex.Message}");
-                Console.WriteLine($"详细信息: {ex}");
+                Console.WriteLine($"❌ An error occurred: {ex.Message}");
+                Console.WriteLine($"Details: {ex}");
             }
 
             Console.WriteLine();
-            Console.WriteLine("按任意键退出...");
+            Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
     }
