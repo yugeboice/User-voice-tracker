@@ -46,6 +46,52 @@
             }
         </div>
 
+        <!-- API Logs Section -->
+        @if (Model.IsAuthenticated)
+        {
+            <div class="api-logs-section mt-4">
+                <div class="card">
+                    <div class="card-header" style="cursor: pointer;" onclick="toggleLogs()">
+                        <h5 class="mb-0">
+                            <span id="logsToggleIcon">▶️</span>
+                            📋 API Call Logs
+                            <small class="text-muted">(Click to expand/collapse)</small>
+                        </h5>
+                    </div>
+                    <div class="card-body" id="apiLogsBody" style="display: none;">
+                        <p class="text-info">
+                            <strong>💡 For Partners:</strong> This section shows the API calls made during authentication and search operations.
+                            It helps you understand the flow and parameters used with MSAL Auth, Lumina Search, and Lumina Open APIs.
+                        </p>
+                        @if (Model.ApiLogs != null && Model.ApiLogs.Any())
+                        {
+                            <div class="api-logs">
+                                @foreach (var log in Model.ApiLogs)
+                                {
+                                    var statusClass = log.Success ? "success" : "danger";
+                                    var statusIcon = log.Success ? "✅" : "❌";
+                                    
+                                    <div class="log-entry log-@statusClass">
+                                        <div class="log-header">
+                                            <span class="log-icon">@statusIcon</span>
+                                            <span class="log-time">@log.Timestamp.ToString("HH:mm:ss.fff")</span>
+                                            <span class="log-api badge bg-@statusClass">@log.ApiName</span>
+                                            <span class="log-operation">@log.Operation</span>
+                                        </div>
+                                        <div class="log-details">@log.Details</div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="text-muted">No API calls logged yet. Perform authentication or search to see logs.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
         <!-- Search Section -->
         @if (Model.IsAuthenticated)
         {
@@ -243,6 +289,20 @@
 
 @section Scripts {
     <script>
+        // Toggle API logs panel
+        function toggleLogs() {
+            const logsBody = document.getElementById('apiLogsBody');
+            const toggleIcon = document.getElementById('logsToggleIcon');
+            
+            if (logsBody.style.display === 'none') {
+                logsBody.style.display = 'block';
+                toggleIcon.textContent = '🔽';
+            } else {
+                logsBody.style.display = 'none';
+                toggleIcon.textContent = '▶️';
+            }
+        }
+        
         // Auto-focus on search input if authenticated
         @if (Model.IsAuthenticated)
         {
@@ -322,6 +382,81 @@
     </script>
 
     <style>
+        .api-logs-section {
+            margin-bottom: 2rem;
+        }
+        
+        .api-logs-section .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .api-logs-section .card-header:hover {
+            background-color: #e9ecef;
+        }
+        
+        .api-logs {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: #f8f9fa;
+        }
+        
+        .log-entry {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 4px solid #6c757d;
+            background-color: white;
+        }
+        
+        .log-entry.log-success {
+            border-left-color: #28a745;
+        }
+        
+        .log-entry.log-danger {
+            border-left-color: #dc3545;
+        }
+        
+        .log-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .log-icon {
+            font-size: 1.2em;
+        }
+        
+        .log-time {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            color: #6c757d;
+        }
+        
+        .log-api {
+            font-size: 0.75em;
+            padding: 2px 8px;
+        }
+        
+        .log-operation {
+            color: #495057;
+            font-weight: 500;
+        }
+        
+        .log-details {
+            margin-left: 35px;
+            color: #6c757d;
+            font-size: 0.9em;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        
         .news-title:hover {
             color: #004499 !important;
         }

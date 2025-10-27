@@ -14,16 +14,14 @@ namespace LuminaSearchConsole.Controllers
 
         private readonly OboTokenService _oboTokenService;
         private readonly ILogger<HomeController> _logger;
+        private readonly Services.ApiLogService _apiLogService;
 
-        public HomeController(OboTokenService oboTokenService, ILogger<HomeController> logger)
+        public HomeController(OboTokenService oboTokenService, ILogger<HomeController> logger, Services.ApiLogService apiLogService)
         {
             _oboTokenService = oboTokenService;
             _logger = logger;
+            _apiLogService = apiLogService;
         }
-
-        #endregion
-
-        #region Page Actions
 
         #endregion
 
@@ -38,7 +36,8 @@ namespace LuminaSearchConsole.Controllers
             var token = HttpContext.Session.GetString("AccessToken");
             var model = new SearchViewModel
             {
-                IsAuthenticated = !string.IsNullOrEmpty(token)
+                IsAuthenticated = !string.IsNullOrEmpty(token),
+                ApiLogs = _apiLogService.GetLogs()
             };
             return View(model);
         }
@@ -56,8 +55,12 @@ namespace LuminaSearchConsole.Controllers
         {
             try
             {
+                _apiLogService.AddLog("MSAL Auth", "GetUserToken", "Requesting OAuth 2.0 access token...");
+                
                 var token = await _oboTokenService.GetUserTokenAsync();
                 HttpContext.Session.SetString("AccessToken", token);
+                
+                _apiLogService.AddLog("MSAL Auth", "GetUserToken", $"✅ Token acquired successfully. Length: {token.Length} chars");
                 
                 TempData["Message"] = "Successfully logged in! You can now search.";
                 return RedirectToAction("Index");
@@ -65,6 +68,7 @@ namespace LuminaSearchConsole.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Authentication failed");
+                _apiLogService.AddLog("MSAL Auth", "GetUserToken", $"❌ Error: {ex.Message}", false);
                 
                 string userMessage = "Login failed. Please try again.";
                 if (ex.Message.Contains("AADSTS"))
@@ -108,37 +112,49 @@ namespace LuminaSearchConsole.Controllers
 
             try
             {
+                _apiLogService.AddLog("Lumina Search", "BatchSearch", $"Executing batch search for: '{model.Query}', TopResults: {model.TopResults}");
+                
                 var searchService = new LuminaSearchService(token);
                 
                 // Execute batch search for company
                 var batchResult = await searchService.ExecuteBatchCompanySearchAsync(model.Query, model.TopResults);
                 
+                _apiLogService.AddLog("Lumina Search", "BatchSearch", 
+                    $"✅ Found {batchResult.StockResults.Count} stock results and {batchResult.NewsResults.Count} news results");
+                
                 model.BatchSearchResult = batchResult;
                 model.IsBatchSearch = true;
                 model.IsAuthenticated = true;
                 model.HasSearched = true;
+                model.ApiLogs = _apiLogService.GetLogs();
                 
                 return View("Index", model);
             }
             catch (ArgumentException ex)
             {
                 _logger.LogWarning("Invalid search parameter: {Message}", ex.Message);
+                _apiLogService.AddLog("Lumina Search", "BatchSearch", $"❌ Validation error: {ex.Message}", false);
                 TempData["Error"] = ex.Message;
                 model.IsAuthenticated = true;
+                model.ApiLogs = _apiLogService.GetLogs();
                 return View("Index", model);
             }
             catch (HttpRequestException ex)
             {
                 _logger.LogError(ex, "Network error during batch search for: {Query}", model.Query);
+                _apiLogService.AddLog("Lumina Search", "BatchSearch", $"❌ Network error: {ex.Message}", false);
                 TempData["Error"] = "Network error. Please check your internet connection and try again.";
                 model.IsAuthenticated = true;
+                model.ApiLogs = _apiLogService.GetLogs();
                 return View("Index", model);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Batch search failed for query: {Query}", model.Query);
+                _apiLogService.AddLog("Lumina Search", "BatchSearch", $"❌ Error: {ex.Message}", false);
                 TempData["Error"] = $"Search failed: {ex.Message}";
                 model.IsAuthenticated = true;
+                model.ApiLogs = _apiLogService.GetLogs();
                 return View("Index", model);
             }
         }
@@ -166,35 +182,46 @@ namespace LuminaSearchConsole.Controllers
 
             try
             {
+                _apiLogService.AddLog("Lumina Search", "WebSearch", $"Executing web search for: '{model.Query}', TopResults: {model.TopResults}");
+                
                 var searchService = new LuminaSearchService(token);
                 var results = await searchService.ExecuteWebSearchAsync(model.Query, model.TopResults);
+                
+                _apiLogService.AddLog("Lumina Search", "WebSearch", $"✅ Found {results.Count} results");
                 
                 model.SearchResults = results;
                 model.IsBatchSearch = false;
                 model.IsAuthenticated = true;
                 model.HasSearched = true;
+                model.ApiLogs = _apiLogService.GetLogs();
                 
                 return View("Index", model);
             }
             catch (ArgumentException ex)
             {
                 _logger.LogWarning("Invalid search parameter: {Message}", ex.Message);
+                _apiLogService.AddLog("Lumina Search", "WebSearch", $"❌ Validation error: {ex.Message}", false);
                 TempData["Error"] = ex.Message;
                 model.IsAuthenticated = true;
+                model.ApiLogs = _apiLogService.GetLogs();
                 return View("Index", model);
             }
             catch (HttpRequestException ex)
             {
                 _logger.LogError(ex, "Network error during simple search for: {Query}", model.Query);
+                _apiLogService.AddLog("Lumina Search", "WebSearch", $"❌ Network error: {ex.Message}", false);
                 TempData["Error"] = "Network error. Please check your internet connection and try again.";
                 model.IsAuthenticated = true;
+                model.ApiLogs = _apiLogService.GetLogs();
                 return View("Index", model);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Simple search failed for query: {Query}", model.Query);
+                _apiLogService.AddLog("Lumina Search", "WebSearch", $"❌ Error: {ex.Message}", false);
                 TempData["Error"] = $"Search failed: {ex.Message}";
                 model.IsAuthenticated = true;
+                model.ApiLogs = _apiLogService.GetLogs();
                 return View("Index", model);
             }
         }
@@ -225,24 +252,31 @@ namespace LuminaSearchConsole.Controllers
 
             try
             {
+                _apiLogService.AddLog("Lumina Open", "OpenContent", $"Opening content from URL: {request.Url}");
+                
                 var searchService = new LuminaSearchService(token);
                 var content = await searchService.OpenContentAsync(request.Url);
+                
+                _apiLogService.AddLog("Lumina Open", "OpenContent", $"✅ Content retrieved. Length: {content.Length} chars");
                 
                 return Json(new { success = true, content = content });
             }
             catch (ArgumentException ex)
             {
                 _logger.LogWarning("Invalid URL parameter: {Message}", ex.Message);
+                _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Validation error: {ex.Message}", false);
                 return Json(new { success = false, error = ex.Message });
             }
             catch (HttpRequestException ex)
             {
                 _logger.LogError(ex, "Network error while opening content from: {Url}", request.Url);
+                _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Network error: {ex.Message}", false);
                 return Json(new { success = false, error = "Network error. Please check your internet connection and try again." });
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Open content failed for URL: {Url}", request.Url);
+                _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Error: {ex.Message}", false);
                 return Json(new { success = false, error = $"Failed to open content: {ex.Message}" });
             }
         }

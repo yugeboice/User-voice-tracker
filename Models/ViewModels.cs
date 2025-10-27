@@ -26,6 +26,9 @@ namespace LuminaSearchConsole.Models
         
         /// <summary>Flag to indicate which result type to display</summary>
         public bool IsBatchSearch { get; set; }
+        
+        /// <summary>API call logs for displaying execution flow</summary>
+        public List<Services.ApiLogEntry>? ApiLogs { get; set; }
     }
 
     /// <summary>
