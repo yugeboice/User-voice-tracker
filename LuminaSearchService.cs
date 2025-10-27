@@ -123,6 +123,11 @@ namespace LuminaSearchConsole
         /// </summary>
         public async Task<BatchSearchResult> ExecuteBatchCompanySearchAsync(string companyName, int topN = 5)
         {
+            if (string.IsNullOrWhiteSpace(companyName))
+            {
+                throw new ArgumentException("Company name cannot be empty", nameof(companyName));
+            }
+
             var searchRequest = new SearchRequest
             {
                 Requests = new List<SearchRequestItem>
@@ -162,7 +167,9 @@ namespace LuminaSearchConsole
 
             try
             {
+                Console.WriteLine($"Executing batch search for company: {companyName}");
                 var searchResult = await _proxy.SearchAsync(searchRequest);
+                Console.WriteLine($"✅ Batch search completed successfully");
                 
                 // Parse results into two categories
                 var stockResults = new List<Models.SearchResult>();
@@ -210,9 +217,15 @@ namespace LuminaSearchConsole
                     NewsResults = newsResults
                 };
             }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"❌ Network error during batch search: {ex.Message}");
+                throw new Exception($"Network error occurred while searching for '{companyName}'. Please check your internet connection.", ex);
+            }
             catch (Exception ex)
             {
-                throw new Exception($"Batch search failed: {ex.Message}", ex);
+                Console.WriteLine($"❌ Batch search failed: {ex.Message}");
+                throw new Exception($"Batch search failed for '{companyName}': {ex.Message}", ex);
             }
         }
 
@@ -221,6 +234,16 @@ namespace LuminaSearchConsole
         /// </summary>
         public async Task<List<Models.SearchResult>> ExecuteWebSearchAsync(string query, int topN = 5)
         {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                throw new ArgumentException("Search query cannot be empty", nameof(query));
+            }
+
+            if (topN <= 0 || topN > 50)
+            {
+                throw new ArgumentOutOfRangeException(nameof(topN), "TopN must be between 1 and 50");
+            }
+
             var searchRequest = new SearchRequest
             {
                 Requests = new List<SearchRequestItem>
@@ -243,7 +266,10 @@ namespace LuminaSearchConsole
 
             try
             {
+                Console.WriteLine($"Executing web search for query: {query}");
                 var searchResult = await _proxy.SearchAsync(searchRequest);
+                Console.WriteLine($"✅ Web search completed, found {searchResult?.Results?.Count ?? 0} results");
+                
                 var results = new List<Models.SearchResult>();
 
                 if (searchResult?.Results != null && searchResult.Results.Count > 0)
@@ -262,9 +288,15 @@ namespace LuminaSearchConsole
 
                 return results;
             }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"❌ Network error during web search: {ex.Message}");
+                throw new Exception($"Network error occurred while searching for '{query}'. Please check your internet connection.", ex);
+            }
             catch (Exception ex)
             {
-                throw new Exception($"Search failed: {ex.Message}", ex);
+                Console.WriteLine($"❌ Web search failed: {ex.Message}");
+                throw new Exception($"Search failed for query '{query}': {ex.Message}", ex);
             }
         }
 
@@ -304,9 +336,19 @@ namespace LuminaSearchConsole
         /// </summary>
         public async Task<string> OpenContentAsync(string url)
         {
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                throw new ArgumentException("URL cannot be empty", nameof(url));
+            }
+
+            if (!Uri.TryCreate(url, UriKind.Absolute, out _))
+            {
+                throw new ArgumentException($"Invalid URL format: {url}", nameof(url));
+            }
+
             try
             {
-                Console.WriteLine($"Opening content from URL: {url}");
+                Console.WriteLine($"📄 Opening content from URL: {url}");
 
                 var openRequest = new OpenRequest
                 {
@@ -336,18 +378,28 @@ namespace LuminaSearchConsole
                         throw new Exception("Content was filtered or failed to load. This may be due to content restrictions.");
                     }
                     
-                    Console.WriteLine($"Successfully retrieved content. Length: {content.Length} characters");
+                    Console.WriteLine($"✅ Successfully retrieved content. Length: {content.Length} characters");
                     return content;
                 }
                 else
                 {
-                    throw new Exception("No content retrieved from the URL");
+                    Console.WriteLine($"⚠️ No content retrieved from URL: {url}");
+                    throw new Exception($"No content available from the URL: {url}");
                 }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"❌ Network error while opening content: {ex.Message}");
+                throw new Exception($"Network error occurred while accessing '{url}'. Please check your internet connection.", ex);
+            }
+            catch (ArgumentException)
+            {
+                throw; // Re-throw validation errors as-is
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error opening content: {ex.Message}");
-                throw new Exception($"Failed to open content: {ex.Message}", ex);
+                Console.WriteLine($"❌ Error opening content: {ex.Message}");
+                throw new Exception($"Failed to open content from '{url}': {ex.Message}", ex);
             }
         }
     }

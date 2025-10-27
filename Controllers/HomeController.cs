@@ -38,8 +38,19 @@ namespace LuminaSearchConsole.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Login failed");
-                TempData["Error"] = $"Login failed: {ex.Message}";
+                _logger.LogError(ex, "Authentication failed");
+                
+                string userMessage = "Login failed. Please try again.";
+                if (ex.Message.Contains("AADSTS"))
+                {
+                    userMessage = "Authentication service error. Please try again or contact support.";
+                }
+                else if (ex.Message.Contains("network") || ex.Message.Contains("connection"))
+                {
+                    userMessage = "Network error. Please check your internet connection and try again.";
+                }
+                
+                TempData["Error"] = userMessage;
                 return RedirectToAction("Index");
             }
         }
@@ -72,6 +83,20 @@ namespace LuminaSearchConsole.Controllers
                 model.IsAuthenticated = true;
                 model.HasSearched = true;
                 
+                return View("Index", model);
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.LogWarning("Invalid search parameter: {Message}", ex.Message);
+                TempData["Error"] = ex.Message;
+                model.IsAuthenticated = true;
+                return View("Index", model);
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError(ex, "Network error during batch search for: {Query}", model.Query);
+                TempData["Error"] = "Network error. Please check your internet connection and try again.";
+                model.IsAuthenticated = true;
                 return View("Index", model);
             }
             catch (Exception ex)
@@ -111,6 +136,20 @@ namespace LuminaSearchConsole.Controllers
                 
                 return View("Index", model);
             }
+            catch (ArgumentException ex)
+            {
+                _logger.LogWarning("Invalid search parameter: {Message}", ex.Message);
+                TempData["Error"] = ex.Message;
+                model.IsAuthenticated = true;
+                return View("Index", model);
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError(ex, "Network error during simple search for: {Query}", model.Query);
+                TempData["Error"] = "Network error. Please check your internet connection and try again.";
+                model.IsAuthenticated = true;
+                return View("Index", model);
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Simple search failed for query: {Query}", model.Query);
@@ -140,6 +179,16 @@ namespace LuminaSearchConsole.Controllers
                 var content = await searchService.OpenContentAsync(request.Url);
                 
                 return Json(new { success = true, content = content });
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.LogWarning("Invalid URL parameter: {Message}", ex.Message);
+                return Json(new { success = false, error = ex.Message });
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError(ex, "Network error while opening content from: {Url}", request.Url);
+                return Json(new { success = false, error = "Network error. Please check your internet connection and try again." });
             }
             catch (Exception ex)
             {
