@@ -29,7 +29,14 @@ namespace LuminaSearchConsole
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // Configure to use port 5000 for web app, MSAL will use 8400 for auth callback
+            app.Urls.Add("http://localhost:5000");
+
+            // Skip HTTPS redirection for localhost:8400
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseHttpsRedirection();
+            }
             app.UseStaticFiles();
 
             app.UseRouting();

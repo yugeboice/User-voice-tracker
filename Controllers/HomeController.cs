@@ -17,9 +17,10 @@ namespace LuminaSearchConsole.Controllers
 
         public IActionResult Index()
         {
+            var token = HttpContext.Session.GetString("AccessToken");
             var model = new SearchViewModel
             {
-                IsAuthenticated = !string.IsNullOrEmpty(HttpContext.Session.GetString("AccessToken"))
+                IsAuthenticated = !string.IsNullOrEmpty(token)
             };
             return View(model);
         }
@@ -32,7 +33,7 @@ namespace LuminaSearchConsole.Controllers
                 var token = await _oboTokenService.GetUserTokenAsync();
                 HttpContext.Session.SetString("AccessToken", token);
                 
-                TempData["Message"] = "Successfully logged in!";
+                TempData["Message"] = "Successfully logged in! You can now search.";
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

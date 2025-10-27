@@ -21,6 +21,7 @@ namespace LuminaSearchConsole
                 .Create(ClientId)
                 .WithAuthority(new Uri($"https://login.microsoftonline.com/{TenantId}"))
                 .WithRedirectUri(RedirectUri)
+                .WithDefaultRedirectUri() // This helps avoid port conflicts
                 .Build();
         }
 
@@ -51,10 +52,11 @@ namespace LuminaSearchConsole
                     }
                 }
 
-                // Interactive login
+                // Interactive login - force interactive mode, no device code flow
                 var interactiveResult = await _app
                     .AcquireTokenInteractive(new[] { LuminaScope })
-                    .WithPrompt(Prompt.SelectAccount)
+                    .WithPrompt(Prompt.ForceLogin) // Always force interactive login
+                    .WithParentActivityOrWindow(IntPtr.Zero) // Use system browser
                     .ExecuteAsync();
 
                 return interactiveResult.AccessToken;

@@ -32,6 +32,7 @@
             {
                 <p class="text-muted">You need to log in to access Lumina search functionality.</p>
                 <form asp-action="Login" method="post">
+                    @Html.AntiForgeryToken()
                     <button type="submit" class="btn btn-primary">🔑 Login with Microsoft</button>
                 </form>
             }
@@ -39,6 +40,7 @@
             {
                 <p class="text-success">✅ Successfully authenticated! You can now search.</p>
                 <form asp-action="Logout" method="post" class="d-inline">
+                    @Html.AntiForgeryToken()
                     <button type="submit" class="btn btn-outline-secondary btn-sm">🚪 Logout</button>
                 </form>
             }
@@ -50,6 +52,7 @@
             <div class="search-section">
                 <h3>🔍 Step 2: Search</h3>
                 <form asp-action="Search" method="post">
+                    @Html.AntiForgeryToken()
                     <div class="mb-3">
                         <label for="query" class="form-label">Search Query</label>
                         <input type="text" class="form-control" id="query" name="Query" 
@@ -59,9 +62,9 @@
                     <div class="mb-3">
                         <label for="topResults" class="form-label">Number of Results</label>
                         <select class="form-select" id="topResults" name="TopResults">
-                            <option value="3" @(Model.TopResults == 3 ? "selected" : "")>3 results</option>
-                            <option value="5" @(Model.TopResults == 5 ? "selected" : "")>5 results</option>
-                            <option value="10" @(Model.TopResults == 10 ? "selected" : "")>10 results</option>
+                            <option value="3" selected="@(Model.TopResults == 3)">3 results</option>
+                            <option value="5" selected="@(Model.TopResults == 5)">5 results</option>
+                            <option value="10" selected="@(Model.TopResults == 10)">10 results</option>
                         </select>
                     </div>
                     
