@@ -1,48 +1,46 @@
 namespace LuminaSearchConsole
 {
-    class Program
+    public class Program
     {
-        static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("🚀 Lumina API Search Console Demo");
-            Console.WriteLine("==================================");
-            Console.WriteLine();
+            var builder = WebApplication.CreateBuilder(args);
 
-            try
+            // Add services to the container
+            builder.Services.AddControllersWithViews();
+            
+            // Add session support for storing tokens
+            builder.Services.AddSession(options =>
             {
-                // Step 1: User authentication to get token
-                Console.WriteLine("📋 Step 1: User Authentication");
-                Console.WriteLine("Opening browser for login...");
-                Console.WriteLine();
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
-                var oboTokenService = new OboTokenService();
-                var token = await oboTokenService.GetUserTokenAsync();
-                Console.WriteLine($"✅ Token acquired successfully!");
-                Console.WriteLine($"🔑 Token preview: {token[..Math.Min(50, token.Length)]}...");
-                Console.WriteLine();
+            // Add OBO token service
+            builder.Services.AddScoped<OboTokenService>();
 
-                // Step 2 & 3: Initialize search service and execute search
-                Console.WriteLine("📋 Step 2 & 3: Initialize search service and execute search");
-                var searchService = new LuminaSearchService(token);
-                Console.WriteLine("✅ LuminaSearchService initialized successfully");
-                Console.WriteLine();
+            var app = builder.Build();
 
-                // Execute basic search (following the Step 3 example from documentation)
-                await searchService.ExecuteBasicSearchAsync();
-
-                Console.WriteLine();
-                Console.WriteLine("🎉 Demo completed!");
-
-            }
-            catch (Exception ex)
+            // Configure the HTTP request pipeline
+            if (!app.Environment.IsDevelopment())
             {
-                Console.WriteLine($"❌ An error occurred: {ex.Message}");
-                Console.WriteLine($"Details: {ex}");
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
-            Console.WriteLine();
-            Console.WriteLine("Press any key to exit...");
-            Console.ReadKey();
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+            app.UseSession();
+            app.UseAuthorization();
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.Run();
         }
     }
 }

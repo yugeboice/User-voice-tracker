@@ -1,0 +1,133 @@
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Home";
+}
+
+@model LuminaSearchConsole.Models.SearchViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mb-4">🚀 Lumina Search Interface</h1>
+        
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["Message"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+        
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["Error"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <!-- Authentication Section -->
+        <div class="auth-section">
+            <h3>📋 Step 1: Authentication</h3>
+            @if (!Model.IsAuthenticated)
+            {
+                <p class="text-muted">You need to log in to access Lumina search functionality.</p>
+                <form asp-action="Login" method="post">
+                    <button type="submit" class="btn btn-primary">🔑 Login with Microsoft</button>
+                </form>
+            }
+            else
+            {
+                <p class="text-success">✅ Successfully authenticated! You can now search.</p>
+                <form asp-action="Logout" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-outline-secondary btn-sm">🚪 Logout</button>
+                </form>
+            }
+        </div>
+
+        <!-- Search Section -->
+        @if (Model.IsAuthenticated)
+        {
+            <div class="search-section">
+                <h3>🔍 Step 2: Search</h3>
+                <form asp-action="Search" method="post">
+                    <div class="mb-3">
+                        <label for="query" class="form-label">Search Query</label>
+                        <input type="text" class="form-control" id="query" name="Query" 
+                               value="@Model.Query" placeholder="Enter your search query..." required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="topResults" class="form-label">Number of Results</label>
+                        <select class="form-select" id="topResults" name="TopResults">
+                            <option value="3" @(Model.TopResults == 3 ? "selected" : "")>3 results</option>
+                            <option value="5" @(Model.TopResults == 5 ? "selected" : "")>5 results</option>
+                            <option value="10" @(Model.TopResults == 10 ? "selected" : "")>10 results</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success">🚀 Search</button>
+                </form>
+            </div>
+
+            <!-- Search Results -->
+            @if (Model.HasSearched && Model.SearchResults != null)
+            {
+                <div class="mt-4">
+                    <h3>📊 Search Results</h3>
+                    <p class="text-muted">Found @Model.SearchResults.Count results for "@Model.Query"</p>
+                    
+                    @if (Model.SearchResults.Any())
+                    {
+                        @foreach (var result in Model.SearchResults)
+                        {
+                            <div class="search-result">
+                                @if (!string.IsNullOrEmpty(result.Title))
+                                {
+                                    <h5>@result.Title</h5>
+                                }
+                                @if (!string.IsNullOrEmpty(result.Url))
+                                {
+                                    <div class="url">
+                                        <a href="@result.Url" target="_blank">@result.Url</a>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(result.Summary))
+                                {
+                                    <div class="summary">@result.Summary</div>
+                                }
+                                else if (!string.IsNullOrEmpty(result.SemanticDocument))
+                                {
+                                    <div class="summary">
+                                        @(result.SemanticDocument.Length > 300 ? 
+                                          result.SemanticDocument.Substring(0, 300) + "..." : 
+                                          result.SemanticDocument)
+                                    </div>
+                                }
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <p class="mb-0">No search results found. Try a different query.</p>
+                        </div>
+                    }
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto-focus on search input if authenticated
+        @if (Model.IsAuthenticated)
+        {
+            <text>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('query').focus();
+            });
+            </text>
+        }
+    </script>
+}

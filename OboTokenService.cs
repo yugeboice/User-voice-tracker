@@ -37,36 +37,31 @@ namespace LuminaSearchConsole
 
                 if (firstAccount != null)
                 {
-                    Console.WriteLine("Attempting to use cached token...");
                     try
                     {
                         var result = await _app
                             .AcquireTokenSilent(new[] { LuminaScope }, firstAccount)
                             .ExecuteAsync();
 
-                        Console.WriteLine($"✅ Successfully used cached token (User: {result.Account?.Username})");
                         return result.AccessToken;
                     }
                     catch (MsalUiRequiredException)
                     {
-                        Console.WriteLine("Cached token expired, re-login required");
+                        // Token expired, need interactive login
                     }
                 }
 
                 // Interactive login
-                Console.WriteLine("Opening browser for login...");
                 var interactiveResult = await _app
                     .AcquireTokenInteractive(new[] { LuminaScope })
                     .WithPrompt(Prompt.SelectAccount)
                     .ExecuteAsync();
 
-                Console.WriteLine($"✅ Login successful (User: {interactiveResult.Account?.Username})");
                 return interactiveResult.AccessToken;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Authentication failed: {ex.Message}");
-                throw;
+                throw new Exception($"Authentication failed: {ex.Message}", ex);
             }
         }
 
@@ -80,7 +75,6 @@ namespace LuminaSearchConsole
             {
                 await _app.RemoveAsync(account);
             }
-            Console.WriteLine("✅ All cached tokens cleared");
         }
     }
 }

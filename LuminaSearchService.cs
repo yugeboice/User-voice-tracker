@@ -2,6 +2,7 @@ using Microsoft.Lumina.Client.ApiProxy;
 using Microsoft.Lumina.Client.Models.Sonicberry;
 using Newtonsoft.Json;
 using static Microsoft.Lumina.Common.Constants.ConstantStrings;
+using LuminaSearchConsole.Models;
 
 namespace LuminaSearchConsole
 {
@@ -114,6 +115,58 @@ namespace LuminaSearchConsole
             {
                 Console.WriteLine($"❌ {searchType} failed: {ex.Message}");
                 throw;
+            }
+        }
+
+        /// <summary>
+        /// Execute web search and return structured results for web interface
+        /// </summary>
+        public async Task<List<Models.SearchResult>> ExecuteWebSearchAsync(string query, int topN = 5)
+        {
+            var searchRequest = new SearchRequest
+            {
+                Requests = new List<SearchRequestItem>
+                {
+                    new SearchRequestItem
+                    {
+                        Q = query,
+                        TopN = topN,
+                        Source = SearchProviders.WebWithBing,
+                        Language = "en",
+                        Market = "en-US",
+                        CountryCode = "us",
+                        AdditionalConfig = new SearchRequestAdditionalConfig
+                        {
+                            MaxSemanticDocumentLength = 200
+                        }
+                    }
+                }
+            };
+
+            try
+            {
+                var searchResult = await _proxy.SearchAsync(searchRequest);
+                var results = new List<Models.SearchResult>();
+
+                if (searchResult?.Results != null && searchResult.Results.Count > 0)
+                {
+                    foreach (var result in searchResult.Results)
+                    {
+                        results.Add(new Models.SearchResult
+                        {
+                            Title = result.Title ?? "No Title",
+                            Url = result.Url ?? "",
+                            Summary = result.SemanticDocument ?? "",
+                            SemanticDocument = result.SemanticDocument ?? ""
+                        });
+                    }
+                }
+
+                return results;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Search failed: {ex.Message}", ex);
             }
         }
 
