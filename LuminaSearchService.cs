@@ -298,6 +298,58 @@ namespace LuminaSearchConsole
             var jsonResponse = JsonConvert.SerializeObject(searchResult, Formatting.Indented);
             Console.WriteLine(jsonResponse);
         }
+
+        /// <summary>
+        /// Open and retrieve full content from a specific URL using Lumina API
+        /// </summary>
+        public async Task<string> OpenContentAsync(string url)
+        {
+            try
+            {
+                Console.WriteLine($"Opening content from URL: {url}");
+
+                var openRequest = new OpenRequest
+                {
+                    Requests = new List<OpenRequestItem>
+                    {
+                        new OpenRequestItem
+                        {
+                            RefId = url
+                        }
+                    }
+                };
+
+                var response = await _proxy.OpenAsync(openRequest);
+                
+                if (response != null && response.Pages != null && response.Pages.Count > 0)
+                {
+                    var page = response.Pages[0];
+                    string content = page.Content ?? "";
+                    
+                    // Check if content was filtered or failed to load
+                    var isContentFiltered = content.Contains("filtered content") || 
+                                          content.Contains("Failed to open") ||
+                                          string.IsNullOrWhiteSpace(content);
+                    
+                    if (isContentFiltered)
+                    {
+                        throw new Exception("Content was filtered or failed to load. This may be due to content restrictions.");
+                    }
+                    
+                    Console.WriteLine($"Successfully retrieved content. Length: {content.Length} characters");
+                    return content;
+                }
+                else
+                {
+                    throw new Exception("No content retrieved from the URL");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error opening content: {ex.Message}");
+                throw new Exception($"Failed to open content: {ex.Message}", ex);
+            }
+        }
     }
 
     /// <summary>

@@ -135,15 +135,16 @@
                             <div class="col-md-6">
                                 <h4 class="text-success">📰 Latest News</h4>
                                 <p class="text-muted">Found @Model.BatchSearchResult.NewsResults.Count news results:</p>
+                                <p class="text-info"><small>💡 Click on any news title to view full content</small></p>
                                 
                                 @if (Model.BatchSearchResult.NewsResults.Any())
                                 {
                                     @foreach (var result in Model.BatchSearchResult.NewsResults)
                                     {
-                                        <div class="search-result">
+                                        <div class="search-result news-result" data-url="@result.Url">
                                             @if (!string.IsNullOrEmpty(result.Title))
                                             {
-                                                <h5>@result.Title</h5>
+                                                <h5 class="news-title" style="cursor: pointer; color: #0066cc;">@result.Title</h5>
                                             }
                                             @if (!string.IsNullOrEmpty(result.Url))
                                             {
@@ -216,6 +217,30 @@
     </div>
 </div>
 
+<!-- Content Modal -->
+<div class="modal fade" id="contentModal" tabindex="-1" aria-labelledby="contentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contentModalLabel">📄 Full Content</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="contentLoading" class="text-center" style="display: none;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Loading full content...</p>
+                </div>
+                <div id="contentBody" style="max-height: 70vh; overflow-y: auto;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script>
         // Auto-focus on search input if authenticated
@@ -224,8 +249,93 @@
             <text>
             document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('query').focus();
+                
+                // Add click handlers for news results
+                const newsResults = document.querySelectorAll('.news-result .news-title');
+                newsResults.forEach(function(title) {
+                    title.addEventListener('click', function() {
+                        const newsResult = this.closest('.news-result');
+                        const url = newsResult.getAttribute('data-url');
+                        if (url) {
+                            openFullContent(url, this.textContent);
+                        }
+                    });
+                    
+                    // Add hover effect
+                    title.addEventListener('mouseenter', function() {
+                        this.style.textDecoration = 'underline';
+                    });
+                    title.addEventListener('mouseleave', function() {
+                        this.style.textDecoration = 'none';
+                    });
+                });
             });
+            
+            function openFullContent(url, title) {
+                // Show modal and loading
+                const modal = new bootstrap.Modal(document.getElementById('contentModal'));
+                document.getElementById('contentModalLabel').textContent = '📄 ' + title;
+                document.getElementById('contentLoading').style.display = 'block';
+                document.getElementById('contentBody').innerHTML = '';
+                modal.show();
+                
+                // Make AJAX request to open content
+                fetch('/Home/OpenContent', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: JSON.stringify({ url: url })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('contentLoading').style.display = 'none';
+                    
+                    if (data.success) {
+                        // Format and display content
+                        const formattedContent = formatContent(data.content);
+                        document.getElementById('contentBody').innerHTML = formattedContent;
+                    } else {
+                        document.getElementById('contentBody').innerHTML = 
+                            '<div class="alert alert-danger">Error: ' + data.error + '</div>';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('contentLoading').style.display = 'none';
+                    document.getElementById('contentBody').innerHTML = 
+                        '<div class="alert alert-danger">Error loading content: ' + error.message + '</div>';
+                });
+            }
+            
+            function formatContent(content) {
+                // Basic formatting for better readability
+                let formatted = content
+                    .replace(/\n/g, '<br>')
+                    .replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
+                    .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
+                
+                return '<div class="content-display">' + formatted + '</div>';
+            }
             </text>
         }
     </script>
+
+    <style>
+        .news-title:hover {
+            color: #004499 !important;
+        }
+        .content-display {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        .content-display a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .content-display a:hover {
+            text-decoration: underline;
+        }
+    </style>
 }

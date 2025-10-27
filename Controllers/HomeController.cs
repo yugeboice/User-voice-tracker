@@ -121,6 +121,34 @@ namespace LuminaSearchConsole.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> OpenContent([FromBody] OpenContentRequest request)
+        {
+            if (string.IsNullOrEmpty(request.Url))
+            {
+                return Json(new { success = false, error = "URL is required" });
+            }
+
+            var token = HttpContext.Session.GetString("AccessToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                return Json(new { success = false, error = "Please log in first" });
+            }
+
+            try
+            {
+                var searchService = new LuminaSearchService(token);
+                var content = await searchService.OpenContentAsync(request.Url);
+                
+                return Json(new { success = true, content = content });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Open content failed for URL: {Url}", request.Url);
+                return Json(new { success = false, error = $"Failed to open content: {ex.Message}" });
+            }
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Logout()
         {
             try

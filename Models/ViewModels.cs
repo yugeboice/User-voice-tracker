@@ -26,6 +26,11 @@ namespace LuminaSearchConsole.Models
         public string? SemanticDocument { get; set; }
     }
 
+    public class OpenContentRequest
+    {
+        public string Url { get; set; } = string.Empty;
+    }
+
     public class ErrorViewModel
     {
         public string? RequestId { get; set; }
