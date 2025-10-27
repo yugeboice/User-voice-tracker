@@ -7,6 +7,15 @@ namespace LuminaSearchConsole.Models
         public bool IsAuthenticated { get; set; }
         public bool HasSearched { get; set; }
         public List<SearchResult>? SearchResults { get; set; }
+        public BatchSearchResult? BatchSearchResult { get; set; }
+        public bool IsBatchSearch { get; set; }
+    }
+
+    public class BatchSearchResult
+    {
+        public string CompanyName { get; set; } = string.Empty;
+        public List<SearchResult> StockResults { get; set; } = new List<SearchResult>();
+        public List<SearchResult> NewsResults { get; set; } = new List<SearchResult>();
     }
 
     public class SearchResult

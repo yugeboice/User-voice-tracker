@@ -119,6 +119,104 @@ namespace LuminaSearchConsole
         }
 
         /// <summary>
+        /// Execute batch search for company stock price and latest news
+        /// </summary>
+        public async Task<BatchSearchResult> ExecuteBatchCompanySearchAsync(string companyName, int topN = 5)
+        {
+            var searchRequest = new SearchRequest
+            {
+                Requests = new List<SearchRequestItem>
+                {
+                    // First search: Company + stock price
+                    new SearchRequestItem
+                    {
+                        Q = $"{companyName} stock price",
+                        TopN = topN,
+                        Source = SearchProviders.WebWithBing,
+                        Language = "en",
+                        Market = "en-US",
+                        CountryCode = "us",
+                        Recency = 7, // Recent stock price info
+                        AdditionalConfig = new SearchRequestAdditionalConfig
+                        {
+                            MaxSemanticDocumentLength = 200
+                        }
+                    },
+                    // Second search: Company + latest news
+                    new SearchRequestItem
+                    {
+                        Q = $"{companyName} latest news",
+                        TopN = topN,
+                        Source = SearchProviders.WebWithBing,
+                        Language = "en",
+                        Market = "en-US",
+                        CountryCode = "us",
+                        Recency = 7, // Recent news
+                        AdditionalConfig = new SearchRequestAdditionalConfig
+                        {
+                            MaxSemanticDocumentLength = 200
+                        }
+                    }
+                }
+            };
+
+            try
+            {
+                var searchResult = await _proxy.SearchAsync(searchRequest);
+                
+                // Parse results into two categories
+                var stockResults = new List<Models.SearchResult>();
+                var newsResults = new List<Models.SearchResult>();
+                
+                if (searchResult?.Results != null && searchResult.Results.Count > 0)
+                {
+                    // First half are stock results, second half are news results
+                    int midPoint = searchResult.Results.Count / 2;
+                    
+                    // Process stock price results (first request)
+                    for (int i = 0; i < Math.Min(midPoint, topN); i++)
+                    {
+                        if (i < searchResult.Results.Count)
+                        {
+                            var result = searchResult.Results[i];
+                            stockResults.Add(new Models.SearchResult
+                            {
+                                Title = result.Title ?? "No Title",
+                                Url = result.Url ?? "",
+                                Summary = result.SemanticDocument ?? "",
+                                SemanticDocument = result.SemanticDocument ?? ""
+                            });
+                        }
+                    }
+                    
+                    // Process news results (second request)
+                    for (int i = midPoint; i < searchResult.Results.Count && i < midPoint + topN; i++)
+                    {
+                        var result = searchResult.Results[i];
+                        newsResults.Add(new Models.SearchResult
+                        {
+                            Title = result.Title ?? "No Title",
+                            Url = result.Url ?? "",
+                            Summary = result.SemanticDocument ?? "",
+                            SemanticDocument = result.SemanticDocument ?? ""
+                        });
+                    }
+                }
+
+                return new BatchSearchResult
+                {
+                    CompanyName = companyName,
+                    StockResults = stockResults,
+                    NewsResults = newsResults
+                };
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Batch search failed: {ex.Message}", ex);
+            }
+        }
+
+        /// <summary>
         /// Execute web search and return structured results for web interface
         /// </summary>
         public async Task<List<Models.SearchResult>> ExecuteWebSearchAsync(string query, int topN = 5)

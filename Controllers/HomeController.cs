@@ -63,9 +63,12 @@ namespace LuminaSearchConsole.Controllers
             try
             {
                 var searchService = new LuminaSearchService(token);
-                var results = await searchService.ExecuteWebSearchAsync(model.Query, model.TopResults);
                 
-                model.SearchResults = results;
+                // Execute batch search for company
+                var batchResult = await searchService.ExecuteBatchCompanySearchAsync(model.Query, model.TopResults);
+                
+                model.BatchSearchResult = batchResult;
+                model.IsBatchSearch = true;
                 model.IsAuthenticated = true;
                 model.HasSearched = true;
                 
@@ -73,7 +76,44 @@ namespace LuminaSearchConsole.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Search failed for query: {Query}", model.Query);
+                _logger.LogError(ex, "Batch search failed for query: {Query}", model.Query);
+                TempData["Error"] = $"Search failed: {ex.Message}";
+                model.IsAuthenticated = true;
+                return View("Index", model);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SimpleSearch(SearchViewModel model)
+        {
+            if (string.IsNullOrEmpty(model.Query))
+            {
+                TempData["Error"] = "Please enter a search query";
+                return RedirectToAction("Index");
+            }
+
+            var token = HttpContext.Session.GetString("AccessToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                TempData["Error"] = "Please log in first";
+                return RedirectToAction("Index");
+            }
+
+            try
+            {
+                var searchService = new LuminaSearchService(token);
+                var results = await searchService.ExecuteWebSearchAsync(model.Query, model.TopResults);
+                
+                model.SearchResults = results;
+                model.IsBatchSearch = false;
+                model.IsAuthenticated = true;
+                model.HasSearched = true;
+                
+                return View("Index", model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Simple search failed for query: {Query}", model.Query);
                 TempData["Error"] = $"Search failed: {ex.Message}";
                 model.IsAuthenticated = true;
                 return View("Index", model);
