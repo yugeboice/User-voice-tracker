@@ -151,6 +151,14 @@
                                                 <img id="cuaImage" src="" alt="CUA Screenshot" class="img-fluid" style="max-width: 100%; border: 1px solid #ddd;">
                                             </div>
                                         </div>
+                                        
+                                        <!-- CUA Operation Logs -->
+                                        <div class="mt-3">
+                                            <h6>📋 CUA Operation Logs</h6>
+                                            <div id="cuaLogs" class="alert alert-secondary" style="max-height: 400px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.85rem; white-space: pre-wrap;">
+                                                <em>CUA logs will appear here...</em>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 
@@ -514,6 +522,10 @@
             
             document.getElementById('cuaScreenshot').style.display = 'none';
             
+            // Clear previous CUA logs
+            const cuaLogsDiv = document.getElementById('cuaLogs');
+            cuaLogsDiv.innerHTML = '<em>Initializing CUA...</em>';
+            
             try {
                 const response = await fetch('@Url.Action("TestCua", "Home")', {
                     method: 'POST',
@@ -531,16 +543,56 @@
                     document.getElementById('cuaImage').src = result.screenshot;
                     document.getElementById('cuaScreenshot').style.display = 'block';
                     
-                    // Refresh logs to show CUA operations
+                    // Fetch and display CUA-specific logs
+                    await refreshCuaLogs();
+                    
+                    // Refresh main logs to show CUA operations
                     refreshLogs();
                 } else {
+                    cuaLogsDiv.innerHTML = '<span style="color: red;">❌ CUA Test Failed: ' + result.error + '</span>';
+                    document.getElementById('cuaScreenshot').style.display = 'block';
                     alert('CUA Test Failed: ' + result.error);
                 }
             } catch (error) {
+                cuaLogsDiv.innerHTML = '<span style="color: red;">❌ Error: ' + error.message + '</span>';
+                document.getElementById('cuaScreenshot').style.display = 'block';
                 alert('Error testing CUA: ' + error.message);
             } finally {
                 button.disabled = false;
                 button.textContent = '🖥️ Test CUA - Search Stock Price on Bing';
+            }
+        }
+        
+        async function refreshCuaLogs() {
+            try {
+                const response = await fetch('/Home/GetLogs');
+                const data = await response.json();
+                
+                if (data.success && data.logs) {
+                    // Filter CUA-related logs
+                    const cuaLogs = data.logs.filter(log => log.category === 'Lumina CUA');
+                    
+                    if (cuaLogs.length > 0) {
+                        const cuaLogsDiv = document.getElementById('cuaLogs');
+                        let logsHtml = '';
+                        
+                        cuaLogs.forEach(log => {
+                            const statusIcon = log.isSuccess ? '✅' : '❌';
+                            const statusColor = log.isSuccess ? '#28a745' : '#dc3545';
+                            const timestamp = new Date(log.timestamp).toLocaleTimeString();
+                            
+                            logsHtml += `<div style="margin-bottom: 10px; padding: 8px; border-left: 3px solid ${statusColor}; background-color: #f8f9fa;">`;
+                            logsHtml += `<strong style="color: ${statusColor};">${statusIcon} ${log.operation}</strong> `;
+                            logsHtml += `<small style="color: #6c757d;">[${timestamp}]</small><br>`;
+                            logsHtml += `<span style="white-space: pre-wrap;">${log.details}</span>`;
+                            logsHtml += `</div>`;
+                        });
+                        
+                        cuaLogsDiv.innerHTML = logsHtml;
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to refresh CUA logs:', error);
             }
         }
     </script>

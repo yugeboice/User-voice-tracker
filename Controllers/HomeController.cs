@@ -422,7 +422,7 @@ namespace LuminaSearchConsole.Controllers
 
             logsHtml.AppendLine("</div>");
             
-            return Json(new { success = true, logsHtml = logsHtml.ToString() });
+            return Json(new { success = true, logsHtml = logsHtml.ToString(), logs = logs });
         }
 
         /// <summary>
