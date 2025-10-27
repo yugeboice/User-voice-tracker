@@ -10,6 +10,27 @@ namespace LuminaSearchConsole
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Load configuration from appsettings.json
+            // Partners can customize these values for their environment
+            var luminaConfig = builder.Configuration.GetSection("LuminaConfiguration").Get<Configuration.LuminaConfiguration>() 
+                ?? new Configuration.LuminaConfiguration();
+            var azureAdConfig = builder.Configuration.GetSection("AzureAd").Get<Configuration.AzureAdConfiguration>() 
+                ?? new Configuration.AzureAdConfiguration();
+            var webServerConfig = builder.Configuration.GetSection("WebServer").Get<Configuration.WebServerConfiguration>() 
+                ?? new Configuration.WebServerConfiguration();
+
+            // Register configurations as singletons for dependency injection
+            builder.Services.AddSingleton(luminaConfig);
+            builder.Services.AddSingleton(azureAdConfig);
+            builder.Services.AddSingleton(webServerConfig);
+
+            // Configure server URLs from configuration
+            // Partners can change port in appsettings.json
+            if (!string.IsNullOrEmpty(webServerConfig.Urls))
+            {
+                builder.WebHost.UseUrls(webServerConfig.Urls);
+            }
+
             // MVC support for web interface
             builder.Services.AddControllersWithViews();
             
@@ -38,11 +59,6 @@ namespace LuminaSearchConsole
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
-            // Configure ports:
-            // - Web app: http://localhost:5000
-            // - MSAL auth callback: http://localhost:8400 (configured in OboTokenService)
-            app.Urls.Add("http://localhost:5000");
 
             if (!app.Environment.IsDevelopment())
             {

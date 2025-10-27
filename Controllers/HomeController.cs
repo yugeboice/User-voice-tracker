@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using LuminaSearchConsole.Models;
+using LuminaSearchConsole.Configuration;
 using System.Diagnostics;
 
 namespace LuminaSearchConsole.Controllers
@@ -15,12 +16,21 @@ namespace LuminaSearchConsole.Controllers
         private readonly OboTokenService _oboTokenService;
         private readonly ILogger<HomeController> _logger;
         private readonly Services.ApiLogService _apiLogService;
+        private readonly AzureAdConfiguration _azureAdConfig;
+        private readonly LuminaConfiguration _luminaConfig;
 
-        public HomeController(OboTokenService oboTokenService, ILogger<HomeController> logger, Services.ApiLogService apiLogService)
+        public HomeController(
+            OboTokenService oboTokenService, 
+            ILogger<HomeController> logger, 
+            Services.ApiLogService apiLogService,
+            AzureAdConfiguration azureAdConfig,
+            LuminaConfiguration luminaConfig)
         {
             _oboTokenService = oboTokenService;
             _logger = logger;
             _apiLogService = apiLogService;
+            _azureAdConfig = azureAdConfig;
+            _luminaConfig = luminaConfig;
         }
 
         #endregion
@@ -57,11 +67,11 @@ namespace LuminaSearchConsole.Controllers
             {
                 _apiLogService.AddLog("MSAL Auth", "GetUserToken", 
                     "📋 OAuth 2.0 Configuration:\n" +
-                    "  TenantId: 72f988bf-86f1-41af-91ab-2d7cd011db47\n" +
-                    "  ClientId: 63696678-8070-4259-91d9-292979db05c4\n" +
-                    "  RedirectUri: http://localhost:8400\n" +
-                    "  Scopes: api://a2075f49-fffd-4cf2-b59d-0e3b1e8c964d/.default\n" +
-                    "  Cache: %LocalAppData%\\LuminaSearchConsole\\msalcache.bin\n" +
+                    $"  TenantId: {_azureAdConfig.TenantId}\n" +
+                    $"  ClientId: {_azureAdConfig.ClientId}\n" +
+                    $"  RedirectUri: {_azureAdConfig.RedirectUri}\n" +
+                    $"  Scopes: {_luminaConfig.ApiScopes}\n" +
+                    $"  Cache: %LocalAppData%\\LuminaSearchConsole\\{_azureAdConfig.CacheFileName}\n" +
                     "  Method: Silent token acquisition (with fallback to interactive)");
                 
                 var token = await _oboTokenService.GetUserTokenAsync();
@@ -128,7 +138,7 @@ namespace LuminaSearchConsole.Controllers
                 var newsQuery = $"{model.Query} latest news";
                 _apiLogService.AddLog("Lumina Search", "BatchSearch", 
                     $"📋 API Configuration:\n" +
-                    $"  Endpoint: https://luminaserviceapi-test-westus.copilotlumina.com\n" +
+                    $"  Endpoint: {_luminaConfig.ApiEndpoint}\n" +
                     $"  Method: POST /search\n" +
                     $"  Auth: Bearer token (OAuth 2.0)\n\n" +
                     $"📝 Batch Search Request:\n" +
@@ -143,7 +153,7 @@ namespace LuminaSearchConsole.Controllers
                     $"  Recency: 7 days\n" +
                     $"  MaxSemanticDocumentLength: 200");
                 
-                var searchService = new LuminaSearchService(token);
+                var searchService = new LuminaSearchService(token, _luminaConfig);
                 
                 // Execute batch search for company
                 var startTime = DateTime.Now;
@@ -224,7 +234,7 @@ namespace LuminaSearchConsole.Controllers
             {
                 _apiLogService.AddLog("Lumina Search", "WebSearch", 
                     $"📋 API Configuration:\n" +
-                    $"  Endpoint: https://luminaserviceapi-test-westus.copilotlumina.com\n" +
+                    $"  Endpoint: {_luminaConfig.ApiEndpoint}\n" +
                     $"  Method: POST /search\n" +
                     $"  Auth: Bearer token (OAuth 2.0)\n\n" +
                     $"📝 Web Search Request:\n" +
@@ -234,7 +244,7 @@ namespace LuminaSearchConsole.Controllers
                     $"  Market: en-US\n" +
                     $"  Language: en");
                 
-                var searchService = new LuminaSearchService(token);
+                var searchService = new LuminaSearchService(token, _luminaConfig);
                 var startTime = DateTime.Now;
                 var results = await searchService.ExecuteWebSearchAsync(model.Query, model.TopResults);
                 var duration = (DateTime.Now - startTime).TotalMilliseconds;
@@ -311,14 +321,14 @@ namespace LuminaSearchConsole.Controllers
             {
                 _apiLogService.AddLog("Lumina Open", "OpenContent", 
                     $"📋 API Configuration:\n" +
-                    $"  Endpoint: https://luminaserviceapi-test-westus.copilotlumina.com\n" +
+                    $"  Endpoint: {_luminaConfig.ApiEndpoint}\n" +
                     $"  Method: POST /open\n" +
                     $"  Auth: Bearer token (OAuth 2.0)\n\n" +
                     $"📝 Open Request:\n" +
                     $"  RefId (URL): {request.Url}\n" +
                     $"  Purpose: Extract full page content");
                 
-                var searchService = new LuminaSearchService(token);
+                var searchService = new LuminaSearchService(token, _luminaConfig);
                 var startTime = DateTime.Now;
                 var content = await searchService.OpenContentAsync(request.Url);
                 var duration = (DateTime.Now - startTime).TotalMilliseconds;

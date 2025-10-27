@@ -3,6 +3,7 @@ using Microsoft.Lumina.Client.Models.Sonicberry;
 using Newtonsoft.Json;
 using static Microsoft.Lumina.Common.Constants.ConstantStrings;
 using LuminaSearchConsole.Models;
+using LuminaSearchConsole.Configuration;
 
 namespace LuminaSearchConsole
 {
@@ -14,25 +15,27 @@ namespace LuminaSearchConsole
     /// - Batch search (multiple queries in one request)
     /// - Content extraction from URLs (Open API)
     /// 
-    /// API Endpoint: https://luminaserviceapi-test-westus.copilotlumina.com
+    /// API Endpoint configured in appsettings.json (LuminaConfiguration:ApiEndpoint)
     /// </summary>
     public class LuminaSearchService
     {
         #region Configuration
         
-        private static readonly string LuminaEndpoint = "https://luminaserviceapi-test-westus.copilotlumina.com";
+        private readonly string _luminaEndpoint;
         private readonly LuminaServiceApiProxy _proxy;
         
         #endregion
 
         #region Constructor
 
-        public LuminaSearchService(string accessToken)
+        public LuminaSearchService(string accessToken, LuminaConfiguration luminaConfig)
         {
+            _luminaEndpoint = luminaConfig.ApiEndpoint;
+            
             // Configure Lumina API proxy with authentication
             var options = new LuminaApiOptions
             {
-                Endpoint = LuminaEndpoint,
+                Endpoint = _luminaEndpoint,
                 LuminaApiTokenProvider = async () => await Task.FromResult(accessToken)
             };
 

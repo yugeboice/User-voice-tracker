@@ -15,31 +15,31 @@ namespace LuminaSearchConsole
     /// </summary>
     public class OboTokenService
     {
-        #region Configuration Constants
-        
-        // Azure AD Configuration
-        // These values are specific to the Lumina API test environment
-        private static readonly string TenantId = "72f988bf-86f1-41af-91ab-2d7cd011db47";
-        private static readonly string ClientId = "63696678-8070-4259-91d9-292979db05c4";
-        private static readonly string RedirectUri = "http://localhost:8400";
-        
-        // Lumina API Scope
-        // This scope grants access to Lumina Search and Open APIs
-        private static readonly string LuminaScope = "67f912ef-f692-43d3-9b97-3702aa2fd840/.default";
-        
-        #endregion
-
         private readonly IPublicClientApplication _app;
+        private readonly Configuration.AzureAdConfiguration _azureAdConfig;
+        private readonly Configuration.LuminaConfiguration _luminaConfig;
+        private readonly string _cacheFilePath;
 
-        public OboTokenService()
+        public OboTokenService(
+            Configuration.AzureAdConfiguration azureAdConfig,
+            Configuration.LuminaConfiguration luminaConfig)
         {
-            var tokenCacheHelper = new TokenCacheHelper();
+            _azureAdConfig = azureAdConfig;
+            _luminaConfig = luminaConfig;
+            
+            // Store cache file path for SignOutAsync
+            _cacheFilePath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "LuminaSearchConsole",
+                _azureAdConfig.CacheFileName);
+            
+            var tokenCacheHelper = new TokenCacheHelper(_azureAdConfig.CacheFileName);
             
             // Build MSAL public client application
             _app = PublicClientApplicationBuilder
-                .Create(ClientId)
-                .WithAuthority(new Uri($"https://login.microsoftonline.com/{TenantId}"))
-                .WithRedirectUri(RedirectUri)
+                .Create(_azureAdConfig.ClientId)
+                .WithAuthority(new Uri(_azureAdConfig.Authority))
+                .WithRedirectUri(_azureAdConfig.RedirectUri)
                 .Build();
                 
             // Enable persistent token caching to disk
@@ -67,7 +67,7 @@ namespace LuminaSearchConsole
                     try
                     {
                         var result = await _app
-                            .AcquireTokenSilent(new[] { LuminaScope }, firstAccount)
+                            .AcquireTokenSilent(new[] { _luminaConfig.ApiScopes }, firstAccount)
                             .ExecuteAsync();
 
                         return result.AccessToken;
@@ -81,7 +81,7 @@ namespace LuminaSearchConsole
                 // Step 2: Interactive login via browser
                 // User will see account picker or login prompt
                 var interactiveResult = await _app
-                    .AcquireTokenInteractive(new[] { LuminaScope })
+                    .AcquireTokenInteractive(new[] { _luminaConfig.ApiScopes })
                     .WithPrompt(Prompt.SelectAccount)
                     .ExecuteAsync();
 
@@ -112,14 +112,9 @@ namespace LuminaSearchConsole
             // Delete persistent cache file
             try
             {
-                var cacheFilePath = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    "LuminaSearchConsole",
-                    "msalcache.bin");
-                    
-                if (File.Exists(cacheFilePath))
+                if (File.Exists(_cacheFilePath))
                 {
-                    File.Delete(cacheFilePath);
+                    File.Delete(_cacheFilePath);
                 }
             }
             catch
@@ -135,14 +130,19 @@ namespace LuminaSearchConsole
     /// Implements persistent token caching to local disk.
     /// This improves performance by avoiding repeated authentication.
     /// 
-    /// Cache Location: %LocalAppData%\LuminaSearchConsole\msalcache.bin
+    /// Cache Location: %LocalAppData%\LuminaSearchConsole\{cacheFileName}
     /// </summary>
     public class TokenCacheHelper
     {
-        private static readonly string CacheFilePath = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "LuminaSearchConsole",
-            "msalcache.bin");
+        private readonly string _cacheFilePath;
+
+        public TokenCacheHelper(string cacheFileName)
+        {
+            _cacheFilePath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "LuminaSearchConsole",
+                cacheFileName);
+        }
 
         public void EnableSerialization(ITokenCache tokenCache)
         {
@@ -154,22 +154,19 @@ namespace LuminaSearchConsole
         /// <summary>
         /// Load cached tokens from disk before MSAL accesses the cache
         /// </summary>
-        /// <summary>
-        /// Load cached tokens from disk before MSAL accesses the cache
-        /// </summary>
         private void BeforeAccessNotification(TokenCacheNotificationArgs args)
         {
-            if (File.Exists(CacheFilePath))
+            if (File.Exists(_cacheFilePath))
             {
                 try
                 {
-                    var cacheData = File.ReadAllBytes(CacheFilePath);
+                    var cacheData = File.ReadAllBytes(_cacheFilePath);
                     args.TokenCache.DeserializeMsalV3(cacheData);
                 }
                 catch
                 {
                     // If cache is corrupted, delete it and start fresh
-                    File.Delete(CacheFilePath);
+                    File.Delete(_cacheFilePath);
                 }
             }
         }
@@ -185,10 +182,10 @@ namespace LuminaSearchConsole
                 try
                 {
                     // Ensure directory exists
-                    Directory.CreateDirectory(Path.GetDirectoryName(CacheFilePath));
+                    Directory.CreateDirectory(Path.GetDirectoryName(_cacheFilePath));
                     
                     var cacheData = args.TokenCache.SerializeMsalV3();
-                    File.WriteAllBytes(CacheFilePath, cacheData);
+                    File.WriteAllBytes(_cacheFilePath, cacheData);
                 }
                 catch
                 {
