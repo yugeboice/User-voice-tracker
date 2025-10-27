@@ -77,6 +77,15 @@ namespace LuminaSearchConsole.Models
     }
 
     /// <summary>
+    /// Request model for CUA test with company search.
+    /// </summary>
+    public class TestCuaRequest
+    {
+        /// <summary>Company name to search for stock price on Bing</summary>
+        public string CompanyName { get; set; } = string.Empty;
+    }
+
+    /// <summary>
     /// Error page view model (standard ASP.NET Core template).
     /// </summary>
     public class ErrorViewModel

@@ -435,5 +435,141 @@ namespace LuminaSearchConsole.Controllers
         }
 
         #endregion
+
+        #region Computer Use Agent (CUA) Operations
+
+        /// <summary>
+        /// Test CUA by navigating to Bing search and getting a screenshot
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> TestCua([FromBody] TestCuaRequest request)
+        {
+            var token = HttpContext.Session.GetString("AccessToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                return Json(new { success = false, error = "Please log in first" });
+            }
+
+            if (string.IsNullOrWhiteSpace(request?.CompanyName))
+            {
+                return Json(new { success = false, error = "Company name is required" });
+            }
+
+            var computerId = Guid.NewGuid().ToString("N");
+            var searchService = new LuminaSearchService(token, _luminaConfig);
+            var searchUrl = $"https://www.bing.com/search?q={Uri.EscapeDataString(request.CompanyName + " stock price")}";
+
+            try
+            {
+                _apiLogService.AddLog("Lumina CUA", "Initialize", 
+                    $"📋 CUA Configuration:\n" +
+                    $"  Endpoint: {_luminaConfig.ApiEndpoint}\n" +
+                    $"  Method: POST /api/agent/computer/initialize\n" +
+                    $"  ComputerId: {computerId}\n" +
+                    $"  UserId: From token\n" +
+                    $"  TenantId: {_azureAdConfig.TenantId}");
+
+                // Initialize computer
+                var startTime = DateTime.Now;
+                await searchService.InitializeComputerAsync(computerId, "user-from-token", _azureAdConfig.TenantId);
+                var duration = (DateTime.Now - startTime).TotalMilliseconds;
+
+                _apiLogService.AddLog("Lumina CUA", "Initialize", 
+                    $"✅ Virtual computer initialized\n" +
+                    $"  ComputerId: {computerId}\n" +
+                    $"  Response time: {duration:F0}ms");
+
+                // Navigate to Bing search results
+                _apiLogService.AddLog("Lumina CUA", "Navigate", 
+                    $"📋 Navigation Request:\n" +
+                    $"  URL: {searchUrl}\n" +
+                    $"  Query: {request.CompanyName} stock price\n" +
+                    $"  Actions: Ctrl+L → Type → Enter → Wait");
+
+                startTime = DateTime.Now;
+                await searchService.NavigateToUrlAsync(computerId, searchUrl);
+                duration = (DateTime.Now - startTime).TotalMilliseconds;
+
+                _apiLogService.AddLog("Lumina CUA", "Navigate", 
+                    $"✅ Navigation completed\n" +
+                    $"  Response time: {duration:F0}ms");
+
+                // Get screenshot
+                _apiLogService.AddLog("Lumina CUA", "Screenshot", 
+                    $"📋 Screenshot Request:\n" +
+                    $"  ComputerId: {computerId}");
+
+                startTime = DateTime.Now;
+                var screenshot = await searchService.GetComputerScreenshotAsync(computerId);
+                duration = (DateTime.Now - startTime).TotalMilliseconds;
+
+                _apiLogService.AddLog("Lumina CUA", "Screenshot", 
+                    $"✅ Screenshot captured\n" +
+                    $"  Resolution: {screenshot.Content?.Width}x{screenshot.Content?.Height}\n" +
+                    $"  Status: {screenshot.Status}\n" +
+                    $"  Response time: {duration:F0}ms");
+
+                // Return screenshot as base64 image
+                return Json(new 
+                { 
+                    success = true, 
+                    screenshot = $"data:image/png;base64,{screenshot.Content?.Screenshot}",
+                    width = screenshot.Content?.Width,
+                    height = screenshot.Content?.Height
+                });
+            }
+            catch (HttpRequestException httpEx) when (httpEx.StatusCode == System.Net.HttpStatusCode.InsufficientStorage)
+            {
+                _logger.LogWarning(httpEx, "CUA service capacity reached");
+                _apiLogService.AddLog("Lumina CUA", "Error", 
+                    $"❌ Service Unavailable\n" +
+                    $"  Reason: CUA service is at capacity\n" +
+                    $"  Status: 507 Insufficient Storage\n" +
+                    $"  Suggestion: Virtual computers are currently unavailable. Please try again later.", false);
+                
+                return Json(new { 
+                    success = false, 
+                    error = "CUA service is currently at capacity. Virtual computers are unavailable. Please try again later." 
+                });
+            }
+            catch (HttpRequestException httpEx)
+            {
+                _logger.LogError(httpEx, "CUA HTTP request failed");
+                var statusCode = httpEx.StatusCode.HasValue ? $"{(int)httpEx.StatusCode} {httpEx.StatusCode}" : "Unknown";
+                _apiLogService.AddLog("Lumina CUA", "Error", 
+                    $"❌ HTTP Error\n" +
+                    $"  Status: {statusCode}\n" +
+                    $"  Message: {httpEx.Message}", false);
+                
+                return Json(new { success = false, error = httpEx.Message });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "CUA test failed");
+                _apiLogService.AddLog("Lumina CUA", "Error", $"❌ Error: {ex.Message}", false);
+                return Json(new { success = false, error = ex.Message });
+            }
+            finally
+            {
+                // Always release computer resources, even if an error occurred
+                try
+                {
+                    await searchService.ReleaseComputerAsync(computerId);
+                    _apiLogService.AddLog("Lumina CUA", "Release", 
+                        $"✅ Computer released (cleanup)\n" +
+                        $"  ComputerId: {computerId}");
+                }
+                catch (Exception releaseEx)
+                {
+                    _logger.LogWarning(releaseEx, "Failed to release computer {ComputerId}", computerId);
+                    _apiLogService.AddLog("Lumina CUA", "Release", 
+                        $"⚠️ Failed to release computer\n" +
+                        $"  ComputerId: {computerId}\n" +
+                        $"  Error: {releaseEx.Message}", false);
+                }
+            }
+        }
+
+        #endregion
     }
 }
