@@ -12,12 +12,12 @@ namespace LuminaSearchConsole
 
             // Load configuration from appsettings.json
             // Partners can customize these values for their environment
-            var luminaConfig = builder.Configuration.GetSection("LuminaConfiguration").Get<Configuration.LuminaConfiguration>() 
-                ?? new Configuration.LuminaConfiguration();
-            var azureAdConfig = builder.Configuration.GetSection("AzureAd").Get<Configuration.AzureAdConfiguration>() 
-                ?? new Configuration.AzureAdConfiguration();
-            var webServerConfig = builder.Configuration.GetSection("WebServer").Get<Configuration.WebServerConfiguration>() 
-                ?? new Configuration.WebServerConfiguration();
+            var luminaConfig = builder.Configuration.GetSection("LuminaConfiguration").Get<LuminaConfiguration>() 
+                ?? new LuminaConfiguration();
+            var azureAdConfig = builder.Configuration.GetSection("AzureAd").Get<AzureAdConfiguration>() 
+                ?? new AzureAdConfiguration();
+            var webServerConfig = builder.Configuration.GetSection("WebServer").Get<WebServerConfiguration>() 
+                ?? new WebServerConfiguration();
 
             // Register configurations as singletons for dependency injection
             builder.Services.AddSingleton(luminaConfig);

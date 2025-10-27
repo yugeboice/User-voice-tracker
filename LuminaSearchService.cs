@@ -3,7 +3,6 @@ using Microsoft.Lumina.Client.Models.Sonicberry;
 using Newtonsoft.Json;
 using static Microsoft.Lumina.Common.Constants.ConstantStrings;
 using LuminaSearchConsole.Models;
-using LuminaSearchConsole.Configuration;
 
 namespace LuminaSearchConsole
 {

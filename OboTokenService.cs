@@ -16,13 +16,13 @@ namespace LuminaSearchConsole
     public class OboTokenService
     {
         private readonly IPublicClientApplication _app;
-        private readonly Configuration.AzureAdConfiguration _azureAdConfig;
-        private readonly Configuration.LuminaConfiguration _luminaConfig;
+        private readonly AzureAdConfiguration _azureAdConfig;
+        private readonly LuminaConfiguration _luminaConfig;
         private readonly string _cacheFilePath;
 
         public OboTokenService(
-            Configuration.AzureAdConfiguration azureAdConfig,
-            Configuration.LuminaConfiguration luminaConfig)
+            AzureAdConfiguration azureAdConfig,
+            LuminaConfiguration luminaConfig)
         {
             _azureAdConfig = azureAdConfig;
             _luminaConfig = luminaConfig;

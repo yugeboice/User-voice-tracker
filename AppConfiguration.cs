@@ -1,4 +1,4 @@
-namespace LuminaSearchConsole.Configuration
+namespace LuminaSearchConsole
 {
     /// <summary>
     /// Configuration for Lumina API services.

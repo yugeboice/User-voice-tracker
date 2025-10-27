@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using LuminaSearchConsole.Models;
-using LuminaSearchConsole.Configuration;
 using System.Diagnostics;
 
 namespace LuminaSearchConsole.Controllers
