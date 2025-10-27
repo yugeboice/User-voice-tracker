@@ -1,15 +1,20 @@
 namespace LuminaSearchConsole
 {
+    /// <summary>
+    /// Lumina API Demo Application
+    /// Demonstrates OAuth authentication, Search API, and Open API integration
+    /// </summary>
     public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container
+            // MVC support for web interface
             builder.Services.AddControllersWithViews();
             
-            // Add session support for storing tokens
+            // Session management for storing access tokens
+            // Token is stored in session after successful login
             builder.Services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -17,30 +22,32 @@ namespace LuminaSearchConsole
                 options.Cookie.IsEssential = true;
             });
 
-            // Add OBO token service
+            // Register OBO authentication service
+            // This service handles OAuth 2.0 token acquisition
             builder.Services.AddScoped<OboTokenService>();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline
+            // Configure error handling
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
 
-            // Configure to use port 5000 for web app, MSAL will use 8400 for auth callback
+            // Configure ports:
+            // - Web app: http://localhost:5000
+            // - MSAL auth callback: http://localhost:8400 (configured in OboTokenService)
             app.Urls.Add("http://localhost:5000");
 
-            // Skip HTTPS redirection for localhost:8400
             if (!app.Environment.IsDevelopment())
             {
                 app.UseHttpsRedirection();
             }
+            
             app.UseStaticFiles();
-
             app.UseRouting();
-            app.UseSession();
+            app.UseSession();  // Enable session before authorization
             app.UseAuthorization();
 
             app.MapControllerRoute(

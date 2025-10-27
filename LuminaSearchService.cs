@@ -7,15 +7,29 @@ using LuminaSearchConsole.Models;
 namespace LuminaSearchConsole
 {
     /// <summary>
-    /// Lumina Search Service - Implements various search functionalities
+    /// Lumina Search API Service
+    /// 
+    /// Demonstrates integration with Lumina Search and Open APIs:
+    /// - Web search using Bing provider
+    /// - Batch search (multiple queries in one request)
+    /// - Content extraction from URLs (Open API)
+    /// 
+    /// API Endpoint: https://luminaserviceapi-test-westus.copilotlumina.com
     /// </summary>
     public class LuminaSearchService
     {
+        #region Configuration
+        
         private static readonly string LuminaEndpoint = "https://luminaserviceapi-test-westus.copilotlumina.com";
         private readonly LuminaServiceApiProxy _proxy;
+        
+        #endregion
+
+        #region Constructor
 
         public LuminaSearchService(string accessToken)
         {
+            // Configure Lumina API proxy with authentication
             var options = new LuminaApiOptions
             {
                 Endpoint = LuminaEndpoint,
@@ -25,9 +39,17 @@ namespace LuminaSearchConsole
             var httpClientFactory = new DefaultHttpClientFactory();
             _proxy = new LuminaServiceApiProxy(options, httpClientFactory);
         }
+        
+        #endregion
+
+        #region Public Search Methods
+
+        #endregion
+
+        #region Public Search Methods
 
         /// <summary>
-        /// Execute basic search (following the Step 3 example from documentation)
+        /// Execute basic web search (Demo example)
         /// </summary>
         public async Task ExecuteBasicSearchAsync()
         {
@@ -119,8 +141,15 @@ namespace LuminaSearchConsole
         }
 
         /// <summary>
-        /// Execute batch search for company stock price and latest news
+        /// Execute batch search for company analysis
+        /// 
+        /// Batch Search Pattern:
+        /// Single API call with multiple search queries reduces latency.
+        /// Use case: Get both stock price and news for a company.
         /// </summary>
+        /// <param name="companyName">Company name to search for</param>
+        /// <param name="topN">Maximum results per query</param>
+        /// <returns>Structured results with stock and news separated</returns>
         public async Task<BatchSearchResult> ExecuteBatchCompanySearchAsync(string companyName, int topN = 5)
         {
             if (string.IsNullOrWhiteSpace(companyName))
@@ -171,13 +200,14 @@ namespace LuminaSearchConsole
                 var searchResult = await _proxy.SearchAsync(searchRequest);
                 Console.WriteLine($"✅ Batch search completed successfully");
                 
-                // Parse results into two categories
+                // Parse and separate results
+                // Results are returned in order: first query results, then second query results
                 var stockResults = new List<Models.SearchResult>();
                 var newsResults = new List<Models.SearchResult>();
                 
                 if (searchResult?.Results != null && searchResult.Results.Count > 0)
                 {
-                    // First half are stock results, second half are news results
+                    // Split results: first half = stock, second half = news
                     int midPoint = searchResult.Results.Count / 2;
                     
                     // Process stock price results (first request)
@@ -230,8 +260,14 @@ namespace LuminaSearchConsole
         }
 
         /// <summary>
-        /// Execute web search and return structured results for web interface
+        /// Execute web search and return structured results
+        /// 
+        /// This is the main search method used by the web interface.
+        /// Returns clean, structured data ready for display.
         /// </summary>
+        /// <param name="query">Search query text</param>
+        /// <param name="topN">Maximum number of results (1-50)</param>
+        /// <returns>List of search results with title, URL, and summary</returns>
         public async Task<List<Models.SearchResult>> ExecuteWebSearchAsync(string query, int topN = 5)
         {
             if (string.IsNullOrWhiteSpace(query))
@@ -270,6 +306,7 @@ namespace LuminaSearchConsole
                 var searchResult = await _proxy.SearchAsync(searchRequest);
                 Console.WriteLine($"✅ Web search completed, found {searchResult?.Results?.Count ?? 0} results");
                 
+                // Convert API results to view models
                 var results = new List<Models.SearchResult>();
 
                 if (searchResult?.Results != null && searchResult.Results.Count > 0)
@@ -300,9 +337,15 @@ namespace LuminaSearchConsole
             }
         }
 
+        #endregion
+
+        #region Private Helper Methods
+
         /// <summary>
-        /// Display search results
+        /// Display search results to console for debugging purposes.
+        /// Shows result count, title/URL pairs, and full JSON response.
         /// </summary>
+        /// <param name="searchResult">Dynamic search result object from Lumina API</param>
         private void DisplaySearchResults(dynamic searchResult)
         {
             Console.WriteLine("📊 Search Results:");
@@ -331,9 +374,19 @@ namespace LuminaSearchConsole
             Console.WriteLine(jsonResponse);
         }
 
+        #endregion
+
+        #region Content Extraction (Open API)
+
         /// <summary>
-        /// Open and retrieve full content from a specific URL using Lumina API
+        /// Open and retrieve full content from a URL using Lumina Open API
+        /// 
+        /// Open API Use Case:
+        /// When search returns a result URL, use Open API to extract the full page content.
+        /// This is useful for content analysis, summarization, or detailed viewing.
         /// </summary>
+        /// <param name="url">Full URL to open and extract content from</param>
+        /// <returns>Extracted page content as text</returns>
         public async Task<string> OpenContentAsync(string url)
         {
             if (string.IsNullOrWhiteSpace(url))
@@ -350,13 +403,14 @@ namespace LuminaSearchConsole
             {
                 Console.WriteLine($"📄 Opening content from URL: {url}");
 
+                // Create Open API request with URL reference
                 var openRequest = new OpenRequest
                 {
                     Requests = new List<OpenRequestItem>
                     {
                         new OpenRequestItem
                         {
-                            RefId = url
+                            RefId = url  // Direct URL reference
                         }
                     }
                 };
@@ -368,14 +422,15 @@ namespace LuminaSearchConsole
                     var page = response.Pages[0];
                     string content = page.Content ?? "";
                     
-                    // Check if content was filtered or failed to load
+                    // Validate content quality
                     var isContentFiltered = content.Contains("filtered content") || 
                                           content.Contains("Failed to open") ||
                                           string.IsNullOrWhiteSpace(content);
                     
                     if (isContentFiltered)
                     {
-                        throw new Exception("Content was filtered or failed to load. This may be due to content restrictions.");
+                        Console.WriteLine($"⚠️ No content retrieved from URL: {url}");
+                        throw new Exception($"No content available from the URL: {url}");
                     }
                     
                     Console.WriteLine($"✅ Successfully retrieved content. Length: {content.Length} characters");
@@ -402,10 +457,15 @@ namespace LuminaSearchConsole
                 throw new Exception($"Failed to open content from '{url}': {ex.Message}", ex);
             }
         }
+
+        #endregion
     }
 
+    #region Helper Classes
+
     /// <summary>
-    /// Simple HTTP client factory implementation
+    /// Simple HTTP client factory for creating HttpClient instances.
+    /// Used by LuminaServiceApiProxy for making API requests.
     /// </summary>
     public class DefaultHttpClientFactory : IHttpClientFactory
     {
@@ -414,4 +474,6 @@ namespace LuminaSearchConsole
             return new HttpClient();
         }
     }
+
+    #endregion
 }
