@@ -83,7 +83,6 @@ namespace LuminaSearchConsole.Controllers
                     $"  Token preview: {tokenPreview}\n" +
                     $"  Storage: Session (30min timeout)");
                 
-                TempData["Message"] = "Successfully logged in! You can now search.";
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
