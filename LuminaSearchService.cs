@@ -1,6 +1,7 @@
 using Microsoft.Lumina.Client.ApiProxy;
 using Microsoft.Lumina.Client.Models.Sonicberry;
 using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using static Microsoft.Lumina.Common.Constants.ConstantStrings;
 using LuminaSearchConsole.Models;
 
@@ -637,40 +638,40 @@ namespace LuminaSearchConsole
 
     public class CuaScreenshotResponse
     {
-        [JsonProperty("messageId")]
+        [JsonPropertyName("messageId")]
         public string? MessageId { get; set; }
 
-        [JsonProperty("createTime")]
-        public long CreateTime { get; set; }
+        [JsonPropertyName("createTime")]
+        public double CreateTime { get; set; }
 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string? Status { get; set; }
 
-        [JsonProperty("content")]
+        [JsonPropertyName("content")]
         public CuaScreenshotContent? Content { get; set; }
     }
 
     public class CuaScreenshotContent
     {
-        [JsonProperty("screenshot")]
+        [JsonPropertyName("screenshot")]
         public string? Screenshot { get; set; }
 
-        [JsonProperty("width")]
+        [JsonPropertyName("width")]
         public int Width { get; set; }
 
-        [JsonProperty("height")]
+        [JsonPropertyName("height")]
         public int Height { get; set; }
 
-        [JsonProperty("success")]
+        [JsonPropertyName("success")]
         public bool Success { get; set; }
     }
 
     public class CuaActionResponse
     {
-        [JsonProperty("messageId")]
+        [JsonPropertyName("messageId")]
         public string? MessageId { get; set; }
 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string? Status { get; set; }
     }
 
@@ -688,6 +689,34 @@ namespace LuminaSearchConsole
         public HttpClient CreateClient(string name)
         {
             return new HttpClient();
+        }
+    }
+
+    /// <summary>
+    /// Custom JSON converter to handle createTime field that can be either number or string
+    /// </summary>
+    public class FlexibleNumberConverter : System.Text.Json.Serialization.JsonConverter<long>
+    {
+        public override long Read(ref System.Text.Json.Utf8JsonReader reader, Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+        {
+            if (reader.TokenType == System.Text.Json.JsonTokenType.Number)
+            {
+                return reader.GetInt64();
+            }
+            else if (reader.TokenType == System.Text.Json.JsonTokenType.String)
+            {
+                var stringValue = reader.GetString();
+                if (long.TryParse(stringValue, out long result))
+                {
+                    return result;
+                }
+            }
+            return 0;
+        }
+
+        public override void Write(System.Text.Json.Utf8JsonWriter writer, long value, System.Text.Json.JsonSerializerOptions options)
+        {
+            writer.WriteNumberValue(value);
         }
     }
 
