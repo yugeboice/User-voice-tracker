@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h1 class="mb-4">🚀 Lumina Search Interface</h1>
+        <h1 class="mb-4">🔍 Company Search by Lumina</h1>
         
         @if (TempData["Message"] != null)
         {
@@ -29,11 +29,11 @@
         @if (!Model.IsAuthenticated)
         {
             <div class="auth-section">
-                <h3>📋 Step 1: Authentication</h3>
-                <p class="text-muted">You need to log in to access Lumina search functionality.</p>
+                <h3>� Welcome!</h3>
+                <p class="text-muted">Sign in to start searching for company information</p>
                 <form asp-action="Login" method="post">
                     @Html.AntiForgeryToken()
-                    <button type="submit" class="btn btn-primary">🔑 Login with Microsoft</button>
+                    <button type="submit" class="btn btn-primary">Sign In with Microsoft</button>
                 </form>
             </div>
         }
@@ -41,10 +41,10 @@
         {
             <!-- Logged in status bar -->
             <div class="alert alert-success d-flex justify-content-between align-items-center mb-4">
-                <span>✅ Successfully logged in!</span>
+                <span>✅ You're signed in</span>
                 <form asp-action="Logout" method="post" class="d-inline">
                     @Html.AntiForgeryToken()
-                    <button type="submit" class="btn btn-outline-secondary btn-sm">🚪 Logout</button>
+                    <button type="submit" class="btn btn-outline-secondary btn-sm">Sign Out</button>
                 </form>
             </div>
         }
@@ -91,52 +91,70 @@
             </div>
         }
 
-        <!-- Two Column Layout: Search + Results (Left) | CUA Test (Right) -->
+        <!-- Main Search Box (Full Width) -->
         @if (Model.IsAuthenticated)
         {
-            <div class="row mt-4">
-                <!-- Left Column: Search and Results -->
-                <div class="col-lg-8">
-                    <!-- Search Section -->
-                    <div class="search-section">
-                        <h3>🔍 Batch Search</h3>
-                        <p class="text-muted">Search for company stock price and latest news</p>
-                        <form asp-action="Search" method="post">
-                            @Html.AntiForgeryToken()
-                            <div class="mb-3">
-                                <label for="query" class="form-label">Company Name</label>
-                                <input type="text" class="form-control" id="query" name="Query" 
-                                       value="@Model.Query" placeholder="Enter company name (e.g., Microsoft, Apple, Google)..." required>
-                                <div class="form-text">This will search for both stock price and latest news about the company.</div>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="topResults" class="form-label">Number of Results per Category</label>
-                                <select class="form-select" id="topResults" name="TopResults">
-                                    <option value="3" selected="@(Model.TopResults == 3)">3 results</option>
-                                    <option value="5" selected="@(Model.TopResults == 5)">5 results</option>
-                                    <option value="10" selected="@(Model.TopResults == 10)">10 results</option>
-                                </select>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-success">🚀 Search Company Info</button>
-                        </form>
+            <div class="main-search-container">
+                <form asp-action="Search" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="search-box-wrapper">
+                        <input type="text" class="form-control form-control-lg search-input" id="query" name="Query" 
+                               value="@Model.Query" placeholder="Search for any company..." required>
+                        <button type="submit" class="btn btn-primary btn-lg search-button">🔍 Search</button>
                     </div>
-                    
-                    <!-- Search Results -->
-                    @if (Model.HasSearched)
-                    {
+                    <div class="form-text text-center mt-2">Get instant access to stock prices and latest news</div>
+                    <input type="hidden" name="TopResults" value="5">
+                </form>
+            </div>
+            
+            <!-- CUA Test Section (Full Width) -->
+            <div class="cua-section-horizontal mt-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="mb-1">🤖 Computer Use Agent (CUA) Usecase</h5>
+                        <p class="text-muted mb-0 small">Navigate to MSN Money, search stock price, and take a screenshot.</p>
+                    </div>
+                    <div>
+                        @if (!string.IsNullOrEmpty(Model.Query))
+                        {
+                            <button type="button" class="btn btn-info" onclick="testCua('@Model.Query')">
+                                ▶️ Watch AI Search
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-info" disabled>
+                                ▶️ Watch AI Search
+                            </button>
+                        }
+                    </div>
+                </div>
+                
+                <!-- CUA Screenshot Display -->
+                <div id="cuaScreenshot" class="mt-3" style="display:none;">
+                    <h6 class="mb-2">📸 Live Search Preview</h6>
+                    <div class="card">
+                        <div class="card-body p-2">
+                            <img id="cuaImage" src="" alt="AI Search Preview" class="img-fluid w-100" style="max-height: 500px; object-fit: contain; border: 1px solid #ddd;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Search Results (Full Width) -->
+            @if (Model.HasSearched)
+            {
                 <div class="mt-4">
                     @if (Model.IsBatchSearch && Model.BatchSearchResult != null)
                     {
                         <!-- Batch Search Results (Company Info) -->
-                        <h3>📊 Company Search Results for "@Model.BatchSearchResult.CompanyName"</h3>
+                        <h3>📊 Results for "@Model.BatchSearchResult.CompanyName"</h3>
                         
                         <div class="row">
                             <!-- Stock Price Results (Left Column) -->
                             <div class="col-md-6">
-                                <h4 class="text-primary">📈 Stock Price Information</h4>
-                                <p class="text-muted">Found @Model.BatchSearchResult.StockResults.Count stock-related results:</p>
+                                <h4 class="text-primary">📈 Stock & Market Data</h4>
+                                <p class="text-muted">@Model.BatchSearchResult.StockResults.Count results found</p>
                                 
                                 @if (Model.BatchSearchResult.StockResults.Any())
                                 {
@@ -167,16 +185,16 @@
                                 else
                                 {
                                     <div class="alert alert-info">
-                                        <p class="mb-0">No stock price information found.</p>
+                                        <p class="mb-0">No stock data available.</p>
                                     </div>
                                 }
                             </div>
                             
                             <!-- Latest News Results (Right Column) -->
                             <div class="col-md-6">
-                                <h4 class="text-success">📰 Latest News</h4>
-                                <p class="text-muted">Found @Model.BatchSearchResult.NewsResults.Count news results:</p>
-                                <p class="text-info"><small>💡 Click on any news title to view full content</small></p>
+                                <h4 class="text-success">📰 Recent News</h4>
+                                <p class="text-muted">@Model.BatchSearchResult.NewsResults.Count articles found</p>
+                                <p class="text-info"><small>💡 Click any article to read the full story</small></p>
                                 
                                 @if (Model.BatchSearchResult.NewsResults.Any())
                                 {
@@ -207,7 +225,7 @@
                                 else
                                 {
                                     <div class="alert alert-info">
-                                        <p class="mb-0">No latest news found.</p>
+                                        <p class="mb-0">No recent articles found.</p>
                                     </div>
                                 }
                             </div>
@@ -217,7 +235,7 @@
                     {
                         <!-- Simple Search Results -->
                         <h3>📊 Search Results</h3>
-                        <p class="text-muted">Found @Model.SearchResults.Count results for "@Model.Query"</p>
+                        <p class="text-muted">@Model.SearchResults.Count results for "@Model.Query"</p>
                         
                         @if (Model.SearchResults.Any())
                         {
@@ -248,49 +266,12 @@
                         else
                         {
                             <div class="alert alert-info">
-                                <p class="mb-0">No search results found. Try a different query.</p>
+                                <p class="mb-0">No results found. Try searching for something else.</p>
                             </div>
                         }
                     }
-                    </div>
-                }
                 </div>
-                <!-- End Left Column -->
-                
-                <!-- Right Column: CUA Test -->
-                <div class="col-lg-4">
-                    <div class="cua-section sticky-top" style="top: 20px;">
-                        <h3>🖥️ Computer Use Agent (CUA) Test</h3>
-                        <p class="text-muted">Test CUA by searching for stock price on Bing using a virtual computer</p>
-                        
-                        @if (!string.IsNullOrEmpty(Model.Query))
-                        {
-                            <div class="mb-3">
-                                <button type="button" class="btn btn-info w-100" onclick="testCua('@Model.Query')">
-                                    🚀 Test CUA - Search "@Model.Query" Stock Price
-                                </button>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="alert alert-info">
-                                <p class="mb-0">💡 Enter a company name in the search box to enable CUA testing.</p>
-                            </div>
-                        }
-                        
-                        <!-- CUA Screenshot Display -->
-                        <div id="cuaScreenshot" class="mt-3" style="display:none;">
-                            <h5>📸 Virtual Computer Screenshot</h5>
-                            <div class="card">
-                                <div class="card-body p-0">
-                                    <img id="cuaImage" src="" alt="CUA Screenshot" class="img-fluid w-100" style="border: 1px solid #ddd;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Right Column -->
-            </div>
+            }
         }
     </div>
 </div>
@@ -300,7 +281,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="contentModalLabel">📄 Full Content</h5>
+                <h5 class="modal-title" id="contentModalLabel">📄 Article</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -308,7 +289,7 @@
                     <div class="spinner-border text-primary" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>
-                    <p class="mt-2">Loading full content...</p>
+                    <p class="mt-2">Loading article...</p>
                 </div>
                 <div id="contentBody" style="max-height: 70vh; overflow-y: auto;"></div>
             </div>
