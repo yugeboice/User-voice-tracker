@@ -205,18 +205,18 @@ namespace LuminaSearchConsole.Controllers
                         var companyInfo = await searchService.ExtractCompanyInfoAsync(wikipediaUrl);
                         var infoDuration = (DateTime.Now - infoStartTime).TotalMilliseconds;
                         
-                        if (companyInfo != null && companyInfo.Matches.Any())
+                        if (companyInfo != null && companyInfo.Fields.Any())
                         {
-                            var matchSummary = string.Join("\n  ", 
-                                companyInfo.Matches.Take(3).Select(m => $"Line {m.LineNumber}: {m.Content.Substring(0, Math.Min(100, m.Content.Length))}"));
+                            var fieldsSummary = string.Join("\n  ", 
+                                companyInfo.Fields.Take(3).Select(f => $"{f.FieldName}: {f.Content.Substring(0, Math.Min(100, f.Content.Length))}"));
                             
                             _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
                                 $"✅ Company information extracted from Wikipedia\n" +
-                                $"  Total matches: {companyInfo.Matches.Count}\n" +
+                                $"  Total fields: {companyInfo.Fields.Count}\n" +
                                 $"  Response time: {infoDuration:F0}ms\n" +
-                                $"  Sample matches:\n  {matchSummary}");
+                                $"  Sample fields:\n  {fieldsSummary}");
                             
-                            model.StockPriceInfo = companyInfo;
+                            model.CompanyInfo = companyInfo;
                         }
                         else
                         {

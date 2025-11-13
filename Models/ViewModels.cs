@@ -27,8 +27,8 @@ namespace LuminaSearchConsole.Models
         /// <summary>Flag to indicate which result type to display</summary>
         public bool IsBatchSearch { get; set; }
         
-        /// <summary>Stock price information extracted using Find API</summary>
-        public LuminaSearchConsole.StockPriceInfo? StockPriceInfo { get; set; }
+        /// <summary>Company information extracted from Wikipedia using Find API</summary>
+        public LuminaSearchConsole.CompanyInfo? CompanyInfo { get; set; }
         
         /// <summary>API call logs for displaying execution flow</summary>
         public List<Services.ApiLogEntry>? ApiLogs { get; set; }

@@ -460,7 +460,7 @@ namespace LuminaSearchConsole
         /// </summary>
         /// <param name="url">Wikipedia URL for the company</param>
         /// <returns>Extracted company information or null if not found</returns>
-        public async Task<StockPriceInfo?> ExtractCompanyInfoAsync(string url)
+        public async Task<CompanyInfo?> ExtractCompanyInfoAsync(string url)
         {
             try
             {
@@ -479,10 +479,10 @@ namespace LuminaSearchConsole
                 // Search for key-value pairs commonly found in Wikipedia company infoboxes
                 string[] patterns = { "Founded", "Headquarters", "Revenue", "Industry", "Type" };
                 
-                var companyInfo = new StockPriceInfo
+                var companyInfo = new CompanyInfo
                 {
                     Url = url,
-                    Matches = new List<PriceMatch>()
+                    Fields = new List<InfoField>()
                 };
                 
                 foreach (var pattern in patterns)
@@ -506,11 +506,11 @@ namespace LuminaSearchConsole
                                 var cleanContent = ExtractInfoboxValue(matchContent, pattern);
                                 Console.WriteLine($"🧹 Cleaned content for '{pattern}': {cleanContent}");
                                 
-                                companyInfo.Matches.Add(new PriceMatch
+                                companyInfo.Fields.Add(new InfoField
                                 {
                                     LineNumber = firstMatch.LineIdx ?? 0,
                                     Content = cleanContent,
-                                    Pattern = pattern
+                                    FieldName = pattern
                                 });
                             }
                         }
@@ -522,7 +522,7 @@ namespace LuminaSearchConsole
                 }
                 
                 // Return results if we found any infobox data
-                if (companyInfo.Matches.Any())
+                if (companyInfo.Fields.Any())
                 {
                     return companyInfo;
                 }
@@ -778,25 +778,25 @@ namespace LuminaSearchConsole
         #endregion
     }
 
-    #region Stock Price Extraction Models
+    #region Company Information Models
 
     /// <summary>
-    /// Stock price information extracted from financial URLs
+    /// Company information extracted from Wikipedia
     /// </summary>
-    public class StockPriceInfo
+    public class CompanyInfo
     {
         public string Url { get; set; } = string.Empty;
-        public List<PriceMatch> Matches { get; set; } = new();
+        public List<InfoField> Fields { get; set; } = new();
     }
 
     /// <summary>
-    /// Individual price match found in content
+    /// Individual information field extracted from company page
     /// </summary>
-    public class PriceMatch
+    public class InfoField
     {
         public long LineNumber { get; set; }
         public string Content { get; set; } = string.Empty;
-        public string Pattern { get; set; } = string.Empty;
+        public string FieldName { get; set; } = string.Empty;
     }
 
     #endregion
