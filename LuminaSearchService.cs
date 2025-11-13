@@ -387,10 +387,11 @@ namespace LuminaSearchConsole
         /// Open API Use Case:
         /// When search returns a result URL, use Open API to extract the full page content.
         /// This is useful for content analysis, summarization, or detailed viewing.
+        /// Returns both content and session ID for follow-up Find operations.
         /// </summary>
         /// <param name="url">Full URL to open and extract content from</param>
-        /// <returns>Extracted page content as text</returns>
-        public async Task<string> OpenContentAsync(string url)
+        /// <returns>Tuple with extracted page content and session ID</returns>
+        public async Task<(string content, string sessionId)> OpenContentWithSessionAsync(string url)
         {
             if (string.IsNullOrWhiteSpace(url))
             {
@@ -418,12 +419,41 @@ namespace LuminaSearchConsole
                     }
                 };
 
+                Console.WriteLine($"📤 Sending Open API request...");
                 var response = await _proxy.OpenAsync(openRequest);
+                Console.WriteLine($"📥 Received Open API response");
+                
+                // Debug: Log response structure
+                Console.WriteLine($"📋 Open API Response Debug:");
+                Console.WriteLine($"  Response is null: {response == null}");
+                if (response != null)
+                {
+                    Console.WriteLine($"  Pages is null: {response.Pages == null}");
+                    Console.WriteLine($"  Pages count: {response.Pages?.Count ?? 0}");
+                    Console.WriteLine($"  ToolState is null: {response.ToolState == null}");
+                    Console.WriteLine($"  SessionId: {response.ToolState?.SessionId ?? "null"}");
+                }
                 
                 if (response != null && response.Pages != null && response.Pages.Count > 0)
                 {
                     var page = response.Pages[0];
                     string content = page.Content ?? "";
+                    string sessionId = response.ToolState?.SessionId ?? "";
+                    
+                    // Debug: Log page details
+                    Console.WriteLine($"📄 Page Details:");
+                    Console.WriteLine($"  URL: {page.Url ?? "null"}");
+                    Console.WriteLine($"  Title: {page.Title ?? "null"}");
+                    Console.WriteLine($"  Content length: {content.Length}");
+                    Console.WriteLine($"  Content is empty: {string.IsNullOrWhiteSpace(content)}");
+                    if (content.Length > 0 && content.Length < 500)
+                    {
+                        Console.WriteLine($"  Content preview: {content}");
+                    }
+                    else if (content.Length > 0)
+                    {
+                        Console.WriteLine($"  Content preview (first 200 chars): {content.Substring(0, Math.Min(200, content.Length))}");
+                    }
                     
                     // Validate content quality
                     var isContentFiltered = content.Contains("filtered content") || 
@@ -432,16 +462,19 @@ namespace LuminaSearchConsole
                     
                     if (isContentFiltered)
                     {
-                        Console.WriteLine($"⚠️ No content retrieved from URL: {url}");
+                        Console.WriteLine($"⚠️ Content validation failed:");
+                        Console.WriteLine($"  Contains 'filtered content': {content.Contains("filtered content")}");
+                        Console.WriteLine($"  Contains 'Failed to open': {content.Contains("Failed to open")}");
+                        Console.WriteLine($"  Is whitespace: {string.IsNullOrWhiteSpace(content)}");
                         throw new Exception($"No content available from the URL: {url}");
                     }
                     
-                    Console.WriteLine($"✅ Successfully retrieved content. Length: {content.Length} characters");
-                    return content;
+                    Console.WriteLine($"✅ Successfully retrieved content. Length: {content.Length} characters, SessionId: {sessionId}");
+                    return (content, sessionId);
                 }
                 else
                 {
-                    Console.WriteLine($"⚠️ No content retrieved from URL: {url}");
+                    Console.WriteLine($"⚠️ Response structure validation failed");
                     throw new Exception($"No content available from the URL: {url}");
                 }
             }
@@ -458,6 +491,346 @@ namespace LuminaSearchConsole
             {
                 Console.WriteLine($"❌ Error opening content: {ex.Message}");
                 throw new Exception($"Failed to open content from '{url}': {ex.Message}", ex);
+            }
+        }
+
+        /// <summary>
+        /// Open and retrieve full content from a URL (backward compatible version)
+        /// </summary>
+        /// <param name="url">Full URL to open and extract content from</param>
+        /// <returns>Extracted page content as text</returns>
+        public async Task<string> OpenContentAsync(string url)
+        {
+            var (content, _) = await OpenContentWithSessionAsync(url);
+            return content;
+        }
+
+        #endregion
+
+        #region Content Finding (Find API)
+
+        /// <summary>
+        /// Find specific patterns within opened page content using Lumina Find API
+        /// 
+        /// Find API Use Case:
+        /// After opening a page with Open API, use Find to search for specific patterns (like stock price)
+        /// within the page content. Similar to Ctrl+F in a browser.
+        /// </summary>
+        /// <param name="pattern">The pattern/text to search for (e.g., "price", "stock")</param>
+        /// <param name="url">URL that was previously opened</param>
+        /// <param name="sessionId">Session ID from previous Open operation</param>
+        /// <returns>List of matching results with line numbers and content</returns>
+        public async Task<FindResponse> FindContentAsync(string pattern, string url, string sessionId)
+        {
+            if (string.IsNullOrWhiteSpace(pattern))
+            {
+                throw new ArgumentException("Pattern cannot be empty", nameof(pattern));
+            }
+
+            if (string.IsNullOrWhiteSpace(sessionId))
+            {
+                throw new ArgumentException("Session ID is required for Find operation", nameof(sessionId));
+            }
+
+            try
+            {
+                Console.WriteLine($"🔍 Finding pattern '{pattern}' in content");
+
+                // Create Find API request
+                var findRequest = new FindRequest
+                {
+                    Requests = new List<FindRequestItem>
+                    {
+                        new FindRequestItem
+                        {
+                            Pattern = pattern,
+                            PageContext = new PageContextInfo
+                            {
+                                Turn = 0,
+                                Action = "view",
+                                Id = 0
+                            }
+                        }
+                    },
+                    ToolState = new ToolState
+                    {
+                        SessionId = sessionId
+                    }
+                };
+
+                var response = await _proxy.FindAsync(findRequest);
+                
+                if (response != null && response.Results != null && response.Results.Count > 0)
+                {
+                    Console.WriteLine($"✅ Found {response.Results.Count} matches for pattern '{pattern}'");
+                    return response;
+                }
+                else
+                {
+                    Console.WriteLine($"⚠️ No matches found for pattern '{pattern}'");
+                    return response!;
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"❌ Network error while finding content: {ex.Message}");
+                throw new Exception($"Network error occurred during Find operation. Please check your internet connection.", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error finding content: {ex.Message}");
+                throw new Exception($"Failed to find pattern '{pattern}': {ex.Message}", ex);
+            }
+        }
+
+        /// <summary>
+        /// Extract company information from Wikipedia using Find API
+        /// 
+        /// Use Case:
+        /// 1. Open the Wikipedia URL with Open API to get page content and session ID
+        /// 2. Use Find API to search for company information keywords in the content
+        /// 3. Extract and return company information like founded date, headquarters, revenue, etc.
+        /// </summary>
+        /// <param name="url">Wikipedia URL for the company</param>
+        /// <returns>Extracted company information or null if not found</returns>
+        public async Task<StockPriceInfo?> ExtractCompanyInfoAsync(string url)
+        {
+            try
+            {
+                Console.WriteLine($"🏢 Extracting company information from: {url}");
+                
+                // Step 1: Open the URL to get content and session
+                var (content, sessionId) = await OpenContentWithSessionAsync(url);
+                
+                if (string.IsNullOrEmpty(sessionId))
+                {
+                    Console.WriteLine("⚠️ No session ID returned from Open API");
+                    return null;
+                }
+                
+                // Step 2: Use Find API to search for Wikipedia infobox patterns
+                // Search for key-value pairs commonly found in Wikipedia company infoboxes
+                string[] patterns = { "Founded", "Headquarters", "Revenue", "Industry", "Type" };
+                
+                var companyInfo = new StockPriceInfo
+                {
+                    Url = url,
+                    Matches = new List<PriceMatch>()
+                };
+                
+                foreach (var pattern in patterns)
+                {
+                    try
+                    {
+                        var findResponse = await FindContentAsync(pattern, url, sessionId);
+                        
+                        if (findResponse?.Results != null && findResponse.Results.Count > 0)
+                        {
+                            Console.WriteLine($"✅ Found {findResponse.Results.Count} matches for '{pattern}'");
+                            
+                            // Extract only the first match for each pattern (likely from infobox)
+                            var firstMatch = findResponse.Results.FirstOrDefault();
+                            if (firstMatch != null)
+                            {
+                                var matchContent = firstMatch.Template ?? "";
+                                Console.WriteLine($"📝 Raw content for '{pattern}': {matchContent.Substring(0, Math.Min(200, matchContent.Length))}...");
+                                
+                                // Try to extract just the value part (after the field name)
+                                var cleanContent = ExtractInfoboxValue(matchContent, pattern);
+                                Console.WriteLine($"🧹 Cleaned content for '{pattern}': {cleanContent}");
+                                
+                                companyInfo.Matches.Add(new PriceMatch
+                                {
+                                    LineNumber = firstMatch.LineIdx ?? 0,
+                                    Content = cleanContent,
+                                    Pattern = pattern
+                                });
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"⚠️ Failed to find pattern '{pattern}': {ex.Message}");
+                    }
+                }
+                
+                // Return results if we found any infobox data
+                if (companyInfo.Matches.Any())
+                {
+                    return companyInfo;
+                }
+                
+                Console.WriteLine($"⚠️ No company information patterns found");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error extracting company info: {ex.Message}");
+                throw;
+            }
+        }
+        
+        /// <summary>
+        /// Extract clean value from Wikipedia infobox content
+        /// </summary>
+        private string ExtractInfoboxValue(string rawContent, string fieldName)
+        {
+            // Remove link markers like [[[link_0]]]
+            var content = System.Text.RegularExpressions.Regex.Replace(rawContent, @"\[\[\[link_\d+\]\]\]", "");
+            
+            // Strategy 1: Look for "FieldName:" pattern (most common in Wikipedia infoboxes)
+            var colonPattern = $@"{fieldName}\s*:\s*([^\n\|]+)";
+            var colonMatch = System.Text.RegularExpressions.Regex.Match(content, colonPattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            if (colonMatch.Success && colonMatch.Groups.Count > 1)
+            {
+                var value = colonMatch.Groups[1].Value.Trim();
+                if (!string.IsNullOrWhiteSpace(value) && value.Length > 3)
+                {
+                    return CleanAndLimit(value, 150);
+                }
+            }
+            
+            // Strategy 2: Look for pipe-delimited table format "| FieldName | Value"
+            var lines = content.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                var line = lines[i].Trim();
+                
+                // Check if this line is the field name
+                if (line.StartsWith("|") && line.Contains(fieldName, StringComparison.OrdinalIgnoreCase))
+                {
+                    // Extract content between pipes
+                    var cells = line.Split('|', StringSplitOptions.RemoveEmptyEntries);
+                    if (cells.Length >= 2)
+                    {
+                        // First cell might be the field name, second is the value
+                        var fieldCell = cells[0].Trim();
+                        if (fieldCell.Equals(fieldName, StringComparison.OrdinalIgnoreCase) && cells.Length > 1)
+                        {
+                            var valueCell = cells[1].Trim();
+                            if (!string.IsNullOrWhiteSpace(valueCell) && valueCell.Length > 3)
+                            {
+                                return CleanAndLimit(valueCell, 150);
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Strategy 3: Simple extraction - find field name and take the next meaningful text
+            var fieldIndex = content.IndexOf(fieldName, StringComparison.OrdinalIgnoreCase);
+            if (fieldIndex >= 0)
+            {
+                var afterField = content.Substring(fieldIndex + fieldName.Length);
+                // Skip common separators
+                afterField = System.Text.RegularExpressions.Regex.Replace(afterField, @"^[\s\|:\-]+", "");
+                
+                // Take text until newline or pipe
+                var match = System.Text.RegularExpressions.Regex.Match(afterField, @"^([^\n\|]{5,150})");
+                if (match.Success)
+                {
+                    return CleanAndLimit(match.Groups[1].Value, 150);
+                }
+            }
+            
+            return "N/A";
+        }
+        
+        /// <summary>
+        /// Clean and limit the length of extracted value
+        /// </summary>
+        private string CleanAndLimit(string value, int maxLength)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return "N/A";
+            
+            // Remove multiple spaces
+            value = System.Text.RegularExpressions.Regex.Replace(value, @"\s+", " ").Trim();
+            
+            // Remove markdown/wiki formatting
+            value = value.Replace("**", "").Replace("__", "");
+            
+            // Limit length
+            if (value.Length > maxLength)
+            {
+                value = value.Substring(0, maxLength).Trim() + "...";
+            }
+            
+            return value;
+        }
+
+        /// <summary>
+        /// Extract stock price from MSN Money or financial URLs using Find API
+        /// 
+        /// Use Case:
+        /// 1. Open the financial URL with Open API to get page content and session ID
+        /// 2. Use Find API to search for stock price patterns in the content
+        /// 3. Extract and return the stock price information
+        /// </summary>
+        /// <param name="url">MSN Money or other financial URL</param>
+        /// <returns>Extracted stock price information or null if not found</returns>
+        public async Task<StockPriceInfo?> ExtractStockPriceAsync(string url)
+        {
+            try
+            {
+                Console.WriteLine($"💰 Extracting stock price from: {url}");
+                
+                // Step 1: Open the URL to get content and session
+                var (content, sessionId) = await OpenContentWithSessionAsync(url);
+                
+                if (string.IsNullOrEmpty(sessionId))
+                {
+                    Console.WriteLine("⚠️ No session ID returned from Open API");
+                    return null;
+                }
+                
+                // Step 2: Use Find API to search for price patterns
+                // Common patterns: "$123.45", "USD 123.45", price indicators
+                string[] patterns = { "$", "USD", "price", "Price" };
+                
+                foreach (var pattern in patterns)
+                {
+                    try
+                    {
+                        var findResponse = await FindContentAsync(pattern, url, sessionId);
+                        
+                        if (findResponse?.Results != null && findResponse.Results.Count > 0)
+                        {
+                            Console.WriteLine($"✅ Found {findResponse.Results.Count} matches for pattern '{pattern}'");
+                            
+                            // Extract price from first few matches
+                            var priceInfo = new StockPriceInfo
+                            {
+                                Url = url,
+                                Matches = new List<PriceMatch>()
+                            };
+                            
+                            foreach (var result in findResponse.Results.Take(10))
+                            {
+                                priceInfo.Matches.Add(new PriceMatch
+                                {
+                                    LineNumber = result.LineIdx ?? 0,
+                                    Content = result.Template ?? "",
+                                    Pattern = pattern
+                                });
+                            }
+                            
+                            return priceInfo;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"⚠️ Failed to find pattern '{pattern}': {ex.Message}");
+                    }
+                }
+                
+                Console.WriteLine("⚠️ No stock price patterns found");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error extracting stock price: {ex.Message}");
+                throw;
             }
         }
 
@@ -612,6 +985,29 @@ namespace LuminaSearchConsole
 
         #endregion
     }
+
+    #region Stock Price Extraction Models
+
+    /// <summary>
+    /// Stock price information extracted from financial URLs
+    /// </summary>
+    public class StockPriceInfo
+    {
+        public string Url { get; set; } = string.Empty;
+        public List<PriceMatch> Matches { get; set; } = new();
+    }
+
+    /// <summary>
+    /// Individual price match found in content
+    /// </summary>
+    public class PriceMatch
+    {
+        public long LineNumber { get; set; }
+        public string Content { get; set; } = string.Empty;
+        public string Pattern { get; set; } = string.Empty;
+    }
+
+    #endregion
 
     #region CUA Model Classes
 
