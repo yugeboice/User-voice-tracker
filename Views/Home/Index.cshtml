@@ -107,40 +107,6 @@
                 </form>
             </div>
             
-            <!-- CUA Test Section (Full Width) -->
-            <div class="cua-section-horizontal mt-4">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <h5 class="mb-1">🤖 Computer Use Agent (CUA) Usecase</h5>
-                        <p class="text-muted mb-0 small">Navigate to MSN Money, search stock price, and take a screenshot.</p>
-                    </div>
-                    <div>
-                        @if (!string.IsNullOrEmpty(Model.Query))
-                        {
-                            <button type="button" class="btn btn-info" onclick="testCua('@Model.Query')">
-                                ▶️ Watch AI Search
-                            </button>
-                        }
-                        else
-                        {
-                            <button type="button" class="btn btn-info" disabled>
-                                ▶️ Watch AI Search
-                            </button>
-                        }
-                    </div>
-                </div>
-                
-                <!-- CUA Screenshot Display -->
-                <div id="cuaScreenshot" class="mt-3" style="display:none;">
-                    <h6 class="mb-2">📸 Live Search Preview</h6>
-                    <div class="card">
-                        <div class="card-body p-2">
-                            <img id="cuaImage" src="" alt="AI Search Preview" class="img-fluid w-100" style="max-height: 500px; object-fit: contain; border: 1px solid #ddd;">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
             <!-- Search Results (Full Width) -->
             @if (Model.HasSearched)
             {
@@ -150,31 +116,74 @@
                         <!-- Batch Search Results (Company Info) -->
                         <h3>📊 Results for "@Model.BatchSearchResult.CompanyName"</h3>
                         
-                        <!-- Company Information Extracted via Find API -->
-                        @if (Model.StockPriceInfo != null && Model.StockPriceInfo.Matches.Any())
-                        {
-                            <div class="card mb-4" style="border-left: 4px solid #0d6efd;">
-                                <div class="card-header" style="background-color: #f8f9fa;">
-                                    <h5 class="mb-0">🏢 Company Overview</h5>
-                                    <small class="text-muted">Information extracted from Wikipedia using Find API</small>
-                                </div>
-                                <div class="card-body">
-                                    <table class="table table-sm table-borderless mb-0">
-                                        @foreach (var match in Model.StockPriceInfo.Matches)
-                                        {
-                                            <tr>
-                                                <td class="text-end" style="width: 150px; font-weight: 600; color: #495057;">@match.Pattern</td>
-                                                <td style="color: #212529;">@match.Content</td>
-                                            </tr>
-                                        }
-                                    </table>
-                                    <hr class="mt-3 mb-2">
-                                    <small class="text-muted">
-                                        <a href="@Model.StockPriceInfo.Url" target="_blank">View full article on Wikipedia →</a>
-                                    </small>
+                        <!-- Two Column Layout: Company Overview + CUA Test -->
+                        <div class="row mb-4">
+                            <!-- Left Column: Company Overview -->
+                            <div class="col-md-6">
+                                @if (Model.StockPriceInfo != null && Model.StockPriceInfo.Matches.Any())
+                                {
+                                    <div class="card h-100" style="border-left: 4px solid #0d6efd;">
+                                        <div class="card-header" style="background-color: #f8f9fa;">
+                                            <h5 class="mb-0">🏢 Company Overview</h5>
+                                            <small class="text-muted">Information extracted from Wikipedia using Find API</small>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-sm table-borderless mb-0">
+                                                @foreach (var match in Model.StockPriceInfo.Matches)
+                                                {
+                                                    <tr>
+                                                        <td class="text-end" style="width: 150px; font-weight: 600; color: #495057;">@match.Pattern</td>
+                                                        <td style="color: #212529;">@match.Content</td>
+                                                    </tr>
+                                                }
+                                            </table>
+                                            <hr class="mt-3 mb-2">
+                                            <small class="text-muted">
+                                                <a href="@Model.StockPriceInfo.Url" target="_blank">View full article on Wikipedia →</a>
+                                            </small>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            
+                            <!-- Right Column: CUA Test -->
+                            <div class="col-md-6">
+                                <div class="card h-100" style="border-left: 4px solid #17a2b8;">
+                                    <div class="card-header" style="background-color: #f8f9fa;">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="mb-1">🤖 Computer Use Agent (CUA)</h5>
+                                                <small class="text-muted">Navigate to MSN Money, search stock price, and take a screenshot.</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="text-center mb-3">
+                                            @if (!string.IsNullOrEmpty(Model.Query))
+                                            {
+                                                <button type="button" class="btn btn-info" onclick="testCua('@Model.Query')">
+                                                    ▶️ Watch AI Search
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="btn btn-info" disabled>
+                                                    ▶️ Watch AI Search
+                                                </button>
+                                            }
+                                        </div>
+                                        
+                                        <!-- CUA Screenshot Display -->
+                                        <div id="cuaScreenshot" style="display:none;">
+                                            <h6 class="mb-2">📸 Live Search Preview</h6>
+                                            <div class="border rounded p-2" style="background-color: #f8f9fa;">
+                                                <img id="cuaImage" src="" alt="AI Search Preview" class="img-fluid w-100" style="max-height: 400px; object-fit: contain;">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        }
+                        </div>
                         
                         <div class="row">
                             <!-- Stock Price Results (Left Column) -->
@@ -540,13 +549,12 @@
             button.disabled = true;
             button.textContent = '⏳ Testing CUA...';
             
-            document.getElementById('cuaScreenshot').style.display = 'none';
-            
-            // Clear previous CUA logs
-            const cuaLogsDiv = document.getElementById('cuaLogs');
-            cuaLogsDiv.innerHTML = '<em>Initializing CUA...</em>';
+            const screenshotDiv = document.getElementById('cuaScreenshot');
+            screenshotDiv.style.display = 'none';
             
             try {
+                console.log('Starting CUA test for:', companyName);
+                
                 const response = await fetch('@Url.Action("TestCua", "Home")', {
                     method: 'POST',
                     headers: {
@@ -556,64 +564,31 @@
                     body: JSON.stringify({ CompanyName: companyName })
                 });
                 
+                console.log('Response status:', response.status);
                 const result = await response.json();
+                console.log('Response result:', result);
                 
                 if (result.success) {
                     // Display screenshot
                     document.getElementById('cuaImage').src = result.screenshot;
-                    document.getElementById('cuaScreenshot').style.display = 'block';
-                    
-                    // Fetch and display CUA-specific logs
-                    await refreshCuaLogs();
+                    screenshotDiv.style.display = 'block';
                     
                     // Refresh main logs to show CUA operations
                     refreshLogs();
                 } else {
-                    cuaLogsDiv.innerHTML = '<span style="color: red;">❌ CUA Test Failed: ' + result.error + '</span>';
-                    document.getElementById('cuaScreenshot').style.display = 'block';
+                    screenshotDiv.style.display = 'block';
                     alert('CUA Test Failed: ' + result.error);
                 }
             } catch (error) {
-                cuaLogsDiv.innerHTML = '<span style="color: red;">❌ Error: ' + error.message + '</span>';
-                document.getElementById('cuaScreenshot').style.display = 'block';
+                console.error('CUA test error:', error);
+                screenshotDiv.style.display = 'block';
                 alert('Error testing CUA: ' + error.message);
             } finally {
                 button.disabled = false;
-                button.textContent = '🖥️ Test CUA - Search Stock Price on Bing';
+                button.textContent = '▶️ Watch AI Search';
             }
         }
         
-        async function refreshCuaLogs() {
-            try {
-                const response = await fetch('/Home/GetLogs');
-                const data = await response.json();
-                
-                if (data.success && data.logs) {
-                    // Filter CUA-related logs
-                    const cuaLogs = data.logs.filter(log => log.category === 'Lumina CUA');
-                    
-                    if (cuaLogs.length > 0) {
-                        const cuaLogsDiv = document.getElementById('cuaLogs');
-                        let logsHtml = '';
-                        
-                        cuaLogs.forEach(log => {
-                            const statusIcon = log.isSuccess ? '✅' : '❌';
-                            const statusColor = log.isSuccess ? '#28a745' : '#dc3545';
-                            const timestamp = new Date(log.timestamp).toLocaleTimeString();
-                            
-                            logsHtml += `<div style="margin-bottom: 10px; padding: 8px; border-left: 3px solid ${statusColor}; background-color: #f8f9fa;">`;
-                            logsHtml += `<strong style="color: ${statusColor};">${statusIcon} ${log.operation}</strong> `;
-                            logsHtml += `<small style="color: #6c757d;">[${timestamp}]</small><br>`;
-                            logsHtml += `<span style="white-space: pre-wrap;">${log.details}</span>`;
-                            logsHtml += `</div>`;
-                        });
-                        
-                        cuaLogsDiv.innerHTML = logsHtml;
-                    }
-                }
-            } catch (error) {
-                console.error('Failed to refresh CUA logs:', error);
-            }
-        }
+
     </script>
 }
