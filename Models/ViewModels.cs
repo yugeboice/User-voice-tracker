@@ -86,6 +86,15 @@ namespace LuminaSearchConsole.Models
     {
         /// <summary>Company name to search for stock price on Bing</summary>
         public string CompanyName { get; set; } = string.Empty;
+        
+        /// <summary>Step to execute: "initialize", "navigate", or "screenshot"</summary>
+        public string Step { get; set; } = string.Empty;
+        
+        /// <summary>Session ID for multi-step operations</summary>
+        public string SessionId { get; set; } = string.Empty;
+        
+        /// <summary>URL to navigate to (for navigate step)</summary>
+        public string Url { get; set; } = string.Empty;
     }
 
     /// <summary>

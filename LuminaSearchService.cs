@@ -493,18 +493,15 @@ namespace LuminaSearchConsole
                         
                         if (findResponse?.Results != null && findResponse.Results.Count > 0)
                         {
-                            Console.WriteLine($"✅ Found {findResponse.Results.Count} matches for '{pattern}'");
-                            
                             // Extract only the first match for each pattern (likely from infobox)
                             var firstMatch = findResponse.Results.FirstOrDefault();
                             if (firstMatch != null)
                             {
                                 var matchContent = firstMatch.Template ?? "";
-                                Console.WriteLine($"📝 Raw content for '{pattern}': {matchContent.Substring(0, Math.Min(200, matchContent.Length))}...");
                                 
                                 // Try to extract just the value part (after the field name)
                                 var cleanContent = ExtractInfoboxValue(matchContent, pattern);
-                                Console.WriteLine($"🧹 Cleaned content for '{pattern}': {cleanContent}");
+                                Console.WriteLine($"✅ {pattern}: {cleanContent}");
                                 
                                 companyInfo.Fields.Add(new InfoField
                                 {
@@ -517,7 +514,7 @@ namespace LuminaSearchConsole
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"⚠️ Failed to find pattern '{pattern}': {ex.Message}");
+                        Console.WriteLine($"⚠️ {pattern}: {ex.Message}");
                     }
                 }
                 

@@ -7,8 +7,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h1 class="mb-4">🔍 Company Search by Lumina</h1>
-        
+
         @if (TempData["Message"] != null)
         {
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -29,7 +28,7 @@
         @if (!Model.IsAuthenticated)
         {
             <div class="auth-section">
-                <h3>� Welcome!</h3>
+                <h3>Welcome!</h3>
                 <p class="text-muted">Sign in to start searching for company information</p>
                 <form asp-action="Login" method="post">
                     @Html.AntiForgeryToken()
@@ -95,12 +94,18 @@
         @if (Model.IsAuthenticated)
         {
             <div class="main-search-container">
-                <form asp-action="Search" method="post">
+                <form asp-action="Search" method="post" id="searchForm" onsubmit="handleSearchSubmit(event)">
                     @Html.AntiForgeryToken()
                     <div class="search-box-wrapper">
                         <input type="text" class="form-control form-control-lg search-input" id="query" name="Query" 
                                value="@Model.Query" placeholder="Search for any company..." required>
-                        <button type="submit" class="btn btn-primary btn-lg search-button">🔍 Search</button>
+                        <button type="submit" class="btn btn-primary btn-lg search-button" id="searchButton">
+                            <span id="searchButtonText">🔍 Search</span>
+                            <span id="searchButtonLoading" style="display: none;">
+                                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                Searching...
+                            </span>
+                        </button>
                     </div>
                     <div class="form-text text-center mt-2">Get instant access to stock prices and latest news</div>
                     <input type="hidden" name="TopResults" value="5">
@@ -152,25 +157,53 @@
                                     <div class="card-header" style="background-color: #f8f9fa;">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>
-                                                <h5 class="mb-1">🤖 Computer Use Agent (CUA)</h5>
-                                                <small class="text-muted">Navigate to MSN Money, search stock price, and take a screenshot.</small>
+                                                <h5 class="mb-1">🤖 Stock Price Screenshot</h5>
+                                                <small class="text-muted">Use CUA to navigate to Bing search result page of stock price, and take a screenshot.</small>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div class="text-center mb-3">
+                                        <!-- CUA Step Buttons -->
+                                        <div class="mb-3">
                                             @if (!string.IsNullOrEmpty(Model.Query))
                                             {
-                                                <button type="button" class="btn btn-info" onclick="testCua('@Model.Query')">
-                                                    ▶️ Watch AI Search
-                                                </button>
+                                                <div class="d-grid gap-2">
+                                                    <button type="button" class="btn btn-outline-info btn-sm" id="cuaStep1Btn" onclick="cuaInitialize('@Model.Query')">
+                                                        <span id="cuaStep1Text">1️⃣ Initialize Computer</span>
+                                                        <span id="cuaStep1Loading" style="display: none;">
+                                                            <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+                                                            Initializing...
+                                                        </span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-info btn-sm" id="cuaStep2Btn" onclick="cuaNavigate('@Model.Query')" disabled>
+                                                        <span id="cuaStep2Text">2️⃣ Navigate to Bing</span>
+                                                        <span id="cuaStep2Loading" style="display: none;">
+                                                            <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+                                                            Navigating...
+                                                        </span>
+                                                    </button>
+                                                    <button type="button" class="btn btn-info btn-sm" id="cuaStep3Btn" onclick="cuaGetScreenshot()" disabled>
+                                                        <span id="cuaStep3Text">3️⃣ Get Screenshot</span>
+                                                        <span id="cuaStep3Loading" style="display: none;">
+                                                            <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+                                                            Capturing...
+                                                        </span>
+                                                    </button>
+                                                </div>
                                             }
                                             else
                                             {
-                                                <button type="button" class="btn btn-info" disabled>
-                                                    ▶️ Watch AI Search
-                                                </button>
+                                                <div class="d-grid gap-2">
+                                                    <button type="button" class="btn btn-outline-info btn-sm" disabled>1️⃣ Initialize Computer</button>
+                                                    <button type="button" class="btn btn-outline-info btn-sm" disabled>2️⃣ Navigate to Bing</button>
+                                                    <button type="button" class="btn btn-info btn-sm" disabled>3️⃣ Get Screenshot</button>
+                                                </div>
                                             }
+                                        </div>
+
+                                        <!-- CUA Status Messages -->
+                                        <div id="cuaStatus" class="alert alert-info" style="display:none; font-size: 0.9rem;">
+                                            <strong>Status:</strong> <span id="cuaStatusText">Ready</span>
                                         </div>
                                         
                                         <!-- CUA Screenshot Display -->
@@ -190,15 +223,16 @@
                             <div class="col-md-6">
                                 <h4 class="text-primary">📈 Stock & Market Data</h4>
                                 <p class="text-muted">@Model.BatchSearchResult.StockResults.Count results found</p>
+                                <p class="text-info"><small>💡 Click any article to read the full story (using Open API)</small></p>
                                 
                                 @if (Model.BatchSearchResult.StockResults.Any())
                                 {
                                     @foreach (var result in Model.BatchSearchResult.StockResults)
                                     {
-                                        <div class="search-result">
+                                        <div class="search-result news-result" data-url="@result.Url">
                                             @if (!string.IsNullOrEmpty(result.Title))
                                             {
-                                                <h5>@result.Title</h5>
+                                                <h5 class="news-title" style="cursor: pointer; color: #0066cc;">@result.Title</h5>
                                             }
                                             @if (!string.IsNullOrEmpty(result.Url))
                                             {
@@ -543,17 +577,159 @@
     </style>
     
     <script>
-        // CUA Test Function
-        async function testCua(companyName) {
-            const button = event.target;
-            button.disabled = true;
-            button.textContent = '⏳ Testing CUA...';
+        // Handle search form submit with loading state
+        function handleSearchSubmit(event) {
+            const searchButton = document.getElementById('searchButton');
+            const searchButtonText = document.getElementById('searchButtonText');
+            const searchButtonLoading = document.getElementById('searchButtonLoading');
+            const queryInput = document.getElementById('query');
             
-            const screenshotDiv = document.getElementById('cuaScreenshot');
-            screenshotDiv.style.display = 'none';
+            // Check if input is empty
+            if (!queryInput.value.trim()) {
+                return true; // Let browser's native validation handle it
+            }
+            
+            // Show loading state
+            searchButton.disabled = true;
+            searchButtonText.style.display = 'none';
+            searchButtonLoading.style.display = 'inline-block';
+            queryInput.readOnly = true; // Use readOnly instead of disabled to preserve form data
+            
+            // Show loading placeholders
+            showLoadingState();
+            
+            // Form will submit normally, page will reload with results
+            return true;
+        }
+
+        // Show loading skeleton for search results
+        function showLoadingState() {
+            // Create loading placeholder HTML
+            const loadingHTML = `
+                <div id="loadingPlaceholder" class="mt-4">
+                    <h3>📊 Searching...</h3>
+                    
+                    <!-- Two Column Layout: Company Overview + CUA Loading -->
+                    <div class="row mb-4">
+                        <!-- Left Column: Company Overview Loading -->
+                        <div class="col-md-6">
+                            <div class="card h-100" style="border-left: 4px solid #0d6efd;">
+                                <div class="card-header" style="background-color: #f8f9fa;">
+                                    <h5 class="mb-0">🏢 Company Overview</h5>
+                                    <small class="text-muted">Loading company information...</small>
+                                </div>
+                                <div class="card-body">
+                                    <div class="loading-spinner-container">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <p>Extracting company info using Find API...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column: CUA Test Loading -->
+                        <div class="col-md-6">
+                            <div class="card h-100" style="border-left: 4px solid #17a2b8;">
+                                <div class="card-header" style="background-color: #f8f9fa;">
+                                    <h5 class="mb-1">🤖 Stock Price Screenshot</h5>
+                                    <small class="text-muted">Ready for screenshot</small>
+                                </div>
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-info" disabled>
+                                            ▶️ Get Screenshot
+                                        </button>
+                                        <p class="text-muted mt-3">Will be available after search completes</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Stock Results Loading -->
+                        <div class="col-md-6">
+                            <h4 class="text-primary">📈 Stock & Market Data</h4>
+                            <p class="text-muted">Loading results...</p>
+                            
+                            <div class="loading-card">
+                                <div class="skeleton skeleton-title"></div>
+                                <div class="skeleton skeleton-text" style="width: 60%;"></div>
+                                <div class="skeleton skeleton-line"></div>
+                                <div class="skeleton skeleton-line"></div>
+                                <div class="skeleton skeleton-line"></div>
+                            </div>
+                            <div class="loading-card">
+                                <div class="skeleton skeleton-title"></div>
+                                <div class="skeleton skeleton-text" style="width: 60%;"></div>
+                                <div class="skeleton skeleton-line"></div>
+                                <div class="skeleton skeleton-line"></div>
+                                <div class="skeleton skeleton-line"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- News Results Loading -->
+                        <div class="col-md-6">
+                            <h4 class="text-success">📰 Recent News</h4>
+                            <p class="text-muted">Loading articles...</p>
+                            
+                            <div class="loading-card">
+                                <div class="skeleton skeleton-title"></div>
+                                <div class="skeleton skeleton-text" style="width: 60%;"></div>
+                                <div class="skeleton skeleton-line"></div>
+                                <div class="skeleton skeleton-line"></div>
+                                <div class="skeleton skeleton-line"></div>
+                            </div>
+                            <div class="loading-card">
+                                <div class="skeleton skeleton-title"></div>
+                                <div class="skeleton skeleton-text" style="width: 60%;"></div>
+                                <div class="skeleton skeleton-line"></div>
+                                <div class="skeleton skeleton-line"></div>
+                                <div class="skeleton skeleton-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Insert loading placeholder after search form
+            const searchContainer = document.querySelector('.main-search-container');
+            searchContainer.insertAdjacentHTML('afterend', loadingHTML);
+        }
+        
+        // CUA Session ID storage
+        let cuaSessionId = null;
+
+        // Helper function to update CUA status
+        function updateCuaStatus(message, isError = false) {
+            const statusDiv = document.getElementById('cuaStatus');
+            const statusText = document.getElementById('cuaStatusText');
+            statusDiv.style.display = 'block';
+            statusDiv.className = isError ? 'alert alert-danger' : 'alert alert-info';
+            statusText.textContent = message;
+        }
+
+        // Helper function to toggle button loading state
+        function setButtonLoading(stepNum, isLoading) {
+            const btn = document.getElementById(`cuaStep${stepNum}Btn`);
+            const text = document.getElementById(`cuaStep${stepNum}Text`);
+            const loading = document.getElementById(`cuaStep${stepNum}Loading`);
+            
+            btn.disabled = isLoading;
+            text.style.display = isLoading ? 'none' : 'inline';
+            loading.style.display = isLoading ? 'inline-block' : 'none';
+        }
+
+        // Step 1: Initialize Computer
+        async function cuaInitialize(companyName) {
+            setButtonLoading(1, true);
+            updateCuaStatus('Initializing CUA computer...');
+            document.getElementById('cuaScreenshot').style.display = 'none';
             
             try {
-                console.log('Starting CUA test for:', companyName);
+                console.log('Step 1: Initializing CUA for:', companyName);
                 
                 const response = await fetch('@Url.Action("TestCua", "Home")', {
                     method: 'POST',
@@ -561,31 +737,137 @@
                         'Content-Type': 'application/json',
                         'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
                     },
-                    body: JSON.stringify({ CompanyName: companyName })
+                    body: JSON.stringify({ 
+                        CompanyName: companyName,
+                        Step: 'initialize'
+                    })
                 });
                 
-                console.log('Response status:', response.status);
                 const result = await response.json();
-                console.log('Response result:', result);
+                console.log('Step 1 result:', result);
+                
+                if (result.success) {
+                    cuaSessionId = result.sessionId;
+                    updateCuaStatus('✅ Computer initialized successfully. Session ID: ' + cuaSessionId);
+                    
+                    // Enable next step
+                    document.getElementById('cuaStep2Btn').disabled = false;
+                    document.getElementById('cuaStep1Btn').classList.remove('btn-outline-info');
+                    document.getElementById('cuaStep1Btn').classList.add('btn-success');
+                } else {
+                    updateCuaStatus('❌ Initialization failed: ' + result.error, true);
+                }
+            } catch (error) {
+                console.error('Step 1 error:', error);
+                updateCuaStatus('❌ Error: ' + error.message, true);
+            } finally {
+                setButtonLoading(1, false);
+            }
+        }
+
+        // Step 2: Navigate to URL
+        async function cuaNavigate(companyName) {
+            if (!cuaSessionId) {
+                updateCuaStatus('❌ Please initialize computer first', true);
+                return;
+            }
+
+            setButtonLoading(2, true);
+            updateCuaStatus('Navigating to Bing search page...');
+            
+            try {
+                console.log('Step 2: Navigating for:', companyName);
+                
+                // Build Bing search URL with finance-specific parameters
+                const query = companyName + ' stock price';
+                const searchUrl = `https://www.bing.com/search?` +
+                    `q=${encodeURIComponent(query)}` +
+                    `&setmkt=en-US` +           // Set market to US
+                    `&setlang=en-US` +          // Set language to English (US)
+                    `&setflight=fin-int`;       // Enable finance integration flight
+                
+                const response = await fetch('@Url.Action("TestCua", "Home")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: JSON.stringify({ 
+                        CompanyName: companyName,
+                        Step: 'navigate',
+                        SessionId: cuaSessionId,
+                        Url: searchUrl
+                    })
+                });
+                
+                const result = await response.json();
+                console.log('Step 2 result:', result);
+                
+                if (result.success) {
+                    updateCuaStatus('✅ Successfully navigated to: ' + searchUrl);
+                    
+                    // Enable next step
+                    document.getElementById('cuaStep3Btn').disabled = false;
+                    document.getElementById('cuaStep2Btn').classList.remove('btn-outline-info');
+                    document.getElementById('cuaStep2Btn').classList.add('btn-success');
+                } else {
+                    updateCuaStatus('❌ Navigation failed: ' + result.error, true);
+                }
+            } catch (error) {
+                console.error('Step 2 error:', error);
+                updateCuaStatus('❌ Error: ' + error.message, true);
+            } finally {
+                setButtonLoading(2, false);
+            }
+        }
+
+        // Step 3: Get Screenshot
+        async function cuaGetScreenshot() {
+            if (!cuaSessionId) {
+                updateCuaStatus('❌ Please initialize computer first', true);
+                return;
+            }
+
+            setButtonLoading(3, true);
+            updateCuaStatus('Capturing screenshot...');
+            
+            try {
+                console.log('Step 3: Getting screenshot');
+                
+                const response = await fetch('@Url.Action("TestCua", "Home")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: JSON.stringify({ 
+                        Step: 'screenshot',
+                        SessionId: cuaSessionId
+                    })
+                });
+                
+                const result = await response.json();
+                console.log('Step 3 result:', result);
                 
                 if (result.success) {
                     // Display screenshot
                     document.getElementById('cuaImage').src = result.screenshot;
-                    screenshotDiv.style.display = 'block';
+                    document.getElementById('cuaScreenshot').style.display = 'block';
+                    updateCuaStatus('✅ Screenshot captured successfully!');
+                    
+                    document.getElementById('cuaStep3Btn').classList.remove('btn-info');
+                    document.getElementById('cuaStep3Btn').classList.add('btn-success');
                     
                     // Refresh main logs to show CUA operations
                     refreshLogs();
                 } else {
-                    screenshotDiv.style.display = 'block';
-                    alert('CUA Test Failed: ' + result.error);
+                    updateCuaStatus('❌ Screenshot failed: ' + result.error, true);
                 }
             } catch (error) {
-                console.error('CUA test error:', error);
-                screenshotDiv.style.display = 'block';
-                alert('Error testing CUA: ' + error.message);
+                console.error('Step 3 error:', error);
+                updateCuaStatus('❌ Error: ' + error.message, true);
             } finally {
-                button.disabled = false;
-                button.textContent = '▶️ Watch AI Search';
+                setButtonLoading(3, false);
             }
         }
         
