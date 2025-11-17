@@ -519,7 +519,7 @@ namespace LuminaSearchConsole.Controllers
                 return Json(new { success = false, error = "Please log in first" });
             }
 
-            var searchService = new LuminaSearchService(token, _luminaConfig);
+            var cuaService = new LuminaCuaService(token, _luminaConfig);
             
             // Handle different steps
             string step = request?.Step?.ToLower() ?? string.Empty;
@@ -542,7 +542,7 @@ namespace LuminaSearchConsole.Controllers
                         $"  TenantId: {_azureAdConfig.TenantId}");
 
                     var startTime = DateTime.Now;
-                    await searchService.InitializeComputerAsync(computerId, "user-from-token", _azureAdConfig.TenantId);
+                    await cuaService.InitializeComputerAsync(computerId, "user-from-token", _azureAdConfig.TenantId);
                     var duration = (DateTime.Now - startTime).TotalMilliseconds;
 
                     _apiLogService.AddLog("Lumina CUA", "Step 1: Initialize", 
@@ -577,7 +577,7 @@ namespace LuminaSearchConsole.Controllers
                         $"  URL: {url}");
 
                     var startTime = DateTime.Now;
-                    await searchService.NavigateToUrlAsync(sessionId, url);
+                    await cuaService.NavigateToUrlAsync(sessionId, url);
                     var duration = (DateTime.Now - startTime).TotalMilliseconds;
 
                     _apiLogService.AddLog("Lumina CUA", "Step 2: Navigate", 
@@ -601,7 +601,7 @@ namespace LuminaSearchConsole.Controllers
                         $"  ComputerId: {sessionId}");
 
                     var startTime = DateTime.Now;
-                    var screenshot = await searchService.GetComputerScreenshotAsync(sessionId);
+                    var screenshot = await cuaService.GetComputerScreenshotAsync(sessionId);
                     var duration = (DateTime.Now - startTime).TotalMilliseconds;
 
                     _apiLogService.AddLog("Lumina CUA", "Step 3: Screenshot", 
@@ -613,11 +613,12 @@ namespace LuminaSearchConsole.Controllers
                     HttpContext.Session.Remove($"CUA_Computer_{sessionId}");
 
                     // Release computer in background (don't wait for it)
+                    var cuaServiceForRelease = new LuminaCuaService(token, _luminaConfig);
                     _ = Task.Run(async () =>
                     {
                         try
                         {
-                            await searchService.ReleaseComputerAsync(sessionId);
+                            await cuaServiceForRelease.ReleaseComputerAsync(sessionId);
                             _apiLogService.AddLog("Lumina CUA", "Cleanup", 
                                 $"✅ Computer released\n" +
                                 $"  ComputerId: {sessionId}");
@@ -660,7 +661,7 @@ namespace LuminaSearchConsole.Controllers
 
                 // Initialize computer
                 var startTime = DateTime.Now;
-                await searchService.InitializeComputerAsync(computerId, "user-from-token", _azureAdConfig.TenantId);
+                await cuaService.InitializeComputerAsync(computerId, "user-from-token", _azureAdConfig.TenantId);
                 var duration = (DateTime.Now - startTime).TotalMilliseconds;
 
                 _apiLogService.AddLog("Lumina CUA", "Initialize", 
@@ -676,7 +677,7 @@ namespace LuminaSearchConsole.Controllers
                     $"  Actions: Ctrl+L → Type → Enter → Wait");
 
                 startTime = DateTime.Now;
-                await searchService.NavigateToUrlAsync(computerId, searchUrl);
+                await cuaService.NavigateToUrlAsync(computerId, searchUrl);
                 duration = (DateTime.Now - startTime).TotalMilliseconds;
 
                 _apiLogService.AddLog("Lumina CUA", "Navigate", 
@@ -689,7 +690,7 @@ namespace LuminaSearchConsole.Controllers
                     $"  ComputerId: {computerId}");
 
                 startTime = DateTime.Now;
-                var screenshot = await searchService.GetComputerScreenshotAsync(computerId);
+                var screenshot = await cuaService.GetComputerScreenshotAsync(computerId);
                 duration = (DateTime.Now - startTime).TotalMilliseconds;
 
                 _apiLogService.AddLog("Lumina CUA", "Screenshot", 
@@ -725,7 +726,7 @@ namespace LuminaSearchConsole.Controllers
                         // Always release computer resources
                         try
                         {
-                            await searchService.ReleaseComputerAsync(computerId);
+                            await cuaService.ReleaseComputerAsync(computerId);
                             _apiLogService.AddLog("Lumina CUA", "Release", 
                                 $"✅ Computer released\n" +
                                 $"  ComputerId: {computerId}");
