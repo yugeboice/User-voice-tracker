@@ -10,10 +10,11 @@ namespace LuminaSearchConsole
     /// <summary>
     /// Lumina Search API Service
     /// 
-    /// Demonstrates integration with Lumina Search and Open APIs:
+    /// Demonstrates integration with Lumina Search, Open, and Find APIs:
     /// - Web search using Bing provider
     /// - Batch search (multiple queries in one request)
     /// - Content extraction from URLs (Open API)
+    /// - Pattern matching within opened content (Find API)
     /// 
     /// API Endpoint configured in appsettings.json (LuminaConfiguration:ApiEndpoint)
     /// </summary>
@@ -286,41 +287,13 @@ namespace LuminaSearchConsole
                     }
                 };
 
-                Console.WriteLine($"📤 Sending Open API request...");
                 var response = await _proxy.OpenAsync(openRequest);
-                Console.WriteLine($"📥 Received Open API response");
-                
-                // Debug: Log response structure
-                Console.WriteLine($"📋 Open API Response Debug:");
-                Console.WriteLine($"  Response is null: {response == null}");
-                if (response != null)
-                {
-                    Console.WriteLine($"  Pages is null: {response.Pages == null}");
-                    Console.WriteLine($"  Pages count: {response.Pages?.Count ?? 0}");
-                    Console.WriteLine($"  ToolState is null: {response.ToolState == null}");
-                    Console.WriteLine($"  SessionId: {response.ToolState?.SessionId ?? "null"}");
-                }
                 
                 if (response != null && response.Pages != null && response.Pages.Count > 0)
                 {
                     var page = response.Pages[0];
                     string content = page.Content ?? "";
                     string sessionId = response.ToolState?.SessionId ?? "";
-                    
-                    // Debug: Log page details
-                    Console.WriteLine($"📄 Page Details:");
-                    Console.WriteLine($"  URL: {page.Url ?? "null"}");
-                    Console.WriteLine($"  Title: {page.Title ?? "null"}");
-                    Console.WriteLine($"  Content length: {content.Length}");
-                    Console.WriteLine($"  Content is empty: {string.IsNullOrWhiteSpace(content)}");
-                    if (content.Length > 0 && content.Length < 500)
-                    {
-                        Console.WriteLine($"  Content preview: {content}");
-                    }
-                    else if (content.Length > 0)
-                    {
-                        Console.WriteLine($"  Content preview (first 200 chars): {content.Substring(0, Math.Min(200, content.Length))}");
-                    }
                     
                     // Validate content quality
                     var isContentFiltered = content.Contains("filtered content") || 
@@ -329,19 +302,16 @@ namespace LuminaSearchConsole
                     
                     if (isContentFiltered)
                     {
-                        Console.WriteLine($"⚠️ Content validation failed:");
-                        Console.WriteLine($"  Contains 'filtered content': {content.Contains("filtered content")}");
-                        Console.WriteLine($"  Contains 'Failed to open': {content.Contains("Failed to open")}");
-                        Console.WriteLine($"  Is whitespace: {string.IsNullOrWhiteSpace(content)}");
+                        Console.WriteLine($"⚠️ No valid content available from: {url}");
                         throw new Exception($"No content available from the URL: {url}");
                     }
                     
-                    Console.WriteLine($"✅ Successfully retrieved content. Length: {content.Length} characters, SessionId: {sessionId}");
+                    Console.WriteLine($"✅ Content retrieved: {content.Length} chars, SessionId: {sessionId}");
                     return (content, sessionId);
                 }
                 else
                 {
-                    Console.WriteLine($"⚠️ Response structure validation failed");
+                    Console.WriteLine($"⚠️ No content returned from Open API");
                     throw new Exception($"No content available from the URL: {url}");
                 }
             }

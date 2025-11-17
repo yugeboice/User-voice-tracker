@@ -189,6 +189,14 @@
                                                             Capturing...
                                                         </span>
                                                     </button>
+                                                    <hr class="my-3">
+                                                    <button type="button" class="btn btn-success btn-sm" onclick="cuaMsnMoney('@Model.Query')">
+                                                        <span id="cuaMsnText">💰 Search on MSN Money (All-in-One)</span>
+                                                        <span id="cuaMsnLoading" style="display: none;">
+                                                            <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+                                                            Processing...
+                                                        </span>
+                                                    </button>
                                                 </div>
                                             }
                                             else
@@ -197,6 +205,8 @@
                                                     <button type="button" class="btn btn-outline-info btn-sm" disabled>1️⃣ Initialize Computer</button>
                                                     <button type="button" class="btn btn-outline-info btn-sm" disabled>2️⃣ Navigate to Bing</button>
                                                     <button type="button" class="btn btn-info btn-sm" disabled>3️⃣ Get Screenshot</button>
+                                                    <hr class="my-3">
+                                                    <button type="button" class="btn btn-success btn-sm" disabled>💰 Search on MSN Money</button>
                                                 </div>
                                             }
                                         </div>
@@ -868,6 +878,57 @@
                 updateCuaStatus('❌ Error: ' + error.message, true);
             } finally {
                 setButtonLoading(3, false);
+            }
+        }
+
+        // MSN Money Search - All-in-One
+        async function cuaMsnMoney(companyName) {
+            const btn = document.querySelector('button[onclick*="cuaMsnMoney"]');
+            const btnText = document.getElementById('cuaMsnText');
+            const btnLoading = document.getElementById('cuaMsnLoading');
+            
+            btn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline-block';
+            
+            updateCuaStatus('🌐 Opening MSN Money and searching for ' + companyName + '...');
+            document.getElementById('cuaScreenshot').style.display = 'none';
+            
+            try {
+                console.log('MSN Money: Searching for:', companyName);
+                
+                const response = await fetch('@Url.Action("TestCuaMsnMoney", "Home")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: JSON.stringify({ 
+                        CompanyName: companyName
+                    })
+                });
+                
+                const result = await response.json();
+                console.log('MSN Money result:', result);
+                
+                if (result.success) {
+                    // Display screenshot
+                    document.getElementById('cuaImage').src = result.screenshot;
+                    document.getElementById('cuaScreenshot').style.display = 'block';
+                    updateCuaStatus('✅ MSN Money search completed! Screenshot captured.');
+                    
+                    // Refresh main logs to show CUA operations
+                    refreshLogs();
+                } else {
+                    updateCuaStatus('❌ MSN Money search failed: ' + result.error, true);
+                }
+            } catch (error) {
+                console.error('MSN Money error:', error);
+                updateCuaStatus('❌ Error: ' + error.message, true);
+            } finally {
+                btn.disabled = false;
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
             }
         }
         

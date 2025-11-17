@@ -164,6 +164,34 @@ namespace LuminaSearchConsole
         }
 
         /// <summary>
+        /// Navigate to MSN Money and search for a company
+        /// </summary>
+        /// <param name="computerId">The computer ID to navigate</param>
+        /// <param name="companyName">Company name to search for</param>
+        public async Task SearchCompanyOnMsnMoneyAsync(string computerId, string companyName)
+        {
+            Console.WriteLine($"🌐 Opening MSN Money and searching for: {companyName}");
+
+            // Step 1: Navigate to MSN Money
+            await NavigateToUrlAsync(computerId, "https://www.msn.com/en-us/money/");
+            
+            // Wait for page to load
+            await Task.Delay(2000);
+            
+            // Step 2: Click on search box and search for company
+            var actions = new List<CuaAction>
+            {
+                new CuaAction { Action = "click", X = 1203, Y = 43, Button = 1 },
+                new CuaAction { Action = "type", Text = companyName },
+                new CuaAction { Action = "keypress", Keys = new[] { "enter" } },
+                new CuaAction { Action = "wait" }
+            };
+
+            await PerformComputerActionsAsync(computerId, actions, actionDelayMs: 800);
+            Console.WriteLine($"✅ Company search completed");
+        }
+
+        /// <summary>
         /// Release virtual computer resources
         /// </summary>
         /// <param name="computerId">The computer ID to release</param>

@@ -770,6 +770,110 @@ namespace LuminaSearchConsole.Controllers
             }
         }
 
+        /// <summary>
+        /// Test CUA with MSN Money - Search for company stock information
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> TestCuaMsnMoney([FromBody] TestCuaRequest request)
+        {
+            var token = HttpContext.Session.GetString("AccessToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                return Json(new { success = false, error = "Please log in first" });
+            }
+
+            if (string.IsNullOrWhiteSpace(request?.CompanyName))
+            {
+                return Json(new { success = false, error = "Company name is required" });
+            }
+
+            var cuaService = new LuminaCuaService(token, _luminaConfig);
+            var computerId = Guid.NewGuid().ToString("N");
+
+            try
+            {
+                _apiLogService.AddLog("Lumina CUA - MSN Money", "Initialize", 
+                    $"📋 CUA Configuration:\n" +
+                    $"  Endpoint: {_luminaConfig.ApiEndpoint}\n" +
+                    $"  ComputerId: {computerId}\n" +
+                    $"  Company: {request.CompanyName}");
+
+                // Step 1: Initialize computer
+                var startTime = DateTime.Now;
+                await cuaService.InitializeComputerAsync(computerId, "user-from-token", _azureAdConfig.TenantId);
+                var duration = (DateTime.Now - startTime).TotalMilliseconds;
+
+                _apiLogService.AddLog("Lumina CUA - MSN Money", "Initialize", 
+                    $"✅ Virtual computer initialized\n" +
+                    $"  Response time: {duration:F0}ms");
+
+                // Step 2: Navigate to MSN Money and search for company
+                _apiLogService.AddLog("Lumina CUA - MSN Money", "Search", 
+                    $"📋 Searching for company on MSN Money:\n" +
+                    $"  URL: https://www.msn.com/en-us/money/\n" +
+                    $"  Company: {request.CompanyName}\n" +
+                    $"  Actions: Navigate → Click search box → Type → Enter → Wait");
+
+                startTime = DateTime.Now;
+                await cuaService.SearchCompanyOnMsnMoneyAsync(computerId, request.CompanyName);
+                duration = (DateTime.Now - startTime).TotalMilliseconds;
+
+                _apiLogService.AddLog("Lumina CUA - MSN Money", "Search", 
+                    $"✅ Search completed\n" +
+                    $"  Response time: {duration:F0}ms");
+
+                // Step 3: Get screenshot
+                _apiLogService.AddLog("Lumina CUA - MSN Money", "Screenshot", 
+                    $"📋 Capturing screenshot");
+
+                startTime = DateTime.Now;
+                var screenshot = await cuaService.GetComputerScreenshotAsync(computerId);
+                duration = (DateTime.Now - startTime).TotalMilliseconds;
+
+                _apiLogService.AddLog("Lumina CUA - MSN Money", "Screenshot", 
+                    $"✅ Screenshot captured\n" +
+                    $"  Resolution: {screenshot.Content?.Width}x{screenshot.Content?.Height}\n" +
+                    $"  Response time: {duration:F0}ms");
+
+                // Release computer in background
+                _ = Task.Run(async () =>
+                {
+                    try
+                    {
+                        await cuaService.ReleaseComputerAsync(computerId);
+                    }
+                    catch (Exception releaseEx)
+                    {
+                        _logger.LogWarning(releaseEx, "Failed to release computer {ComputerId}", computerId);
+                    }
+                });
+
+                return Json(new 
+                { 
+                    success = true, 
+                    screenshot = $"data:image/png;base64,{screenshot.Content?.Screenshot}",
+                    width = screenshot.Content?.Width,
+                    height = screenshot.Content?.Height
+                });
+            }
+            catch (HttpRequestException httpEx) when (httpEx.StatusCode == System.Net.HttpStatusCode.InsufficientStorage)
+            {
+                _logger.LogWarning(httpEx, "CUA service capacity reached");
+                _apiLogService.AddLog("Lumina CUA - MSN Money", "Error", 
+                    $"⚠️ CUA Service Unavailable\n" +
+                    $"  Reason: Virtual computers at capacity\n" +
+                    $"  Message: {httpEx.Message}", false);
+                
+                return Json(new { success = false, error = "CUA service is currently at capacity. Please try again later." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "CUA MSN Money test failed");
+                _apiLogService.AddLog("Lumina CUA - MSN Money", "Error", $"❌ Error: {ex.Message}", false);
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
+
         #endregion
     }
 }
