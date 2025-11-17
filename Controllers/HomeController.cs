@@ -15,6 +15,7 @@ namespace LuminaSearchConsole.Controllers
         private readonly OboTokenService _oboTokenService;
         private readonly ILogger<HomeController> _logger;
         private readonly Services.ApiLogService _apiLogService;
+        private readonly Services.CuaComputerPool _cuaComputerPool;
         private readonly AzureAdConfiguration _azureAdConfig;
         private readonly LuminaConfiguration _luminaConfig;
 
@@ -22,12 +23,14 @@ namespace LuminaSearchConsole.Controllers
             OboTokenService oboTokenService, 
             ILogger<HomeController> logger, 
             Services.ApiLogService apiLogService,
+            Services.CuaComputerPool cuaComputerPool,
             AzureAdConfiguration azureAdConfig,
             LuminaConfiguration luminaConfig)
         {
             _oboTokenService = oboTokenService;
             _logger = logger;
             _apiLogService = apiLogService;
+            _cuaComputerPool = cuaComputerPool;
             _azureAdConfig = azureAdConfig;
             _luminaConfig = luminaConfig;
         }
@@ -772,6 +775,7 @@ namespace LuminaSearchConsole.Controllers
 
         /// <summary>
         /// Test CUA with MSN Money - SSE streaming endpoint for real-time progress
+        /// Uses computer pool for resource reuse (3-minute keep-alive)
         /// </summary>
         [HttpGet]
         public async Task TestCuaMsnMoneyStream(string companyName)
@@ -794,22 +798,24 @@ namespace LuminaSearchConsole.Controllers
             }
 
             var cuaService = new LuminaCuaService(token, _luminaConfig);
-            var computerId = Guid.NewGuid().ToString("N");
+            var userId = "user-from-token"; // Could be extracted from token claims in production
+            string? computerId = null;
 
             try
             {
-                // Step 1: Initialize
-                await SendSseMessage("progress", "🔄 Initialize - Creating virtual computer...");
+                // Step 1: Get or create computer from pool
+                await SendSseMessage("progress", "🔄 Initialize - Getting virtual computer...");
                 await Response.Body.FlushAsync();
                 
                 var startTime = DateTime.Now;
-                await cuaService.InitializeComputerAsync(computerId, "user-from-token", _azureAdConfig.TenantId);
+                computerId = await _cuaComputerPool.GetOrCreateComputerAsync(userId, _azureAdConfig.TenantId, cuaService);
                 var duration = (DateTime.Now - startTime).TotalMilliseconds;
 
+                var poolStats = _cuaComputerPool.GetStatistics();
                 _apiLogService.AddLog("Lumina CUA - MSN Money", "Initialize", 
-                    $"✅ Virtual computer initialized\n  ComputerId: {computerId}\n  Response time: {duration:F0}ms");
+                    $"✅ Virtual computer ready\n  ComputerId: {computerId}\n  Response time: {duration:F0}ms\n  Pool: {poolStats.TotalComputers} computers ({poolStats.ActiveComputers} active)");
 
-                await SendSseMessage("progress", $"✅ Initialize completed ({duration:F0}ms)");
+                await SendSseMessage("progress", $"✅ Initialize completed ({duration:F0}ms) [Reused computer]");
                 await Response.Body.FlushAsync();
                 await Task.Delay(300);
 
@@ -886,20 +892,10 @@ namespace LuminaSearchConsole.Controllers
                 }));
                 await Response.Body.FlushAsync();
 
-                // Release computer in background
-                _ = Task.Run(async () =>
-                {
-                    try
-                    {
-                        await cuaService.ReleaseComputerAsync(computerId);
-                        _apiLogService.AddLog("Lumina CUA - MSN Money", "Cleanup", 
-                            $"✅ Computer released: {computerId}");
-                    }
-                    catch (Exception releaseEx)
-                    {
-                        _logger.LogWarning(releaseEx, "Failed to release computer {ComputerId}", computerId);
-                    }
-                });
+                // Mark computer as used (extends keep-alive time)
+                _cuaComputerPool.TouchComputer(userId, _azureAdConfig.TenantId);
+                _apiLogService.AddLog("Lumina CUA - MSN Money", "Cleanup", 
+                    $"✅ Computer kept alive for reuse (will auto-release after 3 minutes of inactivity)\n  ComputerId: {computerId}");
 
                 await SendSseMessage("complete", "✅ All operations completed successfully!");
             }
@@ -923,6 +919,7 @@ namespace LuminaSearchConsole.Controllers
 
         /// <summary>
         /// Test CUA with MSN Money - Search for company stock information (Legacy POST endpoint)
+        /// Uses computer pool for resource reuse (3-minute keep-alive)
         /// </summary>
         [HttpPost]
         public async Task<IActionResult> TestCuaMsnMoney([FromBody] TestCuaRequest request)
@@ -939,7 +936,8 @@ namespace LuminaSearchConsole.Controllers
             }
 
             var cuaService = new LuminaCuaService(token, _luminaConfig);
-            var computerId = Guid.NewGuid().ToString("N");
+            var userId = "user-from-token";
+            string? computerId = null;
             var statusLog = new System.Text.StringBuilder();
 
             try
@@ -949,6 +947,7 @@ namespace LuminaSearchConsole.Controllers
                 statusLog.AppendLine($"   ComputerId: {computerId}");
                 
                 var startTime = DateTime.Now;
+                if (computerId == null) computerId = Guid.NewGuid().ToString("N");
                 await cuaService.InitializeComputerAsync(computerId, "user-from-token", _azureAdConfig.TenantId);
                 var duration = (DateTime.Now - startTime).TotalMilliseconds;
 
@@ -990,22 +989,11 @@ namespace LuminaSearchConsole.Controllers
                     $"  Resolution: {screenshot.Content?.Width}x{screenshot.Content?.Height}\n" +
                     $"  Response time: {duration:F0}ms");
 
-                // Release computer in background
-                statusLog.AppendLine($"🧹 Releasing computer resources in background...");
-                
-                _ = Task.Run(async () =>
-                {
-                    try
-                    {
-                        await cuaService.ReleaseComputerAsync(computerId);
-                        _apiLogService.AddLog("Lumina CUA - MSN Money", "Cleanup", 
-                            $"✅ Computer released: {computerId}");
-                    }
-                    catch (Exception releaseEx)
-                    {
-                        _logger.LogWarning(releaseEx, "Failed to release computer {ComputerId}", computerId);
-                    }
-                });
+                // Keep computer alive for reuse
+                statusLog.AppendLine($"♻️ Computer kept alive for reuse (3-minute keep-alive)...");
+                _cuaComputerPool.TouchComputer(userId, _azureAdConfig.TenantId);
+                _apiLogService.AddLog("Lumina CUA - MSN Money", "Cleanup", 
+                    $"✅ Computer kept alive for reuse (will auto-release after 3 minutes of inactivity)\n  ComputerId: {computerId}");
 
                 statusLog.AppendLine($"✅ All operations completed successfully!");
 
