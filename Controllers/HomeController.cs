@@ -135,24 +135,11 @@ namespace LuminaSearchConsole.Controllers
 
             try
             {
-                var stockQuery = $"{model.Query} stock price";
-                var newsQuery = $"{model.Query} latest news";
                 _apiLogService.AddLog("Lumina Search", "BatchSearch", 
-                    $"📋 API Configuration:\n" +
-                    $"  Endpoint: {_luminaConfig.ApiEndpoint}\n" +
-                    $"  Method: POST /search\n" +
-                    $"  Auth: Bearer token (OAuth 2.0)\n\n" +
-                    $"📝 Batch Search Request:\n" +
+                    $"📋 Batch Search Request:\n" +
                     $"  Company: '{model.Query}'\n" +
-                    $"  Query 1 (Stock): '{stockQuery}'\n" +
-                    $"  Query 2 (News): '{newsQuery}'\n\n" +
-                    $"⚙️ Parameters:\n" +
-                    $"  TopN per query: {model.TopResults}\n" +
-                    $"  Source: WebWithBing\n" +
-                    $"  Market: en-US\n" +
-                    $"  Language: en\n" +
-                    $"  Recency: 7 days\n" +
-                    $"  MaxSemanticDocumentLength: 200");
+                    $"  Queries: Stock price + Latest news\n" +
+                    $"  TopN: {model.TopResults}");
                 
                 var searchService = new LuminaSearchService(token, _luminaConfig);
                 
@@ -176,11 +163,8 @@ namespace LuminaSearchConsole.Controllers
                 // Try to extract company information from Wikipedia using Find API
                 try
                 {
-                    // Step 1: Search for company + Wikipedia to find the actual Wikipedia URL
                     _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
-                        $"📋 Searching for Wikipedia page:\n" +
-                        $"  Query: '{model.Query} Wikipedia'\n" +
-                        $"  Purpose: Find company's Wikipedia URL");
+                        $"📋 Searching Wikipedia for '{model.Query}'");
                     
                     var wikiSearchStart = DateTime.Now;
                     var wikipediaSearchResults = await searchService.ExecuteWebSearchAsync($"{model.Query} Wikipedia", 3);
@@ -193,16 +177,10 @@ namespace LuminaSearchConsole.Controllers
                     if (!string.IsNullOrEmpty(wikipediaUrl))
                     {
                         _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
-                            $"✅ Found Wikipedia URL\n" +
-                            $"  URL: {wikipediaUrl}\n" +
-                            $"  Response time: {wikiSearchDuration:F0}ms");
+                            $"✅ Found: {wikipediaUrl} ({wikiSearchDuration:F0}ms)");
                         
                         _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
-                            $"📋 Attempting to extract company information:\n" +
-                            $"  URL: {wikipediaUrl}\n" +
-                            $"  Company: {model.Query}\n" +
-                            $"  Method: Open API + Find API\n" +
-                            $"  Search patterns: 'founded', 'headquarters', 'revenue', 'employees'");
+                            $"📋 Extracting company info from Wikipedia");
                         
                         var infoStartTime = DateTime.Now;
                         var companyInfo = await searchService.ExtractCompanyInfoAsync(wikipediaUrl);
@@ -210,22 +188,15 @@ namespace LuminaSearchConsole.Controllers
                         
                         if (companyInfo != null && companyInfo.Fields.Any())
                         {
-                            var fieldsSummary = string.Join("\n  ", 
-                                companyInfo.Fields.Take(3).Select(f => $"{f.FieldName}: {f.Content.Substring(0, Math.Min(100, f.Content.Length))}"));
-                            
                             _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
-                                $"✅ Company information extracted from Wikipedia\n" +
-                                $"  Total fields: {companyInfo.Fields.Count}\n" +
-                                $"  Response time: {infoDuration:F0}ms\n" +
-                                $"  Sample fields:\n  {fieldsSummary}");
+                                $"✅ Extracted {companyInfo.Fields.Count} fields ({infoDuration:F0}ms)");
                             
                             model.CompanyInfo = companyInfo;
                         }
                         else
                         {
                             _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
-                                $"⚠️ No company information found\n" +
-                                $"  Response time: {infoDuration:F0}ms");
+                                $"⚠️ No information found ({infoDuration:F0}ms)");
                         }
                     }
                     else
@@ -304,28 +275,15 @@ namespace LuminaSearchConsole.Controllers
             try
             {
                 _apiLogService.AddLog("Lumina Search", "WebSearch", 
-                    $"📋 API Configuration:\n" +
-                    $"  Endpoint: {_luminaConfig.ApiEndpoint}\n" +
-                    $"  Method: POST /search\n" +
-                    $"  Auth: Bearer token (OAuth 2.0)\n\n" +
-                    $"📝 Web Search Request:\n" +
-                    $"  Query: '{model.Query}'\n" +
-                    $"  TopN: {model.TopResults}\n" +
-                    $"  Source: WebWithBing\n" +
-                    $"  Market: en-US\n" +
-                    $"  Language: en");
+                    $"📋 Query: '{model.Query}', TopN: {model.TopResults}");
                 
                 var searchService = new LuminaSearchService(token, _luminaConfig);
                 var startTime = DateTime.Now;
                 var results = await searchService.ExecuteWebSearchAsync(model.Query, model.TopResults);
                 var duration = (DateTime.Now - startTime).TotalMilliseconds;
                 
-                var firstResult = results.Count > 0 ? $"\n  First result: {results[0].Title}" : "";
-                
                 _apiLogService.AddLog("Lumina Search", "WebSearch", 
-                    $"✅ Search completed\n" +
-                    $"  Results found: {results.Count}\n" +
-                    $"  Response time: {duration:F0}ms{firstResult}");
+                    $"✅ Found {results.Count} results ({duration:F0}ms)");
                 
                 model.SearchResults = results;
                 model.IsBatchSearch = false;
@@ -391,26 +349,15 @@ namespace LuminaSearchConsole.Controllers
             try
             {
                 _apiLogService.AddLog("Lumina Open", "OpenContent", 
-                    $"📋 API Configuration:\n" +
-                    $"  Endpoint: {_luminaConfig.ApiEndpoint}\n" +
-                    $"  Method: POST /open\n" +
-                    $"  Auth: Bearer token (OAuth 2.0)\n\n" +
-                    $"📝 Open Request:\n" +
-                    $"  RefId (URL): {request.Url}\n" +
-                    $"  Purpose: Extract full page content");
+                    $"📋 Opening URL: {request.Url}");
                 
                 var searchService = new LuminaSearchService(token, _luminaConfig);
                 var startTime = DateTime.Now;
                 var content = await searchService.OpenContentAsync(request.Url);
                 var duration = (DateTime.Now - startTime).TotalMilliseconds;
                 
-                var contentPreview = content.Length > 100 ? content.Substring(0, 100) + "..." : content;
-                
                 _apiLogService.AddLog("Lumina Open", "OpenContent", 
-                    $"✅ Content retrieved\n" +
-                    $"  Content length: {content.Length} chars\n" +
-                    $"  Response time: {duration:F0}ms\n" +
-                    $"  Preview: {contentPreview}");
+                    $"✅ Retrieved {content.Length} chars ({duration:F0}ms)");
                 
                 return Json(new { success = true, content = content, logsUpdated = true });
             }
@@ -518,8 +465,8 @@ namespace LuminaSearchConsole.Controllers
         public async Task TestCuaMsnMoneyStream(string companyName)
         {
             Response.ContentType = "text/event-stream";
-            Response.Headers.Add("Cache-Control", "no-cache");
-            Response.Headers.Add("Connection", "keep-alive");
+            Response.Headers["Cache-Control"] = "no-cache";
+            Response.Headers["Connection"] = "keep-alive";
 
             var token = HttpContext.Session.GetString("AccessToken");
             if (string.IsNullOrEmpty(token))
@@ -652,118 +599,6 @@ namespace LuminaSearchConsole.Controllers
         {
             var message = $"event: {eventType}\ndata: {data}\n\n";
             await Response.WriteAsync(message);
-        }
-
-        /// <summary>
-        /// Test CUA with MSN Money - Search for company stock information (Legacy POST endpoint)
-        /// Uses computer pool for resource reuse (3-minute keep-alive)
-        /// </summary>
-        [HttpPost]
-        public async Task<IActionResult> TestCuaMsnMoney([FromBody] TestCuaRequest request)
-        {
-            var token = HttpContext.Session.GetString("AccessToken");
-            if (string.IsNullOrEmpty(token))
-            {
-                return Json(new { success = false, error = "Please log in first" });
-            }
-
-            if (string.IsNullOrWhiteSpace(request?.CompanyName))
-            {
-                return Json(new { success = false, error = "Company name is required" });
-            }
-
-            var cuaService = new LuminaCuaService(token, _luminaConfig);
-            var userId = "user-from-token";
-            string? computerId = null;
-            var statusLog = new System.Text.StringBuilder();
-
-            try
-            {
-                // Step 1: Initialize computer
-                statusLog.AppendLine($"� Initializing virtual computer...");
-                statusLog.AppendLine($"   ComputerId: {computerId}");
-                
-                var startTime = DateTime.Now;
-                if (computerId == null) computerId = Guid.NewGuid().ToString("N");
-                await cuaService.InitializeComputerAsync(computerId, "user-from-token", _azureAdConfig.TenantId);
-                var duration = (DateTime.Now - startTime).TotalMilliseconds;
-
-                statusLog.AppendLine($"✅ Computer initialized ({duration:F0}ms)");
-                statusLog.AppendLine();
-
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Initialize", 
-                    $"✅ Virtual computer initialized\n" +
-                    $"  ComputerId: {computerId}\n" +
-                    $"  Response time: {duration:F0}ms");
-
-                // Step 2: Navigate to MSN Money
-                statusLog.AppendLine($"🌐 Opening MSN Money...");
-                statusLog.AppendLine($"   URL: https://www.msn.com/en-us/money/");
-                
-                startTime = DateTime.Now;
-                await cuaService.SearchCompanyOnMsnMoneyAsync(computerId, request.CompanyName);
-                duration = (DateTime.Now - startTime).TotalMilliseconds;
-
-                statusLog.AppendLine($"✅ Navigated and searched for '{request.CompanyName}' ({duration:F0}ms)");
-                statusLog.AppendLine();
-
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Search", 
-                    $"✅ Search completed for '{request.CompanyName}'\n" +
-                    $"  Response time: {duration:F0}ms");
-
-                // Step 3: Get screenshot
-                statusLog.AppendLine($"📸 Capturing screenshot...");
-                
-                startTime = DateTime.Now;
-                var screenshot = await cuaService.GetComputerScreenshotAsync(computerId);
-                duration = (DateTime.Now - startTime).TotalMilliseconds;
-
-                statusLog.AppendLine($"✅ Screenshot captured: {screenshot.Content?.Width}x{screenshot.Content?.Height} ({duration:F0}ms)");
-                statusLog.AppendLine();
-
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Screenshot", 
-                    $"✅ Screenshot captured\n" +
-                    $"  Resolution: {screenshot.Content?.Width}x{screenshot.Content?.Height}\n" +
-                    $"  Response time: {duration:F0}ms");
-
-                // Keep computer alive for reuse
-                statusLog.AppendLine($"♻️ Computer kept alive for reuse (3-minute keep-alive)...");
-                _cuaComputerPool.TouchComputer(userId, _azureAdConfig.TenantId);
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Cleanup", 
-                    $"✅ Computer kept alive for reuse (will auto-release after 3 minutes of inactivity)\n  ComputerId: {computerId}");
-
-                statusLog.AppendLine($"✅ All operations completed successfully!");
-
-                return Json(new 
-                { 
-                    success = true, 
-                    screenshot = $"data:image/png;base64,{screenshot.Content?.Screenshot}",
-                    width = screenshot.Content?.Width,
-                    height = screenshot.Content?.Height,
-                    statusLog = statusLog.ToString()
-                });
-            }
-            catch (HttpRequestException httpEx) when (httpEx.StatusCode == System.Net.HttpStatusCode.InsufficientStorage)
-            {
-                _logger.LogWarning(httpEx, "CUA service capacity reached");
-                statusLog.AppendLine($"❌ CUA Service Unavailable");
-                statusLog.AppendLine($"   Reason: Virtual computers at capacity");
-                
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Error", 
-                    $"⚠️ CUA Service Unavailable\n" +
-                    $"  Reason: Virtual computers at capacity\n" +
-                    $"  Message: {httpEx.Message}", false);
-                
-                return Json(new { success = false, error = "CUA service is currently at capacity. Please try again later.", statusLog = statusLog.ToString() });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "CUA MSN Money test failed");
-                statusLog.AppendLine($"❌ Error: {ex.Message}");
-                
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Error", $"❌ Error: {ex.Message}", false);
-                return Json(new { success = false, error = ex.Message, statusLog = statusLog.ToString() });
-            }
         }
 
         #endregion

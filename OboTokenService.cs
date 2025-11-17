@@ -182,7 +182,11 @@ namespace LuminaSearchConsole
                 try
                 {
                     // Ensure directory exists
-                    Directory.CreateDirectory(Path.GetDirectoryName(_cacheFilePath));
+                    var directory = Path.GetDirectoryName(_cacheFilePath);
+                    if (!string.IsNullOrEmpty(directory))
+                    {
+                        Directory.CreateDirectory(directory);
+                    }
                     
                     var cacheData = args.TokenCache.SerializeMsalV3();
                     File.WriteAllBytes(_cacheFilePath, cacheData);
