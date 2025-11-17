@@ -125,14 +125,14 @@
                         <div class="row mb-4">
                             <!-- Left Column: Company Overview -->
                             <div class="col-md-6">
-                                @if (Model.CompanyInfo != null && Model.CompanyInfo.Fields.Any())
-                                {
-                                    <div class="card h-100" style="border-left: 4px solid #0d6efd;">
-                                        <div class="card-header" style="background-color: #f8f9fa;">
-                                            <h5 class="mb-0">🏢 Company Overview</h5>
-                                            <small class="text-muted">Information extracted from Wikipedia using Find API</small>
-                                        </div>
-                                        <div class="card-body">
+                                <div class="card h-100" style="border-left: 4px solid #0d6efd;">
+                                    <div class="card-header" style="background-color: #f8f9fa;">
+                                        <h5 class="mb-0">🏢 Company Overview</h5>
+                                        <small class="text-muted">Information extracted from Wikipedia using Find API</small>
+                                    </div>
+                                    <div class="card-body">
+                                        @if (Model.CompanyInfo != null && Model.CompanyInfo.Fields.Any())
+                                        {
                                             <table class="table table-sm table-borderless mb-0">
                                                 @foreach (var field in Model.CompanyInfo.Fields)
                                                 {
@@ -146,9 +146,18 @@
                                             <small class="text-muted">
                                                 <a href="@Model.CompanyInfo.Url" target="_blank">View full article on Wikipedia →</a>
                                             </small>
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="alert alert-warning mb-0">
+                                                <p class="mb-2">⚠️ No company information available</p>
+                                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="window.location.reload()">
+                                                    🔄 Retry
+                                                </button>
+                                            </div>
+                                        }
                                     </div>
-                                }
+                                </div>
                             </div>
                             
                             <!-- Right Column: CUA Test -->
@@ -207,7 +216,7 @@
                             <!-- Stock Price Results (Left Column) -->
                             <div class="col-md-6">
                                 <h4 class="text-primary">📈 Stock & Market Data</h4>
-                                <p class="text-muted">@Model.BatchSearchResult.StockResults.Count results found</p>
+                                <p class="text-muted">Showing @Model.BatchSearchResult.StockResults.Count results</p>
                                 <p class="text-info"><small>💡 Click any article to read the full story (using Open API)</small></p>
                                 
                                 @if (Model.BatchSearchResult.StockResults.Any())
@@ -238,8 +247,11 @@
                                 }
                                 else
                                 {
-                                    <div class="alert alert-info">
-                                        <p class="mb-0">No stock data available.</p>
+                                    <div class="alert alert-warning">
+                                        <p class="mb-2">⚠️ No stock data available</p>
+                                        <button type="button" class="btn btn-sm btn-outline-primary" onclick="window.location.reload()">
+                                            🔄 Retry
+                                        </button>
                                     </div>
                                 }
                             </div>
@@ -247,7 +259,7 @@
                             <!-- Latest News Results (Right Column) -->
                             <div class="col-md-6">
                                 <h4 class="text-success">📰 Recent News</h4>
-                                <p class="text-muted">@Model.BatchSearchResult.NewsResults.Count articles found</p>
+                                <p class="text-muted">Showing @Model.BatchSearchResult.NewsResults.Count results</p>
                                 <p class="text-info"><small>💡 Click any article to read the full story (using Open API)</small></p>
                                 
                                 @if (Model.BatchSearchResult.NewsResults.Any())
@@ -278,8 +290,11 @@
                                 }
                                 else
                                 {
-                                    <div class="alert alert-info">
-                                        <p class="mb-0">No recent articles found.</p>
+                                    <div class="alert alert-warning">
+                                        <p class="mb-2">⚠️ No recent articles found</p>
+                                        <button type="button" class="btn btn-sm btn-outline-primary" onclick="window.location.reload()">
+                                            🔄 Retry
+                                        </button>
                                     </div>
                                 }
                             </div>
@@ -756,12 +771,11 @@
                 eventSource.addEventListener('error', function(e) {
                     console.error('SSE Error:', e);
                     
+                    statusDiv.className = 'alert alert-danger';
                     if (e.data) {
-                        statusDiv.className = 'alert alert-danger';
-                        updateStatus('❌ Error: ' + e.data);
+                        statusText.innerHTML = '❌ Error: ' + e.data + '<br><button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="cuaMsnMoney(\'' + companyName + '\')">🔄 Retry</button>';
                     } else {
-                        statusDiv.className = 'alert alert-danger';
-                        updateStatus('❌ Connection error. Please try again.');
+                        statusText.innerHTML = '❌ Connection error. Please try again.<br><button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="cuaMsnMoney(\'' + companyName + '\')">🔄 Retry</button>';
                     }
                     
                     eventSource.close();
@@ -780,7 +794,7 @@
                         console.log('EventSource connection closed');
                     } else {
                         statusDiv.className = 'alert alert-danger';
-                        updateStatus('❌ Connection failed. Please try again.');
+                        statusText.innerHTML = '❌ Connection failed. Please try again.<br><button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="cuaMsnMoney(\'' + companyName + '\')">🔄 Retry</button>';
                         
                         eventSource.close();
                         
@@ -794,7 +808,7 @@
             } catch (error) {
                 console.error('MSN Money error:', error);
                 statusDiv.className = 'alert alert-danger';
-                statusText.textContent = '❌ Error: ' + error.message;
+                statusText.innerHTML = '❌ Error: ' + error.message + '<br><button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="cuaMsnMoney(\'' + companyName + '\')">🔄 Retry</button>';
                 
                 // Re-enable button
                 btn.disabled = false;
