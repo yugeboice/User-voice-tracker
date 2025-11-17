@@ -163,35 +163,13 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <!-- CUA Step Buttons -->
+                                        <!-- CUA MSN Money Button -->
                                         <div class="mb-3">
                                             @if (!string.IsNullOrEmpty(Model.Query))
                                             {
-                                                <div class="d-grid gap-2">
-                                                    <button type="button" class="btn btn-outline-info btn-sm" id="cuaStep1Btn" onclick="cuaInitialize('@Model.Query')">
-                                                        <span id="cuaStep1Text">1️⃣ Initialize Computer</span>
-                                                        <span id="cuaStep1Loading" style="display: none;">
-                                                            <span class="spinner-border spinner-border-sm me-1" role="status"></span>
-                                                            Initializing...
-                                                        </span>
-                                                    </button>
-                                                    <button type="button" class="btn btn-outline-info btn-sm" id="cuaStep2Btn" onclick="cuaNavigate('@Model.Query')" disabled>
-                                                        <span id="cuaStep2Text">2️⃣ Navigate to Bing</span>
-                                                        <span id="cuaStep2Loading" style="display: none;">
-                                                            <span class="spinner-border spinner-border-sm me-1" role="status"></span>
-                                                            Navigating...
-                                                        </span>
-                                                    </button>
-                                                    <button type="button" class="btn btn-info btn-sm" id="cuaStep3Btn" onclick="cuaGetScreenshot()" disabled>
-                                                        <span id="cuaStep3Text">3️⃣ Get Screenshot</span>
-                                                        <span id="cuaStep3Loading" style="display: none;">
-                                                            <span class="spinner-border spinner-border-sm me-1" role="status"></span>
-                                                            Capturing...
-                                                        </span>
-                                                    </button>
-                                                    <hr class="my-3">
-                                                    <button type="button" class="btn btn-success btn-sm" onclick="cuaMsnMoney('@Model.Query')">
-                                                        <span id="cuaMsnText">💰 Search on MSN Money (All-in-One)</span>
+                                                <div class="d-grid">
+                                                    <button type="button" class="btn btn-success" id="cuaMsnBtn" onclick="cuaMsnMoney('@Model.Query')">
+                                                        <span id="cuaMsnText">💰 Search on MSN Money</span>
                                                         <span id="cuaMsnLoading" style="display: none;">
                                                             <span class="spinner-border spinner-border-sm me-1" role="status"></span>
                                                             Processing...
@@ -201,19 +179,16 @@
                                             }
                                             else
                                             {
-                                                <div class="d-grid gap-2">
-                                                    <button type="button" class="btn btn-outline-info btn-sm" disabled>1️⃣ Initialize Computer</button>
-                                                    <button type="button" class="btn btn-outline-info btn-sm" disabled>2️⃣ Navigate to Bing</button>
-                                                    <button type="button" class="btn btn-info btn-sm" disabled>3️⃣ Get Screenshot</button>
-                                                    <hr class="my-3">
-                                                    <button type="button" class="btn btn-success btn-sm" disabled>💰 Search on MSN Money</button>
+                                                <div class="d-grid">
+                                                    <button type="button" class="btn btn-success" disabled>💰 Search on MSN Money</button>
                                                 </div>
                                             }
                                         </div>
 
                                         <!-- CUA Status Messages -->
-                                        <div id="cuaStatus" class="alert alert-info" style="display:none; font-size: 0.9rem;">
-                                            <strong>Status:</strong> <span id="cuaStatusText">Ready</span>
+                                        <div id="cuaStatus" class="alert alert-info" style="display:none; font-size: 0.9rem; max-height: 300px; overflow-y: auto;">
+                                            <strong>Progress:</strong>
+                                            <div id="cuaStatusText" style="margin-top: 10px; font-family: 'Courier New', monospace; white-space: pre-line;"></div>
                                         </div>
                                         
                                         <!-- CUA Screenshot Display -->
@@ -709,223 +684,119 @@
             searchContainer.insertAdjacentHTML('afterend', loadingHTML);
         }
         
-        // CUA Session ID storage
-        let cuaSessionId = null;
-
-        // Helper function to update CUA status
-        function updateCuaStatus(message, isError = false) {
-            const statusDiv = document.getElementById('cuaStatus');
-            const statusText = document.getElementById('cuaStatusText');
-            statusDiv.style.display = 'block';
-            statusDiv.className = isError ? 'alert alert-danger' : 'alert alert-info';
-            statusText.textContent = message;
-        }
-
-        // Helper function to toggle button loading state
-        function setButtonLoading(stepNum, isLoading) {
-            const btn = document.getElementById(`cuaStep${stepNum}Btn`);
-            const text = document.getElementById(`cuaStep${stepNum}Text`);
-            const loading = document.getElementById(`cuaStep${stepNum}Loading`);
-            
-            btn.disabled = isLoading;
-            text.style.display = isLoading ? 'none' : 'inline';
-            loading.style.display = isLoading ? 'inline-block' : 'none';
-        }
-
-        // Step 1: Initialize Computer
-        async function cuaInitialize(companyName) {
-            setButtonLoading(1, true);
-            updateCuaStatus('Initializing CUA computer...');
-            document.getElementById('cuaScreenshot').style.display = 'none';
-            
-            try {
-                console.log('Step 1: Initializing CUA for:', companyName);
-                
-                const response = await fetch('@Url.Action("TestCua", "Home")', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
-                    },
-                    body: JSON.stringify({ 
-                        CompanyName: companyName,
-                        Step: 'initialize'
-                    })
-                });
-                
-                const result = await response.json();
-                console.log('Step 1 result:', result);
-                
-                if (result.success) {
-                    cuaSessionId = result.sessionId;
-                    updateCuaStatus('✅ Computer initialized successfully. Session ID: ' + cuaSessionId);
-                    
-                    // Enable next step
-                    document.getElementById('cuaStep2Btn').disabled = false;
-                    document.getElementById('cuaStep1Btn').classList.remove('btn-outline-info');
-                    document.getElementById('cuaStep1Btn').classList.add('btn-success');
-                } else {
-                    updateCuaStatus('❌ Initialization failed: ' + result.error, true);
-                }
-            } catch (error) {
-                console.error('Step 1 error:', error);
-                updateCuaStatus('❌ Error: ' + error.message, true);
-            } finally {
-                setButtonLoading(1, false);
-            }
-        }
-
-        // Step 2: Navigate to URL
-        async function cuaNavigate(companyName) {
-            if (!cuaSessionId) {
-                updateCuaStatus('❌ Please initialize computer first', true);
-                return;
-            }
-
-            setButtonLoading(2, true);
-            updateCuaStatus('Navigating to Bing search page...');
-            
-            try {
-                console.log('Step 2: Navigating for:', companyName);
-                
-                // Build Bing search URL with finance-specific parameters
-                const query = companyName + ' stock price';
-                const searchUrl = `https://www.bing.com/search?` +
-                    `q=${encodeURIComponent(query)}` +
-                    `&setmkt=en-US` +           // Set market to US
-                    `&setlang=en-US` +          // Set language to English (US)
-                    `&setflight=fin-int`;       // Enable finance integration flight
-                
-                const response = await fetch('@Url.Action("TestCua", "Home")', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
-                    },
-                    body: JSON.stringify({ 
-                        CompanyName: companyName,
-                        Step: 'navigate',
-                        SessionId: cuaSessionId,
-                        Url: searchUrl
-                    })
-                });
-                
-                const result = await response.json();
-                console.log('Step 2 result:', result);
-                
-                if (result.success) {
-                    updateCuaStatus('✅ Successfully navigated to: ' + searchUrl);
-                    
-                    // Enable next step
-                    document.getElementById('cuaStep3Btn').disabled = false;
-                    document.getElementById('cuaStep2Btn').classList.remove('btn-outline-info');
-                    document.getElementById('cuaStep2Btn').classList.add('btn-success');
-                } else {
-                    updateCuaStatus('❌ Navigation failed: ' + result.error, true);
-                }
-            } catch (error) {
-                console.error('Step 2 error:', error);
-                updateCuaStatus('❌ Error: ' + error.message, true);
-            } finally {
-                setButtonLoading(2, false);
-            }
-        }
-
-        // Step 3: Get Screenshot
-        async function cuaGetScreenshot() {
-            if (!cuaSessionId) {
-                updateCuaStatus('❌ Please initialize computer first', true);
-                return;
-            }
-
-            setButtonLoading(3, true);
-            updateCuaStatus('Capturing screenshot...');
-            
-            try {
-                console.log('Step 3: Getting screenshot');
-                
-                const response = await fetch('@Url.Action("TestCua", "Home")', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
-                    },
-                    body: JSON.stringify({ 
-                        Step: 'screenshot',
-                        SessionId: cuaSessionId
-                    })
-                });
-                
-                const result = await response.json();
-                console.log('Step 3 result:', result);
-                
-                if (result.success) {
-                    // Display screenshot
-                    document.getElementById('cuaImage').src = result.screenshot;
-                    document.getElementById('cuaScreenshot').style.display = 'block';
-                    updateCuaStatus('✅ Screenshot captured successfully!');
-                    
-                    document.getElementById('cuaStep3Btn').classList.remove('btn-info');
-                    document.getElementById('cuaStep3Btn').classList.add('btn-success');
-                    
-                    // Refresh main logs to show CUA operations
-                    refreshLogs();
-                } else {
-                    updateCuaStatus('❌ Screenshot failed: ' + result.error, true);
-                }
-            } catch (error) {
-                console.error('Step 3 error:', error);
-                updateCuaStatus('❌ Error: ' + error.message, true);
-            } finally {
-                setButtonLoading(3, false);
-            }
-        }
-
-        // MSN Money Search - All-in-One
-        async function cuaMsnMoney(companyName) {
-            const btn = document.querySelector('button[onclick*="cuaMsnMoney"]');
+        // MSN Money Search - All-in-One with Real-time SSE Streaming
+        function cuaMsnMoney(companyName) {
+            const btn = document.getElementById('cuaMsnBtn');
             const btnText = document.getElementById('cuaMsnText');
             const btnLoading = document.getElementById('cuaMsnLoading');
+            const statusDiv = document.getElementById('cuaStatus');
+            const statusText = document.getElementById('cuaStatusText');
             
             btn.disabled = true;
             btnText.style.display = 'none';
             btnLoading.style.display = 'inline-block';
             
-            updateCuaStatus('🌐 Opening MSN Money and searching for ' + companyName + '...');
+            // Show status area
+            statusDiv.style.display = 'block';
+            statusDiv.className = 'alert alert-info';
             document.getElementById('cuaScreenshot').style.display = 'none';
             
+            // Helper function to update status (replaces content, not append)
+            function updateStatus(message) {
+                statusText.textContent = message;
+            }
+            
             try {
-                console.log('MSN Money: Searching for:', companyName);
+                console.log('MSN Money: Connecting to SSE stream for:', companyName);
                 
-                const response = await fetch('@Url.Action("TestCuaMsnMoney", "Home")', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
-                    },
-                    body: JSON.stringify({ 
-                        CompanyName: companyName
-                    })
+                // Create EventSource for Server-Sent Events
+                const eventSource = new EventSource('/Home/TestCuaMsnMoneyStream?companyName=' + encodeURIComponent(companyName));
+                
+                // Handle progress updates
+                eventSource.addEventListener('progress', function(e) {
+                    console.log('Progress:', e.data);
+                    updateStatus(e.data);
                 });
                 
-                const result = await response.json();
-                console.log('MSN Money result:', result);
+                // Handle screenshot data
+                eventSource.addEventListener('screenshot', function(e) {
+                    console.log('Screenshot received');
+                    try {
+                        const screenshotData = JSON.parse(e.data);
+                        document.getElementById('cuaImage').src = screenshotData.image;
+                        document.getElementById('cuaScreenshot').style.display = 'block';
+                    } catch (error) {
+                        console.error('Failed to parse screenshot data:', error);
+                    }
+                });
                 
-                if (result.success) {
-                    // Display screenshot
-                    document.getElementById('cuaImage').src = result.screenshot;
-                    document.getElementById('cuaScreenshot').style.display = 'block';
-                    updateCuaStatus('✅ MSN Money search completed! Screenshot captured.');
+                // Handle completion
+                eventSource.addEventListener('complete', function(e) {
+                    console.log('Complete:', e.data);
+                    updateStatus(e.data);
                     
-                    // Refresh main logs to show CUA operations
+                    // Hide progress after a short delay
+                    setTimeout(() => {
+                        statusDiv.style.display = 'none';
+                    }, 1000);
+                    
+                    // Close the connection
+                    eventSource.close();
+                    
+                    // Re-enable button
+                    btn.disabled = false;
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                    
+                    // Refresh main logs
                     refreshLogs();
-                } else {
-                    updateCuaStatus('❌ MSN Money search failed: ' + result.error, true);
-                }
+                });
+                
+                // Handle errors
+                eventSource.addEventListener('error', function(e) {
+                    console.error('SSE Error:', e);
+                    
+                    if (e.data) {
+                        statusDiv.className = 'alert alert-danger';
+                        updateStatus('❌ Error: ' + e.data);
+                    } else {
+                        statusDiv.className = 'alert alert-danger';
+                        updateStatus('❌ Connection error. Please try again.');
+                    }
+                    
+                    eventSource.close();
+                    
+                    // Re-enable button
+                    btn.disabled = false;
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                });
+                
+                // Handle connection errors
+                eventSource.onerror = function(error) {
+                    console.error('EventSource failed:', error);
+                    
+                    if (eventSource.readyState === EventSource.CLOSED) {
+                        console.log('EventSource connection closed');
+                    } else {
+                        statusDiv.className = 'alert alert-danger';
+                        updateStatus('❌ Connection failed. Please try again.');
+                        
+                        eventSource.close();
+                        
+                        // Re-enable button
+                        btn.disabled = false;
+                        btnText.style.display = 'inline';
+                        btnLoading.style.display = 'none';
+                    }
+                };
+                
             } catch (error) {
                 console.error('MSN Money error:', error);
-                updateCuaStatus('❌ Error: ' + error.message, true);
-            } finally {
+                statusDiv.className = 'alert alert-danger';
+                statusText.textContent = '❌ Error: ' + error.message;
+                
+                // Re-enable button
                 btn.disabled = false;
                 btnText.style.display = 'inline';
                 btnLoading.style.display = 'none';
