@@ -8,7 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Lumina" Version="2025.8.27.441" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.67.2" />
+    <!-- Upgraded: MSAL client library for token acquisition (required by Microsoft.Identity.Web 4.0.1) -->
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.77.1" />
+    <!-- Added: Server-side MISE validation libraries for compliance -->
+    <PackageReference Include="Microsoft.Identity.Web" Version="4.0.1" />
+    <PackageReference Include="Microsoft.Identity.Web.UI" Version="4.0.1" />
+    <!-- Added: JWT Bearer authentication middleware -->
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 

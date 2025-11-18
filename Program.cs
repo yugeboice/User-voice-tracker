@@ -1,3 +1,5 @@
+using Microsoft.Identity.Web;
+
 namespace LuminaSearchConsole
 {
     /// <summary>
@@ -43,6 +45,12 @@ namespace LuminaSearchConsole
                 options.Cookie.IsEssential = true;
             });
 
+            // Add Microsoft Identity Web for server-side token validation and MISE compliance
+            // This enables automatic MISE/SAL telemetry reporting to Azure AD
+            builder.Services
+                .AddAuthentication()
+                .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+
             // Register OBO authentication service
             // This service handles OAuth 2.0 token acquisition
             builder.Services.AddScoped<OboTokenService>();
@@ -72,6 +80,7 @@ namespace LuminaSearchConsole
             app.UseStaticFiles();
             app.UseRouting();
             app.UseSession();  // Enable session before authorization
+            app.UseAuthentication();  // Enable Microsoft Identity Web authentication
             app.UseAuthorization();
 
             app.MapControllerRoute(
