@@ -77,6 +77,86 @@ namespace LuminaSearchConsole.Models
     {
         /// <summary>URL to extract content from using Lumina Open API</summary>
         public string Url { get; set; } = string.Empty;
+        
+        /// <summary>Optional session ID to maintain context</summary>
+        public string? SessionId { get; set; }
+    }
+
+    /// <summary>
+    /// Request model for clicking a link within an opened page.
+    /// Used to navigate through article links using Click API.
+    /// </summary>
+    public class ClickLinkRequest
+    {
+        /// <summary>Session ID from the current browsing session</summary>
+        public string SessionId { get; set; } = string.Empty;
+        
+        /// <summary>Link identifier to click (e.g., "13" or "link_13")</summary>
+        public string LinkId { get; set; } = string.Empty;
+        
+        /// <summary>Page context containing turn, action, and id</summary>
+        public PageContextDto PageContext { get; set; } = new();
+    }
+
+    /// <summary>
+    /// Page context information for navigation.
+    /// </summary>
+    public class PageContextDto
+    {
+        public int Turn { get; set; }
+        public string Action { get; set; } = string.Empty;
+        public int Id { get; set; }
+    }
+
+    /// <summary>
+    /// Response model for Open API with links and navigation support.
+    /// </summary>
+    public class OpenContentResponse
+    {
+        /// <summary>Success indicator</summary>
+        public bool Success { get; set; }
+        
+        /// <summary>Page content text</summary>
+        public string Content { get; set; } = string.Empty;
+        
+        /// <summary>Session ID for maintaining context</summary>
+        public string SessionId { get; set; } = string.Empty;
+        
+        /// <summary>List of clickable links found in the page</summary>
+        public List<LinkInfo> Links { get; set; } = new();
+        
+        /// <summary>Page context for navigation</summary>
+        public PageContextDto? PageContext { get; set; }
+        
+        /// <summary>Current page URL</summary>
+        public string Url { get; set; } = string.Empty;
+        
+        /// <summary>Current page title</summary>
+        public string Title { get; set; } = string.Empty;
+        
+        /// <summary>Breadcrumb path for navigation history</summary>
+        public List<string> BreadcrumbPath { get; set; } = new();
+        
+        /// <summary>Error message if any</summary>
+        public string? Error { get; set; }
+        
+        /// <summary>Whether logs were updated</summary>
+        public bool LogsUpdated { get; set; }
+    }
+
+    /// <summary>
+    /// Link information for display and navigation.
+    /// </summary>
+    public class LinkInfo
+    {
+        /// <summary>Link ID for Click API</summary>
+        public string LinkId { get; set; } = string.Empty;
+        
+        /// <summary>Display name of the link</summary>
+        public string Name { get; set; } = string.Empty;
+        
+        /// <summary>Target URL</summary>
+        public string Url { get; set; } = string.Empty;
     }
 
     /// <summary>

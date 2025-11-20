@@ -329,7 +329,7 @@ namespace LuminaSearchConsole.Controllers
         /// <summary>
         /// Open and extract full content from a URL using Lumina Open API.
         /// Called when user clicks a search result to view full content.
-        /// Returns JSON response for AJAX requests.
+        /// Returns JSON response with content, links, and navigation context.
         /// </summary>
         /// <param name="request">Request containing URL to extract content from</param>
         [HttpPost]
@@ -349,35 +349,224 @@ namespace LuminaSearchConsole.Controllers
             try
             {
                 _apiLogService.AddLog("Lumina Open", "OpenContent", 
-                    $"📋 Opening URL: {request.Url}");
+                    $"📋 API Configuration:\n" +
+                    $"  Endpoint: {_luminaConfig.ApiEndpoint}\n" +
+                    $"  Method: POST /api/sonicberry/open\n" +
+                    $"  Auth: Bearer token (OAuth 2.0)\n\n" +
+                    $"📝 Open Request:\n" +
+                    $"  RefId (URL): {request.Url}\n" +
+                    $"  SessionId: {request.SessionId ?? "New session"}\n" +
+                    $"  Purpose: Extract full page content and discover links");
                 
                 var searchService = new LuminaSearchService(token, _luminaConfig);
                 var startTime = DateTime.Now;
-                var content = await searchService.OpenContentAsync(request.Url);
+                var result = await searchService.OpenContentWithLinksAsync(request.Url, request.SessionId);
                 var duration = (DateTime.Now - startTime).TotalMilliseconds;
                 
-                _apiLogService.AddLog("Lumina Open", "OpenContent", 
-                    $"✅ Retrieved {content.Length} chars ({duration:F0}ms)");
+                // Convert dynamic links to LinkInfo
+                var linksList = new List<LinkInfo>();
+                for (int i = 0; i < result.Links.Count && i < 10; i++)
+                {
+                    try
+                    {
+                        var link = result.Links[i];
+                        string linkId = link.LinkId?.ToString() ?? i.ToString();
+                        string name = link.Name?.ToString() ?? $"Link {i}";
+                        string url = link.Url?.ToString() ?? "";
+                        
+                        if (!string.IsNullOrEmpty(name) && !name.StartsWith("[[["))
+                        {
+                            linksList.Add(new LinkInfo
+                            {
+                                LinkId = linkId,
+                                Name = name,
+                                Url = url
+                            });
+                        }
+                    }
+                    catch
+                    {
+                        // Skip invalid links
+                    }
+                }
                 
-                return Json(new { success = true, content = content, logsUpdated = true });
+                // Convert PageContext
+                PageContextDto? pageContextDto = null;
+                if (result.PageContext != null)
+                {
+                    try
+                    {
+                        pageContextDto = new PageContextDto
+                        {
+                            Turn = (int)(result.PageContext.Turn ?? 0),
+                            Action = result.PageContext.Action?.ToString() ?? "view",
+                            Id = (int)(result.PageContext.Id ?? 0)
+                        };
+                    }
+                    catch { }
+                }
+                
+                _apiLogService.AddLog("Lumina Open", "OpenContent", 
+                    $"✅ Content retrieved\n" +
+                    $"  Content length: {result.Content.Length} chars\n" +
+                    $"  Links found: {linksList.Count}\n" +
+                    $"  Session ID: {result.SessionId}\n" +
+                    $"  Response time: {duration:F0}ms");
+                
+                var response = new OpenContentResponse
+                {
+                    Success = true,
+                    Content = result.Content,
+                    SessionId = result.SessionId,
+                    Links = linksList,
+                    PageContext = pageContextDto,
+                    Url = result.Url,
+                    Title = result.Title,
+                    LogsUpdated = true
+                };
+                
+                return Json(response);
             }
             catch (ArgumentException ex)
             {
                 _logger.LogWarning("Invalid URL parameter: {Message}", ex.Message);
                 _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Validation error: {ex.Message}", false);
-                return Json(new { success = false, error = ex.Message, logsUpdated = true });
+                return Json(new OpenContentResponse { Success = false, Error = ex.Message, LogsUpdated = true });
             }
             catch (HttpRequestException ex)
             {
                 _logger.LogError(ex, "Network error while opening content from: {Url}", request.Url);
                 _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Network error: {ex.Message}", false);
-                return Json(new { success = false, error = "Network error. Please check your internet connection and try again.", logsUpdated = true });
+                return Json(new OpenContentResponse { Success = false, Error = "Network error. Please check your internet connection.", LogsUpdated = true });
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Open content failed for URL: {Url}", request.Url);
                 _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Error: {ex.Message}", false);
-                return Json(new { success = false, error = $"Failed to open content: {ex.Message}", logsUpdated = true });
+                return Json(new OpenContentResponse { Success = false, Error = $"Failed to open content: {ex.Message}", LogsUpdated = true });
+            }
+        }
+
+        /// <summary>
+        /// Click a link within an opened page using Lumina Click API.
+        /// Enables navigation through article links for deep content exploration.
+        /// </summary>
+        /// <param name="request">Request containing session ID, link ID, and page context</param>
+        [HttpPost]
+        public async Task<IActionResult> ClickLink([FromBody] ClickLinkRequest request)
+        {
+            if (string.IsNullOrEmpty(request.SessionId))
+            {
+                return Json(new OpenContentResponse { Success = false, Error = "Session ID is required" });
+            }
+
+            if (string.IsNullOrEmpty(request.LinkId))
+            {
+                return Json(new OpenContentResponse { Success = false, Error = "Link ID is required" });
+            }
+
+            var token = HttpContext.Session.GetString("AccessToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                return Json(new OpenContentResponse { Success = false, Error = "Please log in first" });
+            }
+
+            try
+            {
+                _apiLogService.AddLog("Lumina Click", "ClickLink", 
+                    $"📋 API Configuration:\n" +
+                    $"  Endpoint: {_luminaConfig.ApiEndpoint}\n" +
+                    $"  Method: POST (via SDK ClickAsync)\n" +
+                    $"  Auth: Bearer token (OAuth 2.0)\n\n" +
+                    $"📝 Click Request:\n" +
+                    $"  SessionId: {request.SessionId}\n" +
+                    $"  LinkId: {request.LinkId}\n" +
+                    $"  PageContext: Turn={request.PageContext.Turn}, Action={request.PageContext.Action}, Id={request.PageContext.Id}");
+                
+                var searchService = new LuminaSearchService(token, _luminaConfig);
+                var startTime = DateTime.Now;
+                
+                // Convert PageContextDto to dynamic object for API
+                dynamic pageContext = new
+                {
+                    Turn = request.PageContext.Turn,
+                    Action = request.PageContext.Action,
+                    Id = request.PageContext.Id
+                };
+                
+                var result = await searchService.ClickLinkAsync(request.SessionId, request.LinkId, pageContext);
+                var duration = (DateTime.Now - startTime).TotalMilliseconds;
+                
+                // Convert links
+                var linksList = new List<LinkInfo>();
+                for (int i = 0; i < result.Links.Count && i < 10; i++)
+                {
+                    try
+                    {
+                        var link = result.Links[i];
+                        string linkId = link.LinkId?.ToString() ?? i.ToString();
+                        string name = link.Name?.ToString() ?? $"Link {i}";
+                        string url = link.Url?.ToString() ?? "";
+                        
+                        if (!string.IsNullOrEmpty(name) && !name.StartsWith("[[["))
+                        {
+                            linksList.Add(new LinkInfo
+                            {
+                                LinkId = linkId,
+                                Name = name,
+                                Url = url
+                            });
+                        }
+                    }
+                    catch
+                    {
+                        // Skip invalid links
+                    }
+                }
+                
+                // Convert PageContext
+                PageContextDto? pageContextDto = null;
+                if (result.PageContext != null)
+                {
+                    try
+                    {
+                        pageContextDto = new PageContextDto
+                        {
+                            Turn = (int)(result.PageContext.Turn ?? 0),
+                            Action = result.PageContext.Action?.ToString() ?? "view",
+                            Id = (int)(result.PageContext.Id ?? 0)
+                        };
+                    }
+                    catch { }
+                }
+                
+                _apiLogService.AddLog("Lumina Click", "ClickLink", 
+                    $"✅ Navigated to new page\n" +
+                    $"  URL: {result.Url}\n" +
+                    $"  Title: {result.Title}\n" +
+                    $"  Content length: {result.Content.Length} chars\n" +
+                    $"  Links found: {linksList.Count}\n" +
+                    $"  Response time: {duration:F0}ms");
+                
+                var response = new OpenContentResponse
+                {
+                    Success = true,
+                    Content = result.Content,
+                    SessionId = result.SessionId,
+                    Links = linksList,
+                    PageContext = pageContextDto,
+                    Url = result.Url,
+                    Title = result.Title,
+                    LogsUpdated = true
+                };
+                
+                return Json(response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Click link failed for LinkId: {LinkId}", request.LinkId);
+                _apiLogService.AddLog("Lumina Click", "ClickLink", $"❌ Error: {ex.Message}", false);
+                return Json(new OpenContentResponse { Success = false, Error = $"Failed to click link: {ex.Message}", LogsUpdated = true });
             }
         }
 

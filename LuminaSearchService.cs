@@ -255,11 +255,12 @@ namespace LuminaSearchConsole
         /// Open API Use Case:
         /// When search returns a result URL, use Open API to extract the full page content.
         /// This is useful for content analysis, summarization, or detailed viewing.
-        /// Returns both content and session ID for follow-up Find operations.
+        /// Returns content, session ID, links, and page context for follow-up operations.
         /// </summary>
         /// <param name="url">Full URL to open and extract content from</param>
-        /// <returns>Tuple with extracted page content and session ID</returns>
-        public async Task<(string content, string sessionId)> OpenContentWithSessionAsync(string url)
+        /// <param name="sessionId">Optional session ID to maintain context</param>
+        /// <returns>OpenContentResult with content, links, and navigation context</returns>
+        public async Task<OpenContentResult> OpenContentWithLinksAsync(string url, string? sessionId = null)
         {
             if (string.IsNullOrWhiteSpace(url))
             {
@@ -284,7 +285,8 @@ namespace LuminaSearchConsole
                         {
                             RefId = url  // Direct URL reference
                         }
-                    }
+                    },
+                    ToolState = string.IsNullOrEmpty(sessionId) ? null : new Microsoft.Lumina.Client.Models.Sonicberry.ToolState { SessionId = sessionId }
                 };
 
                 var response = await _proxy.OpenAsync(openRequest);
@@ -293,7 +295,20 @@ namespace LuminaSearchConsole
                 {
                     var page = response.Pages[0];
                     string content = page.Content ?? "";
-                    string sessionId = response.ToolState?.SessionId ?? "";
+                    string newSessionId = response.ToolState?.SessionId ?? "";
+                    
+                    // Extract links - handle dynamic type
+                    var linksList = new List<dynamic>();
+                    if (page.Doc?.Links != null)
+                    {
+                        foreach (var link in page.Doc.Links)
+                        {
+                            linksList.Add(link);
+                            if (linksList.Count >= 20) break;
+                        }
+                    }
+                    
+                    var pageContext = page.PageContext;
                     
                     // Validate content quality
                     var isContentFiltered = content.Contains("filtered content") || 
@@ -306,8 +321,16 @@ namespace LuminaSearchConsole
                         throw new Exception($"No content available from the URL: {url}");
                     }
                     
-                    Console.WriteLine($"✅ Content retrieved: {content.Length} chars, SessionId: {sessionId}");
-                    return (content, sessionId);
+                    Console.WriteLine($"✅ Content retrieved: {content.Length} chars, Links: {linksList.Count}, SessionId: {newSessionId}");
+                    return new OpenContentResult
+                    {
+                        Content = content,
+                        SessionId = newSessionId,
+                        Links = linksList,
+                        PageContext = pageContext,
+                        Url = page.Url ?? url,
+                        Title = page.Title ?? ""
+                    };
                 }
                 else
                 {
@@ -338,8 +361,102 @@ namespace LuminaSearchConsole
         /// <returns>Extracted page content as text</returns>
         public async Task<string> OpenContentAsync(string url)
         {
-            var (content, _) = await OpenContentWithSessionAsync(url);
-            return content;
+            var result = await OpenContentWithLinksAsync(url);
+            return result.Content;
+        }
+
+        /// <summary>
+        /// Click a link within an opened page using Lumina Click API
+        /// </summary>
+        /// <param name="sessionId">Session ID from previous Open operation</param>
+        /// <param name="linkId">Link identifier (e.g., "13" or "link_13")</param>
+        /// <param name="pageContext">Page context from the page containing the link</param>
+        /// <returns>OpenContentResult with the clicked page's content and links</returns>
+        public async Task<OpenContentResult> ClickLinkAsync(string sessionId, string linkId, dynamic pageContext)
+        {
+            if (string.IsNullOrWhiteSpace(sessionId))
+            {
+                throw new ArgumentException("Session ID cannot be empty", nameof(sessionId));
+            }
+
+            if (string.IsNullOrWhiteSpace(linkId))
+            {
+                throw new ArgumentException("Link ID cannot be empty", nameof(linkId));
+            }
+
+            try
+            {
+                Console.WriteLine($"🔗 Clicking link: {linkId} in session: {sessionId}");
+
+                // Create Click request
+                var clickRequest = new ClickRequest
+                {
+                    Requests = new List<ClickRequestItem>
+                    {
+                        new ClickRequestItem
+                        {
+                            RefId = linkId,
+                            PageContext = new PageContextInfo
+                            {
+                                Turn = (int)(pageContext.Turn ?? 0),
+                                Action = pageContext.Action?.ToString() ?? "view",
+                                Id = (int)(pageContext.Id ?? 0)
+                            }
+                        }
+                    },
+                    ToolState = new Microsoft.Lumina.Client.Models.Sonicberry.ToolState
+                    {
+                        SessionId = sessionId
+                    }
+                };
+
+                var clickResponse = await _proxy.ClickAsync(clickRequest);
+                
+                if (clickResponse != null && clickResponse.Pages != null && clickResponse.Pages.Count > 0)
+                {
+                    var page = clickResponse.Pages[0];
+                    string content = page.Content ?? "";
+                    
+                    // Extract links
+                    var linksList = new List<dynamic>();
+                    if (page.Doc?.Links != null)
+                    {
+                        foreach (var link in page.Doc.Links)
+                        {
+                            linksList.Add(link);
+                            if (linksList.Count >= 20) break;
+                        }
+                    }
+                    
+                    var newPageContext = page.PageContext;
+                    
+                    Console.WriteLine($"✅ Clicked to: {page.Url}, Content: {content.Length} chars, Links: {linksList.Count}");
+                    
+                    return new OpenContentResult
+                    {
+                        Content = content,
+                        SessionId = sessionId,
+                        Links = linksList,
+                        PageContext = newPageContext,
+                        Url = page.Url ?? "",
+                        Title = page.Title ?? ""
+                    };
+                }
+                else
+                {
+                    throw new Exception($"No content available from clicked link");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"❌ Network error while clicking link: {ex.Message}");
+                throw new Exception($"Network error occurred while clicking link. Please check your internet connection.", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error clicking link: {ex.Message}");
+                throw new Exception($"Failed to click link '{linkId}': {ex.Message}", ex);
+            }
         }
 
         #endregion
@@ -437,7 +554,9 @@ namespace LuminaSearchConsole
                 Console.WriteLine($"🏢 Extracting company information from: {url}");
                 
                 // Step 1: Open the URL to get content and session
-                var (content, sessionId) = await OpenContentWithSessionAsync(url);
+                var result = await OpenContentWithLinksAsync(url);
+                string content = result.Content;
+                string sessionId = result.SessionId;
                 
                 if (string.IsNullOrEmpty(sessionId))
                 {
@@ -615,6 +734,33 @@ namespace LuminaSearchConsole
         public long LineNumber { get; set; }
         public string Content { get; set; } = string.Empty;
         public string FieldName { get; set; } = string.Empty;
+    }
+
+    #endregion
+
+    #region Content Extraction Models
+
+    /// <summary>
+    /// Result from Open API or Click API containing page content and navigation context
+    /// </summary>
+    public class OpenContentResult
+    {
+        public string Content { get; set; } = string.Empty;
+        public string SessionId { get; set; } = string.Empty;
+        public List<dynamic> Links { get; set; } = new();
+        public dynamic? PageContext { get; set; }
+        public string Url { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
+    }
+
+    /// <summary>
+    /// Simplified link information for UI display
+    /// </summary>
+    public class PageLink
+    {
+        public int LinkId { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Url { get; set; } = string.Empty;
     }
 
     #endregion
