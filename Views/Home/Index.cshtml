@@ -408,7 +408,8 @@
         var currentSession = {
             sessionId: null,
             pageContext: null,
-            breadcrumb: []
+            breadcrumb: [],
+            history: []  // Store full state for each navigation step
         };
         
         // Auto-focus on search input if authenticated
@@ -446,7 +447,8 @@
                 currentSession = {
                     sessionId: null,
                     pageContext: null,
-                    breadcrumb: [title]
+                    breadcrumb: [title],
+                    history: []
                 };
                 // Show modal and loading
                 const modal = new bootstrap.Modal(document.getElementById('contentModal'));
@@ -474,6 +476,14 @@
                         // Save session info
                         currentSession.sessionId = data.sessionId;
                         currentSession.pageContext = data.pageContext;
+                        
+                        // Save to history
+                        currentSession.history = [{
+                            title: title,
+                            content: data.content,
+                            links: data.links,
+                            pageContext: data.pageContext
+                        }];
                         
                         // Format and display content
                         const formattedContent = formatContent(data.content);
@@ -603,6 +613,14 @@
                         // Update session context
                         currentSession.pageContext = data.pageContext;
                         
+                        // Add to history
+                        currentSession.history.push({
+                            title: linkName,
+                            content: data.content,
+                            links: data.links,
+                            pageContext: data.pageContext
+                        });
+                        
                         // Format and display content
                         const formattedContent = formatContent(data.content);
                         document.getElementById('contentBody').innerHTML = formattedContent;
@@ -644,10 +662,11 @@
                     if (i === currentSession.breadcrumb.length - 1) {
                         breadcrumbHtml += '<strong>' + escapeHtml(item) + '</strong>';
                     } else {
-                        breadcrumbHtml += escapeHtml(item);
+                        const escapedItem = escapeHtml(item).replace(/'/g, '&#39;');
+                        breadcrumbHtml += '<a href="#" onclick="navigateToBreadcrumb(' + i + '); return false;" style="color: #0d6efd; text-decoration: none;">' + escapeHtml(item) + '</a>';
                     }
                     if (i < currentSession.breadcrumb.length - 1) {
-                        breadcrumbHtml += ' &#8594; ';
+                        breadcrumbHtml += ' &gt; ';
                     }
                 }
                 breadcrumbHtml += '</small>';
@@ -660,6 +679,33 @@
                 const div = document.createElement('div');
                 div.textContent = text;
                 return div.innerHTML;
+            }
+            
+            function navigateToBreadcrumb(index) {
+                if (index < 0 || index >= currentSession.history.length) {
+                    return;
+                }
+                
+                // Get the state at that point
+                const state = currentSession.history[index];
+                
+                // Truncate breadcrumb and history
+                currentSession.breadcrumb = currentSession.breadcrumb.slice(0, index + 1);
+                currentSession.history = currentSession.history.slice(0, index + 1);
+                currentSession.pageContext = state.pageContext;
+                
+                // Update modal title
+                document.getElementById('contentModalLabel').textContent = '📄 ' + state.title;
+                
+                // Display the content
+                const formattedContent = formatContent(state.content);
+                document.getElementById('contentBody').innerHTML = formattedContent;
+                
+                // Display links
+                displayRelatedLinks(state.links);
+                
+                // Update breadcrumb
+                updateBreadcrumb();
             }
     </script>
 
