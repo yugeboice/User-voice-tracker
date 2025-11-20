@@ -107,7 +107,7 @@
                             </span>
                         </button>
                     </div>
-                    <div class="form-text text-center mt-2">Get instant access to stock prices and latest news</div>
+                    <div class="form-text text-center mt-2">Get instant access to stock prices and latest news powered by <strong>Lumina Search API</strong></div>
                     <input type="hidden" name="TopResults" value="5">
                 </form>
             </div>
@@ -128,7 +128,7 @@
                                 <div class="card h-100" style="border-left: 4px solid #0d6efd;">
                                     <div class="card-header" style="background-color: #f8f9fa;">
                                         <h5 class="mb-0">🏢 Company Overview</h5>
-                                        <small class="text-muted">Information extracted from Wikipedia using Find API</small>
+                                        <small class="text-muted">Information extracted from Wikipedia using <strong>Find API</strong></small>
                                     </div>
                                     <div class="card-body">
                                         @if (Model.CompanyInfo != null && Model.CompanyInfo.Fields.Any())
@@ -167,7 +167,7 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>
                                                 <h5 class="mb-1">🤖 Stock Price Screenshot</h5>
-                                                <small class="text-muted">Use CUA to navigate to Bing search result page of stock price, and take a screenshot.</small>
+                                                <small class="text-muted">Automated browser navigation and screenshot capture using <strong>Computer Use Agent (CUA) API</strong></small>
                                             </div>
                                         </div>
                                     </div>
@@ -216,8 +216,8 @@
                             <!-- Stock Price Results (Left Column) -->
                             <div class="col-md-6">
                                 <h4 class="text-primary">📈 Stock & Market Data</h4>
-                                <p class="text-muted">Showing @Model.BatchSearchResult.StockResults.Count results</p>
-                                <p class="text-info"><small>💡 Click any article to read the full story (using Open API)</small></p>
+                                <p class="text-muted">Showing @Model.BatchSearchResult.StockResults.Count results from <strong>Search API</strong></p>
+                                <p class="text-info"><small>💡 Click any article to extract full content using <strong>Open API</strong></small></p>
                                 
                                 @if (Model.BatchSearchResult.StockResults.Any())
                                 {
@@ -259,8 +259,8 @@
                             <!-- Latest News Results (Right Column) -->
                             <div class="col-md-6">
                                 <h4 class="text-success">📰 Recent News</h4>
-                                <p class="text-muted">Showing @Model.BatchSearchResult.NewsResults.Count results</p>
-                                <p class="text-info"><small>💡 Click any article to read the full story (using Open API)</small></p>
+                                <p class="text-muted">Showing @Model.BatchSearchResult.NewsResults.Count results from <strong>Search API</strong></p>
+                                <p class="text-info"><small>💡 Click any article to extract full content using <strong>Open API</strong></small></p>
                                 
                                 @if (Model.BatchSearchResult.NewsResults.Any())
                                 {
@@ -616,14 +616,14 @@
                             <div class="card h-100" style="border-left: 4px solid #0d6efd;">
                                 <div class="card-header" style="background-color: #f8f9fa;">
                                     <h5 class="mb-0">🏢 Company Overview</h5>
-                                    <small class="text-muted">Loading company information...</small>
+                                    <small class="text-muted">Loading company information using <strong>Find API</strong>...</small>
                                 </div>
                                 <div class="card-body">
                                     <div class="loading-spinner-container">
                                         <div class="spinner-border text-primary" role="status">
                                             <span class="visually-hidden">Loading...</span>
                                         </div>
-                                        <p>Extracting company info using Find API...</p>
+                                        <p>Extracting company info using <strong>Find API</strong>...</p>
                                     </div>
                                 </div>
                             </div>
