@@ -111,6 +111,17 @@
                             </span>
                         </button>
                     </div>
+                    
+                    <!-- Example Queries -->
+                    <div class="text-center mt-3">
+                        <small class="text-muted me-2">Try these examples:</small>
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="fillQuery('Microsoft')">Microsoft</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="fillQuery('Apple')">Apple</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="fillQuery('Tesla')">Tesla</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="fillQuery('Amazon')">Amazon</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="fillQuery('Google')">Google</button>
+                    </div>
+                    
                     <div class="form-text text-center mt-2">Get instant access to stock prices and latest news powered by <strong>Lumina Search API</strong></div>
                     <input type="hidden" name="TopResults" value="5">
                 </form>
@@ -381,6 +392,12 @@
     <script src="~/js/cua.js"></script>
     
     <script>
+        // Fill search query when user clicks example button
+        function fillQuery(query) {
+            document.getElementById('query').value = query;
+            document.getElementById('query').focus();
+        }
+        
         // Auto-focus on search input if authenticated
         @if (Model.IsAuthenticated)
         {
