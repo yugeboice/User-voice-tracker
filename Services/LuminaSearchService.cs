@@ -7,28 +7,22 @@ using LuminaSearchConsole.Models;
 namespace LuminaSearchConsole.Services
 {
     /// <summary>
-    /// Lumina Search API Service - Demonstrates POST /api/sonicberry/search
+    /// Search API Demo - Shows how to use POST /api/sonicberry/search
     /// 
-    /// This service shows how to use the Lumina Search API for web search operations.
+    /// WHAT THIS API DOES:
+    /// Web search with Bing provider, supports batch queries for better performance.
+    /// Can filter by domain (e.g., Wikipedia only) and recency (recent results).
     /// 
-    /// API Endpoint: POST /api/sonicberry/search
-    /// Purpose: Web search with batch processing capabilities
+    /// HOW TO TEST IN THIS DEMO:
+    /// - Home page: Enter search query and click "Search" button
+    /// - Batch Search: Enter company name and click "Batch Search" (searches stock prices + news)
+    /// - Check "API Calls Log" section to see request/response details
     /// 
-    /// Key Features:
-    /// - Simple web search with Bing provider
-    /// - Batch search (multiple queries in one request for better performance)
-    /// - Domain filtering (restrict results to specific websites)
-    /// - Recency filtering (get recent results only)
-    /// 
-    /// Use Cases:
-    /// - General web search
-    /// - Company research (stock prices + news in one call)
-    /// - Wikipedia-only search using domain filter
-    /// 
-    /// How to Use:
-    /// 1. Create instance with access token and configuration
-    /// 2. Call ExecuteWebSearchAsync() for simple search
-    /// 3. Call ExecuteBatchCompanySearchAsync() for multi-query search
+    /// CODE EXAMPLE:
+    /// <code>
+    /// var service = new LuminaSearchService(accessToken, luminaConfig);
+    /// var results = await service.ExecuteWebSearchAsync("Microsoft", domains: new[] { "wikipedia.org" });
+    /// </code>
     /// 
     /// API Endpoint configured in appsettings.json (LuminaConfiguration:ApiEndpoint)
     /// </summary>

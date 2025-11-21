@@ -5,14 +5,27 @@ using Microsoft.Lumina.Client.Models.Sonicberry;
 namespace LuminaSearchConsole.Services
 {
     /// <summary>
-    /// Lumina Find API Service
+    /// Find API Demo - Shows how to use POST /api/sonicberry/find
     /// 
-    /// Demonstrates: POST /api/sonicberry/find
-    /// Purpose: Search for specific patterns within opened web page content
+    /// WHAT THIS API DOES:
+    /// Search for specific text patterns within opened web page content.
+    /// Works with session from Open API to extract structured information.
     /// 
-    /// Common Use Case:
-    /// After opening a page with Open API, use Find API to extract structured information
-    /// like company details from Wikipedia infoboxes.
+    /// HOW TO TEST IN THIS DEMO:
+    /// 1. Enter company name (e.g., "Microsoft") and click "Get Company Info"
+    /// 2. The demo will:
+    ///    - Use Search API to find Wikipedia page
+    ///    - Use Open API to get page content and session
+    ///    - Use Find API to extract company details (Founded, Headquarters, Revenue, etc.)
+    /// 3. Check "API Calls Log" to see the complete workflow
+    /// 
+    /// CODE EXAMPLE:
+    /// <code>
+    /// // First, open a page to get session ID
+    /// var openResult = await openService.OpenContentWithLinksAsync(wikipediaUrl);
+    /// // Then, find specific information
+    /// var companyInfo = await findService.ExtractCompanyInfoAsync(wikipediaUrl, openResult.SessionId);
+    /// </code>
     /// </summary>
     public class LuminaFindService
     {

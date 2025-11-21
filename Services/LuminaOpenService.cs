@@ -5,16 +5,25 @@ using Microsoft.Lumina.Client.Models.Sonicberry;
 namespace LuminaSearchConsole.Services
 {
     /// <summary>
-    /// Lumina Open & Click API Service
-    /// 
-    /// Demonstrates:
+    /// Open & Click API Demo - Shows how to use:
     /// - POST /api/sonicberry/open - Extract full content from URLs
     /// - POST /api/sonicberry/click - Navigate through links in opened pages
     /// 
-    /// Common Use Case:
-    /// 1. Open a URL to get full page content and available links
-    /// 2. Click on links to navigate deeper into related pages
-    /// 3. Maintain session context for multi-step navigation
+    /// WHAT THESE APIs DO:
+    /// Open API: Retrieve full page text and clickable links from any URL
+    /// Click API: Navigate through links while maintaining session context for multi-step browsing
+    /// 
+    /// HOW TO TEST IN THIS DEMO:
+    /// 1. Search for a company (e.g., "Microsoft") to get Wikipedia URL
+    /// 2. Click "Open Content" - uses Open API to extract page content and links
+    /// 3. Click any link from the list - uses Click API to navigate to that page
+    /// 4. Check "API Calls Log" to see Open and Click API request/response details
+    /// 
+    /// CODE EXAMPLE:
+    /// <code>
+    /// var result = await service.OpenContentWithLinksAsync("https://en.wikipedia.org/wiki/Microsoft");
+    /// var nextPage = await service.ClickLinkAsync(result.SessionId, linkId, result.PageContext);
+    /// </code>
     /// </summary>
     public class LuminaOpenService
     {

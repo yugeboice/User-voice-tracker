@@ -5,14 +5,31 @@ using System.Text.Json.Serialization;
 namespace LuminaSearchConsole.Services
 {
     /// <summary>
-    /// Lumina Computer Use Agent (CUA) Service
+    /// Computer Use Agent (CUA) API Demo - Shows how to use:
+    /// - POST /api/agent/computer/init - Initialize virtual computer
+    /// - POST /api/agent/computer/actions - Perform actions (navigate, click, type, keypress)
+    /// - GET /api/agent/computer/screenshot - Capture screenshots
     /// 
-    /// Handles all CUA-related operations:
-    /// - Initialize virtual computers
-    /// - Navigate to URLs
-    /// - Perform actions (click, type, keypress)
-    /// - Capture screenshots
-    /// - Release computer resources
+    /// WHAT THESE APIs DO:
+    /// Control a virtual computer to automate web browsing tasks.
+    /// Can navigate to URLs, interact with pages, and capture visual results.
+    /// 
+    /// HOW TO TEST IN THIS DEMO:
+    /// 1. Enter company name and click "Search Company & Capture Screenshot"
+    /// 2. The demo will:
+    ///    - Initialize a virtual computer
+    ///    - Search the company on MSN Money
+    ///    - Capture a screenshot of the stock price page
+    /// 3. Watch real-time progress updates in the streaming response
+    /// 4. Check "API Calls Log" to see all CUA API calls
+    /// 
+    /// CODE EXAMPLE:
+    /// <code>
+    /// var cua = new LuminaCuaService(token, config);
+    /// await cua.InitializeComputerAsync(computerId, userId, tenantId);
+    /// await cua.SearchCompanyOnMsnMoneyAsync(computerId, "Microsoft");
+    /// var screenshot = await cua.GetComputerScreenshotAsync(computerId);
+    /// </code>
     /// 
     /// API Endpoint configured in appsettings.json (LuminaConfiguration:ApiEndpoint)
     /// </summary>
