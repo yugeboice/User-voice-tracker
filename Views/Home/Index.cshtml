@@ -14,7 +14,7 @@
 
         @if (TempData["Message"] != null)
         {
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible fade show" role="alert" id="successAlert">
                 @TempData["Message"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -37,17 +37,6 @@
                 <form asp-action="Login" method="post">
                     @Html.AntiForgeryToken()
                     <button type="submit" class="btn btn-primary">Sign In with Microsoft</button>
-                </form>
-            </div>
-        }
-        else
-        {
-            <!-- Logged in status bar -->
-            <div class="alert alert-success d-flex justify-content-between align-items-center mb-4">
-                <span>✅ You're signed in</span>
-                <form asp-action="Logout" method="post" class="d-inline">
-                    @Html.AntiForgeryToken()
-                    <button type="submit" class="btn btn-outline-secondary btn-sm">Sign Out</button>
                 </form>
             </div>
         }
@@ -115,11 +104,11 @@
                     <!-- Example Queries -->
                     <div class="text-center mt-3">
                         <small class="text-muted me-2">Try these examples:</small>
-                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="fillQuery('Microsoft')">Microsoft</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="fillQuery('Apple')">Apple</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="fillQuery('Tesla')">Tesla</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="fillQuery('Amazon')">Amazon</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="fillQuery('Google')">Google</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="searchExample('Microsoft')">Microsoft</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="searchExample('Apple')">Apple</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="searchExample('Tesla')">Tesla</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="searchExample('Amazon')">Amazon</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="searchExample('Google')">Google</button>
                     </div>
                     
                     <div class="form-text text-center mt-2">Get instant access to stock prices and latest news powered by <strong>Lumina Search API</strong></div>
@@ -392,10 +381,10 @@
     <script src="~/js/cua.js"></script>
     
     <script>
-        // Fill search query when user clicks example button
-        function fillQuery(query) {
+        // Search with example query - fills input and submits form
+        function searchExample(query) {
             document.getElementById('query').value = query;
-            document.getElementById('query').focus();
+            document.getElementById('searchForm').submit();
         }
         
         // Auto-focus on search input if authenticated
@@ -403,6 +392,15 @@
         {
             <text>
             document.addEventListener('DOMContentLoaded', function() {
+                // Auto-dismiss success alert after 5 seconds
+                const successAlert = document.getElementById('successAlert');
+                if (successAlert) {
+                    setTimeout(() => {
+                        const bsAlert = new bootstrap.Alert(successAlert);
+                        bsAlert.close();
+                    }, 5000);
+                }
+                
                 document.getElementById('query').focus();
                 
                 // Add click handlers for news results

@@ -35,6 +35,19 @@ namespace LuminaSearchConsole.Controllers
 
         #endregion
 
+        #region Helper Methods
+
+        /// <summary>
+        /// Set ViewBag properties before returning a view
+        /// </summary>
+        private void SetViewBagProperties()
+        {
+            var token = HttpContext.Session.GetString("AccessToken");
+            ViewBag.IsAuthenticated = !string.IsNullOrEmpty(token);
+        }
+
+        #endregion
+
         #region Page Actions
 
         /// <summary>
@@ -43,6 +56,8 @@ namespace LuminaSearchConsole.Controllers
         /// </summary>
         public IActionResult Index()
         {
+            SetViewBagProperties();
+            
             var token = HttpContext.Session.GetString("AccessToken");
             var model = new SearchViewModel
             {
@@ -143,6 +158,7 @@ namespace LuminaSearchConsole.Controllers
                 model.HasSearched = true;
                 model.ApiLogs = _apiLogService.GetLogs();
                 
+                SetViewBagProperties();
                 return View("Index", model);
             }
             catch (ArgumentException ex)
@@ -150,13 +166,15 @@ namespace LuminaSearchConsole.Controllers
                 TempData["Error"] = ex.Message;
                 model.IsAuthenticated = true;
                 model.ApiLogs = _apiLogService.GetLogs();
+                SetViewBagProperties();
                 return View("Index", model);
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 TempData["Error"] = "Network error. Please check your internet connection and try again.";
                 model.IsAuthenticated = true;
                 model.ApiLogs = _apiLogService.GetLogs();
+                SetViewBagProperties();
                 return View("Index", model);
             }
             catch (Exception ex)
@@ -164,6 +182,7 @@ namespace LuminaSearchConsole.Controllers
                 TempData["Error"] = $"Search failed: {ex.Message}";
                 model.IsAuthenticated = true;
                 model.ApiLogs = _apiLogService.GetLogs();
+                SetViewBagProperties();
                 return View("Index", model);
             }
         }
@@ -200,6 +219,7 @@ namespace LuminaSearchConsole.Controllers
                 model.HasSearched = true;
                 model.ApiLogs = _apiLogService.GetLogs();
                 
+                SetViewBagProperties();
                 return View("Index", model);
             }
             catch (ArgumentException ex)
@@ -207,13 +227,15 @@ namespace LuminaSearchConsole.Controllers
                 TempData["Error"] = ex.Message;
                 model.IsAuthenticated = true;
                 model.ApiLogs = _apiLogService.GetLogs();
+                SetViewBagProperties();
                 return View("Index", model);
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 TempData["Error"] = "Network error. Please check your internet connection and try again.";
                 model.IsAuthenticated = true;
                 model.ApiLogs = _apiLogService.GetLogs();
+                SetViewBagProperties();
                 return View("Index", model);
             }
             catch (Exception ex)
@@ -221,6 +243,7 @@ namespace LuminaSearchConsole.Controllers
                 TempData["Error"] = $"Search failed: {ex.Message}";
                 model.IsAuthenticated = true;
                 model.ApiLogs = _apiLogService.GetLogs();
+                SetViewBagProperties();
                 return View("Index", model);
             }
         }
