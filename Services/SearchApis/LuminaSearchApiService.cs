@@ -48,28 +48,35 @@ namespace LuminaSearchConsole.Services.SearchApis
         /// </summary>
         public async Task<BatchSearchResult> ExecuteBatchSearchAsync(string companyName, int topResults)
         {
-            _apiLogService.AddLog("Lumina Search", "BatchSearch", 
-                $"📋 Batch Search Request:\n" +
-                $"  Company: '{companyName}'\n" +
-                $"  Queries: Stock price + Latest news\n" +
-                $"  TopN: {topResults}\n" +
-                $"  API: POST /api/sonicberry/search");
+            _apiLogService.AddLog("Lumina Search API", "POST /api/sonicberry/search", 
+                $"Parameters\n" +
+                $"{{\n" +
+                $"  \"requests\": [\n" +
+                $"    {{ \"q\": \"{companyName} stock price\", \"topN\": {topResults}, \"source\": \"WebWithBing\", \"recency\": 7 }},\n" +
+                $"    {{ \"q\": \"{companyName} latest news\", \"topN\": {topResults}, \"source\": \"WebWithBing\", \"recency\": 7 }}\n" +
+                $"  ]\n" +
+                $"}}");
             
             var startTime = DateTime.Now;
             var batchResult = await _luminaSearchService.ExecuteBatchCompanySearchAsync(companyName, topResults);
             var duration = (DateTime.Now - startTime).TotalMilliseconds;
             
             // Build result preview
-            var stockPreview = batchResult.StockResults.Count > 0 ? 
-                $"\n  First stock result: {batchResult.StockResults[0].Title}" : "";
-            var newsPreview = batchResult.NewsResults.Count > 0 ? 
-                $"\n  First news result: {batchResult.NewsResults[0].Title}" : "";
+            var stockPreview = batchResult.StockResults.Count > 0 && batchResult.StockResults[0].Title != null ? 
+                $"{batchResult.StockResults[0].Title.Substring(0, Math.Min(50, batchResult.StockResults[0].Title.Length))}..." : "(no results)";
+            var newsPreview = batchResult.NewsResults.Count > 0 && batchResult.NewsResults[0].Title != null ? 
+                $"{batchResult.NewsResults[0].Title.Substring(0, Math.Min(50, batchResult.NewsResults[0].Title.Length))}..." : "(no results)";
             
-            _apiLogService.AddLog("Lumina Search", "BatchSearch", 
-                $"✅ Search completed\n" +
-                $"  Stock results: {batchResult.StockResults.Count}\n" +
-                $"  News results: {batchResult.NewsResults.Count}\n" +
-                $"  Response time: {duration:F0}ms{stockPreview}{newsPreview}");
+            _apiLogService.AddLog("Lumina Search API", "POST /api/sonicberry/search", 
+                $"Result\n" +
+                $"{{\n" +
+                $"  \"results_count\": {batchResult.StockResults.Count + batchResult.NewsResults.Count},\n" +
+                $"  \"stock_results\": {batchResult.StockResults.Count},\n" +
+                $"  \"news_results\": {batchResult.NewsResults.Count},\n" +
+                $"  \"stock_preview\": \"{stockPreview}\",\n" +
+                $"  \"news_preview\": \"{newsPreview}\",\n" +
+                $"  \"response_time_ms\": {duration:F0}\n" +
+                $"}}");
             
             return batchResult;
         }
@@ -82,16 +89,29 @@ namespace LuminaSearchConsole.Services.SearchApis
         /// </summary>
         public async Task<List<SearchResult>> ExecuteSimpleSearchAsync(string query, int topResults)
         {
-            _apiLogService.AddLog("Lumina Search", "WebSearch", 
-                $"📋 Query: '{query}', TopN: {topResults}\n" +
-                $"  API: POST /api/sonicberry/search");
+            _apiLogService.AddLog("Lumina Search API", "POST /api/sonicberry/search", 
+                $"Parameters\n" +
+                $"{{\n" +
+                $"  \"q\": \"{query}\",\n" +
+                $"  \"topN\": {topResults},\n" +
+                $"  \"source\": \"WebWithBing\",\n" +
+                $"  \"market\": \"en-US\"\n" +
+                $"}}");
             
             var startTime = DateTime.Now;
             var results = await _luminaSearchService.ExecuteWebSearchAsync(query, topResults);
             var duration = (DateTime.Now - startTime).TotalMilliseconds;
             
-            _apiLogService.AddLog("Lumina Search", "WebSearch", 
-                $"✅ Found {results.Count} results ({duration:F0}ms)");
+            var preview = results.Count > 0 && results[0].Title != null ? 
+                results[0].Title.Substring(0, Math.Min(50, results[0].Title.Length)) + "..." : "(no results)";
+            
+            _apiLogService.AddLog("Lumina Search API", "POST /api/sonicberry/search", 
+                $"Result\n" +
+                $"{{\n" +
+                $"  \"results_count\": {results.Count},\n" +
+                $"  \"first_result\": \"{preview}\",\n" +
+                $"  \"response_time_ms\": {duration:F0}\n" +
+                $"}}");
             
             return results;
         }

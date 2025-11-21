@@ -55,10 +55,13 @@ namespace LuminaSearchConsole.Services.SearchApis
         public async Task<FindApiResult> FindCompanyInfoAsync(string companyName)
         {
             // Step 1: Search Wikipedia for company page
-            _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
-                $"📋 Searching Wikipedia for '{companyName}'\n" +
-                $"  API: POST /api/sonicberry/search\n" +
-                $"  Query: '{companyName} Wikipedia'");
+            _apiLogService.AddLog("Lumina Search API", "POST /api/sonicberry/search (Step 1/2)", 
+                $"Parameters\n" +
+                $"{{\n" +
+                $"  \"q\": \"{companyName} Wikipedia\",\n" +
+                $"  \"topN\": 3,\n" +
+                $"  \"source\": \"WebWithBing\"\n" +
+                $"}}");
             
             var wikiSearchStart = DateTime.Now;
             var wikipediaSearchResults = await _luminaSearchService.ExecuteWebSearchAsync($"{companyName} Wikipedia", 3);
@@ -69,8 +72,13 @@ namespace LuminaSearchConsole.Services.SearchApis
             
             if (string.IsNullOrEmpty(wikipediaUrl))
             {
-                _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
-                    $"⚠️ No Wikipedia URL found ({wikiSearchDuration:F0}ms)");
+                _apiLogService.AddLog("Lumina Search API", "POST /api/sonicberry/search (Step 1/2)", 
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"results_count\": {wikipediaSearchResults.Count},\n" +
+                    $"  \"wikipedia_url\": null,\n" +
+                    $"  \"response_time_ms\": {wikiSearchDuration:F0}\n" +
+                    $"}}", false);
                 return new FindApiResult 
                 { 
                     Success = false, 
@@ -78,15 +86,21 @@ namespace LuminaSearchConsole.Services.SearchApis
                 };
             }
             
-            _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
-                $"✅ Found: {wikipediaUrl} ({wikiSearchDuration:F0}ms)");
+            _apiLogService.AddLog("Lumina Search API", "POST /api/sonicberry/search (Step 1/2)", 
+                $"Result\n" +
+                $"{{\n" +
+                $"  \"results_count\": {wikipediaSearchResults.Count},\n" +
+                $"  \"wikipedia_url\": \"{wikipediaUrl}\",\n" +
+                $"  \"response_time_ms\": {wikiSearchDuration:F0}\n" +
+                $"}}");
             
             // Step 2: Extract company info using Find API
-            _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
-                $"📋 Extracting company info from Wikipedia\n" +
-                $"  API: POST /api/sonicberry/find\n" +
-                $"  URL: {wikipediaUrl}\n" +
-                $"  Purpose: Extract structured fields (Founded, HQ, CEO, etc.)");
+            _apiLogService.AddLog("Lumina Find API", "POST /api/sonicberry/find (Step 2/2)", 
+                $"Parameters\n" +
+                $"{{\n" +
+                $"  \"url\": \"{wikipediaUrl}\",\n" +
+                $"  \"patterns\": [\"Founded\", \"Headquarters\", \"Revenue\", \"Industry\", \"Type\"]\n" +
+                $"}}");
             
             var infoStartTime = DateTime.Now;
             var companyInfo = await _luminaSearchService.ExtractCompanyInfoAsync(wikipediaUrl);
@@ -94,9 +108,15 @@ namespace LuminaSearchConsole.Services.SearchApis
             
             if (companyInfo != null && companyInfo.Fields.Any())
             {
-                _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
-                    $"✅ Extracted {companyInfo.Fields.Count} fields ({infoDuration:F0}ms)\n" +
-                    $"  Fields: {string.Join(", ", companyInfo.Fields.Select(f => f.FieldName))}");
+                var fieldsJson = string.Join(",\n    ", companyInfo.Fields.Select(f => 
+                    $"\"{f.FieldName}\": \"{f.Content.Substring(0, Math.Min(30, f.Content.Length))}{(f.Content.Length > 30 ? "..." : "")}\""));
+                _apiLogService.AddLog("Lumina Find API", "POST /api/sonicberry/find (Step 2/2)", 
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"fields_extracted\": {companyInfo.Fields.Count},\n" +
+                    $"  \"data\": {{\n    {fieldsJson}\n  }},\n" +
+                    $"  \"response_time_ms\": {infoDuration:F0}\n" +
+                    $"}}");
                 
                 return new FindApiResult
                 {
@@ -106,8 +126,12 @@ namespace LuminaSearchConsole.Services.SearchApis
             }
             else
             {
-                _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
-                    $"⚠️ No information found ({infoDuration:F0}ms)");
+                _apiLogService.AddLog("Lumina Find API", "POST /api/sonicberry/find (Step 2/2)", 
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"fields_extracted\": 0,\n" +
+                    $"  \"response_time_ms\": {infoDuration:F0}\n" +
+                    $"}}", false);
                 return new FindApiResult
                 {
                     Success = false,

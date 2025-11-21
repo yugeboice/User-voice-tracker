@@ -9,6 +9,14 @@ function toggleLogs() {
     if (logsBody.style.display === 'none') {
         logsBody.style.display = 'block';
         toggleIcon.textContent = '🔽';
+        
+        // Scroll to bottom after expanding - target the actual scrollable container
+        setTimeout(() => {
+            const apiLogsContainer = document.querySelector('.api-logs');
+            if (apiLogsContainer) {
+                apiLogsContainer.scrollTop = apiLogsContainer.scrollHeight;
+            }
+        }, 100);
     } else {
         logsBody.style.display = 'none';
         toggleIcon.textContent = '▶️';

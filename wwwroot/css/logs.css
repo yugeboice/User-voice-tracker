@@ -12,6 +12,13 @@
     background-color: #e9ecef;
 }
 
+/* API logs body with scrolling */
+#apiLogsBody {
+    max-height: 500px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
 .api-logs {
     max-height: 400px;
     overflow-y: auto;

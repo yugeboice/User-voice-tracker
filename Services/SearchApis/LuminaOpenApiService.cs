@@ -59,25 +59,29 @@ namespace LuminaSearchConsole.Services.SearchApis
             {
                 _logger.LogInformation("Opening content from URL: {Url}", url);
 
+                _apiLogService.AddLog("Lumina Open API", "POST /api/sonicberry/open",
+                    $"Parameters\n" +
+                    $"{{\n" +
+                    $"  \"refId\": \"{url}\",\n" +
+                    $"  \"sessionId\": {(sessionId != null ? $"\"{sessionId}\"" : "null")}\n" +
+                    $"}}");
+
                 // Create Open API request and call Lumina
                 var startTime = DateTime.UtcNow;
                 var openResult = await searchService.OpenContentWithLinksAsync(url, sessionId);
                 var duration = (DateTime.UtcNow - startTime).TotalMilliseconds;
 
                 // Log API call for debugging
-                _apiLogService.AddLog(
-                    apiName: "Lumina Open",
-                    operation: "OpenContent",
-                    details: $"📋 API Call:\n" +
-                             $"  Endpoint: POST /api/sonicberry/open\n" +
-                             $"  URL: {url}\n" +
-                             $"  SessionId: {sessionId ?? "New session"}\n" +
-                             $"  Duration: {duration}ms\n\n" +
-                             $"✅ Response:\n" +
-                             $"  Content: {openResult.Content.Length} chars\n" +
-                             $"  Links: {openResult.Links.Count}\n" +
-                             $"  New SessionId: {openResult.SessionId}"
-                );
+                _apiLogService.AddLog("Lumina Open API", "POST /api/sonicberry/open",
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"title\": \"{openResult.Title}\",\n" +
+                    $"  \"url\": \"{openResult.Url}\",\n" +
+                    $"  \"content_length\": {openResult.Content.Length},\n" +
+                    $"  \"links_count\": {openResult.Links.Count},\n" +
+                    $"  \"sessionId\": \"{openResult.SessionId}\",\n" +
+                    $"  \"response_time_ms\": {duration:F0}\n" +
+                    $"}}");
 
                 if (string.IsNullOrEmpty(openResult.Content))
                 {
@@ -137,7 +141,11 @@ namespace LuminaSearchConsole.Services.SearchApis
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error opening content from URL: {Url}", url);
-                _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Error: {ex.Message}", false);
+                _apiLogService.AddLog("Lumina Open API", "POST /api/sonicberry/open", 
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"error\": \"{ex.Message}\"\n" +
+                    $"}}", false);
                 
                 return new OpenApiResult
                 {
@@ -176,25 +184,29 @@ namespace LuminaSearchConsole.Services.SearchApis
             {
                 _logger.LogInformation("Clicking link: {LinkId} in session: {SessionId}", linkId, sessionId);
 
+                _apiLogService.AddLog("Lumina Click API", "POST /api/sonicberry/click",
+                    $"Parameters\n" +
+                    $"{{\n" +
+                    $"  \"refId\": \"{linkId}\",\n" +
+                    $"  \"sessionId\": \"{sessionId}\",\n" +
+                    $"  \"pageContext\": {{ \"turn\": {(int)(pageContext.Turn ?? 0)}, \"action\": \"{pageContext.Action ?? "view"}\" }}\n" +
+                    $"}}");
+
                 // Call Click API via LuminaSearchService
                 var startTime = DateTime.UtcNow;
                 var clickResult = await searchService.ClickLinkAsync(sessionId, linkId, pageContext);
                 var duration = (DateTime.UtcNow - startTime).TotalMilliseconds;
 
                 // Log API call for debugging
-                _apiLogService.AddLog(
-                    apiName: "Lumina Click",
-                    operation: "ClickLink",
-                    details: $"📋 API Call:\n" +
-                             $"  Endpoint: POST /api/sonicberry/click (via Open SDK)\n" +
-                             $"  SessionId: {sessionId}\n" +
-                             $"  LinkId: {linkId}\n" +
-                             $"  Duration: {duration}ms\n\n" +
-                             $"✅ Response:\n" +
-                             $"  New URL: {clickResult.Url}\n" +
-                             $"  Content: {clickResult.Content.Length} chars\n" +
-                             $"  Links: {clickResult.Links.Count}"
-                );
+                _apiLogService.AddLog("Lumina Click API", "POST /api/sonicberry/click",
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"url\": \"{clickResult.Url}\",\n" +
+                    $"  \"title\": \"{clickResult.Title}\",\n" +
+                    $"  \"content_length\": {clickResult.Content.Length},\n" +
+                    $"  \"links_count\": {clickResult.Links.Count},\n" +
+                    $"  \"response_time_ms\": {duration:F0}\n" +
+                    $"}}");
 
                 // Convert dynamic links to structured LinkInfo
                 var relatedLinks = new List<LinkInfo>();
@@ -240,7 +252,11 @@ namespace LuminaSearchConsole.Services.SearchApis
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error clicking link: {LinkId}", linkId);
-                _apiLogService.AddLog("Lumina Click", "ClickLink", $"❌ Error: {ex.Message}", false);
+                _apiLogService.AddLog("Lumina Click API", "POST /api/sonicberry/click", 
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"error\": \"{ex.Message}\"\n" +
+                    $"}}", false);
                 
                 return new OpenApiResult
                 {

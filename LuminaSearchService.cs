@@ -104,9 +104,10 @@ namespace LuminaSearchConsole
 
             try
             {
-                Console.WriteLine($"Executing batch search for company: {companyName}");
+                Console.WriteLine($"📤 POST /api/sonicberry/search (Batch) - Company: '{companyName}'\n" +
+                    $"  Request: 2 queries [{companyName} stock price] + [{companyName} latest news], TopN={topN}, Recency=7days");
                 var searchResult = await _proxy.SearchAsync(searchRequest);
-                Console.WriteLine($"✅ Batch search completed successfully");
+                Console.WriteLine($"📥 Response: {searchResult?.Results?.Count ?? 0} total results (Stock + News combined)");
                 
                 // Parse and separate results
                 // Results are returned in order: first query results, then second query results
@@ -213,11 +214,12 @@ namespace LuminaSearchConsole
             try
             {
                 var domainInfo = domains != null && domains.Length > 0 
-                    ? $" (domains: {string.Join(", ", domains)})" 
+                    ? $", Domains=[{string.Join(", ", domains)}]" 
                     : "";
-                Console.WriteLine($"Executing web search for query: {query}{domainInfo}");
+                Console.WriteLine($"📤 POST /api/sonicberry/search - Query: '{query}'\n" +
+                    $"  Request: TopN={topN}, Source=WebWithBing, Market=en-US{domainInfo}");
                 var searchResult = await _proxy.SearchAsync(searchRequest);
-                Console.WriteLine($"✅ Web search completed, found {searchResult?.Results?.Count ?? 0} results");
+                Console.WriteLine($"📥 Response: {searchResult?.Results?.Count ?? 0} results");
                 
                 // Convert API results to view models
                 var results = new List<Models.SearchResult>();
@@ -279,7 +281,9 @@ namespace LuminaSearchConsole
 
             try
             {
-                Console.WriteLine($"📄 Opening content from URL: {url}");
+                var sessionInfo = string.IsNullOrEmpty(sessionId) ? "New session" : $"Session: {sessionId}";
+                Console.WriteLine($"📤 POST /api/sonicberry/open - URL: {url}\n" +
+                    $"  Request: RefId={url}, {sessionInfo}");
 
                 // Create Open API request with URL reference
                 var openRequest = new OpenRequest
@@ -326,7 +330,7 @@ namespace LuminaSearchConsole
                         throw new Exception($"No content available from the URL: {url}");
                     }
                     
-                    Console.WriteLine($"✅ Content retrieved: {content.Length} chars, Links: {linksList.Count}, SessionId: {newSessionId}");
+                    Console.WriteLine($"📥 Response: Content={content.Length} chars, Links={linksList.Count}, Title='{page.Title ?? "N/A"}', SessionId={newSessionId}");
                     return new OpenContentResult
                     {
                         Content = content,
@@ -391,7 +395,8 @@ namespace LuminaSearchConsole
 
             try
             {
-                Console.WriteLine($"🔗 Clicking link: {linkId} in session: {sessionId}");
+                Console.WriteLine($"📤 POST /api/sonicberry/click - LinkId: {linkId}\n" +
+                    $"  Request: RefId={linkId}, SessionId={sessionId}, PageContext.Turn={(int)(pageContext.Turn ?? 0)}");
 
                 // Create Click request
                 var clickRequest = new ClickRequest
@@ -435,7 +440,7 @@ namespace LuminaSearchConsole
                     
                     var newPageContext = page.PageContext;
                     
-                    Console.WriteLine($"✅ Clicked to: {page.Url}, Content: {content.Length} chars, Links: {linksList.Count}");
+                    Console.WriteLine($"📥 Response: URL={page.Url}, Content={content.Length} chars, Links={linksList.Count}, Title='{page.Title ?? "N/A"}'");
                     
                     return new OpenContentResult
                     {
@@ -493,7 +498,8 @@ namespace LuminaSearchConsole
 
             try
             {
-                Console.WriteLine($"🔍 Finding pattern '{pattern}' in content");
+                Console.WriteLine($"📤 POST /api/sonicberry/find - Pattern: '{pattern}'\n" +
+                    $"  Request: SessionId={sessionId}, PageContext=[Turn=0, Action=view]");
 
                 // Create Find API request
                 var findRequest = new FindRequest
@@ -521,12 +527,17 @@ namespace LuminaSearchConsole
                 
                 if (response != null && response.Results != null && response.Results.Count > 0)
                 {
-                    Console.WriteLine($"✅ Found {response.Results.Count} matches for pattern '{pattern}'");
+                    var firstMatch = response.Results[0];
+                    var preview = (firstMatch.Template?.Length ?? 0) > 50 ? 
+                        firstMatch.Template!.Substring(0, 50) + "..." : 
+                        firstMatch.Template ?? "";
+                    Console.WriteLine($"📥 Response: {response.Results.Count} matches found\n" +
+                        $"  First match preview: {preview}");
                     return response;
                 }
                 else
                 {
-                    Console.WriteLine($"⚠️ No matches found for pattern '{pattern}'");
+                    Console.WriteLine($"📥 Response: 0 matches for pattern '{pattern}'");
                     return response!;
                 }
             }
@@ -556,7 +567,8 @@ namespace LuminaSearchConsole
         {
             try
             {
-                Console.WriteLine($"🏢 Extracting company information from: {url}");
+                Console.WriteLine($"🏢 Extracting company info - URL: {url}\n" +
+                    $"  Process: Step 1=Open page, Step 2=Find patterns [Founded,Headquarters,Revenue,Industry,Type]");
                 
                 // Step 1: Open the URL to get content and session
                 var result = await OpenContentWithLinksAsync(url);
@@ -595,7 +607,7 @@ namespace LuminaSearchConsole
                                 
                                 // Try to extract just the value part (after the field name)
                                 var cleanContent = ExtractInfoboxValue(matchContent, pattern);
-                                Console.WriteLine($"✅ {pattern}: {cleanContent}");
+                                Console.WriteLine($"  ✅ {pattern}: {cleanContent} (Line {firstMatch.LineIdx ?? 0})");
                                 
                                 companyInfo.Fields.Add(new InfoField
                                 {
@@ -606,9 +618,9 @@ namespace LuminaSearchConsole
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Console.WriteLine($"⚠️ {pattern}: {ex.Message}");
+                        Console.WriteLine($"  ⚠️ {pattern}: Not found or error");
                     }
                 }
                 

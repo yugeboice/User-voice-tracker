@@ -96,11 +96,21 @@ namespace LuminaSearchConsole.Services
                 var duration = (DateTime.Now - startTime).TotalMilliseconds;
 
                 var poolStats = GetPoolStatistics();
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Initialize",
-                    $"✅ Virtual computer ready\n" +
-                    $"  ComputerId: {computerId}\n" +
-                    $"  Response time: {duration:F0}ms\n" +
-                    $"  Pool: {poolStats.TotalComputers} computers ({poolStats.ActiveComputers} active)");
+                _apiLogService.AddLog("Lumina CUA", "POST /api/cua/initialize",
+                    $"Parameters\n" +
+                    $"{{\n" +
+                    $"  \"computerId\": \"{computerId}\",\n" +
+                    $"  \"userId\": \"{userId}\",\n" +
+                    $"  \"tenantId\": \"{tenantId}\"\n" +
+                    $"}}\n\n" +
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"status\": \"ready\",\n" +
+                    $"  \"source\": \"{(poolStats.ActiveComputers > 0 ? "pool_reused" : "new_computer")}\",\n" +
+                    $"  \"response_time_ms\": {duration:F0},\n" +
+                    $"  \"pool_total\": {poolStats.TotalComputers},\n" +
+                    $"  \"pool_active\": {poolStats.ActiveComputers}\n" +
+                    $"}}");
 
                 await SendProgress(progressCallback, "progress", $"✅ Initialize completed ({duration:F0}ms) [Reused computer]");
                 await Task.Delay(300);
@@ -139,8 +149,23 @@ namespace LuminaSearchConsole.Services
 
                 await cuaService.PerformComputerActionsAsync(computerId, actions, actionDelayMs: 800);
 
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Search",
-                    $"✅ Search completed for '{companyName}'");
+                _apiLogService.AddLog("Lumina CUA", "POST /api/cua/action",
+                    $"Parameters\n" +
+                    $"{{\n" +
+                    $"  \"computerId\": \"{computerId}\",\n" +
+                    $"  \"actions\": [\n" +
+                    $"    {{ \"action\": \"click\", \"x\": 1203, \"y\": 43, \"button\": 1 }},\n" +
+                    $"    {{ \"action\": \"type\", \"text\": \"{companyName}\" }},\n" +
+                    $"    {{ \"action\": \"keypress\", \"keys\": [\"enter\"] }},\n" +
+                    $"    {{ \"action\": \"wait\" }}\n" +
+                    $"  ],\n" +
+                    $"  \"actionDelayMs\": 800\n" +
+                    $"}}\n\n" +
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"status\": \"completed\",\n" +
+                    $"  \"message\": \"Search completed for '{companyName}'\"\n" +
+                    $"}}");
 
                 await Task.Delay(500);
 
@@ -151,19 +176,31 @@ namespace LuminaSearchConsole.Services
                 var screenshot = await cuaService.GetComputerScreenshotAsync(computerId);
                 duration = (DateTime.Now - startTime).TotalMilliseconds;
 
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Screenshot",
-                    $"✅ Screenshot captured\n" +
-                    $"  Resolution: {screenshot.Content?.Width}x{screenshot.Content?.Height}\n" +
-                    $"  Response time: {duration:F0}ms");
+                _apiLogService.AddLog("Lumina CUA", "POST /api/cua/screenshot",
+                    $"Parameters\n" +
+                    $"{{\n" +
+                    $"  \"computerId\": \"{computerId}\"\n" +
+                    $"}}\n\n" +
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"width\": {screenshot.Content?.Width},\n" +
+                    $"  \"height\": {screenshot.Content?.Height},\n" +
+                    $"  \"format\": \"png_base64\",\n" +
+                    $"  \"response_time_ms\": {duration:F0}\n" +
+                    $"}}");
 
                 await SendProgress(progressCallback, "progress", $"✅ GetScreenshot completed ({duration:F0}ms)");
                 await Task.Delay(500);
 
                 // Mark computer as used (extends keep-alive time)
                 TouchComputer(userKey);
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Cleanup",
-                    $"✅ Computer kept alive for reuse (will auto-release after 3 minutes of inactivity)\n" +
-                    $"  ComputerId: {computerId}");
+                _apiLogService.AddLog("Lumina CUA", "Computer Pool Management",
+                    $"{{\n" +
+                    $"  \"computerId\": \"{computerId}\",\n" +
+                    $"  \"status\": \"kept_in_pool\",\n" +
+                    $"  \"auto_release_after_seconds\": 180,\n" +
+                    $"  \"next_use\": \"instant (no init needed)\"\n" +
+                    $"}}");
 
                 return new CuaResult
                 {
@@ -177,8 +214,12 @@ namespace LuminaSearchConsole.Services
             catch (HttpRequestException httpEx) when (httpEx.StatusCode == System.Net.HttpStatusCode.InsufficientStorage)
             {
                 _logger.LogWarning(httpEx, "CUA service capacity reached");
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Error",
-                    "❌ CUA service is currently at capacity", false);
+                _apiLogService.AddLog("Lumina CUA", "POST /api/cua/initialize",
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"error\": \"HTTP 507 InsufficientStorage\",\n" +
+                    $"  \"message\": \"CUA service is currently at capacity\"\n" +
+                    $"}}", false);
 
                 return new CuaResult
                 {
@@ -189,8 +230,12 @@ namespace LuminaSearchConsole.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "CUA MSN Money search failed");
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Error",
-                    $"❌ Error: {ex.Message}", false);
+                _apiLogService.AddLog("Lumina CUA", "Error",
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"error\": \"{ex.GetType().Name}\",\n" +
+                    $"  \"message\": \"{ex.Message}\"\n" +
+                    $"}}", false);
 
                 return new CuaResult
                 {
