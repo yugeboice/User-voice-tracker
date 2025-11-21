@@ -160,59 +160,7 @@ namespace LuminaSearchConsole.Controllers
                     $"  News results: {batchResult.NewsResults.Count}\n" +
                     $"  Response time: {duration:F0}ms{stockPreview}{newsPreview}");
                 
-                // Try to extract company information from Wikipedia using Find API
-                try
-                {
-                    _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
-                        $"📋 Searching Wikipedia for '{model.Query}'");
-                    
-                    var wikiSearchStart = DateTime.Now;
-                    var wikipediaSearchResults = await searchService.ExecuteWebSearchAsync($"{model.Query} Wikipedia", 3);
-                    var wikiSearchDuration = (DateTime.Now - wikiSearchStart).TotalMilliseconds;
-                    
-                    // Find Wikipedia URL from search results
-                    var wikipediaUrl = wikipediaSearchResults
-                        .FirstOrDefault(r => r.Url?.Contains("wikipedia.org/wiki/") == true)?.Url;
-                    
-                    if (!string.IsNullOrEmpty(wikipediaUrl))
-                    {
-                        _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
-                            $"✅ Found: {wikipediaUrl} ({wikiSearchDuration:F0}ms)");
-                        
-                        _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
-                            $"📋 Extracting company info from Wikipedia");
-                        
-                        var infoStartTime = DateTime.Now;
-                        var companyInfo = await searchService.ExtractCompanyInfoAsync(wikipediaUrl);
-                        var infoDuration = (DateTime.Now - infoStartTime).TotalMilliseconds;
-                        
-                        if (companyInfo != null && companyInfo.Fields.Any())
-                        {
-                            _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
-                                $"✅ Extracted {companyInfo.Fields.Count} fields ({infoDuration:F0}ms)");
-                            
-                            model.CompanyInfo = companyInfo;
-                        }
-                        else
-                        {
-                            _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
-                                $"⚠️ No information found ({infoDuration:F0}ms)");
-                        }
-                    }
-                    else
-                    {
-                        _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
-                            $"⚠️ No Wikipedia URL found in search results\n" +
-                            $"  Response time: {wikiSearchDuration:F0}ms");
-                    }
-                }
-                catch (Exception findEx)
-                {
-                    _logger.LogWarning(findEx, "Failed to extract company info using Find API");
-                    _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
-                        $"⚠️ Could not extract company information: {findEx.Message}", false);
-                    // Continue even if Find API fails
-                }
+                // Note: Company info will be loaded separately via AJAX call to FindCompanyInfo
                 
                 model.BatchSearchResult = batchResult;
                 model.IsBatchSearch = true;
@@ -319,6 +267,94 @@ namespace LuminaSearchConsole.Controllers
                 model.IsAuthenticated = true;
                 model.ApiLogs = _apiLogService.GetLogs();
                 return View("Index", model);
+            }
+        }
+
+        #endregion
+
+        #region Find API Operations
+
+        /// <summary>
+        /// Extract company information from Wikipedia using Find API.
+        /// This runs independently from batch search for better performance.
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> FindCompanyInfo([FromBody] RetryFindRequest request)
+        {
+            if (string.IsNullOrEmpty(request.CompanyName))
+            {
+                return Json(new { success = false, error = "Company name is required" });
+            }
+
+            var token = HttpContext.Session.GetString("AccessToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                return Json(new { success = false, error = "Please log in first" });
+            }
+
+            try
+            {
+                var searchService = new LuminaSearchService(token, _luminaConfig);
+                
+                // Search Wikipedia
+                _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
+                    $"📋 Searching Wikipedia for '{request.CompanyName}'");
+                
+                var wikiSearchStart = DateTime.Now;
+                var wikipediaSearchResults = await searchService.ExecuteWebSearchAsync($"{request.CompanyName} Wikipedia", 3);
+                var wikiSearchDuration = (DateTime.Now - wikiSearchStart).TotalMilliseconds;
+                
+                var wikipediaUrl = wikipediaSearchResults
+                    .FirstOrDefault(r => r.Url?.Contains("wikipedia.org/wiki/") == true)?.Url;
+                
+                if (string.IsNullOrEmpty(wikipediaUrl))
+                {
+                    _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
+                        $"⚠️ No Wikipedia URL found ({wikiSearchDuration:F0}ms)");
+                    return Json(new { success = false, error = "No Wikipedia page found" });
+                }
+                
+                _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
+                    $"✅ Found: {wikipediaUrl} ({wikiSearchDuration:F0}ms)");
+                
+                // Extract company info
+                _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
+                    $"📋 Extracting company info from Wikipedia");
+                
+                var infoStartTime = DateTime.Now;
+                var companyInfo = await searchService.ExtractCompanyInfoAsync(wikipediaUrl);
+                var infoDuration = (DateTime.Now - infoStartTime).TotalMilliseconds;
+                
+                if (companyInfo != null && companyInfo.Fields.Any())
+                {
+                    _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
+                        $"✅ Extracted {companyInfo.Fields.Count} fields ({infoDuration:F0}ms)");
+                    
+                    return Json(new { 
+                        success = true, 
+                        companyInfo = new {
+                            url = companyInfo.Url,
+                            fields = companyInfo.Fields.Select(f => new {
+                                fieldName = f.FieldName,
+                                content = f.Content
+                            }).ToList()
+                        },
+                        logsUpdated = true 
+                    });
+                }
+                else
+                {
+                    _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
+                        $"⚠️ No information found ({infoDuration:F0}ms)");
+                    return Json(new { success = false, error = "No company information found" });
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Find API failed for: {CompanyName}", request.CompanyName);
+                _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
+                    $"❌ Error: {ex.Message}", false);
+                return Json(new { success = false, error = ex.Message, logsUpdated = true });
             }
         }
 

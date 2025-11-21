@@ -160,6 +160,15 @@ namespace LuminaSearchConsole.Models
     }
 
     /// <summary>
+    /// Request model for retrying Find API to extract company information.
+    /// </summary>
+    public class RetryFindRequest
+    {
+        /// <summary>Company name to search for</summary>
+        public string CompanyName { get; set; } = string.Empty;
+    }
+
+    /// <summary>
     /// Error page view model (standard ASP.NET Core template).
     /// </summary>
     public class ErrorViewModel
