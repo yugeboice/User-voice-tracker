@@ -71,14 +71,14 @@ namespace LuminaSearchConsole
     {
         /// <summary>
         /// Port number for web server
-        /// Default: 5000
+        /// Default: 8400
         /// </summary>
-        public int Port { get; set; } = 5000;
+        public int Port { get; set; } = 8400;
 
         /// <summary>
         /// Server URLs
-        /// Default: http://localhost:5000
+        /// Default: http://localhost:8400
         /// </summary>
-        public string Urls { get; set; } = "http://localhost:5000";
+        public string Urls { get; set; } = "http://localhost:8400";
     }
 }

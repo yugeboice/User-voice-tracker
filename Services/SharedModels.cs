@@ -7,8 +7,6 @@ namespace LuminaSearchConsole.Services
     // View models for UI are in Models/ViewModels.cs
     // ========================================
 
-    #region Service Layer Internal Models
-
     /// <summary>
     /// Internal result model from Open/Click API - used within service layer.
     /// For UI responses, use OpenContentResponse in Models/ViewModels.cs
@@ -24,20 +22,6 @@ namespace LuminaSearchConsole.Services
     }
 
     /// <summary>
-    /// Simplified link information for UI display
-    /// </summary>
-    public class PageLink
-    {
-        public int LinkId { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string Url { get; set; } = string.Empty;
-    }
-
-    #endregion
-
-    #region Helper Classes
-
-    /// <summary>
     /// Simple HTTP client factory for creating HttpClient instances.
     /// Required by LuminaServiceApiProxy for making API requests.
     /// </summary>
@@ -48,6 +32,4 @@ namespace LuminaSearchConsole.Services
             return new HttpClient();
         }
     }
-
-    #endregion
 }

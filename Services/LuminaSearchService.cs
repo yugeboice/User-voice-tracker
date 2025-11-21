@@ -190,10 +190,25 @@ namespace LuminaSearchConsole.Services
                 }
 
                 // Log response (optional, for debugging/learning)
-                var stockPreview = stockResults.Count > 0 && stockResults[0].Title != null ? 
-                    stockResults[0].Title!.Substring(0, Math.Min(50, stockResults[0].Title.Length)) + "..." : "(no results)";
-                var newsPreview = newsResults.Count > 0 && newsResults[0].Title != null ? 
-                    newsResults[0].Title!.Substring(0, Math.Min(50, newsResults[0].Title.Length)) + "..." : "(no results)";
+                string stockPreview = "(no results)";
+                if (stockResults.Count > 0)
+                {
+                    var title = stockResults[0].Title;
+                    if (!string.IsNullOrEmpty(title))
+                    {
+                        stockPreview = title.Substring(0, Math.Min(50, title.Length)) + "...";
+                    }
+                }
+                
+                string newsPreview = "(no results)";
+                if (newsResults.Count > 0)
+                {
+                    var title = newsResults[0].Title;
+                    if (!string.IsNullOrEmpty(title))
+                    {
+                        newsPreview = title.Substring(0, Math.Min(50, title.Length)) + "...";
+                    }
+                }
                 
                 apiLogService?.AddLog("Lumina Search API", "POST /api/sonicberry/search", 
                     $"Result\n" +
@@ -286,7 +301,7 @@ namespace LuminaSearchConsole.Services
                         Language = "en",
                         Market = "en-US",
                         CountryCode = "us",
-                        Domains = domains?.ToList(), // Optional domain filter
+                        Domains = domains?.ToList()!, // Optional domain filter
                         AdditionalConfig = new SearchRequestAdditionalConfig
                         {
                             MaxSemanticDocumentLength = 200
@@ -322,8 +337,15 @@ namespace LuminaSearchConsole.Services
                 }
 
                 // Log response (optional)
-                var preview = results.Count > 0 && results[0].Title != null ? 
-                    results[0].Title!.Substring(0, Math.Min(50, results[0].Title.Length)) + "..." : "(no results)";
+                string preview = "(no results)";
+                if (results.Count > 0)
+                {
+                    var title = results[0].Title;
+                    if (!string.IsNullOrEmpty(title))
+                    {
+                        preview = title.Substring(0, Math.Min(50, title.Length)) + "...";
+                    }
+                }
                 
                 apiLogService?.AddLog("Lumina Search API", "POST /api/sonicberry/search", 
                     $"Result\n" +

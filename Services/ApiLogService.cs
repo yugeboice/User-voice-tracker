@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text;
 
 namespace LuminaSearchConsole.Services
 {
@@ -61,49 +60,6 @@ namespace LuminaSearchConsole.Services
             lock (_lockObject)
             {
                 _logs.Clear();
-            }
-        }
-
-        /// <summary>
-        /// Get logs formatted as HTML for display
-        /// </summary>
-        public string GetLogsAsHtml()
-        {
-            lock (_lockObject)
-            {
-                if (_logs.Count == 0)
-                {
-                    return "<p class='text-muted'>No API calls logged yet. Perform authentication or search to see logs.</p>";
-                }
-
-                var sb = new StringBuilder();
-                sb.AppendLine("<div class='api-logs'>");
-
-                foreach (var log in _logs)
-                {
-                    var statusClass = log.Success ? "success" : "danger";
-                    var statusIcon = log.Success ? "✅" : "❌";
-                    
-                    // Add feature badge if available
-                    var featureBadge = !string.IsNullOrEmpty(log.Feature) 
-                        ? $"<span class='log-feature badge bg-primary'>{log.Feature}</span>" 
-                        : "";
-
-                    sb.AppendLine($@"
-                    <div class='log-entry log-{statusClass}'>
-                        <div class='log-header'>
-                            <span class='log-icon'>{statusIcon}</span>
-                            <span class='log-time'>{log.Timestamp:HH:mm:ss.fff}</span>
-                            {featureBadge}
-                            <span class='log-api badge bg-{statusClass}'>{log.ApiName}</span>
-                            <span class='log-operation'>{log.Operation}</span>
-                        </div>
-                        <div class='log-details'>{System.Web.HttpUtility.HtmlEncode(log.Details)}</div>
-                    </div>");
-                }
-
-                sb.AppendLine("</div>");
-                return sb.ToString();
             }
         }
     }
