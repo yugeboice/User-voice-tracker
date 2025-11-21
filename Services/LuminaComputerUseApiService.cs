@@ -110,7 +110,7 @@ namespace LuminaSearchConsole.Services
                     $"  \"response_time_ms\": {duration:F0},\n" +
                     $"  \"pool_total\": {poolStats.TotalComputers},\n" +
                     $"  \"pool_active\": {poolStats.ActiveComputers}\n" +
-                    $"}}");
+                    $"}}", true, "Stock Price Screenshot");
 
                 await SendProgress(progressCallback, "progress", $"✅ Initialize completed ({duration:F0}ms) [Reused computer]");
                 await Task.Delay(300);
@@ -165,7 +165,7 @@ namespace LuminaSearchConsole.Services
                     $"{{\n" +
                     $"  \"status\": \"completed\",\n" +
                     $"  \"message\": \"Search completed for '{companyName}'\"\n" +
-                    $"}}");
+                    $"}}", true, "Stock Price Screenshot");
 
                 await Task.Delay(500);
 
@@ -187,7 +187,7 @@ namespace LuminaSearchConsole.Services
                     $"  \"height\": {screenshot.Content?.Height},\n" +
                     $"  \"format\": \"png_base64\",\n" +
                     $"  \"response_time_ms\": {duration:F0}\n" +
-                    $"}}");
+                    $"}}", true, "Stock Price Screenshot");
 
                 await SendProgress(progressCallback, "progress", $"✅ GetScreenshot completed ({duration:F0}ms)");
                 await Task.Delay(500);
@@ -200,7 +200,7 @@ namespace LuminaSearchConsole.Services
                     $"  \"status\": \"kept_in_pool\",\n" +
                     $"  \"auto_release_after_seconds\": 180,\n" +
                     $"  \"next_use\": \"instant (no init needed)\"\n" +
-                    $"}}");
+                    $"}}", true, "Stock Price Screenshot");
 
                 return new CuaResult
                 {
@@ -213,13 +213,12 @@ namespace LuminaSearchConsole.Services
             }
             catch (HttpRequestException httpEx) when (httpEx.StatusCode == System.Net.HttpStatusCode.InsufficientStorage)
             {
-                _logger.LogWarning(httpEx, "CUA service capacity reached");
-                _apiLogService.AddLog("Lumina CUA", "POST /api/cua/initialize",
+                                _apiLogService.AddLog("Lumina CUA", "POST /api/cua/initialize",
                     $"Result\n" +
                     $"{{\n" +
                     $"  \"error\": \"HTTP 507 InsufficientStorage\",\n" +
                     $"  \"message\": \"CUA service is currently at capacity\"\n" +
-                    $"}}", false);
+                    $"}}", false, "Stock Price Screenshot");
 
                 return new CuaResult
                 {
@@ -229,13 +228,12 @@ namespace LuminaSearchConsole.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "CUA MSN Money search failed");
-                _apiLogService.AddLog("Lumina CUA", "Error",
+                                _apiLogService.AddLog("Lumina CUA", "Error",
                     $"Result\n" +
                     $"{{\n" +
                     $"  \"error\": \"{ex.GetType().Name}\",\n" +
                     $"  \"message\": \"{ex.Message}\"\n" +
-                    $"}}", false);
+                    $"}}", false, "Stock Price Screenshot");
 
                 return new CuaResult
                 {
@@ -290,9 +288,7 @@ namespace LuminaSearchConsole.Services
             {
                 // Update last used time
                 computerInfo.LastUsedTime = DateTime.UtcNow;
-                _logger.LogInformation("Reusing existing computer {ComputerId} for user {UserId}",
-                    computerInfo.ComputerId, userId);
-                return (computerInfo.ComputerId, computerInfo.CuaService);
+                                return (computerInfo.ComputerId, computerInfo.CuaService);
             }
 
             // Create new computer
@@ -310,8 +306,7 @@ namespace LuminaSearchConsole.Services
             };
 
             _computerPool.TryAdd(userKey, newComputer);
-            _logger.LogInformation("Created new computer {ComputerId} for user {UserId}", computerId, userId);
-
+            
             return (computerId, cuaService);
         }
 
@@ -347,23 +342,17 @@ namespace LuminaSearchConsole.Services
                         {
                             await computerInfo.CuaService.ReleaseComputerAsync(computerInfo.ComputerId);
                             var idleTime = now - computerInfo.LastUsedTime;
-                            _logger.LogInformation(
-                                "Auto-released computer {ComputerId} after {IdleMinutes:F1} minutes of inactivity",
-                                computerInfo.ComputerId, idleTime.TotalMinutes);
-                        }
+                                                    }
                         catch (Exception ex)
                         {
-                            _logger.LogWarning(ex, "Failed to release expired computer {ComputerId}",
-                                computerInfo.ComputerId);
-                        }
+                                                    }
                     });
                 }
             }
 
             if (expiredComputers.Any())
             {
-                _logger.LogInformation("Cleaned up {Count} expired computers", expiredComputers.Count);
-            }
+                            }
         }
 
         /// <summary>

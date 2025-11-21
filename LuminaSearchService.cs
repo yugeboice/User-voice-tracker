@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 using static Microsoft.Lumina.Common.Constants.ConstantStrings;
 using LuminaSearchConsole.Models;
+using LuminaSearchConsole.Services;
 
 namespace LuminaSearchConsole
 {
@@ -57,13 +58,24 @@ namespace LuminaSearchConsole
         /// </summary>
         /// <param name="companyName">Company name to search for</param>
         /// <param name="topN">Maximum results per query</param>
+        /// <param name="apiLogService">Optional API log service for tracking</param>
+        /// <param name="feature">Feature name for log categorization</param>
         /// <returns>Structured results with stock and news separated</returns>
-        public async Task<BatchSearchResult> ExecuteBatchCompanySearchAsync(string companyName, int topN = 5)
+        public async Task<BatchSearchResult> ExecuteBatchCompanySearchAsync(string companyName, int topN = 5, ApiLogService? apiLogService = null, string? feature = null)
         {
             if (string.IsNullOrWhiteSpace(companyName))
             {
                 throw new ArgumentException("Company name cannot be empty", nameof(companyName));
             }
+
+            apiLogService?.AddLog("Lumina Search API", "POST /api/sonicberry/search", 
+                $"Parameters\n" +
+                $"{{\n" +
+                $"  \"requests\": [\n" +
+                $"    {{ \"q\": \"{companyName} stock price\", \"topN\": {topN}, \"source\": \"WebWithBing\", \"recency\": 7 }},\n" +
+                $"    {{ \"q\": \"{companyName} latest news\", \"topN\": {topN}, \"source\": \"WebWithBing\", \"recency\": 7 }}\n" +
+                $"  ]\n" +
+                $"}}", true, feature);
 
             var searchRequest = new SearchRequest
             {
@@ -104,10 +116,9 @@ namespace LuminaSearchConsole
 
             try
             {
-                Console.WriteLine($"📤 POST /api/sonicberry/search (Batch) - Company: '{companyName}'\n" +
-                    $"  Request: 2 queries [{companyName} stock price] + [{companyName} latest news], TopN={topN}, Recency=7days");
+                var startTime = DateTime.Now;
                 var searchResult = await _proxy.SearchAsync(searchRequest);
-                Console.WriteLine($"📥 Response: {searchResult?.Results?.Count ?? 0} total results (Stock + News combined)");
+                var duration = (DateTime.Now - startTime).TotalMilliseconds;
                 
                 // Parse and separate results
                 // Results are returned in order: first query results, then second query results
@@ -149,6 +160,22 @@ namespace LuminaSearchConsole
                     }
                 }
 
+                var stockPreview = stockResults.Count > 0 && stockResults[0].Title != null ? 
+                    stockResults[0].Title!.Substring(0, Math.Min(50, stockResults[0].Title.Length)) + "..." : "(no results)";
+                var newsPreview = newsResults.Count > 0 && newsResults[0].Title != null ? 
+                    newsResults[0].Title!.Substring(0, Math.Min(50, newsResults[0].Title.Length)) + "..." : "(no results)";
+                
+                apiLogService?.AddLog("Lumina Search API", "POST /api/sonicberry/search", 
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"results_count\": {stockResults.Count + newsResults.Count},\n" +
+                    $"  \"stock_results\": {stockResults.Count},\n" +
+                    $"  \"news_results\": {newsResults.Count},\n" +
+                    $"  \"stock_preview\": \"{stockPreview}\",\n" +
+                    $"  \"news_preview\": \"{newsPreview}\",\n" +
+                    $"  \"response_time_ms\": {duration:F0}\n" +
+                    $"}}", true, feature);
+
                 return new BatchSearchResult
                 {
                     CompanyName = companyName,
@@ -158,13 +185,11 @@ namespace LuminaSearchConsole
             }
             catch (HttpRequestException ex)
             {
-                Console.WriteLine($"❌ Network error during batch search: {ex.Message}");
-                throw new Exception($"Network error occurred while searching for '{companyName}'. Please check your internet connection.", ex);
+                                throw new Exception($"Network error occurred while searching for '{companyName}'. Please check your internet connection.", ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Batch search failed: {ex.Message}");
-                throw new Exception($"Batch search failed for '{companyName}': {ex.Message}", ex);
+                                throw new Exception($"Batch search failed for '{companyName}': {ex.Message}", ex);
             }
         }
 
@@ -177,8 +202,10 @@ namespace LuminaSearchConsole
         /// <param name="query">Search query text</param>
         /// <param name="topN">Maximum number of results (1-50)</param>
         /// <param name="domains">Optional: Specific domains to restrict search results to (e.g., ["wikipedia.org"])</param>
+        /// <param name="apiLogService">Optional API log service for tracking</param>
+        /// <param name="feature">Feature name for log categorization</param>
         /// <returns>List of search results with title, URL, and summary</returns>
-        public async Task<List<Models.SearchResult>> ExecuteWebSearchAsync(string query, int topN = 5, string[]? domains = null)
+        public async Task<List<Models.SearchResult>> ExecuteWebSearchAsync(string query, int topN = 5, string[]? domains = null, ApiLogService? apiLogService = null, string? feature = null)
         {
             if (string.IsNullOrWhiteSpace(query))
             {
@@ -189,6 +216,15 @@ namespace LuminaSearchConsole
             {
                 throw new ArgumentOutOfRangeException(nameof(topN), "TopN must be between 1 and 50");
             }
+
+            apiLogService?.AddLog("Lumina Search API", "POST /api/sonicberry/search", 
+                $"Parameters\n" +
+                $"{{\n" +
+                $"  \"q\": \"{query}\",\n" +
+                $"  \"topN\": {topN},\n" +
+                $"  \"source\": \"WebWithBing\",\n" +
+                $"  \"market\": \"en-US\"\n" +
+                $"}}", true, feature);
 
             var searchRequest = new SearchRequest
             {
@@ -216,11 +252,10 @@ namespace LuminaSearchConsole
                 var domainInfo = domains != null && domains.Length > 0 
                     ? $", Domains=[{string.Join(", ", domains)}]" 
                     : "";
-                Console.WriteLine($"📤 POST /api/sonicberry/search - Query: '{query}'\n" +
-                    $"  Request: TopN={topN}, Source=WebWithBing, Market=en-US{domainInfo}");
+                var startTime = DateTime.Now;
                 var searchResult = await _proxy.SearchAsync(searchRequest);
-                Console.WriteLine($"📥 Response: {searchResult?.Results?.Count ?? 0} results");
-                
+                var duration = (DateTime.Now - startTime).TotalMilliseconds;
+                                
                 // Convert API results to view models
                 var results = new List<Models.SearchResult>();
 
@@ -238,17 +273,26 @@ namespace LuminaSearchConsole
                     }
                 }
 
+                var preview = results.Count > 0 && results[0].Title != null ? 
+                    results[0].Title!.Substring(0, Math.Min(50, results[0].Title.Length)) + "..." : "(no results)";
+                
+                apiLogService?.AddLog("Lumina Search API", "POST /api/sonicberry/search", 
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"results_count\": {results.Count},\n" +
+                    $"  \"first_result\": \"{preview}\",\n" +
+                    $"  \"response_time_ms\": {duration:F0}\n" +
+                    $"}}", true, feature);
+
                 return results;
             }
             catch (HttpRequestException ex)
             {
-                Console.WriteLine($"❌ Network error during web search: {ex.Message}");
-                throw new Exception($"Network error occurred while searching for '{query}'. Please check your internet connection.", ex);
+                                throw new Exception($"Network error occurred while searching for '{query}'. Please check your internet connection.", ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Web search failed: {ex.Message}");
-                throw new Exception($"Search failed for query '{query}': {ex.Message}", ex);
+                                throw new Exception($"Search failed for query '{query}': {ex.Message}", ex);
             }
         }
 
@@ -282,9 +326,7 @@ namespace LuminaSearchConsole
             try
             {
                 var sessionInfo = string.IsNullOrEmpty(sessionId) ? "New session" : $"Session: {sessionId}";
-                Console.WriteLine($"📤 POST /api/sonicberry/open - URL: {url}\n" +
-                    $"  Request: RefId={url}, {sessionInfo}");
-
+                
                 // Create Open API request with URL reference
                 var openRequest = new OpenRequest
                 {
@@ -326,12 +368,10 @@ namespace LuminaSearchConsole
                     
                     if (isContentFiltered)
                     {
-                        Console.WriteLine($"⚠️ No valid content available from: {url}");
-                        throw new Exception($"No content available from the URL: {url}");
+                                                throw new Exception($"No content available from the URL: {url}");
                     }
                     
-                    Console.WriteLine($"📥 Response: Content={content.Length} chars, Links={linksList.Count}, Title='{page.Title ?? "N/A"}', SessionId={newSessionId}");
-                    return new OpenContentResult
+                                        return new OpenContentResult
                     {
                         Content = content,
                         SessionId = newSessionId,
@@ -343,14 +383,12 @@ namespace LuminaSearchConsole
                 }
                 else
                 {
-                    Console.WriteLine($"⚠️ No content returned from Open API");
-                    throw new Exception($"No content available from the URL: {url}");
+                                        throw new Exception($"No content available from the URL: {url}");
                 }
             }
             catch (HttpRequestException ex)
             {
-                Console.WriteLine($"❌ Network error while opening content: {ex.Message}");
-                throw new Exception($"Network error occurred while accessing '{url}'. Please check your internet connection.", ex);
+                                throw new Exception($"Network error occurred while accessing '{url}'. Please check your internet connection.", ex);
             }
             catch (ArgumentException)
             {
@@ -358,8 +396,7 @@ namespace LuminaSearchConsole
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Error opening content: {ex.Message}");
-                throw new Exception($"Failed to open content from '{url}': {ex.Message}", ex);
+                                throw new Exception($"Failed to open content from '{url}': {ex.Message}", ex);
             }
         }
 
@@ -395,9 +432,7 @@ namespace LuminaSearchConsole
 
             try
             {
-                Console.WriteLine($"📤 POST /api/sonicberry/click - LinkId: {linkId}\n" +
-                    $"  Request: RefId={linkId}, SessionId={sessionId}, PageContext.Turn={(int)(pageContext.Turn ?? 0)}");
-
+                
                 // Create Click request
                 var clickRequest = new ClickRequest
                 {
@@ -440,8 +475,7 @@ namespace LuminaSearchConsole
                     
                     var newPageContext = page.PageContext;
                     
-                    Console.WriteLine($"📥 Response: URL={page.Url}, Content={content.Length} chars, Links={linksList.Count}, Title='{page.Title ?? "N/A"}'");
-                    
+                                        
                     return new OpenContentResult
                     {
                         Content = content,
@@ -459,13 +493,11 @@ namespace LuminaSearchConsole
             }
             catch (HttpRequestException ex)
             {
-                Console.WriteLine($"❌ Network error while clicking link: {ex.Message}");
-                throw new Exception($"Network error occurred while clicking link. Please check your internet connection.", ex);
+                                throw new Exception($"Network error occurred while clicking link. Please check your internet connection.", ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Error clicking link: {ex.Message}");
-                throw new Exception($"Failed to click link '{linkId}': {ex.Message}", ex);
+                                throw new Exception($"Failed to click link '{linkId}': {ex.Message}", ex);
             }
         }
 
@@ -498,9 +530,7 @@ namespace LuminaSearchConsole
 
             try
             {
-                Console.WriteLine($"📤 POST /api/sonicberry/find - Pattern: '{pattern}'\n" +
-                    $"  Request: SessionId={sessionId}, PageContext=[Turn=0, Action=view]");
-
+                
                 // Create Find API request
                 var findRequest = new FindRequest
                 {
@@ -531,25 +561,20 @@ namespace LuminaSearchConsole
                     var preview = (firstMatch.Template?.Length ?? 0) > 50 ? 
                         firstMatch.Template!.Substring(0, 50) + "..." : 
                         firstMatch.Template ?? "";
-                    Console.WriteLine($"📥 Response: {response.Results.Count} matches found\n" +
-                        $"  First match preview: {preview}");
-                    return response;
+                                        return response;
                 }
                 else
                 {
-                    Console.WriteLine($"📥 Response: 0 matches for pattern '{pattern}'");
-                    return response!;
+                                        return response!;
                 }
             }
             catch (HttpRequestException ex)
             {
-                Console.WriteLine($"❌ Network error while finding content: {ex.Message}");
-                throw new Exception($"Network error occurred during Find operation. Please check your internet connection.", ex);
+                                throw new Exception($"Network error occurred during Find operation. Please check your internet connection.", ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Error finding content: {ex.Message}");
-                throw new Exception($"Failed to find pattern '{pattern}': {ex.Message}", ex);
+                                throw new Exception($"Failed to find pattern '{pattern}': {ex.Message}", ex);
             }
         }
 
@@ -567,9 +592,7 @@ namespace LuminaSearchConsole
         {
             try
             {
-                Console.WriteLine($"🏢 Extracting company info - URL: {url}\n" +
-                    $"  Process: Step 1=Open page, Step 2=Find patterns [Founded,Headquarters,Revenue,Industry,Type]");
-                
+                                
                 // Step 1: Open the URL to get content and session
                 var result = await OpenContentWithLinksAsync(url);
                 string content = result.Content;
@@ -577,8 +600,7 @@ namespace LuminaSearchConsole
                 
                 if (string.IsNullOrEmpty(sessionId))
                 {
-                    Console.WriteLine("⚠️ No session ID returned from Open API");
-                    return null;
+                                        return null;
                 }
                 
                 // Step 2: Use Find API to search for Wikipedia infobox patterns
@@ -607,8 +629,7 @@ namespace LuminaSearchConsole
                                 
                                 // Try to extract just the value part (after the field name)
                                 var cleanContent = ExtractInfoboxValue(matchContent, pattern);
-                                Console.WriteLine($"  ✅ {pattern}: {cleanContent} (Line {firstMatch.LineIdx ?? 0})");
-                                
+                                                                
                                 companyInfo.Fields.Add(new InfoField
                                 {
                                     LineNumber = firstMatch.LineIdx ?? 0,
@@ -620,8 +641,7 @@ namespace LuminaSearchConsole
                     }
                     catch (Exception)
                     {
-                        Console.WriteLine($"  ⚠️ {pattern}: Not found or error");
-                    }
+                                            }
                 }
                 
                 // Return results if we found any infobox data
@@ -630,13 +650,11 @@ namespace LuminaSearchConsole
                     return companyInfo;
                 }
                 
-                Console.WriteLine($"⚠️ No company information patterns found");
-                return null;
+                                return null;
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine($"❌ Error extracting company info: {ex.Message}");
-                throw;
+                                throw;
             }
         }
         

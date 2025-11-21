@@ -117,6 +117,7 @@ function handleSearchSubmit(event) {
     showLoadingState();
     
     // Form will submit normally, page will reload with results
+    // Auto-refresh will be started after page reload (see Index.cshtml)
     return true;
 }
 

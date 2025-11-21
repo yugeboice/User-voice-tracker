@@ -75,8 +75,7 @@ namespace LuminaSearchConsole
                 throw new HttpRequestException($"{errorMessage}\n\nDetails: {errorContent}", null, response.StatusCode);
             }
 
-            Console.WriteLine($"✅ Computer initialized: {computerId}");
-            return computerId;
+                        return computerId;
         }
 
         /// <summary>
@@ -103,8 +102,7 @@ namespace LuminaSearchConsole
             }
 
             var result = await response.Content.ReadFromJsonAsync<CuaScreenshotResponse>();
-            Console.WriteLine($"✅ Screenshot retrieved: {result?.Content?.Width}x{result?.Content?.Height}");
-            return result!;
+                        return result!;
         }
 
         /// <summary>
@@ -138,8 +136,7 @@ namespace LuminaSearchConsole
             }
 
             var result = await response.Content.ReadFromJsonAsync<CuaActionResponse>();
-            Console.WriteLine($"✅ Actions performed successfully");
-            return result!;
+                        return result!;
         }
 
         /// <summary>
@@ -149,8 +146,7 @@ namespace LuminaSearchConsole
         /// <param name="url">The URL to navigate to</param>
         public async Task NavigateToUrlAsync(string computerId, string url)
         {
-            Console.WriteLine($"🌐 Navigating to: {url}");
-
+            
             var actions = new List<CuaAction>
             {
                 new CuaAction { Action = "keypress", Keys = new[] { "ctrl", "l" } },
@@ -160,8 +156,7 @@ namespace LuminaSearchConsole
             };
 
             await PerformComputerActionsAsync(computerId, actions);
-            Console.WriteLine($"✅ Navigation completed");
-        }
+                    }
 
         /// <summary>
         /// Navigate to MSN Money and search for a company
@@ -170,8 +165,7 @@ namespace LuminaSearchConsole
         /// <param name="companyName">Company name to search for</param>
         public async Task SearchCompanyOnMsnMoneyAsync(string computerId, string companyName)
         {
-            Console.WriteLine($"🌐 Opening MSN Money and searching for: {companyName}");
-
+            
             // Step 1: Navigate to MSN Money
             await NavigateToUrlAsync(computerId, "https://www.msn.com/en-us/money/");
             
@@ -188,8 +182,7 @@ namespace LuminaSearchConsole
             };
 
             await PerformComputerActionsAsync(computerId, actions, actionDelayMs: 800);
-            Console.WriteLine($"✅ Company search completed");
-        }
+                    }
 
         /// <summary>
         /// Release virtual computer resources
@@ -208,8 +201,7 @@ namespace LuminaSearchConsole
                 body);
             response.EnsureSuccessStatusCode();
 
-            Console.WriteLine($"✅ Computer released: {computerId}");
-        }
+                    }
 
         #endregion
     }

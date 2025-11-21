@@ -28,16 +28,13 @@ namespace LuminaSearchConsole.Services.SearchApis
     {
         private readonly LuminaSearchService _luminaSearchService;
         private readonly ApiLogService _apiLogService;
-        private readonly ILogger<LuminaFindApiService> _logger;
 
         public LuminaFindApiService(
             LuminaSearchService luminaSearchService,
-            ApiLogService apiLogService,
-            ILogger<LuminaFindApiService> logger)
+            ApiLogService apiLogService)
         {
             _luminaSearchService = luminaSearchService;
             _apiLogService = apiLogService;
-            _logger = logger;
         }
 
         /// <summary>
@@ -61,7 +58,7 @@ namespace LuminaSearchConsole.Services.SearchApis
                 $"  \"q\": \"{companyName} Wikipedia\",\n" +
                 $"  \"topN\": 3,\n" +
                 $"  \"source\": \"WebWithBing\"\n" +
-                $"}}");
+                $"}}", true, "Company Overview");
             
             var wikiSearchStart = DateTime.Now;
             var wikipediaSearchResults = await _luminaSearchService.ExecuteWebSearchAsync($"{companyName} Wikipedia", 3);
@@ -78,7 +75,7 @@ namespace LuminaSearchConsole.Services.SearchApis
                     $"  \"results_count\": {wikipediaSearchResults.Count},\n" +
                     $"  \"wikipedia_url\": null,\n" +
                     $"  \"response_time_ms\": {wikiSearchDuration:F0}\n" +
-                    $"}}", false);
+                    $"}}", false, "Company Overview");
                 return new FindApiResult 
                 { 
                     Success = false, 
@@ -92,7 +89,7 @@ namespace LuminaSearchConsole.Services.SearchApis
                 $"  \"results_count\": {wikipediaSearchResults.Count},\n" +
                 $"  \"wikipedia_url\": \"{wikipediaUrl}\",\n" +
                 $"  \"response_time_ms\": {wikiSearchDuration:F0}\n" +
-                $"}}");
+                $"}}", true, "Company Overview");
             
             // Step 2: Extract company info using Find API
             _apiLogService.AddLog("Lumina Find API", "POST /api/sonicberry/find (Step 2/2)", 
@@ -100,7 +97,7 @@ namespace LuminaSearchConsole.Services.SearchApis
                 $"{{\n" +
                 $"  \"url\": \"{wikipediaUrl}\",\n" +
                 $"  \"patterns\": [\"Founded\", \"Headquarters\", \"Revenue\", \"Industry\", \"Type\"]\n" +
-                $"}}");
+                $"}}", true, "Company Overview");
             
             var infoStartTime = DateTime.Now;
             var companyInfo = await _luminaSearchService.ExtractCompanyInfoAsync(wikipediaUrl);
@@ -116,7 +113,7 @@ namespace LuminaSearchConsole.Services.SearchApis
                     $"  \"fields_extracted\": {companyInfo.Fields.Count},\n" +
                     $"  \"data\": {{\n    {fieldsJson}\n  }},\n" +
                     $"  \"response_time_ms\": {infoDuration:F0}\n" +
-                    $"}}");
+                    $"}}", true, "Company Overview");
                 
                 return new FindApiResult
                 {
@@ -131,7 +128,7 @@ namespace LuminaSearchConsole.Services.SearchApis
                     $"{{\n" +
                     $"  \"fields_extracted\": 0,\n" +
                     $"  \"response_time_ms\": {infoDuration:F0}\n" +
-                    $"}}", false);
+                    $"}}", false, "Company Overview");
                 return new FindApiResult
                 {
                     Success = false,

@@ -23,16 +23,13 @@ namespace LuminaSearchConsole.Services.SearchApis
     {
         private readonly LuminaSearchService _luminaSearchService;
         private readonly ApiLogService _apiLogService;
-        private readonly ILogger<LuminaSearchApiService> _logger;
 
         public LuminaSearchApiService(
             LuminaSearchService luminaSearchService,
-            ApiLogService apiLogService,
-            ILogger<LuminaSearchApiService> logger)
+            ApiLogService apiLogService)
         {
             _luminaSearchService = luminaSearchService;
             _apiLogService = apiLogService;
-            _logger = logger;
         }
 
         /// <summary>
@@ -67,18 +64,16 @@ namespace LuminaSearchConsole.Services.SearchApis
             var newsPreview = batchResult.NewsResults.Count > 0 && batchResult.NewsResults[0].Title != null ? 
                 $"{batchResult.NewsResults[0].Title.Substring(0, Math.Min(50, batchResult.NewsResults[0].Title.Length))}..." : "(no results)";
             
-            _apiLogService.AddLog("Lumina Search API", "POST /api/sonicberry/search", 
-                $"Result\n" +
-                $"{{\n" +
-                $"  \"results_count\": {batchResult.StockResults.Count + batchResult.NewsResults.Count},\n" +
-                $"  \"stock_results\": {batchResult.StockResults.Count},\n" +
-                $"  \"news_results\": {batchResult.NewsResults.Count},\n" +
-                $"  \"stock_preview\": \"{stockPreview}\",\n" +
-                $"  \"news_preview\": \"{newsPreview}\",\n" +
-                $"  \"response_time_ms\": {duration:F0}\n" +
-                $"}}");
-            
-            return batchResult;
+                _apiLogService.AddLog("Lumina Search API", "POST /api/sonicberry/search", 
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"results_count\": {batchResult.StockResults.Count + batchResult.NewsResults.Count},\n" +
+                    $"  \"stock_results\": {batchResult.StockResults.Count},\n" +
+                    $"  \"news_results\": {batchResult.NewsResults.Count},\n" +
+                    $"  \"stock_preview\": \"{stockPreview}\",\n" +
+                    $"  \"news_preview\": \"{newsPreview}\",\n" +
+                    $"  \"response_time_ms\": {duration:F0}\n" +
+                    $"}}", true, "Search Results");            return batchResult;
         }
 
         /// <summary>

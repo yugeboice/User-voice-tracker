@@ -408,6 +408,18 @@
                     });
                 });
                 
+                // If search results are loading, start auto-refresh
+                @if (Model.HasSearched)
+                {
+                    <text>
+                    // Start auto-refresh to show logs in real-time during async operations
+                    startLogAutoRefresh(500);
+                    
+                    // Stop after 30 seconds (safety timeout)
+                    setTimeout(() => stopLogAutoRefresh(), 30000);
+                    </text>
+                }
+                
                 // Load company info via AJAX (independent from search)
                 @if (Model.HasSearched && !string.IsNullOrEmpty(Model.Query))
                 {

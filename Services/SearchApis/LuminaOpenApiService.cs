@@ -28,14 +28,10 @@ namespace LuminaSearchConsole.Services.SearchApis
     public class LuminaOpenApiService
     {
         private readonly ApiLogService _apiLogService;
-        private readonly ILogger<LuminaOpenApiService> _logger;
 
-        public LuminaOpenApiService(
-            ApiLogService apiLogService,
-            ILogger<LuminaOpenApiService> logger)
+        public LuminaOpenApiService(ApiLogService apiLogService)
         {
             _apiLogService = apiLogService;
-            _logger = logger;
         }
 
         /// <summary>
@@ -57,14 +53,13 @@ namespace LuminaSearchConsole.Services.SearchApis
         {
             try
             {
-                _logger.LogInformation("Opening content from URL: {Url}", url);
-
+                
                 _apiLogService.AddLog("Lumina Open API", "POST /api/sonicberry/open",
                     $"Parameters\n" +
                     $"{{\n" +
                     $"  \"refId\": \"{url}\",\n" +
                     $"  \"sessionId\": {(sessionId != null ? $"\"{sessionId}\"" : "null")}\n" +
-                    $"}}");
+                    $"}}", true, "Content Viewer");
 
                 // Create Open API request and call Lumina
                 var startTime = DateTime.UtcNow;
@@ -81,12 +76,11 @@ namespace LuminaSearchConsole.Services.SearchApis
                     $"  \"links_count\": {openResult.Links.Count},\n" +
                     $"  \"sessionId\": \"{openResult.SessionId}\",\n" +
                     $"  \"response_time_ms\": {duration:F0}\n" +
-                    $"}}");
+                    $"}}", true, "Content Viewer");
 
                 if (string.IsNullOrEmpty(openResult.Content))
                 {
-                    _logger.LogWarning("Open API returned no content for URL: {Url}", url);
-                    return new OpenApiResult
+                                        return new OpenApiResult
                     {
                         Success = false,
                         ErrorMessage = "No content returned from Open API"
@@ -117,16 +111,10 @@ namespace LuminaSearchConsole.Services.SearchApis
                     }
                     catch (Exception ex)
                     {
-                        _logger.LogWarning(ex, "Error parsing link at index {Index}", i);
-                    }
+                                            }
                 }
 
-                _logger.LogInformation(
-                    "Open API succeeded: {TextLength} chars, {LinkCount} links",
-                    openResult.Content.Length,
-                    relatedLinks.Count
-                );
-
+                
                 return new OpenApiResult
                 {
                     Success = true,
@@ -140,12 +128,11 @@ namespace LuminaSearchConsole.Services.SearchApis
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error opening content from URL: {Url}", url);
-                _apiLogService.AddLog("Lumina Open API", "POST /api/sonicberry/open", 
+                                _apiLogService.AddLog("Lumina Open API", "POST /api/sonicberry/open", 
                     $"Result\n" +
                     $"{{\n" +
                     $"  \"error\": \"{ex.Message}\"\n" +
-                    $"}}", false);
+                    $"}}", false, "Content Viewer");
                 
                 return new OpenApiResult
                 {
@@ -182,15 +169,14 @@ namespace LuminaSearchConsole.Services.SearchApis
         {
             try
             {
-                _logger.LogInformation("Clicking link: {LinkId} in session: {SessionId}", linkId, sessionId);
-
+                
                 _apiLogService.AddLog("Lumina Click API", "POST /api/sonicberry/click",
                     $"Parameters\n" +
                     $"{{\n" +
                     $"  \"refId\": \"{linkId}\",\n" +
                     $"  \"sessionId\": \"{sessionId}\",\n" +
                     $"  \"pageContext\": {{ \"turn\": {(int)(pageContext.Turn ?? 0)}, \"action\": \"{pageContext.Action ?? "view"}\" }}\n" +
-                    $"}}");
+                    $"}}", true, "Content Viewer");
 
                 // Call Click API via LuminaSearchService
                 var startTime = DateTime.UtcNow;
@@ -206,7 +192,7 @@ namespace LuminaSearchConsole.Services.SearchApis
                     $"  \"content_length\": {clickResult.Content.Length},\n" +
                     $"  \"links_count\": {clickResult.Links.Count},\n" +
                     $"  \"response_time_ms\": {duration:F0}\n" +
-                    $"}}");
+                    $"}}", true, "Content Viewer");
 
                 // Convert dynamic links to structured LinkInfo
                 var relatedLinks = new List<LinkInfo>();
@@ -231,13 +217,11 @@ namespace LuminaSearchConsole.Services.SearchApis
                     }
                     catch (Exception ex)
                     {
-                        _logger.LogWarning(ex, "Error parsing link at index {Index}", i);
-                    }
+                                            }
                 }
 
                 string navigatedUrl = clickResult.Url;
-                _logger.LogInformation("Click succeeded, navigated to: {Url}", navigatedUrl);
-
+                
                 return new OpenApiResult
                 {
                     Success = true,
@@ -251,12 +235,11 @@ namespace LuminaSearchConsole.Services.SearchApis
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error clicking link: {LinkId}", linkId);
-                _apiLogService.AddLog("Lumina Click API", "POST /api/sonicberry/click", 
+                                _apiLogService.AddLog("Lumina Click API", "POST /api/sonicberry/click", 
                     $"Result\n" +
                     $"{{\n" +
                     $"  \"error\": \"{ex.Message}\"\n" +
-                    $"}}", false);
+                    $"}}", false, "Content Viewer");
                 
                 return new OpenApiResult
                 {

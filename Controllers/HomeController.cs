@@ -74,7 +74,7 @@ namespace LuminaSearchConsole.Controllers
                     $"  RedirectUri: {_azureAdConfig.RedirectUri}\n" +
                     $"  Scopes: {_luminaConfig.ApiScopes}\n" +
                     $"  Cache: %LocalAppData%\\LuminaSearchConsole\\{_azureAdConfig.CacheFileName}\n" +
-                    "  Method: Silent token acquisition (with fallback to interactive)");
+                    "  Method: Silent token acquisition (with fallback to interactive)", true, "Authentication");
                 
                 var token = await _oboTokenService.GetUserTokenAsync();
                 HttpContext.Session.SetString("AccessToken", token);
@@ -84,14 +84,13 @@ namespace LuminaSearchConsole.Controllers
                     $"✅ Token acquired successfully\n" +
                     $"  Token length: {token.Length} chars\n" +
                     $"  Token preview: {tokenPreview}\n" +
-                    $"  Storage: Session (30min timeout)");
+                    $"  Storage: Session (30min timeout)", true, "Authentication");
                 
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Authentication failed");
-                _apiLogService.AddLog("MSAL Auth", "GetUserToken", $"❌ Error: {ex.Message}", false);
+                                _apiLogService.AddLog("MSAL Auth", "GetUserToken", $"❌ Error: {ex.Message}", false, "Authentication");
                 
                 string userMessage = "Login failed. Please try again.";
                 if (ex.Message.Contains("AADSTS"))
@@ -135,30 +134,8 @@ namespace LuminaSearchConsole.Controllers
 
             try
             {
-                _apiLogService.AddLog("Lumina Search", "BatchSearch", 
-                    $"📋 Batch Search Request:\n" +
-                    $"  Company: '{model.Query}'\n" +
-                    $"  Queries: Stock price + Latest news\n" +
-                    $"  TopN: {model.TopResults}");
-                
                 var searchService = new LuminaSearchService(token, _luminaConfig);
-                
-                // Execute batch search for company
-                var startTime = DateTime.Now;
-                var batchResult = await searchService.ExecuteBatchCompanySearchAsync(model.Query, model.TopResults);
-                var duration = (DateTime.Now - startTime).TotalMilliseconds;
-                
-                // Build result preview with first title from each category
-                var stockPreview = batchResult.StockResults.Count > 0 ? 
-                    $"\n  First stock result: {batchResult.StockResults[0].Title}" : "";
-                var newsPreview = batchResult.NewsResults.Count > 0 ? 
-                    $"\n  First news result: {batchResult.NewsResults[0].Title}" : "";
-                
-                _apiLogService.AddLog("Lumina Search", "BatchSearch", 
-                    $"✅ Search completed\n" +
-                    $"  Stock results: {batchResult.StockResults.Count}\n" +
-                    $"  News results: {batchResult.NewsResults.Count}\n" +
-                    $"  Response time: {duration:F0}ms{stockPreview}{newsPreview}");
+                var batchResult = await searchService.ExecuteBatchCompanySearchAsync(model.Query, model.TopResults, _apiLogService, "Stock & market data + recent news");
                 
                 // Note: Company info will be loaded separately via AJAX call to FindCompanyInfo
                 
@@ -172,8 +149,6 @@ namespace LuminaSearchConsole.Controllers
             }
             catch (ArgumentException ex)
             {
-                _logger.LogWarning("Invalid search parameter: {Message}", ex.Message);
-                _apiLogService.AddLog("Lumina Search", "BatchSearch", $"❌ Validation error: {ex.Message}", false);
                 TempData["Error"] = ex.Message;
                 model.IsAuthenticated = true;
                 model.ApiLogs = _apiLogService.GetLogs();
@@ -181,8 +156,6 @@ namespace LuminaSearchConsole.Controllers
             }
             catch (HttpRequestException ex)
             {
-                _logger.LogError(ex, "Network error during batch search for: {Query}", model.Query);
-                _apiLogService.AddLog("Lumina Search", "BatchSearch", $"❌ Network error: {ex.Message}", false);
                 TempData["Error"] = "Network error. Please check your internet connection and try again.";
                 model.IsAuthenticated = true;
                 model.ApiLogs = _apiLogService.GetLogs();
@@ -190,8 +163,6 @@ namespace LuminaSearchConsole.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Batch search failed for query: {Query}", model.Query);
-                _apiLogService.AddLog("Lumina Search", "BatchSearch", $"❌ Error: {ex.Message}", false);
                 TempData["Error"] = $"Search failed: {ex.Message}";
                 model.IsAuthenticated = true;
                 model.ApiLogs = _apiLogService.GetLogs();
@@ -222,18 +193,10 @@ namespace LuminaSearchConsole.Controllers
 
             try
             {
-                _apiLogService.AddLog("Lumina Search", "WebSearch", 
-                    $"📋 Query: '{model.Query}', TopN: {model.TopResults}");
-                
                 var searchService = new LuminaSearchService(token, _luminaConfig);
-                var startTime = DateTime.Now;
-                var results = await searchService.ExecuteWebSearchAsync(model.Query, model.TopResults);
-                var duration = (DateTime.Now - startTime).TotalMilliseconds;
+                var searchResults = await searchService.ExecuteWebSearchAsync(model.Query, model.TopResults, null, _apiLogService, "Web Search");
                 
-                _apiLogService.AddLog("Lumina Search", "WebSearch", 
-                    $"✅ Found {results.Count} results ({duration:F0}ms)");
-                
-                model.SearchResults = results;
+                model.SearchResults = searchResults;
                 model.IsBatchSearch = false;
                 model.IsAuthenticated = true;
                 model.HasSearched = true;
@@ -243,8 +206,6 @@ namespace LuminaSearchConsole.Controllers
             }
             catch (ArgumentException ex)
             {
-                _logger.LogWarning("Invalid search parameter: {Message}", ex.Message);
-                _apiLogService.AddLog("Lumina Search", "WebSearch", $"❌ Validation error: {ex.Message}", false);
                 TempData["Error"] = ex.Message;
                 model.IsAuthenticated = true;
                 model.ApiLogs = _apiLogService.GetLogs();
@@ -252,8 +213,6 @@ namespace LuminaSearchConsole.Controllers
             }
             catch (HttpRequestException ex)
             {
-                _logger.LogError(ex, "Network error during simple search for: {Query}", model.Query);
-                _apiLogService.AddLog("Lumina Search", "WebSearch", $"❌ Network error: {ex.Message}", false);
                 TempData["Error"] = "Network error. Please check your internet connection and try again.";
                 model.IsAuthenticated = true;
                 model.ApiLogs = _apiLogService.GetLogs();
@@ -261,8 +220,6 @@ namespace LuminaSearchConsole.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Simple search failed for query: {Query}", model.Query);
-                _apiLogService.AddLog("Lumina Search", "WebSearch", $"❌ Error: {ex.Message}", false);
                 TempData["Error"] = $"Search failed: {ex.Message}";
                 model.IsAuthenticated = true;
                 model.ApiLogs = _apiLogService.GetLogs();
@@ -295,52 +252,20 @@ namespace LuminaSearchConsole.Controllers
             try
             {
                 var searchService = new LuminaSearchService(token, _luminaConfig);
+                var findApiService = new Services.SearchApis.LuminaFindApiService(
+                    searchService, 
+                    _apiLogService);
                 
-                // Search Wikipedia using domains parameter (more reliable than adding "Wikipedia" to query)
-                _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
-                    $"📋 Searching Wikipedia for '{request.CompanyName}'\n" +
-                    $"  Strategy: Using domains=['wikipedia.org'] to restrict results");
+                // Call Service layer which has JSON format logs
+                var result = await findApiService.FindCompanyInfoAsync(request.CompanyName);
                 
-                var wikiSearchStart = DateTime.Now;
-                var wikipediaSearchResults = await searchService.ExecuteWebSearchAsync(
-                    query: request.CompanyName,  // Just the company name, no "Wikipedia" suffix
-                    topN: 5,
-                    domains: new[] { "wikipedia.org" }  // Restrict to Wikipedia only
-                );
-                var wikiSearchDuration = (DateTime.Now - wikiSearchStart).TotalMilliseconds;
-                
-                var wikipediaUrl = wikipediaSearchResults
-                    .FirstOrDefault(r => r.Url?.Contains("wikipedia.org/wiki/") == true)?.Url;
-                
-                if (string.IsNullOrEmpty(wikipediaUrl))
+                if (result.Success && result.CompanyInfo != null)
                 {
-                    _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
-                        $"⚠️ No Wikipedia page found for '{request.CompanyName}' ({wikiSearchDuration:F0}ms)\n" +
-                        $"  Found {wikipediaSearchResults.Count} results, but none are Wikipedia wiki pages");
-                    return Json(new { success = false, error = "No Wikipedia page found" });
-                }
-                
-                _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
-                    $"✅ Found Wikipedia page ({wikiSearchDuration:F0}ms)\n  URL: {wikipediaUrl}");
-                
-                // Extract company info
-                _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
-                    $"📋 Extracting company info from Wikipedia");
-                
-                var infoStartTime = DateTime.Now;
-                var companyInfo = await searchService.ExtractCompanyInfoAsync(wikipediaUrl);
-                var infoDuration = (DateTime.Now - infoStartTime).TotalMilliseconds;
-                
-                if (companyInfo != null && companyInfo.Fields.Any())
-                {
-                    _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
-                        $"✅ Extracted {companyInfo.Fields.Count} fields ({infoDuration:F0}ms)");
-                    
                     return Json(new { 
                         success = true, 
                         companyInfo = new {
-                            url = companyInfo.Url,
-                            fields = companyInfo.Fields.Select(f => new {
+                            url = result.CompanyInfo.Url,
+                            fields = result.CompanyInfo.Fields.Select(f => new {
                                 fieldName = f.FieldName,
                                 content = f.Content
                             }).ToList()
@@ -350,15 +275,12 @@ namespace LuminaSearchConsole.Controllers
                 }
                 else
                 {
-                    _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
-                        $"⚠️ No information found ({infoDuration:F0}ms)");
-                    return Json(new { success = false, error = "No company information found" });
+                    return Json(new { success = false, error = result.ErrorMessage ?? "No company information found", logsUpdated = true });
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Find API failed for: {CompanyName}", request.CompanyName);
-                _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
+                                _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
                     $"❌ Error: {ex.Message}", false);
                 return Json(new { success = false, error = ex.Message, logsUpdated = true });
             }
@@ -471,20 +393,17 @@ namespace LuminaSearchConsole.Controllers
             }
             catch (ArgumentException ex)
             {
-                _logger.LogWarning("Invalid URL parameter: {Message}", ex.Message);
-                _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Validation error: {ex.Message}", false);
+                                _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Validation error: {ex.Message}", false);
                 return Json(new OpenContentResponse { Success = false, Error = ex.Message, LogsUpdated = true });
             }
             catch (HttpRequestException ex)
             {
-                _logger.LogError(ex, "Network error while opening content from: {Url}", request.Url);
-                _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Network error: {ex.Message}", false);
+                                _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Network error: {ex.Message}", false);
                 return Json(new OpenContentResponse { Success = false, Error = "Network error. Please check your internet connection.", LogsUpdated = true });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Open content failed for URL: {Url}", request.Url);
-                _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Error: {ex.Message}", false);
+                                _apiLogService.AddLog("Lumina Open", "OpenContent", $"❌ Error: {ex.Message}", false);
                 return Json(new OpenContentResponse { Success = false, Error = $"Failed to open content: {ex.Message}", LogsUpdated = true });
             }
         }
@@ -606,8 +525,7 @@ namespace LuminaSearchConsole.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Click link failed for LinkId: {LinkId}", request.LinkId);
-                _apiLogService.AddLog("Lumina Click", "ClickLink", $"❌ Error: {ex.Message}", false);
+                                _apiLogService.AddLog("Lumina Click", "ClickLink", $"❌ Error: {ex.Message}", false);
                 return Json(new OpenContentResponse { Success = false, Error = $"Failed to click link: {ex.Message}", LogsUpdated = true });
             }
         }
@@ -626,8 +544,7 @@ namespace LuminaSearchConsole.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Logout failed");
-                TempData["Error"] = $"Logout failed: {ex.Message}";
+                                TempData["Error"] = $"Logout failed: {ex.Message}";
             }
             
             return RedirectToAction("Index");
@@ -651,26 +568,30 @@ namespace LuminaSearchConsole.Controllers
             }
 
             var logsHtml = new System.Text.StringBuilder();
-            logsHtml.AppendLine("<div class='api-logs'>");
+            // Don't include the outer <div class='api-logs'> wrapper - that stays in the DOM
 
             foreach (var log in logs)
             {
                 var statusClass = log.Success ? "success" : "danger";
                 var statusIcon = log.Success ? "✅" : "❌";
                 
+                // Add feature badge if available
+                var featureBadge = !string.IsNullOrEmpty(log.Feature) 
+                    ? $"<span class='log-feature badge bg-primary'>{System.Web.HttpUtility.HtmlEncode(log.Feature)}</span>" 
+                    : "";
+                
                 logsHtml.AppendLine($@"
                 <div class='log-entry log-{statusClass}'>
                     <div class='log-header'>
                         <span class='log-icon'>{statusIcon}</span>
                         <span class='log-time'>{log.Timestamp:HH:mm:ss.fff}</span>
+                        {featureBadge}
                         <span class='log-api badge bg-{statusClass}'>{System.Web.HttpUtility.HtmlEncode(log.ApiName)}</span>
                         <span class='log-operation'>{System.Web.HttpUtility.HtmlEncode(log.Operation)}</span>
                     </div>
                     <div class='log-details'>{System.Web.HttpUtility.HtmlEncode(log.Details)}</div>
                 </div>");
             }
-
-            logsHtml.AppendLine("</div>");
             
             return Json(new { success = true, logsHtml = logsHtml.ToString(), logs = logs });
         }
@@ -746,8 +667,7 @@ namespace LuminaSearchConsole.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "CUA MSN Money test failed");
-                await SendSseMessage("error", ex.Message);
+                                await SendSseMessage("error", ex.Message);
             }
         }
 

@@ -24,6 +24,8 @@ function toggleLogs() {
 }
 
 // Refresh API logs from server
+let logRefreshInterval = null;
+
 function refreshLogs() {
     // Fetch updated logs from server
     fetch('/Home/GetLogs')
@@ -32,11 +34,36 @@ function refreshLogs() {
             if (data.success && data.logsHtml) {
                 const logsContainer = document.querySelector('.api-logs');
                 if (logsContainer) {
-                    logsContainer.outerHTML = data.logsHtml;
+                    // Use innerHTML instead of outerHTML to preserve the container
+                    // This prevents the entire element from being replaced and reduces flickering
+                    logsContainer.innerHTML = data.logsHtml;
                 }
             }
         })
         .catch(error => console.error('Failed to refresh logs:', error));
+}
+
+// Start auto-refreshing logs (used during API operations)
+function startLogAutoRefresh(intervalMs = 500) {
+    // Clear any existing interval
+    stopLogAutoRefresh();
+    
+    // Start new interval
+    logRefreshInterval = setInterval(refreshLogs, intervalMs);
+    
+    // Also refresh immediately
+    refreshLogs();
+}
+
+// Stop auto-refreshing logs
+function stopLogAutoRefresh() {
+    if (logRefreshInterval) {
+        clearInterval(logRefreshInterval);
+        logRefreshInterval = null;
+    }
+    
+    // Do one final refresh
+    refreshLogs();
 }
 
 // Format content for display
