@@ -1,5 +1,6 @@
 using Microsoft.Lumina.Client.ApiProxy;
 using Microsoft.Lumina.Client.Models.Sonicberry;
+// Models like CompanyInfo, InfoField are in SharedModels.cs (same namespace)
 
 namespace LuminaSearchConsole.Services
 {

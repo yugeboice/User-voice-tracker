@@ -2,6 +2,7 @@ using Microsoft.Lumina.Client.ApiProxy;
 using Microsoft.Lumina.Client.Models.Sonicberry;
 using static Microsoft.Lumina.Common.Constants.ConstantStrings;
 using LuminaSearchConsole.Models;
+// Models like DefaultHttpClientFactory are in SharedModels.cs (same namespace)
 
 namespace LuminaSearchConsole.Services
 {

@@ -1,5 +1,12 @@
 namespace LuminaSearchConsole.Services
 {
+    // ========================================
+    // Shared Model Classes for Demo Application
+    // ========================================
+    // These are NOT official Lumina API models.
+    // They are custom classes created for demonstration purposes only.
+    // ========================================
+
     #region Company Information Models
 
     /// <summary>
