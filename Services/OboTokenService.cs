@@ -1,6 +1,6 @@
 using Microsoft.Identity.Client;
 
-namespace LuminaSearchConsole
+namespace LuminaSearchConsole.Services
 {
     /// <summary>
     /// OAuth 2.0 Authentication Service for Lumina API

@@ -28,7 +28,7 @@ namespace LuminaSearchConsole.Models
         public bool IsBatchSearch { get; set; }
         
         /// <summary>Company information extracted from Wikipedia using Find API</summary>
-        public LuminaSearchConsole.CompanyInfo? CompanyInfo { get; set; }
+        public Services.CompanyInfo? CompanyInfo { get; set; }
         
         /// <summary>API call logs for displaying execution flow</summary>
         public List<Services.ApiLogEntry>? ApiLogs { get; set; }

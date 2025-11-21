@@ -2,7 +2,7 @@ using Microsoft.Lumina.Client.ApiProxy;
 using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 
-namespace LuminaSearchConsole
+namespace LuminaSearchConsole.Services
 {
     /// <summary>
     /// Lumina Computer Use Agent (CUA) Service

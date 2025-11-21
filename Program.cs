@@ -53,15 +53,11 @@ namespace LuminaSearchConsole
 
             // Register OBO authentication service
             // This service handles OAuth 2.0 token acquisition
-            builder.Services.AddScoped<OboTokenService>();
+            builder.Services.AddScoped<LuminaSearchConsole.Services.OboTokenService>();
 
             // Register ApiLogService as singleton to track API calls across all requests
             // This helps partners understand API usage patterns
             builder.Services.AddSingleton<LuminaSearchConsole.Services.ApiLogService>();
-
-            // Register Lumina API service layers (singleton for optimal performance)
-            // These services demonstrate best practices for using Lumina Search, Find, Open, and CUA APIs
-            builder.Services.AddSingleton<LuminaSearchConsole.Services.LuminaComputerUseApiService>();
 
             var app = builder.Build();
 

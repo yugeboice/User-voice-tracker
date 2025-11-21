@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using LuminaSearchConsole.Models;
+using LuminaSearchConsole.Services;
 using System.Diagnostics;
 
 namespace LuminaSearchConsole.Controllers
@@ -14,23 +15,20 @@ namespace LuminaSearchConsole.Controllers
 
         private readonly OboTokenService _oboTokenService;
         private readonly ILogger<HomeController> _logger;
-        private readonly Services.ApiLogService _apiLogService;
-        private readonly Services.LuminaComputerUseApiService _cuaService;
+        private readonly ApiLogService _apiLogService;
         private readonly AzureAdConfiguration _azureAdConfig;
         private readonly LuminaConfiguration _luminaConfig;
 
         public HomeController(
             OboTokenService oboTokenService, 
             ILogger<HomeController> logger, 
-            Services.ApiLogService apiLogService,
-            Services.LuminaComputerUseApiService cuaService,
+            ApiLogService apiLogService,
             AzureAdConfiguration azureAdConfig,
             LuminaConfiguration luminaConfig)
         {
             _oboTokenService = oboTokenService;
             _logger = logger;
             _apiLogService = apiLogService;
-            _cuaService = cuaService;
             _azureAdConfig = azureAdConfig;
             _luminaConfig = luminaConfig;
         }
@@ -251,21 +249,82 @@ namespace LuminaSearchConsole.Controllers
 
             try
             {
-                var searchService = new LuminaSearchService(token, _luminaConfig);
-                var findApiService = new Services.SearchApis.LuminaFindApiService(
-                    searchService, 
-                    _apiLogService);
+                // Step 1: Search Wikipedia for company page
+                _apiLogService.AddLog("Lumina Search API", "POST /api/sonicberry/search (Step 1/2)", 
+                    $"Parameters\n" +
+                    $"{{\n" +
+                    $"  \"q\": \"{request.CompanyName} Wikipedia\",\n" +
+                    $"  \"topN\": 3,\n" +
+                    $"  \"source\": \"WebWithBing\"\n" +
+                    $"}}", true, "Company Overview");
                 
-                // Call Service layer which has JSON format logs
-                var result = await findApiService.FindCompanyInfoAsync(request.CompanyName);
+                var searchService = new Services.LuminaSearchService(token, _luminaConfig);
+                var wikiSearchStart = DateTime.Now;
+                var wikipediaSearchResults = await searchService.ExecuteWebSearchAsync($"{request.CompanyName} Wikipedia", 3);
+                var wikiSearchDuration = (DateTime.Now - wikiSearchStart).TotalMilliseconds;
                 
-                if (result.Success && result.CompanyInfo != null)
+                var wikipediaUrl = wikipediaSearchResults
+                    .FirstOrDefault(r => r.Url?.Contains("wikipedia.org/wiki/") == true)?.Url;
+                
+                if (string.IsNullOrEmpty(wikipediaUrl))
                 {
+                    _apiLogService.AddLog("Lumina Search API", "POST /api/sonicberry/search (Step 1/2)", 
+                        $"Result\n" +
+                        $"{{\n" +
+                        $"  \"results_count\": {wikipediaSearchResults.Count},\n" +
+                        $"  \"wikipedia_url\": null,\n" +
+                        $"  \"response_time_ms\": {wikiSearchDuration:F0}\n" +
+                        $"}}", false, "Company Overview");
+                    return Json(new { success = false, error = "No Wikipedia page found for this company" });
+                }
+                
+                _apiLogService.AddLog("Lumina Search API", "POST /api/sonicberry/search (Step 1/2)", 
+                    $"Result\n" +
+                    $"{{\n" +
+                    $"  \"results_count\": {wikipediaSearchResults.Count},\n" +
+                    $"  \"wikipedia_url\": \"{wikipediaUrl}\",\n" +
+                    $"  \"response_time_ms\": {wikiSearchDuration:F0}\n" +
+                    $"}}", true, "Company Overview");
+                
+                // Step 2: Open the Wikipedia page
+                var openService = new Services.LuminaOpenService(token, _luminaConfig);
+                var openResult = await openService.OpenContentWithLinksAsync(wikipediaUrl);
+                
+                if (string.IsNullOrEmpty(openResult.SessionId))
+                {
+                    return Json(new { success = false, error = "Failed to open Wikipedia page", logsUpdated = true });
+                }
+                
+                // Step 3: Extract company info using Find API
+                _apiLogService.AddLog("Lumina Find API", "POST /api/sonicberry/find (Step 2/2)", 
+                    $"Parameters\n" +
+                    $"{{\n" +
+                    $"  \"url\": \"{wikipediaUrl}\",\n" +
+                    $"  \"patterns\": [\"Founded\", \"Headquarters\", \"Revenue\", \"Industry\", \"Type\"]\n" +
+                    $"}}", true, "Company Overview");
+                
+                var findService = new Services.LuminaFindService(token, _luminaConfig);
+                var infoStartTime = DateTime.Now;
+                var companyInfo = await findService.ExtractCompanyInfoAsync(wikipediaUrl, openResult.SessionId);
+                var infoDuration = (DateTime.Now - infoStartTime).TotalMilliseconds;
+                
+                if (companyInfo != null && companyInfo.Fields.Any())
+                {
+                    var fieldsJson = string.Join(",\n    ", companyInfo.Fields.Select(f => 
+                        $"\"{f.FieldName}\": \"{f.Content.Substring(0, Math.Min(30, f.Content.Length))}{(f.Content.Length > 30 ? "..." : "")}\""));
+                    _apiLogService.AddLog("Lumina Find API", "POST /api/sonicberry/find (Step 2/2)", 
+                        $"Result\n" +
+                        $"{{\n" +
+                        $"  \"fields_extracted\": {companyInfo.Fields.Count},\n" +
+                        $"  \"data\": {{\n    {fieldsJson}\n  }},\n" +
+                        $"  \"response_time_ms\": {infoDuration:F0}\n" +
+                        $"}}", true, "Company Overview");
+                    
                     return Json(new { 
                         success = true, 
                         companyInfo = new {
-                            url = result.CompanyInfo.Url,
-                            fields = result.CompanyInfo.Fields.Select(f => new {
+                            url = companyInfo.Url,
+                            fields = companyInfo.Fields.Select(f => new {
                                 fieldName = f.FieldName,
                                 content = f.Content
                             }).ToList()
@@ -275,12 +334,18 @@ namespace LuminaSearchConsole.Controllers
                 }
                 else
                 {
-                    return Json(new { success = false, error = result.ErrorMessage ?? "No company information found", logsUpdated = true });
+                    _apiLogService.AddLog("Lumina Find API", "POST /api/sonicberry/find (Step 2/2)", 
+                        $"Result\n" +
+                        $"{{\n" +
+                        $"  \"fields_extracted\": 0,\n" +
+                        $"  \"response_time_ms\": {infoDuration:F0}\n" +
+                        $"}}", false, "Company Overview");
+                    return Json(new { success = false, error = "No company information found on the page", logsUpdated = true });
                 }
             }
             catch (Exception ex)
             {
-                                _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
+                _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
                     $"❌ Error: {ex.Message}", false);
                 return Json(new { success = false, error = ex.Message, logsUpdated = true });
             }
@@ -322,9 +387,9 @@ namespace LuminaSearchConsole.Controllers
                     $"  SessionId: {request.SessionId ?? "New session"}\n" +
                     $"  Purpose: Extract full page content and discover links");
                 
-                var searchService = new LuminaSearchService(token, _luminaConfig);
+                var openService = new Services.LuminaOpenService(token, _luminaConfig);
                 var startTime = DateTime.Now;
-                var result = await searchService.OpenContentWithLinksAsync(request.Url, request.SessionId);
+                var result = await openService.OpenContentWithLinksAsync(request.Url, request.SessionId);
                 var duration = (DateTime.Now - startTime).TotalMilliseconds;
                 
                 // Convert dynamic links to LinkInfo
@@ -444,7 +509,7 @@ namespace LuminaSearchConsole.Controllers
                     $"  LinkId: {request.LinkId}\n" +
                     $"  PageContext: Turn={request.PageContext.Turn}, Action={request.PageContext.Action}, Id={request.PageContext.Id}");
                 
-                var searchService = new LuminaSearchService(token, _luminaConfig);
+                var openService = new Services.LuminaOpenService(token, _luminaConfig);
                 var startTime = DateTime.Now;
                 
                 // Convert PageContextDto to dynamic object for API
@@ -455,7 +520,7 @@ namespace LuminaSearchConsole.Controllers
                     Id = request.PageContext.Id
                 };
                 
-                var result = await searchService.ClickLinkAsync(request.SessionId, request.LinkId, pageContext);
+                var result = await openService.ClickLinkAsync(request.SessionId, request.LinkId, pageContext);
                 var duration = (DateTime.Now - startTime).TotalMilliseconds;
                 
                 // Convert links
@@ -633,28 +698,49 @@ namespace LuminaSearchConsole.Controllers
                 return;
             }
 
-            var luminaCuaService = new LuminaCuaService(token, _luminaConfig);
+            var cuaService = new Services.LuminaCuaService(token, _luminaConfig);
             var userId = "user-from-token"; // Could be extracted from token claims in production
 
             try
             {
-                // Use the new service to handle all CUA operations with streaming progress
-                var result = await _cuaService.SearchCompanyAndCaptureScreenshotAsync(
-                    cuaService: luminaCuaService,
-                    userId: userId,
-                    tenantId: _azureAdConfig.TenantId,
-                    companyName: companyName,
-                    progressCallback: SendSseMessage
-                );
-
-                if (result.Success)
+                await SendSseMessage("progress", "🔧 Initializing virtual computer...");
+                
+                var computerId = Guid.NewGuid().ToString("N");
+                await cuaService.InitializeComputerAsync(computerId, userId, _azureAdConfig.TenantId);
+                
+                _apiLogService.AddLog("Lumina CUA", "POST /api/agent/computer/initialize",
+                    $"Result\n{{\n  \"computerId\": \"{computerId}\",\n  \"status\": \"initialized\"\n}}", 
+                    true, "Stock Price Screenshot");
+                
+                await SendSseMessage("progress", "✅ Virtual computer initialized");
+                
+                // Navigate and perform search
+                await SendSseMessage("progress", "🌐 Opening MSN Money...");
+                await cuaService.SearchCompanyOnMsnMoneyAsync(computerId, companyName);
+                
+                _apiLogService.AddLog("Lumina CUA", "POST /api/agent/computer/do",
+                    $"Result\n{{\n  \"action\": \"search_completed\",\n  \"query\": \"{companyName}\"\n}}", 
+                    true, "Stock Price Screenshot");
+                
+                await SendSseMessage("progress", "✅ Search completed");
+                
+                // Capture screenshot
+                await SendSseMessage("progress", "📸 Capturing screenshot...");
+                await Task.Delay(1000); // Wait for page to load
+                
+                var screenshot = await cuaService.GetComputerScreenshotAsync(computerId);
+                
+                if (screenshot?.Content?.Success == true)
                 {
-                    // Send screenshot data
+                    _apiLogService.AddLog("Lumina CUA", "POST /api/agent/computer/get",
+                        $"Result\n{{\n  \"width\": {screenshot.Content.Width},\n  \"height\": {screenshot.Content.Height}\n}}", 
+                        true, "Stock Price Screenshot");
+                    
                     await SendSseMessage("screenshot", System.Text.Json.JsonSerializer.Serialize(new
                     {
-                        image = $"data:image/png;base64,{result.Screenshot}",
-                        width = result.Width,
-                        height = result.Height
+                        image = $"data:image/png;base64,{screenshot.Content.Screenshot}",
+                        width = screenshot.Content.Width,
+                        height = screenshot.Content.Height
                     }));
                     await Response.Body.FlushAsync();
 
@@ -662,12 +748,15 @@ namespace LuminaSearchConsole.Controllers
                 }
                 else
                 {
-                    await SendSseMessage("error", result.ErrorMessage ?? "Unknown error occurred");
+                    await SendSseMessage("error", "Failed to capture screenshot");
                 }
             }
             catch (Exception ex)
             {
-                                await SendSseMessage("error", ex.Message);
+                _apiLogService.AddLog("Lumina CUA", "Error",
+                    $"Result\n{{\n  \"error\": \"{ex.Message}\"\n}}", 
+                    false, "Stock Price Screenshot");
+                await SendSseMessage("error", ex.Message);
             }
         }
 
