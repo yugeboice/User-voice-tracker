@@ -1,5 +1,29 @@
 namespace LuminaSearchConsole.Models
 {
+    #region Company Information Models
+
+    /// <summary>
+    /// Company information extracted from Wikipedia using Find API.
+    /// Used to display structured company data in the UI.
+    /// </summary>
+    public class CompanyInfo
+    {
+        public string Url { get; set; } = string.Empty;
+        public List<InfoField> Fields { get; set; } = new();
+    }
+
+    /// <summary>
+    /// Individual information field extracted from company page (e.g., Founded, Headquarters).
+    /// </summary>
+    public class InfoField
+    {
+        public long LineNumber { get; set; }
+        public string Content { get; set; } = string.Empty;
+        public string FieldName { get; set; } = string.Empty;
+    }
+
+    #endregion
+
     /// <summary>
     /// Main view model for search page.
     /// Contains search parameters, authentication state, and search results.
@@ -28,7 +52,7 @@ namespace LuminaSearchConsole.Models
         public bool IsBatchSearch { get; set; }
         
         /// <summary>Company information extracted from Wikipedia using Find API</summary>
-        public Services.CompanyInfo? CompanyInfo { get; set; }
+        public CompanyInfo? CompanyInfo { get; set; }
         
         /// <summary>API call logs for displaying execution flow</summary>
         public List<Services.ApiLogEntry>? ApiLogs { get; set; }

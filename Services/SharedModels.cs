@@ -1,40 +1,19 @@
 namespace LuminaSearchConsole.Services
 {
     // ========================================
-    // Shared Model Classes for Demo Application
+    // Internal Helper Classes for Services
     // ========================================
-    // They are custom classes created for demonstration purposes only.
+    // These are internal classes used within service layer only.
+    // View models for UI are in Models/ViewModels.cs
     // ========================================
 
-    #region Company Information Models
+    #region Service Layer Internal Models
 
     /// <summary>
-    /// Company information extracted from Wikipedia
+    /// Internal result model from Open/Click API - used within service layer.
+    /// For UI responses, use OpenContentResponse in Models/ViewModels.cs
     /// </summary>
-    public class CompanyInfo
-    {
-        public string Url { get; set; } = string.Empty;
-        public List<InfoField> Fields { get; set; } = new();
-    }
-
-    /// <summary>
-    /// Individual information field extracted from company page
-    /// </summary>
-    public class InfoField
-    {
-        public long LineNumber { get; set; }
-        public string Content { get; set; } = string.Empty;
-        public string FieldName { get; set; } = string.Empty;
-    }
-
-    #endregion
-
-    #region Content Extraction Models
-
-    /// <summary>
-    /// Result from Open API or Click API containing page content and navigation context
-    /// </summary>
-    public class OpenContentResult
+    public class OpenContentInternal
     {
         public string Content { get; set; } = string.Empty;
         public string SessionId { get; set; } = string.Empty;

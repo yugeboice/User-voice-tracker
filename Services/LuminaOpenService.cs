@@ -1,6 +1,6 @@
 using Microsoft.Lumina.Client.ApiProxy;
 using Microsoft.Lumina.Client.Models.Sonicberry;
-// Models like OpenContentResult, PageLink are in SharedModels.cs (same namespace)
+// OpenContentInternal is in SharedModels.cs (same namespace - internal use only)
 
 namespace LuminaSearchConsole.Services
 {
@@ -51,7 +51,7 @@ namespace LuminaSearchConsole.Services
         /// 
         /// Returns: Full page text, clickable links, and session ID for navigation
         /// </summary>
-        public async Task<OpenContentResult> OpenContentWithLinksAsync(string url, string? sessionId = null)
+        public async Task<OpenContentInternal> OpenContentWithLinksAsync(string url, string? sessionId = null)
         {
             if (string.IsNullOrWhiteSpace(url))
             {
@@ -103,7 +103,7 @@ namespace LuminaSearchConsole.Services
                         throw new Exception($"No content available from the URL: {url}");
                     }
                     
-                    return new OpenContentResult
+                    return new OpenContentInternal
                     {
                         Content = content,
                         SessionId = newSessionId,
@@ -138,7 +138,7 @@ namespace LuminaSearchConsole.Services
         /// Requires: Session ID and page context from previous Open operation
         /// Returns: Content of the clicked page with new navigation context
         /// </summary>
-        public async Task<OpenContentResult> ClickLinkAsync(string sessionId, string linkId, dynamic pageContext)
+        public async Task<OpenContentInternal> ClickLinkAsync(string sessionId, string linkId, dynamic pageContext)
         {
             if (string.IsNullOrWhiteSpace(sessionId))
             {
@@ -193,7 +193,7 @@ namespace LuminaSearchConsole.Services
                     
                     var newPageContext = page.PageContext;
                     
-                    return new OpenContentResult
+                    return new OpenContentInternal
                     {
                         Content = content,
                         SessionId = sessionId,
