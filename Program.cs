@@ -59,9 +59,9 @@ namespace LuminaSearchConsole
             // This helps partners understand API usage patterns
             builder.Services.AddSingleton<LuminaSearchConsole.Services.ApiLogService>();
 
-            // Register CuaComputerPool as singleton to manage virtual computer resources
-            // Computers are kept alive for 3 minutes and reused across requests
-            builder.Services.AddSingleton<LuminaSearchConsole.Services.CuaComputerPool>();
+            // Register Lumina API service layers (singleton for optimal performance)
+            // These services demonstrate best practices for using Lumina Search, Find, Open, and CUA APIs
+            builder.Services.AddSingleton<LuminaSearchConsole.Services.LuminaComputerUseApiService>();
 
             var app = builder.Build();
 

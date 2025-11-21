@@ -175,8 +175,9 @@ namespace LuminaSearchConsole
         /// </summary>
         /// <param name="query">Search query text</param>
         /// <param name="topN">Maximum number of results (1-50)</param>
+        /// <param name="domains">Optional: Specific domains to restrict search results to (e.g., ["wikipedia.org"])</param>
         /// <returns>List of search results with title, URL, and summary</returns>
-        public async Task<List<Models.SearchResult>> ExecuteWebSearchAsync(string query, int topN = 5)
+        public async Task<List<Models.SearchResult>> ExecuteWebSearchAsync(string query, int topN = 5, string[]? domains = null)
         {
             if (string.IsNullOrWhiteSpace(query))
             {
@@ -200,6 +201,7 @@ namespace LuminaSearchConsole
                         Language = "en",
                         Market = "en-US",
                         CountryCode = "us",
+                        Domains = domains?.ToList(), // Restrict to specific domains if provided
                         AdditionalConfig = new SearchRequestAdditionalConfig
                         {
                             MaxSemanticDocumentLength = 200
@@ -210,7 +212,10 @@ namespace LuminaSearchConsole
 
             try
             {
-                Console.WriteLine($"Executing web search for query: {query}");
+                var domainInfo = domains != null && domains.Length > 0 
+                    ? $" (domains: {string.Join(", ", domains)})" 
+                    : "";
+                Console.WriteLine($"Executing web search for query: {query}{domainInfo}");
                 var searchResult = await _proxy.SearchAsync(searchRequest);
                 Console.WriteLine($"✅ Web search completed, found {searchResult?.Results?.Count ?? 0} results");
                 

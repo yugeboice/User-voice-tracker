@@ -15,7 +15,7 @@ namespace LuminaSearchConsole.Controllers
         private readonly OboTokenService _oboTokenService;
         private readonly ILogger<HomeController> _logger;
         private readonly Services.ApiLogService _apiLogService;
-        private readonly Services.CuaComputerPool _cuaComputerPool;
+        private readonly Services.LuminaComputerUseApiService _cuaService;
         private readonly AzureAdConfiguration _azureAdConfig;
         private readonly LuminaConfiguration _luminaConfig;
 
@@ -23,14 +23,14 @@ namespace LuminaSearchConsole.Controllers
             OboTokenService oboTokenService, 
             ILogger<HomeController> logger, 
             Services.ApiLogService apiLogService,
-            Services.CuaComputerPool cuaComputerPool,
+            Services.LuminaComputerUseApiService cuaService,
             AzureAdConfiguration azureAdConfig,
             LuminaConfiguration luminaConfig)
         {
             _oboTokenService = oboTokenService;
             _logger = logger;
             _apiLogService = apiLogService;
-            _cuaComputerPool = cuaComputerPool;
+            _cuaService = cuaService;
             _azureAdConfig = azureAdConfig;
             _luminaConfig = luminaConfig;
         }
@@ -296,12 +296,17 @@ namespace LuminaSearchConsole.Controllers
             {
                 var searchService = new LuminaSearchService(token, _luminaConfig);
                 
-                // Search Wikipedia
+                // Search Wikipedia using domains parameter (more reliable than adding "Wikipedia" to query)
                 _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
-                    $"📋 Searching Wikipedia for '{request.CompanyName}'");
+                    $"📋 Searching Wikipedia for '{request.CompanyName}'\n" +
+                    $"  Strategy: Using domains=['wikipedia.org'] to restrict results");
                 
                 var wikiSearchStart = DateTime.Now;
-                var wikipediaSearchResults = await searchService.ExecuteWebSearchAsync($"{request.CompanyName} Wikipedia", 3);
+                var wikipediaSearchResults = await searchService.ExecuteWebSearchAsync(
+                    query: request.CompanyName,  // Just the company name, no "Wikipedia" suffix
+                    topN: 5,
+                    domains: new[] { "wikipedia.org" }  // Restrict to Wikipedia only
+                );
                 var wikiSearchDuration = (DateTime.Now - wikiSearchStart).TotalMilliseconds;
                 
                 var wikipediaUrl = wikipediaSearchResults
@@ -310,12 +315,13 @@ namespace LuminaSearchConsole.Controllers
                 if (string.IsNullOrEmpty(wikipediaUrl))
                 {
                     _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
-                        $"⚠️ No Wikipedia URL found ({wikiSearchDuration:F0}ms)");
+                        $"⚠️ No Wikipedia page found for '{request.CompanyName}' ({wikiSearchDuration:F0}ms)\n" +
+                        $"  Found {wikipediaSearchResults.Count} results, but none are Wikipedia wiki pages");
                     return Json(new { success = false, error = "No Wikipedia page found" });
                 }
                 
                 _apiLogService.AddLog("Lumina Search", "WikipediaSearch", 
-                    $"✅ Found: {wikipediaUrl} ({wikiSearchDuration:F0}ms)");
+                    $"✅ Found Wikipedia page ({wikiSearchDuration:F0}ms)\n  URL: {wikipediaUrl}");
                 
                 // Extract company info
                 _apiLogService.AddLog("Lumina Find", "ExtractCompanyInfo", 
@@ -706,112 +712,37 @@ namespace LuminaSearchConsole.Controllers
                 return;
             }
 
-            var cuaService = new LuminaCuaService(token, _luminaConfig);
+            var luminaCuaService = new LuminaCuaService(token, _luminaConfig);
             var userId = "user-from-token"; // Could be extracted from token claims in production
-            string? computerId = null;
 
             try
             {
-                // Step 1: Get or create computer from pool
-                await SendSseMessage("progress", "🔄 Initialize - Getting virtual computer...");
-                await Response.Body.FlushAsync();
-                
-                var startTime = DateTime.Now;
-                computerId = await _cuaComputerPool.GetOrCreateComputerAsync(userId, _azureAdConfig.TenantId, cuaService);
-                var duration = (DateTime.Now - startTime).TotalMilliseconds;
+                // Use the new service to handle all CUA operations with streaming progress
+                var result = await _cuaService.SearchCompanyAndCaptureScreenshotAsync(
+                    cuaService: luminaCuaService,
+                    userId: userId,
+                    tenantId: _azureAdConfig.TenantId,
+                    companyName: companyName,
+                    progressCallback: SendSseMessage
+                );
 
-                var poolStats = _cuaComputerPool.GetStatistics();
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Initialize", 
-                    $"✅ Virtual computer ready\n  ComputerId: {computerId}\n  Response time: {duration:F0}ms\n  Pool: {poolStats.TotalComputers} computers ({poolStats.ActiveComputers} active)");
-
-                await SendSseMessage("progress", $"✅ Initialize completed ({duration:F0}ms) [Reused computer]");
-                await Response.Body.FlushAsync();
-                await Task.Delay(300);
-
-                // Step 2: Navigate to MSN Money
-                await SendSseMessage("progress", "🌐 Navigate - Opening https://www.msn.com/en-us/money/...");
-                await Response.Body.FlushAsync();
-
-                startTime = DateTime.Now;
-                
-                // Navigate to MSN Money
-                await cuaService.NavigateToUrlAsync(computerId, "https://www.msn.com/en-us/money/");
-                await Task.Delay(2000); // Wait for page load
-                
-                duration = (DateTime.Now - startTime).TotalMilliseconds;
-                await SendSseMessage("progress", $"✅ Navigate completed ({duration:F0}ms)");
-                await Response.Body.FlushAsync();
-                await Task.Delay(300);
-
-                // Step 3: Click search box
-                await SendSseMessage("progress", "🖱️ Click - Clicking search box at (1203, 43)...");
-                await Response.Body.FlushAsync();
-                await Task.Delay(300);
-
-                // Step 4: Type company name
-                await SendSseMessage("progress", $"⌨️ Type - Typing \"{companyName}\"...");
-                await Response.Body.FlushAsync();
-                await Task.Delay(400);
-
-                // Step 5: Press Enter
-                await SendSseMessage("progress", "⏎ Keypress - Pressing Enter...");
-                await Response.Body.FlushAsync();
-                await Task.Delay(300);
-
-                // Step 6: Wait for page load
-                await SendSseMessage("progress", "⏱️ Wait - Waiting for page to load...");
-                await Response.Body.FlushAsync();
-
-                // Perform the search actions
-                var actions = new List<CuaAction>
+                if (result.Success)
                 {
-                    new CuaAction { Action = "click", X = 1203, Y = 43, Button = 1 },
-                    new CuaAction { Action = "type", Text = companyName },
-                    new CuaAction { Action = "keypress", Keys = new[] { "enter" } },
-                    new CuaAction { Action = "wait" }
-                };
-                await cuaService.PerformComputerActionsAsync(computerId, actions, actionDelayMs: 800);
+                    // Send screenshot data
+                    await SendSseMessage("screenshot", System.Text.Json.JsonSerializer.Serialize(new
+                    {
+                        image = $"data:image/png;base64,{result.Screenshot}",
+                        width = result.Width,
+                        height = result.Height
+                    }));
+                    await Response.Body.FlushAsync();
 
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Search", 
-                    $"✅ Search completed for '{companyName}'");
-
-                await Task.Delay(500);
-
-                // Step 7: Get screenshot
-                await SendSseMessage("progress", "📸 GetScreenshot - Capturing screenshot...");
-                await Response.Body.FlushAsync();
-
-                startTime = DateTime.Now;
-                var screenshot = await cuaService.GetComputerScreenshotAsync(computerId);
-                duration = (DateTime.Now - startTime).TotalMilliseconds;
-
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Screenshot", 
-                    $"✅ Screenshot captured\n  Resolution: {screenshot.Content?.Width}x{screenshot.Content?.Height}\n  Response time: {duration:F0}ms");
-
-                await SendSseMessage("progress", $"✅ GetScreenshot completed ({duration:F0}ms)");
-                await Response.Body.FlushAsync();
-                await Task.Delay(500);
-
-                // Send screenshot data
-                await SendSseMessage("screenshot", System.Text.Json.JsonSerializer.Serialize(new
+                    await SendSseMessage("complete", "✅ All operations completed successfully!");
+                }
+                else
                 {
-                    image = $"data:image/png;base64,{screenshot.Content?.Screenshot}",
-                    width = screenshot.Content?.Width,
-                    height = screenshot.Content?.Height
-                }));
-                await Response.Body.FlushAsync();
-
-                // Mark computer as used (extends keep-alive time)
-                _cuaComputerPool.TouchComputer(userId, _azureAdConfig.TenantId);
-                _apiLogService.AddLog("Lumina CUA - MSN Money", "Cleanup", 
-                    $"✅ Computer kept alive for reuse (will auto-release after 3 minutes of inactivity)\n  ComputerId: {computerId}");
-
-                await SendSseMessage("complete", "✅ All operations completed successfully!");
-            }
-            catch (HttpRequestException httpEx) when (httpEx.StatusCode == System.Net.HttpStatusCode.InsufficientStorage)
-            {
-                _logger.LogWarning(httpEx, "CUA service capacity reached");
-                await SendSseMessage("error", "CUA service is currently at capacity. Please try again later.");
+                    await SendSseMessage("error", result.ErrorMessage ?? "Unknown error occurred");
+                }
             }
             catch (Exception ex)
             {
