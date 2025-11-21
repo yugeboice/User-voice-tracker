@@ -42,3 +42,7 @@ Thumbs.db
 *.iml
 *.ipr
 *.iws
+
+# Application configuration with secrets
+appsettings.json
+msalcache.bin
