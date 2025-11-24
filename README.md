@@ -4,7 +4,11 @@ An educational sample application designed to help developers quickly learn and 
 
 ## What This Demo Does
 
-This demo uses **company name search** as a practical, end-to-end example. Search for a company (e.g., "Microsoft", "Apple", "Tesla") and see how different Lumina APIs work together:
+This demo showcases the raw capabilities of **Lumina APIs**—an AI infrastructure platform designed to empower agents with tools for searching, browsing, and interacting with the web.
+
+**Note**: This application does **not** involve any LLM (Large Language Model) calls or AI reasoning. It purely demonstrates how to use Lumina as an infrastructure layer to retrieve and process information that an AI agent would typically consume.
+
+Using **company name search** as a practical example, you can see how different Lumina APIs work together:
 
 - **Search API** returns comprehensive results: stock information, news articles, and web pages
 - **Open API** opens the company's website and extracts navigable links
@@ -18,6 +22,8 @@ The web interface provides real-time logging so you can see the complete request
 ### 📊 Stock Market Data & Recent News
 **What it does**: Performs a batch search to retrieve stock-related information and recent news articles about a company in a single API call.
 
+<img src="images_for_readme/batch_search.png" width="600" alt="Batch Search" />
+
 **APIs used**:
 - **Search API (Batch)**: Sends two queries simultaneously:
   - Query 1: `"{company name} stock price"` - Returns stock market data and financial pages
@@ -29,6 +35,8 @@ The web interface provides real-time logging so you can see the complete request
 ### 📋 Company Overview
 **What it does**: Extracts structured company information (founding date, headquarters, revenue, etc.) from the company's Wikipedia page.
 
+<img src="images_for_readme/company_overview.png" width="400" alt="Company Overview" />
+
 **APIs used** (3-step workflow):
 1. **Search API**: Searches for the company name with `domains: ["wikipedia.org"]` filter to restrict results to Wikipedia only
 2. **Open API**: Opens the Wikipedia page and retrieves its content with a session ID
@@ -39,15 +47,14 @@ The web interface provides real-time logging so you can see the complete request
 ### 📈 Stock Price Screenshot
 **What it does**: Automatically navigates to MSN Money, searches for the company, and captures a screenshot of the stock price chart.
 
+<img src="images_for_readme/stock_price_screenshot.png" width="600" alt="Stock Price Screenshot" />
+
 **APIs used**:
-- **Computer Use Agent (CUA) API - Initialize**: Creates a virtual computer session with unique computer ID
-- **CUA API - Actions** (streaming with real-time progress updates):
-  1. Navigate to MSN Money: Press `Ctrl+L` → Type URL → Press `Enter` → Wait
-  2. Click search box at coordinates (1203, 43)
-  3. Type the company name
-  4. Press `Enter` to search
-  5. Wait for search results page to load
-- **CUA API - Screenshot**: Captures the final page showing stock chart and company information
+- **Computer Use Agent (CUA) API**:
+  1. **Initialize**: Creates a virtual computer session (`/initialize`)
+  2. **Actions**: Sends a sequence of commands (`/do`) to navigate and search
+  3. **Screenshot**: Captures the final result (`/get`)
+  4. **Release**: Frees the computer resource (`/release`)
 
 **How to test**: After searching for a company, click "Stock Price Screenshot" button
 
@@ -56,8 +63,8 @@ The web interface provides real-time logging so you can see the complete request
 ### Prerequisites
 
 - **.NET 8.0 SDK** or higher
-- **Azure AD App Registration** (see configuration steps below)
-- **Lumina API Access**
+- **Lumina Environment Setup**: Please ensure you have completed the **Installation & Usage** and **Access** sections in the [Lumina Partner Documentation](partner/partner/index.md).
+  - This covers necessary steps like NuGet feed configuration and Azure AD App Registration.
 
 ### Configuration Steps
 
@@ -68,30 +75,14 @@ git clone <your-repository-url>
 cd lumina-test
 ```
 
-#### 2. Register an Azure AD Application
+#### 2. Configure Authentication
 
-You need to register an application in the [Azure Portal](https://portal.azure.com):
+This demo uses the **On-Behalf-Of (OBO)** flow (implemented in `Services/OboTokenService.cs`).
 
-1. Navigate to **Azure Active Directory** → **App registrations** → **New registration**
-2. Enter an application name (e.g., "Lumina API Demo")
-3. Select account type: **Accounts in this organizational directory only**
-4. Set Redirect URI:
-   - Platform type: **Web**
-   - URI: `http://localhost:8401`
-5. After registration, record:
-   - **Tenant ID** (Directory (tenant) ID)
-   - **Client ID** (Application (client) ID)
+- If you plan to use **OBO**, ensure your Azure AD App Registration is configured for it, and you can use the `OboTokenService` provided in this sample directly.
+- If you need to use S2S or PFT, you and will need to implement your own token acquisition logic. Please refer to the documentation in `quick-start/token-types.md` for implementation details.
 
-#### 3. Configure API Permissions
-
-In your Azure AD application:
-
-1. Go to **API permissions** → **Add a permission**
-2. Select **APIs my organization uses**
-3. Search for and add Lumina API permissions
-4. Grant necessary scopes
-
-#### 4. Create Configuration File
+#### 3. Create Configuration File
 
 ```bash
 cd LuminaSearchConsole
@@ -105,14 +96,15 @@ Edit `appsettings.json` with your configuration:
   "AzureAd": {
     "TenantId": "YOUR-TENANT-ID",
     "ClientId": "YOUR-CLIENT-ID",
-    "RedirectUri": "http://localhost:8401"
+    "RedirectUri": "YOUR-REDIRECT-URI"
   }
 }
 ```
 
-> **Note**: `appsettings.json` is excluded in `.gitignore` and will not be committed to Git. Keep your credentials secure.
+> **Note**: Ensure `RedirectUri` matches exactly what you configured in the Azure Portal.
+> **Note**: `appsettings.json` is excluded in `.gitignore` and will not be committed to Git.
 
-#### 5. Run the Application
+#### 4. Run the Application
 
 ```bash
 # Restore NuGet packages
@@ -127,12 +119,21 @@ The application will start at **http://localhost:8400**.
 ### Usage Guide
 
 1. **Login**: First visit will redirect to Microsoft login page
+   
+   <img src="images_for_readme/before_signin.png" width="600" alt="Login Screen" />
+
 2. **Search Testing**: 
    - Use example buttons (Microsoft, Apple, Tesla...) for quick start
    - Or enter your own search keywords
-   - View real-time logs on the right to understand API call flow
+   - View real-time logs (expandable section at the top) to understand API call flow
+
+     <img src="images_for_readme/company_overview_log1.png" width="600" alt="API Logs" />
+
 3. **Explore Other Features**:
-   - Click **"Open Content"** button in search results to test Open API
+   - Click **"Open Content"** button in search results to test Open API & Click API
+     
+     <img src="images_for_readme/open_and_click.png" width="600" alt="Open and Click" />
+
    - Click **"Find Company Info"** button to test Find API
    - Click **"Stock Price Screenshot"** button to test CUA API
 
@@ -173,6 +174,20 @@ lumina-test/
 └── README.md                      # This file
 ```
 
+## API Endpoint Mapping
+
+This demo wraps Lumina API calls in C# Services. Here is the mapping to the actual REST endpoints:
+
+| Service Class | Method | Lumina API Endpoint | Description |
+|--------------|--------|---------------------|-------------|
+| `LuminaSearchService` | `BatchSearchAsync` | `POST /api/sonicberry/search` | Performs batch search for multiple content types |
+| `LuminaOpenService` | `OpenContentWithLinksAsync` | `POST /api/sonicberry/open` | Opens a URL and extracts content & links |
+| `LuminaOpenService` | `ClickLinkAsync` | `POST /api/sonicberry/click` | Navigates to a link within an open session |
+| `LuminaFindService` | `FindContentAsync` | `POST /api/sonicberry/find` | Finds specific information within a page |
+| `LuminaCuaService` | `InitializeComputerAsync` | `POST /api/agent/computer/initialize` | Starts a new virtual computer session |
+| `LuminaCuaService` | `PerformComputerActionsAsync` | `POST /api/agent/computer/do` | Executes keyboard/mouse actions |
+| `LuminaCuaService` | `GetComputerScreenshotAsync` | `POST /api/agent/computer/get` | Captures the current screen state |
+
 ## Learning Each API
 
 Each Service file contains detailed teaching comments:
@@ -209,50 +224,6 @@ Each Service file contains detailed teaching comments:
 - **Key Methods**: 
   - `GetOboTokenAsync()` - Get access token for Lumina API
 - **Features**: Automatic token caching and refresh on expiration
-
-## Troubleshooting
-
-### Q: Why ports 8400 and 8401?
-A: 8400 is the application port, 8401 is the Azure AD callback port. To change, update both `appsettings.json` and the Redirect URI in your Azure AD app registration.
-
-### Q: What if my token expires?
-A: Click the **Sign Out** button in the top-right corner, then log in again. The token cache will be automatically cleared.
-
-### Q: Build fails?
-A: 
-1. Check .NET SDK version: `dotnet --version` (requires 8.0+)
-2. Clean and rebuild: `dotnet clean && dotnet build`
-3. Delete `bin/` and `obj/` folders and retry
-
-### Q: Getting 401 Unauthorized error?
-A: 
-1. Verify TenantId and ClientId in `appsettings.json` are correct
-2. Confirm your Azure AD app has been granted Lumina API permissions
-3. Try signing out and signing in again
-
-### Q: Search returns no results?
-A: Check that `LuminaConfiguration.ApiEndpoint` is correct and you have access to that environment.
-
-## Logging and Debugging
-
-### View Real-time Logs
-The right side of the application displays detailed logs for all API calls, including:
-- Request URL and parameters
-- Response status code
-- Response content (formatted JSON)
-- Error messages (if any)
-
-### Enable Verbose Logging
-Modify `appsettings.json`:
-```json
-{
-  "Logging": {
-    "LogLevel": {
-      "Default": "Debug"
-    }
-  }
-}
-```
 
 ---
 

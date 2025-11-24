@@ -52,3 +52,6 @@ DataProtection-Keys/
 
 # Image assets (screenshots, generated images, etc.)
 images_for_readme/
+
+# Lumina Doc site for reference
+partner/
