@@ -46,3 +46,6 @@ Thumbs.db
 # Application configuration with secrets
 appsettings.json
 msalcache.bin
+
+# Data Protection Keys (generated locally, should not be committed)
+DataProtection-Keys/

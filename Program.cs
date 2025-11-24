@@ -33,6 +33,13 @@ namespace LuminaSearchConsole
                 builder.WebHost.UseUrls(webServerConfig.Urls);
             }
 
+            // Configure Data Protection to persist keys across app restarts
+            // This prevents session cookie decryption warnings when the app restarts
+            var dataProtectionPath = Path.Combine(Directory.GetCurrentDirectory(), "DataProtection-Keys");
+            builder.Services.AddDataProtection()
+                .PersistKeysToFileSystem(new DirectoryInfo(dataProtectionPath))
+                .SetApplicationName("LuminaSearchConsole");
+
             // MVC support for web interface
             builder.Services.AddControllersWithViews();
             
