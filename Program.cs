@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Identity.Web;
 
 namespace LuminaSearchConsole

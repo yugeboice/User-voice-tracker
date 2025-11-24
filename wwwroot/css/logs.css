@@ -63,8 +63,13 @@
 }
 
 .log-api {
-    font-size: 0.75em;
-    padding: 2px 8px;
+    font-size: 0.75em !important;
+    padding: 2px 8px !important;
+}
+
+.log-feature {
+    font-size: 0.75em !important;
+    padding: 2px 8px !important;
 }
 
 .log-operation {
