@@ -51,4 +51,4 @@ msalcache.bin
 DataProtection-Keys/
 
 # Image assets (screenshots, generated images, etc.)
-images/
+images_for_readme/
