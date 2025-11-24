@@ -67,7 +67,22 @@ namespace LuminaSearchConsole
             // This helps partners understand API usage patterns
             builder.Services.AddSingleton<LuminaSearchConsole.Services.ApiLogService>();
 
+            // Register CuaComputerPool as singleton to manage virtual computer resources
+            // Computers are kept alive for 3 minutes and reused across requests
+            builder.Services.AddSingleton<LuminaSearchConsole.Services.CuaComputerPool>();
+
             var app = builder.Build();
+
+            // Ensure CuaComputerPool releases all computers on application shutdown
+            var lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
+            lifetime.ApplicationStopping.Register(() =>
+            {
+                var pool = app.Services.GetRequiredService<LuminaSearchConsole.Services.CuaComputerPool>();
+                var logger = app.Services.GetRequiredService<ILogger<Program>>();
+                logger.LogInformation("Application is shutting down, releasing all CUA virtual computers...");
+                pool.Dispose();
+                logger.LogInformation("All CUA virtual computers have been released successfully.");
+            });
 
             // Configure error handling
             if (!app.Environment.IsDevelopment())
@@ -76,11 +91,6 @@ namespace LuminaSearchConsole
                 app.UseHsts();
             }
 
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseHttpsRedirection();
-            }
-            
             app.UseStaticFiles();
             app.UseRouting();
             app.UseSession();  // Enable session before authorization

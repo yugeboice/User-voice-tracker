@@ -16,6 +16,7 @@ namespace LuminaSearchConsole.Controllers
         private readonly OboTokenService _oboTokenService;
         private readonly ILogger<HomeController> _logger;
         private readonly ApiLogService _apiLogService;
+        private readonly Services.CuaComputerPool _cuaComputerPool;
         private readonly AzureAdConfiguration _azureAdConfig;
         private readonly LuminaConfiguration _luminaConfig;
 
@@ -23,12 +24,14 @@ namespace LuminaSearchConsole.Controllers
             OboTokenService oboTokenService, 
             ILogger<HomeController> logger, 
             ApiLogService apiLogService,
+            Services.CuaComputerPool cuaComputerPool,
             AzureAdConfiguration azureAdConfig,
             LuminaConfiguration luminaConfig)
         {
             _oboTokenService = oboTokenService;
             _logger = logger;
             _apiLogService = apiLogService;
+            _cuaComputerPool = cuaComputerPool;
             _azureAdConfig = azureAdConfig;
             _luminaConfig = luminaConfig;
         }
@@ -723,41 +726,89 @@ namespace LuminaSearchConsole.Controllers
 
             var cuaService = new Services.LuminaCuaService(token, _luminaConfig);
             var userId = "user-from-token"; // Could be extracted from token claims in production
+            string? computerId = null;
 
             try
             {
-                await SendSseMessage("progress", "🔧 Initializing virtual computer...");
+                // Step 1: Initialize
+                await SendSseMessage("progress", "🔄 Initialize - Creating virtual computer...");
+                await Response.Body.FlushAsync();
                 
-                var computerId = Guid.NewGuid().ToString("N");
-                await cuaService.InitializeComputerAsync(computerId, userId, _azureAdConfig.TenantId);
+                var startTime = DateTime.Now;
+                computerId = await _cuaComputerPool.GetOrCreateComputerAsync(userId, _azureAdConfig.TenantId, cuaService);
+                var duration = (DateTime.Now - startTime).TotalMilliseconds;
                 
+                var poolStats = _cuaComputerPool.GetStatistics();
                 _apiLogService.AddLog("Lumina CUA", "POST /api/agent/computer/initialize",
-                    $"Result\n{{\n  \"computerId\": \"{computerId}\",\n  \"status\": \"initialized\"\n}}", 
+                    $"✅ Virtual computer ready\n  ComputerId: {computerId}\n  Pool: {poolStats.TotalComputers} total, {poolStats.ActiveComputers} active\n  Response time: {duration:F0}ms", 
                     true, "Stock Price Screenshot");
                 
-                await SendSseMessage("progress", "✅ Virtual computer initialized");
+                await SendSseMessage("progress", $"✅ Initialize completed ({duration:F0}ms)");
+                await Response.Body.FlushAsync();
+                await Task.Delay(300);
                 
-                // Navigate and perform search
-                await SendSseMessage("progress", "🌐 Opening MSN Money...");
+                // Step 2: Navigate to MSN Money
+                await SendSseMessage("progress", "🌐 Navigate - Opening https://www.msn.com/en-us/money/...");
+                await Response.Body.FlushAsync();
+                
+                startTime = DateTime.Now;
+                await cuaService.NavigateToUrlAsync(computerId, "https://www.msn.com/en-us/money/");
+                await Task.Delay(2000); // Wait for page load
+                duration = (DateTime.Now - startTime).TotalMilliseconds;
+                
+                await SendSseMessage("progress", $"✅ Navigate completed ({duration:F0}ms)");
+                await Response.Body.FlushAsync();
+                await Task.Delay(300);
+                
+                // Step 3: Click search box
+                await SendSseMessage("progress", "🖱️ Click - Clicking search box at (1203, 43)...");
+                await Response.Body.FlushAsync();
+                await Task.Delay(300);
+                
+                // Step 4: Type company name
+                await SendSseMessage("progress", $"⌨️ Type - Typing \"{companyName}\"...");
+                await Response.Body.FlushAsync();
+                await Task.Delay(400);
+                
+                // Step 5: Press Enter
+                await SendSseMessage("progress", "⏎ Keypress - Pressing Enter...");
+                await Response.Body.FlushAsync();
+                await Task.Delay(300);
+                
+                // Step 6: Wait for search results
+                await SendSseMessage("progress", "⏱️ Wait - Waiting for search results to load...");
+                await Response.Body.FlushAsync();
+                
+                // Perform the actual search actions
+                startTime = DateTime.Now;
                 await cuaService.SearchCompanyOnMsnMoneyAsync(computerId, companyName);
+                duration = (DateTime.Now - startTime).TotalMilliseconds;
                 
                 _apiLogService.AddLog("Lumina CUA", "POST /api/agent/computer/do",
-                    $"Result\n{{\n  \"action\": \"search_completed\",\n  \"query\": \"{companyName}\"\n}}", 
+                    $"✅ Search actions completed\n  Query: {companyName}\n  Response time: {duration:F0}ms", 
                     true, "Stock Price Screenshot");
                 
-                await SendSseMessage("progress", "✅ Search completed");
+                await SendSseMessage("progress", $"✅ Search actions completed ({duration:F0}ms)");
+                await Response.Body.FlushAsync();
+                await Task.Delay(300);
                 
-                // Capture screenshot
-                await SendSseMessage("progress", "📸 Capturing screenshot...");
-                await Task.Delay(1000); // Wait for page to load
+                // Step 7: Capture screenshot
+                await SendSseMessage("progress", "📸 Screenshot - Capturing page screenshot...");
+                await Response.Body.FlushAsync();
+                await Task.Delay(1000); // Wait for page to fully load
                 
+                startTime = DateTime.Now;
                 var screenshot = await cuaService.GetComputerScreenshotAsync(computerId);
+                duration = (DateTime.Now - startTime).TotalMilliseconds;
                 
                 if (screenshot?.Content?.Success == true)
                 {
                     _apiLogService.AddLog("Lumina CUA", "POST /api/agent/computer/get",
-                        $"Result\n{{\n  \"width\": {screenshot.Content.Width},\n  \"height\": {screenshot.Content.Height}\n}}", 
+                        $"✅ Screenshot captured\n  Resolution: {screenshot.Content.Width}x{screenshot.Content.Height}\n  Response time: {duration:F0}ms", 
                         true, "Stock Price Screenshot");
+                    
+                    await SendSseMessage("progress", $"✅ Screenshot captured ({duration:F0}ms)");
+                    await Response.Body.FlushAsync();
                     
                     await SendSseMessage("screenshot", System.Text.Json.JsonSerializer.Serialize(new
                     {
@@ -766,6 +817,12 @@ namespace LuminaSearchConsole.Controllers
                         height = screenshot.Content.Height
                     }));
                     await Response.Body.FlushAsync();
+
+                    // Keep computer alive for reuse (3-minute keep-alive)
+                    _cuaComputerPool.TouchComputer(userId, _azureAdConfig.TenantId);
+                    _apiLogService.AddLog("Lumina CUA", "Cleanup",
+                        $"✅ Computer kept alive for reuse (will auto-release after 3 minutes of inactivity)\n  ComputerId: {computerId}", 
+                        true, "Stock Price Screenshot");
 
                     await SendSseMessage("complete", "✅ All operations completed successfully!");
                 }

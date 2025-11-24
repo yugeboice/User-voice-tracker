@@ -49,3 +49,6 @@ msalcache.bin
 
 # Data Protection Keys (generated locally, should not be committed)
 DataProtection-Keys/
+
+# Image assets (screenshots, generated images, etc.)
+images/

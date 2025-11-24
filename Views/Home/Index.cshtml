@@ -111,7 +111,6 @@
                         <button type="button" class="btn btn-sm btn-outline-secondary" onclick="searchExample('Google')">Google</button>
                     </div>
                     
-                    <div class="form-text text-center mt-2">Get instant access to stock prices and latest news powered by <strong>Lumina Search API</strong></div>
                     <input type="hidden" name="TopResults" value="5">
                 </form>
             </div>
@@ -381,10 +380,19 @@
     <script src="~/js/cua.js"></script>
     
     <script>
-        // Search with example query - fills input and submits form
+        // Search with example query - fills input and submits form with loading state
         function searchExample(query) {
-            document.getElementById('query').value = query;
-            document.getElementById('searchForm').submit();
+            const queryInput = document.getElementById('query');
+            const searchForm = document.getElementById('searchForm');
+            
+            // Fill the input
+            queryInput.value = query;
+            
+            // Trigger the same loading state as manual search
+            handleSearchSubmit(new Event('submit'));
+            
+            // Submit the form
+            searchForm.submit();
         }
         
         // Auto-focus on search input if authenticated
