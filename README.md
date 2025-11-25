@@ -63,7 +63,7 @@ The web interface provides real-time logging so you can see the complete request
 
 <img src="assets/stock_price_screenshot.png" width="600" alt="Stock Price Screenshot" />
 
-The CUA API provides real-time progress updates during execution:
+This feature provides real-time progress updates during execution:
 
 <img src="assets/stock_price_sse.png" width="600" alt="CUA Processing Status" />
 
@@ -241,9 +241,9 @@ Each Service file contains detailed teaching comments:
 - **How to Test**: After searching for a company, click "Stock Price Screenshot"
 
 ### OboTokenService.cs
-- **Purpose**: Handles On-Behalf-Of (OBO) authentication
+- **Purpose**: Handles authentication for accessing Lumina APIs
 - **Key Methods**: 
-  - `GetOboTokenAsync()` - Get access token for Lumina API
+  - `GetOboTokenAsync()` - Acquires On-Behalf-Of (OBO) access token
 - **Features**: Automatic token caching and refresh on expiration
 
 ---
