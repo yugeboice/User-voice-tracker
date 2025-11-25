@@ -63,6 +63,10 @@ The web interface provides real-time logging so you can see the complete request
 
 <img src="assets/stock_price_screenshot.png" width="600" alt="Stock Price Screenshot" />
 
+The CUA API provides real-time progress updates during execution:
+
+<img src="assets/cua_processing.png" width="600" alt="CUA Processing Status" />
+
 **APIs used**:
 - **Computer Use Agent (CUA) API**:
   1. **Initialize**: Creates a virtual computer session (`/initialize`)
