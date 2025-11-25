@@ -84,8 +84,8 @@ The web interface provides real-time logging so you can see the complete request
 #### 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
-cd lumina-test
+git clone https://github.com/yufanli_microsoft/Lumina-API-Demo.git
+cd Lumina-API-Demo
 ```
 
 #### 2. Configure Authentication
