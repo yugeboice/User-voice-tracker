@@ -2,6 +2,20 @@
 
 An educational sample application designed to help developers quickly learn and test Lumina API features. 
 
+## Table of Contents
+- [What This Demo Does](#what-this-demo-does)
+- [Features](#features)
+  - [Stock Market Data & Recent News](#-stock-market-data--recent-news)
+  - [Company Overview](#-company-overview)
+  - [Stock Price Screenshot](#-stock-price-screenshot)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Configuration Steps](#configuration-steps)
+  - [Usage Guide](#usage-guide)
+- [Code Structure](#code-structure)
+- [API Endpoint Mapping](#api-endpoint-mapping)
+- [Learning Each API](#learning-each-api)
+
 ## What This Demo Does
 
 This demo showcases the raw capabilities of **Lumina APIs**—an AI infrastructure platform designed to empower agents with tools for searching, browsing, and interacting with the web.
@@ -35,7 +49,7 @@ The web interface provides real-time logging so you can see the complete request
 ### 📋 Company Overview
 **What it does**: Extracts structured company information (founding date, headquarters, revenue, etc.) from the company's Wikipedia page.
 
-<img src="assets/company_overview.png" width="400" alt="Company Overview" />
+<img src="assets/company_overview.png" width="600" alt="Company Overview" />
 
 **APIs used** (3-step workflow):
 1. **Search API**: Searches for the company name with `domains: ["wikipedia.org"]` filter to restrict results to Wikipedia only
@@ -63,8 +77,7 @@ The web interface provides real-time logging so you can see the complete request
 ### Prerequisites
 
 - **.NET 8.0 SDK** or higher
-- **Lumina Environment Setup**: Please ensure you have completed the **Installation & Usage** and **Access** sections in the [Lumina Partner Documentation](partner/partner/index.md).
-  - This covers necessary steps like NuGet feed configuration and Azure AD App Registration.
+- **Lumina Environment Setup**: Complete the **Installation & Usage** and **Access** sections in the [Lumina Partner Documentation].
 
 ### Configuration Steps
 
@@ -80,7 +93,7 @@ cd lumina-test
 This demo uses the **On-Behalf-Of (OBO)** flow (implemented in `Services/OboTokenService.cs`).
 
 - If you plan to use **OBO**, ensure your Azure AD App Registration is configured for it, and you can use the `OboTokenService` provided in this sample directly.
-- If you need to use S2S or PFT, you and will need to implement your own token acquisition logic. Please refer to the documentation in `quick-start/token-types.md` for implementation details.
+- If you need to use S2S or PFT, you and will need to implement your own token acquisition logic. Please refer to the Lumina documentation for implementation details.
 
 #### 3. Create Configuration File
 
@@ -144,38 +157,38 @@ The application will start at **http://localhost:8400**.
 ## Code Structure
 
 ```
-lumina-test/
-├── LuminaSearchConsole/           # Main application
-│   ├── Controllers/               # MVC controllers
-│   │   └── HomeController.cs      # Main controller handling all page requests
-│   │
-│   ├── Services/                  # Lumina API usage examples (core learning content)
-│   │   ├── LuminaSearchService.cs    # Search API demo
-│   │   ├── LuminaOpenService.cs      # Open & Click API demo
-│   │   ├── LuminaFindService.cs      # Find API demo
-│   │   ├── LuminaCuaService.cs       # Computer Use Agent API demo
-│   │   ├── OboTokenService.cs        # MSAL authentication
-│   │   ├── ApiLogService.cs          # Logging service for UI
-│   │   └── SharedModels.cs           # Internal helper models
-│   │
-│   ├── Models/                    # View models and business models
-│   │   └── ViewModels.cs          # UI data models
-│   │
-│   ├── Views/                     # Razor view pages
-│   │   ├── Home/
-│   │   │   └── Index.cshtml       # Main page
-│   │   └── Shared/
-│   │       ├── _Layout.cshtml     # Layout template
-│   │       └── Error.cshtml       # Error page
-│   │
-│   ├── appsettings.Template.json  # Configuration template (committed to Git)
-│   ├── appsettings.json           # Your actual config (not committed)
-│   ├── AppConfiguration.cs        # Configuration class definitions
-│   └── Program.cs                 # Application entry point
+.
+├── Controllers/
+│   └── HomeController.cs         # Main controller handling all page requests
 │
-├── CUA.md                         # Computer Use Agent API documentation
-├── SearchAPIs.md                  # Search API documentation
-└── README.md                      # This file
+├── Services/                     # Lumina API usage examples (core learning content)
+│   ├── LuminaSearchService.cs    # Search API demo
+│   ├── LuminaOpenService.cs      # Open & Click API demo
+│   ├── LuminaFindService.cs      # Find API demo
+│   ├── LuminaCuaService.cs       # Computer Use Agent API demo
+│   ├── OboTokenService.cs        # MSAL authentication
+│   ├── ApiLogService.cs          # Logging service for UI
+│   ├── CuaComputerPool.cs        # Helper for CUA session management
+│   └── SharedModels.cs           # Internal helper models
+│
+├── Models/                       # View models and business models
+│   └── ViewModels.cs             # UI data models
+│
+├── Views/                        # Razor view pages
+│   ├── Home/
+│   │   └── Index.cshtml          # Main page
+│   └── Shared/
+│       ├── _Layout.cshtml        # Layout template
+│       └── Error.cshtml          # Error page
+│
+├── wwwroot/                      # Static assets (CSS/JS)
+│   ├── css/
+│   └── js/
+│
+├── appsettings.Template.json     # Configuration template
+├── AppConfiguration.cs           # Configuration class definitions
+├── Program.cs                    # Application entry point
+└── README.md                     # This file
 ```
 
 ## API Endpoint Mapping
