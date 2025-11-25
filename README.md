@@ -88,7 +88,7 @@ The CUA API provides real-time progress updates during execution:
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yufanli_microsoft/Lumina-API-Demo.git
+git clone https://github.com/ai-microsoft/Lumina-API-Demo.git
 cd Lumina-API-Demo
 ```
 
