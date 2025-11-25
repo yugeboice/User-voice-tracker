@@ -122,6 +122,10 @@ The application will start at **http://localhost:8400**.
    
    <img src="images_for_readme/before_signin.png" width="600" alt="Login Screen" />
 
+   After successful login, you will see the main search console:
+
+   <img src="images_for_readme/after_signin.png" width="600" alt="Main Console" />
+
 2. **Search Testing**: 
    - Use example buttons (Microsoft, Apple, Tesla...) for quick start
    - Or enter your own search keywords
