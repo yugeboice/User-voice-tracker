@@ -4,12 +4,13 @@ An educational sample application designed to help developers quickly learn and 
 
 ## Table of Contents
 - [What This Demo Does](#what-this-demo-does)
+  - [Branch Guide](#-branch-guide)
 - [Features](#features)
   - [Stock Market Data & Recent News](#-stock-market-data--recent-news)
   - [Company Overview](#-company-overview)
   - [Stock Price Screenshot](#-stock-price-screenshot)
 - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
+  - [Prerequisites](#-prerequisites)
   - [Configuration Steps](#configuration-steps)
   - [Usage Guide](#usage-guide)
 - [Code Structure](#code-structure)
@@ -30,6 +31,19 @@ Using **company name search** as a practical example, you can see how different 
 - **Computer Use Agent API** automatically captures stock price chart screenshots
 
 The web interface provides real-time logging so you can see the complete request/response flow for each API call.
+
+### 📂 Branch Guide
+
+| Branch | Description | Best For |
+|--------|-------------|----------|
+| **`main`** (this branch) | Full-featured web application with UI, logging, and all 4 APIs | Learning how to build a complete Lumina-powered application; understanding API request/response details through real-time logs |
+| **`minimal-api-call`** | Minimal Lumina + LLM integration example | Quick start for vibe coding; simple code base to extend and customize; integrating Lumina with LLM for AI-powered features |
+
+To switch branches:
+```bash
+git checkout minimal-api-call  # For minimal example
+git checkout main              # For full demo
+```
 
 ## Features
 
@@ -78,10 +92,16 @@ This feature provides real-time progress updates during execution:
 
 ## Getting Started
 
-### Prerequisites
+### 🔑 Prerequisites
 
-- **.NET 8.0 SDK** or higher
-- **Lumina Environment Setup**: Complete the **Installation & Usage** and **Access** sections in the [Lumina Partner Documentation].
+Complete the steps listed below of the [Lumina Quick Start Guide](https://eng.ms/docs/experiences-devices/m365-core-msai/platform/msai-stca/copilot-lumina/copilot-lumina/quick-start):
+
+- [ ] Submitted onboarding form
+- [ ] Requested and received access
+- [ ] Installed Lumina NuGet package
+- [ ] Applied for Bing AppID
+
+> 📚 For detailed environment setup and access request procedures, please refer to [Lumina Partner Documentation]
 
 ### Configuration Steps
 
