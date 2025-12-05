@@ -126,7 +126,7 @@ cd LuminaSearchConsole
 cp appsettings.Template.json appsettings.json
 ```
 
-Edit `appsettings.json` with your configuration:
+Edit `appsettings.json` with your configuration. The template is configured for **OBO authentication**. If you use other authentication methods (S2S, PFT), you'll need to adjust accordingly:
 
 ```json
 {
