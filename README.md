@@ -21,9 +21,9 @@ An educational sample application designed to help developers quickly learn and 
 
 This demo showcases the raw capabilities of **Lumina APIs**—an AI infrastructure platform designed to empower agents with tools for searching, browsing, and interacting with the web.
 
-**Note**: This application does **not** involve any LLM (Large Language Model) calls or AI reasoning. It purely demonstrates how to use Lumina as an infrastructure layer to retrieve and process information that an AI agent would typically consume.
+**Note**: This branch (`main`) does **not** involve any LLM (Large Language Model) calls. It purely demonstrates how to use Lumina as an infrastructure layer to retrieve and process information. If you want to see Lumina + LLM integration examples, please switch to the `minimal-api-call` branch.
 
-Using **company name search** as a practical example, you can see how different Lumina APIs work together:
+The `main` branch uses **company name search** as a practical example to show how different Lumina APIs work together:
 
 - **Search API** returns comprehensive results: stock information, news articles, and web pages
 - **Open API** opens the company's website and extracts navigable links
