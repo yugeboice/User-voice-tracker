@@ -14,6 +14,10 @@ An educational sample application designed to help developers quickly learn and 
   - [Configuration Steps](#configuration-steps)
   - [Usage Guide](#usage-guide)
 - [Code Structure](#code-structure)
+- [Partner Context Implementation](#partner-context-implementation)
+  - [How Partner Context is Passed](#how-partner-context-is-passed)
+  - [Configuration Flow](#configuration-flow)
+  - [Customizing Your Partner Context](#customizing-your-partner-context)
 - [API Endpoint Mapping](#api-endpoint-mapping)
 - [Learning Each API](#learning-each-api)
 
@@ -134,9 +138,25 @@ Edit `appsettings.json` with your configuration. The template is configured for 
     "TenantId": "YOUR-TENANT-ID",
     "ClientId": "YOUR-CLIENT-ID",
     "RedirectUri": "YOUR-REDIRECT-URI"
+  },
+  "PartnerContext": {
+    "Partner": "PM playground",
+    "ScenarioGroup": "APIDemo",
+    "ScenarioName": "",
+    "Application": "",
+    "Component": ""
   }
 }
 ```
+
+**Partner Context Configuration**:
+- `Partner` (Required): Your partner identifier registered with Lumina team
+- `ScenarioGroup` (Optional): Group name for your scenarios
+- `ScenarioName` (Optional): Specific scenario name
+- `Application` (Optional): Application identifier
+- `Component` (Optional): Component identifier
+
+> **Note**: Partner Context fields are hierarchical. You cannot skip levels (e.g., you can't set `ScenarioName` without setting `ScenarioGroup` first).
 
 > **Note**: Ensure `RedirectUri` matches exactly what you configured in the Azure Portal.
 > **Note**: `appsettings.json` is excluded in `.gitignore` and will not be committed to Git.
@@ -190,6 +210,7 @@ The application will start at **http://localhost:8400**.
 │   ├── LuminaOpenService.cs      # Open & Click API demo
 │   ├── LuminaFindService.cs      # Find API demo
 │   ├── LuminaCuaService.cs       # Computer Use Agent API demo
+│   ├── PartnerContextHelper.cs   # Helper for applying Partner Context to API calls
 │   ├── OboTokenService.cs        # MSAL authentication
 │   ├── ApiLogService.cs          # Logging service for UI
 │   ├── CuaComputerPool.cs        # Helper for CUA session management
@@ -210,10 +231,83 @@ The application will start at **http://localhost:8400**.
 │   └── js/
 │
 ├── appsettings.Template.json     # Configuration template
-├── AppConfiguration.cs           # Configuration class definitions
+├── AppConfiguration.cs           # Configuration class definitions (includes PartnerContextConfiguration)
 ├── Program.cs                    # Application entry point
 └── README.md                     # This file
 ```
+
+## Partner Context Implementation
+
+This demo implements **Partner Context** to identify API callers for telemetry, quota management, and debugging purposes. Partner Context is passed to Lumina APIs through two mechanisms depending on the service type.
+
+### How Partner Context is Passed
+
+#### 1. SDK-based Services (Search, Open, Find APIs)
+
+For services using the Lumina SDK (`LuminaSearchService`, `LuminaOpenService`, `LuminaFindService`), Partner Context is passed via `LuminaApiOptions`:
+
+```csharp
+// In PartnerContextHelper.cs
+var options = new LuminaApiOptions
+{
+    Partner = partnerContext.Partner,
+    ScenarioGroup = partnerContext.ScenarioGroup,
+    // ... other fields
+};
+
+// Create client with options
+var client = new LuminaClient(tokenProvider, options);
+```
+
+#### 2. HTTP-based Services (Computer Use Agent API)
+
+For services using direct HTTP calls (`LuminaCuaService`), Partner Context is passed via HTTP headers:
+
+```csharp
+// In LuminaCuaService.cs
+httpClient.DefaultRequestHeaders.Add("X-Partner", partnerContext.Partner);
+httpClient.DefaultRequestHeaders.Add("X-ScenarioGroup", partnerContext.ScenarioGroup);
+httpClient.DefaultRequestHeaders.Add("X-ScenarioName", partnerContext.ScenarioName);
+httpClient.DefaultRequestHeaders.Add("X-Application", partnerContext.Application);
+httpClient.DefaultRequestHeaders.Add("X-Component", partnerContext.Component);
+```
+
+### Configuration Flow
+
+```
+appsettings.json (PartnerContext section)
+        ↓
+Program.cs (loads config, registers as singleton)
+        ↓
+HomeController (receives via dependency injection)
+        ↓
+Service constructors (passed as parameter)
+        ↓
+┌─────────────────────────────────────┐
+│ SDK Services → LuminaApiOptions     │
+│ HTTP Services → X-* HTTP Headers    │
+└─────────────────────────────────────┘
+        ↓
+Lumina API Backend
+```
+
+### Customizing Your Partner Context
+
+To use your own Partner Context, simply update `appsettings.json`:
+
+```json
+{
+  "PartnerContext": {
+    "Partner": "Your Partner Name",
+    "ScenarioGroup": "Your Scenario Group",
+    "ScenarioName": "Your Scenario Name",
+    "Application": "Your Application",
+    "Component": "Your Component"
+  }
+}
+```
+
+No code changes required!
 
 ## API Endpoint Mapping
 

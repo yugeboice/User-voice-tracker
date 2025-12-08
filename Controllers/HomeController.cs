@@ -19,6 +19,7 @@ namespace LuminaSearchConsole.Controllers
         private readonly Services.CuaComputerPool _cuaComputerPool;
         private readonly AzureAdConfiguration _azureAdConfig;
         private readonly LuminaConfiguration _luminaConfig;
+        private readonly PartnerContextConfiguration _partnerContext;
 
         public HomeController(
             OboTokenService oboTokenService, 
@@ -26,7 +27,8 @@ namespace LuminaSearchConsole.Controllers
             ApiLogService apiLogService,
             Services.CuaComputerPool cuaComputerPool,
             AzureAdConfiguration azureAdConfig,
-            LuminaConfiguration luminaConfig)
+            LuminaConfiguration luminaConfig,
+            PartnerContextConfiguration partnerContext)
         {
             _oboTokenService = oboTokenService;
             _logger = logger;
@@ -34,6 +36,7 @@ namespace LuminaSearchConsole.Controllers
             _cuaComputerPool = cuaComputerPool;
             _azureAdConfig = azureAdConfig;
             _luminaConfig = luminaConfig;
+            _partnerContext = partnerContext;
         }
 
         #endregion
@@ -150,7 +153,7 @@ namespace LuminaSearchConsole.Controllers
 
             try
             {
-                var searchService = new LuminaSearchService(token, _luminaConfig);
+                var searchService = new LuminaSearchService(token, _luminaConfig, _partnerContext);
                 var batchResult = await searchService.ExecuteBatchCompanySearchAsync(model.Query, model.TopResults, _apiLogService, "Stock & market data + recent news");
                 
                 // Note: Company info will be loaded separately via AJAX call to FindCompanyInfo
@@ -213,7 +216,7 @@ namespace LuminaSearchConsole.Controllers
 
             try
             {
-                var searchService = new LuminaSearchService(token, _luminaConfig);
+                var searchService = new LuminaSearchService(token, _luminaConfig, _partnerContext);
                 var searchResults = await searchService.ExecuteWebSearchAsync(model.Query, model.TopResults, null, _apiLogService, "Web Search");
                 
                 model.SearchResults = searchResults;
@@ -284,7 +287,7 @@ namespace LuminaSearchConsole.Controllers
                     $"  \"source\": \"WebWithBing\"\n" +
                     $"}}", true, "Company Overview");
                 
-                var searchService = new Services.LuminaSearchService(token, _luminaConfig);
+                var searchService = new Services.LuminaSearchService(token, _luminaConfig, _partnerContext);
                 var wikiSearchStart = DateTime.Now;
                 var wikipediaSearchResults = await searchService.ExecuteWebSearchAsync($"{request.CompanyName} Wikipedia", 3);
                 var wikiSearchDuration = (DateTime.Now - wikiSearchStart).TotalMilliseconds;
@@ -313,7 +316,7 @@ namespace LuminaSearchConsole.Controllers
                     $"}}", true, "Company Overview");
                 
                 // Step 2: Open the Wikipedia page
-                var openService = new Services.LuminaOpenService(token, _luminaConfig);
+                var openService = new Services.LuminaOpenService(token, _luminaConfig, _partnerContext);
                 var openResult = await openService.OpenContentWithLinksAsync(wikipediaUrl);
                 
                 if (string.IsNullOrEmpty(openResult.SessionId))
@@ -329,7 +332,7 @@ namespace LuminaSearchConsole.Controllers
                     $"  \"patterns\": [\"Founded\", \"Headquarters\", \"Revenue\", \"Industry\", \"Type\"]\n" +
                     $"}}", true, "Company Overview");
                 
-                var findService = new Services.LuminaFindService(token, _luminaConfig);
+                var findService = new Services.LuminaFindService(token, _luminaConfig, _partnerContext);
                 var infoStartTime = DateTime.Now;
                 var companyInfo = await findService.ExtractCompanyInfoAsync(wikipediaUrl, openResult.SessionId);
                 var infoDuration = (DateTime.Now - infoStartTime).TotalMilliseconds;
@@ -413,7 +416,7 @@ namespace LuminaSearchConsole.Controllers
                     $"  SessionId: {request.SessionId ?? "New session"}\n" +
                     $"  Purpose: Extract full page content and discover links");
                 
-                var openService = new Services.LuminaOpenService(token, _luminaConfig);
+                var openService = new Services.LuminaOpenService(token, _luminaConfig, _partnerContext);
                 var startTime = DateTime.Now;
                 var result = await openService.OpenContentWithLinksAsync(request.Url, request.SessionId);
                 var duration = (DateTime.Now - startTime).TotalMilliseconds;
@@ -535,7 +538,7 @@ namespace LuminaSearchConsole.Controllers
                     $"  LinkId: {request.LinkId}\n" +
                     $"  PageContext: Turn={request.PageContext.Turn}, Action={request.PageContext.Action}, Id={request.PageContext.Id}");
                 
-                var openService = new Services.LuminaOpenService(token, _luminaConfig);
+                var openService = new Services.LuminaOpenService(token, _luminaConfig, _partnerContext);
                 var startTime = DateTime.Now;
                 
                 // Convert PageContextDto to dynamic object for API
@@ -724,7 +727,7 @@ namespace LuminaSearchConsole.Controllers
                 return;
             }
 
-            var cuaService = new Services.LuminaCuaService(token, _luminaConfig);
+            var cuaService = new Services.LuminaCuaService(token, _luminaConfig, _partnerContext);
             var userId = "user-from-token"; // Could be extracted from token claims in production
             string? computerId = null;
 

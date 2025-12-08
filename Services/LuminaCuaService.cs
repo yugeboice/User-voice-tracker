@@ -39,15 +39,49 @@ namespace LuminaSearchConsole.Services
 
         private readonly string _luminaEndpoint;
         private readonly string _accessToken;
+        private readonly PartnerContextConfiguration? _partnerContext;
 
         #endregion
 
         #region Constructor
 
-        public LuminaCuaService(string accessToken, LuminaConfiguration luminaConfig)
+        public LuminaCuaService(string accessToken, LuminaConfiguration luminaConfig, PartnerContextConfiguration? partnerContext = null)
         {
             _accessToken = accessToken;
             _luminaEndpoint = luminaConfig.ApiEndpoint;
+            _partnerContext = partnerContext;
+        }
+
+        #endregion
+
+        #region Helper Methods
+
+        /// <summary>
+        /// Configure HttpClient with authentication and Partner Context headers
+        /// </summary>
+        private void ConfigureHttpClient(HttpClient httpClient)
+        {
+            httpClient.DefaultRequestHeaders.Authorization = 
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
+
+            // Add Partner Context headers if configured
+            // These headers identify the caller and enable customized Lumina settings
+            if (_partnerContext != null && _partnerContext.HasPartnerContext)
+            {
+                httpClient.DefaultRequestHeaders.Add("X-Partner", _partnerContext.Partner);
+
+                if (!string.IsNullOrEmpty(_partnerContext.ScenarioGroup))
+                    httpClient.DefaultRequestHeaders.Add("X-ScenarioGroup", _partnerContext.ScenarioGroup);
+
+                if (!string.IsNullOrEmpty(_partnerContext.ScenarioName))
+                    httpClient.DefaultRequestHeaders.Add("X-ScenarioName", _partnerContext.ScenarioName);
+
+                if (!string.IsNullOrEmpty(_partnerContext.Application))
+                    httpClient.DefaultRequestHeaders.Add("X-Application", _partnerContext.Application);
+
+                if (!string.IsNullOrEmpty(_partnerContext.Component))
+                    httpClient.DefaultRequestHeaders.Add("X-Component", _partnerContext.Component);
+            }
         }
 
         #endregion
@@ -64,8 +98,7 @@ namespace LuminaSearchConsole.Services
         public async Task<string> InitializeComputerAsync(string computerId, string userId, string tenantId)
         {
             using var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = 
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
+            ConfigureHttpClient(httpClient);
 
             var body = new
             {
@@ -103,8 +136,7 @@ namespace LuminaSearchConsole.Services
         public async Task<CuaScreenshotResponse> GetComputerScreenshotAsync(string computerId)
         {
             using var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = 
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
+            ConfigureHttpClient(httpClient);
 
             var body = new { computerId = computerId };
 
@@ -132,8 +164,7 @@ namespace LuminaSearchConsole.Services
         public async Task<CuaActionResponse> PerformComputerActionsAsync(string computerId, List<CuaAction> actions, int actionDelayMs = 800)
         {
             using var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = 
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
+            ConfigureHttpClient(httpClient);
 
             var body = new
             {
@@ -208,8 +239,7 @@ namespace LuminaSearchConsole.Services
         public async Task ReleaseComputerAsync(string computerId)
         {
             using var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = 
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
+            ConfigureHttpClient(httpClient);
 
             var body = new { computerId = computerId };
 

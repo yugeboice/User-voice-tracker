@@ -37,16 +37,16 @@ namespace LuminaSearchConsole.Services
 
         #region Constructor
 
-        public LuminaSearchService(string accessToken, LuminaConfiguration luminaConfig)
+        public LuminaSearchService(string accessToken, LuminaConfiguration luminaConfig, PartnerContextConfiguration? partnerContext = null)
         {
             _luminaEndpoint = luminaConfig.ApiEndpoint;
             
-            // Configure Lumina API proxy with authentication
-            var options = new LuminaApiOptions
-            {
-                Endpoint = _luminaEndpoint,
-                LuminaApiTokenProvider = async () => await Task.FromResult(accessToken)
-            };
+            // Configure Lumina API proxy with authentication and Partner Context
+            // Partner Context identifies this caller and enables customized settings
+            var options = PartnerContextHelper.CreateLuminaApiOptions(
+                endpoint: _luminaEndpoint,
+                accessToken: accessToken,
+                partnerContext: partnerContext);
 
             var httpClientFactory = new DefaultHttpClientFactory();
             _proxy = new LuminaServiceApiProxy(options, httpClientFactory);

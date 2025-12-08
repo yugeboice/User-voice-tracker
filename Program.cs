@@ -21,11 +21,18 @@ namespace LuminaSearchConsole
                 ?? new AzureAdConfiguration();
             var webServerConfig = builder.Configuration.GetSection("WebServer").Get<WebServerConfiguration>() 
                 ?? new WebServerConfiguration();
+            
+            // Load Partner Context configuration
+            // Partner Context identifies callers and enables customized Lumina settings
+            // Partners should update these values in appsettings.json
+            var partnerContextConfig = builder.Configuration.GetSection("PartnerContext").Get<PartnerContextConfiguration>() 
+                ?? new PartnerContextConfiguration();
 
             // Register configurations as singletons for dependency injection
             builder.Services.AddSingleton(luminaConfig);
             builder.Services.AddSingleton(azureAdConfig);
             builder.Services.AddSingleton(webServerConfig);
+            builder.Services.AddSingleton(partnerContextConfig);
 
             // Configure server URLs from configuration
             // Partners can change port in appsettings.json

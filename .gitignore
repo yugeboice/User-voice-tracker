@@ -55,3 +55,6 @@ DataProtection-Keys/
 
 # Lumina Doc site for reference
 partner/
+
+# Local MSBuild override to exclude partner/ from compilation
+Directory.Build.props
