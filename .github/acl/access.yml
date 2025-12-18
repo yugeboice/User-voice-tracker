@@ -1,0 +1,13 @@
+name: Access control list
+description: List of users and teams and their permission levels
+resource: repository
+where:
+configuration:
+  manageAccess:
+  - team: sgalias-team-readers
+    role: Read# Access Control List for the repository
+# Define users and teams with their permissions here.
+
+teams:
+- name: lumina-pm
+  permission: Write
