@@ -12,3 +12,7 @@ configuration:
     role: Maintain
   - team: lumina-pm
     role: Write
+  - member: bowguo
+    role: Write
+  - member: qixia
+    role: Write
