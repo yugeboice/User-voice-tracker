@@ -58,3 +58,5 @@ partner/
 
 # Local MSBuild override to exclude partner/ from compilation
 Directory.Build.props
+
+net8.0/
