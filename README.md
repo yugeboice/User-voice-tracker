@@ -54,7 +54,7 @@ git checkout main              # For full demo
 ### 📊 Stock Market Data & Recent News
 **What it does**: Performs a batch search to retrieve stock-related information and recent news articles about a company in a single API call.
 
-<img src="assets/batch_search.png" width="600" alt="Batch Search" />
+<img src="LuminaSearchConsole/assets/batch_search.png" width="600" alt="Batch Search" />
 
 **APIs used**:
 - **Search API (Batch)**: Sends two queries simultaneously:
@@ -67,7 +67,7 @@ git checkout main              # For full demo
 ### 📋 Company Overview
 **What it does**: Extracts structured company information (founding date, headquarters, revenue, etc.) from the company's Wikipedia page.
 
-<img src="assets/company_overview.png" width="600" alt="Company Overview" />
+<img src="LuminaSearchConsole/assets/company_overview.png" width="600" alt="Company Overview" />
 
 **APIs used** (3-step workflow):
 1. **Search API**: Searches for the company name with `domains: ["wikipedia.org"]` filter to restrict results to Wikipedia only
@@ -79,11 +79,11 @@ git checkout main              # For full demo
 ### 📈 Stock Price Screenshot
 **What it does**: Automatically navigates to MSN Money, searches for the company, and captures a screenshot of the stock price chart.
 
-<img src="assets/stock_price_screenshot.png" width="600" alt="Stock Price Screenshot" />
+<img src="LuminaSearchConsole/assets/stock_price_screenshot.png" width="600" alt="Stock Price Screenshot" />
 
 This feature provides real-time progress updates during execution:
 
-<img src="assets/stock_price_sse.png" width="600" alt="CUA Processing Status" />
+<img src="LuminaSearchConsole/assets/stock_price_sse.png" width="600" alt="CUA Processing Status" />
 
 **APIs used**:
 - **Computer Use Agent (CUA) API**:
@@ -177,23 +177,23 @@ The application will start at **http://localhost:8400**.
 
 1. **Login**: First visit will redirect to Microsoft login page
    
-   <img src="assets/before_signin.png" width="600" alt="Login Screen" />
+   <img src="LuminaSearchConsole/assets/before_signin.png" width="600" alt="Login Screen" />
 
    After successful login, you will see the main search console:
 
-   <img src="assets/after_signin.png" width="600" alt="Main Console" />
+   <img src="LuminaSearchConsole/assets/after_signin.png" width="600" alt="Main Console" />
 
 2. **Search Testing**: 
    - Use example buttons (Microsoft, Apple, Tesla...) for quick start
    - Or enter your own search keywords
    - View real-time logs (expandable section at the top) to understand API call flow
 
-     <img src="assets/company_overview_log1.png" width="600" alt="API Logs" />
+     <img src="LuminaSearchConsole/assets/company_overview_log1.png" width="600" alt="API Logs" />
 
 3. **Explore Other Features**:
    - Click **"Open Content"** button in search results to test Open API & Click API
      
-     <img src="assets/open_and_click.png" width="600" alt="Open and Click" />
+     <img src="LuminaSearchConsole/assets/open_and_click.png" width="600" alt="Open and Click" />
 
    - Click **"Find Company Info"** button to test Find API
    - Click **"Stock Price Screenshot"** button to test CUA API
