@@ -66,21 +66,22 @@ namespace LuminaSearchConsole.Services
 
             // Add Partner Context headers if configured
             // These headers identify the caller and enable customized Lumina settings
+            // Header names follow Lumina API standard: x-ms-lumina-{field}
             if (_partnerContext != null && _partnerContext.HasPartnerContext)
             {
-                httpClient.DefaultRequestHeaders.Add("X-Partner", _partnerContext.Partner);
+                httpClient.DefaultRequestHeaders.Add("x-ms-lumina-partner", _partnerContext.Partner);
 
                 if (!string.IsNullOrEmpty(_partnerContext.ScenarioGroup))
-                    httpClient.DefaultRequestHeaders.Add("X-ScenarioGroup", _partnerContext.ScenarioGroup);
+                    httpClient.DefaultRequestHeaders.Add("x-ms-lumina-scenariogroup", _partnerContext.ScenarioGroup);
 
                 if (!string.IsNullOrEmpty(_partnerContext.ScenarioName))
-                    httpClient.DefaultRequestHeaders.Add("X-ScenarioName", _partnerContext.ScenarioName);
+                    httpClient.DefaultRequestHeaders.Add("x-ms-lumina-scenario", _partnerContext.ScenarioName);
 
                 if (!string.IsNullOrEmpty(_partnerContext.Application))
-                    httpClient.DefaultRequestHeaders.Add("X-Application", _partnerContext.Application);
+                    httpClient.DefaultRequestHeaders.Add("x-ms-lumina-application", _partnerContext.Application);
 
                 if (!string.IsNullOrEmpty(_partnerContext.Component))
-                    httpClient.DefaultRequestHeaders.Add("X-Component", _partnerContext.Component);
+                    httpClient.DefaultRequestHeaders.Add("x-ms-lumina-component", _partnerContext.Component);
             }
         }
 

@@ -118,7 +118,7 @@ cd Lumina-API-Demo
 
 #### 2. Configure Authentication
 
-This demo uses the **On-Behalf-Of (OBO)** flow (implemented in `Services/OboTokenService.cs`).
+This demo uses the **On-Behalf-Of (OBO)** flow (implemented in `LuminaSearchConsole/Services/OboTokenService.cs`).
 
 - If you plan to use **OBO**, ensure your Azure AD App Registration is configured for it, and you can use the `OboTokenService` provided in this sample directly.
 - If you need to use S2S or PFT, you and will need to implement your own token acquisition logic. Please refer to the Lumina documentation for implementation details.
@@ -164,6 +164,9 @@ Edit `appsettings.json` with your configuration. The template is configured for 
 #### 4. Run the Application
 
 ```bash
+# Navigate to project folder
+cd LuminaSearchConsole
+
 # Restore NuGet packages
 dotnet restore
 
@@ -202,38 +205,41 @@ The application will start at **http://localhost:8400**.
 
 ```
 .
-├── Controllers/
-│   └── HomeController.cs         # Main controller handling all page requests
+├── LuminaSearchConsole/              # Main project folder
+│   ├── Controllers/
+│   │   └── HomeController.cs         # Main controller handling all page requests
+│   │
+│   ├── Services/                     # Lumina API usage examples (core learning content)
+│   │   ├── LuminaSearchService.cs    # Search API demo
+│   │   ├── LuminaOpenService.cs      # Open & Click API demo
+│   │   ├── LuminaFindService.cs      # Find API demo
+│   │   ├── LuminaCuaService.cs       # Computer Use Agent API demo
+│   │   ├── PartnerContextHelper.cs   # Helper for applying Partner Context to API calls
+│   │   ├── OboTokenService.cs        # MSAL authentication
+│   │   ├── ApiLogService.cs          # Logging service for UI
+│   │   ├── CuaComputerPool.cs        # Helper for CUA session management
+│   │   └── SharedModels.cs           # Internal helper models
+│   │
+│   ├── Models/                       # View models and business models
+│   │   └── ViewModels.cs             # UI data models
+│   │
+│   ├── Views/                        # Razor view pages
+│   │   ├── Home/
+│   │   │   └── Index.cshtml          # Main page
+│   │   └── Shared/
+│   │       ├── _Layout.cshtml        # Layout template
+│   │       └── Error.cshtml          # Error page
+│   │
+│   ├── wwwroot/                      # Static assets (CSS/JS)
+│   │   ├── css/
+│   │   └── js/
+│   │
+│   ├── appsettings.Template.json     # Configuration template
+│   ├── AppConfiguration.cs           # Configuration class definitions (includes PartnerContextConfiguration)
+│   └── Program.cs                    # Application entry point
 │
-├── Services/                     # Lumina API usage examples (core learning content)
-│   ├── LuminaSearchService.cs    # Search API demo
-│   ├── LuminaOpenService.cs      # Open & Click API demo
-│   ├── LuminaFindService.cs      # Find API demo
-│   ├── LuminaCuaService.cs       # Computer Use Agent API demo
-│   ├── PartnerContextHelper.cs   # Helper for applying Partner Context to API calls
-│   ├── OboTokenService.cs        # MSAL authentication
-│   ├── ApiLogService.cs          # Logging service for UI
-│   ├── CuaComputerPool.cs        # Helper for CUA session management
-│   └── SharedModels.cs           # Internal helper models
-│
-├── Models/                       # View models and business models
-│   └── ViewModels.cs             # UI data models
-│
-├── Views/                        # Razor view pages
-│   ├── Home/
-│   │   └── Index.cshtml          # Main page
-│   └── Shared/
-│       ├── _Layout.cshtml        # Layout template
-│       └── Error.cshtml          # Error page
-│
-├── wwwroot/                      # Static assets (CSS/JS)
-│   ├── css/
-│   └── js/
-│
-├── appsettings.Template.json     # Configuration template
-├── AppConfiguration.cs           # Configuration class definitions (includes PartnerContextConfiguration)
-├── Program.cs                    # Application entry point
-└── README.md                     # This file
+├── InvokeSkillsAgent/                # Minimal API call example (see minimal-api-call branch)
+└── README.md                         # This file
 ```
 
 ## Partner Context Implementation
@@ -265,11 +271,11 @@ For services using direct HTTP calls (`LuminaCuaService`), Partner Context is pa
 
 ```csharp
 // In LuminaCuaService.cs
-httpClient.DefaultRequestHeaders.Add("X-Partner", partnerContext.Partner);
-httpClient.DefaultRequestHeaders.Add("X-ScenarioGroup", partnerContext.ScenarioGroup);
-httpClient.DefaultRequestHeaders.Add("X-ScenarioName", partnerContext.ScenarioName);
-httpClient.DefaultRequestHeaders.Add("X-Application", partnerContext.Application);
-httpClient.DefaultRequestHeaders.Add("X-Component", partnerContext.Component);
+httpClient.DefaultRequestHeaders.Add("x-ms-lumina-partner", partnerContext.Partner);
+httpClient.DefaultRequestHeaders.Add("x-ms-lumina-scenariogroup", partnerContext.ScenarioGroup);
+httpClient.DefaultRequestHeaders.Add("x-ms-lumina-scenario", partnerContext.ScenarioName);
+httpClient.DefaultRequestHeaders.Add("x-ms-lumina-application", partnerContext.Application);
+httpClient.DefaultRequestHeaders.Add("x-ms-lumina-component", partnerContext.Component);
 ```
 
 ### Configuration Flow
@@ -283,10 +289,10 @@ HomeController (receives via dependency injection)
         ↓
 Service constructors (passed as parameter)
         ↓
-┌─────────────────────────────────────┐
-│ SDK Services → LuminaApiOptions     │
-│ HTTP Services → X-* HTTP Headers    │
-└─────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────┐
+│ SDK Services → LuminaApiOptions                         │
+│ HTTP Services → x-ms-lumina-* HTTP Headers              │
+└─────────────────────────────────────────────────────────┘
         ↓
 Lumina API Backend
 ```
