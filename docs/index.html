@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina API Demo Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { margin-bottom: 8px; }
+        .subtitle { color: #666; margin-bottom: 24px; }
+        .info { background: #e8f4fd; border: 1px solid #b3d9f2; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 14px; }
+        .info code { background: #d0e8f5; padding: 2px 6px; border-radius: 3px; }
+        .cards { display: flex; flex-direction: column; gap: 16px; }
+        .card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
+        .card h3 { margin-bottom: 4px; }
+        .card .author { color: #888; font-size: 13px; margin-bottom: 8px; }
+        .card .desc { margin-bottom: 12px; font-size: 14px; }
+        .card .meta { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+        .badge-dotnet { background: #512bd4; color: #fff; }
+        .badge-node { background: #339933; color: #fff; }
+        .badge-port { background: #eee; color: #555; }
+        .links { display: flex; gap: 12px; }
+        .links a { text-decoration: none; font-size: 14px; padding: 6px 14px; border-radius: 4px; }
+        .link-run { background: #0078d4; color: #fff; }
+        .link-run:hover { background: #106ebe; }
+        .link-source { background: #eee; color: #333; }
+        .link-source:hover { background: #ddd; }
+        .link-disabled { background: #ccc; color: #888; cursor: default; pointer-events: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lumina API Demo Lab</h1>
+        <p class="subtitle">Team vibe coding practice projects demonstrating Lumina API use cases</p>
+
+        <div class="info">
+            <strong>How to run:</strong> Open a terminal, <code>cd projects/&lt;project-name&gt;</code>, then <code>dotnet run</code> (C#) or <code>npm install</code> (Node.js). Each C# project runs on its own port.
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Competitor Trending News</h3>
+                <div class="author">by sunting</div>
+                <div class="desc">Competitive intelligence tool: automatically track competitor product launches, market trends, and trending news using Lumina Search + Open + LLM APIs.</div>
+                <div class="meta">
+                    <span class="badge badge-dotnet">C# / .NET 8</span>
+                    <span class="badge badge-port">Port 8401</span>
+                </div>
+                <div class="links">
+                    <a class="link-run" href="http://localhost:8401" target="_blank">Run locally</a>
+                    <a class="link-source" href="https://github.com/ai-microsoft/Lumina-API-Demo/tree/lab/projects/competitor-trending-news" target="_blank">View source</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>AI Newsletter (AI Radar)</h3>
+                <div class="author">by Doris</div>
+                <div class="desc">Automated AI news aggregation system: scrapes ChatGPT, Gemini, Genspark discussions, generates McKinsey-style summaries, and auto-uploads to Google NotebookLM for podcast generation.</div>
+                <div class="meta">
+                    <span class="badge badge-node">Node.js</span>
+                    <span class="badge badge-port">Script tool (no web server)</span>
+                </div>
+                <div class="links">
+                    <a class="link-disabled" href="#">No web UI</a>
+                    <a class="link-source" href="https://github.com/ai-microsoft/Lumina-API-Demo/tree/lab/projects/ai-newsletter" target="_blank">View source</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
