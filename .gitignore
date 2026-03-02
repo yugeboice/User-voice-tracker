@@ -53,6 +53,13 @@ DataProtection-Keys/
 # Image assets (screenshots, generated images, etc.)
 # assets/
 
+# Node.js
+node_modules/
+
+# Secrets & personal data
+user_profile.json
+.claude/
+
 # Lumina Doc site for reference
 partner/
 
