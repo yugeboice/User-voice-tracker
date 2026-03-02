@@ -142,7 +142,7 @@
                 <div class="step-content">
                     <div class="step-title">在主页面登录</div>
                     <div class="step-desc">
-                        访问 <span class="highlight">http://localhost:8400/index.html</span><br>
+                        访问 <span class="highlight">http://localhost:8402/index.html</span><br>
                         点击 <strong>"登录 Microsoft 账号"</strong> 按钮完成登录
                     </div>
                 </div>
@@ -398,7 +398,7 @@
                     <div class="step-title">方法二：使用隐私模式</div>
                     <div class="step-desc">
                         按 <strong>Ctrl + Shift + N</strong> (Chrome/Edge) 或 <strong>Ctrl + Shift + P</strong> (Firefox)<br>
-                        在隐私窗口中访问 <code>http://localhost:8400/companion.html</code>
+                        在隐私窗口中访问 <code>http://localhost:8402/companion.html</code>
                     </div>
                 </div>
             </div>
@@ -422,7 +422,7 @@
             • 新配置使用 ClientId: <code>04b07795-8ddb-461a-bbee-02f9e1bf7b46</code><br>
             • Authority: <code>https://login.microsoftonline.com/common</code><br>
             • 支持任何Microsoft个人账号或工作/学校账号登录<br>
-            • RedirectUri: <code>http://localhost:8400/companion.html</code>
+            • RedirectUri: <code>http://localhost:8402/companion.html</code>
         </div>
 
         <div class="btn-group">
@@ -437,7 +437,7 @@
         }
 
         function copyUrl() {
-            const url = 'http://localhost:8400/companion.html';
+            const url = 'http://localhost:8402/companion.html';
             navigator.clipboard.writeText(url).then(() => {
                 alert('✅ 链接已复制到剪贴板！\n\n' + url);
             });
@@ -462,7 +462,7 @@
 
             // 打开陪伴聊天页面
             setTimeout(() => {
-                window.open('http://localhost:8400/companion.html', '_blank');
+                window.open('http://localhost:8402/companion.html', '_blank');
             }, 500);
         }
 

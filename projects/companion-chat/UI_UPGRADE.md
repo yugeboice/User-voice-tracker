@@ -103,7 +103,7 @@ AI回复（左侧，白色）:
 
 1. **刷新浏览器**
    ```
-   访问: http://localhost:8400
+   访问: http://localhost:8402
    按 Ctrl+F5 强制刷新
    ```
 
@@ -223,4 +223,4 @@ function addChatMessage(role, content) {
 - ✅ **体验**：更友好的用户界面
 - ✅ **细节**：更精致的设计元素
 
-现在就去试试吧！**http://localhost:8400** 🚀
+现在就去试试吧！**http://localhost:8402** 🚀

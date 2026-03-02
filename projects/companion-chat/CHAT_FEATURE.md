@@ -13,7 +13,7 @@
 ```bash
 dotnet run
 ```
-然后打开浏览器访问: http://localhost:8400
+然后打开浏览器访问: http://localhost:8402
 
 ### 2. 登录
 - 点击"登录 Microsoft 账号"按钮

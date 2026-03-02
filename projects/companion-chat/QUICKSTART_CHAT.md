@@ -9,7 +9,7 @@
    ```
 
 2. **打开浏览器**
-   - 访问: http://localhost:8400
+   - 访问: http://localhost:8402
 
 3. **开始聊天**
    - 登录 Microsoft 账号

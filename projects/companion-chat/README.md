@@ -1,4 +1,6 @@
-# Lumina API - 最小化实现 Demo
+[← Back to Lab Index](../../README.md)
+
+# Lumina API - Companion Chat & Multi-Feature Demo
 
 一个最小化的 Lumina API 调用示例。帮助你快速掌握 API 基本用法，并在简洁的代码基础上自由扩展、设计你自己的功能。
 
@@ -13,7 +15,8 @@
 ```powershell
 git clone https://github.com/ai-microsoft/Lumina-API-Demo.git
 cd Lumina-API-Demo
-git checkout minimal-api-call
+git checkout lab
+cd projects/companion-chat
 ```
 
 ---
@@ -85,7 +88,7 @@ npx copilot-api@0.5.14 start
 dotnet run
 ```
 
-🎉 **大功告成！** 打开浏览器访问 **http://localhost:8400**，你会看到一个简洁的 Web 界面，可以尝试各种 Lumina API 功能：
+🎉 **大功告成！** 打开浏览器访问 **http://localhost:8402**，你会看到一个简洁的 Web 界面，可以尝试各种 Lumina API 功能：
 
 - **Search + LLM**：Web 搜索，可选用 LLM 总结结果
 - **Open + Find**：打开网页获取内容，可选在页面内查找

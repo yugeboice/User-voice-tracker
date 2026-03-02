@@ -4,14 +4,14 @@ namespace MinimalApiCall;
 
 /// <summary>
 /// Lumina API Demo - Simple Web UI for PM learning.
-/// Run: dotnet run → Open http://localhost:8400
+/// Run: dotnet run → Open http://localhost:8402
 /// </summary>
 class Program
 {
     static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        builder.WebHost.UseUrls("http://localhost:8400");
+        builder.WebHost.UseUrls("http://localhost:8402");
 
         var app = builder.Build();
         app.UseStaticFiles();
@@ -574,7 +574,7 @@ class Program
         Console.WriteLine();
         Console.WriteLine("╔══════════════════════════════════════════════════════╗");
         Console.WriteLine("║        Lumina API Demo - Web UI                      ║");
-        Console.WriteLine("║        Open: http://localhost:8400                   ║");
+        Console.WriteLine("║        Open: http://localhost:8402                   ║");
         Console.WriteLine("╚══════════════════════════════════════════════════════╝");
         Console.WriteLine();
 

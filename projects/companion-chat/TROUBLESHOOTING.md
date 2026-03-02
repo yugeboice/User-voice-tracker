@@ -91,7 +91,7 @@ copilot-api --port 4141
 
 现在你可以直接测试聊天功能了！
 
-1. **访问**: http://localhost:8400
+1. **访问**: http://localhost:8402
 2. **登录** Microsoft 账号
 3. **输入问题**，例如："2024年人工智能有什么突破？"
 4. **查看结果**：
@@ -110,7 +110,7 @@ copilot-api --port 4141
 **解决方案**：
 ```bash
 # 检查是否已启动
-netstat -ano | findstr :8400
+netstat -ano | findstr :8402
 
 # 重新启动
 cd Lumina-API-Demo
@@ -191,4 +191,4 @@ private string BuildFallbackSummary(string query, List<SearchResultItem> results
 2. 浏览器控制台（F12）的错误
 3. `appsettings.json` 配置文件
 
-**现在应用已经启动，可以访问 http://localhost:8400 开始使用了！** 🚀
+**现在应用已经启动，可以访问 http://localhost:8402 开始使用了！** 🚀

@@ -54,8 +54,8 @@
    ```
 
 4. **访问应用**
-   - 主页面: http://localhost:8400/index.html
-   - 陪伴聊天: http://localhost:8400/companion.html
+   - 主页面: http://localhost:8402/index.html
+   - 陪伴聊天: http://localhost:8402/companion.html
 
 ---
 

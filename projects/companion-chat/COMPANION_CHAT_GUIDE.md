@@ -7,13 +7,13 @@
 ## 🚀 使用方法
 
 ### 方式1：从主页面进入（推荐）
-1. 访问 `http://localhost:8400/index.html`
+1. 访问 `http://localhost:8402/index.html`
 2. 登录Microsoft账号
 3. 点击顶部的 **✨ 陪伴模式** 按钮
 4. 将在新标签页打开科幻风格的陪伴聊天界面
 
 ### 方式2：直接访问
-直接在浏览器打开：`http://localhost:8400/companion.html`
+直接在浏览器打开：`http://localhost:8402/companion.html`
 
 ## ✨ 主要特性
 
@@ -146,7 +146,7 @@ public class CompanionChatResponse {
 ### 问题2：消息发送失败
 **检查**：
 1. 确认已登录（检查浏览器Console）
-2. 确认后端服务运行在 localhost:8400
+2. 确认后端服务运行在 localhost:8402
 3. 查看Console错误日志
 
 ### 问题3：语音无法播放
@@ -177,7 +177,7 @@ public class CompanionChatResponse {
 ### 测试API
 ```bash
 # 使用curl测试（需要先获取token）
-curl -X POST http://localhost:8400/api/companion-chat \
+curl -X POST http://localhost:8402/api/companion-chat \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -d '{"sessionId":"test-123","message":"你好","personality":"默认"}'

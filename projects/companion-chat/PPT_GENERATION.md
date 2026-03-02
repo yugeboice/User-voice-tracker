@@ -223,7 +223,7 @@ bool shouldGeneratePpt = (userMessage.Contains("生成PPT") ||
 
 ## 🚀 快速测试
 
-1. 访问 http://localhost:8400
+1. 访问 http://localhost:8402
 2. 开启智能模式（点击🧠按钮）
 3. 输入: "帮我做AI发展的市场调研，并生成PPT"
 4. 等待Agent完成调研和生成
