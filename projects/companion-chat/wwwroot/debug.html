@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Debug Login</title>
+</head>
+<body>
+    <h1>Debug Login Page</h1>
+    <button id="loginBtn" onclick="console.log('onclick fired'); doLogin()">登录 Microsoft 账号</button>
+    <p id="loginStatus"></p>
+    
+    <script>
+        console.log('Script loaded');
+        
+        async function doLogin() {
+            console.log('doLogin function called');
+            const loginBtn = document.getElementById('loginBtn');
+            const loginStatus = document.getElementById('loginStatus');
+            
+            console.log('Elements found:', loginBtn, loginStatus);
+            
+            loginBtn.disabled = true;
+            loginStatus.innerHTML = '<span style="color: blue;">正在登录...</span>';
+
+            try {
+                console.log('Fetching /api/login');
+                const res = await fetch('/api/login', { method: 'POST' });
+                console.log('Response received:', res.status);
+                const data = await res.json();
+                console.log('Data:', data);
+                
+                if (data.success) {
+                    loginStatus.innerHTML = '<span style="color: green;">✅ 登录成功！</span>';
+                } else {
+                    loginStatus.innerHTML = `<span style="color: red;">登录失败: ${data.message}</span>`;
+                    loginBtn.disabled = false;
+                }
+            } catch (e) {
+                console.error('Error:', e);
+                loginStatus.innerHTML = `<span style="color: red;">Error: ${e.message}</span>`;
+                loginBtn.disabled = false;
+            }
+        }
+        
+        // Also add event listener
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            console.log('addEventListener fired');
+        });
+        
+        console.log('Script finished loading');
+    </script>
+</body>
+</html>
