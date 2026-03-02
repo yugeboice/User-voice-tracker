@@ -17,6 +17,7 @@ Open `docs/index.html` in your browser to see the project landing page with link
 | Project | Author | Tech Stack | Port | Description |
 |---------|--------|-----------|------|-------------|
 | [Competitor Trending News](./projects/competitor-trending-news/) | sunting | C#/.NET 8 | 8401 | Competitive intelligence tool: track competitor news and market trends |
+| [Companion Chat](./projects/companion-chat/) | fangwu | C#/.NET 8 | 8402 | Multi-feature demo: companion chat, PPT generation, TTS, local knowledge base |
 | [AI Newsletter (AI Radar)](./projects/ai-newsletter/) | Doris | Node.js | — | Automated AI news aggregation from ChatGPT, Gemini, Genspark |
 
 > More projects coming soon.
@@ -53,7 +54,7 @@ npm install
 
 1. Create a new folder under `projects/` with a descriptive name
 2. Include all necessary files for independent build and run
-3. Assign a unique port (next available: 8403) in `Program.cs`
+3. Assign a unique port (next available: 8404) in `Program.cs`
 4. Add a `README.md` with setup and usage instructions
 5. Update this README and `docs/index.html` with your project info
 6. Submit a PR to the `lab` branch
