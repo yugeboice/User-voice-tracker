@@ -1,3 +1,5 @@
+[← Back to Lab Index](../../README.md)
+
 # Lumina API - 最小化实现 Demo
 
 一个最小化的 Lumina API 调用示例。帮助你快速掌握 API 基本用法，并在简洁的代码基础上自由扩展、设计你自己的功能。
@@ -13,7 +15,8 @@
 ```powershell
 git clone https://github.com/ai-microsoft/Lumina-API-Demo.git
 cd Lumina-API-Demo
-git checkout minimal-api-call
+git checkout lab
+cd projects/competitor-trending-news
 ```
 
 ---

@@ -1,4 +1,6 @@
-# 🚀 AI Radar - 自动化 AI 情报系统
+[← Back to Lab Index](../../README.md)
+
+# AI Radar - 自动化 AI 情报系统
 
 **每天一键汇总全球最新 AI 动态，自动生成行业周报 + 音频播客，让你永远领先市场。**
 
