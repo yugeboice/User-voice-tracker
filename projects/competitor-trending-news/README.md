@@ -85,7 +85,7 @@ npx copilot-api@0.5.14 start
 dotnet run
 ```
 
-🎉 **大功告成！** 打开浏览器访问 **http://localhost:8400**，你会看到一个简洁的 Web 界面，可以尝试各种 Lumina API 功能：
+🎉 **大功告成！** 打开浏览器访问 **http://localhost:8401**，你会看到一个简洁的 Web 界面，可以尝试各种 Lumina API 功能：
 
 - **Search + LLM**：Web 搜索，可选用 LLM 总结结果
 - **Open + Find**：打开网页获取内容，可选在页面内查找
