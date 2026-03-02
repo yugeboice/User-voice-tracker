@@ -1,0 +1,25 @@
+{
+  "name": "auto_ainewsletter",
+  "version": "1.0.0",
+  "description": "AI Radar - 自动化情报系统",
+  "main": "run_daily.js",
+  "scripts": {
+    "daily": "node run_daily.js",
+    "scrape": "node run_daily.js --scrape-only",
+    "upload": "node run_daily.js --skip-scrape",
+    "chatgpt": "node scrape_chatgpt_chrome.js",
+    "gemini": "node scrape_gemini_debug.js",
+    "genspark": "node scrape_genspark.js",
+    "merge": "node merge_reports.js",
+    "notebooklm": "node upload_notebooklm.js",
+    "summary": "node generate_summary.js",
+    "test": "echo \"运行: npm run daily\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "playwright": "^1.57.0"
+  }
+}

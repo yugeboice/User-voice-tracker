@@ -1,0 +1,40 @@
+[2026-01-18T13:35:57.065Z] SUCCESS: 报告已保存：/Users/raoyuhuizi/vibe/Auto_AInewsletter/reports/report-chatgpt-2026-01-18.md
+[2026-01-18T13:37:46.967Z] [NotebookLM] SUCCESS: 文件已上传：/Users/raoyuhuizi/vibe/Auto_AInewsletter/reports/combined-2026-01-18.md
+[2026-01-19T01:02:53.421Z] FAILED: page.goto: Timeout 60000ms exceeded.
+Call log:
+[2m  - navigating to "https://chatgpt.com/", waiting until "domcontentloaded"[22m
+
+[2026-01-21T01:01:03.673Z] FAILED: page.goto: Timeout 60000ms exceeded.
+Call log:
+[2m  - navigating to "https://chatgpt.com/", waiting until "domcontentloaded"[22m
+
+[2026-01-21T02:48:53.377Z] SUCCESS: 报告已保存：/Users/raoyuhuizi/vibe/Auto_AInewsletter/reports/report-chatgpt-2026-01-21.md
+[2026-01-21T02:51:29.321Z] SUCCESS: 报告已保存：/Users/raoyuhuizi/vibe/Auto_AInewsletter/reports/report-chatgpt-2026-01-21.md
+[2026-01-21T02:52:27.290Z] [NotebookLM] FAILED: 未找到笔记本「AI 行业情报」，请检查名称
+[2026-01-21T03:02:25.333Z] SUCCESS: 报告已保存：/Users/raoyuhuizi/vibe/Auto_AInewsletter/reports/report-chatgpt-2026-01-21.md
+[2026-01-21T03:03:25.178Z] [NotebookLM] FAILED: 未找到笔记本「AI 行业情报」，请检查名称
+[2026-01-21T03:05:40.064Z] [NotebookLM] FAILED: 未找到笔记本「AI 行业情报」，请检查名称
+[2026-01-21T03:24:22.281Z] [NotebookLM] FAILED: 未找到"添加来源"按钮
+[2026-01-21T03:28:51.438Z] [NotebookLM] SUCCESS: 文件已上传：/Users/raoyuhuizi/vibe/Auto_AInewsletter/reports/combined-2026-01-21.md
+[2026-01-21T03:38:31.350Z] SUCCESS: 报告已保存：/Users/raoyuhuizi/vibe/Auto_AInewsletter/reports/report-chatgpt-2026-01-21.md
+[2026-01-21T03:40:28.538Z] [NotebookLM] SUCCESS: 文件已上传：/Users/raoyuhuizi/vibe/Auto_AInewsletter/reports/combined-2026-01-21.md
+[2026-01-22T01:01:03.044Z] FAILED: page.goto: Timeout 60000ms exceeded.
+Call log:
+[2m  - navigating to "https://chatgpt.com/", waiting until "domcontentloaded"[22m
+
+[2026-01-29T01:07:43.368Z] FAILED: page.goto: Timeout 60000ms exceeded.
+Call log:
+[2m  - navigating to "https://chatgpt.com/", waiting until "domcontentloaded"[22m
+
+[2026-01-30T01:01:05.629Z] FAILED: page.goto: Timeout 60000ms exceeded.
+Call log:
+[2m  - navigating to "https://chatgpt.com/", waiting until "domcontentloaded"[22m
+
+[2026-01-30T08:55:09.459Z] SUCCESS: 报告已保存：/Users/raoyuhuizi/vibe/Auto_AInewsletter/reports/report-chatgpt-2026-01-30.md
+[2026-01-30T09:03:03.659Z] SUCCESS: 报告已保存：/Users/raoyuhuizi/vibe/Auto_AInewsletter/reports/report-chatgpt-2026-01-30.md
+[2026-01-30T09:04:24.519Z] [NotebookLM] SUCCESS: 文件已上传：/Users/raoyuhuizi/vibe/Auto_AInewsletter/reports/combined-2026-01-30.md
+[2026-02-05T06:33:20.201Z] SUCCESS: 报告已保存：C:\Users\dorisrao\vibeprojects\Doris_AInewsletter\reports\report-chatgpt-2026-02-05.md
+[2026-02-05T06:38:38.651Z] SUCCESS: 报告已保存：C:\Users\dorisrao\vibeprojects\Doris_AInewsletter\reports\report-chatgpt-2026-02-05.md
+[2026-02-05T06:41:40.064Z] [NotebookLM] SUCCESS: 文件已上传：C:\Users\dorisrao\vibeprojects\Doris_AInewsletter\reports\combined-2026-02-05.md
+[2026-02-05T07:07:46.266Z] SUCCESS: 报告已保存：C:\Users\dorisrao\vibeprojects\Doris_AInewsletter\reports\report-chatgpt-2026-02-05.md
+[2026-02-05T07:09:24.752Z] [NotebookLM] SUCCESS: 文件已上传：C:\Users\dorisrao\vibeprojects\Doris_AInewsletter\reports\combined-2026-02-05.md

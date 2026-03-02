@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+
+# Chrome user data (contains login sessions - sensitive)
+chrome-data/
+chrome-data-chatgpt/
+chrome-data-gemini/
+chrome-data-genspark/
+chrome-data-notebooklm/
+
+# Auth storage (sensitive)
+auth/*.json
+!auth/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/*.log
+!logs/.gitkeep
+
+# Reports (generated files)
+reports/*.md
+reports/*.html
+reports/*.png
+!reports/.gitkeep
+
+# Screenshots (debug)
+screenshots/
+*.png
+
+# Editor
+.vscode/
+*.swp
+*~
+
+# Archives
+*.zip
+AInews_medical.zip
