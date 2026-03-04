@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Notebooks</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: #f8f9fa; 
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            color: #202124;
+            font-weight: 400;
+        }
+        
+        .header .back-btn {
+            background: white;
+            border: 1px solid #dadce0;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #5f6368;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .header .back-btn:hover {
+            background: #f8f9fa;
+        }
+        
+        .section-header {
+            max-width: 1200px;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-header h2 {
+            font-size: 22px;
+            color: #202124;
+            font-weight: 400;
+        }
+        
+        .create-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .create-btn:hover {
+            background: #1765cc;
+        }
+        
+        .notebooks-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .notebook-card {
+            background: white;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .notebook-card:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-color: #1a73e8;
+        }
+        
+        .notebook-icon {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+        
+        .notebook-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 5px;
+        }
+        
+        .notebook-description {
+            font-size: 13px;
+            color: #5f6368;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            min-height: 36px;
+        }
+        
+        .notebook-meta {
+            font-size: 12px;
+            color: #80868b;
+            display: flex;
+            justify-content: space-between;
+            padding-top: 10px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #d93025;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s, background 0.2s;
+            z-index: 10;
+        }
+        
+        .delete-btn:hover {
+            background: #c5221f;
+        }
+        
+        .notebook-card:hover .delete-btn {
+            opacity: 1;
+        }
+        
+        .notebook-card {
+            position: relative;
+        }
+        
+        .empty-state {
+            max-width: 1200px;
+            margin: 100px auto;
+            text-align: center;
+            color: #5f6368;
+        }
+        
+        .empty-state .icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+        
+        .empty-state h3 {
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        
+        .empty-state p {
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+        
+        .modal-header {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #202124;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: #5f6368;
+            margin-bottom: 8px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .btn-cancel {
+            background: white;
+            border: 1px solid #dadce0;
+            padding: 8px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #5f6368;
+            font-size: 14px;
+        }
+        
+        .btn-cancel:hover {
+            background: #f8f9fa;
+        }
+        
+        .btn-create {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .btn-create:hover {
+            background: #1765cc;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #5f6368;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📓 Notebook</h1>
+        <a href="/" class="back-btn">← 返回首页</a>
+    </div>
+    
+    <div class="section-header">
+        <h2>我的笔记本</h2>
+        <button class="create-btn" onclick="openCreateModal()">+ 新建笔记本</button>
+    </div>
+    
+    <div id="loadingState" class="loading" style="display: none;">
+        Loading notebooks...
+    </div>
+    
+    <div id="emptyState" class="empty-state" style="display: none;">
+        <div class="icon">📓</div>
+        <h3>还没有笔记本</h3>
+        <p>创建第一个笔记本开始你的学习之旅</p>
+        <button class="create-btn" onclick="openCreateModal()">+ 新建笔记本</button>
+    </div>
+    
+    <div id="notebooksGrid" class="notebooks-grid"></div>
+    
+    <!-- Create Notebook Modal -->
+    <div id="createModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">新建笔记本</div>
+            <form id="createForm" onsubmit="createNotebook(event)">
+                <div class="form-group">
+                    <label for="notebookTitle">标题 *</label>
+                    <input type="text" id="notebookTitle" required placeholder="输入笔记本标题">
+                </div>
+                <div class="form-group">
+                    <label for="notebookDescription">描述（可选）</label>
+                    <textarea id="notebookDescription" placeholder="添加描述帮助你记住这个笔记本的用途"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeCreateModal()">取消</button>
+                    <button type="submit" class="btn-create">创建</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <h2>确认删除</h2>
+            <p id="deleteMessage">确定要删除这个笔记本吗？此操作无法撤销。</p>
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" onclick="closeDeleteModal()">取消</button>
+                <button type="button" class="btn-primary" onclick="executeDelete()" style="background: #d93025;">删除</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let notebooks = [];
+        
+        // Load notebooks on page load
+        window.addEventListener('DOMContentLoaded', loadNotebooks);
+        
+        async function loadNotebooks() {
+            const loadingState = document.getElementById('loadingState');
+            const emptyState = document.getElementById('emptyState');
+            const notebooksGrid = document.getElementById('notebooksGrid');
+            
+            loadingState.style.display = 'block';
+            emptyState.style.display = 'none';
+            notebooksGrid.innerHTML = '';
+            
+            try {
+                const res = await fetch('/api/notebooks');
+                const data = await res.json();
+                notebooks = data.notebooks || [];
+                
+                loadingState.style.display = 'none';
+                
+                if (notebooks.length === 0) {
+                    notebooksGrid.style.display = 'none';
+                    emptyState.style.display = 'block';
+                } else {
+                    notebooksGrid.style.display = 'grid';
+                    emptyState.style.display = 'none';
+                    renderNotebooks();
+                }
+            } catch (e) {
+                console.error('Failed to load notebooks:', e);
+                loadingState.style.display = 'none';
+                emptyState.style.display = 'block';
+            }
+        }
+        
+        function renderNotebooks() {
+            const notebooksGrid = document.getElementById('notebooksGrid');
+            notebooksGrid.innerHTML = notebooks.map(nb => {
+                const createdDate = new Date(nb.createdAt).toLocaleDateString('zh-CN');
+                return `
+                    <div class="notebook-card" data-notebook-id="${nb.id}">
+                        <button class="delete-btn" data-notebook-id="${nb.id}" data-notebook-title="${escapeHtml(nb.title)}">🗑️ 删除</button>
+                        <div class="notebook-icon">📓</div>
+                        <div class="notebook-title">${escapeHtml(nb.title)}</div>
+                        <div class="notebook-description">${escapeHtml(nb.description) || '暂无描述'}</div>
+                        <div class="notebook-meta">
+                            <span>${createdDate}</span>
+                            <span>${nb.sourceCount} 个来源</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Add event listeners after rendering
+            document.querySelectorAll('.notebook-card').forEach(card => {
+                const notebookId = card.dataset.notebookId;
+                card.addEventListener('click', (e) => {
+                    // Only open if not clicking on delete button
+                    if (!e.target.closest('.delete-btn')) {
+                        openNotebook(notebookId);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const notebookId = btn.dataset.notebookId;
+                    const notebookTitle = btn.dataset.notebookTitle;
+                    confirmDelete(notebookId, notebookTitle);
+                });
+            });
+        }
+        
+        function openNotebook(notebookId) {
+            window.location.href = `notebook.html?id=${notebookId}`;
+        }
+        
+        function openCreateModal() {
+            document.getElementById('createModal').classList.add('active');
+            document.getElementById('notebookTitle').focus();
+        }
+        
+        function closeCreateModal() {
+            document.getElementById('createModal').classList.remove('active');
+            document.getElementById('createForm').reset();
+        }
+        
+        async function createNotebook(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('notebookTitle').value.trim();
+            const description = document.getElementById('notebookDescription').value.trim();
+            
+            if (!title) return;
+            
+            try {
+                const res = await fetch('/api/notebooks', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, description })
+                });
+                
+                const data = await res.json();
+                
+                if (data.success) {
+                    closeCreateModal();
+                    // Directly open the new notebook
+                    openNotebook(data.notebook.id);
+                } else {
+                    alert('创建失败: ' + (data.message || 'Unknown error'));
+                }
+            } catch (e) {
+                console.error('Failed to create notebook:', e);
+                alert('创建失败，请稍后重试');
+            }
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        let deleteNotebookId = null;
+        
+        function confirmDelete(notebookId, notebookTitle) {
+            deleteNotebookId = notebookId;
+            document.getElementById('deleteMessage').textContent = 
+                `确定要删除笔记本"${notebookTitle}"吗？此操作无法撤销。`;
+            document.getElementById('deleteModal').classList.add('active');
+        }
+        
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').classList.remove('active');
+            deleteNotebookId = null;
+        }
+        
+        async function executeDelete() {
+            if (!deleteNotebookId) return;
+            
+            try {
+                const response = await fetch(`/api/notebooks/${deleteNotebookId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (response.ok) {
+                    const deletedId = deleteNotebookId;
+                    closeDeleteModal();
+                    
+                    // Remove from local array and re-render
+                    notebooks = notebooks.filter(nb => nb.id !== deletedId);
+                    
+                    const notebooksGrid = document.getElementById('notebooksGrid');
+                    const emptyState = document.getElementById('emptyState');
+                    
+                    if (notebooks.length === 0) {
+                        notebooksGrid.style.display = 'none';
+                        emptyState.style.display = 'block';
+                    } else {
+                        notebooksGrid.style.display = 'grid';
+                        emptyState.style.display = 'none';
+                        renderNotebooks();
+                    }
+                } else {
+                    alert('删除失败，请稍后重试');
+                }
+            } catch (e) {
+                console.error('Failed to delete notebook:', e);
+                alert('删除失败，请稍后重试');
+            }
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('createModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCreateModal();
+            }
+        });
+        
+        document.getElementById('deleteModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeDeleteModal();
+            }
+        });
+    </script>
+</body>
+</html>

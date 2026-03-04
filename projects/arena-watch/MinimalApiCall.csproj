@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>MinimalApiCall</RootNamespace>
+  </PropertyGroup>
+
+  <!-- 排除 partner 文件夹（参考文档，不参与编译） -->
+  <ItemGroup>
+    <Compile Remove="partner\**" />
+    <Content Remove="partner\**" />
+    <EmbeddedResource Remove="partner\**" />
+    <None Remove="partner\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Lumina" Version="2025.11.26.128" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.77.1" />
+  </ItemGroup>
+
+</Project>

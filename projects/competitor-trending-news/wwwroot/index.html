@@ -160,16 +160,10 @@
     <div class="container">
         <h1>🔮 Lumina API Demo</h1>
 
-        <!-- Login Section -->
-        <div id="loginSection" class="section login-section">
-            <h2>🔐 登录</h2>
-            <p>点击下方按钮登录 Microsoft 账号以使用 Lumina API</p>
-            <button onclick="doLogin()" id="loginBtn">登录 Microsoft 账号</button>
-            <p id="loginStatus" style="margin-top: 15px;"></p>
-        </div>
+        <!-- Login handled by Launcher - skip directly to main content -->
 
-        <!-- Main Content (hidden until login) -->
-        <div id="mainContent" class="hidden">
+        <!-- Main Content -->
+        <div id="mainContent">
             <!-- Trending News Section -->
             <div class="section">
                 <h2>📰 竞品热点新闻跟踪</h2>
@@ -420,33 +414,8 @@
             }
         }
 
-        async function doLogin() {
-            const loginBtn = document.getElementById('loginBtn');
-            const loginStatus = document.getElementById('loginStatus');
-            
-            loginBtn.disabled = true;
-            loginStatus.innerHTML = '<span class="loading">正在登录，请在弹出的浏览器窗口中完成认证...</span>';
-
-            try {
-                const res = await fetch('/api/login', { method: 'POST' });
-                const data = await res.json();
-                
-                if (data.success) {
-                    loginStatus.innerHTML = '<span style="color: green;">✅ 登录成功！</span>';
-                    setTimeout(() => {
-                        document.getElementById('loginSection').classList.add('hidden');
-                        document.getElementById('mainContent').classList.remove('hidden');
-                        initCompetitorTags();
-                    }, 500);
-                } else {
-                    loginStatus.innerHTML = `<span class="error">登录失败: ${data.message}</span>`;
-                    loginBtn.disabled = false;
-                }
-            } catch (e) {
-                loginStatus.innerHTML = `<span class="error">Error: ${e.message}</span>`;
-                loginBtn.disabled = false;
-            }
-        }
+        // doLogin no longer needed — auth handled by Launcher
+        function doLogin() { /* no-op: handled by Launcher */ }
 
         async function doSearch() {
             const query = document.getElementById('searchQuery').value;
@@ -667,6 +636,10 @@
                 resultDiv.innerHTML = `<p class="error">Error: ${e.message}</p>`;
             }
         }
+    </script>
+    <script>
+        // Auto-init on page load (login handled by Launcher)
+        initCompetitorTags();
     </script>
 </body>
 </html>

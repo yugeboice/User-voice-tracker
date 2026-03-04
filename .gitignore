@@ -60,6 +60,9 @@ node_modules/
 user_profile.json
 .claude/
 
+# Claude temp directories
+tmpclaude-*/
+
 # Lumina Doc site for reference
 partner/
 

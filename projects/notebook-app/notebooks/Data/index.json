@@ -1,0 +1,20 @@
+[
+  {
+    "id": "55b2aeae-4b8f-4a6a-b4b3-9a91df044996",
+    "title": "1",
+    "description": "",
+    "createdAt": "2026-03-03T09:25:13.4089285Z",
+    "updatedAt": "2026-03-03T09:25:51.4871009Z",
+    "sourceCount": 1,
+    "isDeleted": false
+  },
+  {
+    "id": "55d3a8fa-c3ca-4658-b07c-67da1d19fd2e",
+    "title": "Test Notebook",
+    "description": "test",
+    "createdAt": "2026-03-03T09:22:28.2786883Z",
+    "updatedAt": "2026-03-03T09:22:40.9400473Z",
+    "sourceCount": 0,
+    "isDeleted": true
+  }
+]

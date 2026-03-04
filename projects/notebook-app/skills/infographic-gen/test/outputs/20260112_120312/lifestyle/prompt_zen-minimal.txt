@@ -1,0 +1,172 @@
+Generated at: 2026-01-12 12:21:45
+
+Create a professional, educational infographic in LANDSCAPE format (16:9 or 4:3 aspect ratio) based on this specification:
+
+# INFOGRAPHIC BRIEF
+
+- **Title**: Transform Your Daily Life Through Mindful Living
+- **One-sentence takeaway**: Small mindful practices create lasting wellness through sustainable habits that nourish mind, body, and spirit
+- **Topic domain**: lifestyle
+- **Tone**: calm
+- **Aspect ratio**: landscape (16:9)
+- **Target audience**: Adults seeking practical wellness strategies for busy lifestyles
+
+# CONTENT OUTLINE
+
+**a) What it is**
+Mindful living is the practice of being fully present in each moment while creating sustainable habits that support overall wellness. It's about intention over perfection, focusing on small consistent choices rather than dramatic lifestyle overhauls.
+
+**b) Why it matters**
+- Reduces stress hormones and increases mental clarity throughout the day
+- Improves physical health through better digestion, sleep quality, and energy levels
+- Creates work-life harmony by establishing clear boundaries and reducing mental overwhelm
+
+**c) Key points**
+
+**Morning Mindfulness Foundation**
+Start each day with five minutes of conscious breathing and micro-meditations during routine activities. Engage all senses during simple tasks like washing dishes or walking to notice textures, sounds, and sensations.
+
+**Mindful Nourishment**
+Transform eating into meditation by appreciating food's colors, aromas, and textures before consuming. Follow the plate method: half vegetables, quarter lean proteins, quarter complex carbohydrates, plus visible water for hydration.
+
+**Work-Life Boundaries**
+Create a closing ritual to transition between work and personal time, such as tidying workspace or writing tomorrow's priorities. Practice the "one-tab rule" by focusing completely on single tasks rather than multitasking.
+
+**Restorative Sleep Habits**
+Design evening routines with dimmed lights, device-free time, and calming activities one hour before bed. Keep bedrooms cool, dark, and dedicated primarily to sleep for optimal rest quality.
+
+**Joyful Movement**
+Incorporate fifteen minutes of daily movement that feels enjoyable rather than punitive—dancing, gardening, nature walks, or yoga. Consistency trumps intensity for lasting benefits.
+
+**Meaningful Connections**
+Nurture uplifting relationships through regular check-ins and active listening. Practice self-compassion by speaking to yourself as you would a dear friend, especially during challenging moments.
+
+**Sustainable Progress**
+Choose one practice and commit for two weeks before adding new elements. View setbacks as part of the journey rather than failures, celebrating small victories along the way.
+
+**d) How to apply**
+Begin with one chosen practice for two weeks until it feels natural, then gradually layer additional elements. Trust your intuition to customize the approach for your unique lifestyle and circumstances.
+
+**e) Visual suggestions per section**
+- Morning practices: serene sunrise scenes with breathing illustrations
+- Nourishment: colorful food photography with plate diagrams
+- Work boundaries: organized workspace transitions
+- Sleep habits: cozy bedroom environments with evening routine steps
+- Movement: diverse joyful activities in natural settings
+- Connections: warm interpersonal moments and self-care imagery
+
+# LAYOUT PLAN
+
+**Layout Type**: MOSAIC - magazine-style with varied card sizes and organic arrangement
+
+**Visual hierarchy**: 
+[Large hero title with serene nature backdrop] → [Core wellness message callout box] → [Six flowing content cards of varying sizes] → [Visual connecting elements between sections] → [Small steps reminder footer]
+
+**Component layout**: 
+Asymmetric title placement in upper left with breathing illustration. Large mindful eating card (double-width) in center-left. Smaller boundary-setting and movement cards in upper right. Sleep and connection cards staggered in lower portion. Progress reminder spans bottom width.
+
+**Visual flow**: 
+Magazine-style F-pattern starting with hero title, flowing through large nutrition card, scanning across smaller practice cards, ending with sustainable progress message at bottom.
+
+**Density**: 
+Balanced information density with generous whitespace between cards, allowing each practice area to breathe while maintaining visual connections through subtle design elements.
+
+# STYLE GUIDE (LIFESTYLE Domain)
+
+**Look**: Organic, inviting, Instagram-worthy editorial vibe with Pinterest-style mixed media approach
+
+**Layout**: Mixed media composition with photo collages, flowing text wraps around circular image crops, overlapping content cards with soft shadows
+
+**Typography**: Elegant script headers ("Transform Your Daily Life") paired with clean sans-serif body text (Avenir or similar), varied font weights creating clear hierarchy
+
+**Colors**: Curated earth-tone palette featuring sage green primary, warm cream backgrounds, soft terracotta accents, with muted lavender for callout elements
+
+**Visual elements**: 
+- Lifestyle photography of morning light, fresh foods, cozy spaces, people in nature
+- Hand-drawn doodle connectors between sections (flowing vines, gentle arrows)
+- Botanical elements (eucalyptus branches, simple leaf motifs)
+- Watercolor texture backgrounds in content cards
+- Overlapping circular photo crops with soft edges
+
+**Include**: 
+Generous whitespace as design element, layered transparency effects, organic textures like linen and paper grain, subtle drop shadows creating depth
+
+**Specific text to render**:
+- Main title: "Transform Your Daily Life Through Mindful Living"
+- Subtitle: "Small mindful practices create lasting wellness"
+- Section headers: "Morning Foundation" "Mindful Nourishment" "Work-Life Balance" "Restorative Sleep" "Joyful Movement" "Meaningful Connections" "Your Wellness Journey"
+- Key practices: "5-minute breathing" "Micro-meditations" "Plate method" "One-tab rule" "Closing ritual" "15-minute movement" "Active listening" "Self-compassion"
+- Call-to-action: "Start with one practice for two weeks"
+- Footer: "Trust your intuition • Celebrate small victories • Begin again each moment"
+
+```
+### ZEN MINIMAL STYLE (Lifestyle - Wellness & Mindfulness)
+
+⚠️ CRITICAL LANGUAGE REQUIREMENT:
+- ALL text must be in ENGLISH alphabet only (A-Z, a-z, 0-9)
+- "Zen Minimal" refers to the AESTHETIC STYLE (simplicity, whitespace, wabi-sabi)
+- NOT the language - all content must be readable English text
+
+#### Color Palette:
+- Background: Natural cream (#F5F5DC) or soft beige (#E8DCC4)
+- Primary: Soft gray (#B8B8B8) for text and lines
+- Accent: Single earth tone - clay (#C4A57B) OR charcoal (#4A4A4A)
+- Highlight: Very subtle - warm sand (#D4C5B0) or cool stone (#C5C9C7)
+- Maximum 3-4 colors total including background
+
+#### Typography:
+- All text: Light to regular weight, never heavy bold - ENGLISH TEXT ONLY
+- Headlines: Elegant sans-serif or serif, 36-48pt, generous spacing
+- Body: Light sans-serif, 14-16pt, 2.0x line height for breathing room
+- Haiku-like brevity in ENGLISH - fewer words, more meaning
+- Perfect kerning and spacing - precision matters
+
+#### Layout & Composition:
+- Zen-like composition with intentional emptiness (60-70% whitespace)
+- Asymmetric balance inspired by ikebana (flower arrangement)
+- Golden ratio proportions (1:1.618) for section divisions
+- Minimal elements with maximum impact
+- Negative space as primary design element
+
+#### Visual Elements:
+- Simple line drawings with minimal strokes - ONLY when essential
+- Negative space illustrations (what's NOT drawn is as important)
+- Natural textures (paper grain, wood texture) - VERY subtle
+- Small accent marks (single dot or shape for emphasis) - RARE use
+- NO borders, NO dividing lines, NO decorative rules
+
+#### Mood & References:
+- Calm, meditative, contemplative quiet
+- Think: Muji aesthetic, Japanese tea ceremony, wabi-sabi philosophy
+- Imperfect perfection - embrace natural imperfection
+- Empty space is design
+
+#### Key Features:
+- Extreme restraint - resist adding more
+- Breathing room around every element (minimum 40px margins)
+- Fewer elements with deeper presence
+- Quiet elegance - whispers, not shouts
+- Separation through whitespace, NOT lines
+
+#### Avoid:
+- ❌ ANY Japanese, Chinese, Korean, or non-English text characters
+- ❌ ANY horizontal or vertical dividing lines between sections
+- ❌ Borders around content areas or images
+- ❌ Underlines or strikethroughs for emphasis
+- Bold vibrant colors or high saturation
+- Information density or cramping
+```
+
+## GENERAL RENDERING RULES:
+- Follow the specified layout type from description precisely
+- Maintain visual hierarchy and clear information flow
+- ALL TEXT MUST BE IN ENGLISH ONLY - no Chinese, Japanese, Korean, or other non-English characters
+- Do NOT add decorative foreign language text (e.g., Japanese characters in Japanese Minimal style)
+- Balance aesthetics with readability - information must be clear
+- Create depth through layering, shadows, and visual rhythm
+- Include source citations in footer (minimalist style)
+
+CRITICAL LANGUAGE ENFORCEMENT:
+- Render ALL visible text in English alphabet characters only
+- If style mentions Asian aesthetics, use the aesthetic principles but English text only
+- No foreign language decorations, no untranslated text, English only everywhere

@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArenaWatch - AI模型排名分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            /* 主色调 - 青绿色系 */
+            --primary: #14b8a6;
+            --primary-light: #2dd4bf;
+            --primary-soft: rgba(199, 247, 243, 0.8);
+            --primary-bg: #c7f7f3;
+            
+            /* 强调色 - 橙色系 */
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --accent-soft: rgba(255, 208, 99, 0.7);
+            --accent-bg: #ffd063;
+            
+            /* 次要色 - 紫色系 */
+            --secondary: #8b5cf6;
+            --secondary-soft: rgba(139, 92, 246, 0.2);
+            
+            /* 渐变色 */
+            --gradient-primary: linear-gradient(135deg, #14b8a6 0%, #06b6d4 50%, #0891b2 100%);
+            --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fcd34d 100%);
+            --gradient-soft: linear-gradient(135deg, rgba(199, 247, 243, 0.7) 0%, rgba(255, 208, 99, 0.5) 50%, rgba(199, 247, 243, 0.6) 100%);
+            --gradient-warm: linear-gradient(135deg, rgba(255, 208, 99, 0.4) 0%, rgba(254, 243, 199, 0.6) 100%);
+            
+            /* 背景渐变 */
+            --bg-gradient: linear-gradient(135deg, 
+                rgba(199, 247, 243, 0.5) 0%, 
+                rgba(255, 255, 255, 0.8) 30%,
+                rgba(255, 208, 99, 0.3) 70%,
+                rgba(199, 247, 243, 0.4) 100%);
+            
+            /* 卡片背景 */
+            --card-bg: rgba(255, 255, 255, 0.95);
+            
+            /* 文字颜色 */
+            --text-primary: #0f172a;
+            --text-secondary: #0d9488;
+            --text-muted: #64748b;
+            --text-light: #94a3b8;
+            
+            /* 边框 */
+            --border-light: rgba(20, 184, 166, 0.15);
+            --border-medium: rgba(20, 184, 166, 0.25);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 装饰性光斑 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -100px;
+            right: 15%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 208, 99, 0.5) 0%, transparent 70%);
+            filter: blur(60px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -100px;
+            left: 10%;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(199, 247, 243, 0.6) 0%, transparent 70%);
+            filter: blur(50px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .app-container {
+            display: flex;
+            height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== 左侧面板 ========== */
+        .left-panel {
+            width: 480px;
+            min-width: 320px;
+            max-width: 70%;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            border-right: 1px solid var(--border-light);
+            transition: none; /* 拖动时不要动画 */
+        }
+
+        .app-header {
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .app-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        /* Logo 设计 */
+        .app-logo {
+            width: 42px;
+            height: 42px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(20, 184, 166, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-logo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .app-logo svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-info h1 {
+            font-size: 20px;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .app-info .subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* 设置按钮 */
+        .settings-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border-medium);
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .settings-btn:hover {
+            background: var(--primary-soft);
+            border-color: var(--primary);
+            transform: rotate(45deg);
+        }
+
+        .settings-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-muted);
+        }
+
+        /* 快速查看榜单 */
+        .quick-leaderboards {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .quick-leaderboards-title {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .leaderboard-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .leaderboard-tab {
+            padding: 10px 18px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--border-medium);
+            background: white;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .leaderboard-tab:hover {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+        }
+
+        /* 榜单Tab Tooltip */
+        .leaderboard-tab {
+            position: relative;
+        }
+
+        .leaderboard-tab::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-primary);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .leaderboard-tab::before {
+            content: '';
+            position: absolute;
+            bottom: calc(100% + 2px);
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--text-primary);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .leaderboard-tab:hover::after,
+        .leaderboard-tab:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .leaderboard-tab.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4);
+        }
+
+        .all-leaderboards-btn {
+            padding: 10px 18px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 2px dashed var(--border-medium);
+            background: transparent;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .all-leaderboards-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        /* 聊天区域 */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        /* Bot 头像 */
+        .bot-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: var(--gradient-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .bot-avatar::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 14px;
+            height: 14px;
+            background: #22c55e;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .bot-avatar svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+        }
+
+        /* 欢迎区域 */
+        .welcome-section {
+            margin-bottom: 24px;
+        }
+
+        .welcome-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-content {
+            background: linear-gradient(135deg, var(--primary-soft) 0%, rgba(255,255,255,0.9) 50%, var(--accent-soft) 100%);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 20px 24px;
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255, 208, 99, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .welcome-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .welcome-text {
+            font-size: 15px;
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .welcome-features {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .welcome-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .welcome-feature-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 8px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 12px;
+        }
+
+        /* 快速查询提示 */
+        .quick-hint {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+            font-size: 12px;
+            margin-bottom: 14px;
+            padding-left: 58px;
+            font-weight: 500;
+        }
+
+        /* 快速问题按钮 */
+        .quick-questions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-left: 58px;
+        }
+
+        .quick-question-btn {
+            padding: 14px 18px;
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            font-weight: 500;
+        }
+
+        .quick-question-btn::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .quick-question-btn:hover {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+            padding-left: 22px;
+            transform: translateX(4px);
+        }
+
+        .quick-question-btn:hover::before {
+            opacity: 1;
+        }
+
+        /* 消息气泡 */
+        .message {
+            margin-bottom: 24px;
+            display: flex;
+            gap: 14px;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .message.assistant .message-avatar {
+            background: var(--gradient-accent);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+        }
+
+        .message.assistant .message-avatar svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .message.user .message-avatar {
+            background: var(--gradient-primary);
+            box-shadow: 0 6px 20px rgba(20, 184, 166, 0.35);
+        }
+
+        .message.user .message-avatar svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+
+        .message-content {
+            max-width: 85%;
+            padding: 16px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .message.assistant .message-content {
+            background: white;
+            color: var(--text-primary);
+            border-bottom-left-radius: 6px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            border: 1px solid var(--border-light);
+        }
+
+        .message.user .message-content {
+            background: var(--gradient-primary);
+            color: white;
+            border-bottom-right-radius: 6px;
+            box-shadow: 0 6px 20px rgba(20, 184, 166, 0.35);
+        }
+
+        /* Markdown 样式 */
+        .message-content h2 { font-size: 16px; margin: 14px 0 10px 0; font-weight: 700; color: var(--text-primary); }
+        .message-content h3 { font-size: 15px; margin: 14px 0 10px 0; font-weight: 600; }
+        .message-content p { margin-bottom: 10px; }
+        .message-content ul, .message-content ol { padding-left: 20px; margin-bottom: 10px; }
+        .message-content li { margin-bottom: 6px; }
+        .message-content code { background: rgba(20, 184, 166, 0.1); padding: 3px 8px; border-radius: 6px; font-size: 13px; color: var(--primary); }
+        .message-content a { color: var(--primary); text-decoration: none; font-weight: 500; }
+        .message-content strong { color: var(--primary); font-weight: 600; }
+        .message-content blockquote { border-left: 3px solid var(--accent); padding-left: 12px; margin: 12px 0; color: var(--text-muted); background: var(--accent-soft); padding: 10px 12px; border-radius: 0 8px 8px 0; }
+        .message-content table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+        .message-content th { background: var(--primary-soft); padding: 10px 12px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--primary); }
+        .message-content td { padding: 8px 12px; border-bottom: 1px solid var(--border-light); }
+        .message-content tr:hover td { background: rgba(199, 247, 243, 0.3); }
+
+        /* 核心结论高亮区域 */
+        .message-content .core-conclusion {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, rgba(199, 247, 243, 0.3) 100%);
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 12px 12px 0;
+            padding: 28px 20px 16px 20px;
+            margin: 20px 0 16px 0;
+            position: relative;
+        }
+
+        .message-content .core-conclusion::before {
+            content: '📊 核心结论';
+            position: absolute;
+            top: -10px;
+            left: 12px;
+            background: white;
+            padding: 2px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary);
+            border-radius: 10px;
+            border: 1px solid rgba(20, 184, 166, 0.2);
+        }
+
+        .message-content .core-conclusion p {
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-primary);
+        }
+
+        .message-content .core-conclusion strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* 数据分析区域 */
+        .message-content .data-analysis {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(255, 208, 99, 0.2) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 12px 12px 0;
+            padding: 16px 20px;
+            margin: 16px 0;
+            position: relative;
+        }
+
+        .message-content .data-analysis::before {
+            content: '📈 数据分析';
+            position: absolute;
+            top: -10px;
+            left: 12px;
+            background: white;
+            padding: 2px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            border-radius: 10px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        /* 引用标记样式 */
+        .message-content sup {
+            font-size: 10px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-left: 2px;
+            cursor: pointer;
+        }
+
+        .message-content sup:hover {
+            color: var(--accent);
+        }
+
+        /* 结构化回答卡片 */
+        .answer-card {
+            background: linear-gradient(135deg, var(--primary-soft) 0%, rgba(255,255,255,0.95) 100%);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            border: 1px solid var(--border-light);
+        }
+
+        .answer-card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .answer-highlight {
+            background: linear-gradient(90deg, var(--accent-soft), transparent);
+            padding: 4px 10px;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+            margin: 8px 0;
+            font-weight: 500;
+        }
+
+        /* 榜单分类标签 */
+        .leaderboard-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .category-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: white;
+            border: 1px solid var(--border-medium);
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .category-tag:hover {
+            background: var(--primary-soft);
+            border-color: var(--primary);
+        }
+
+        .category-tag.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+        }
+
+        .category-tag-icon { font-size: 14px; }
+
+        /* 排名列表样式 */
+        .ranking-list {
+            margin: 10px 0;
+        }
+
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            border: 1px solid var(--border-light);
+            transition: all 0.2s;
+        }
+
+        .ranking-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transform: translateX(4px);
+        }
+
+        .ranking-position {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .ranking-position.gold { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; }
+        .ranking-position.silver { background: linear-gradient(135deg, #94a3b8, #64748b); color: white; }
+        .ranking-position.bronze { background: linear-gradient(135deg, #f97316, #ea580c); color: white; }
+        .ranking-position.normal { background: var(--primary-soft); color: var(--primary); }
+
+        .ranking-model { flex: 1; font-weight: 500; color: var(--text-primary); }
+        .ranking-score { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+        .ranking-change { font-size: 12px; }
+        .ranking-change.up { color: #22c55e; }
+        .ranking-change.down { color: #ef4444; }
+        .ranking-change.same { color: var(--text-light); }
+
+        /* 来源引用 */
+        .sources {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .sources-title {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .source-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            font-size: 12px;
+        }
+
+        .source-badge {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+        }
+
+        .source-link {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* 记忆指示器 */
+        .memory-indicator {
+            margin: 0 24px 16px 24px;
+            padding: 14px 18px;
+            background: var(--gradient-warm);
+            border-radius: 16px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .memory-icon {
+            width: 36px;
+            height: 36px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .memory-content {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .memory-label {
+            color: #92400e;
+            font-weight: 600;
+        }
+
+        .memory-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: white;
+            padding: 5px 12px;
+            border-radius: 14px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #78350f;
+        }
+
+        .memory-divider {
+            color: #d97706;
+            margin: 0 4px;
+        }
+
+        .memory-focus {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #92400e;
+            font-size: 11px;
+        }
+
+        /* 输入区域 */
+        .chat-input-area {
+            padding: 18px 24px;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: white;
+            border: 2px solid var(--border-medium);
+            border-radius: 28px;
+            padding: 8px 8px 8px 24px;
+            transition: all 0.3s;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.1);
+        }
+
+        .chat-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            outline: none;
+            color: var(--text-primary);
+        }
+
+        .chat-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .send-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4);
+        }
+
+        .send-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .send-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+
+        /* 分割条 - 可拖动 */
+        .divider {
+            width: 6px;
+            background: linear-gradient(180deg, transparent 0%, var(--primary-soft) 15%, var(--accent-soft) 50%, var(--primary-soft) 85%, transparent 100%);
+            cursor: col-resize;
+            position: relative;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .divider:hover, .divider.dragging {
+            background: linear-gradient(180deg, transparent 0%, var(--primary) 15%, var(--accent) 50%, var(--primary) 85%, transparent 100%);
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 4px;
+            height: 40px;
+            background: rgba(20, 184, 166, 0.3);
+            border-radius: 2px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .divider:hover::before, .divider.dragging::before {
+            opacity: 1;
+        }
+
+        /* ========== 右侧面板 ========== */
+        .right-panel {
+            flex: 1;
+            background: linear-gradient(180deg, rgba(250,250,250,0.8) 0%, rgba(245,245,245,0.8) 100%);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .screenshot-header {
+            padding: 18px 28px;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .screenshot-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .screenshot-title-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(20, 184, 166, 0.35);
+        }
+
+        .screenshot-title-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+
+        .screenshot-title h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .screenshot-tabs {
+            display: flex;
+            gap: 8px;
+        }
+
+        .screenshot-tab {
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--border-medium);
+            background: white;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .screenshot-tab:hover {
+            background: var(--primary-soft);
+        }
+
+        .screenshot-tab.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+        }
+
+        .screenshot-content {
+            flex: 1;
+            padding: 24px 28px;
+            overflow-y: auto;
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .screenshot-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+        }
+
+        .screenshot-card:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
+        }
+
+        .screenshot-card-header {
+            padding: 12px 16px;
+            background: linear-gradient(135deg, var(--primary-soft) 0%, rgba(255,255,255,0.9) 50%, var(--accent-soft) 100%);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .screenshot-card-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .screenshot-card-icon.lmsys { background: var(--gradient-accent); }
+        .screenshot-card-icon.helm { background: var(--gradient-primary); }
+        .screenshot-card-icon.huggingface { background: var(--gradient-accent); }
+
+        .screenshot-card-info { flex: 1; }
+        .screenshot-card-title { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+        .screenshot-card-meta { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+        
+        .screenshot-card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            object-position: top;
+            display: block;
+        }
+
+        .screenshot-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 350px;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .screenshot-placeholder-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-soft);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .screenshot-placeholder-icon svg {
+            width: 50px;
+            height: 50px;
+            fill: var(--primary);
+            opacity: 0.6;
+        }
+
+        .screenshot-placeholder-text { font-size: 15px; color: var(--text-secondary); }
+        .screenshot-placeholder-hint { font-size: 13px; color: var(--text-light); margin-top: 6px; }
+
+        /* 图片弹出层 */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .lightbox.show {
+            display: flex;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255,255,255,0.2);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-img {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-info {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 30px;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* 设置模态框 */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.show { display: flex; }
+
+        .settings-modal {
+            width: 90%;
+            max-width: 580px;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        .settings-header {
+            padding: 24px 28px;
+            background: var(--gradient-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .settings-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .settings-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+
+        .settings-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
+
+        .settings-body {
+            padding: 28px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .settings-section { margin-bottom: 28px; }
+        .settings-section:last-child { margin-bottom: 0; }
+
+        .settings-section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .settings-section-title svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary);
+        }
+
+        .settings-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .settings-tag {
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--border-medium);
+            background: white;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .settings-tag:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .settings-tag.selected {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+        }
+
+        .settings-input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .settings-input {
+            flex: 1;
+            padding: 12px 18px;
+            border: 1px solid var(--border-medium);
+            border-radius: 12px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .settings-input:focus {
+            border-color: var(--primary);
+        }
+
+        .settings-add-btn {
+            padding: 12px 24px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .settings-footer {
+            padding: 20px 28px;
+            background: var(--primary-soft);
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .settings-save-btn {
+            padding: 12px 28px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* 加载动画 */
+        .typing-indicator { display: flex; gap: 6px; padding: 10px 0; }
+        .typing-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--primary-soft);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-10px); opacity: 1; }
+        }
+
+        /* 处理步骤样式 */
+        .processing-steps {
+            padding: 20px !important;
+        }
+
+        .steps-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-light);
+            opacity: 0.5;
+            transition: all 0.3s;
+        }
+
+        .step-item:last-child {
+            border-bottom: none;
+        }
+
+        .step-item.active {
+            opacity: 1;
+        }
+
+        .step-item.done {
+            opacity: 0.7;
+        }
+
+        .step-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .step-icon.waiting {
+            background: var(--primary-soft);
+            color: var(--text-muted);
+        }
+
+        .step-icon.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .step-icon.done {
+            background: var(--gradient-accent);
+            color: white;
+        }
+
+        .step-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .step-text {
+            flex: 1;
+        }
+
+        .step-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .step-item.active .step-name {
+            color: var(--primary);
+        }
+
+        .step-item.done .step-name {
+            color: var(--accent);
+        }
+
+        .hidden { display: none !important; }
+
+        @media (max-width: 768px) {
+            .app-container { flex-direction: column; }
+            .left-panel { width: 100%; height: 60vh; }
+            .right-panel { height: 40vh; }
+            .divider { display: none; }
+            .screenshot-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- 左侧面板 -->
+        <div class="left-panel">
+            <div class="app-header">
+                <div class="app-brand">
+                    <div class="app-logo">
+                        <svg viewBox="0 0 24 24"><path d="M3 13h2v8H3v-8zm4-5h2v13H7V8zm4-5h2v18h-2V3zm4 8h2v10h-2V11zm4-3h2v13h-2V8z"/></svg>
+                    </div>
+                    <div class="app-info">
+                        <h1>ArenaWatch</h1>
+                        <div class="subtitle">AI模型排名分析 · 实时追踪能力变化</div>
+                    </div>
+                </div>
+                <button class="settings-btn" onclick="openSettings()">
+                    <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                </button>
+            </div>
+
+            <div class="quick-leaderboards">
+                <div class="quick-leaderboards-title">📊 快速查看榜单</div>
+                <div class="leaderboard-tabs">
+                    <button class="leaderboard-tab" data-id="lmsys" data-tooltip="用户真实偏好" onclick="selectLeaderboard('lmsys')">🏆 LM Arena</button>
+                    <button class="leaderboard-tab" data-id="helm" data-tooltip="学术全面评测" onclick="selectLeaderboard('helm')">📈 HELM</button>
+                    <button class="leaderboard-tab" data-id="huggingface" data-tooltip="开源社区标准" onclick="selectLeaderboard('huggingface')">🤗 HuggingFace</button>
+                    <button class="all-leaderboards-btn" onclick="selectLeaderboard('all')">🎯 全部榜单</button>
+                </div>
+            </div>
+
+            <div class="chat-area">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="welcome-section" id="welcomeSection">
+                        <div class="welcome-header">
+                            <div class="bot-avatar">
+                                <svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a1 1 0 011 1v3a1 1 0 01-1 1h-1v1a2 2 0 01-2 2H5a2 2 0 01-2-2v-1H2a1 1 0 01-1-1v-3a1 1 0 011-1h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2zm-4.5 11a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm9 0a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"/></svg>
+                            </div>
+                            <div class="welcome-content">
+                                <div class="welcome-badge">👋 欢迎使用</div>
+                                <div class="welcome-text">我是 ArenaWatch 排名分析师，帮你追踪 AI 模型在各大榜单的表现！</div>
+                                <div class="welcome-features">
+                                    <div class="welcome-feature"><div class="welcome-feature-icon">✓</div><span>实时获取 LMSYS Arena、HELM、HuggingFace 排名</span></div>
+                                    <div class="welcome-feature"><div class="welcome-feature-icon">✓</div><span>对比模型能力，分析排名变化</span></div>
+                                    <div class="welcome-feature"><div class="welcome-feature-icon">✓</div><span>搜索最新评测资讯和社区讨论</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="quick-hint">💡 点击下方问题快速查询</div>
+                        <div class="quick-questions" id="quickQuestions">
+                            <button class="quick-question-btn" onclick="askQuestion('Gemini 3 Pro 在 LM Arena 排第几？')">Gemini 3 Pro 在 LM Arena 排第几？</button>
+                            <button class="quick-question-btn" onclick="askQuestion('GPT-5 mini 在 HELM 表现如何？')">GPT-5 mini 在 HELM 表现如何？</button>
+                            <button class="quick-question-btn" onclick="askQuestion('Qwen2.5-72B 在 HuggingFace 排名？')">Qwen2.5-72B 在 HuggingFace 排名？</button>
+                            <button class="quick-question-btn" onclick="askQuestion('Claude 4 Opus vs Grok 4 对比分析')">Claude 4 Opus vs Grok 4 对比分析</button>
+                            <button class="quick-question-btn" onclick="askQuestion('o3 和 o4-mini 在 HELM 榜单表现？')">o3 和 o4-mini 在 HELM 榜单表现？</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="memory-indicator" id="memoryIndicator">
+                    <div class="memory-icon">🧠</div>
+                    <div class="memory-content">
+                        <span class="memory-label">已使用记忆：</span>
+                        <span class="memory-tag"><span class="memory-tag-icon">👤</span> VibeCoder</span>
+                        <span class="memory-divider">|</span>
+                        <span class="memory-tag"><span class="memory-tag-icon">🤖</span> GPT-5, Claude 4, Gemini Pro 3</span>
+                        <span class="memory-divider">|</span>
+                        <span class="memory-focus"><span>🎯</span> 推理能力, 代码生成</span>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <div class="input-wrapper">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="输入问题，支持榜单查询或任意话题搜索..." onkeydown="handleInputKeydown(event)">
+                        <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 右侧面板 -->
+        <div class="right-panel">
+            <div class="screenshot-header">
+                <div class="screenshot-title">
+                    <div class="screenshot-title-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </div>
+                    <h2>榜单截图</h2>
+                </div>
+                <div class="screenshot-tabs">
+                    <button class="screenshot-tab active" data-filter="all" onclick="filterScreenshots('all')">全部</button>
+                    <button class="screenshot-tab" data-filter="lmsys" onclick="filterScreenshots('lmsys')">LM Arena</button>
+                    <button class="screenshot-tab" data-filter="helm" onclick="filterScreenshots('helm')">HELM</button>
+                    <button class="screenshot-tab" data-filter="huggingface" onclick="filterScreenshots('huggingface')">HuggingFace</button>
+                </div>
+            </div>
+            <div class="screenshot-content" id="screenshotContent">
+                <div class="screenshot-placeholder" id="screenshotPlaceholder">
+                    <div class="screenshot-placeholder-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 15.2c1.77 0 3.2-1.43 3.2-3.2S13.77 8.8 12 8.8 8.8 10.23 8.8 12s1.43 3.2 3.2 3.2zM9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+                    </div>
+                    <div class="screenshot-placeholder-text">提问后将自动获取相关榜单截图</div>
+                    <div class="screenshot-placeholder-hint">支持 LMSYS Arena、HELM、HuggingFace Open LLM</div>
+                </div>
+                <div class="screenshot-grid hidden" id="screenshotGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 图片放大弹出层 -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close">×</button>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="">
+        <div class="lightbox-info" id="lightboxInfo"></div>
+    </div>
+
+    <!-- 设置模态框 -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="settings-modal">
+            <div class="settings-header">
+                <h2><svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> 偏好设置</h2>
+                <button class="settings-close" onclick="closeSettings()">×</button>
+            </div>
+            <div class="settings-body">
+                <div class="settings-section">
+                    <div class="settings-section-title"><svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0014.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg> 回答语言</div>
+                    <div class="settings-tags" id="languageTags">
+                        <button class="settings-tag selected" data-lang="zh">🇨🇳 中文</button>
+                        <button class="settings-tag" data-lang="en">🇺🇸 English</button>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <div class="settings-section-title"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> 我的角色</div>
+                    <div class="settings-tags" id="roleTags">
+                        <button class="settings-tag selected" data-role="engineer">👨‍💻 技术研发</button>
+                        <button class="settings-tag" data-role="pm">📋 产品经理</button>
+                        <button class="settings-tag" data-role="researcher">🔬 AI研究员</button>
+                        <button class="settings-tag" data-role="manager">💼 技术管理</button>
+                        <button class="settings-tag" data-role="student">🎓 学生</button>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <div class="settings-section-title"><svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a1 1 0 011 1v3a1 1 0 01-1 1h-1v1a2 2 0 01-2 2H5a2 2 0 01-2-2v-1H2a1 1 0 01-1-1v-3a1 1 0 011-1h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/></svg> 关注模型</div>
+                    <div class="settings-tags" id="modelTags">
+                        <button class="settings-tag selected" data-model="gpt-5">GPT-5</button>
+                        <button class="settings-tag selected" data-model="claude-4">Claude 4</button>
+                        <button class="settings-tag" data-model="gemini-pro">Gemini Pro</button>
+                        <button class="settings-tag" data-model="qwen3">Qwen3</button>
+                        <button class="settings-tag" data-model="grok-4">Grok 4</button>
+                        <button class="settings-tag" data-model="llama-4">Llama 4</button>
+                        <button class="settings-tag" data-model="o3">o3</button>
+                        <button class="settings-tag" data-model="deepseek">DeepSeek</button>
+                    </div>
+                    <div class="settings-input-group">
+                        <input type="text" class="settings-input" id="customModelInput" placeholder="添加自定义模型...">
+                        <button class="settings-add-btn" onclick="addCustomModel()">添加</button>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <div class="settings-section-title"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> 关注能力</div>
+                    <div class="settings-tags" id="capabilityTags">
+                        <button class="settings-tag selected" data-capability="reasoning">推理能力</button>
+                        <button class="settings-tag selected" data-capability="coding">代码生成</button>
+                        <button class="settings-tag" data-capability="math">数学计算</button>
+                        <button class="settings-tag" data-capability="writing">写作创作</button>
+                        <button class="settings-tag" data-capability="multilingual">多语言</button>
+                        <button class="settings-tag" data-capability="vision">视觉理解</button>
+                        <button class="settings-tag" data-capability="agents">Agent能力</button>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <div class="settings-section-title"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg> 关注方向</div>
+                    <div class="settings-tags" id="focusTags">
+                        <button class="settings-tag" data-focus="benchmark">基准测试</button>
+                        <button class="settings-tag selected" data-focus="ranking">排名变化</button>
+                        <button class="settings-tag" data-focus="newmodels">新模型发布</button>
+                        <button class="settings-tag" data-focus="comparison">模型对比</button>
+                        <button class="settings-tag" data-focus="pricing">价格分析</button>
+                    </div>
+                </div>
+            </div>
+            <div class="settings-footer">
+                <button class="settings-save-btn" onclick="saveSettings()">保存设置</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLeaderboard = null;
+        let screenshots = [];
+        let isLoading = false;
+        let userSettings = { models: ['gpt-5', 'claude-4'], capabilities: ['reasoning', 'coding'], focus: ['ranking'], language: 'zh', role: 'engineer' };
+
+        document.addEventListener('DOMContentLoaded', () => { loadScreenshots(); loadSettings(); updateMemoryIndicator(); initSettingsTags(); });
+
+        function openSettings() { document.getElementById('settingsModal').classList.add('show'); }
+        function closeSettings() { document.getElementById('settingsModal').classList.remove('show'); }
+        function initSettingsTags() {
+            document.querySelectorAll('.settings-tag').forEach(tag => {
+                tag.addEventListener('click', () => {
+                    // 语言和角色为单选
+                    if (tag.dataset.lang) {
+                        document.querySelectorAll('#languageTags .settings-tag').forEach(t => t.classList.remove('selected'));
+                        tag.classList.add('selected');
+                    } else if (tag.dataset.role) {
+                        document.querySelectorAll('#roleTags .settings-tag').forEach(t => t.classList.remove('selected'));
+                        tag.classList.add('selected');
+                    } else {
+                        tag.classList.toggle('selected');
+                    }
+                });
+            });
+        }
+
+        function addCustomModel() {
+            const input = document.getElementById('customModelInput');
+            const value = input.value.trim();
+            if (!value) return;
+            const container = document.getElementById('modelTags');
+            const tag = document.createElement('button');
+            tag.className = 'settings-tag selected';
+            tag.dataset.model = value.toLowerCase().replace(/\s+/g, '-');
+            tag.textContent = value;
+            tag.addEventListener('click', () => tag.classList.toggle('selected'));
+            container.appendChild(tag);
+            input.value = '';
+        }
+
+        function saveSettings() {
+            userSettings.models = Array.from(document.querySelectorAll('#modelTags .settings-tag.selected')).map(tag => tag.dataset.model);
+            userSettings.capabilities = Array.from(document.querySelectorAll('#capabilityTags .settings-tag.selected')).map(tag => tag.dataset.capability);
+            userSettings.focus = Array.from(document.querySelectorAll('#focusTags .settings-tag.selected')).map(tag => tag.dataset.focus);
+            userSettings.language = document.querySelector('#languageTags .settings-tag.selected')?.dataset.lang || 'zh';
+            userSettings.role = document.querySelector('#roleTags .settings-tag.selected')?.dataset.role || 'engineer';
+            localStorage.setItem('arenawatch_settings', JSON.stringify(userSettings));
+            updateMemoryIndicator();
+            closeSettings();
+        }
+
+        function loadSettings() {
+            const saved = localStorage.getItem('arenawatch_settings');
+            if (saved) {
+                userSettings = JSON.parse(saved);
+                document.querySelectorAll('.settings-tag').forEach(tag => {
+                    tag.classList.remove('selected');
+                    const model = tag.dataset.model, capability = tag.dataset.capability, focus = tag.dataset.focus;
+                    const lang = tag.dataset.lang, role = tag.dataset.role;
+                    if (model && userSettings.models.includes(model)) tag.classList.add('selected');
+                    if (capability && userSettings.capabilities.includes(capability)) tag.classList.add('selected');
+                    if (focus && userSettings.focus.includes(focus)) tag.classList.add('selected');
+                    if (lang && userSettings.language === lang) tag.classList.add('selected');
+                    if (role && userSettings.role === role) tag.classList.add('selected');
+                });
+            }
+        }
+
+        function updateMemoryIndicator() {
+            const modelNames = { 'gpt-5': 'GPT-5', 'claude-4': 'Claude 4', 'gemini-pro': 'Gemini Pro', 'qwen3': 'Qwen3', 'grok-4': 'Grok 4', 'llama-4': 'Llama 4', 'o3': 'o3', 'deepseek': 'DeepSeek' };
+            const capNames = { 'reasoning': '推理能力', 'coding': '代码生成', 'math': '数学计算', 'writing': '写作创作', 'multilingual': '多语言', 'vision': '视觉理解', 'agents': 'Agent能力' };
+            const models = userSettings.models.slice(0, 3).map(m => modelNames[m] || m).join(', ');
+            const caps = userSettings.capabilities.slice(0, 2).map(c => capNames[c] || c).join(', ');
+            const indicator = document.querySelector('.memory-content');
+            if (indicator) {
+                indicator.innerHTML = `<span class="memory-label">已使用记忆：</span><span class="memory-tag"><span class="memory-tag-icon">👤</span> VibeCoder</span><span class="memory-divider">|</span><span class="memory-tag"><span class="memory-tag-icon">🤖</span> ${models || '未设置'}</span><span class="memory-divider">|</span><span class="memory-focus"><span>🎯</span> ${caps || '未设置'}</span>`;
+            }
+        }
+
+        function selectLeaderboard(id) {
+            currentLeaderboard = id === 'all' ? null : id;
+            document.querySelectorAll('.leaderboard-tab').forEach(tab => { tab.classList.toggle('active', tab.dataset.id === id); });
+            const questions = { 'lmsys': '请展示 LM Arena 最新排名情况', 'helm': '请展示 HELM 最新排名情况', 'huggingface': '请展示 HuggingFace Open LLM 最新排名情况', 'all': '请对比三大榜单（LMSYS Arena、HELM、HuggingFace）的最新排名' };
+            if (questions[id]) askQuestion(questions[id]);
+        }
+
+        function askQuestion(question) { document.getElementById('chatInput').value = question; sendMessage(); }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const question = input.value.trim();
+            if (!question || isLoading) return;
+            isLoading = true;
+            input.value = '';
+            hideWelcomeContent();
+            addMessage('user', question);
+            
+            // 显示处理步骤
+            const stepsId = showProcessingSteps();
+            
+            try {
+                // 模拟步骤更新
+                await updateStep(stepsId, 1, 'active');
+                
+                const response = await fetch('/api/arena/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question, userPreferences: userSettings }) });
+                
+                await updateStep(stepsId, 1, 'done');
+                await updateStep(stepsId, 2, 'active');
+                
+                const data = await response.json();
+                
+                await updateStep(stepsId, 2, 'done');
+                await updateStep(stepsId, 3, 'active');
+                
+                // 短暂延迟让用户看到最后一步
+                await new Promise(r => setTimeout(r, 300));
+                await updateStep(stepsId, 3, 'done');
+                
+                removeProcessingSteps(stepsId);
+                
+                // 使用 Response 字段（API返回的字段名，C# record 序列化时首字母大写）
+                const answer = data.Response || data.response || data.answer || '暂无回答';
+                const leaderboard = data.Leaderboard || data.leaderboard;
+                addMessage('assistant', answer, data.Sources || data.sources, leaderboard);
+                
+                // 处理截图 - 如果有新截图，添加到列表
+                if (data.Screenshot || data.screenshot) {
+                    const newScreenshot = {
+                        leaderboardId: leaderboard?.Id || leaderboard?.id || 'unknown',
+                        leaderboardName: leaderboard?.Name || leaderboard?.name || '榜单',
+                        imageData: data.Screenshot || data.screenshot,
+                        timestamp: new Date().toISOString()
+                    };
+                    screenshots.unshift(newScreenshot);
+                    renderScreenshots();
+                }
+                
+                // 刷新截图历史
+                await loadScreenshots();
+                
+            } catch (error) {
+                removeProcessingSteps(stepsId);
+                addMessage('assistant', '抱歉，请求失败：' + error.message);
+            }
+            isLoading = false;
+        }
+
+        // ========== 处理步骤显示 ==========
+        function showProcessingSteps() {
+            const messagesDiv = document.getElementById('chatMessages');
+            const id = 'steps-' + Date.now();
+            const stepsDiv = document.createElement('div');
+            stepsDiv.id = id;
+            stepsDiv.className = 'message assistant';
+            stepsDiv.innerHTML = `
+                <div class="message-avatar">
+                    <svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a1 1 0 011 1v3a1 1 0 01-1 1h-1v1a2 2 0 01-2 2H5a2 2 0 01-2-2v-1H2a1 1 0 01-1-1v-3a1 1 0 011-1h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/></svg>
+                </div>
+                <div class="message-content processing-steps">
+                    <div class="steps-title">🔍 正在为您分析...</div>
+                    <div class="step-item" data-step="1">
+                        <div class="step-icon waiting">1</div>
+                        <div class="step-text">
+                            <div class="step-name">识别问题 & 匹配榜单</div>
+                            <div class="step-desc">分析您的问题，确定查询的榜单和模型</div>
+                        </div>
+                    </div>
+                    <div class="step-item" data-step="2">
+                        <div class="step-icon waiting">2</div>
+                        <div class="step-text">
+                            <div class="step-name">搜索榜单数据 & 截取页面</div>
+                            <div class="step-desc">从官方榜单获取最新排名信息</div>
+                        </div>
+                    </div>
+                    <div class="step-item" data-step="3">
+                        <div class="step-icon waiting">3</div>
+                        <div class="step-text">
+                            <div class="step-name">AI 分析 & 生成回答</div>
+                            <div class="step-desc">综合数据给出专业分析</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            messagesDiv.appendChild(stepsDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            return id;
+        }
+
+        async function updateStep(stepsId, stepNum, status) {
+            const stepsDiv = document.getElementById(stepsId);
+            if (!stepsDiv) return;
+            
+            const stepItem = stepsDiv.querySelector(`[data-step="${stepNum}"]`);
+            if (!stepItem) return;
+            
+            const icon = stepItem.querySelector('.step-icon');
+            icon.className = `step-icon ${status}`;
+            
+            if (status === 'active') {
+                icon.innerHTML = '<div class="step-spinner"></div>';
+                stepItem.classList.add('active');
+            } else if (status === 'done') {
+                icon.innerHTML = '✓';
+                stepItem.classList.remove('active');
+                stepItem.classList.add('done');
+            }
+            
+            // 小延迟让动画更流畅
+            await new Promise(r => setTimeout(r, 100));
+        }
+
+        function removeProcessingSteps(id) {
+            const element = document.getElementById(id);
+            if (element) element.remove();
+        }
+
+        function addMessage(role, content, sources = [], leaderboardInfo = null) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+            
+            // 来源引用
+            let sourcesHtml = '';
+            if (sources && sources.length > 0) {
+                sourcesHtml = `<div class="sources"><div class="sources-title">📎 参考来源</div>${sources.map((s, i) => `<div class="source-item"><span class="source-badge">${s.Block || s.block || (i + 1)}</span><a href="${s.Url || s.url}" target="_blank" class="source-link">${s.Title || s.title || s.Url || s.url}</a></div>`).join('')}</div>`;
+            }
+            
+            // 安全处理 marked - 确保 content 不是 null 或 undefined
+            let htmlContent;
+            if (role === 'assistant') {
+                try {
+                    // 先移除core-conclusion中的重复文字
+                    let cleanedContent = (content || '')
+                        .replace(/【核心结论】/g, '')
+                        .replace(/\[核心结论\]/g, '')
+                        .replace(/核心结论：/g, '')
+                        .replace(/核心结论:/g, '');
+                    htmlContent = marked.parse(cleanedContent);
+                } catch (e) {
+                    console.error('Marked parse error:', e);
+                    htmlContent = content || '';
+                }
+            } else {
+                htmlContent = escapeHtml(content || '');
+            }
+            
+            const botSvg = '<svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a1 1 0 011 1v3a1 1 0 01-1 1h-1v1a2 2 0 01-2 2H5a2 2 0 01-2-2v-1H2a1 1 0 01-1-1v-3a1 1 0 011-1h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2zm-4.5 11a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm9 0a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"/></svg>';
+            const userSvg = '<svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>';
+            messageDiv.innerHTML = `<div class="message-avatar">${role === 'assistant' ? botSvg : userSvg}</div><div class="message-content">${htmlContent}${sourcesHtml}</div>`;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const messagesDiv = document.getElementById('chatMessages');
+            const id = 'typing-' + Date.now();
+            const typingDiv = document.createElement('div');
+            typingDiv.id = id;
+            typingDiv.className = 'message assistant';
+            typingDiv.innerHTML = `<div class="message-avatar"><svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a1 1 0 011 1v3a1 1 0 01-1 1h-1v1a2 2 0 01-2 2H5a2 2 0 01-2-2v-1H2a1 1 0 01-1-1v-3a1 1 0 011-1h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/></svg></div><div class="message-content"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+            messagesDiv.appendChild(typingDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            return id;
+        }
+
+        function removeTypingIndicator(id) { const element = document.getElementById(id); if (element) element.remove(); }
+        function hideWelcomeContent() { /* 保留欢迎区域，不再隐藏 */ }
+
+        // 截图管理
+        async function loadScreenshots() {
+            try {
+                const response = await fetch('/api/arena/screenshots');
+                const data = await response.json();
+                // API 返回的是 ScreenshotHistory 对象列表，字段首字母大写
+                screenshots = (data || []).map(s => ({
+                    leaderboardId: s.LeaderboardId || s.leaderboardId,
+                    leaderboardName: getLeaderboardName(s.LeaderboardId || s.leaderboardId),
+                    url: s.Url || s.url,  // 这是图片的URL路径
+                    timestamp: s.CapturedAt || s.capturedAt || new Date().toISOString()
+                }));
+                renderScreenshots();
+            } catch (error) { console.error('Failed to load screenshots:', error); }
+        }
+
+        function getLeaderboardName(id) {
+            const names = { 'lmsys': 'LM Arena', 'helm': 'HELM Benchmark', 'huggingface': 'HuggingFace Open LLM' };
+            return names[id] || id;
+        }
+
+        function renderScreenshots() {
+            const placeholder = document.getElementById('screenshotPlaceholder');
+            const grid = document.getElementById('screenshotGrid');
+            const activeFilter = document.querySelector('.screenshot-tab.active')?.dataset.filter || 'all';
+            const filtered = activeFilter === 'all' ? screenshots : screenshots.filter(s => s.leaderboardId === activeFilter);
+            
+            if (filtered.length === 0) { 
+                placeholder.classList.remove('hidden'); 
+                grid.classList.add('hidden'); 
+                return; 
+            }
+            
+            placeholder.classList.add('hidden');
+            grid.classList.remove('hidden');
+            
+            grid.innerHTML = filtered.map((screenshot, index) => {
+                const time = screenshot.timestamp ? formatTime(screenshot.timestamp) : '刚刚';
+                // 使用 url 或 imageData
+                const imgSrc = screenshot.url || screenshot.imageData || '';
+                const icon = screenshot.leaderboardId === 'lmsys' ? '🏆' : screenshot.leaderboardId === 'helm' ? '📈' : '🤗';
+                
+                return `<div class="screenshot-card" onclick="openLightbox('${imgSrc}', '${screenshot.leaderboardName}', '${time}')">
+                    <div class="screenshot-card-header">
+                        <div class="screenshot-card-icon ${screenshot.leaderboardId}">${icon}</div>
+                        <div class="screenshot-card-info">
+                            <div class="screenshot-card-title">${screenshot.leaderboardName}</div>
+                            <div class="screenshot-card-meta">🕐 ${time}</div>
+                        </div>
+                    </div>
+                    <img class="screenshot-card-img" src="${imgSrc}" alt="${screenshot.leaderboardName}" onerror="this.style.display='none'">
+                </div>`;
+            }).join('');
+        }
+
+        function filterScreenshots(filter) {
+            document.querySelectorAll('.screenshot-tab').forEach(tab => { tab.classList.toggle('active', tab.dataset.filter === filter); });
+            renderScreenshots();
+        }
+
+        // 图片放大
+        function openLightbox(src, title, time) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightboxImg');
+            const info = document.getElementById('lightboxInfo');
+            img.src = src;
+            info.textContent = `${title} · ${time}`;
+            lightbox.classList.add('show');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('show');
+        }
+
+        function formatTime(isoString) {
+            const date = new Date(isoString);
+            const now = new Date();
+            const diff = (now - date) / 1000;
+            if (diff < 60) return '刚刚';
+            if (diff < 3600) return `${Math.floor(diff / 60)}分钟前`;
+            if (diff < 86400) return `${Math.floor(diff / 3600)}小时前`;
+            return `${date.getMonth() + 1}/${date.getDate()} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+        }
+
+        function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
+        function handleInputKeydown(event) { if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); sendMessage(); } }
+
+        // ========== 分割线拖动功能 ==========
+        const divider = document.querySelector('.divider');
+        const leftPanel = document.querySelector('.left-panel');
+        const rightPanel = document.querySelector('.right-panel');
+        let isDragging = false;
+        let startX, startLeftWidth;
+
+        divider.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX;
+            startLeftWidth = leftPanel.offsetWidth;
+            divider.classList.add('dragging');
+            document.body.style.cursor = 'col-resize';
+            document.body.style.userSelect = 'none';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const deltaX = e.clientX - startX;
+            const newLeftWidth = Math.max(320, Math.min(startLeftWidth + deltaX, window.innerWidth - 400));
+            leftPanel.style.width = newLeftWidth + 'px';
+            leftPanel.style.flexShrink = '0';
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                divider.classList.remove('dragging');
+                document.body.style.cursor = '';
+                document.body.style.userSelect = '';
+            }
+        });
+    </script>
+</body>
+</html>

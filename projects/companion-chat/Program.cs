@@ -14,7 +14,14 @@ class Program
         builder.WebHost.UseUrls("http://localhost:8402");
 
         var app = builder.Build();
-        app.UseStaticFiles();
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            OnPrepareResponse = ctx =>
+            {
+                ctx.Context.Response.Headers["Cache-Control"] = "no-cache, no-store";
+                ctx.Context.Response.Headers["Pragma"] = "no-cache";
+            }
+        });
 
         // Load config
         var config = app.Configuration;
@@ -23,12 +30,12 @@ class Program
         var llmEndpoint = config["CopilotApi:Endpoint"] ?? "http://localhost:4141";
         var llmModel = config["CopilotApi:Model"] ?? "gpt-4";
 
-        // Token provider (lazy init - only created when API is called)
-        TokenService? tokenService = null;
+        // Token provider - uses Launcher's unified auth (no local login needed)
+        LauncherTokenProvider? launcherTokenProvider = null;
         Func<Task<string>> tokenProvider = async () =>
         {
-            tokenService ??= new TokenService(config);
-            return await tokenService.GetTokenAsync();
+            launcherTokenProvider ??= new LauncherTokenProvider(config);
+            return await launcherTokenProvider.GetTokenAsync();
         };
 
         // ========== Centralized Proxy Management ==========

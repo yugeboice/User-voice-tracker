@@ -1,0 +1,151 @@
+Generated at: 2026-01-12 12:04:50
+
+Create a professional, educational infographic in LANDSCAPE format (16:9 or 4:3 aspect ratio) based on this specification:
+
+# INFOGRAPHIC BRIEF
+
+**Title**: Strategic Business Excellence: Five Pillars of Sustainable Success
+
+**One-sentence takeaway**: Integrate market analysis, ROI measurement, leadership, reporting, and stakeholder management for competitive advantage.
+
+**Topic domain**: professional
+
+**Tone**: confident
+
+**Aspect ratio**: landscape (16:9)
+
+**Target audience**: Business executives, managers, and strategic planning professionals
+
+# CONTENT OUTLINE
+
+**a) What it is**: A comprehensive framework for sustainable organizational success through five integrated strategic pillars that drive competitive advantage in dynamic markets.
+
+**b) Why it matters**:
+• Creates systematic approach to business strategy reducing reactive decision-making
+• Builds stakeholder confidence through transparent performance management
+• Establishes measurable frameworks for resource allocation and value creation
+
+**c) Key points**:
+
+**Market Analysis Foundation**
+Strategic decision-making requires systematic evaluation of consumer behavior, competitive positioning, and emerging trends. Companies must assess market size, growth potential, and customer segmentation to identify opportunities while benchmarking competitors and monitoring technological disruptions.
+
+**ROI Performance Measurement**
+Return on investment serves as the critical metric for evaluating strategic initiatives, tracking both financial and non-financial returns including customer acquisition costs and lifetime value. Establish clear ROI thresholds for investment categories and reassess performance regularly.
+
+**Leadership Excellence**
+Strong leadership bridges strategic vision with operational execution by communicating goals clearly, inspiring teams, and balancing short-term pressures with long-term investments. Leadership development ensures organizational resilience during transitions.
+
+**Quarterly Reporting Accountability**
+Regular reporting provides stakeholder transparency into financial performance and strategic progress, creating accountability checkpoints for course-correction while ensuring regulatory compliance and building stakeholder confidence.
+
+**Stakeholder Relationship Management**
+Comprehensive stakeholder management recognizes diverse group influences—shareholders, employees, customers, suppliers, communities—requiring identification of interests, communication channels, and value propositions that align needs with business objectives.
+
+**d) How to apply**:
+Integrate all five pillars simultaneously, using market analysis to inform strategy, leadership to execute, ROI measurement to validate, reporting to maintain transparency, and stakeholder management to build support networks.
+
+**e) Visual suggestions**: 
+Central hub design with interconnected circular elements, flowing arrows showing integration, data visualization elements for ROI metrics, leadership icons, and stakeholder network diagrams.
+
+# LAYOUT PLAN
+
+**Layout type**: CIRCULAR-FLOW - Five strategic pillars as orbital elements around central "Strategic Excellence" hub
+
+**Visual hierarchy**: 
+[Bold title with corporate geometric accent] → [Central hub illustration with "Strategic Excellence" core] → [Five orbital content cards with connecting flow lines] → [Integration messaging banner] → [Performance metrics footer]
+
+**Component layout**: 
+Central circular hub (350px) positioned at canvas center containing "Strategic Excellence" with abstract geometric pattern. Five content cards (280px each) positioned in orbital arrangement around hub, connected by curved flowing lines with directional arrows. Asymmetric title placement in upper left with geometric accent shape.
+
+**Visual flow**: 
+Eye travels from title → central hub → clockwise around orbital cards → integration banner → metrics footer, with curved connecting lines guiding circular movement pattern.
+
+**Density**: 
+Balanced information density with spacious breathing room between orbital elements, concentrated information within cards, clean whitespace in outer margins.
+
+# STYLE GUIDE (PROFESSIONAL Domain)
+
+**Look**: Modern, confident, editorial magazine style with sophisticated business aesthetic
+
+**Layout**: Asymmetric title composition, overlapping orbital elements with subtle depth, dynamic connecting lines with premium geometric accents
+
+**Typography**: Bold geometric sans-serif titles (Montserrat Bold), clean sans-serif body text (Open Sans), varied font weights creating clear hierarchy, monospace for metrics
+
+**Colors**: Deep navy primary (#1B365D) with bright electric blue accent (#00A8FF), neutral grays (#F8F9FA, #6C757D), metallic silver highlights (#C0C0C0) for premium feel
+
+**Visual elements**: Abstract geometric shapes, refined data visualization, subtle gradients on connecting lines, overlapping circular elements with transparency, clean iconography, sophisticated color blocking
+
+**Specific text to render**:
+- Main title: "Strategic Business Excellence: Five Pillars of Sustainable Success"
+- Central hub: "STRATEGIC EXCELLENCE"
+- Orbital cards: "Market Analysis", "ROI Measurement", "Leadership Excellence", "Quarterly Reporting", "Stakeholder Management"
+- Integration banner: "Synergistic Integration Drives Superior Performance"
+- Card content: Condensed key points with bullet formatting
+- Metrics footer: "Companies integrating all 5 pillars show 23% higher performance"
+- Subtitle: "A Framework for Sustainable Competitive Advantage"
+
+```
+### MINIMAL DATA STYLE (Professional)
+
+#### Color Palette:
+- Background: Pure white (#FFFFFF) or very light gray (#F8F9FA)
+- Primary: Single bold accent - electric blue (#0066FF) OR deep forest green (#006B3F)
+- Data colors: Monochromatic variations of primary (3-4 shades max)
+- Text: Near-black (#1A1A1A) for perfect contrast
+
+#### Typography:
+- All text: Clean geometric sans-serif (Inter, SF Pro Display, Helvetica Neue)
+- Headlines: Bold weight, 48-64pt, minimal letter spacing
+- Body: Regular weight, 14-16pt, optimal line height (1.5x)
+- Data labels: Medium weight, 12-14pt, uppercase for emphasis
+- Consistent font sizing system (scale: 12, 14, 16, 24, 48, 64)
+
+#### Layout & Composition:
+- Grid-based but with generous margins (20-25% whitespace minimum)
+- Centered content zones with symmetrical padding
+- Clear visual hierarchy through size and spacing (not color)
+- Elements aligned to precise grid (8pt or 12pt baseline)
+- Maximum 3-4 content sections to maintain clarity
+
+#### Visual Elements:
+- Clean line charts with minimal gridlines (1-2 reference lines max)
+- Simple bar graphs with rounded ends (4px radius)
+- Minimalist icons (outline style, 2px stroke, no fills)
+- Subtle drop shadows only where necessary (2px blur, 10% opacity)
+- No decorative elements - every element serves a purpose
+
+#### Mood & References:
+- Clear, precise, maximum signal-to-noise ratio
+- Think: Apple Keynote slides, Stripe documentation, Linear app
+- Data speaks for itself without embellishment
+- Swiss design principles - form follows function
+
+#### Key Features:
+- 40-50% whitespace as design element
+- One focal point per section
+- Consistent spacing system throughout
+- Perfect alignment and symmetry
+- Breathing room around every element
+
+#### Avoid:
+- Gradients, textures, or busy backgrounds
+- Multiple accent colors or color coding
+- Overlapping elements or layering
+- Decorative graphics or illustrations
+- Information overload
+```
+
+## GENERAL RENDERING RULES:
+- Follow the specified layout type from description precisely
+- Maintain visual hierarchy and clear information flow
+- ALL TEXT MUST BE IN ENGLISH ONLY - no Chinese, Japanese, Korean, or other non-English characters
+- Do NOT add decorative foreign language text (e.g., Japanese characters in Japanese Minimal style)
+- Balance aesthetics with readability - information must be clear
+- Create depth through layering, shadows, and visual rhythm
+- Include source citations in footer (minimalist style)
+
+CRITICAL LANGUAGE ENFORCEMENT:
+- Render ALL visible text in English alphabet characters only
+- If style mentions Asian aesthetics, use the aesthetic principles but English text only
+- No foreign language decorations, no untranslated text, English only everywhere

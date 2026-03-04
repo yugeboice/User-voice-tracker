@@ -1,0 +1,114 @@
+Generated at: 2026-01-12 12:31:49
+
+Create a professional, educational infographic in LANDSCAPE format (16:9 or 4:3 aspect ratio) based on this specification:
+
+# INFOGRAPHIC BRIEF
+
+**Title:** How Our Eyes Create the Magic of Colors
+
+**One-sentence takeaway:** Colors don't actually exist - they're our brain's amazing way of interpreting light waves bouncing around us.
+
+**Topic domain:** kids
+
+**Tone:** friendly
+
+**Aspect ratio:** landscape (16:9)
+
+**Target audience:** Elementary school children (ages 6-12), families, and educators looking to explain color science in an engaging way
+
+# CONTENT OUTLINE
+
+**a) What it is - brief definition/overview**
+Colors are our brain's incredible translation of invisible light waves into the beautiful rainbow world we see every day.
+
+**b) Why it matters - relevance and impact**
+• Understanding colors helps us appreciate the amazing science happening in our eyes every second
+• Colors influence our feelings and behaviors in our daily lives  
+• Learning about light waves opens the door to understanding how our world really works
+
+**c) Key points - 5-7 most important concepts**
+
+**Light Waves Make Colors**
+Light travels in invisible ripples called wavelengths, and different wavelengths create different colors when they reach our eyes.
+
+**Objects Don't Have Color**
+A red apple absorbs all colors except red - only the red wavelengths bounce back to our eyes! The apple isn't actually red.
+
+**Amazing Animal Vision**
+Butterflies see ultraviolet patterns on flowers that are completely invisible to humans, while bulls can't see red at all.
+
+**Pink Isn't Real**
+Pink doesn't exist in rainbows - our brain creates it by mixing red and white light together.
+
+**Colors Affect Our Feelings**
+Red makes us energetic, blue helps us feel calm, and green relaxes our eyes - that's why classrooms use these colors.
+
+**Historical Color Secrets**
+Ancient Egyptians only had six color words, and blue was so expensive only kings and queens could afford it.
+
+**Fun Home Experiments**
+Simple activities like rainbow glasses, color-changing milk, and spinning color wheels let you see light science in action.
+
+**d) How to apply/use**
+Try the three featured experiments: create rainbows with water glasses, make milk colors dance with soap, and spin color wheels to see white light. Notice colors around you and think about the light waves creating each shade.
+
+**e) Visual suggestions per section**
+Large friendly cartoon eyes with light rays entering, animated wavelength patterns, smiling sun character, colorful dancing molecules, butterfly with UV-pattern wings, historical Egyptian figures, hands-on experiment illustrations with step-by-step visuals.
+
+# LAYOUT PLAN
+
+**Layout Type:** DUAL-PATH
+
+**Visual hierarchy:** [Large hero illustration of giant friendly eye with rainbow light entering] → [Split learning tracks with "Light Science" and "Try It Yourself" paths] → [Flowing connection elements between knowledge and experiments] → [Fun facts callout bubbles] → [Encouraging conclusion banner]
+
+**Component layout:** Top 30% features oversized cartoon eye character with light waves entering and color spectrum flowing out. Middle 60% splits into left track (science knowledge cards with circular illustrations) connected by a winding rainbow path to right track (hands-on experiment cards with step icons). Bottom 10% contains colorful footer band with historical facts and source attribution.
+
+**Visual flow:** Eye starts at hero character, flows down left science track through connected knowledge bubbles, rainbow connector guides across to experiment track on right, circular flow back up through activities, ending at encouraging message banner.
+
+**Density:** Spacious with breathing room - large illustrations and chunky text blocks ensure easy reading for young learners, with plenty of white space between colorful elements.
+
+# STYLE GUIDE (KIDS Domain)
+
+**Look:** Storybook energy, welcoming educational vibe, safe for classrooms and family settings with friendly cartoon aesthetic
+
+**Layout:** Large hero scene with giant smiling eye character establishing the color theme, chunky content sections with clear visual separation using colorful borders, oversized numbered badges for experiment steps, speech bubble callouts for amazing facts
+
+**Typography:** Bold rounded sans-serif headers (28-32pt) with playful character, high-contrast clean sans-serif body text (20pt) for easy reading, oversized numbers (48pt) for experiment steps, all text in friendly blue and purple shades
+
+**Colors:** Bright rainbow palette (red, orange, yellow, green, blue, purple) balanced with soft pastel backgrounds (cream, light blue, pale yellow) for readability, high saturation elements balanced with neutral spaces
+
+**Visual elements:** Friendly illustrated eye character with eyelashes and smile, chunky rounded icons (sun, lightbulb, rainbow, butterfly), speech bubbles for "wow" facts, sticker-style experiment badges, playful geometric shapes (circles, wavy lines), motion lines showing light movement
+
+**Include:** Paper grain texture backgrounds, watercolor splash effects around rainbow elements, tactile button-style experiment cards, personality-filled connecting paths (smiling rainbow bridge), visual connectors with animated dash patterns
+
+**Specific text to render:**
+- Main title: "How Our Eyes Create the Magic of Colors"
+- Section headers: "Light Makes Colors!", "Amazing Color Facts!", "Try These at Home!", "Colors Around Us"
+- Experiment titles: "Rainbow in a Glass", "Color-Changing Milk Magic", "Spinning Color Wheel"
+- Speech bubbles: "Colors don't really exist!", "Pink isn't in rainbows!", "Bulls can't see red!"
+- Call-to-action: "What's your favorite color discovery?"
+- Footer: "Science is everywhere - keep exploring the amazing world around you!"
+
+```
+### ILLUSTRATED ADVENTURE STYLE (Family-Friendly Exploration)
+
+Use the Illustrated Editorial Style (lifestyle/editorial-lifestyle variant) with family-friendly themes:
+- Exploration and discovery focus
+- Adventure without being extreme
+- Safe for all ages
+- Quest-like narrative structure
+```
+
+## GENERAL RENDERING RULES:
+- Follow the specified layout type from description precisely
+- Maintain visual hierarchy and clear information flow
+- ALL TEXT MUST BE IN ENGLISH ONLY - no Chinese, Japanese, Korean, or other non-English characters
+- Do NOT add decorative foreign language text (e.g., Japanese characters in Japanese Minimal style)
+- Balance aesthetics with readability - information must be clear
+- Create depth through layering, shadows, and visual rhythm
+- Include source citations in footer (minimalist style)
+
+CRITICAL LANGUAGE ENFORCEMENT:
+- Render ALL visible text in English alphabet characters only
+- If style mentions Asian aesthetics, use the aesthetic principles but English text only
+- No foreign language decorations, no untranslated text, English only everywhere

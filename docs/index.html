@@ -6,83 +6,783 @@
     <title>Lumina API Demo Lab</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; }
+        html, body { height: 100%; overflow: hidden; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; }
+        
+        /* Layout transition */
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 20px;
+            height: 100vh;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+        .container.sidebar-mode {
+            max-width: 100%;
+            display: flex;
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        /* Header styles */
         h1 { margin-bottom: 8px; }
         .subtitle { color: #666; margin-bottom: 24px; }
         .info { background: #e8f4fd; border: 1px solid #b3d9f2; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 14px; }
-        .info code { background: #d0e8f5; padding: 2px 6px; border-radius: 3px; }
-        .cards { display: flex; flex-direction: column; gap: 16px; }
-        .card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
-        .card h3 { margin-bottom: 4px; }
+        .container.sidebar-mode .info { display: none; }
+        
+        /* Cards container - grid layout */
+        .cards { 
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 16px;
+            transition: all 0.3s ease;
+        }
+        .container.sidebar-mode #cardsWrapper {
+            width: 280px;
+            min-width: 280px;
+            flex-shrink: 0;
+            overflow-y: auto;
+            border-right: 1px solid #ddd;
+            background: #fafafa;
+            padding: 12px;
+        }
+        .container.sidebar-mode .cards {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 10px;
+        }
+        .container.sidebar-mode h1 {
+            font-size: 16px;
+            margin-bottom: 4px;
+            padding: 12px 12px 0;
+        }
+        .container.sidebar-mode .subtitle {
+            display: none;
+        }
+        
+        /* Card styles */
+        .card { 
+            background: #fff; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            border-color: #0078d4;
+            transform: translateY(-2px);
+        }
+        .card .card-icon {
+            font-size: 28px;
+            margin-right: 8px;
+            line-height: 1;
+        }
+        /* Status border indicator - only active project gets colored border */
+        .card.card-running {
+            border-left: 4px solid #ddd;
+        }
+        .card.card-stopped {
+            border-left: 4px solid #ddd;
+        }
+        .card.card-noui {
+            border-left: 4px solid #f0f0f0;
+            opacity: 0.7;
+            cursor: default;
+        }
+        .card.card-noui:hover {
+            transform: none;
+            border-color: #ddd;
+            box-shadow: none;
+        }
+        .container.sidebar-mode .card {
+            padding: 14px;
+        }
+        .card h3 { margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+        .container.sidebar-mode .card h3 { font-size: 15px; }
         .card .author { color: #888; font-size: 13px; margin-bottom: 8px; }
+        .container.sidebar-mode .card .author { font-size: 11px; margin-bottom: 6px; }
         .card .desc { margin-bottom: 12px; font-size: 14px; }
-        .card .meta { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+        .container.sidebar-mode .card .desc { font-size: 12px; margin-bottom: 8px; }
+        .card .meta { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+        .container.sidebar-mode .card .meta { margin-bottom: 8px; }
         .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+        .container.sidebar-mode .badge { font-size: 10px; padding: 2px 6px; }
         .badge-dotnet { background: #512bd4; color: #fff; }
         .badge-node { background: #339933; color: #fff; }
         .badge-port { background: #eee; color: #555; }
-        .links { display: flex; gap: 12px; }
-        .links a { text-decoration: none; font-size: 14px; padding: 6px 14px; border-radius: 4px; }
-        .link-run { background: #0078d4; color: #fff; }
-        .link-run:hover { background: #106ebe; }
+        .links { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+        .container.sidebar-mode .links { gap: 8px; }
+        .links a, .links button { text-decoration: none; font-size: 14px; padding: 6px 14px; border-radius: 4px; border: none; cursor: pointer; }
+        .container.sidebar-mode .links a, .container.sidebar-mode .links button { font-size: 12px; padding: 4px 10px; }
+        .btn-launch, .btn-stop { font-size: 13px; padding: 5px 16px; border-radius: 6px; border: none; cursor: pointer; font-weight: 500; transition: background 0.15s; }
+        .btn-launch { background: #107c10; color: #fff; }
+        .btn-launch:hover { background: #0b5e0b; }
+        .btn-launch:disabled { opacity: 0.6; cursor: wait; }
+        .btn-stop { background: #d83b01; color: #fff; }
+        .btn-stop:hover { background: #b33201; }
         .link-source { background: #eee; color: #333; }
         .link-source:hover { background: #ddd; }
-        .link-disabled { background: #ccc; color: #888; cursor: default; pointer-events: none; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+        .status-running { background: #107c10; animation: pulse 2s infinite; }
+        .status-stopped { background: #ccc; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .status-text { font-size: 12px; color: #888; font-weight: 500; }
+        .status-text.running { color: #107c10; }
+        .container.sidebar-mode .status-text { font-size: 10px; }
+        .loading { display: inline-block; width: 14px; height: 14px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 4px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        /* Card states for sidebar mode */
+        .card.active {
+            border-left: 3px solid #0078d4;
+            background: #e8f4fd;
+        }
+        .container.sidebar-mode .card.active h3 {
+            font-weight: 600;
+        }
+        
+        /* Project viewer */
+        .project-viewer {
+            flex: 1;
+            position: relative;
+            display: none;
+            flex-direction: column;
+        }
+        .container.sidebar-mode .project-viewer {
+            display: flex;
+        }
+        .viewer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 16px;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            flex-shrink: 0;
+        }
+        .viewer-header .viewer-title {
+            font-weight: 600;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .viewer-header .viewer-actions { display: flex; gap: 6px; }
+        .viewer-header button, .viewer-header a {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            transition: opacity 0.15s;
+        }
+        .viewer-header .btn-newtab {
+            background: #e8f4fd;
+            color: #0078d4;
+        }
+        .viewer-header .btn-newtab:hover { opacity: 0.75; }
+        .viewer-header .btn-close {
+            background: #fde7e9;
+            color: #d13438;
+        }
+        .viewer-header .btn-close:hover { opacity: 0.75; }
+        .project-viewer iframe {
+            width: 100%;
+            border: none;
+            display: none;
+            flex: 0 0 0;
+            height: 0;
+            overflow: hidden;
+        }
+        .project-viewer iframe.active {
+            display: block;
+            flex: 1;
+            height: auto;
+            overflow: visible;
+        }
+
+        /* Error overlay for iframe */
+        .iframe-error {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        .iframe-error.hidden { display: none; }
+        .iframe-error-box {
+            text-align: center;
+            max-width: 400px;
+        }
+        .iframe-error-box h3 { font-size: 18px; margin-bottom: 8px; color: #333; }
+        .iframe-error-box p { color: #666; margin-bottom: 16px; font-size: 14px; }
+        .iframe-error-box button {
+            padding: 8px 20px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 0 6px;
+        }
+        .iframe-error-box .btn-retry { background: #0078d4; color: #fff; }
+        .iframe-error-box .btn-retry:hover { background: #106ebe; }
+        .iframe-error-box .btn-kill { background: #d83b01; color: #fff; }
+        .iframe-error-box .btn-kill:hover { background: #b33201; }
+
+        /* Login gate overlay */
+        .login-gate {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.4s ease;
+        }
+        .login-gate.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .login-box {
+            background: rgba(255,255,255,0.12);
+            border-radius: 16px;
+            padding: 50px 60px;
+            text-align: center;
+            color: #fff;
+            backdrop-filter: blur(10px);
+        }
+        .login-box h1 { font-size: 32px; margin-bottom: 8px; }
+        .login-box .sub { opacity: 0.85; margin-bottom: 32px; font-size: 15px; }
+        .login-box button {
+            background: #fff;
+            color: #5b47b0;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .login-box button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+        .login-box button:disabled {
+            opacity: 0.7;
+            cursor: wait;
+        }
+        .login-box .login-msg {
+            margin-top: 16px;
+            font-size: 14px;
+            min-height: 20px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Lumina API Demo Lab</h1>
-        <p class="subtitle">Team vibe coding practice projects demonstrating Lumina API use cases</p>
-
-        <div class="info">
-            <strong>How to run:</strong> Open a terminal, <code>cd projects/&lt;project-name&gt;</code>, then <code>dotnet run</code> (C#) or <code>npm install</code> (Node.js). Each C# project runs on its own port.
-        </div>
-
-        <div class="cards">
-            <div class="card">
-                <h3>Competitor Trending News</h3>
-                <div class="author">by sunting</div>
-                <div class="desc">Competitive intelligence tool: automatically track competitor product launches, market trends, and trending news using Lumina Search + Open + LLM APIs.</div>
-                <div class="meta">
-                    <span class="badge badge-dotnet">C# / .NET 8</span>
-                    <span class="badge badge-port">Port 8401</span>
-                </div>
-                <div class="links">
-                    <a class="link-run" href="http://localhost:8401" target="_blank">Run locally</a>
-                    <a class="link-source" href="https://github.com/ai-microsoft/Lumina-API-Demo/tree/lab/projects/competitor-trending-news" target="_blank">View source</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>Companion Chat</h3>
-                <div class="author">by fangwu</div>
-                <div class="desc">Multi-feature demo: companion chat with personality modes, PPT generation, text-to-speech, local knowledge base, and smart search-augmented Q&A.</div>
-                <div class="meta">
-                    <span class="badge badge-dotnet">C# / .NET 8</span>
-                    <span class="badge badge-port">Port 8402</span>
-                </div>
-                <div class="links">
-                    <a class="link-run" href="http://localhost:8402" target="_blank">Run locally</a>
-                    <a class="link-source" href="https://github.com/ai-microsoft/Lumina-API-Demo/tree/lab/projects/companion-chat" target="_blank">View source</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>AI Newsletter (AI Radar)</h3>
-                <div class="author">by Doris</div>
-                <div class="desc">Automated AI news aggregation system: scrapes ChatGPT, Gemini, Genspark discussions, generates McKinsey-style summaries, and auto-uploads to Google NotebookLM for podcast generation.</div>
-                <div class="meta">
-                    <span class="badge badge-node">Node.js</span>
-                    <span class="badge badge-port">Script tool (no web server)</span>
-                </div>
-                <div class="links">
-                    <a class="link-disabled" href="#">No web UI</a>
-                    <a class="link-source" href="https://github.com/ai-microsoft/Lumina-API-Demo/tree/lab/projects/ai-newsletter" target="_blank">View source</a>
-                </div>
-            </div>
+    <!-- Login gate: shown first, hidden after successful auth -->
+    <div id="loginGate" class="login-gate">
+        <div class="login-box">
+            <h1>Lumina API Demo Lab</h1>
+            <p class="sub">Team vibe coding practice projects</p>
+            <button id="gateLoginBtn" onclick="handleGateLogin()">Login with Microsoft</button>
+            <div class="login-msg" id="gateLoginMsg"></div>
         </div>
     </div>
+
+    <div id="mainContainer" class="container" style="display:none;">
+        <div id="cardsWrapper">
+            <h1>Lumina API Demo Lab</h1>
+            <p class="subtitle">Team vibe coding practice projects demonstrating Lumina API use cases</p>
+
+            <div class="info">
+                Click any project card to launch and open it in the sidebar.
+            </div>
+
+            <div class="cards" id="cards">
+                <div style="color:#888; padding:20px; text-align:center;">Loading projects...</div>
+            </div>
+        </div>
+        
+        <div id="projectViewer" class="project-viewer">
+            <div class="viewer-header">
+                <div class="viewer-title" id="viewerTitle"></div>
+                <div class="viewer-actions">
+                    <a id="viewerExternal" class="btn-newtab" href="#" target="_blank" title="Open in new tab"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h4.5"/><path d="M10 2h4v4"/><path d="M14 2L7 9"/></svg></a>
+                    <button class="btn-close" onclick="closeViewer()" title="Close"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg></button>
+                </div>
+            </div>
+            <!-- iframes will be dynamically added here -->
+        </div>
+    </div>
+
+    <script>
+        const GITHUB_BASE = 'https://github.com/ai-microsoft/Lumina-API-Demo/tree/lab/';
+
+        // Project emoji icons for visual distinction
+        const projectIcons = {
+            'competitor-trending-news': '📰',
+            'companion-chat': '💬',
+            'notebook-app': '📓',
+            'infographic-gen': '🎨',
+            'customer-service-agent': '🤖',
+            'arena-watch': '🏆',
+            'ai-newsletter': '📡',
+        };
+
+        // Convert slug to readable name (e.g. "competitor-trending-news" → "Competitor Trending News")
+        function displayName(slug) {
+            return slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        }
+
+        // State management
+        const state = {
+            activeProject: null,
+            openedProjects: new Set(),
+            iframes: {},
+            projects: []
+        };
+
+        // Load state from localStorage
+        function loadState() {
+            try {
+                const saved = localStorage.getItem('lumina-launcher-state');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    state.openedProjects = new Set(data.openedProjects || []);
+                    state.activeProject = data.activeProject || null;
+                    state.inSidebarMode = data.inSidebarMode || false;
+                }
+            } catch (e) {
+                console.error('Failed to load state:', e);
+            }
+        }
+
+        // Save state to localStorage
+        function saveState() {
+            try {
+                const isSidebar = document.getElementById('mainContainer').classList.contains('sidebar-mode');
+                localStorage.setItem('lumina-launcher-state', JSON.stringify({
+                    openedProjects: Array.from(state.openedProjects),
+                    activeProject: state.activeProject,
+                    inSidebarMode: isSidebar
+                }));
+            } catch (e) {
+                console.error('Failed to save state:', e);
+            }
+        }
+
+        // Enter sidebar mode
+        function enterSidebarMode() {
+            document.getElementById('mainContainer').classList.add('sidebar-mode');
+        }
+
+        // Update card visual states
+        function updateCardStates() {
+            for (const p of state.projects) {
+                const card = document.getElementById('card-' + p.name);
+                if (!card) continue;
+                
+                card.classList.remove('active');
+                if (state.activeProject === p.name) {
+                    card.classList.add('active');
+                }
+            }
+        }
+
+        // Wait for a URL to become reachable (health check)
+        async function waitForReady(url, maxRetries = 8, delayMs = 1500) {
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    await fetch(url, { mode: 'no-cors' });
+                    return true;
+                } catch (e) {
+                    await new Promise(r => setTimeout(r, delayMs));
+                }
+            }
+            return false;
+        }
+
+        // Show error overlay for a project
+        function showIframeError(name, url) {
+            let overlay = document.getElementById('iframe-error-' + name);
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'iframe-error-' + name;
+                overlay.className = 'iframe-error';
+                overlay.innerHTML = `
+                    <div class="iframe-error-box">
+                        <h3>\u26a0\ufe0f Cannot connect</h3>
+                        <p>The project failed to start or the port is occupied by an old process.</p>
+                        <button class="btn-retry" onclick="retryProject('${name}', '${url}')">\ud83d\udd04 Retry</button>
+                        <button class="btn-kill" onclick="killAndRetry('${name}', '${url}')">\ud83d\udca5 Kill port & Retry</button>
+                    </div>
+                `;
+                document.getElementById('projectViewer').appendChild(overlay);
+            }
+            overlay.classList.remove('hidden');
+        }
+
+        function hideIframeError(name) {
+            const overlay = document.getElementById('iframe-error-' + name);
+            if (overlay) overlay.classList.add('hidden');
+        }
+
+        async function retryProject(name, url) {
+            const overlay = document.getElementById('iframe-error-' + name);
+            if (overlay) overlay.querySelector('p').textContent = 'Retrying...';
+
+            // Stop and re-launch
+            await fetch('/api/stop/' + name, { method: 'POST' });
+            await new Promise(r => setTimeout(r, 1000));
+            const res = await fetch('/api/launch/' + name, { method: 'POST' });
+            const data = await res.json();
+            const projectUrl = data.url || url;
+
+            const ready = await waitForReady(projectUrl);
+            if (ready) {
+                hideIframeError(name);
+                // Reload iframe
+                if (state.iframes[name]) {
+                    state.iframes[name].src = projectUrl;
+                }
+                await loadProjects();
+            } else {
+                if (overlay) overlay.querySelector('p').textContent = 'Still cannot connect. The port may be occupied by an old process.';
+            }
+        }
+
+        async function killAndRetry(name, url) {
+            const overlay = document.getElementById('iframe-error-' + name);
+            if (overlay) overlay.querySelector('p').textContent = 'Killing old process...';
+
+            // Call stop to kill the process
+            await fetch('/api/stop/' + name, { method: 'POST' });
+            await new Promise(r => setTimeout(r, 2000));
+
+            // Re-launch
+            if (overlay) overlay.querySelector('p').textContent = 'Restarting...';
+            const res = await fetch('/api/launch/' + name, { method: 'POST' });
+            const data = await res.json();
+            const projectUrl = data.url || url;
+
+            const ready = await waitForReady(projectUrl);
+            if (ready) {
+                hideIframeError(name);
+                if (state.iframes[name]) {
+                    state.iframes[name].src = projectUrl;
+                }
+                await loadProjects();
+            } else {
+                if (overlay) overlay.querySelector('p').textContent = 'Still cannot connect. Please manually kill processes on this port.';
+            }
+        }
+
+        // Open or switch to a project
+        async function openProjectInSidebar(name, url) {
+            if (!state.openedProjects.has(name)) {
+                // Remove any stale iframe with same id
+                const existing = document.getElementById('iframe-' + name);
+                if (existing) existing.remove();
+
+                enterSidebarMode();
+
+                // Health check before loading iframe
+                const ready = await waitForReady(url, 6, 1500);
+
+                const iframe = document.createElement('iframe');
+                iframe.id = 'iframe-' + name;
+                if (ready) {
+                    iframe.src = url;
+                } else {
+                    iframe.src = 'about:blank';
+                    // Show error overlay after small delay
+                    setTimeout(() => showIframeError(name, url), 100);
+                }
+                document.getElementById('projectViewer').appendChild(iframe);
+                state.iframes[name] = iframe;
+                state.openedProjects.add(name);
+            }
+            
+            // Switch to this project
+            switchToProject(name);
+        }
+
+        // Switch active project
+        function switchToProject(name) {
+            // Hide all iframes
+            for (const iframeName in state.iframes) {
+                state.iframes[iframeName].classList.remove('active');
+            }
+            
+            // Show target iframe
+            if (state.iframes[name]) {
+                state.iframes[name].classList.add('active');
+            }
+            
+            // Update viewer header
+            const project = state.projects.find(p => p.name === name);
+            const icon = projectIcons[name] || '\ud83d\udce6';
+            document.getElementById('viewerTitle').innerHTML = icon + ' ' + displayName(name);
+            if (project && project.url) {
+                document.getElementById('viewerExternal').href = project.url;
+            }
+
+            state.activeProject = name;
+            updateCardStates();
+            saveState();
+        }
+
+        // Close viewer and return to full card grid
+        function closeViewer() {
+            // Hide all iframes but keep state
+            for (const iframeName in state.iframes) {
+                state.iframes[iframeName].classList.remove('active');
+            }
+            state.activeProject = null;
+            document.getElementById('mainContainer').classList.remove('sidebar-mode');
+            updateCardStates();
+            saveState();
+        }
+
+        // Handle card click - auto launch if not running
+        async function handleCardClick(name, url, hasWebUi, running) {
+            if (!hasWebUi) return;
+            
+            if (running) {
+                // Already running - just open/switch
+                if (state.openedProjects.has(name)) {
+                    switchToProject(name);
+                } else {
+                    openProjectInSidebar(name, url);
+                }
+            } else {
+                // Not running - launch first, then open
+                await launchProject(name);
+            }
+        }
+
+        async function loadProjects() {
+            try {
+                const res = await fetch('/api/projects');
+                const projects = await res.json();
+                state.projects = projects;
+                renderCards(projects);
+                
+                // Restore sidebar view only if user was in sidebar mode before refresh
+                if (state.inSidebarMode && state.openedProjects.size > 0) {
+                    for (const name of state.openedProjects) {
+                        const project = projects.find(p => p.name === name);
+                        if (project && project.running) {
+                            if (!state.iframes[name]) {
+                                const iframe = document.createElement('iframe');
+                                iframe.src = project.url;
+                                iframe.id = 'iframe-' + name;
+                                document.getElementById('projectViewer').appendChild(iframe);
+                                state.iframes[name] = iframe;
+                            }
+                        } else {
+                            state.openedProjects.delete(name);
+                        }
+                    }
+                    
+                    if (state.openedProjects.size > 0) {
+                        enterSidebarMode();
+                        if (state.activeProject && state.openedProjects.has(state.activeProject)) {
+                            switchToProject(state.activeProject);
+                        } else {
+                            switchToProject(Array.from(state.openedProjects)[0]);
+                        }
+                    }
+                    state.inSidebarMode = false; // consumed, future saves reflect actual state
+                }
+                
+                updateCardStates();
+            } catch (e) {
+                document.getElementById('cards').innerHTML = '<div style="color:red;padding:20px;">Failed to connect to launcher. Is it running on localhost:8400?</div>';
+            }
+        }
+
+        function renderCards(projects) {
+            const container = document.getElementById('cards');
+            container.innerHTML = '';
+            for (const p of projects) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.id = 'card-' + p.name;
+                card.dataset.projectName = p.name;
+                card.dataset.projectUrl = p.url || '';
+                card.dataset.hasWebUi = p.hasWebUi;
+                card.dataset.running = p.running;
+
+                const badgeClass = p.stack.includes('Node') ? 'badge-node' : 'badge-dotnet';
+                const portLabel = p.hasWebUi ? `Port ${p.port}` : 'Script tool';
+                const icon = projectIcons[p.name] || '📦';
+                const cardStatusClass = !p.hasWebUi ? 'card-noui' : (p.running ? 'card-running' : 'card-stopped');
+                card.className = 'card ' + cardStatusClass;
+
+                let buttons = '';
+                if (p.hasWebUi) {
+                    if (p.running) {
+                        buttons = `
+                            <button class="btn-stop" onclick="event.stopPropagation(); stopProject('${p.name}')">Stop</button>
+                        `;
+                    } else {
+                        buttons = `
+                            <button class="btn-launch" onclick="event.stopPropagation(); handleCardClick('${p.name}', '${p.url}', true, false)">▶ Run</button>
+                        `;
+                    }
+                }
+
+                card.innerHTML = `
+                    <h3>
+                        <span class="card-icon">${icon}</span>
+                        ${displayName(p.name)}
+                        <span class="status-dot ${p.running ? 'status-running' : 'status-stopped'}" style="margin-left:auto;"></span>
+                    </h3>
+                    <div class="author">by ${p.author || 'team'}</div>
+                    <div class="desc">${p.description || ''}</div>
+                    <div class="meta">
+                        <span class="status-text ${p.running ? 'running' : ''}">${p.running ? '● Running' : 'Stopped'}</span>
+                    </div>
+                    <div class="links">
+                        ${buttons}
+                        <a class="link-source" href="${GITHUB_BASE}projects/${p.name}" target="_blank" onclick="event.stopPropagation();">View source</a>
+                    </div>
+                `;
+                
+                // Add click handler for card
+                if (p.hasWebUi) {
+                    card.addEventListener('click', () => {
+                        // Look up current state (not stale captured value)
+                        const current = state.projects.find(proj => proj.name === p.name);
+                        handleCardClick(p.name, p.url, p.hasWebUi, current?.running || false);
+                    });
+                }
+                
+                container.appendChild(card);
+            }
+        }
+
+        // Prevent concurrent launches
+        const _launching = new Set();
+
+        async function launchProject(name) {
+            if (_launching.has(name)) return; // already launching
+            _launching.add(name);
+
+            // Show loading state on the card
+            const card = document.getElementById('card-' + name);
+            const statusText = card?.querySelector('.status-text');
+            if (statusText) statusText.innerHTML = '<span class="loading" style="border-color:#0078d4;border-top-color:transparent;width:12px;height:12px;"></span> Starting...';
+
+            try {
+                const res = await fetch('/api/launch/' + name, { method: 'POST' });
+                const data = await res.json();
+                if (data.url) {
+                    // Open iframe (health check is inside openProjectInSidebar)
+                    await openProjectInSidebar(name, data.url);
+                    // Refresh card list after iframe is open
+                    await loadProjects();
+                }
+            } catch (e) {
+                alert('Failed to launch: ' + e.message);
+            }
+            _launching.delete(name);
+        }
+
+        async function stopProject(name) {
+            await fetch('/api/stop/' + name, { method: 'POST' });
+            
+            // Remove from opened projects if stopped
+            if (state.openedProjects.has(name)) {
+                state.openedProjects.delete(name);
+                if (state.iframes[name]) {
+                    state.iframes[name].remove();
+                    delete state.iframes[name];
+                }
+                
+                // Switch to another project or exit sidebar mode
+                if (state.activeProject === name) {
+                    if (state.openedProjects.size > 0) {
+                        switchToProject(Array.from(state.openedProjects)[0]);
+                    } else {
+                        state.activeProject = null;
+                        document.getElementById('mainContainer').classList.remove('sidebar-mode');
+                    }
+                }
+                saveState();
+            }
+            
+            await loadProjects();
+        }
+
+        // Initialize
+        loadState();
+        loadProjects();
+        // Refresh status every 5 seconds
+        setInterval(loadProjects, 5000);
+
+        // ===== Authentication gate =====
+        async function checkAuthAndGate() {
+            try {
+                const res = await fetch('/api/auth/status');
+                const data = await res.json();
+                if (data.isLoggedIn) {
+                    showApp();
+                }
+                // If not logged in, login gate stays visible
+            } catch (e) {
+                console.error('Failed to check auth status:', e);
+            }
+        }
+
+        function showApp() {
+            document.getElementById('loginGate').classList.add('hidden');
+            document.getElementById('mainContainer').style.display = '';
+        }
+
+        async function handleGateLogin() {
+            const btn = document.getElementById('gateLoginBtn');
+            const msg = document.getElementById('gateLoginMsg');
+            btn.disabled = true;
+            btn.textContent = 'Logging in...';
+            msg.textContent = '';
+            try {
+                const res = await fetch('/api/auth/login', { method: 'POST' });
+                const data = await res.json();
+                if (data.success) {
+                    msg.textContent = 'Login successful!';
+                    setTimeout(showApp, 500);
+                } else {
+                    msg.textContent = 'Login failed: ' + (data.message || 'Unknown error');
+                    btn.disabled = false;
+                    btn.textContent = 'Login with Microsoft';
+                }
+            } catch (e) {
+                msg.textContent = 'Login failed: ' + e.message;
+                btn.disabled = false;
+                btn.textContent = 'Login with Microsoft';
+            }
+        }
+
+        // On page load: check if already logged in → skip gate
+        checkAuthAndGate();
+    </script>
 </body>
 </html>

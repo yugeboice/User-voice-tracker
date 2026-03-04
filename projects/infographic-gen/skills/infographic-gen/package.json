@@ -1,0 +1,7 @@
+{
+  "name": "infographic-gen",
+  "version": "1.0.0",
+  "description": "Generate professional infographics from text files with intelligent style adaptation",
+  "main": "SKILL.md",
+  "keywords": ["infographic", "visualization", "education", "design", "claude-skill"]
+}
