@@ -1,0 +1,129 @@
+Generated at: 2026-01-12 12:27:46
+
+Create a professional, educational infographic in LANDSCAPE format (16:9 or 4:3 aspect ratio) based on this specification:
+
+# INFOGRAPHIC BRIEF
+
+- **Title**: "Master Your Digital Presence: Social Media Success Guide"
+- **One-sentence takeaway**: Transform your online impact through authentic content, genuine engagement, and strategic platform optimization
+- **Topic domain**: professional
+- **Tone**: confident
+- **Aspect ratio**: landscape (16:9)
+- **Target audience**: entrepreneurs, marketers, content creators, and business professionals seeking to enhance their digital marketing strategy
+
+# CONTENT OUTLINE
+
+**a) What it is - Definition/Overview**
+A comprehensive guide to building successful digital presence through strategic social media marketing, authentic content creation, and meaningful audience engagement in today's evolving online ecosystem.
+
+**b) Why it matters - Relevance and Impact**
+• Modern brands must adapt to algorithm changes and shifting user behaviors to maintain competitive advantage
+• Authentic engagement drives higher conversion rates than traditional advertising methods
+• Digital presence directly impacts business growth, career opportunities, and brand credibility in the modern marketplace
+
+**c) Key Points - 7 Essential Concepts**
+
+**Quality Content Creation**
+Focus on authentic, valuable content with consistent visual identity and unique voice. Short-form videos under 60 seconds generate highest engagement rates on platforms like TikTok and Instagram Reels.
+Example: Behind-the-scenes content and user-generated material build deeper audience connections
+
+**Strategic Engagement Tactics**
+Move beyond follower counts to prioritize meaningful interactions. Respond to comments within first hour for maximum algorithmic visibility.
+Example: Thought-provoking questions and respectful controversial opinions spark valuable conversations
+
+**Community Building Excellence**
+Create exclusive groups, host live sessions, and develop hashtag campaigns that encourage participation. Provide value through entertainment, education, or inspiration before requesting engagement.
+Example: Successful brands tailor content to each platform's unique culture and format preferences
+
+**Evolved Influencer Marketing**
+Micro and nano-influencers deliver higher engagement rates than celebrity endorsements. Audiences prefer relatability over reach, valuing genuine product experiences over polished advertisements.
+Example: Transparent partnerships and honest reviews maintain credibility in saturated markets
+
+**Social Commerce Integration**
+Platforms now feature direct shopping capabilities, streamlining customer journey from discovery to conversion without leaving apps.
+Example: Instagram Shopping and TikTok Shop enable seamless purchase experiences within social feeds
+
+**AI-Powered Content Strategy**
+Artificial intelligence tools optimize posting times, analyze performance metrics, and generate content ideas while maintaining human authenticity for genuine engagement.
+Example: Scheduling tools and sentiment analysis provide data-driven insights for campaign optimization
+
+**Meaningful Success Metrics**
+Track save rates, click-throughs, conversion rates, and customer lifetime value instead of vanity metrics. Monitor audience sentiment and brand mentions for campaign effectiveness insights.
+Example: Engagement quality and conversion tracking provide better ROI measurement than follower counts
+
+**d) How to Apply/Use**
+Develop editorial calendars for consistent posting, engage with comments promptly, create platform-specific content strategies, build authentic community relationships, and regularly analyze performance metrics to refine approach.
+
+**e) Visual Suggestions per Section**
+Content creation: Camera and editing icons with video play buttons; Engagement: Speech bubbles and heart icons; Community: Connected user avatars; Influencer culture: Diverse creator portraits; Trends: Shopping cart and AI robot icons; Metrics: Dashboard and analytics charts
+
+# LAYOUT PLAN
+
+**Layout Type**: FLOW - dynamic S-curve workflow showing the journey from content creation to measurable success
+
+**Visual Hierarchy**: 
+[Bold hero title with smartphone/social media graphic] → [Key insight callout highlighting "Quality Over Quantity"] → [Flowing S-curve with 7 content stations] → [Connecting arrows and progress indicators] → [Success metrics dashboard] → [Source attribution footer]
+
+**Component Layout**: 
+Asymmetric title placement in upper-left with curved text flow, varied section sizes following S-curve path, mixed content blocks including circular icons, rectangular tip boxes, and diamond-shaped key stats, overlapping elements create depth
+
+**Visual Flow**: 
+Eye travels in modified S-pattern starting from hero title, following curved path through content stations, with directional arrows guiding progression from content creation through engagement tactics to final success metrics, circular flow returns attention to key takeaways
+
+**Density**: 
+Balanced information density with breathing room between major sections, strategic white space highlighting important callouts, information-rich content organized in digestible visual chunks
+
+# STYLE GUIDE (PROFESSIONAL Domain)
+
+**Look**: Modern, confident, editorial magazine style with dynamic energy and premium feel
+
+**Layout**: Asymmetric compositions with overlapping elements, diagonal content blocks following S-curve flow, varied geometric shapes creating visual interest, photo-style background elements
+
+**Typography**: Bold sans-serif titles (Montserrat or similar) with elegant serif accents (Playfair Display) for key quotes, varied font weights creating clear hierarchy, modern number styling for statistics
+
+**Colors**: Electric blue primary (#0066FF) with charcoal neutrals (#2C3E50, #ECF0F1) and gold metallic accents (#FFD700) for premium feel, subtle gradient overlays on key sections
+
+**Visual Elements**: Abstract geometric shapes, sleek data visualization components, subtle gradients and shadows, photography-style crops for user avatars, modern iconography with consistent stroke weight, connecting lines with dynamic curves
+
+**Specific text to render**:
+- Main title: "Master Your Digital Presence: Social Media Success Guide"
+- Subtitle: "Transform your online impact through authentic content, genuine engagement, and strategic platform optimization"
+- Section headers: "Quality Content Creation" | "Strategic Engagement" | "Community Building" | "Influencer Evolution" | "Social Commerce" | "AI-Powered Strategy" | "Success Metrics"
+- Key stats: "60 seconds = peak engagement" | "1 hour response = max visibility" | "Micro-influencers = higher ROI"
+- Call-to-action: "Start Building Your Digital Empire Today"
+- Footer: "Based on current social media trends and digital marketing best practices"
+
+```
+### INFLUENCER BOLD STYLE (Personal Branding)
+
+#### Color Palette:
+- Bold, attention-grabbing colors
+- High saturation
+- Confident contrasts
+
+#### Visual Elements:
+- Bold typography
+- Confident imagery
+- Strong personal brand elements
+- Attention-grabbing design
+
+#### Mood & References:
+- Bold, confident, viral-ready
+- Personal brand aesthetic
+```
+
+---
+
+## GENERAL RENDERING RULES:
+- Follow the specified layout type from description precisely
+- Maintain visual hierarchy and clear information flow
+- ALL TEXT MUST BE IN ENGLISH ONLY - no Chinese, Japanese, Korean, or other non-English characters
+- Do NOT add decorative foreign language text (e.g., Japanese characters in Japanese Minimal style)
+- Balance aesthetics with readability - information must be clear
+- Create depth through layering, shadows, and visual rhythm
+- Include source citations in footer (minimalist style)
+
+CRITICAL LANGUAGE ENFORCEMENT:
+- Render ALL visible text in English alphabet characters only
+- If style mentions Asian aesthetics, use the aesthetic principles but English text only
+- No foreign language decorations, no untranslated text, English only everywhere

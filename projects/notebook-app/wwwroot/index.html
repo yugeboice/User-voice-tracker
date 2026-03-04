@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina API Demo</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; padding: 20px; }
+        h1 { text-align: center; color: #333; margin-bottom: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .section { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .section h2 { color: #0078d4; margin-bottom: 15px; font-size: 1.2em; }
+        .section p { color: #666; font-size: 0.9em; margin-bottom: 15px; }
+        .form-row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+        input[type="text"] { flex: 1; min-width: 200px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+        label { display: flex; align-items: center; gap: 5px; font-size: 14px; color: #555; }
+        button { background: #0078d4; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        button:hover { background: #106ebe; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        .btn-secondary { background: #6c757d; }
+        .btn-secondary:hover { background: #5a6268; }
+        .result { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 15px; margin-top: 15px; max-height: 400px; overflow-y: auto; }
+        .result pre { white-space: pre-wrap; word-wrap: break-word; font-size: 13px; }
+        .result img { max-width: 100%; border: 1px solid #ddd; margin-top: 10px; }
+        .loading { color: #0078d4; font-style: italic; }
+        .error { color: #d32f2f; }
+        .search-item { border-bottom: 1px solid #eee; padding: 10px 0; }
+        .search-item:last-child { border-bottom: none; }
+        .search-item h4 { color: #1a0dab; margin-bottom: 5px; }
+        .search-item a { color: #006621; font-size: 12px; text-decoration: none; }
+        .search-item p { color: #545454; font-size: 13px; margin-top: 5px; }
+        .llm-summary { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 4px; padding: 15px; margin-bottom: 15px; }
+        .llm-summary h4 { color: #1565c0; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔮 Lumina API Demo</h1>
+
+
+        <!-- Main Content (hidden until login) -->
+        <div id="mainContent">
+            <!-- Search + LLM Section -->
+            <div class="section">
+                <h2>🔍 Search API + LLM</h2>
+                <p>Web search powered by Lumina. 搜索结果出来后可点击 "LLM Summary" 获取 AI 总结。</p>
+                <div class="form-row">
+                    <input type="text" id="searchQuery" placeholder="Enter search query..." value="latest AI developments">
+                    <button onclick="doSearch()">Search</button>
+                </div>
+                <div id="searchResult" class="result" style="display:none;"></div>
+            </div>
+
+            <!-- Open + Find Section -->
+            <div class="section">
+                <h2>📖 Open API + Find</h2>
+                <p>Fetch webpage content. Optionally search within the page using Find pattern.</p>
+                <div class="form-row">
+                    <input type="text" id="openUrl" placeholder="Enter URL..." value="https://en.wikipedia.org/wiki/Artificial_intelligence">
+                </div>
+                <div class="form-row">
+                    <input type="text" id="findPattern" placeholder="Find pattern (optional)..." value="">
+                    <button onclick="doOpen()">Open</button>
+                </div>
+                <div id="openResult" class="result" style="display:none;"></div>
+            </div>
+
+            <!-- CUA Section -->
+            <div class="section">
+                <h2>🖥️ CUA (Computer Use Agent)</h2>
+                <p>Virtual browser automation - captures screenshots of web pages. Try a news site for rich content!</p>
+                <div class="form-row">
+                    <input type="text" id="cuaUrl" placeholder="Enter URL..." value="https://www.bbc.com/news">
+                    <button onclick="doCua()">Capture Screenshot</button>
+                </div>
+                <div id="cuaResult" class="result" style="display:none;"></div>
+            </div>
+
+            <!-- Notebook Section -->
+            <div class="section">
+                <h2>📓 Notebook</h2>
+                <p>AI-powered notebook with source management, chat, and mindmap generation - inspired by NotebookLM.</p>
+                <button onclick="window.location.href='/notebooks/Frontend/notebook-home.html'" style="width: 100%; padding: 15px; font-size: 16px;">
+                    进入 Notebook →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let lastSearchQuery = '';
+        let lastSearchResults = [];
+
+        async function doSearch() {
+            const query = document.getElementById('searchQuery').value;
+            const resultDiv = document.getElementById('searchResult');
+            
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<p class="loading">Searching...</p>';
+
+            try {
+                const res = await fetch('/api/search', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query, topN: 5, useLlm: false })
+                });
+                const data = await res.json();
+
+                if (!res.ok || !data.results) {
+                    resultDiv.innerHTML = `<p class="error">Error: ${data.error || data || 'Search failed'}</p>`;
+                    return;
+                }
+
+                lastSearchQuery = query;
+                lastSearchResults = data.results || [];
+
+                let html = `<div style="margin-bottom: 15px;">
+                    <button class="btn-secondary" onclick="doLlmSummary()">🤖 LLM Summary</button>
+                </div>`;
+                html += `<div id="llmSummaryDiv"></div>`;
+                html += `<h4>Found ${data.results.length} results:</h4>`;
+                data.results.forEach((r, i) => {
+                    html += `<div class="search-item">
+                        <h4>${i+1}. ${r.title || 'No title'}</h4>
+                        <a href="${r.url}" target="_blank">${r.url}</a>
+                        <p>${(r.semanticDocument || '').substring(0, 200)}...</p>
+                    </div>`;
+                });
+                resultDiv.innerHTML = html;
+            } catch (e) {
+                resultDiv.innerHTML = `<p class="error">Error: ${e.message}</p>`;
+            }
+        }
+
+        async function doLlmSummary() {
+            const summaryDiv = document.getElementById('llmSummaryDiv');
+            if (!summaryDiv) return;
+            
+            summaryDiv.innerHTML = '<div class="llm-summary"><p class="loading">🤖 Generating LLM summary...</p></div>';
+
+            try {
+                const res = await fetch('/api/llm-summary', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: lastSearchQuery, topN: 5 })
+                });
+                const data = await res.json();
+                
+                summaryDiv.innerHTML = `<div class="llm-summary">
+                    <h4>🤖 LLM Summary:</h4>
+                    <pre>${data.summary}</pre>
+                </div>`;
+            } catch (e) {
+                summaryDiv.innerHTML = `<div class="llm-summary"><p class="error">Error: ${e.message}</p></div>`;
+            }
+        }
+
+        async function doOpen() {
+            const url = document.getElementById('openUrl').value;
+            const findPattern = document.getElementById('findPattern').value;
+            const resultDiv = document.getElementById('openResult');
+            
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<p class="loading">Opening page...</p>';
+
+            try {
+                const res = await fetch('/api/open', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url, findPattern: findPattern || null })
+                });
+                const data = await res.json();
+                
+                let html = `<h4>📄 ${data.title || 'Page opened'}</h4>
+                    <p><small>Session: ${data.sessionId}</small></p>
+                    <pre>${data.content || 'No content'}</pre>`;
+                
+                if (data.findResults && data.findResults.length > 0) {
+                    html += `<h4>🔎 Find results (${data.findResults.length}):</h4>`;
+                    data.findResults.forEach(r => {
+                        html += `<p>Line ${r.lineIdx}: ${r.template}</p>`;
+                    });
+                }
+                resultDiv.innerHTML = html;
+            } catch (e) {
+                resultDiv.innerHTML = `<p class="error">Error: ${e.message}</p>`;
+            }
+        }
+
+        async function doCua() {
+            const url = document.getElementById('cuaUrl').value;
+            const resultDiv = document.getElementById('cuaResult');
+            
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<p class="loading">Capturing screenshot (this may take 10-20 seconds)...</p>';
+
+            try {
+                const res = await fetch('/api/cua', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+                const data = await res.json();
+                
+                if (data.screenshot) {
+                    resultDiv.innerHTML = `<h4>📸 Screenshot:</h4><img src="data:image/png;base64,${data.screenshot}" alt="Screenshot">`;
+                } else {
+                    resultDiv.innerHTML = '<p class="error">Failed to capture screenshot</p>';
+                }
+            } catch (e) {
+                resultDiv.innerHTML = `<p class="error">Error: ${e.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

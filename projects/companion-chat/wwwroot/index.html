@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Lumina API Demo</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; padding: 20px; }
+        h1 { text-align: center; color: #333; margin-bottom: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .section { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .section h2 { color: #0078d4; margin-bottom: 15px; font-size: 1.2em; }
+        .section p { color: #666; font-size: 0.9em; margin-bottom: 15px; }
+        .form-row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+        input[type="text"] { flex: 1; min-width: 200px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; }
+        label { display: flex; align-items: center; gap: 5px; font-size: 14px; color: #555; }
+        button { background: #0078d4; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        button:hover { background: #106ebe; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        .btn-secondary { background: #6c757d; }
+        .btn-secondary:hover { background: #5a6268; }
+        .result { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 15px; margin-top: 15px; max-height: 400px; overflow-y: auto; }
+        .result pre { white-space: pre-wrap; word-wrap: break-word; font-size: 13px; }
+        .result img { max-width: 100%; border: 1px solid #ddd; margin-top: 10px; }
+        .loading { color: #0078d4; font-style: italic; }
+        .error { color: #d32f2f; }
+        .search-item { border-bottom: 1px solid #eee; padding: 10px 0; }
+        .search-item:last-child { border-bottom: none; }
+        .search-item h4 { color: #1a0dab; margin-bottom: 5px; }
+        .search-item a { color: #006621; font-size: 12px; text-decoration: none; }
+        .search-item p { color: #545454; font-size: 13px; margin-top: 5px; }
+        .llm-summary { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 4px; padding: 15px; margin-bottom: 15px; }
+        .llm-summary h4 { color: #1565c0; margin-bottom: 10px; }
+        .login-section { text-align: center; padding: 40px; }
+        .login-section p { margin-bottom: 20px; color: #666; }
+        .hidden { display: none !important; }
+        .competitor-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 15px; margin-bottom: 15px; }
+        .competitor-card h3 { color: #0078d4; margin-bottom: 10px; font-size: 1.1em; }
+        .competitor-card .queries { background: #f0f8ff; padding: 8px; border-radius: 4px; margin: 10px 0; font-size: 12px; }
+        .competitor-card .queries strong { color: #333; }
+        .competitor-card .news-item { border-left: 3px solid #0078d4; padding-left: 10px; margin: 10px 0; }
+        .competitor-card .news-item h4 { color: #1a0dab; font-size: 14px; margin-bottom: 5px; }
+        .competitor-card .news-item .meta { color: #666; font-size: 12px; margin-bottom: 5px; }
+        .competitor-card .news-item p { color: #545454; font-size: 13px; }
+        .competitor-card .news-item .full-content { background: #f9f9f9; border: 1px solid #e0e0e0; border-radius: 4px; padding: 10px; margin-top: 8px; max-height: 300px; overflow-y: auto; }
+        .competitor-card .news-item .full-content-badge { display: inline-block; background: #4caf50; color: white; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: 5px; }
+        .competitor-card .news-item .expand-btn { background: #e3f2fd; color: #0078d4; border: 1px solid #90caf9; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 5px; }
+        .competitor-card .news-item .expand-btn:hover { background: #bbdefb; }
+        .chip-input { display: flex; flex-wrap: wrap; gap: 5px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; min-height: 42px; }
+        .chip { background: #e3f2fd; color: #0078d4; padding: 5px 10px; border-radius: 20px; font-size: 13px; display: inline-flex; align-items: center; gap: 5px; }
+        .chip button { background: none; border: none; color: #0078d4; cursor: pointer; font-weight: bold; padding: 0 5px; }
+        .chip button:hover { color: #d32f2f; }
+        input.chip-add { border: none; outline: none; flex: 1; min-width: 150px; padding: 5px; font-size: 14px; }
+        #analysisReport { background: #ffffff; border: 2px solid #0078d4; max-height: 600px; margin-top: 20px; }
+        #analysisReport h2, #analysisReport h3, #analysisReport h4 { color: #0078d4; margin-top: 15px; margin-bottom: 10px; }
+        #analysisReport table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
+        #analysisReport table th { background: #0078d4; color: white; padding: 10px; text-align: left; }
+        #analysisReport table td { border: 1px solid #ddd; padding: 8px; }
+        #analysisReport ul, #analysisReport ol { margin-left: 20px; line-height: 1.6; }
+        #analysisReport strong { color: #0078d4; }
+        #analysisReport .markdown-content { line-height: 1.8; }
+        /* WeChat-style Chat Interface */
+        #chatHistory { background: #f5f5f5 !important; border: none !important; }
+        .chat-message { margin-bottom: 16px; display: flex; gap: 10px; animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Avatar styles */
+        .chat-avatar { width: 40px; height: 40px; border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .chat-message.user .chat-avatar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); order: 2; }
+        .chat-message.assistant .chat-avatar { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        
+        /* Message container */
+        .chat-content { display: flex; flex-direction: column; max-width: 70%; }
+        .chat-message.user { flex-direction: row-reverse; }
+        .chat-message.user .chat-content { align-items: flex-end; }
+        .chat-message.assistant .chat-content { align-items: flex-start; }
+        
+        /* Bubble styles - WeChat green for user */
+        .chat-bubble { padding: 10px 14px; border-radius: 8px; word-wrap: break-word; line-height: 1.6; font-size: 14px; position: relative; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .chat-message.user .chat-bubble { background: #95ec69; color: #000; border-top-right-radius: 2px; }
+        .chat-message.assistant .chat-bubble { background: #fff; color: #000; border-top-left-radius: 2px; border: 1px solid #e5e5e5; }
+        
+        /* Bubble tail - WeChat style */
+        .chat-bubble::before { content: ''; position: absolute; top: 0; width: 0; height: 0; }
+        .chat-message.user .chat-bubble::before { right: -6px; border-left: 6px solid #95ec69; border-top: 6px solid #95ec69; border-right: 6px solid transparent; border-bottom: 6px solid transparent; }
+        .chat-message.assistant .chat-bubble::before { left: -6px; border-right: 6px solid #fff; border-top: 6px solid #fff; border-left: 6px solid transparent; border-bottom: 6px solid transparent; }
+        
+        /* Meta info */
+        .chat-meta { font-size: 11px; color: #b2b2b2; margin-top: 4px; padding: 0 2px; }
+        
+        /* Message content styling */
+        .chat-bubble p { margin: 4px 0; }
+        .chat-bubble strong { font-weight: 600; }
+        .chat-message pre { background: rgba(0,0,0,0.05); padding: 8px; border-radius: 4px; margin: 8px 0; white-space: pre-wrap; word-wrap: break-word; font-size: 13px; }
+        
+        /* Typing indicator - WeChat style */
+        .typing-indicator { display: inline-flex; gap: 4px; align-items: center; padding: 4px 0; }
+        .typing-indicator span { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #b2b2b2; animation: typing 1.4s infinite ease-in-out; }
+        .typing-indicator span:nth-child(1) { animation-delay: 0s; }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-8px); opacity: 1; } }
+        
+        /* Chat input area - WeChat style */
+        .chat-input-wrapper { display: flex; gap: 8px; align-items: center; background: #f7f7f7; padding: 10px; border-radius: 6px; }
+        .chat-input-wrapper input { background: #fff; border: 1px solid #d9d9d9; border-radius: 4px; padding: 8px 12px; font-size: 14px; }
+        .chat-input-wrapper input:focus { outline: none; border-color: #07c160; }
+        .chat-input-wrapper button { background: #07c160; border-radius: 4px; padding: 8px 20px; font-size: 14px; transition: all 0.2s; }
+        .chat-input-wrapper button:hover { background: #06ad56; transform: translateY(-1px); box-shadow: 0 2px 8px rgba(7, 193, 96, 0.3); }
+        .chat-input-wrapper button:active { transform: translateY(0); }
+        
+        /* Voice control button */
+        .voice-btn { 
+            background: #ff9800; 
+            color: white; 
+            border: none; 
+            padding: 6px 10px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            font-size: 16px; 
+            width: 32px; 
+            height: 32px; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .voice-btn:hover { 
+            background: #f57c00; 
+            transform: scale(1.1); 
+        }
+        .voice-btn.playing { 
+            background: #4caf50; 
+            animation: pulse 1.5s infinite; 
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Welcome message style */
+        .chat-welcome { text-align: center; color: #999; padding: 40px 20px; }
+        .chat-welcome-icon { font-size: 48px; margin-bottom: 16px; }
+        .chat-welcome p { margin: 8px 0; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔮 Lumina API Demo</h1>
+
+        <!-- Login handled by Launcher - skip directly to main content -->
+
+        <!-- Main Content -->
+        <div id="mainContent">
+            <!-- AI Chat Section (WeChat Style) -->
+            <div class="section" style="padding: 0; overflow: hidden;">
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 16px 20px; color: white; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h2 style="color: white; margin: 0; font-size: 1.1em; font-weight: 500;" id="chatTitle">💬 AI 智能助手</h2>
+                        <p style="color: rgba(255,255,255,0.9); margin: 4px 0 0 0; font-size: 0.85em;" id="chatSubtitle">基于网络实时搜索 · 智能分析回答</p>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button onclick="window.open('/companion.html', '_blank')" style="background: linear-gradient(135deg, #4a9eff, #7b2ff7); color: white; padding: 6px 12px; font-size: 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 2px 8px rgba(74, 158, 255, 0.3);">
+                            ✨ 陪伴模式
+                        </button>
+                        <button onclick="toggleChatMode()" id="chatModeBtn" style="background: rgba(255,255,255,0.3); color: white; padding: 6px 12px; font-size: 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3);">
+                            🤖 快捷陪伴
+                        </button>
+                        <button onclick="toggleSmartMode()" id="smartModeBtn" style="background: rgba(255,255,255,0.2); color: white; padding: 6px 12px; font-size: 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3);">
+                            🧠 智能模式
+                        </button>
+                        <button onclick="toggleKnowledgePanel()" id="knowledgeBtn" style="background: rgba(255,255,255,0.2); color: white; padding: 6px 12px; font-size: 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3);">
+                            📚 知识库
+                        </button>
+                        <button onclick="toggleAgentPanel()" id="agentBtn" style="background: rgba(255,255,255,0.2); color: white; padding: 6px 12px; font-size: 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3);">
+                            🤖 Agent
+                        </button>
+                        <button onclick="clearChatHistory()" style="background: rgba(255,255,255,0.2); color: white; padding: 6px 12px; font-size: 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3);">
+                            🗑️ 清除历史
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Knowledge Base Panel -->
+                <div id="knowledgePanel" style="display: none; background: #f9f9f9; border-bottom: 1px solid #e5e5e5; padding: 16px;">
+                    <h3 style="margin: 0 0 12px 0; font-size: 14px; color: #667eea;">📚 本地知识库设置</h3>
+                    <div style="margin-bottom: 12px;">
+                        <input type="text" id="knowledgePath" placeholder="输入文件夹路径，例如: C:\Knowledge" style="width: 70%; padding: 8px; border: 1px solid #d9d9d9; border-radius: 4px; font-size: 13px;">
+                        <button onclick="setKnowledgePath()" style="background: #667eea; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; margin-left: 8px;">设置路径</button>
+                        <button onclick="refreshFileList()" style="background: #4caf50; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; margin-left: 8px;">刷新文件</button>
+                    </div>
+                    <div id="knowledgeStatus" style="font-size: 12px; color: #666; margin-bottom: 8px;"></div>
+                    <div id="fileList" style="max-height: 150px; overflow-y: auto; background: white; border: 1px solid #e5e5e5; border-radius: 4px; padding: 8px; font-size: 12px;"></div>
+                    <div style="margin-top: 8px; font-size: 11px; color: #999;">
+                        💡 支持的文件类型: .md, .txt, .html, .json, .csv<br>
+                        📝 对话会自动保存到此文件夹（如包含代码或长回答）
+                    </div>
+                </div>
+
+                <!-- Agent Panel -->
+                <div id="agentPanel" style="display: none; background: #fff3e0; border-bottom: 1px solid #ffb74d; padding: 16px;">
+                    <h3 style="margin: 0 0 12px 0; font-size: 14px; color: #f57c00;">🤖 AI Agent 系统</h3>
+                    <div style="background: white; border: 1px solid #ffb74d; border-radius: 4px; padding: 12px; margin-bottom: 12px;">
+                        <div style="font-size: 12px; color: #666; margin-bottom: 8px;">
+                            <strong>当前Agent路径:</strong> <span id="agentPathDisplay" style="color: #f57c00;">C:\knowledge\agent</span>
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <input type="text" id="agentPath" placeholder="输入Agent文件夹路径，例如: C:\knowledge\agent" value="C:\knowledge\agent" style="width: 70%; padding: 8px; border: 1px solid #d9d9d9; border-radius: 4px; font-size: 13px;">
+                            <button onclick="setAgentPath()" style="background: #f57c00; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; margin-left: 8px;">更新路径</button>
+                            <button onclick="refreshAgentList()" style="background: #4caf50; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; margin-left: 8px;">刷新列表</button>
+                        </div>
+                    </div>
+                    <div id="agentStatus" style="font-size: 12px; color: #666; margin-bottom: 8px; font-weight: 500;"></div>
+                    <div id="agentList" style="max-height: 200px; overflow-y: auto; background: white; border: 1px solid #ffb74d; border-radius: 4px; padding: 8px; font-size: 12px;"></div>
+                    <div style="margin-top: 12px; padding: 10px; background: white; border: 1px solid #ffb74d; border-radius: 4px; font-size: 11px; color: #666;">
+                        <strong style="color: #f57c00;">🎯 Agent智能匹配:</strong><br>
+                        • <strong>PPT/演示文稿</strong>: 自动使用PPT Agent生成调研报告<br>
+                        • <strong>产品/设计/开发</strong>: 使用CLAUDE Agent协调产品流程<br>
+                        • <strong>其他任务</strong>: 根据关键词自动选择最合适的Agent<br>
+                        <span style="color: #999;">💡 系统会根据你的问题自动选择最合适的Agent，无需手动切换</span>
+                    </div>
+                </div>
+                
+                <!-- Personality Selection Panel (for Companion Mode) -->
+                <div id="personalityPanel" style="display: none; background: #fff8e1; border-bottom: 1px solid #ffc107; padding: 12px 16px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <span style="font-size: 13px; color: #f57c00; font-weight: 500;">🎭 人设：</span>
+                            <select id="personalitySelect" onchange="changePersonality()" style="padding: 6px 12px; border: 1px solid #ffc107; border-radius: 4px; font-size: 12px; background: white;">
+                                <option value="默认">💬 默认 - 友好智慧</option>
+                                <option value="温暖治愈">🌸 小暖 - 温暖治愈</option>
+                                <option value="活泼开朗">⚡小阳 - 活泼开朗</option>
+                                <option value="知性文艺">📚 小书 - 知性文艺</option>
+                                <option value="务实理性">🧠 小智 - 务实理性</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <span style="font-size: 13px; color: #f57c00; font-weight: 500;">🔊 语音：</span>
+                            <select id="voiceSelect" style="padding: 6px 12px; border: 1px solid #ffc107; border-radius: 4px; font-size: 12px; background: white;">
+                                <option value="甜美女生">🌸 甜美女生 - 晓晓</option>
+                                <option value="活力女生">⚡ 活力女生 - 晓依</option>
+                                <option value="知性女声">📚 知性女声 - 晓辰</option>
+                                <option value="磁性男声">🎵 磁性男声 - 云希</option>
+                                <option value="稳重男声">🎙️ 稳重男声 - 云健</option>
+                                <option value="少年音">🌟 少年音 - 云扬</option>
+                            </select>
+                            <label style="display: flex; align-items: center; gap: 4px; font-size: 12px; color: #666;">
+                                <input type="checkbox" id="autoPlayVoice" checked>
+                                自动播放
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chat history display - WeChat style -->
+                <div id="chatHistory" style="background: #f5f5f5; padding: 16px; margin: 0; max-height: 450px; overflow-y: auto; min-height: 300px;">
+                    <div class="chat-welcome">
+                        <div class="chat-welcome-icon">🤖</div>
+                        <p style="font-size: 16px; color: #666; font-weight: 500;">你好！我是AI智能助手</p>
+                        <p style="font-size: 13px; color: #999; margin-top: 12px;">我会自动搜索网络获取最新信息<br>然后基于搜索结果为你生成专业回答</p>
+                        <p style="font-size: 12px; color: #b2b2b2; margin-top: 16px;">💡 开启智能模式可以：<br>• 理解对话上下文<br>• 优化搜索策略<br>• 并行多query搜索<br><br>📚 设置知识库路径：<br>• 本地文档作为补充资料<br>• 自动保存有价值对话</p>
+                    </div>
+                </div>
+                
+                <!-- Chat input - WeChat style -->
+                <div class="chat-input-wrapper" style="margin: 0; border-top: 1px solid #e5e5e5; display: flex; align-items: center; gap: 8px;">
+                    <input type="text" id="chatInput" placeholder="输入消息..." onkeypress="handleChatKeyPress(event)" style="flex: 1;">
+                    <button onclick="generatePptFromLastAnswer()" id="pptBtn" style="background: #ff9800; padding: 10px 16px; border-radius: 4px; display: none;">📊 生成PPT</button>
+                    <button onclick="sendChatMessage()" id="sendChatBtn">发送</button>
+                </div>
+            </div>
+
+            <!-- Search + LLM Section -->
+            <div class="section">
+                <h2>🔍 Search API + LLM</h2>
+                <p>Web search powered by Lumina. 搜索结果出来后可点击 "LLM Summary" 获取 AI 总结。</p>
+                <div class="form-row">
+                    <input type="text" id="searchQuery" placeholder="Enter search query..." value="latest AI developments">
+                    <button onclick="doSearch()">Search</button>
+                </div>
+                <div id="searchResult" class="result" style="display:none;"></div>
+            </div>
+
+            <!-- Open + Find Section -->
+            <div class="section">
+                <h2>📖 Open API + Find</h2>
+                <p>Fetch webpage content. Optionally search within the page using Find pattern.</p>
+                <div class="form-row">
+                    <input type="text" id="openUrl" placeholder="Enter URL..." value="https://en.wikipedia.org/wiki/Artificial_intelligence">
+                </div>
+                <div class="form-row">
+                    <input type="text" id="findPattern" placeholder="Find pattern (optional)..." value="">
+                    <button onclick="doOpen()">Open</button>
+                </div>
+                <div id="openResult" class="result" style="display:none;"></div>
+            </div>
+
+            <!-- CUA Section -->
+            <div class="section">
+                <h2>🖥️ CUA (Computer Use Agent)</h2>
+                <p>Virtual browser automation - captures screenshots of web pages. Try a news site for rich content!</p>
+                <div class="form-row">
+                    <input type="text" id="cuaUrl" placeholder="Enter URL..." value="https://www.bbc.com/news">
+                    <button onclick="doCua()">Capture Screenshot</button>
+                </div>
+                <div id="cuaResult" class="result" style="display:none;"></div>
+            </div>
+
+            <!-- Competitor Analysis Section -->
+            <div class="section">
+                <h2>🎯 竞品分析 (Competitor Analysis)</h2>
+                <p>输入竞品名称和官网地址（可选），一键生成包含新闻摘要、深度分析、官网截图的完整竞品报告</p>
+                
+                <!-- Competitors Input -->
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">竞品名称:</label>
+                    <div class="chip-input" id="competitorChips" onclick="document.getElementById('competitorInput').focus()">
+                        <input type="text" id="competitorInput" class="chip-add" placeholder="输入竞品名称后按回车..." onkeydown="handleCompetitorInput(event)">
+                    </div>
+                </div>
+
+                <!-- Website URLs Input (Optional) -->
+                <div id="websiteUrlsContainer" style="display:none; margin-bottom: 15px;">
+                    <!-- Dynamic website URL inputs will be added here -->
+                </div>
+
+                <div class="form-row">
+                    <button onclick="generateCompleteReport()">🚀 一键生成完整报告</button>
+                    <button class="btn-secondary" onclick="loadExampleCompetitors()">📝 加载示例</button>
+                    <button class="btn-secondary" onclick="toggleAdvancedMode()" id="advancedModeBtn">⚙️ 高级选项</button>
+                </div>
+                
+                <div id="competitorResult" class="result" style="display:none;"></div>
+                <div id="analysisReport" class="result" style="display:none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('=== Script Loading - ' + new Date().toISOString() + ' ===');
+        
+        let lastSearchQuery = '';
+        let lastSearchResults = [];
+        let competitors = [];
+        let competitorWebsites = {}; // Store custom website URLs
+        let lastAnalysisResult = null;
+        let advancedMode = false;
+        let chatHistory = []; // Store chat messages
+        let smartModeEnabled = false; // 智能模式开关
+        let companionMode = false; // 陪伴聊天模式开关
+        let currentPersonality = "默认"; // 当前人设
+        let companionSessionId = 'companion_' + Date.now(); // 陪伴聊天会话ID
+        let currentAudio = null; // 当前播放的音频
+        let currentVoiceStyle = "甜美女生"; // 当前声音风格
+        let sessionId = 'session-' + Date.now(); // 会话ID
+
+        // ========== Chat Functions ==========
+        function toggleSmartMode() {
+            smartModeEnabled = !smartModeEnabled;
+            const btn = document.getElementById('smartModeBtn');
+            if (smartModeEnabled) {
+                btn.textContent = '🧠 智能模式 ✓';
+                btn.style.background = 'rgba(7, 193, 96, 0.9)';
+                showSystemMessage('已开启智能模式：支持上下文理解、多query并行搜索、智能搜索词优化');
+            } else {
+                btn.textContent = '🧠 智能模式';
+                btn.style.background = 'rgba(255,255,255,0.2)';
+                showSystemMessage('已关闭智能模式：使用基础搜索模式');
+            }
+        }
+
+        // ========== Companion Chat Functions ==========
+        function toggleChatMode() {
+            companionMode = !companionMode;
+            const btn = document.getElementById('chatModeBtn');
+            const title = document.getElementById('chatTitle');
+            const subtitle = document.getElementById('chatSubtitle');
+            const personalityPanel = document.getElementById('personalityPanel');
+            const smartModeBtn = document.getElementById('smartModeBtn');
+            
+            if (companionMode) {
+                // 切换到陪伴聊天模式
+                btn.textContent = '🤖 陪伴聊天 ✓';
+                btn.style.background = 'rgba(255, 193, 7, 0.9)';
+                title.textContent = '💕 AI 陪伴小助手';
+                subtitle.textContent = '贴心陪伴 · 温暖聊天 · 无需搜索';
+                personalityPanel.style.display = 'block';
+                
+                // 禁用智能模式（陪伴模式不需要搜索）
+                smartModeEnabled = false;
+                smartModeBtn.disabled = true;
+                smartModeBtn.style.opacity = '0.5';
+                
+                // 清空历史，显示欢迎消息
+                clearChatForCompanion();
+                showSystemMessage('已切换到陪伴聊天模式 💕 我会陪你聊天，不进行网络搜索');
+            } else {
+                // 切换回智能助手模式
+                btn.textContent = '🤖 陪伴聊天';
+                btn.style.background = 'rgba(255,255,255,0.3)';
+                title.textContent = '💬 AI 智能助手';
+                subtitle.textContent = '基于网络实时搜索 · 智能分析回答';
+                personalityPanel.style.display = 'none';
+                
+                // 启用智能模式按钮
+                smartModeBtn.disabled = false;
+                smartModeBtn.style.opacity = '1';
+                
+                showSystemMessage('已切换到智能助手模式 🧠');
+            }
+        }
+
+        function changePersonality() {
+            currentPersonality = document.getElementById('personalitySelect').value;
+            const personalityNames = {
+                '默认': '友好智慧的小助',
+                '温暖治愈': '温柔体贴的小暖',
+                '活泼开朗': '元气满满的小阳',
+                '知性文艺': '博学优雅的小书',
+                '务实理性': '思路清晰的小智'
+            };
+            showSystemMessage(`已切换人设为: ${personalityNames[currentPersonality]} ✨`);
+        }
+
+        function clearChatForCompanion() {
+            chatHistory = [];
+            const chatHistoryDiv = document.getElementById('chatHistory');
+            
+            const welcomeMessages = {
+                '默认': { icon: '💬', name: '小助', message: '你好呀！我是你的AI小助手<br>随时都可以找我聊天哦！' },
+                '温暖治愈': { icon: '🌸', name: '小暖', message: '嗨，见到你真开心~<br>今天过得怎么样？有什么想聊的吗？💕' },
+                '活泼开朗': { icon: '⚡', name: '小阳', message: '嘿！你来啦！😊<br>准备好和我一起开心聊天了吗？' },
+                '知性文艺': { icon: '📚', name: '小书', message: '你好，很高兴遇见你<br>想聊聊什么呢？☕' },
+                '务实理性': { icon: '🧠', name: '小智', message: '你好，有什么可以帮你的吗？<br>或者随便聊聊也行' }
+            };
+            
+            const welcome = welcomeMessages[currentPersonality];
+            chatHistoryDiv.innerHTML = `
+                <div class="chat-welcome">
+                    <div class="chat-welcome-icon">${welcome.icon}</div>
+                    <p style="font-size: 16px; color: #666; font-weight: 500;">${welcome.name}</p>
+                    <p style="font-size: 13px; color: #999; margin-top: 12px;">${welcome.message}</p>
+                </div>`;
+        }
+
+        function clearChatHistory() {
+            if (chatHistory.length === 0) {
+                alert('对话历史为空');
+                return;
+            }
+            
+            if (!confirm('确定要清除所有对话历史吗？')) {
+                return;
+            }
+
+            // 清除前端历史
+            chatHistory = [];
+            const chatHistoryDiv = document.getElementById('chatHistory');
+            chatHistoryDiv.innerHTML = `
+                <div class="chat-welcome">
+                    <div class="chat-welcome-icon">🤖</div>
+                    <p style="font-size: 16px; color: #666; font-weight: 500;">对话历史已清除</p>
+                    <p style="font-size: 13px; color: #999; margin-top: 12px;">开始新的对话吧！</p>
+                </div>`;
+
+            // 清除服务端历史（如果是智能模式）
+            if (smartModeEnabled) {
+                fetch('/api/clear-chat-history', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sessionId })
+                });
+            }
+        }
+
+        // ========== Knowledge Base Functions ==========
+        function toggleKnowledgePanel() {
+            const panel = document.getElementById('knowledgePanel');
+            const btn = document.getElementById('knowledgeBtn');
+            if (panel.style.display === 'none') {
+                panel.style.display = 'block';
+                btn.style.background = 'rgba(7, 193, 96, 0.9)';
+                loadCurrentPath();
+                refreshFileList();
+            } else {
+                panel.style.display = 'none';
+                btn.style.background = 'rgba(255,255,255,0.2)';
+            }
+        }
+
+        async function loadCurrentPath() {
+            try {
+                const res = await fetch('/api/knowledge/get-path');
+                const data = await res.json();
+                if (data.path) {
+                    document.getElementById('knowledgePath').value = data.path;
+                    document.getElementById('knowledgeStatus').innerHTML = 
+                        `<span style="color: green;">✅ 当前路径: ${data.path}</span>`;
+                }
+            } catch (e) {
+                console.error('Failed to load path:', e);
+            }
+        }
+
+        async function setKnowledgePath() {
+            const path = document.getElementById('knowledgePath').value.trim();
+            const statusDiv = document.getElementById('knowledgeStatus');
+
+            if (!path) {
+                statusDiv.innerHTML = '<span style="color: red;">❌ 请输入路径</span>';
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/knowledge/set-path', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ path })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    statusDiv.innerHTML = `<span style="color: green;">✅ ${data.message}</span>`;
+                    refreshFileList();
+                    showSystemMessage(`知识库已设置: ${path}`);
+                } else {
+                    statusDiv.innerHTML = `<span style="color: red;">❌ ${data.message}</span>`;
+                }
+            } catch (e) {
+                statusDiv.innerHTML = `<span style="color: red;">❌ 设置失败: ${e.message}</span>`;
+            }
+        }
+
+        async function refreshFileList() {
+            const fileListDiv = document.getElementById('fileList');
+            fileListDiv.innerHTML = '<p style="color: #999;">加载中...</p>';
+
+            try {
+                const res = await fetch('/api/knowledge/files');
+                const data = await res.json();
+
+                if (data.files && data.files.length > 0) {
+                    let html = `<div style="font-weight: bold; margin-bottom: 8px;">📁 文件列表 (${data.count}个文件):</div>`;
+                    data.files.forEach(f => {
+                        const size = (f.size / 1024).toFixed(1);
+                        const date = new Date(f.lastModified).toLocaleDateString();
+                        html += `<div style="padding: 4px 0; border-bottom: 1px solid #f0f0f0;">
+                            📄 ${f.name} <span style="color: #999;">(${size}KB, ${date})</span>
+                        </div>`;
+                    });
+                    fileListDiv.innerHTML = html;
+                } else {
+                    fileListDiv.innerHTML = '<p style="color: #999;">📭 文件夹为空或未设置路径</p>';
+                }
+            } catch (e) {
+                fileListDiv.innerHTML = `<p style="color: red;">❌ 加载失败: ${e.message}</p>`;
+            }
+        }
+
+        // ========== Agent Functions ==========
+        function toggleAgentPanel() {
+            const panel = document.getElementById('agentPanel');
+            const btn = document.getElementById('agentBtn');
+            const knowledgePanel = document.getElementById('knowledgePanel');
+            
+            // 关闭知识库面板
+            if (knowledgePanel.style.display === 'block') {
+                knowledgePanel.style.display = 'none';
+                document.getElementById('knowledgeBtn').style.background = 'rgba(255,255,255,0.2)';
+            }
+            
+            if (panel.style.display === 'none') {
+                panel.style.display = 'block';
+                btn.style.background = 'rgba(7, 193, 96, 0.9)';
+                loadCurrentAgentPath();
+                refreshAgentList();
+            } else {
+                panel.style.display = 'none';
+                btn.style.background = 'rgba(255,255,255,0.2)';
+            }
+        }
+
+        async function loadCurrentAgentPath() {
+            try {
+                const res = await fetch('/api/agent/get-path');
+                const data = await res.json();
+                if (data.path) {
+                    document.getElementById('agentPath').value = data.path;
+                    document.getElementById('agentPathDisplay').textContent = data.path;
+                }
+            } catch (e) {
+                console.error('Failed to load agent path:', e);
+            }
+        }
+
+        async function setAgentPath() {
+            const path = document.getElementById('agentPath').value.trim();
+            const statusDiv = document.getElementById('agentStatus');
+
+            if (!path) {
+                statusDiv.innerHTML = '<span style="color: red;">❌ 请输入路径</span>';
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/agent/set-path', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ path })
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    statusDiv.innerHTML = `<span style="color: green;">✅ ${data.message}</span>`;
+                    document.getElementById('agentPathDisplay').textContent = path;
+                    refreshAgentList();
+                    showSystemMessage(`Agent路径已更新: ${path}`);
+                } else {
+                    statusDiv.innerHTML = `<span style="color: red;">❌ ${data.message}</span>`;
+                }
+            } catch (e) {
+                statusDiv.innerHTML = `<span style="color: red;">❌ 设置失败: ${e.message}</span>`;
+            }
+        }
+
+        async function refreshAgentList() {
+            const agentListDiv = document.getElementById('agentList');
+            agentListDiv.innerHTML = '<p style="color: #999;">加载中...</p>';
+
+            try {
+                const res = await fetch('/api/agent/list');
+                const data = await res.json();
+
+                if (data.agents && data.agents.length > 0) {
+                    let html = `<div style="font-weight: bold; margin-bottom: 8px; color: #f57c00;">🤖 可用Agent (${data.count}个):</div>`;
+                    data.agents.forEach(agent => {
+                        const size = (agent.size / 1024).toFixed(1);
+                        const date = new Date(agent.lastModified).toLocaleDateString();
+                        const icon = agent.name === 'CLAUDE' ? '👥' : 
+                                    agent.name === 'PPT' ? '📊' : 
+                                    agent.name === 'RESEARCH' ? '🔬' : '🤖';
+                        html += `<div style="padding: 8px; margin-bottom: 6px; background: #fff3e0; border: 1px solid #ffcc80; border-radius: 4px; cursor: pointer;" onclick="viewAgent('${agent.name}')">
+                            <div style="font-weight: 500; color: #e65100;">${icon} ${agent.name}</div>
+                            <div style="font-size: 11px; color: #999; margin-top: 2px;">${size}KB · ${date} · 点击查看详情</div>
+                        </div>`;
+                    });
+                    agentListDiv.innerHTML = html;
+                    document.getElementById('agentStatus').innerHTML = 
+                        `<span style="color: green;">✅ 找到 ${data.count} 个Agent，系统会根据对话自动选择</span>`;
+                } else {
+                    agentListDiv.innerHTML = '<p style="color: #999;">📭 未找到Agent文件</p>';
+                    document.getElementById('agentStatus').innerHTML = 
+                        '<span style="color: orange;">⚠️ 未找到Agent，将使用默认对话模式</span>';
+                }
+            } catch (e) {
+                agentListDiv.innerHTML = `<p style="color: red;">❌ 加载失败: ${e.message}</p>`;
+                document.getElementById('agentStatus').innerHTML = 
+                    `<span style="color: red;">❌ 加载失败</span>`;
+            }
+        }
+
+        async function viewAgent(agentName) {
+            try {
+                const res = await fetch(`/api/agent/content/${agentName}`);
+                const data = await res.json();
+                
+                if (data.success) {
+                    const content = data.content.substring(0, 500); // 显示前500字符
+                    alert(`🤖 ${agentName} Agent\n\n${content}...\n\n💡 系统会根据你的问题自动使用此Agent`);
+                } else {
+                    alert('无法加载Agent内容');
+                }
+            } catch (e) {
+                alert('加载失败: ' + e.message);
+            }
+        }
+
+        function showSystemMessage(message) {
+            const chatHistoryDiv = document.getElementById('chatHistory');
+            
+            // Clear welcome if first message
+            if (chatHistory.length === 0) {
+                chatHistoryDiv.innerHTML = '';
+            }
+
+            const msgDiv = document.createElement('div');
+            msgDiv.style.cssText = 'text-align: center; padding: 12px; margin: 16px 0; background: rgba(7, 193, 96, 0.1); border-radius: 8px; font-size: 13px; color: #666;';
+            msgDiv.innerHTML = `<span style="margin-right: 8px;">ℹ️</span>${message}`;
+            chatHistoryDiv.appendChild(msgDiv);
+
+            setTimeout(() => {
+                chatHistoryDiv.scrollTo({
+                    top: chatHistoryDiv.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendChatMessage();
+            }
+        }
+
+        // ========== Text-to-Speech Functions ==========
+        async function playVoice(text, button) {
+            // 停止当前播放
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+            }
+
+            // 移除所有播放状态
+            document.querySelectorAll('.voice-btn.playing').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.innerHTML = '🔊';
+            });
+
+            // 如果点击的是正在播放的按钮，停止播放
+            if (button.classList.contains('playing')) {
+                button.classList.remove('playing');
+                button.innerHTML = '🔊';
+                return;
+            }
+
+            try {
+                button.classList.add('playing');
+                button.innerHTML = '⏸️';
+                button.disabled = true;
+
+                // 清理文本（移除HTML标签和特殊字符）
+                const cleanText = text.replace(/<[^>]*>/g, '')
+                                     .replace(/\*\*/g, '')
+                                     .replace(/[🔊⏸️🎵📊💾✨🌸💕⚡📚🧠🤖💬🎭]/g, '')
+                                     .trim();
+
+                if (cleanText.length === 0) {
+                    throw new Error('没有可播放的文本内容');
+                }
+
+                currentVoiceStyle = document.getElementById('voiceSelect')?.value || "甜美女生";
+
+                // 尝试使用后端TTS
+                const res = await fetch('/api/tts/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        text: cleanText,
+                        voiceStyle: currentVoiceStyle
+                    })
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    if (data.useWebSpeech) {
+                        // 使用浏览器内置TTS
+                        await playWithWebSpeech(cleanText, currentVoiceStyle);
+                    } else {
+                        // 使用生成的音频文件
+                        currentAudio = new Audio(data.audioUrl);
+                        currentAudio.onended = () => {
+                            button.classList.remove('playing');
+                            button.innerHTML = '🔊';
+                            button.disabled = false;
+                            currentAudio = null;
+                        };
+                        currentAudio.onerror = () => {
+                            throw new Error('音频播放失败');
+                        };
+                        await currentAudio.play();
+                    }
+                    
+                    button.disabled = false;
+                } else {
+                    throw new Error(data.message || '生成语音失败');
+                }
+            } catch (e) {
+                console.error('语音播放错误:', e);
+                button.classList.remove('playing');
+                button.innerHTML = '🔊';
+                button.disabled = false;
+                
+                // 降级到浏览器TTS
+                try {
+                    await playWithWebSpeech(text.replace(/<[^>]*>/g, ''), currentVoiceStyle);
+                } catch (e2) {
+                    alert('语音播放失败: ' + e.message);
+                }
+            }
+        }
+
+        async function playWithWebSpeech(text, voiceStyle) {
+            return new Promise((resolve, reject) => {
+                if (!window.speechSynthesis) {
+                    reject(new Error('浏览器不支持语音合成'));
+                    return;
+                }
+
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-CN';
+                utterance.rate = 1.0;
+                utterance.pitch = 1.0;
+
+                // 根据风格选择声音
+                const voices = speechSynthesis.getVoices();
+                const zhVoices = voices.filter(v => v.lang.startsWith('zh'));
+                
+                if (voiceStyle.includes('女')) {
+                    const femaleVoice = zhVoices.find(v => v.name.includes('Female') || v.name.includes('女'));
+                    if (femaleVoice) utterance.voice = femaleVoice;
+                } else if (voiceStyle.includes('男')) {
+                    const maleVoice = zhVoices.find(v => v.name.includes('Male') || v.name.includes('男'));
+                    if (maleVoice) utterance.voice = maleVoice;
+                }
+
+                utterance.onend = resolve;
+                utterance.onerror = reject;
+
+                speechSynthesis.speak(utterance);
+            });
+        }
+
+        // ========== PPT Generation Functions ==========
+        let lastAssistantAnswer = null;
+
+        async function generatePptFromLastAnswer() {
+            if (!lastAssistantAnswer) {
+                alert('没有可用的内容生成PPT');
+                return;
+            }
+
+            const pptBtn = document.getElementById('pptBtn');
+            pptBtn.disabled = true;
+            pptBtn.textContent = '生成中...';
+
+            try {
+                // 提取标题
+                let title = '调研报告';
+                const lines = lastAssistantAnswer.split('\n');
+                for (const line of lines) {
+                    if (line.trim().startsWith('# ')) {
+                        title = line.trim().substring(2).trim();
+                        break;
+                    }
+                }
+
+                const res = await fetch('/api/ppt/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        title: title,
+                        content: lastAssistantAnswer
+                    })
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    // 显示成功消息
+                    showSystemMessage(`✅ PPT生成成功！文件名: ${data.fileName}`);
+                    
+                    // 自动下载
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = data.downloadUrl;
+                    downloadLink.download = data.fileName;
+                    downloadLink.click();
+                    
+                    alert(`✅ PPT生成成功！\n文件名: ${data.fileName}\n路径: ${data.filePath}\n\n已开始下载，请查看浏览器下载文件夹。`);
+                } else {
+                    alert('生成失败: ' + data.message);
+                }
+            } catch (e) {
+                alert('生成PPT时出错: ' + e.message);
+            } finally {
+                pptBtn.disabled = false;
+                pptBtn.textContent = '📊 生成PPT';
+            }
+        }
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const question = input.value.trim();
+            
+            if (!question) return;
+            
+            // Disable input while processing
+            const sendBtn = document.getElementById('sendChatBtn');
+            input.disabled = true;
+            sendBtn.disabled = true;
+            
+            // Add user message to history
+            addChatMessage('user', question);
+            input.value = '';
+            
+            // Show typing indicator
+            const typingId = addTypingIndicator();
+            
+            try {
+                let data;
+                
+                if (companionMode) {
+                    // 陪伴聊天模式
+                    const res = await fetch('/api/companion-chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            sessionId: companionSessionId, 
+                            message: question,
+                            personality: currentPersonality
+                        })
+                    });
+                    data = await res.json();
+                    
+                    console.log('💕 陪伴聊天:', {
+                        personality: currentPersonality,
+                        messageCount: data.messageCount
+                    });
+                    
+                    removeTypingIndicator(typingId);
+                    addChatMessage('assistant', data.reply);
+                    
+                } else if (smartModeEnabled) {
+                    // 使用智能模式
+                    const res = await fetch('/api/smart-chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ sessionId, question, topN: 5 })
+                    });
+                    data = await res.json();
+                    
+                    // 显示调试信息（可选）
+                    if (data.intent || data.searchQueries) {
+                        console.log('🧠 智能模式详情:');
+                        console.log('  意图理解:', data.intent);
+                        console.log('  搜索词:', data.searchQueries);
+                        console.log('  搜索结果数:', data.searchResultsCount);
+                        console.log('  Agent模式:', data.agentMode ? '✅ 已激活' : '❌ 未激活');
+                    }
+                    
+                    removeTypingIndicator(typingId);
+                    
+                    // Agent模式下添加特殊标记
+                    if (data.agentMode) {
+                        addChatMessage('assistant', `🤖 **[Agent模式]**\n\n${data.answer}`, data);
+                    } else {
+                        addChatMessage('assistant', data.answer, data);
+                    }
+                    
+                    // 保存最后的答案并显示PPT按钮
+                    if (data.searchResultsCount > 0 || data.answer.length > 500) {
+                        lastAssistantAnswer = data.answer;
+                        document.getElementById('pptBtn').style.display = 'block';
+                    }
+                } else {
+                    // 使用基础模式
+                    const res = await fetch('/api/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ question, topN: 5 })
+                    });
+                    data = await res.json();
+                    removeTypingIndicator(typingId);
+                    addChatMessage('assistant', data.answer);
+                }
+                
+            } catch (e) {
+                removeTypingIndicator(typingId);
+                addChatMessage('assistant', `抱歉，发生错误: ${e.message}`);
+            } finally {
+                // Re-enable input
+                input.disabled = false;
+                sendBtn.disabled = false;
+                input.focus();
+            }
+        }
+
+        function addChatMessage(role, content, smartData = null) {
+            const chatHistoryDiv = document.getElementById('chatHistory');
+            
+            // Clear welcome message on first message
+            if (chatHistory.length === 0) {
+                chatHistoryDiv.innerHTML = '';
+            }
+            
+            chatHistory.push({ role, content, timestamp: new Date() });
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${role}`;
+            
+            // Add avatar
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = 'chat-avatar';
+            avatarDiv.textContent = role === 'user' ? '👤' : '🤖';
+            
+            // Create content wrapper
+            const contentWrapper = document.createElement('div');
+            contentWrapper.className = 'chat-content';
+            
+            // Add bubble
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'chat-bubble';
+            
+            // Format content with line breaks and preserve formatting
+            const formattedContent = content.replace(/\n/g, '<br>');
+            bubbleDiv.innerHTML = formattedContent;
+            
+            // Add smart mode indicators if available
+            if (smartData && role === 'assistant' && smartModeEnabled) {
+                if (smartData.intent || smartData.searchQueries) {
+                    const smartInfo = document.createElement('div');
+                    smartInfo.style.cssText = 'margin-top: 8px; padding: 8px; background: rgba(102, 126, 234, 0.1); border-radius: 4px; font-size: 11px; color: #667eea;';
+                    let infoHtml = '🧠 智能分析: ';
+                    if (smartData.intent) {
+                        infoHtml += `理解为"${smartData.intent}" `;
+                    }
+                    if (smartData.searchQueries && smartData.searchQueries.length > 0) {
+                        infoHtml += `• 搜索${smartData.searchQueries.length}个query `;
+                    }
+                    if (smartData.searchResultsCount) {
+                        infoHtml += `• 找到${smartData.searchResultsCount}条结果`;
+                    }
+                    smartInfo.innerHTML = infoHtml;
+                    bubbleDiv.appendChild(smartInfo);
+                }
+            }
+            
+            // Add meta info
+            const metaDiv = document.createElement('div');
+            metaDiv.className = 'chat-meta';
+            metaDiv.textContent = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+            
+            // Add voice button for assistant messages in companion mode
+            if (role === 'assistant' && companionMode) {
+                const voiceBtn = document.createElement('button');
+                voiceBtn.className = 'voice-btn';
+                voiceBtn.innerHTML = '🔊';
+                voiceBtn.title = '播放语音';
+                voiceBtn.onclick = () => playVoice(content, voiceBtn);
+                metaDiv.appendChild(document.createTextNode(' '));
+                metaDiv.appendChild(voiceBtn);
+                
+                // 如果开启自动播放，立即播放
+                if (document.getElementById('autoPlayVoice')?.checked) {
+                    setTimeout(() => playVoice(content, voiceBtn), 500);
+                }
+            }
+            
+            contentWrapper.appendChild(bubbleDiv);
+            contentWrapper.appendChild(metaDiv);
+            
+            messageDiv.appendChild(avatarDiv);
+            messageDiv.appendChild(contentWrapper);
+            chatHistoryDiv.appendChild(messageDiv);
+            
+            // Smooth scroll to bottom
+            setTimeout(() => {
+                chatHistoryDiv.scrollTo({
+                    top: chatHistoryDiv.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+
+        function addTypingIndicator() {
+            const chatHistoryDiv = document.getElementById('chatHistory');
+            const typingDiv = document.createElement('div');
+            const id = 'typing-' + Date.now();
+            typingDiv.id = id;
+            typingDiv.className = 'chat-message assistant';
+            
+            // Add avatar
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = 'chat-avatar';
+            avatarDiv.textContent = '🤖';
+            
+            // Create content wrapper
+            const contentWrapper = document.createElement('div');
+            contentWrapper.className = 'chat-content';
+            
+            // Add typing indicator bubble
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'chat-bubble';
+            bubbleDiv.innerHTML = `
+                <div class="typing-indicator">
+                    <span></span><span></span><span></span>
+                </div>`;
+            
+            contentWrapper.appendChild(bubbleDiv);
+            typingDiv.appendChild(avatarDiv);
+            typingDiv.appendChild(contentWrapper);
+            chatHistoryDiv.appendChild(typingDiv);
+            
+            chatHistoryDiv.scrollTo({
+                top: chatHistoryDiv.scrollHeight,
+                behavior: 'smooth'
+            });
+            return id;
+        }
+
+        function removeTypingIndicator(id) {
+            const typingDiv = document.getElementById(id);
+            if (typingDiv) typingDiv.remove();
+        }
+
+        // ========== Original Functions ==========
+        // doLogin no longer needed — auth handled by Launcher
+        function doLogin() { /* no-op: handled by Launcher */ }
+
+        async function doSearch() {
+            const query = document.getElementById('searchQuery').value;
+            const resultDiv = document.getElementById('searchResult');
+            
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<p class="loading">Searching...</p>';
+
+            try {
+                const res = await fetch('/api/search', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query, topN: 5, useLlm: false })
+                });
+                const data = await res.json();
+                
+                lastSearchQuery = query;
+                lastSearchResults = data.results || [];
+                
+                let html = `<div style="margin-bottom: 15px;">
+                    <button class="btn-secondary" onclick="doLlmSummary()">🤖 LLM Summary</button>
+                </div>`;
+                html += `<div id="llmSummaryDiv"></div>`;
+                html += `<h4>Found ${data.results.length} results:</h4>`;
+                data.results.forEach((r, i) => {
+                    html += `<div class="search-item">
+                        <h4>${i+1}. ${r.title || 'No title'}</h4>
+                        <a href="${r.url}" target="_blank">${r.url}</a>
+                        <p>${(r.semanticDocument || '').substring(0, 200)}...</p>
+                    </div>`;
+                });
+                resultDiv.innerHTML = html;
+            } catch (e) {
+                resultDiv.innerHTML = `<p class="error">Error: ${e.message}</p>`;
+            }
+        }
+
+        async function doLlmSummary() {
+            const summaryDiv = document.getElementById('llmSummaryDiv');
+            if (!summaryDiv) return;
+            
+            summaryDiv.innerHTML = '<div class="llm-summary"><p class="loading">🤖 Generating LLM summary...</p></div>';
+
+            try {
+                const res = await fetch('/api/llm-summary', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: lastSearchQuery, topN: 5 })
+                });
+                const data = await res.json();
+                
+                summaryDiv.innerHTML = `<div class="llm-summary">
+                    <h4>🤖 LLM Summary:</h4>
+                    <pre>${data.summary}</pre>
+                </div>`;
+            } catch (e) {
+                summaryDiv.innerHTML = `<div class="llm-summary"><p class="error">Error: ${e.message}</p></div>`;
+            }
+        }
+
+        async function doOpen() {
+            const url = document.getElementById('openUrl').value;
+            const findPattern = document.getElementById('findPattern').value;
+            const resultDiv = document.getElementById('openResult');
+            
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<p class="loading">Opening page...</p>';
+
+            try {
+                const res = await fetch('/api/open', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url, findPattern: findPattern || null })
+                });
+                const data = await res.json();
+                
+                let html = `<h4>📄 ${data.title || 'Page opened'}</h4>
+                    <p><small>Session: ${data.sessionId}</small></p>
+                    <pre>${data.content || 'No content'}</pre>`;
+                
+                if (data.findResults && data.findResults.length > 0) {
+                    html += `<h4>🔎 Find results (${data.findResults.length}):</h4>`;
+                    data.findResults.forEach(r => {
+                        html += `<p>Line ${r.lineIdx}: ${r.template}</p>`;
+                    });
+                }
+                resultDiv.innerHTML = html;
+            } catch (e) {
+                resultDiv.innerHTML = `<p class="error">Error: ${e.message}</p>`;
+            }
+        }
+
+        async function doCua() {
+            const url = document.getElementById('cuaUrl').value;
+            const resultDiv = document.getElementById('cuaResult');
+            
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<p class="loading">Capturing screenshot (this may take 10-20 seconds)...</p>';
+
+            try {
+                const res = await fetch('/api/cua', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+                const data = await res.json();
+                
+                if (data.screenshot) {
+                    resultDiv.innerHTML = `<h4>📸 Screenshot:</h4><img src="data:image/png;base64,${data.screenshot}" alt="Screenshot">`;
+                } else {
+                    resultDiv.innerHTML = '<p class="error">Failed to capture screenshot</p>';
+                }
+            } catch (e) {
+                resultDiv.innerHTML = `<p class="error">Error: ${e.message}</p>`;
+            }
+        }
+
+        // ========== Competitor Analysis Functions ==========
+        function handleCompetitorInput(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const input = document.getElementById('competitorInput');
+                const value = input.value.trim();
+                
+                if (value && !competitors.includes(value)) {
+                    competitors.push(value);
+                    renderCompetitorChips();
+                    input.value = '';
+                }
+            }
+        }
+
+        function removeCompetitor(name) {
+            competitors = competitors.filter(c => c !== name);
+            renderCompetitorChips();
+        }
+
+        function renderCompetitorChips() {
+            const container = document.getElementById('competitorChips');
+            const input = document.getElementById('competitorInput');
+            
+            // Remove existing chips
+            const existingChips = container.querySelectorAll('.chip');
+            existingChips.forEach(chip => chip.remove());
+            
+            // Add new chips before input
+            competitors.forEach(name => {
+                const chip = document.createElement('div');
+                chip.className = 'chip';
+                chip.innerHTML = `${name} <button onclick="removeCompetitor('${name}')">×</button>`;
+                container.insertBefore(chip, input);
+            });
+
+            // Update website URL inputs if in advanced mode
+            if (advancedMode) {
+                renderWebsiteUrlInputs();
+            }
+        }
+
+        function toggleAdvancedMode() {
+            advancedMode = !advancedMode;
+            const container = document.getElementById('websiteUrlsContainer');
+            const btn = document.getElementById('advancedModeBtn');
+            
+            if (advancedMode) {
+                container.style.display = 'block';
+                btn.textContent = '⚙️ 隐藏高级选项';
+                renderWebsiteUrlInputs();
+            } else {
+                container.style.display = 'none';
+                btn.textContent = '⚙️ 高级选项';
+            }
+        }
+
+        function renderWebsiteUrlInputs() {
+            const container = document.getElementById('websiteUrlsContainer');
+            container.innerHTML = '<label style="display: block; margin-bottom: 5px; font-weight: bold;">官网地址（可选，留空则自动识别）:</label>';
+            
+            competitors.forEach(name => {
+                const urlValue = competitorWebsites[name] || '';
+                container.innerHTML += `
+                    <div style="margin-bottom: 8px;">
+                        <label style="font-size: 13px; color: #666;">${name}:</label>
+                        <input type="text" 
+                               placeholder="例如: https://${name.toLowerCase().replace(/\s+/g, '')}.com"
+                               value="${urlValue}"
+                               onchange="competitorWebsites['${name}'] = this.value"
+                               style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 13px;">
+                    </div>`;
+            });
+        }
+
+        function loadExampleCompetitors() {
+            competitors = ['OpenAI', 'Google AI', 'Anthropic'];
+            competitorWebsites = {
+                'OpenAI': 'https://openai.com',
+                'Google AI': 'https://ai.google',
+                'Anthropic': 'https://anthropic.com'
+            };
+            renderCompetitorChips();
+        }
+
+        // ========== One-Click Complete Report Generation ==========
+        async function generateCompleteReport() {
+            if (competitors.length === 0) {
+                alert('请先输入至少一个竞品名称');
+                return;
+            }
+
+            const resultDiv = document.getElementById('competitorResult');
+            const reportDiv = document.getElementById('analysisReport');
+            
+            resultDiv.style.display = 'block';
+            reportDiv.style.display = 'none';
+            
+            resultDiv.innerHTML = `<p class="loading">
+                🚀 正在生成完整竞品报告，这可能需要 1-2 分钟...<br>
+                <small>步骤：① 识别官网 → ② 截图首页 → ③ 搜索新闻 → ④ 获取全文 → ⑤ AI 深度分析</small>
+            </p>`;
+
+            try {
+                // Prepare website URLs (only non-empty values)
+                const websiteUrls = {};
+                for (const name in competitorWebsites) {
+                    if (competitorWebsites[name] && competitorWebsites[name].trim()) {
+                        websiteUrls[name] = competitorWebsites[name].trim();
+                    }
+                }
+
+                const res = await fetch('/api/competitor-complete-report', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        competitors: competitors,
+                        websiteUrls: Object.keys(websiteUrls).length > 0 ? websiteUrls : null,
+                        resultsPerCompetitor: 5 
+                    })
+                });
+                const fullReport = await res.json();
+                
+                // Store the analysis result
+                lastAnalysisResult = fullReport.analysisResult;
+                
+                // Display analysis data
+                displayAnalysisResult(fullReport.analysisResult, resultDiv);
+                
+                // Display AI report
+                reportDiv.style.display = 'block';
+                const reportHtml = convertMarkdownToHtml(fullReport.aiReport);
+                reportDiv.innerHTML = `<h3 style="color: #0078d4; margin-bottom: 15px;">📊 AI 深度分析报告</h3>
+                    <div class="markdown-content">${reportHtml}</div>`;
+                
+                // Scroll to report
+                reportDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } catch (e) {
+                resultDiv.innerHTML = `<p class="error">Error: ${e.message}</p>`;
+            }
+        }
+
+        // Helper function to display analysis results
+        function displayAnalysisResult(data, resultDiv) {
+            try {
+                let html = `<h4>📊 分析时间: ${new Date(data.analysisDate).toLocaleString()}</h4>`;
+                
+                data.competitors.forEach(comp => {
+                    html += `<div class="competitor-card">
+                        <h3>🏢 ${comp.name}</h3>`;
+                    
+                    if (comp.status !== 'Success') {
+                        html += `<p class="error">${comp.status}</p>`;
+                    } else {
+                        // Show screenshot if available
+                        if (comp.screenshot) {
+                            html += `<div style="margin: 15px 0;">
+                                <img src="data:image/png;base64,${comp.screenshot}" 
+                                     alt="${comp.name} 官网截图" 
+                                     style="max-width: 100%; border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <p style="font-size: 12px; color: #666; margin-top: 5px;">
+                                    📸 官网首页: <a href="${comp.websiteUrl}" target="_blank">${comp.websiteUrl}</a>
+                                </p>
+                            </div>`;
+                        } else if (comp.websiteUrl) {
+                            html += `<p style="font-size: 12px; color: #666; margin: 10px 0;">
+                                🌐 官网: <a href="${comp.websiteUrl}" target="_blank">${comp.websiteUrl}</a>
+                            </p>`;
+                        }
+
+                        // Show AI-generated queries
+                        html += `<div class="queries">
+                            <strong>🤖 AI 生成的搜索词:</strong> ${comp.searchQueries.join(' • ')}
+                        </div>`;
+                        
+                        // Show news results
+                        if (comp.newsResults.length > 0) {
+                            html += `<h4 style="margin-top: 15px;">📰 最近一周新闻 (${comp.newsResults.length} 条):</h4>`;
+                            comp.newsResults.forEach((news, idx) => {
+                                const date = new Date(news.publishedDate).toLocaleDateString();
+                                const contentId = `content-${comp.name.replace(/\s+/g, '-')}-${idx}`;
+                                
+                                html += `<div class="news-item">
+                                    <h4>${idx + 1}. ${news.title}`;
+                                
+                                // Show badge if full content is available
+                                if (news.hasFullContent) {
+                                    html += `<span class="full-content-badge">完整内容</span>`;
+                                }
+                                
+                                html += `</h4>
+                                    <div class="meta">${news.source} • ${date} • <a href="${news.url}" target="_blank">查看原文</a></div>`;
+                                
+                                // Show full content if available, otherwise show snippet
+                                if (news.hasFullContent && news.fullContent) {
+                                    const preview = news.fullContent.substring(0, 300);
+                                    html += `<p><strong>摘要:</strong> ${news.snippet}</p>
+                                        <button class="expand-btn" onclick="toggleContent('${contentId}')">
+                                            📖 查看完整内容
+                                        </button>
+                                        <div id="${contentId}" class="full-content" style="display: none;">
+                                            <pre>${escapeHtml(news.fullContent)}</pre>
+                                        </div>`;
+                                } else {
+                                    html += `<p>${news.snippet}</p>`;
+                                }
+                                
+                                html += `</div>`;
+                            });
+                        } else {
+                            html += `<p style="color: #999; margin-top: 10px;">未找到相关新闻</p>`;
+                        }
+                    }
+                    
+                    html += `</div>`;
+                });
+                
+                resultDiv.innerHTML = html;
+            } catch (e) {
+                resultDiv.innerHTML = `<p class="error">Error: ${e.message}</p>`;
+            }
+        }
+
+        // Helper function to toggle full content visibility
+        function toggleContent(contentId) {
+            const element = document.getElementById(contentId);
+            const button = event.target;
+            
+            if (element.style.display === 'none') {
+                element.style.display = 'block';
+                button.textContent = '🔼 收起内容';
+            } else {
+                element.style.display = 'none';
+                button.textContent = '📖 查看完整内容';
+            }
+        }
+
+        // Helper function to escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Generate AI analysis report
+        async function generateAnalysisReport() {
+            if (!lastAnalysisResult) {
+                alert('请先进行竞品分析');
+                return;
+            }
+
+            const reportDiv = document.getElementById('analysisReport');
+            const reportBtn = document.getElementById('generateReportBtn');
+            
+            reportDiv.style.display = 'block';
+            reportDiv.innerHTML = '<p class="loading">🤖 AI 正在生成深度分析报告，这可能需要 20-30 秒...</p>';
+            reportBtn.disabled = true;
+
+            try {
+                const res = await fetch('/api/competitor-analysis-report', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(lastAnalysisResult)
+                });
+                const data = await res.json();
+                
+                // Convert markdown to HTML for better display
+                const reportHtml = convertMarkdownToHtml(data.report);
+                reportDiv.innerHTML = `<div class="markdown-content">${reportHtml}</div>`;
+                
+                // Scroll to report
+                reportDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } catch (e) {
+                reportDiv.innerHTML = `<p class="error">Error: ${e.message}</p>`;
+            } finally {
+                reportBtn.disabled = false;
+            }
+        }
+
+        // Simple markdown to HTML converter
+        function convertMarkdownToHtml(markdown) {
+            let html = markdown;
+            
+            // Headers
+            html = html.replace(/^### (.*$)/gim, '<h4>$1</h4>');
+            html = html.replace(/^## (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^# (.*$)/gim, '<h2>$1</h2>');
+            
+            // Bold
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // Lists
+            html = html.replace(/^\* (.*$)/gim, '<li>$1</li>');
+            html = html.replace(/^- (.*$)/gim, '<li>$1</li>');
+            html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+            
+            // Line breaks
+            html = html.replace(/\n\n/g, '</p><p>');
+            html = '<p>' + html + '</p>';
+            
+            // Tables (basic support)
+            html = html.replace(/\|(.+)\|/g, function(match) {
+                const cells = match.split('|').filter(c => c.trim());
+                const cellTags = cells.map(c => `<td>${c.trim()}</td>`).join('');
+                return `<tr>${cellTags}</tr>`;
+            });
+            html = html.replace(/(<tr>.*<\/tr>)/s, '<table>$1</table>');
+            
+            return html;
+        }
+    </script>
+</body>
+</html>

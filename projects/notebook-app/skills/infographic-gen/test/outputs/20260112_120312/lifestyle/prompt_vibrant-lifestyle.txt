@@ -1,0 +1,152 @@
+Generated at: 2026-01-12 12:22:50
+
+Create a professional, educational infographic in LANDSCAPE format (16:9 or 4:3 aspect ratio) based on this specification:
+
+# INFOGRAPHIC BRIEF
+
+**Title:** Simple Daily Practices for Mindful Wellness
+**One-sentence takeaway:** Transform your wellbeing through small, sustainable mindful habits that nourish mind, body, and spirit.
+**Topic domain:** lifestyle
+**Tone:** calm
+**Aspect ratio:** landscape (16:9)
+**Target audience:** adults seeking practical wellness guidance for busy lifestyles
+
+# CONTENT OUTLINE
+
+**a) What it is - brief definition/overview**
+Mindful wellness: the practice of being fully present while creating sustainable habits that support your physical, mental, and emotional health through small daily choices.
+
+**b) Why it matters - relevance and impact (2-3 bullets)**
+• Reduces stress hormones and increases mental clarity throughout your entire day
+• Transforms routine activities into opportunities for greater awareness and calm
+• Creates lasting change through consistency over intensity, making wellness achievable for busy lifestyles
+
+**c) Key points - 5-7 most important concepts:**
+
+**Morning Mindful Breathing**
+Start each day with five minutes of conscious breathing - sit comfortably, focus on your breath's natural rhythm, and gently return attention when thoughts arise. This simple practice sets a calm foundation for your entire day.
+
+**Micro-Meditations Throughout the Day**
+During routine activities like washing dishes or walking, engage all your senses to notice textures, sounds, and sensations. These brief present moments accumulate into greater overall awareness.
+
+**Mindful Eating Practice**
+Transform meals into meditation by pausing to appreciate food's colors, aromas, and textures before eating slowly and noticing how your body responds. This improves digestion and helps recognize true hunger signals.
+
+**Work-Life Boundaries**
+Create a "closing ritual" for your workday and practice the "one-tab rule" - focusing completely on one task before moving to the next, just like managing browser tabs for better mental performance.
+
+**Restorative Evening Routine**
+Design calming bedtime habits by dimming lights an hour early, putting devices away, and keeping your bedroom cool and dark. Quality sleep foundation supports all other wellness practices.
+
+**Joyful Daily Movement**
+Incorporate movement that feels enjoyable rather than punitive - dancing, gardening, walking in nature, or yoga. Fifteen minutes of daily consistency yields more benefits than sporadic intense sessions.
+
+**Self-Compassion & Connection**
+Nurture uplifting relationships through regular check-ins and active listening, while practicing self-compassion by speaking to yourself as you would a dear friend, especially during challenging moments.
+
+**d) How to apply/use:**
+Choose one practice and commit for two weeks until it feels natural, then gradually add another element. Start with morning breathing or micro-meditations as foundation practices.
+
+**e) Visual suggestions per section:**
+Morning breathing with sunrise imagery, micro-meditation icons for daily activities, colorful whole foods photography, workspace transition visuals, cozy bedroom scenes, people enjoying various movements, and warm connection imagery.
+
+# LAYOUT PLAN
+
+**Layout type:** RADIAL - central wellness concept with flowing connections to practice areas
+
+**Visual hierarchy:** 
+[Central wellness hub with title overlay] → [Six practice cards radiating outward in organic spiral] → [Implementation pathway connecting practices] → [Daily routine timeline at bottom] → [Source attribution footer]
+
+**Component layout:** 
+Central circular wellness illustration (300px) with title overlay, six practice cards of varying sizes (200-250px each) positioned in flowing spiral around center, connected by curved organic lines suggesting natural flow and growth patterns, bottom timeline showing sample daily integration
+
+**Visual flow:** 
+Eye starts at central wellness concept, flows clockwise through morning practices (top right), moves through day practices (right and bottom), transitions to evening practices (left), circles back through connection practices (top left), with curved connecting paths guiding natural eye movement in gentle spiral
+
+**Density:** 
+Spacious with breathing room - generous whitespace between sections allows each practice area to feel approachable and non-overwhelming, supporting the calm wellness theme
+
+# STYLE GUIDE (LIFESTYLE Domain)
+
+**Look:** organic, inviting, Instagram-worthy, editorial vibe with wellness magazine aesthetic
+**Layout:** Pinterest-style mixed media with flowing organic connections, photo-illustration hybrid approach
+**Typography:** elegant script headers ("Simple Daily Practices") paired with clean geometric sans-serif body text (Montserrat or similar), varied font weights creating gentle hierarchy
+**Colors:** curated earth tone palette - sage green primary, warm cream backgrounds, terracotta accent, soft lavender highlights, with natural wood and stone textures
+**Visual elements:** lifestyle photography of real people in wellness activities, hand-drawn connecting lines and botanical doodles, watercolor wash backgrounds, organic shapes and flowing curves
+**Include:** abundant whitespace as calming design element, overlapping translucent layers, subtle paper texture backgrounds, soft drop shadows creating depth
+
+**Specific text to render:**
+- Main title: "Simple Daily Practices for Mindful Wellness"
+- Subtitle: "Small habits • Lasting change • Sustainable wellbeing"
+- Central hub: "Mindful Living"
+- Practice cards: "Morning Breathing", "Micro-Meditations", "Mindful Eating", "Work Boundaries", "Evening Routine", "Joyful Movement", "Self-Compassion"
+- Key phrases: "5 minutes daily", "One-tab rule", "Cool, dark bedroom", "15 minutes beats intensity", "Speak kindly to yourself"
+- Bottom timeline: "Morning • Midday • Evening • Bedtime"
+- Call-to-action: "Choose one practice • Commit 2 weeks • Add gradually"
+- Footer: "Your wellness journey is uniquely yours"
+
+```
+### VIBRANT LIFESTYLE STYLE (Fitness & Energy)
+
+#### Color Palette:
+- Background: Bright white (#FFFFFF) or vibrant color blocks
+- Primary: Bold saturated colors - hot pink (#FF006E), electric blue (#00C2FF)
+- Secondary: Sunshine yellow (#FFD60A), lime green (#B7FF00), coral (#FF7F51)
+- Use 4-5 bold colors simultaneously - embrace color chaos
+- High contrast combinations for maximum pop
+
+#### Typography:
+- Headlines: Fun rounded sans-serif (Quicksand, Fredoka), 48-72pt, BOLD
+- Body: Geometric sans-serif, 16-20pt (large for readability)
+- Varied sizes for visual rhythm (mix 12pt, 24pt, 48pt, 72pt+)
+- ALL CAPS for emphasis, lowercase for casual feel
+- Playful text on curved paths or circles
+
+#### Layout & Composition:
+- Dynamic diagonal angles (15-30 degrees) for energy
+- Sticker-like elements scattered asymmetrically
+- Layered composition with 4-5 depth levels
+- Intentional "organized chaos" - busy but navigable
+- Mobile-first thinking - bold clear elements
+
+#### Visual Elements:
+- Colorful abstract shapes (blobs, circles, stars, lightning bolts)
+- Gradient meshes (multi-color gradients, 3-4 colors)
+- Sticker overlays (3D-looking stickers with shadows)
+- Playful icons (rounded, friendly, expressive faces)
+- Speech bubbles and callout shapes
+- Pattern fills (dots, stripes, doodles)
+
+#### Mood & References:
+- Energetic, youthful, optimistic, playful
+- Think: TikTok/Instagram Stories, Gen-Z aesthetic
+- Social media native design language
+
+#### Key Features:
+- High energy through color and movement
+- Color blocking with multiple bold colors
+- Playful overlays and stickers
+- Motion implied through angles and overlaps
+- Separation through color blocks and shapes, NOT lines
+
+#### Avoid:
+- ❌ Thin horizontal lines separating sections
+- ❌ Border strokes around elements
+- ❌ Frame outlines
+- Conservative corporate colors
+- Formal structured layouts
+```
+
+## GENERAL RENDERING RULES:
+- Follow the specified layout type from description precisely
+- Maintain visual hierarchy and clear information flow
+- ALL TEXT MUST BE IN ENGLISH ONLY - no Chinese, Japanese, Korean, or other non-English characters
+- Do NOT add decorative foreign language text (e.g., Japanese characters in Japanese Minimal style)
+- Balance aesthetics with readability - information must be clear
+- Create depth through layering, shadows, and visual rhythm
+- Include source citations in footer (minimalist style)
+
+CRITICAL LANGUAGE ENFORCEMENT:
+- Render ALL visible text in English alphabet characters only
+- If style mentions Asian aesthetics, use the aesthetic principles but English text only
+- No foreign language decorations, no untranslated text, English only everywhere

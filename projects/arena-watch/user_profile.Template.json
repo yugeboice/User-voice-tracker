@@ -1,0 +1,14 @@
+{
+  "basic_info": {
+    "name": "Your Name",
+    "role": "Your Role (e.g., Product Manager, Developer)"
+  },
+  "preferences": {
+    "language": "Chinese",
+    "summary_style": "Key takeaways list",
+    "focus_topics": [
+      "AI",
+      "Product Management"
+    ]
+  }
+}

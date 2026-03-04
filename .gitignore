@@ -1,0 +1,72 @@
+# .NET build artifacts
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.deps.json
+*.runtimeconfig.json
+
+# Visual Studio / VS Code
+.vs/
+.vscode/
+*.suo
+*.user
+*.sln.docstates
+
+# NuGet packages
+packages/
+*.nupkg
+*.snupkg
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows specific
+*.lnk
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Application configuration with secrets
+appsettings.json
+msalcache.bin
+
+# Data Protection Keys (generated locally, should not be committed)
+DataProtection-Keys/
+
+# Image assets (screenshots, generated images, etc.)
+# assets/
+
+# Node.js
+node_modules/
+
+# Secrets & personal data
+user_profile.json
+.claude/
+
+# Claude temp directories
+tmpclaude-*/
+
+# Lumina Doc site for reference
+partner/
+
+# Local MSBuild override to exclude partner/ from compilation
+Directory.Build.props
+
+net8.0/

@@ -1,0 +1,16 @@
+{
+  "memories": [
+    {
+      "id": "mem_example_001",
+      "content": "用户是产品经理，负责AI产品线",
+      "timestamp": "2026-01-01T10:00:00Z",
+      "type": "identity"
+    },
+    {
+      "id": "mem_example_002",
+      "content": "用户偏好使用中文进行交流",
+      "timestamp": "2026-01-01T09:00:00Z",
+      "type": "preference"
+    }
+  ]
+}

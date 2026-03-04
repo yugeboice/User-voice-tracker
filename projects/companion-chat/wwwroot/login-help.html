@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陪伴聊天 - 使用指南</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 700px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #999;
+            margin-bottom: 30px;
+        }
+        .status {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .status.info {
+            background: #e3f2fd;
+            border-left-color: #2196f3;
+        }
+        .status.warning {
+            background: #fff3e0;
+            border-left-color: #ff9800;
+        }
+        .steps {
+            margin: 30px 0;
+        }
+        .step {
+            background: #f5f5f5;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            display: flex;
+            gap: 15px;
+        }
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .step-content {
+            flex: 1;
+        }
+        .step-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .step-desc {
+            color: #666;
+            font-size: 14px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        button {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        .btn-secondary {
+            background: #4caf50;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+        .highlight {
+            background: #fff9c4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌟 陪伴聊天 - 使用指南</h1>
+        <p class="subtitle">简单3步，开启AI陪伴之旅</p>
+        
+        <div class="status">
+            <strong>✅ 已优化:</strong> 使用统一的后端认证，无需复杂配置！
+        </div>
+
+        <div class="status info">
+            <strong>💡 关键提示:</strong> 陪伴聊天与主页面共享同一个登录会话，<br>
+            只需在主页面登录一次，即可在所有页面使用！
+        </div>
+
+        <div class="steps">
+            <h3 style="margin-bottom: 15px; color: #333;">📝 使用步骤</h3>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-title">在主页面登录</div>
+                    <div class="step-desc">
+                        访问 <span class="highlight">http://localhost:8402/index.html</span><br>
+                        点击 <strong>"登录 Microsoft 账号"</strong> 按钮完成登录
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-title">进入陪伴聊天</div>
+                    <div class="step-desc">
+                        登录成功后，点击顶部的 <strong>"✨ 陪伴模式"</strong> 按钮<br>
+                        会在新标签页打开科幻风格的陪伴聊天界面
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-title">开始愉快聊天</div>
+                    <div class="step-desc">
+                        选择AI人设（5种性格）和语音风格（6种声音）<br>
+                        输入消息，按Enter发送，享受AI陪伴！
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status warning">
+            <strong>⚠️ 注意事项:</strong><br>
+            • 如果提示"需要登录"，说明主页面未登录或登录已过期<br>
+            • 请返回主页面重新登录即可<br>
+            • 建议同时保持主页面和陪伴模式标签页打开
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-secondary" onclick="window.location.href='/index.html'">
+                🏠 前往主页登录
+            </button>
+            <button class="btn-primary" onclick="checkAndOpen()">
+                🚀 直接打开陪伴聊天
+            </button>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: #f5f5f5; border-radius: 8px; font-size: 14px; color: #666;">
+            <strong style="color: #333;">🎨 陪伴聊天特色功能:</strong><br>
+            ✨ 科幻风格UI（暗黑背景、粒子特效、炫光效果）<br>
+            🎭 5种AI人设（默认、温暖治愈、活泼开朗、知性文艺、务实理性）<br>
+            🔊 6种语音风格（甜美女生、活力女生、知性女声等）<br>
+            📊 实时统计（对话轮次、时长、情感评分）<br>
+            🎨 个性化头像（彩虹渐变旋转光环）
+        </div>
+    </div>
+
+    <script>
+        async function checkAndOpen() {
+            // 检查登录状态
+            try {
+                const response = await fetch('/api/companion-chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        sessionId: 'test-' + Date.now(),
+                        message: '测试',
+                        personality: '默认'
+                    })
+                });
+
+                if (response.status === 401 || response.status === 403) {
+                    // 未登录
+                    if (confirm('检测到未登录。\n\n是否前往主页面登录？')) {
+                        window.location.href = '/index.html';
+                    }
+                } else {
+                    // 已登录，直接打开
+                    window.open('/companion.html', '_blank');
+                }
+            } catch (error) {
+                // 直接尝试打开
+                window.open('/companion.html', '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 700px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .status {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .status.error {
+            background: #ffebee;
+            border-left-color: #f44336;
+        }
+        .status.info {
+            background: #e3f2fd;
+            border-left-color: #2196f3;
+        }
+        .steps {
+            margin: 30px 0;
+        }
+        .step {
+            background: #f5f5f5;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            display: flex;
+            gap: 15px;
+        }
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .step-content {
+            flex: 1;
+        }
+        .step-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .step-desc {
+            color: #666;
+            font-size: 14px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        button {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+        }
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        .code {
+            background: #f5f5f5;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .code:hover {
+            background: #e0e0e0;
+        }
+        .tech-note {
+            background: #fff3e0;
+            border: 1px solid #ffb74d;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        .tech-note strong {
+            color: #f57c00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 登录问题解决方案</h1>
+        
+        <div class="status error">
+            <strong>❌ 遇到的错误:</strong><br>
+            AADSTS700016: Application with identifier '872e1bb6-...' was not found
+        </div>
+
+        <div class="status">
+            <strong>✅ 已修复:</strong><br>
+            应用配置已更新为通用Microsoft账号登录（common租户）
+        </div>
+
+        <div class="status info">
+            <strong>💡 问题原因:</strong><br>
+            浏览器缓存了旧的Azure AD配置，需要清除缓存才能使用新配置
+        </div>
+
+        <div class="steps">
+            <h3 style="margin-bottom: 15px; color: #333;">📝 解决步骤（任选其一）</h3>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-title">方法一：清除浏览器缓存（推荐）</div>
+                    <div class="step-desc">
+                        按 <strong>Ctrl + Shift + Delete</strong> 打开清除浏览器数据<br>
+                        选择 "所有时间"<br>
+                        勾选 "Cookie和其他网站数据" + "缓存的图像和文件"<br>
+                        点击 "清除数据"
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-title">方法二：使用隐私模式</div>
+                    <div class="step-desc">
+                        按 <strong>Ctrl + Shift + N</strong> (Chrome/Edge) 或 <strong>Ctrl + Shift + P</strong> (Firefox)<br>
+                        在隐私窗口中访问 <code>http://localhost:8402/companion.html</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-title">方法三：使用Edge设置页面</div>
+                    <div class="step-desc">
+                        点击下方链接直接打开清除数据页面：<br>
+                        <div class="code" onclick="openClearData()">
+                            edge://settings/clearBrowserData
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-note">
+            <strong>🔍 技术说明:</strong><br>
+            • 新配置使用 ClientId: <code>04b07795-8ddb-461a-bbee-02f9e1bf7b46</code><br>
+            • Authority: <code>https://login.microsoftonline.com/common</code><br>
+            • 支持任何Microsoft个人账号或工作/学校账号登录<br>
+            • RedirectUri: <code>http://localhost:8402/companion.html</code>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-secondary" onclick="copyUrl()">📋 复制陪伴聊天链接</button>
+            <button class="btn-primary" onclick="openCompanion()">🚀 打开陪伴聊天</button>
+        </div>
+    </div>
+
+    <script>
+        function openClearData() {
+            window.open('edge://settings/clearBrowserData', '_blank');
+        }
+
+        function copyUrl() {
+            const url = 'http://localhost:8402/companion.html';
+            navigator.clipboard.writeText(url).then(() => {
+                alert('✅ 链接已复制到剪贴板！\n\n' + url);
+            });
+        }
+
+        function openCompanion() {
+            // 先尝试清除localStorage中的MSAL缓存
+            try {
+                const keysToRemove = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key && (key.includes('msal') || key.includes('login.microsoftonline.com'))) {
+                        keysToRemove.push(key);
+                    }
+                }
+                keysToRemove.forEach(key => localStorage.removeItem(key));
+                
+                alert('✅ 已清除本地认证缓存！\n\n即将打开陪伴聊天页面...');
+            } catch (e) {
+                console.error('清除缓存失败:', e);
+            }
+
+            // 打开陪伴聊天页面
+            setTimeout(() => {
+                window.open('http://localhost:8402/companion.html', '_blank');
+            }, 500);
+        }
+
+        // 页面加载时自动清除MSAL缓存
+        window.onload = function() {
+            console.log('正在清除旧的认证缓存...');
+            try {
+                const keysToRemove = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key && (key.includes('msal') || key.includes('872e1bb6'))) {
+                        keysToRemove.push(key);
+                        console.log('将清除:', key);
+                    }
+                }
+                keysToRemove.forEach(key => {
+                    localStorage.removeItem(key);
+                    console.log('已清除:', key);
+                });
+                if (keysToRemove.length > 0) {
+                    console.log(`✅ 已清除 ${keysToRemove.length} 个旧缓存项`);
+                }
+            } catch (e) {
+                console.error('清除缓存失败:', e);
+            }
+        };
+    </script>
+</body>
+</html>

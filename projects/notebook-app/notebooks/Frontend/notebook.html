@@ -1,0 +1,2879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notebook</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Google Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #e8eaed;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back-link {
+            color: #5f6368;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .back-link:hover {
+            color: #1a73e8;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: #5f6368;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .breadcrumb-link {
+            color: #1a73e8;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb-link:hover {
+            color: #1557b0;
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            color: #5f6368;
+            font-size: 14px;
+        }
+
+        .breadcrumb-current {
+            color: #202124;
+            font-weight: 400;
+            font-size: 22px;
+        }
+
+        .notebook-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 300px 1fr 500px;
+            height: calc(100vh - 65px);
+            gap: 0;
+        }
+
+        .panel {
+            background: white;
+            overflow-y: auto;
+            border-right: 1px solid #e8eaed;
+        }
+
+        .panel:last-child {
+            border-right: none;
+        }
+
+        .panel-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e8eaed;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+        }
+
+        .panel-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #5f6368;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .add-source-btn {
+            width: 100%;
+            padding: 10px 16px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .add-source-btn:hover {
+            background: #1557b0;
+        }
+
+        .clear-all-btn {
+            padding: 10px 16px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .clear-all-btn:hover {
+            background: #c62828;
+        }
+
+        .source-list {
+            padding: 16px;
+        }
+
+        .source-item {
+            background: #f8f9fa;
+            border: 1px solid #e8eaed;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .source-item:hover {
+            background: #f1f3f4;
+            border-color: #dadce0;
+        }
+
+        .source-item.selected {
+            background: #e8f0fe;
+            border-color: #1a73e8;
+        }
+
+        .source-type {
+            font-size: 11px;
+            color: #5f6368;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 4px;
+        }
+
+        .file-upload-area {
+            border: 2px dashed #dadce0;
+            border-radius: 8px;
+            padding: 32px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #f8f9fa;
+        }
+
+        .file-upload-area:hover {
+            border-color: #1a73e8;
+            background: #f1f3f4;
+        }
+
+        .file-upload-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .file-upload-text {
+            color: #5f6368;
+            font-size: 14px;
+        }
+
+        .file-upload-hint {
+            font-size: 12px;
+            color: #80868b;
+            margin-top: 4px;
+        }
+
+        .file-preview {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-top: 12px;
+            position: relative;
+        }
+
+        .file-preview-icon {
+            font-size: 32px;
+            margin-right: 12px;
+        }
+
+        .file-preview-info {
+            flex: 1;
+        }
+
+        .file-preview-name {
+            font-size: 14px;
+            color: #202124;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .file-preview-size {
+            font-size: 12px;
+            color: #5f6368;
+        }
+
+        .file-preview-remove {
+            background: none;
+            border: none;
+            color: #5f6368;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .file-preview-remove:hover {
+            background: #e8eaed;
+            color: #d93025;
+        }
+
+        .source-content {
+            font-size: 13px;
+            color: #202124;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .source-meta {
+            font-size: 11px;
+            color: #5f6368;
+        }
+
+        .source-delete {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: transparent;
+            border: none;
+            color: #5f6368;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 18px;
+            opacity: 0;
+            transition: all 0.2s;
+        }
+
+        .source-item:hover .source-delete {
+            opacity: 1;
+        }
+
+        .source-delete:hover {
+            background: #f1f3f4;
+            color: #d93025;
+        }
+
+        .chat-panel {
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .chat-input-container {
+            padding: 24px;
+            border-top: 1px solid #e8eaed;
+            background: white;
+        }
+
+        .chat-options {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        .search-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            user-select: none;
+            color: #5f6368;
+        }
+
+        .search-toggle input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: #1a73e8;
+        }
+
+        .search-toggle:hover {
+            color: #1a73e8;
+        }
+
+        .search-status {
+            display: none;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #1a73e8;
+            padding: 4px 8px;
+            background: #e8f0fe;
+            border-radius: 12px;
+        }
+
+        .search-status.active {
+            display: flex;
+        }
+
+        .search-status .spinner {
+            width: 12px;
+            height: 12px;
+            border: 2px solid #1a73e8;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .search-citation {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e8eaed;
+            font-size: 12px;
+            color: #5f6368;
+        }
+
+        .search-citation-header {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .search-citation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .search-citation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        .search-citation-item a {
+            color: #1a73e8;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .search-citation-item a:hover {
+            text-decoration: underline;
+        }
+
+        .chat-input {
+            width: 100%;
+            min-height: 60px;
+            padding: 16px;
+            border: 1px solid #e8eaed;
+            border-radius: 24px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: none;
+            transition: all 0.2s;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.1);
+        }
+
+        .chat-message {
+            margin-bottom: 24px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-role {
+            font-size: 12px;
+            font-weight: 500;
+            color: #5f6368;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .message-content {
+            font-size: 14px;
+            color: #202124;
+            line-height: 1.6;
+            background: #f8f9fa;
+            padding: 12px 16px;
+            border-radius: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .message-content.user {
+            background: #e8f0fe;
+        }
+
+        .message-content.assistant {
+            background: #f8f9fa;
+        }
+
+        .message-sources {
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: #fff;
+            border: 1px solid #e8eaed;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        .message-sources-title {
+            font-weight: 500;
+            color: #5f6368;
+            margin-bottom: 4px;
+        }
+
+        .message-sources-list {
+            color: #1a73e8;
+        }
+
+        .chat-send-btn {
+            position: absolute;
+            right: 32px;
+            bottom: 32px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .chat-send-btn:hover {
+            background: #1557b0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .chat-send-btn:disabled {
+            background: #e8eaed;
+            color: #5f6368;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .chat-loading {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #5f6368;
+            font-size: 13px;
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .chat-loading::before {
+            content: "⋯";
+            font-size: 24px;
+            animation: blink 1.4s infinite;
+        }
+
+        @keyframes blink {
+            0%, 20% { opacity: 0.2; }
+            40% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+
+        .chat-actions {
+            padding: 12px 24px;
+            border-bottom: 1px solid #e8eaed;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .clear-chat-btn {
+            background: transparent;
+            border: 1px solid #e8eaed;
+            color: #5f6368;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .clear-chat-btn:hover {
+            background: #f1f3f4;
+            border-color: #dadce0;
+        }
+
+        .studio-panel {
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .studio-options-section {
+            border-bottom: 2px solid #e8eaed;
+        }
+
+        .studio-option {
+            padding: 16px 24px;
+            border-bottom: 1px solid #e8eaed;
+            cursor: pointer;
+            transition: background 0.2s;
+            position: relative;
+        }
+
+        .studio-option-with-action {
+            display: flex;
+            align-items: center;
+            padding-right: 16px;
+        }
+
+        .studio-option-main {
+            flex: 1;
+        }
+
+        .studio-option-edit-btn {
+            background: transparent;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            padding: 6px;
+            cursor: pointer;
+            color: #5f6368;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 12px;
+            flex-shrink: 0;
+        }
+
+        .studio-option-edit-btn:hover {
+            background: #f1f3f4;
+            color: #1a73e8;
+            border-color: #1a73e8;
+        }
+
+        .studio-option:hover {
+            background: #f1f3f4;
+        }
+
+        .studio-option:active {
+            background: #e8eaed;
+        }
+
+        .studio-option-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 4px;
+        }
+
+        .studio-option-desc {
+            font-size: 12px;
+            color: #5f6368;
+            line-height: 1.4;
+        }
+
+        .studio-generations-section {
+            flex: 1;
+            overflow-y: auto;
+            background: white;
+        }
+
+        .generation-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e8eaed;
+            cursor: pointer;
+            transition: background 0.2s;
+            position: relative;
+        }
+
+        .generation-item:hover {
+            background: #f8f9fa;
+        }
+
+        .generation-item.selected {
+            background: #e8f0fe;
+            border-left: 3px solid #1a73e8;
+        }
+
+        .generation-item.generating {
+            background: #fff8e1;
+        }
+
+        .generation-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .generation-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #202124;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .generation-status {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .generation-status.generating {
+            background: #fff8e1;
+            color: #f9ab00;
+        }
+
+        .generation-status.completed {
+            background: #e6f4ea;
+            color: #1e8e3e;
+        }
+
+        .generation-status.failed {
+            background: #fce8e6;
+            color: #d93025;
+        }
+
+        .generation-time {
+            font-size: 11px;
+            color: #5f6368;
+        }
+
+        .generation-delete {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: transparent;
+            border: none;
+            color: #5f6368;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: all 0.2s;
+            font-size: 16px;
+        }
+
+        .generation-item:hover .generation-delete {
+            opacity: 1;
+        }
+
+        .generation-delete:hover {
+            background: #f1f3f4;
+            color: #d93025;
+        }
+
+        .generation-preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .generation-preview-modal.active {
+            display: flex;
+        }
+
+        .generation-preview-content {
+            background: white;
+            border-radius: 8px;
+            width: 1200px;
+            max-width: 95%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .generation-preview-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e8eaed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .generation-preview-title {
+            font-size: 20px;
+            font-weight: 400;
+            color: #202124;
+        }
+
+        .generation-preview-close {
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            color: #5f6368;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .generation-preview-close:hover {
+            background: #f1f3f4;
+        }
+
+        .generation-preview-body {
+            padding: 24px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .generation-preview-body h1 {
+            font-size: 24px;
+            margin: 24px 0 16px 0;
+            color: #202124;
+        }
+
+        .generation-preview-body h2 {
+            font-size: 20px;
+            margin: 20px 0 12px 0;
+            color: #202124;
+        }
+
+        .generation-preview-body h3 {
+            font-size: 16px;
+            margin: 16px 0 8px 0;
+            color: #202124;
+        }
+
+        .generation-preview-body p {
+            margin: 8px 0;
+            line-height: 1.6;
+            color: #202124;
+        }
+
+        .generation-preview-body ul,
+        .generation-preview-body ol {
+            margin: 8px 0;
+            padding-left: 24px;
+        }
+
+        .generation-preview-body li {
+            margin: 4px 0;
+            line-height: 1.6;
+        }
+
+        .generation-preview-body strong {
+            font-weight: 600;
+        }
+
+        .generation-preview-body code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+
+        .generation-loading {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #5f6368;
+        }
+
+        .generation-loading::before {
+            content: "⋯";
+            font-size: 20px;
+            animation: blink 1.4s infinite;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px;
+            color: #5f6368;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
+        .empty-state-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            width: 500px;
+            max-width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 24px 24px 16px;
+            border-bottom: 1px solid #e8eaed;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 400;
+            color: #202124;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .modal-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .modal-tab {
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid #e8eaed;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #5f6368;
+        }
+
+        .modal-tab.active {
+            background: #e8f0fe;
+            border-color: #1a73e8;
+            color: #1a73e8;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e8eaed;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .form-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 10px 12px;
+            border: 1px solid #e8eaed;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid #e8eaed;
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 8px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #1a73e8;
+        }
+
+        .btn-secondary:hover {
+            background: #f1f3f4;
+        }
+
+        .btn-primary {
+            background: #1a73e8;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1557b0;
+        }
+
+        .btn-primary:disabled {
+            background: #e8eaed;
+            color: #5f6368;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            color: #5f6368;
+            font-size: 13px;
+            padding: 8px;
+        }
+
+        .search-results-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e8eaed;
+            border-radius: 4px;
+        }
+
+        .search-result-item {
+            padding: 12px;
+            border-bottom: 1px solid #e8eaed;
+            display: flex;
+            gap: 12px;
+            transition: background 0.2s;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background: #f8f9fa;
+        }
+
+        .search-result-checkbox {
+            margin-top: 2px;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+        }
+
+        .search-result-content {
+            flex: 1;
+        }
+
+        .search-result-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a73e8;
+            margin-bottom: 4px;
+            cursor: pointer;
+        }
+
+        .search-result-url {
+            font-size: 12px;
+            color: #5f6368;
+            margin-bottom: 6px;
+            word-break: break-all;
+        }
+
+        .search-result-snippet {
+            font-size: 13px;
+            color: #202124;
+            line-height: 1.4;
+        }
+
+        .search-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-top: 1px solid #e8eaed;
+        }
+
+        .select-all-container {
+            font-size: 13px;
+            color: #5f6368;
+        }
+
+        .select-all-container input {
+            margin-right: 6px;
+            cursor: pointer;
+        }
+
+        .copy-links-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .copy-links-btn:hover {
+            background: #1557b0;
+        }
+
+        .copy-links-btn:active {
+            background: #0d47a1;
+        }
+
+        .search-status {
+            font-size: 13px;
+            color: #5f6368;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+        .mindmap-preview {
+            width: 100%;
+            height: 520px;
+            background: #f8f9fb;
+            border: 1px solid #e0e3eb;
+            border-radius: 12px;
+            margin-top: 8px;
+            position: relative;
+        }
+
+        .mindmap-preview svg {
+            width: 100%;
+            height: 100%;
+            font-family: inherit;
+        }
+
+        .mindmap-node circle {
+            fill: #e8f5e9;
+            stroke: #66bb6a;
+            stroke-width: 2px;
+            cursor: pointer;
+        }
+
+        .mindmap-node.root-node circle {
+            fill: #e3f2fd;
+            stroke: #42a5f5;
+        }
+
+        .mindmap-node text {
+            font-size: 13px;
+            fill: #202124;
+            pointer-events: none;
+            font-weight: 500;
+        }
+
+        .mindmap-node rect {
+            fill: #e8f5e9;
+            stroke: #66bb6a;
+            stroke-width: 2px;
+            rx: 8;
+            cursor: pointer;
+        }
+
+        .mindmap-node.root-node rect {
+            fill: #e3f2fd;
+            stroke: #42a5f5;
+            stroke-width: 2.5px;
+        }
+
+        .mindmap-node.level-1 rect {
+            fill: #fff3e0;
+            stroke: #ff9800;
+        }
+
+        .mindmap-node.level-2 rect {
+            fill: #f3e5f5;
+            stroke: #9c27b0;
+        }
+
+        .mindmap-node.level-3 rect {
+            fill: #fce4ec;
+            stroke: #e91e63;
+        }
+
+        .mindmap-link {
+            fill: none;
+            stroke: #90caf9;
+            stroke-width: 2px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="header-title">
+            <div class="notebook-icon">N</div>
+            <div class="breadcrumb">
+                <a href="/notebooks/Frontend/notebook-home.html" class="breadcrumb-link">Notebook</a>
+                <span class="breadcrumb-separator">›</span>
+                <span class="breadcrumb-current" id="breadcrumbNotebookName">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sources Panel -->
+        <div class="panel">
+            <div class="panel-header">
+                <div class="panel-title">Sources</div>
+                <div style="display: flex; gap: 8px;">
+                    <button class="clear-all-btn" onclick="clearAllData()" title="Clear all sources and generations">🗑️ Clear All</button>
+                    <button class="add-source-btn" onclick="openAddSourceModal()">+ Add Source</button>
+                </div>
+            </div>
+            <div class="source-list" id="sourceList">
+                <div class="empty-state">
+                    <div class="empty-state-icon">📚</div>
+                    <div class="empty-state-text">No sources yet.<br>Add text, URLs, or search results to get started.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Panel -->
+        <div class="panel chat-panel">
+            <div class="panel-header">
+                <div class="panel-title">Chat</div>
+            </div>
+            <div class="chat-actions">
+                <button class="clear-chat-btn" onclick="clearChatHistory()" title="Clear conversation history">🗑️ Clear History</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="empty-state">
+                    <div class="empty-state-icon">💬</div>
+                    <div class="empty-state-text">Start a conversation about your sources.<br>Ask questions and get AI-powered insights.</div>
+                </div>
+            </div>
+            <div class="chat-input-container" style="position: relative;">
+                <div class="chat-options">
+                    <label class="search-toggle" title="Enable web search to enhance answers when your sources don't have enough information">
+                        <input type="checkbox" id="enableSearchToggle">
+                        <span>🔍 Enable Search</span>
+                    </label>
+                    <div class="search-status" id="searchStatus">
+                        <div class="spinner"></div>
+                        <span id="searchStatusText">Searching...</span>
+                    </div>
+                </div>
+                <textarea class="chat-input" id="chatInput" placeholder="Ask anything about your sources..." rows="2" onkeydown="handleChatKeydown(event)"></textarea>
+                <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()" title="Send message">▶</button>
+            </div>
+        </div>
+
+        <!-- Studio Panel -->
+        <div class="panel studio-panel">
+            <div class="studio-options-section">
+                <div class="panel-header">
+                    <div class="panel-title">Notebook Guide</div>
+                </div>
+                <div class="studio-option" onclick="generateStudio('study-guide')" data-type="study-guide">
+                    <div class="studio-option-title">📝 Study Guide</div>
+                    <div class="studio-option-desc">Generate a comprehensive study guide from your sources</div>
+                </div>
+                <div class="studio-option" onclick="generateStudio('faq')" data-type="faq">
+                    <div class="studio-option-title">❓ FAQ</div>
+                    <div class="studio-option-desc">Create frequently asked questions with answers</div>
+                </div>
+                <div class="studio-option" onclick="generateStudio('summary')" data-type="summary">
+                    <div class="studio-option-title">📄 Summary</div>
+                    <div class="studio-option-desc">Get a concise summary of all your sources</div>
+                </div>
+                <div class="studio-option" onclick="generateStudio('key-points')" data-type="key-points">
+                    <div class="studio-option-title">💡 Key Points</div>
+                    <div class="studio-option-desc">Extract the most important concepts and ideas</div>
+                </div>
+                <div class="studio-option" onclick="generateStudio('mindmap')" data-type="mindmap">
+                    <div class="studio-option-title">🧠 Mind Map</div>
+                    <div class="studio-option-desc">Automatically outline the topic as a collapsible mindmap</div>
+                </div>
+                <div class="studio-option studio-option-with-action" data-type="infographic">
+                    <div class="studio-option-main" onclick="generateStudio('infographic')">
+                        <div class="studio-option-title">📊 Infographic</div>
+                        <div class="studio-option-desc">Generate a detailed visual infographic explaining your sources (landscape format)</div>
+                    </div>
+                    <button class="studio-option-edit-btn" onclick="event.stopPropagation(); openCustomStyleModal();" title="Customize Style">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M12.146.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708l-9.793 9.793a.5.5 0 0 1-.168.11l-3.5 1.5a.5.5 0 0 1-.65-.65l1.5-3.5a.5.5 0 0 1 .11-.168l9.793-9.793zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm-1.414 1.414L3 10.707V12h1.293l6.793-6.793-1.5-1.5z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="studio-generations-section">
+                <div class="panel-header" style="padding: 16px;">
+                    <div class="panel-title">Generated Content</div>
+                </div>
+                <div id="generationsList">
+                    <div class="empty-state" style="padding: 24px;">
+                        <div class="empty-state-icon">📋</div>
+                        <div class="empty-state-text">No content generated yet.<br>Click an option above to generate.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generation Preview Modal -->
+    <div class="generation-preview-modal" id="generationPreviewModal">
+        <div class="generation-preview-content">
+            <div class="generation-preview-header">
+                <div class="generation-preview-title" id="previewTitle">Generation Preview</div>
+                <button class="generation-preview-close" onclick="closeGenerationPreview()">×</button>
+            </div>
+            <div class="generation-preview-body">
+                <div class="mindmap-preview hidden" id="mindmapPreview"></div>
+                <div class="preview-body-text" id="previewBody">
+                    <!-- Content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Source Modal -->
+    <div class="modal" id="addSourceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Add Source</div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-tabs">
+                    <button class="modal-tab active" onclick="switchTab('text', event)">Text</button>
+                    <button class="modal-tab" onclick="switchTab('url', event)">URL</button>
+                    <button class="modal-tab" onclick="switchTab('search', event)">Search</button>
+                    <button class="modal-tab" onclick="switchTab('file', event)">File</button>
+                </div>
+
+                <div class="tab-content active" id="textTab">
+                    <div class="form-group">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-input" id="textTitle" placeholder="Enter a title for your source">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Content</label>
+                        <textarea class="form-textarea" id="textContent" placeholder="Paste or type your text here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="urlTab">
+                    <div class="form-group">
+                        <label class="form-label">URL</label>
+                        <input type="url" class="form-input" id="urlInput" placeholder="https://example.com">
+                    </div>
+                </div>
+
+                <div class="tab-content" id="searchTab">
+                    <div class="form-group">
+                        <label class="form-label">Search Query</label>
+                        <input type="text" class="form-input" id="searchQuery" placeholder="What do you want to search for?" onkeydown="handleSearchKeydown(event)">
+                    </div>
+                    <div id="searchResultsContainer" style="display: none;">
+                        <div class="search-status" id="addSourceSearchStatus"></div>
+                        <div class="search-results-list" id="searchResultsList"></div>
+                        <div class="search-actions">
+                            <label class="select-all-container">
+                                <input type="checkbox" id="selectAllCheckbox" onchange="toggleSelectAll()">
+                                Select All
+                            </label>
+                            <span id="selectedCount">0 selected</span>
+                            <button type="button" class="copy-links-btn" onclick="copyAllLinks(event)" title="Copy all result links as HTML">
+                                📋 Copy All Links
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="fileTab">
+                    <div class="form-group">
+                        <label class="form-label">Upload Document</label>
+                        <div class="file-upload-area" onclick="document.getElementById('fileInput').click()">
+                            <input type="file" id="fileInput" accept=".txt,.md" style="display: none;" onchange="handleFileSelect(event)">
+                            <div class="file-upload-icon">📄</div>
+                            <div class="file-upload-text">
+                                <div>Click to upload or drag and drop</div>
+                                <div class="file-upload-hint">Supports: TXT, MD (max 10MB)</div>
+                            </div>
+                        </div>
+                        <div id="filePreview" class="file-preview" style="display: none;">
+                            <div class="file-preview-icon">📄</div>
+                            <div class="file-preview-info">
+                                <div class="file-preview-name" id="fileName"></div>
+                                <div class="file-preview-size" id="fileSize"></div>
+                            </div>
+                            <button class="file-preview-remove" onclick="clearFileSelection(event)">×</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeAddSourceModal()">Cancel</button>
+                <button class="btn btn-primary" id="addSourceBtn" onclick="addSource()">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Style Modal for Infographic -->
+    <div class="modal" id="customStyleModal">
+        <div class="modal-content" style="width: 450px;">
+            <div class="modal-header">
+                <div class="modal-title">🎨 Customize Infographic Style</div>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Custom Style / Content Instructions</label>
+                    <textarea 
+                        class="form-textarea" 
+                        id="customStylePrompt" 
+                        rows="5"
+                        placeholder="Describe your preferred style or content requirements...
+
+Examples:
+• 极简风格，白色背景，只展示三个核心要点
+• Cyberpunk style with neon colors and dark background
+• Focus on the data comparison, use charts and graphs
+• Timeline layout showing historical progression"
+                        style="min-height: 150px;"
+                    ></textarea>
+                    <div style="font-size: 12px; color: #666; margin-top: 8px; text-align: right;">
+                        <span id="customStyleCharCount">0</span> characters
+                    </div>
+                </div>
+                <div style="font-size: 13px; color: #5f6368; background: #f8f9fa; padding: 12px; border-radius: 6px;">
+                    💡 <strong>Tip:</strong> Your instructions will influence both content selection and visual style. Leave empty for automatic style detection.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeCustomStyleModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="generateWithCustomStyle()">Generate</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get notebookId from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const notebookId = urlParams.get('id');
+        
+        if (!notebookId) {
+            alert('No notebook ID specified. Redirecting to notebook home.');
+            window.location.href = '/notebooks/Frontend/notebook-home.html';
+            throw new Error('No notebook ID');
+        }
+        
+        let currentTab = 'text';
+        let sources = [];
+        let searchResults = [];
+        let selectedSearchIndices = new Set();
+
+        // Load notebook info and sources on page load
+        async function loadNotebook() {
+            try {
+                const response = await fetch(`/api/notebooks/${notebookId}`);
+                if (response.ok) {
+                    const notebook = await response.json();
+                    document.getElementById('breadcrumbNotebookName').textContent = notebook.title;
+                    document.title = notebook.title + ' - Notebook';
+                } else {
+                    console.error('Failed to load notebook info');
+                }
+            } catch (error) {
+                console.error('Error loading notebook:', error);
+            }
+        }
+
+        async function loadSources() {
+            try {
+                const response = await fetch(`/api/notebook/sources?notebookId=${notebookId}`);
+                if (response.ok) {
+                    sources = await response.json();
+                    renderSources();
+                }
+            } catch (error) {
+                console.error('Failed to load sources:', error);
+            }
+        }
+
+        function renderSources() {
+            const container = document.getElementById('sourceList');
+            
+            if (sources.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📚</div>
+                        <div class="empty-state-text">No sources yet.<br>Add text, URLs, files, or search results to get started.</div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = sources.map(source => {
+                let displayContent = source.title || source.content;
+                let typeDisplay = source.type;
+                
+                // For file sources, show filename and extension
+                if (source.type === 'file' && source.fileName) {
+                    const ext = source.fileName.split('.').pop().toUpperCase();
+                    typeDisplay = `FILE (${ext})`;
+                    displayContent = source.fileName;
+                }
+                
+                return `
+                    <div class="source-item" data-id="${source.id}">
+                        <button class="source-delete" onclick="deleteSource('${source.id}')" title="Delete">×</button>
+                        <div class="source-type">${typeDisplay}</div>
+                        <div class="source-content">${displayContent}</div>
+                        <div class="source-meta">${new Date(source.createdAt).toLocaleDateString()}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openAddSourceModal() {
+            document.getElementById('addSourceModal').classList.add('active');
+        }
+
+        function closeAddSourceModal() {
+            document.getElementById('addSourceModal').classList.remove('active');
+            // Reset form
+            document.getElementById('textTitle').value = '';
+            document.getElementById('textContent').value = '';
+            document.getElementById('urlInput').value = '';
+            document.getElementById('searchQuery').value = '';
+            document.getElementById('searchResultsContainer').style.display = 'none';
+            document.getElementById('searchResultsList').innerHTML = '';
+            
+            // Reset file input
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput) {
+                fileInput.value = '';
+                document.querySelector('.file-upload-area').style.display = 'block';
+                document.getElementById('filePreview').style.display = 'none';
+            }
+            
+            searchResults = [];
+            selectedSearchIndices.clear();
+            updateAddButtonState();
+        }
+
+        // Custom Style Modal functions
+        function openCustomStyleModal() {
+            document.getElementById('customStyleModal').classList.add('active');
+            document.getElementById('customStylePrompt').value = '';
+            updateCustomStyleCharCount();
+        }
+
+        function closeCustomStyleModal() {
+            document.getElementById('customStyleModal').classList.remove('active');
+            document.getElementById('customStylePrompt').value = '';
+        }
+
+        function updateCustomStyleCharCount() {
+            const textarea = document.getElementById('customStylePrompt');
+            const count = document.getElementById('customStyleCharCount');
+            if (textarea && count) {
+                count.textContent = textarea.value.length;
+            }
+        }
+
+        // Add event listener for character count
+        document.addEventListener('DOMContentLoaded', function() {
+            const textarea = document.getElementById('customStylePrompt');
+            if (textarea) {
+                textarea.addEventListener('input', updateCustomStyleCharCount);
+            }
+        });
+
+        async function generateWithCustomStyle() {
+            const customPrompt = document.getElementById('customStylePrompt').value.trim();
+            closeCustomStyleModal();
+            
+            // Show confirmation with custom style info
+            const styleInfo = customPrompt ? `\n\nCustom style: "${customPrompt.substring(0, 50)}${customPrompt.length > 50 ? '...' : ''}"` : '';
+            const confirmed = confirm(`Infographic generation may take 30-60 seconds.${styleInfo}\n\nContinue?`);
+            
+            if (!confirmed) return;
+
+            try {
+                const response = await fetch('/api/notebook/studio/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        notebookId: notebookId, 
+                        type: 'infographic',
+                        customPrompt: customPrompt || null
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Generation request failed');
+                }
+                
+                const generation = await response.json();
+                console.log('Started generation with custom style:', generation);
+                
+                // Start polling for completion
+                pollGenerationStatus(generation.id);
+                
+                // Refresh list to show new generation
+                await loadGenerations();
+                
+            } catch (error) {
+                console.error('Custom style generation failed:', error);
+                alert('Failed to start generation: ' + error.message);
+            }
+        }
+
+        function switchTab(tab, e) {
+            currentTab = tab;
+
+            // Update tab buttons
+            document.querySelectorAll('.modal-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            e.target.classList.add('active');
+
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`${tab}Tab`).classList.add('active');
+
+            // Update button text based on tab
+            const btn = document.getElementById('addSourceBtn');
+            if (tab === 'search') {
+                btn.textContent = 'Search';
+                btn.onclick = performSearch;
+            } else {
+                btn.textContent = 'Add';
+                btn.onclick = addSource;
+            }
+        }
+
+        async function performSearch() {
+            const query = document.getElementById('searchQuery').value.trim();
+            
+            if (!query) {
+                alert('Please enter a search query');
+                return;
+            }
+
+            const btn = document.getElementById('addSourceBtn');
+            btn.disabled = true;
+            btn.textContent = 'Searching...';
+
+            try {
+                const response = await fetch('/api/notebook/search/preview', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query })
+                });
+
+                if (response.ok) {
+                    searchResults = await response.json();
+                    displaySearchResults(searchResults);
+                    
+                    // Change button to "Add Selected"
+                    btn.textContent = 'Add Selected';
+                    btn.onclick = addSelectedSearchSources;
+                    updateAddButtonState();
+                } else {
+                    const error = await response.text();
+                    alert('Search failed: ' + error);
+                    btn.textContent = 'Search';
+                }
+            } catch (error) {
+                console.error('Search error:', error);
+                alert('Search failed');
+                btn.textContent = 'Search';
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        function copyAllLinks(event) {
+            if (searchResults.length === 0) {
+                alert('No search results to copy.');
+                return;
+            }
+
+            // Generate plain URLs with line breaks (one URL per line)
+            const urls = searchResults
+                .map(result => result.url)
+                .join('\n');
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(urls)
+                .then(() => {
+                    // Show success feedback
+                    const btn = event.target;
+                    const originalText = btn.textContent;
+                    btn.textContent = '✓ Copied!';
+                    btn.style.background = '#188038';
+                    
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.background = '';
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Failed to copy:', err);
+                    alert('Failed to copy links to clipboard. Error: ' + err.message);
+                });
+        }
+
+        function displaySearchResults(results) {
+            const container = document.getElementById('searchResultsContainer');
+            const list = document.getElementById('searchResultsList');
+            const status = document.getElementById('addSourceSearchStatus');
+            
+            container.style.display = 'block';
+            status.textContent = `Found ${results.length} results. Select the ones you want to add as sources:`;
+            
+            list.innerHTML = results.map(result => `
+                <div class="search-result-item">
+                    <input type="checkbox" 
+                           class="search-result-checkbox" 
+                           data-index="${result.index}" 
+                           onchange="toggleSearchResult(${result.index})">
+                    <div class="search-result-content">
+                        <div class="search-result-title">${escapeHtml(result.title)}</div>
+                        <div class="search-result-url">${escapeHtml(result.url)}</div>
+                        <div class="search-result-snippet">${escapeHtml(result.snippet)}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            selectedSearchIndices.clear();
+            updateSelectedCount();
+        }
+
+        function toggleSearchResult(index) {
+            if (selectedSearchIndices.has(index)) {
+                selectedSearchIndices.delete(index);
+            } else {
+                selectedSearchIndices.add(index);
+            }
+            updateSelectedCount();
+            updateAddButtonState();
+        }
+
+        function toggleSelectAll() {
+            const checkbox = document.getElementById('selectAllCheckbox');
+            const allCheckboxes = document.querySelectorAll('.search-result-checkbox');
+            
+            if (checkbox.checked) {
+                allCheckboxes.forEach(cb => {
+                    cb.checked = true;
+                    selectedSearchIndices.add(parseInt(cb.dataset.index));
+                });
+            } else {
+                allCheckboxes.forEach(cb => {
+                    cb.checked = false;
+                });
+                selectedSearchIndices.clear();
+            }
+            
+            updateSelectedCount();
+            updateAddButtonState();
+        }
+
+        function updateSelectedCount() {
+            document.getElementById('selectedCount').textContent = `${selectedSearchIndices.size} selected`;
+        }
+
+        function updateAddButtonState() {
+            const btn = document.getElementById('addSourceBtn');
+            if (currentTab === 'search' && searchResults.length > 0) {
+                btn.disabled = selectedSearchIndices.size === 0;
+            } else {
+                btn.disabled = false;
+            }
+        }
+
+        async function addSelectedSearchSources() {
+            const btn = document.getElementById('addSourceBtn');
+            btn.disabled = true;
+            btn.textContent = 'Adding...';
+
+            try {
+                const query = document.getElementById('searchQuery').value.trim();
+                const selectedIndices = Array.from(selectedSearchIndices);
+
+                const response = await fetch('/api/notebook/sources/search', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        notebookId,
+                        query, 
+                        selectedIndices,
+                        searchResults 
+                    })
+                });
+
+                if (response.ok) {
+                    await loadSources();
+                    closeAddSourceModal();
+                } else {
+                    const error = await response.text();
+                    alert('Failed to add sources: ' + error);
+                }
+            } catch (error) {
+                console.error('Error adding sources:', error);
+                alert('Failed to add sources');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Add Selected';
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        async function addSource() {
+            const btn = document.getElementById('addSourceBtn');
+            btn.disabled = true;
+            btn.textContent = 'Adding...';
+
+            try {
+                let response;
+
+                if (currentTab === 'text') {
+                    const title = document.getElementById('textTitle').value.trim();
+                    const content = document.getElementById('textContent').value.trim();
+                    
+                    if (!content) {
+                        alert('Please enter some content');
+                        return;
+                    }
+
+                    response = await fetch('/api/notebook/sources/text', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ notebookId, title, content })
+                    });
+                } else if (currentTab === 'url') {
+                    const url = document.getElementById('urlInput').value.trim();
+                    
+                    if (!url) {
+                        alert('Please enter a URL');
+                        return;
+                    }
+
+                    response = await fetch('/api/notebook/sources/url', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ notebookId, url })
+                    });
+                } else if (currentTab === 'file') {
+                    const fileInput = document.getElementById('fileInput');
+                    
+                    if (!fileInput.files.length) {
+                        alert('Please select a file');
+                        return;
+                    }
+
+                    const formData = new FormData();
+                    formData.append('file', fileInput.files[0]);
+
+                    response = await fetch(`/api/notebook/${notebookId}/sources/file`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                }
+
+                if (response && response.ok) {
+                    await loadSources();
+                    closeAddSourceModal();
+                } else if (response) {
+                    const error = await response.text();
+                    alert('Failed to add source: ' + error);
+                }
+            } catch (error) {
+                console.error('Error adding source:', error);
+                alert('Failed to add source');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Add';
+            }
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const uploadArea = document.querySelector('.file-upload-area');
+            const preview = document.getElementById('filePreview');
+            const fileName = document.getElementById('fileName');
+            const fileSize = document.getElementById('fileSize');
+
+            // Format file size
+            const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+            const sizeText = sizeInMB < 1 
+                ? `${(file.size / 1024).toFixed(2)} KB` 
+                : `${sizeInMB} MB`;
+
+            // Show preview
+            fileName.textContent = file.name;
+            fileSize.textContent = sizeText;
+            uploadArea.style.display = 'none';
+            preview.style.display = 'flex';
+        }
+
+        function clearFileSelection(event) {
+            event.stopPropagation();
+            const fileInput = document.getElementById('fileInput');
+            const uploadArea = document.querySelector('.file-upload-area');
+            const preview = document.getElementById('filePreview');
+
+            fileInput.value = '';
+            uploadArea.style.display = 'block';
+            preview.style.display = 'none';
+        }
+
+        async function deleteSource(id) {
+            if (!confirm('Are you sure you want to delete this source?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/notebook/sources/${id}?notebookId=${notebookId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    await loadSources();
+                } else {
+                    alert('Failed to delete source');
+                }
+            } catch (error) {
+                console.error('Error deleting source:', error);
+                alert('Failed to delete source');
+            }
+        }
+
+        async function clearAllData() {
+            if (!confirm('Are you sure you want to clear ALL sources and generations? This cannot be undone.')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/notebook/clear?notebookId=${notebookId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    // Reload both sources and generations
+                    await loadSources();
+                    await loadGenerations();
+                    alert('All data cleared successfully');
+                } else {
+                    alert('Failed to clear data');
+                }
+            } catch (error) {
+                console.error('Error clearing data:', error);
+                alert('Failed to clear data');
+            }
+        }
+
+        // Load notebook and sources on page load
+        loadNotebook();
+        loadSources();
+        loadChatHistory();
+
+        // ========== Chat Functions ==========
+
+        async function loadChatHistory() {
+            try {
+                const response = await fetch(`/api/notebook/chat/history?notebookId=${notebookId}`);
+                if (response.ok) {
+                    const history = await response.json();
+                    const messagesContainer = document.getElementById('chatMessages');
+                    
+                    // Clear existing messages except empty state
+                    messagesContainer.innerHTML = '';
+                    
+                    if (history.length === 0) {
+                        messagesContainer.innerHTML = `
+                            <div class="empty-state">
+                                <div class="empty-state-icon">💬</div>
+                                <div class="empty-state-text">No messages yet.<br>Ask a question to start the conversation.</div>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    // Render all messages from history
+                    history.forEach(msg => {
+                        if (msg.role === 'user' || msg.role === 'assistant') {
+                            addMessageToChat(msg.role, msg.content, []);
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Failed to load chat history:', error);
+            }
+        }
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+
+            if (!message) {
+                return;
+            }
+
+            // Check if there are sources
+            if (sources.length === 0) {
+                alert('Please add some sources first to chat about them.');
+                return;
+            }
+
+            // Get Enable Search toggle state
+            const enableSearch = document.getElementById('enableSearchToggle').checked;
+            const searchStatus = document.getElementById('searchStatus');
+            const searchStatusText = document.getElementById('searchStatusText');
+
+            // Disable input while processing
+            const sendBtn = document.getElementById('chatSendBtn');
+            input.disabled = true;
+            sendBtn.disabled = true;
+
+            // Add user message to UI
+            addMessageToChat('user', message);
+            input.value = '';
+
+            // Show loading indicator
+            const loadingId = showChatLoading();
+
+            // Show search status if enabled
+            if (enableSearch) {
+                searchStatus.classList.add('active');
+                searchStatusText.textContent = 'Processing...';
+            }
+
+            try {
+                const response = await fetch('/api/notebook/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ notebookId, message, includeHistory: true, enableSearch })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    removeChatLoading(loadingId);
+                    addMessageToChat('assistant', data.message, data.sources, data.searchResults);
+                } else {
+                    const error = await response.text();
+                    removeChatLoading(loadingId);
+                    addMessageToChat('assistant', `Error: ${error}`);
+                }
+            } catch (error) {
+                console.error('Chat error:', error);
+                removeChatLoading(loadingId);
+                addMessageToChat('assistant', 'Sorry, I encountered an error. Please try again.');
+            } finally {
+                input.disabled = false;
+                sendBtn.disabled = false;
+                input.focus();
+                // Hide search status
+                searchStatus.classList.remove('active');
+            }
+        }
+
+        function addMessageToChat(role, content, sources = [], searchResults = []) {
+            const messagesContainer = document.getElementById('chatMessages');
+            
+            // Remove empty state if it exists
+            const emptyState = messagesContainer.querySelector('.empty-state');
+            if (emptyState) {
+                emptyState.remove();
+            }
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message';
+
+            const roleEmoji = role === 'user' ? '👤' : '🤖';
+            const roleText = role === 'user' ? 'You' : 'AI Assistant';
+
+            let sourcesHtml = '';
+            if (sources && sources.length > 0) {
+                sourcesHtml = `
+                    <div class="message-sources">
+                        <div class="message-sources-title">📚 Sources cited:</div>
+                        <div class="message-sources-list">${sources.join(', ')}</div>
+                    </div>
+                `;
+            }
+
+            // Add search results citation if present
+            let searchCitationHtml = '';
+            if (searchResults && searchResults.length > 0) {
+                const citationItems = searchResults.map((r, i) => `
+                    <div class="search-citation-item">
+                        <span>[${i + 1}]</span>
+                        <a href="${escapeHtml(r.url)}" target="_blank" title="${escapeHtml(r.snippet || '')}">${escapeHtml(r.title)}</a>
+                    </div>
+                `).join('');
+                
+                searchCitationHtml = `
+                    <div class="search-citation">
+                        <div class="search-citation-header">
+                            🔍 This answer used web search results:
+                        </div>
+                        <div class="search-citation-list">
+                            ${citationItems}
+                        </div>
+                    </div>
+                `;
+            }
+
+            messageDiv.innerHTML = `
+                <div class="message-role">${roleEmoji} ${roleText}</div>
+                <div class="message-content ${role}">${escapeHtml(content)}</div>
+                ${sourcesHtml}
+                ${searchCitationHtml}
+            `;
+
+            messagesContainer.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showChatLoading() {
+            const messagesContainer = document.getElementById('chatMessages');
+            const loadingDiv = document.createElement('div');
+            const loadingId = 'loading-' + Date.now();
+            loadingDiv.id = loadingId;
+            loadingDiv.className = 'chat-loading';
+            loadingDiv.textContent = 'AI is thinking...';
+            messagesContainer.appendChild(loadingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            return loadingId;
+        }
+
+        function removeChatLoading(loadingId) {
+            const loadingDiv = document.getElementById(loadingId);
+            if (loadingDiv) {
+                loadingDiv.remove();
+            }
+        }
+
+        async function clearChatHistory() {
+            if (!confirm('Are you sure you want to clear the conversation history?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/notebook/chat/history?notebookId=${notebookId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    const messagesContainer = document.getElementById('chatMessages');
+                    messagesContainer.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">💬</div>
+                            <div class="empty-state-text">Start a conversation about your sources.<br>Ask questions and get AI-powered insights.</div>
+                        </div>
+                    `;
+                } else {
+                    alert('Failed to clear history');
+                }
+            } catch (error) {
+                console.error('Error clearing history:', error);
+                alert('Failed to clear history');
+            }
+        }
+
+        function handleChatKeydown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendChatMessage();
+            }
+        }
+
+        function handleSearchKeydown(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                performSearch();
+            }
+        }
+
+        // ========== Studio Functions ==========
+
+        let generations = [];
+        let currentPreviewId = null;
+
+        async function loadGenerations() {
+            try {
+                const response = await fetch(`/api/notebook/studio/generations?notebookId=${notebookId}`);
+                if (response.ok) {
+                    generations = await response.json();
+                    renderGenerations();
+                }
+            } catch (error) {
+                console.error('Failed to load generations:', error);
+            }
+        }
+
+        function renderGenerations() {
+            const container = document.getElementById('generationsList');
+            
+            if (generations.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" style="padding: 24px;">
+                        <div class="empty-state-icon">📋</div>
+                        <div class="empty-state-text">No content generated yet.<br>Click an option above to generate.</div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = generations.map(gen => {
+                const statusClass = gen.status.toLowerCase();
+                const statusText = gen.status === 'generating' ? 'Generating...' : 
+                                   gen.status === 'completed' ? 'Completed' : 'Failed';
+                const timeText = new Date(gen.createdAt).toLocaleTimeString('en-US', { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                });
+
+                // Add thumbnail for infographic
+                let thumbnailHtml = '';
+                if (gen.type === 'infographic' && gen.imagePath && gen.status === 'completed') {
+                    const imageUrl = `/api/notebook/images/${notebookId}/${gen.imagePath}`;
+                    thumbnailHtml = `<img src="${imageUrl}" style="width: 100%; height: 80px; object-fit: cover; border-radius: 4px; margin-top: 8px;" alt="Infographic thumbnail" />`;
+                }
+
+                return `
+                    <div class="generation-item ${statusClass}" 
+                         data-id="${gen.id}" 
+                         onclick="viewGeneration('${gen.id}')">
+                        <button class="generation-delete" onclick="event.stopPropagation(); deleteGeneration('${gen.id}')" title="Delete">×</button>
+                        <div class="generation-header">
+                            <div class="generation-title">
+                                ${getGenerationIcon(gen.type)} ${gen.title}
+                            </div>
+                            <span class="generation-status ${statusClass}">${statusText}</span>
+                        </div>
+                        <div class="generation-time">${timeText}</div>
+                        ${gen.status === 'generating' ? '<div class="generation-loading">Generating content</div>' : ''}
+                        ${thumbnailHtml}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getGenerationIcon(type) {
+            const icons = {
+                'study-guide': '📝',
+                'faq': '❓',
+                'summary': '📄',
+                'key-points': '💡',
+                'mindmap': '🧠',
+                'infographic': '📊'
+            };
+            return icons[type] || '📋';
+        }
+
+        async function generateStudio(type) {
+            if (sources.length === 0) {
+                alert('Please add some sources first to generate content from them.');
+                return;
+            }
+
+            // Show special message for infographic
+            if (type === 'infographic') {
+                const confirmed = confirm('Infographic generation may take 30-60 seconds. The system will generate a detailed visual explanation of your sources. Continue?');
+                if (!confirmed) return;
+            }
+
+            try {
+                const response = await fetch('/api/notebook/studio/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ notebookId, type })
+                });
+
+                if (response.ok) {
+                    await loadGenerations();
+                    
+                    // Poll for completion if generation is still in progress
+                    const generation = await response.json();
+                    if (generation.status === 'generating') {
+                        pollGenerationStatus(generation.id);
+                    }
+                } else {
+                    const error = await response.text();
+                    alert('Failed to generate: ' + error);
+                }
+            } catch (error) {
+                console.error('Generation error:', error);
+                alert('Failed to generate content');
+            }
+        }
+
+        async function pollGenerationStatus(id) {
+            const maxAttempts = 60; // 1 minute max
+            let attempts = 0;
+
+            const interval = setInterval(async () => {
+                attempts++;
+
+                try {
+                    const response = await fetch(`/api/notebook/studio/generations/${id}?notebookId=${notebookId}`);
+                    if (response.ok) {
+                        const generation = await response.json();
+                        
+                        await loadGenerations();
+
+                        if (generation.status !== 'generating' || attempts >= maxAttempts) {
+                            clearInterval(interval);
+                            
+                            if (generation.status === 'completed') {
+                                // Optionally auto-open the preview
+                                // viewGeneration(id);
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error('Poll error:', error);
+                    clearInterval(interval);
+                }
+            }, 1000); // Poll every second
+        }
+
+        async function viewGeneration(id) {
+            try {
+                const response = await fetch(`/api/notebook/studio/generations/${id}?notebookId=${notebookId}`);
+                if (response.ok) {
+                    const generation = await response.json();
+                    
+                    if (generation.status === 'generating') {
+                        alert('Content is still being generated. Please wait...');
+                        return;
+                    }
+
+                    if (generation.status === 'failed') {
+                        alert('Generation failed. Please try again.');
+                        return;
+                    }
+
+                    // Show preview modal
+                    currentPreviewId = id;
+                    document.getElementById('previewTitle').textContent = generation.title;
+
+                    if ((generation.type || '').toLowerCase() === 'mindmap') {
+                        try {
+                            console.log('[Debug] Raw generation.content type:', typeof generation.content);
+                            console.log('[Debug] Raw generation.content (first 200 chars):', (generation.content || '').substring(0, 200));
+                            const payload = JSON.parse(generation.content || '{}');
+                            console.log('[Debug] Parsed payload:', payload);
+                            console.log('[Debug] Payload.nodes length:', payload.nodes ? payload.nodes.length : 'undefined');
+                            renderMindmapPreview(payload);
+                        } catch (err) {
+                            console.error('Mindmap parse failed:', err);
+                            console.error('[Debug] Failed content:', generation.content);
+                            alert('Mindmap data is invalid. Please regenerate.');
+                            return;
+                        }
+                    } else if ((generation.type || '').toLowerCase() === 'infographic') {
+                        // Show infographic image
+                        if (generation.imagePath) {
+                            const imageUrl = `/api/notebook/images/${notebookId}/${generation.imagePath}`;
+                            showInfographicPreview(imageUrl, generation.content || '', generation.imagePrompt || null);
+                        } else {
+                            const htmlContent = convertMarkdownToHtml(generation.content || 'Image not available');
+                            showTextPreview(htmlContent);
+                        }
+                    } else {
+                        const htmlContent = convertMarkdownToHtml(generation.content || '');
+                        showTextPreview(htmlContent);
+                    }
+
+                    document.getElementById('generationPreviewModal').classList.add('active');
+
+                    // Highlight selected item
+                    document.querySelectorAll('.generation-item').forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    const selectedItem = document.querySelector(`[data-id="${id}"]`);
+                    if (selectedItem) {
+                        selectedItem.classList.add('selected');
+                    }
+                }
+            } catch (error) {
+                console.error('Error viewing generation:', error);
+                alert('Failed to load content');
+            }
+        }
+
+        function closeGenerationPreview() {
+            document.getElementById('generationPreviewModal').classList.remove('active');
+            currentPreviewId = null;
+
+            const previewBody = document.getElementById('previewBody');
+            previewBody.innerHTML = '';
+            previewBody.classList.remove('hidden');
+
+            const mindmapContainer = document.getElementById('mindmapPreview');
+            mindmapContainer.innerHTML = '';
+            mindmapContainer.classList.add('hidden');
+            
+            // Remove selection
+            document.querySelectorAll('.generation-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+        }
+
+        async function deleteGeneration(id) {
+            if (!confirm('Are you sure you want to delete this generation?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/notebook/studio/generations/${id}?notebookId=${notebookId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    await loadGenerations();
+                    
+                    // Close preview if it's the current one
+                    if (currentPreviewId === id) {
+                        closeGenerationPreview();
+                    }
+                } else {
+                    alert('Failed to delete generation');
+                }
+            } catch (error) {
+                console.error('Error deleting generation:', error);
+                alert('Failed to delete generation');
+            }
+        }
+
+        function convertMarkdownToHtml(markdown) {
+            // Simple markdown conversion (basic implementation)
+            let html = markdown;
+            
+            // Headers
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            
+            // Bold
+            html = html.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
+            
+            // Lists
+            html = html.replace(/^\* (.*$)/gim, '<li>$1</li>');
+            html = html.replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
+            
+            // Wrap consecutive <li> in <ul>
+            html = html.replace(/(<li>.*<\/li>)/s, function(match) {
+                return '<ul>' + match + '</ul>';
+            });
+            
+            // Paragraphs
+            html = html.split('\n\n').map(para => {
+                if (!para.match(/<[^>]+>/)) {
+                    return '<p>' + para.replace(/\n/g, '<br>') + '</p>';
+                }
+                return para;
+            }).join('\n');
+            
+            return html;
+        }
+
+        function showTextPreview(htmlContent) {
+            const mindmapContainer = document.getElementById('mindmapPreview');
+            mindmapContainer.innerHTML = '';
+            mindmapContainer.classList.add('hidden');
+
+            const previewBody = document.getElementById('previewBody');
+            previewBody.classList.remove('hidden');
+            previewBody.innerHTML = htmlContent;
+        }
+
+        function showInfographicPreview(imageUrl, description, imagePrompt) {
+            const mindmapContainer = document.getElementById('mindmapPreview');
+            mindmapContainer.innerHTML = '';
+            mindmapContainer.classList.add('hidden');
+
+            const previewBody = document.getElementById('previewBody');
+            previewBody.classList.remove('hidden');
+            
+            // Display imagePrompt if available, otherwise show "null"
+            const promptContent = imagePrompt 
+                ? `<pre style="background: #f5f5f5; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 13px; line-height: 1.6; color: #2c3e50; white-space: pre-wrap; word-wrap: break-word; font-family: 'Consolas', 'Monaco', monospace;">${escapeHtml(imagePrompt)}</pre>`
+                : `<p style="color: #999; font-style: italic;">null</p>`;
+            
+            previewBody.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="${imageUrl}" style="max-width: 100%; border: 1px solid #e0e3eb; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" alt="Infographic" />
+                    <div style="margin-top: 12px;">
+                        <a href="${imageUrl}" download="infographic.png" style="display: inline-block; padding: 8px 16px; background: #1a73e8; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">📥 Download Image</a>
+                    </div>
+                </div>
+                <div style="border-top: 1px solid #e8eaed; padding-top: 20px; margin-top: 20px;">
+                    <h3 style="color: #5f6368; font-size: 16px; margin-bottom: 12px;">Image Generation Prompt:</h3>
+                    ${promptContent}
+                </div>
+            `;
+        }
+
+        function renderMindmapPreview(payload) {
+            const mindmapContainer = document.getElementById('mindmapPreview');
+            const previewBody = document.getElementById('previewBody');
+
+            previewBody.innerHTML = '';
+            previewBody.classList.add('hidden');
+            mindmapContainer.classList.remove('hidden');
+
+            drawMindmap(mindmapContainer, payload);
+        }
+
+        function drawMindmap(container, payload) {
+            container.innerHTML = '';
+            const nodes = Array.isArray(payload.nodes) ? payload.nodes : [];
+            const edges = Array.isArray(payload.edges) ? payload.edges : [];
+
+            if (nodes.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🧠</div><div class="empty-state-text">Mindmap data unavailable.</div></div>';
+                return;
+            }
+
+            const treeData = buildMindmapTree(nodes);
+            if (!treeData) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⚠️</div><div class="empty-state-text">Mindmap structure is invalid.</div></div>';
+                return;
+            }
+
+            const width = container.clientWidth || 640;
+            const height = container.clientHeight || 520;
+
+            const svg = d3.select(container)
+                .append('svg')
+                .attr('viewBox', `0 0 ${width} ${height}`)
+                .attr('preserveAspectRatio', 'xMidYMid meet');
+
+            const g = svg.append('g').attr('transform', 'translate(60,40)');
+
+            const zoom = d3.zoom().scaleExtent([0.5, 2]).on('zoom', (event) => {
+                g.attr('transform', event.transform);
+            });
+            svg.call(zoom);
+
+            const treeLayout = d3.tree().nodeSize([60, 200]);
+            const root = d3.hierarchy(treeData, d => d.children);
+            root.x0 = height / 2;
+            root.y0 = 0;
+
+            root.each(d => {
+                d.id = d.data.id;
+                d._children = d.children;
+                if (d.depth > 1) {
+                    d.children = null;
+                }
+            });
+
+            const crossEdges = edges.filter(edge => edge && edge.from && edge.to);
+
+            const diagonal = (s, d) => `M ${s.y},${s.x} C ${(s.y + d.y) / 2},${s.x} ${(s.y + d.y) / 2},${d.x} ${d.y},${d.x}`;
+
+            function update(source) {
+                const treeData = treeLayout(root);
+                const nodes = treeData.descendants();
+                const links = treeData.links();
+
+                const node = g.selectAll('g.mindmap-node')
+                    .data(nodes, d => d.id);
+
+                const nodeEnter = node.enter().append('g')
+                    .attr('class', d => {
+                        let classes = 'mindmap-node';
+                        if (d.depth === 0) classes += ' root-node';
+                        else classes += ` level-${Math.min(d.depth, 3)}`;
+                        return classes;
+                    })
+                    .attr('transform', `translate(${source.y0},${source.x0})`)
+                    .on('click', (_, d) => toggleNode(d));
+
+                // Add rectangle background for text (will be sized later)
+                nodeEnter.append('rect')
+                    .attr('rx', 8)
+                    .attr('ry', 8);
+
+                // Add text element first
+                const text = nodeEnter.append('text')
+                    .attr('class', 'node-text')
+                    .style('font-size', '13px')
+                    .style('font-weight', '500')
+                    .attr('text-anchor', 'middle');
+
+                // Step 1: Calculate dimensions first WITHOUT rendering text
+                text.each(function(d) {
+                    const textEl = d3.select(this);
+                    textEl.selectAll('tspan').remove();
+                    
+                    const fullText = d.data.label || '';
+                    const lineHeight = 18;
+                    
+                    // Create temporary text element to measure
+                    const tempText = textEl.append('tspan')
+                        .style('font-size', '13px')
+                        .style('font-weight', '500')
+                        .text(fullText);
+                    
+                    // Force browser to compute styles before measuring
+                    tempText.node().getBBox();
+                    
+                    // Measure the full text width (no line breaking)
+                    const fullTextWidth = tempText.node().getComputedTextLength();
+                    
+                    tempText.remove();
+                    
+                    // Calculate rectangle dimensions based on FULL text width
+                    const paddingX = 24;
+                    const paddingY = 14;
+                    
+                    // Width = full text width + padding (no max limit)
+                    d.rectWidth = fullTextWidth + paddingX * 2;
+                    // Height = single line + padding
+                    d.rectHeight = lineHeight + paddingY * 2;
+                    d.fullText = fullText;
+                });
+
+                // Step 2: Now update rectangles with calculated dimensions BEFORE rendering text
+                nodeEnter.select('rect')
+                    .attr('width', d => d.rectWidth)
+                    .attr('height', d => d.rectHeight)
+                    .attr('x', d => -(d.rectWidth) / 2)
+                    .attr('y', d => -(d.rectHeight) / 2);
+
+                // Step 3: Finally render the text
+                text.each(function(d) {
+                    const textEl = d3.select(this);
+                    textEl.append('tspan')
+                        .attr('x', 0)
+                        .attr('y', 0)
+                        .text(d.fullText);
+                });
+
+                // Add expand/collapse indicator for nodes with children
+                nodeEnter.each(function(d) {
+                    if (d._children || d.children) {
+                        const g = d3.select(this);
+                        const indicator = g.append('g')
+                            .attr('class', 'expand-indicator')
+                            .attr('transform', `translate(${(d.rectWidth || 100) / 2 - 12}, 0)`);
+                        
+                        indicator.append('circle')
+                            .attr('r', 10)
+                            .attr('fill', 'white')
+                            .attr('stroke', '#666')
+                            .attr('stroke-width', 1.5);
+                        
+                        indicator.append('text')
+                            .attr('text-anchor', 'middle')
+                            .attr('dy', '0.35em')
+                            .attr('font-size', '14px')
+                            .attr('font-weight', 'bold')
+                            .attr('fill', '#666')
+                            .text(d.children ? '−' : '+');
+                    }
+                });
+
+                const nodeUpdate = nodeEnter.merge(node);
+
+                // Recompute text and dimensions for both new and existing nodes (avoids default widths)
+                nodeUpdate.select('text').each(function(d) {
+                    const textEl = d3.select(this);
+                    textEl.selectAll('tspan').remove();
+
+                    const fullText = d.data.label || '';
+                    const lineHeight = 18;
+
+                    const tempText = textEl.append('tspan')
+                        .style('font-size', '13px')
+                        .style('font-weight', '500')
+                        .text(fullText);
+
+                    tempText.node().getBBox();
+                    const fullTextWidth = tempText.node().getComputedTextLength();
+                    tempText.remove();
+
+                    const paddingX = 24;
+                    const paddingY = 14;
+                    d.rectWidth = fullTextWidth + paddingX * 2;
+                    d.rectHeight = lineHeight + paddingY * 2;
+                    d.fullText = fullText;
+
+                    textEl.append('tspan')
+                        .attr('x', 0)
+                        .attr('y', 0)
+                        .text(fullText);
+                });
+
+                // Recompute per-depth horizontal spacing using updated widths to prevent overlap
+                const depthMaxWidth = {};
+                nodes.forEach(n => {
+                    depthMaxWidth[n.depth] = Math.max(depthMaxWidth[n.depth] || 0, n.rectWidth || 0);
+                });
+                const depthPadding = 120; // horizontal padding between levels
+                nodes.forEach(n => {
+                    const w = depthMaxWidth[n.depth] || 0;
+                    n.y = n.depth * (w + depthPadding);
+                });
+
+                nodeUpdate.transition().duration(300)
+                    .attr('transform', d => `translate(${d.y},${d.x})`);
+
+                // Update rectangles for existing nodes too
+                nodeUpdate.select('rect')
+                    .attr('width', d => d.rectWidth)
+                    .attr('height', d => d.rectHeight)
+                    .attr('x', d => -(d.rectWidth) / 2)
+                    .attr('y', d => -(d.rectHeight) / 2);
+
+                // Update expand/collapse indicator
+                nodeUpdate.each(function(d) {
+                    const g = d3.select(this);
+                    const indicator = g.select('.expand-indicator');
+                    
+                    if (d._children || d.children) {
+                        if (indicator.empty()) {
+                            // Add indicator if it doesn't exist
+                            const newIndicator = g.append('g')
+                                .attr('class', 'expand-indicator')
+                                .attr('transform', `translate(${(d.rectWidth) / 2 - 12}, 0)`);
+                            
+                            newIndicator.append('circle')
+                                .attr('r', 10)
+                                .attr('fill', 'white')
+                                .attr('stroke', '#666')
+                                .attr('stroke-width', 1.5);
+                            
+                            newIndicator.append('text')
+                                .attr('text-anchor', 'middle')
+                                .attr('dy', '0.35em')
+                                .attr('font-size', '14px')
+                                .attr('font-weight', 'bold')
+                                .attr('fill', '#666')
+                                .text(d.children ? '−' : '+');
+                        } else {
+                            // Update existing indicator
+                            indicator.attr('transform', `translate(${(d.rectWidth) / 2 - 12}, 0)`);
+                            indicator.select('text').text(d.children ? '−' : '+');
+                        }
+                    } else {
+                        // Remove indicator if no children
+                        indicator.remove();
+                    }
+                });
+
+                const nodeExit = node.exit().transition().duration(300)
+                    .attr('transform', `translate(${source.y},${source.x})`)
+                    .remove();
+
+                nodeExit.select('rect').attr('width', 0).attr('height', 0);
+                nodeExit.select('text').style('fill-opacity', 0);
+
+                const link = g.selectAll('path.mindmap-link')
+                    .data(links, d => d.target.id);
+
+                const linkEnter = link.enter().insert('path', 'g')
+                    .attr('class', 'mindmap-link')
+                    .attr('d', () => diagonal(source, source));
+
+                linkEnter.merge(link)
+                    .transition().duration(300)
+                    .attr('d', d => diagonal(d.source, d.target));
+
+                link.exit().transition().duration(300)
+                    .attr('d', () => diagonal(source, source))
+                    .remove();
+
+                nodes.forEach(d => {
+                    d.x0 = d.x;
+                    d.y0 = d.y;
+                });
+            }
+
+            function toggleNode(d) {
+                if (d.children) {
+                    d._children = d.children;
+                    d.children = null;
+                } else if (d._children) {
+                    d.children = d._children;
+                    d._children = null;
+                }
+                update(d);
+            }
+
+            update(root);
+            
+            // Force multiple re-renders to ensure proper text measurement and wrapping
+            requestAnimationFrame(() => {
+                update(root);
+                requestAnimationFrame(() => {
+                    setTimeout(() => {
+                        update(root);
+                    }, 100);
+                });
+            });
+        }
+
+        function buildMindmapTree(nodes) {
+            if (!Array.isArray(nodes) || nodes.length === 0) {
+                return null;
+            }
+
+            const lookup = new Map();
+            nodes.forEach(node => {
+                // Use Object.assign instead of spread to avoid syntax errors in stricter runtimes
+                lookup.set(node.id, Object.assign({}, node, { children: [] }));
+            });
+
+            let root = null;
+            lookup.forEach(node => {
+                if (node.parentId && lookup.has(node.parentId)) {
+                    lookup.get(node.parentId).children.push(node);
+                } else if (!node.parentId && !root) {
+                    root = node;
+                }
+            });
+
+            if (!root) {
+                const iterator = lookup.values().next();
+                root = iterator.value;
+            }
+
+            return root;
+        }
+
+        // Load generations on page load
+        loadGenerations();
+
+        // Refresh generations periodically
+        setInterval(loadGenerations, 5000); // Every 5 seconds
+    </script>
+</body>
+</html>

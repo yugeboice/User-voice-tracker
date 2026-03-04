@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Test</title>
+</head>
+<body>
+    <h1>Login Test Page</h1>
+    <button id="testBtn" onclick="testLogin()">Test Login</button>
+    <div id="result"></div>
+    
+    <script>
+        async function testLogin() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                console.log('Sending request to /api/login');
+                const res = await fetch('/api/login', { method: 'POST' });
+                console.log('Response:', res);
+                const data = await res.json();
+                console.log('Data:', data);
+                resultDiv.innerHTML = `Success: ${JSON.stringify(data)}`;
+            } catch (e) {
+                console.error('Error:', e);
+                resultDiv.innerHTML = `Error: ${e.message}`;
+            }
+        }
+        
+        // Test if button click works
+        document.getElementById('testBtn').addEventListener('click', function() {
+            console.log('Button clicked!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+
+╔════════════════════════════════════════════════════════════╗
+║                     UI 调试报告                             ║
+╚════════════════════════════════════════════════════════════╝
+
+📸 页面信息：
+  URL: https://notebooklm.google.com/notebook/4761a715-1571-4374-ad20-970d5295ca82?addSource=true
+  标题: NotebookLM
+
+👆 检测到的点击元素：
+    (未检测到点击)
+
+🔍 找到的相关按钮：
+
+  [0] 文本: "dock_to_right"
+      aria-label: "收起来源面板"
+      class: "mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger toggle-source-panel-button label-medium-button ng-tns-c2498014206-0 mat-unthemed"
+      id: ""
+      title: ""
+
+  [1] 文本: "add 添加来源"
+      aria-label: "添加来源"
+      class: "mdc-button mat-mdc-button-base mat-mdc-tooltip-trigger add-source-button ng-tns-c2897995863-2 mdc-button--outlined mat-mdc-outlined-button mat-unthemed"
+      id: ""
+      title: ""
+
+  [2] 文本: "audio_magic_eraser AI 核心从模型转向智能体   1 个来源 ·  23 分钟前"
+      aria-label: ""
+      class: "mdc-button mat-mdc-button-base artifact-button-content mat-mdc-button mat-unthemed"
+      id: ""
+      title: ""
+
+  [3] 文本: "tablet The Agentic Stack January 2026   1 个来源 ·  2"
+      aria-label: ""
+      class: "mdc-button mat-mdc-button-base artifact-button-content mat-mdc-button mat-unthemed"
+      id: ""
+      title: ""
+
+  [4] 文本: "audio_magic_eraser AI巨头决战智能体落地   1 个来源 ·  9 天前 pla"
+      aria-label: ""
+      class: "mdc-button mat-mdc-button-base artifact-button-content mat-mdc-button mat-unthemed"
+      id: ""
+      title: ""
+
+  [5] 文本: "tablet 2026 Agent Stack Review   1 个来源 ·  9 天前 mor"
+      aria-label: ""
+      class: "mdc-button mat-mdc-button-base artifact-button-content mat-mdc-button mat-unthemed"
+      id: ""
+      title: ""
+
+  [6] 文本: "tablet Practical AI Adoption Radar   1 个来源 ·  9 天前"
+      aria-label: ""
+      class: "mdc-button mat-mdc-button-base artifact-button-content mat-mdc-button mat-unthemed"
+      id: ""
+      title: ""
+
+  [7] 文本: "audio_magic_eraser AI变身数字员工   1 个来源 ·  9 天前 play_a"
+      aria-label: ""
+      class: "mdc-button mat-mdc-button-base artifact-button-content mat-mdc-button mat-unthemed"
+      id: ""
+      title: ""
+
+
+💡 推荐的选择器：
+  [0] '[aria-label="收起来源面板"]' OR 'button:has-text("dock_to_right")' OR 'button[class*="mdc-icon-button"]'
+  [1] '[aria-label="添加来源"]' OR 'button:has-text("add 添加来源")' OR 'button[class*="mdc-button"]'
+  [2] 'button:has-text("audio_magic_eraser A")' OR 'button[class*="mdc-button"]'
+  [3] 'button:has-text("tablet The Agentic S")' OR 'button[class*="mdc-button"]'
+  [4] 'button:has-text("audio_magic_eraser A")' OR 'button[class*="mdc-button"]'
+  [5] 'button:has-text("tablet 2026 Agent St")' OR 'button[class*="mdc-button"]'
+  [6] 'button:has-text("tablet Practical AI ")' OR 'button[class*="mdc-button"]'
+  [7] 'button:has-text("audio_magic_eraser A")' OR 'button[class*="mdc-button"]'
+
+📋 所有可见按钮（包括非"添加来源"相关）：
+
+  [0] "add创建笔记本" (aria-label: "创建笔记本")
+  [1] "trending_up 分析" (aria-label: "")
+  [2] "share 分享" (aria-label: "分享笔记本")
+  [3] "settings 设置" (aria-label: "设置")
+  [4] "dock_to_right" (aria-label: "收起来源面板")
+  [5] "add 添加来源" (aria-label: "添加来源")
+  [6] "languagekeyboard_arrow_down" (aria-label: "")
+  [7] "search_sparkkeyboard_arrow_down" (aria-label: "")
+  [8] "arrow_forward" (aria-label: "提交")
+  [9] "more_vertmarkdown" (aria-label: "更多")
+  [10] "more_vertmarkdown" (aria-label: "更多")
+  [11] "tune" (aria-label: "配置笔记本")
+  [12] "more_vert" (aria-label: "对话选项")
+  [13] "keep保存到笔记" (aria-label: "")
+  [14] "copy_all" (aria-label: "复制摘要")
+  [15] "thumb_up" (aria-label: "摘要很棒")
+  [16] "thumb_down" (aria-label: "摘要欠佳")
+  [17] "1" (aria-label: "")
+  [18] "2" (aria-label: "")
+  [19] "3" (aria-label: "")
+  [20] "2" (aria-label: "")
+  [21] "3" (aria-label: "")
+  [22] "2" (aria-label: "")
+  [23] "3" (aria-label: "")
+  [24] "2" (aria-label: "")
+  [25] "4" (aria-label: "")
+  [26] "3" (aria-label: "")
+  [27] "3" (aria-label: "")
+  [28] "1" (aria-label: "")
+  [29] "2" (aria-label: "")

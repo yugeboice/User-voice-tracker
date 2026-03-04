@@ -1,0 +1,142 @@
+Generated at: 2026-01-12 12:23:58
+
+Create a professional, educational infographic in LANDSCAPE format (16:9 or 4:3 aspect ratio) based on this specification:
+
+# INFOGRAPHIC BRIEF
+
+**Title**: Simple Daily Practices for Mindful Wellness
+**One-sentence takeaway**: Transform your daily life through small, sustainable mindfulness practices that nourish mind, body, and spirit.
+**Topic domain**: lifestyle
+**Tone**: calm
+**Aspect ratio**: landscape (16:9)
+**Target audience**: Adults seeking practical wellness habits for busy lifestyles
+
+# CONTENT OUTLINE
+
+**a) What it is**: Mindful living combines present-moment awareness with intentional daily habits to create sustainable wellness without perfectionism.
+
+**b) Why it matters**:
+• Reduces stress hormones while increasing mental clarity throughout the day
+• Improves digestion and helps recognize true hunger signals naturally
+• Creates lasting change through small, consistent choices rather than overwhelming overhauls
+
+**c) Key points**:
+
+**Morning Mindfulness**: Start with 5 minutes of conscious breathing—sit comfortably, focus on breath's natural rhythm, acknowledge thoughts without judgment. This simple practice sets a calm foundation for your entire day.
+
+**Micro-Meditations**: During routine activities like washing dishes or walking, engage all senses. Notice textures, sounds, sensations. These brief presence moments accumulate into greater overall awareness.
+
+**Mindful Eating**: Pause before meals to appreciate food's colors and aromas. Chew slowly, noticing flavors and body responses. This transforms meals into meditation and improves digestion naturally.
+
+**Work-Life Boundaries**: Create a "closing ritual" like tidying workspace or writing tomorrow's priorities. Practice the "one-tab rule"—focus completely on one task before moving to the next for better mental clarity.
+
+**Evening Restoration**: Dim lights an hour before bedtime, put devices away, engage in calming activities. Keep bedroom cool, dark, and dedicated to sleep for quality rest.
+
+**Joyful Movement**: Choose activities that feel good—dancing, gardening, nature walks, yoga. Fifteen minutes daily beats sporadic intense sessions for lasting benefits.
+
+**Nurturing Connection**: Schedule regular friend/family check-ins and practice active listening. Most importantly, speak to yourself as you would a dear friend during challenging moments.
+
+**d) How to apply**: Choose one practice and commit for two weeks until it feels natural, then gradually add another element. Approach setbacks with patience—each moment offers fresh opportunity to begin again.
+
+**e) Visual suggestions**: Flowing organic shapes, lifestyle photography of peaceful moments, soft botanical elements, overlapping layers with breathing room, calming color palette
+
+# LAYOUT PLAN
+
+**Layout type**: RADIAL
+The design features a central wellness hub with mindfulness practices flowing outward in organic connections, creating a mind-map style that shows how all practices interconnect.
+
+**Visual hierarchy**: 
+• Hero title with soft botanical graphic element at top
+• Central mindfulness icon/illustration (300px) at canvas center  
+• Six practice cards orbiting around center, connected by gentle curved paths
+• Key insight callout boxes scattered between connections
+• Flowing footer with implementation tips
+
+**Component layout**: 
+• Asymmetric title placement in upper left with decorative leaf elements
+• Varied card sizes—larger cards for core practices, smaller for supporting tips
+• Mixed content blocks with rounded corners and soft shadows
+• Organic spacing that follows natural eye flow rather than rigid grid
+
+**Visual flow**: Eye travels from title → central mindfulness hub → spirals outward through connected practice cards → settles on implementation footer. Curved connecting lines guide attention in clockwise flow.
+
+**Density**: Spacious with breathing room—plenty of whitespace between elements to create calm, uncluttered feeling that matches mindful living theme
+
+# STYLE GUIDE (LIFESTYLE Domain)
+
+**Look**: Organic, inviting, Instagram-worthy editorial vibe with Pinterest-style mixed media feel
+**Layout**: Flowing compositions with photo collages, overlapping layers, and text wrapping naturally around visual elements
+**Typography**: Script headers for warmth ("Simple Daily Practices") paired with clean sans-serif body text (16-18pt) for readability
+**Colors**: Curated earth-tone palette—sage green primary, warm cream backgrounds, soft terracotta accents, with touches of golden hour warmth
+**Visual elements**: Lifestyle photography of peaceful moments (meditation, nature, healthy food), hand-drawn botanical doodles, watercolor texture overlays, subtle grain texture
+**Include**: Generous whitespace as design element, overlapping translucent shapes, organic flowing connectors, soft drop shadows
+
+**Specific text to render**:
+• Main title: "Simple Daily Practices for Mindful Wellness"
+• Central hub: "Mindful Living" with lotus/leaf icon
+• Practice cards: "Morning Breath Work", "Micro-Meditations", "Mindful Eating", "Work Boundaries", "Evening Rituals", "Joyful Movement", "Heart Connections"
+• Key callouts: "5 minutes daily", "One-tab rule", "15 min > intense sporadic", "Self-compassion first"
+• Implementation footer: "Start with one practice • Commit 2 weeks • Add gradually • Embrace fresh starts"
+• Subtle source note: "Based on mindfulness research and sustainable habit formation"
+
+```
+### ILLUSTRATED EDITORIAL STYLE (Lifestyle/Educational)
+
+#### Color Palette:
+- Background: Warm cream (#F5F2E8) or soft beige (#E8DCC4)
+- Primary earth tones: Earth brown (#8B6F47), Sky blue (#7BA7BC), Forest green (#5A7553)
+- Accent colors: Sunset orange (#D4765F), Dusk purple (#8B7BA8), Dawn yellow (#F4C542)
+- Text: Deep brown-black (#2C2416), Medium brown (#5A4A3A), Light brown (#8B7355)
+
+#### Typography:
+- Headlines: Friendly serif or rounded sans-serif, 36-56pt, Bold
+- Body text: Humanist sans-serif, 15-18pt, line height 1.7x
+- Labels: Semi-bold, 12-14pt
+
+#### Layout & Composition:
+- Circular card design with illustration circles (120-200px diameter)
+- Text cards with rounded corners (12-20px radius)
+- Asymmetric balance, S-curve or zigzag reading path
+- Minimum 24px between elements
+
+#### Visual Elements:
+- Hand-drawn digital illustrations in circular frames
+- Warm, organic, slightly imperfect aesthetic
+- Medium detail level (not simplified, not photorealistic)
+- Decorative elements: Hand-drawn icons, dotted lines, wavy curves
+- Subtle texture overlays (paper, watercolor, canvas)
+
+#### Mood & References:
+- Friendly without being childish
+- Think: Airbnb Experiences, Duolingo, Headspace, National Geographic Kids
+- Weekend family outing vibe
+
+#### Key Features:
+- Illustration-first approach
+- Circle dominant (80% of elements use circles/rounded corners)
+- Warm color palette
+- Organic feel - embrace slight imperfections
+- High readability
+
+#### Avoid:
+- ❌ Photography collages (must use illustrations)
+- ❌ Cold colors or high-tech aesthetics
+- ❌ Dense information blocks
+- ❌ Pure black text
+```
+
+---
+
+## GENERAL RENDERING RULES:
+- Follow the specified layout type from description precisely
+- Maintain visual hierarchy and clear information flow
+- ALL TEXT MUST BE IN ENGLISH ONLY - no Chinese, Japanese, Korean, or other non-English characters
+- Do NOT add decorative foreign language text (e.g., Japanese characters in Japanese Minimal style)
+- Balance aesthetics with readability - information must be clear
+- Create depth through layering, shadows, and visual rhythm
+- Include source citations in footer (minimalist style)
+
+CRITICAL LANGUAGE ENFORCEMENT:
+- Render ALL visible text in English alphabet characters only
+- If style mentions Asian aesthetics, use the aesthetic principles but English text only
+- No foreign language decorations, no untranslated text, English only everywhere

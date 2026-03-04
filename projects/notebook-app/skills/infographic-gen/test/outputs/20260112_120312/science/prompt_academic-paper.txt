@@ -1,0 +1,150 @@
+Generated at: 2026-01-12 12:11:28
+
+Create a professional, educational infographic in LANDSCAPE format (16:9 or 4:3 aspect ratio) based on this specification:
+
+# INFOGRAPHIC BRIEF
+
+**Title**: The Quantum Secrets of Photosynthesis
+
+**One-sentence takeaway**: Plants use quantum mechanics to achieve 95-99% energy efficiency in converting sunlight to chemical energy.
+
+**Topic domain**: academic
+
+**Tone**: serious
+
+**Aspect ratio**: landscape (16:9)
+
+**Target audience**: Science enthusiasts, students, and researchers interested in quantum biology and photosynthesis
+
+# CONTENT OUTLINE
+
+## a) What it is - Brief Definition/Overview
+Photosynthesis is nature's solar energy system where plants convert sunlight into chemical energy with extraordinary 95-99% efficiency using quantum mechanical phenomena that operate at room temperature.
+
+## b) Why it matters - Relevance and Impact
+• **Revolutionary Discovery**: Challenges belief that quantum effects only occur in cold, isolated systems—plants use them at 300 Kelvin biological temperatures
+• **Evolutionary Advantage**: Quantum coherence provides up to 30% efficiency boost, giving early organisms competitive edge in energy capture
+• **Technology Inspiration**: Discoveries drive development of quantum-enhanced solar cells and artificial photosynthetic devices for renewable energy
+
+## c) Key Points - Most Important Concepts
+
+**Quantum Energy Transfer**: When photons hit chlorophyll molecules, they create energy packets called excitons that must travel to reaction centers where photosynthesis occurs (from Berkeley research)
+
+**Quantum Superposition Magic**: Energy exists in multiple pathways simultaneously, allowing it to "explore" all routes before "choosing" the most efficient one—avoiding dead-end traps (from 2007 Berkeley studies using femtosecond lasers)
+
+**Protein Protection System**: Surrounding protein scaffolds create optimal environmental noise levels—enough to prevent energy trapping but not enough to destroy quantum coherence (from FMO complex studies)
+
+**Quantum Coherence Duration**: These quantum effects persist for 660 femtoseconds in photosystem I complexes, maintaining energy flow efficiency (from ultrafast spectroscopy experiments)
+
+**Classical vs Quantum**: Classical physics predicts energy loss through random molecular collisions, but quantum beating patterns show plants bypass this limitation (from University of California research)
+
+**Goldilocks Zone Effect**: Specific protein vibrational modes create perfect balance of environmental conditions to preserve quantum states while preventing energy stagnation (from computational models)
+
+**Quantum Biology Field**: This discovery launched entirely new scientific discipline showing evolution exploited quantum phenomena for billions of years (from multiple research sources)
+
+## d) How to Apply/Use
+• **Solar Technology**: Engineers now mimic biological quantum effects in synthetic photosynthetic devices
+• **Research Applications**: Quantum biology principles guide development of more efficient renewable energy systems
+• **Educational Understanding**: Demonstrates how quantum mechanics operates in everyday biological processes, not just laboratory conditions
+
+## e) Visual Suggestions per Section
+• Hero illustration: Stylized plant leaf with quantum energy pathways shown as glowing particle streams
+• Efficiency comparison: Classical vs quantum energy transfer visualization with percentage indicators
+• Molecular diagrams: Photosystem complexes with highlighted reaction centers and energy flow arrows
+• Timeline element: Evolution of quantum biology discoveries from 2007 Berkeley research to current applications
+• Technology connections: Split visual showing natural photosynthesis inspiring artificial solar cell design
+
+# LAYOUT PLAN
+
+**Layout Type**: FLOW - Dynamic energy pathway design showing quantum energy transfer process
+
+**Visual Hierarchy**: [Large hero title with quantum leaf illustration] → [Efficiency callout box with 95-99% statistic] → [Flowing process sections along curved pathway] → [Technology applications connector] → [Research sources footer]
+
+**Component Layout**: Asymmetric title placement in upper left, large central curved pathway showing energy flow from photon capture to reaction center, varied-sized content cards positioned along the energy flow path, breakthrough research timeline integrated into pathway design
+
+**Visual Flow**: Follows energy transfer journey - eye enters at top left with photon capture, follows curved pathway through quantum mechanisms, exits at bottom right with technology applications. S-curve pattern guides reader through complex scientific concepts in logical sequence.
+
+**Density**: Balanced information density with strategic whitespace around complex molecular diagrams, concentrated information nodes connected by flowing visual pathways
+
+# STYLE GUIDE (ACADEMIC Domain)
+
+**Look**: Contemporary scientific infographic style with editorial sophistication—clean, authoritative, but visually engaging for complex quantum concepts
+
+**Layout**: Modular but dynamic design with geometric molecular shapes, flowing energy pathways, isometric 3D elements for protein structures, layered transparency effects for quantum superposition visualization
+
+**Typography**: Geometric sans-serif for headers (Montserrat Bold), clean sans-serif for body text (Open Sans), monospace accents for scientific data and measurements, varied font weights creating clear information hierarchy
+
+**Colors**: Tech-inspired palette with electric blue primary (#0066FF), quantum green accent (#00FF88), dark navy background sections (#1A1A2E), bright white for contrast, metallic silver highlights for pathways (#C0C0C0)
+
+**Visual Elements**: 3D isometric molecular diagrams, circuit-board inspired connecting pathways, layered transparency showing quantum superposition, animated-style energy flow arrows, scientific data visualization with style, subtle gradient overlays on key statistics
+
+**Include**: Connecting lines with electromagnetic styling, network nodes showing molecular interactions, layered geometric shapes representing quantum states, scientific accuracy balanced with visual appeal
+
+**Specific text to render**:
+- Main title: "The Quantum Secrets of Photosynthesis"
+- Hero statistic: "95-99% Energy Efficiency"
+- Section headers: "Quantum Energy Transfer" | "Superposition Magic" | "Protein Protection" | "Coherence Duration" | "Classical vs Quantum" | "Goldilocks Zone" | "Technology Impact"
+- Key measurements: "660 femtoseconds" | "300 Kelvin" | "30% efficiency boost"
+- Process labels: "Photon Capture" → "Exciton Creation" → "Quantum Pathways" → "Reaction Center"
+- Source attribution: "Berkeley Research 2007" | "FMO Complex Studies" | "Ultrafast Spectroscopy"
+- Footer sources: "UC Berkeley Quantum Biology Lab | Nature Physics | Science Magazine | Quantum Biology Review"
+- Technology callout: "Inspiring Next-Gen Solar Cells"
+
+```
+### ACADEMIC PAPER STYLE (Scientific Research)
+
+#### Color Palette:
+- Background: Pure white (#FFFFFF)
+- Text: True black (#000000)
+- Accent: Deep blue (#1E3A8A) OR forest green (#065F46)
+- Charts: Grayscale with single accent
+
+#### Typography:
+- Body: Clean serif (Georgia, Merriweather), 14-16pt
+- Headlines: Bold sans-serif, 24-32pt
+- Technical terms: Monospace, 14pt
+- Line spacing: 1.6-1.8x
+
+#### Layout & Composition:
+- Hierarchical structure (1, 1.1, 1.2 numbering)
+- Generous margins
+- Numbered sections
+- Figure captions below images
+- Bibliography at bottom
+
+#### Visual Elements:
+- Simple diagrams with clear labels
+- Flowcharts with standard shapes
+- Clean line illustrations
+- Properly formatted equations
+- Citation numbers in brackets
+
+#### Mood & References:
+- Scholarly, precise, authoritative
+- Think: Academic papers, IEEE publications
+
+#### Key Features:
+- Clarity and readability first
+- Consistent formatting
+- Proper citations
+- Content-first approach
+
+#### Avoid:
+- Flashy effects
+- Decorative elements
+- Vibrant colors
+```
+
+## GENERAL RENDERING RULES:
+- Follow the specified layout type from description precisely
+- Maintain visual hierarchy and clear information flow
+- ALL TEXT MUST BE IN ENGLISH ONLY - no Chinese, Japanese, Korean, or other non-English characters
+- Do NOT add decorative foreign language text (e.g., Japanese characters in Japanese Minimal style)
+- Balance aesthetics with readability - information must be clear
+- Create depth through layering, shadows, and visual rhythm
+- Include source citations in footer (minimalist style)
+
+CRITICAL LANGUAGE ENFORCEMENT:
+- Render ALL visible text in English alphabet characters only
+- If style mentions Asian aesthetics, use the aesthetic principles but English text only
+- No foreign language decorations, no untranslated text, English only everywhere

@@ -1,0 +1,429 @@
+[
+  {
+    "domain": "business",
+    "description": "Corporate, finance, enterprise, and professional business content",
+    "keywords": [
+      "business",
+      "corporate",
+      "finance",
+      "enterprise",
+      "professional",
+      "management",
+      "strategy",
+      "company",
+      "revenue",
+      "market",
+      "investment",
+      "executive",
+      "boardroom",
+      "quarterly",
+      "CEO"
+    ],
+    "antiKeywords": [
+      "kids",
+      "children",
+      "playful",
+      "family",
+      "cartoon"
+    ],
+    "priority": 10,
+    "variants": [
+      {
+        "name": "editorial",
+        "keywords": ["magazine", "publication", "journalism", "article"],
+        "preferredTones": ["professional", "authoritative", "serious"]
+      },
+      {
+        "name": "minimal-data",
+        "keywords": ["data", "statistics", "metrics", "analytics", "chart"],
+        "preferredTones": ["analytical", "clean", "professional"]
+      },
+      {
+        "name": "corporate",
+        "keywords": ["corporate", "executive", "boardroom", "leadership"],
+        "preferredTones": ["formal", "serious", "professional"]
+      }
+    ]
+  },
+  {
+    "domain": "history",
+    "description": "Historical events, cultural heritage, and societal evolution",
+    "keywords": [
+      "history",
+      "historical",
+      "war",
+      "conflict",
+      "battle",
+      "timeline",
+      "era",
+      "century",
+      "ancient",
+      "medieval",
+      "revolution",
+      "empire",
+      "civilization",
+      "legacy",
+      "culture",
+      "heritage",
+      "tradition",
+      "artifact",
+      "museum",
+      "archive",
+      "documentary"
+    ],
+    "antiKeywords": [
+      "kids",
+      "playful",
+      "cartoon",
+      "adventure begins",
+      "treasure hunt",
+      "quest",
+      "fun",
+      "game"
+    ],
+    "priority": 18,
+    "variants": [
+      {
+        "name": "timeline-classic",
+        "keywords": ["timeline", "chronology", "sequence", "events", "dates"],
+        "preferredTones": ["serious", "authoritative", "informative"]
+      },
+      {
+        "name": "documentary-style",
+        "keywords": ["war", "conflict", "battle", "documentary", "archive"],
+        "preferredTones": ["serious", "dramatic", "impactful"]
+      },
+      {
+        "name": "cultural-heritage",
+        "keywords": ["culture", "heritage", "tradition", "civilization", "artifact"],
+        "preferredTones": ["respectful", "elegant", "timeless"]
+      }
+    ]
+  },
+  {
+    "domain": "science",
+    "description": "Scientific research, academic studies, and experimental analysis",
+    "keywords": [
+      "science",
+      "scientific",
+      "research",
+      "study",
+      "experiment",
+      "hypothesis",
+      "theory",
+      "laboratory",
+      "lab",
+      "peer-reviewed",
+      "biology",
+      "chemistry",
+      "physics",
+      "medicine",
+      "academic",
+      "university",
+      "thesis",
+      "dissertation",
+      "analysis",
+      "methodology",
+      "evidence"
+    ],
+    "antiKeywords": [
+      "business",
+      "corporate",
+      "marketing",
+      "sales",
+      "kids",
+      "playful",
+      "cartoon"
+    ],
+    "priority": 16,
+    "variants": [
+      {
+        "name": "academic-paper",
+        "keywords": ["research", "study", "thesis", "academic", "university", "peer-reviewed"],
+        "preferredTones": ["formal", "rigorous", "objective"]
+      },
+      {
+        "name": "lab-visual",
+        "keywords": ["experiment", "laboratory", "methodology", "process"],
+        "preferredTones": ["technical", "precise", "clinical"]
+      },
+      {
+        "name": "illustrated-science",
+        "keywords": ["biology", "chemistry", "physics", "explanation", "concept"],
+        "preferredTones": ["educational", "clear", "approachable"]
+      }
+    ]
+  },
+  {
+    "domain": "nature-space",
+    "description": "Astronomy, natural environment, and outdoor exploration",
+    "keywords": [
+      "astronomy",
+      "space",
+      "universe",
+      "galaxy",
+      "planet",
+      "star",
+      "cosmic",
+      "celestial",
+      "stargazing",
+      "constellation",
+      "telescope",
+      "observatory",
+      "night sky",
+      "solar system",
+      "nature",
+      "ecology",
+      "environment",
+      "wildlife",
+      "conservation",
+      "ecosystem",
+      "biodiversity",
+      "sustainable",
+      "natural",
+      "outdoor",
+      "national park",
+      "hiking",
+      "trail",
+      "scenic",
+      "camping",
+      "wilderness",
+      "landscape"
+    ],
+    "antiKeywords": [
+      "urban",
+      "city",
+      "indoor",
+      "artificial"
+    ],
+    "priority": 15,
+    "variants": [
+      {
+        "name": "cosmic-wonder",
+        "keywords": ["astronomy", "space", "stargazing", "galaxy", "universe", "cosmic", "celestial", "constellation", "telescope", "planet"],
+        "preferredTones": ["inspiring", "awe", "wonder", "majestic", "ethereal"]
+      },
+      {
+        "name": "nature-minimal",
+        "keywords": ["ecology", "environment", "conservation", "wildlife", "sustainable", "ecosystem", "biodiversity", "organic"],
+        "preferredTones": ["calm", "clean", "serene", "organic", "peaceful"]
+      },
+      {
+        "name": "outdoor-adventure",
+        "keywords": ["outdoor", "hiking", "national park", "trail", "camping", "wilderness", "exploration", "scenic", "landscape"],
+        "preferredTones": ["adventurous", "energetic", "inspiring", "dynamic"]
+      }
+    ]
+  },
+  {
+    "domain": "technology",
+    "description": "Technology, software, digital products, and innovation",
+    "keywords": [
+      "tech",
+      "technology",
+      "software",
+      "digital",
+      "app",
+      "platform",
+      "code",
+      "algorithm",
+      "programming",
+      "developer",
+      "AI",
+      "machine learning",
+      "automation",
+      "cloud",
+      "web",
+      "internet",
+      "online",
+      "cyber",
+      "database",
+      "API",
+      "framework",
+      "productivity",
+      "tool"
+    ],
+    "antiKeywords": [
+      "kids",
+      "children",
+      "family",
+      "playful"
+    ],
+    "priority": 12,
+    "variants": [
+      {
+        "name": "cyberpunk",
+        "keywords": ["futuristic", "cyber", "hacker", "digital", "matrix", "neon"],
+        "preferredTones": ["edgy", "modern", "intense", "bold"]
+      },
+      {
+        "name": "notion-isometric",
+        "keywords": ["productivity", "workspace", "organization", "notion", "workflow"],
+        "preferredTones": ["friendly", "modern", "clean", "minimal"]
+      },
+      {
+        "name": "data-dashboard",
+        "keywords": ["data", "dashboard", "analytics", "visualization", "metrics"],
+        "preferredTones": ["professional", "analytical", "clean", "precise"]
+      }
+    ]
+  },
+  {
+    "domain": "lifestyle",
+    "description": "Lifestyle, wellness, health, and personal development",
+    "keywords": [
+      "lifestyle",
+      "wellness",
+      "health",
+      "fitness",
+      "nutrition",
+      "meditation",
+      "mindfulness",
+      "yoga",
+      "self-care",
+      "wellbeing",
+      "personal growth",
+      "habits",
+      "routine",
+      "balance",
+      "mental health",
+      "stress",
+      "sleep",
+      "energy"
+    ],
+    "antiKeywords": [
+      "corporate",
+      "business",
+      "technical",
+      "professional"
+    ],
+    "priority": 10,
+    "variants": [
+      {
+        "name": "zen-minimal",
+        "keywords": ["wellness", "meditation", "mindfulness", "zen", "calm", "peaceful", "yoga"],
+        "preferredTones": ["calm", "peaceful", "serene", "tranquil"]
+      },
+      {
+        "name": "vibrant-lifestyle",
+        "keywords": ["fitness", "nutrition", "active", "energy", "healthy", "workout"],
+        "preferredTones": ["energetic", "vibrant", "motivational", "dynamic"]
+      },
+      {
+        "name": "editorial-lifestyle",
+        "keywords": ["lifestyle", "magazine", "fashion", "culture", "trends", "style"],
+        "preferredTones": ["sophisticated", "aspirational", "stylish", "elegant"]
+      }
+    ]
+  },
+  {
+    "domain": "social",
+    "description": "Social media, content creation, and personal branding",
+    "keywords": [
+      "social",
+      "social media",
+      "instagram",
+      "pinterest",
+      "tiktok",
+      "influencer",
+      "content creator",
+      "viral",
+      "trending",
+      "community",
+      "followers",
+      "engagement",
+      "post",
+      "story",
+      "brand",
+      "personal brand",
+      "audience",
+      "creator"
+    ],
+    "antiKeywords": [
+      "corporate",
+      "enterprise",
+      "formal",
+      "academic"
+    ],
+    "priority": 10,
+    "variants": [
+      {
+        "name": "pinterest-collage",
+        "keywords": ["pinterest", "collage", "aesthetic", "mood board", "inspiration", "visual"],
+        "preferredTones": ["inspiring", "vibrant", "creative", "artistic"]
+      },
+      {
+        "name": "instagram-modern",
+        "keywords": ["instagram", "story", "reel", "post", "feed", "carousel"],
+        "preferredTones": ["friendly", "casual", "engaging", "relatable"]
+      },
+      {
+        "name": "influencer-bold",
+        "keywords": ["influencer", "creator", "viral", "trending", "personal brand"],
+        "preferredTones": ["bold", "confident", "attention-grabbing", "dynamic"]
+      }
+    ]
+  },
+  {
+    "domain": "family",
+    "description": "Kids activities, educational content for children, and family-friendly projects",
+    "keywords": [
+      "kids",
+      "children",
+      "family",
+      "classroom",
+      "teacher",
+      "student",
+      "learning",
+      "playful",
+      "educational",
+      "school",
+      "parent",
+      "child",
+      "toddler",
+      "elementary",
+      "kindergarten",
+      "preschool",
+      "young learners",
+      "fun"
+    ],
+    "antiKeywords": [
+      "war",
+      "conflict",
+      "death",
+      "holocaust",
+      "violence",
+      "corporate",
+      "business",
+      "professional",
+      "technical",
+      "academic",
+      "university",
+      "college",
+      "serious tone"
+    ],
+    "priority": 20,
+    "variants": [
+      {
+        "name": "playful-learning",
+        "keywords": ["playful", "fun", "game", "interactive", "colorful", "engaging"],
+        "preferredTones": ["playful", "fun", "cheerful", "joyful"]
+      },
+      {
+        "name": "educational-story",
+        "keywords": ["story", "narrative", "tale", "characters", "lesson", "moral"],
+        "preferredTones": ["friendly", "engaging", "warm", "nurturing"]
+      },
+      {
+        "name": "illustrated-adventure",
+        "keywords": ["adventure", "journey", "exploration", "quest", "discover", "treasure"],
+        "preferredTones": ["exciting", "adventurous", "playful", "imaginative"]
+      },
+      {
+        "name": "friendly-guide",
+        "keywords": ["guide", "tutorial", "how-to", "step-by-step", "beginner", "easy"],
+        "preferredTones": ["helpful", "supportive", "encouraging", "patient"]
+      }
+    ]
+  }
+]

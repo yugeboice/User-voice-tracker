@@ -1,0 +1,167 @@
+Generated at: 2026-01-12 12:05:54
+
+Create a professional, educational infographic in LANDSCAPE format (16:9 or 4:3 aspect ratio) based on this specification:
+
+# INFOGRAPHIC BRIEF
+
+**Title**: Strategic Business Excellence: Five Pillars of Corporate Success
+**One-sentence takeaway**: Successful companies integrate market analysis, ROI measurement, strong leadership, transparent reporting, and stakeholder management for sustainable growth.
+**Topic domain**: professional
+**Tone**: serious
+**Aspect ratio**: landscape (16:9)
+**Target audience**: Business executives, managers, and MBA students seeking strategic management insights
+
+# CONTENT OUTLINE
+
+## a) What it is
+Strategic business management integrating five core pillars that drive organizational success: market intelligence, financial accountability, leadership excellence, performance transparency, and relationship building.
+
+## b) Why it matters
+• **Competitive Advantage**: Companies using integrated approaches demonstrate superior financial performance and market resilience
+• **Risk Mitigation**: Systematic evaluation and reporting help organizations pivot quickly during market disruptions
+• **Stakeholder Value**: Comprehensive management builds trust and collaborative partnerships supporting long-term growth
+
+## c) Key points
+
+**Market Analysis Foundation**
+Strategic decision-making powered by consumer behavior insights, competitive positioning, and trend identification. Includes competitor benchmarking and technological disruption assessment.
+*Example: Regular market assessments enable quick strategic pivots and opportunity capitalization*
+
+**ROI Measurement Excellence**
+Critical metric tracking both financial and non-financial returns including customer acquisition costs, lifetime value, and operational efficiency gains.
+*Example: Establishing clear ROI thresholds for investment categories with regular performance reassessment*
+
+**Leadership Bridge Strategy**
+Strong leaders connect strategic vision to operational execution through clear communication, team inspiration, and balanced decision-making.
+*Example: Leadership development programs ensure continuity and organizational resilience during transitions*
+
+**Quarterly Transparency Reporting**
+Regular stakeholder communication balancing quantitative metrics with qualitative market insights and future outlook.
+*Example: Accountability checkpoints helping management course-correct while building stakeholder confidence*
+
+**Stakeholder Relationship Management**
+Comprehensive approach recognizing diverse groups (shareholders, employees, customers, suppliers, communities) influence business outcomes.
+*Example: Identifying stakeholder interests and creating aligned value propositions for collaborative partnerships*
+
+**Synergistic Integration**
+Five pillars working together create robust strategies where market analysis informs direction, leadership ensures implementation, and stakeholder management builds support networks.
+
+## d) How to apply
+• Implement systematic market evaluation processes with quarterly competitive assessments
+• Establish ROI thresholds and tracking systems for all major initiatives
+• Invest in leadership development and succession planning programs
+• Create transparent reporting cycles with stakeholder communication strategies
+
+## e) Visual suggestions
+Use professional editorial style with dynamic asymmetric layout, bold data visualizations, interconnected pillar graphics, and flowing visual hierarchy emphasizing integration themes.
+
+# LAYOUT PLAN
+
+**Layout Type**: RADIAL
+Central hub featuring "Strategic Business Excellence" with five major pillars radiating outward in an interconnected web pattern. Each pillar connects to the center and to adjacent pillars showing synergistic relationships.
+
+**Visual hierarchy**: 
+[Hero title with corporate graphic element at center] → [Five radiating pillar sections with bold headers] → [Connecting flow lines showing integration] → [Key insight callout boxes] → [ROI/performance metrics sidebar] → [Sources footnote]
+
+**Component layout**: 
+Central circular hub (400px diameter) containing main title and integration messaging. Five pillar sections positioned around center in pentagon formation, each with distinct visual treatment. Asymmetric sizing based on content depth with Market Analysis and Leadership receiving larger treatment.
+
+**Visual flow**: 
+Eye travels from central title outward in clockwise direction starting with Market Analysis (top), moving through ROI Measurement (top right), Leadership (bottom right), Quarterly Reporting (bottom left), and Stakeholder Management (left), with connecting visual elements guiding flow back to center emphasizing integration message.
+
+**Density**: 
+Balanced information density with spacious breathing room around central hub, concentrated detail in pillar sections, and clean connecting pathways maintaining professional aesthetic.
+
+# STYLE GUIDE (PROFESSIONAL Domain)
+
+**Look**: Modern, confident, editorial magazine style with sophisticated business aesthetic
+**Layout**: Asymmetric radial composition with overlapping pillar elements, dynamic angular connections, and varied section treatments
+**Typography**: Bold sans-serif titles (Montserrat Heavy) with serif accents (Merriweather) for credibility, varied font weights creating clear hierarchy
+**Colors**: Deep navy blue primary (#1B365D) + charcoal gray neutrals (#4A5568) + gold metallic accent (#D4AF37) for premium executive feel
+**Visual elements**: Abstract geometric shapes, sophisticated data visualization charts, subtle gradients, professional photography crops of boardroom/office settings
+**Include**: Connecting lines with executive style, network nodes showing relationships, layered transparency effects, minimalist icons
+
+**Specific text to render**:
+- Main title: "Strategic Business Excellence: Five Pillars of Corporate Success"
+- Central tagline: "Integrated Approach to Sustainable Growth"
+- Pillar 1 header: "Market Analysis Foundation"
+- Pillar 1 content: "Drive decisions with consumer insights • Competitive positioning analysis • Trend identification & disruption assessment"
+- Pillar 2 header: "ROI Measurement Excellence" 
+- Pillar 2 content: "Track financial & non-financial returns • Customer acquisition costs & lifetime value • Performance benchmarks"
+- Pillar 3 header: "Leadership Bridge Strategy"
+- Pillar 3 content: "Connect vision to execution • Clear communication & team inspiration • Balanced decision-making"
+- Pillar 4 header: "Quarterly Transparency Reporting"
+- Pillar 4 content: "Stakeholder communication • Quantitative metrics + qualitative insights • Accountability checkpoints"
+- Pillar 5 header: "Stakeholder Relationship Management" 
+- Pillar 5 content: "Comprehensive approach • Aligned value propositions • Collaborative partnerships"
+- Integration callout: "Superior Performance: Companies excelling in all five areas demonstrate enhanced financial results and market resilience"
+- Key stat boxes: "ROI Thresholds" | "Market Assessment Frequency" | "Stakeholder Groups" | "Reporting Cycles"
+- Footer: "Strategic management requires continuous refinement and adaptation"
+
+```
+### CORPORATE REPORT STYLE (Professional)
+
+#### Color Palette:
+- Background: White (#FFFFFF) with light gray sections (#F5F7FA)
+- Primary: Professional navy (#002B5C) for headers and key data
+- Secondary: Medium gray (#5A6C7D) for supporting text
+- Accent: Warm orange (#FF6B35) for highlights and CTAs
+- Chart colors: 4-5 color palette (blue, teal, orange, gray, green)
+
+#### Typography:
+- Headers: Bold Arial/Helvetica, 32-48pt, traditional business feel
+- Subheaders: Medium weight, 24-28pt, clear hierarchy
+- Body: Regular Arial/Helvetica, 14-16pt, high readability
+- Captions: Small text, 11-12pt, gray color for de-emphasis
+- Numbers/data: Tabular figures for alignment, bold for emphasis
+
+#### Layout & Composition:
+- Structured sections with clear dividers (1-2px lines)
+- Boxed information panels with subtle borders
+- Consistent left/right margins (15-20% of width)
+- Numbered sections and subsections for easy reference
+- Header/footer with page info and branding
+
+#### Visual Elements:
+- Professional charts: pie charts, bar graphs, line graphs with legends
+- Data tables with alternating row colors (zebra striping)
+- Icon badges for categories (solid style, corporate palette)
+- Process diagrams with numbered steps and arrows
+- Callout boxes with border and light background fill
+
+#### Mood & References:
+- Trustworthy, organized, institutional authority
+- Think: McKinsey reports, Deloitte insights, corporate annual reports
+- Formal but not boring - professional polish
+- Information-dense but well-organized
+
+#### Key Features:
+- High information density with clear organization
+- Consistent visual system (colors, icons, charts)
+- Clear sectioning with numbered hierarchy
+- Source citations prominent (footnotes, references)
+- Professional polish in every detail
+
+#### Avoid:
+- Artistic or unconventional layouts
+- Trendy design elements or effects
+- Playful colors or casual typography
+- Asymmetry or broken grids
+- Oversimplification - show the complexity
+```
+
+---
+
+## GENERAL RENDERING RULES:
+- Follow the specified layout type from description precisely
+- Maintain visual hierarchy and clear information flow
+- ALL TEXT MUST BE IN ENGLISH ONLY - no Chinese, Japanese, Korean, or other non-English characters
+- Do NOT add decorative foreign language text (e.g., Japanese characters in Japanese Minimal style)
+- Balance aesthetics with readability - information must be clear
+- Create depth through layering, shadows, and visual rhythm
+- Include source citations in footer (minimalist style)
+
+CRITICAL LANGUAGE ENFORCEMENT:
+- Render ALL visible text in English alphabet characters only
+- If style mentions Asian aesthetics, use the aesthetic principles but English text only
+- No foreign language decorations, no untranslated text, English only everywhere
