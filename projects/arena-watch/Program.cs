@@ -349,8 +349,8 @@ class Program
 
         Console.WriteLine();
         Console.WriteLine("╔══════════════════════════════════════════════════════╗");
-        Console.WriteLine("║        Lumina API Demo - Web UI                      ║");
-        Console.WriteLine("║        Open: http://localhost:8400                   ║");
+        Console.WriteLine("║        ArenaWatch - AI模型排名分析                    ║");
+        Console.WriteLine("║        Open: http://localhost:8406                   ║");
         Console.WriteLine("╚══════════════════════════════════════════════════════╝");
         Console.WriteLine();
 

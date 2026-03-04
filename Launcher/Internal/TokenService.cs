@@ -93,6 +93,11 @@ public class TokenService
         return !string.IsNullOrEmpty(_cachedToken) && DateTimeOffset.UtcNow < _tokenExpiry.AddMinutes(-5);
     }
 
+    /// <summary>
+    /// Returns the expiry time of the current cached token.
+    /// </summary>
+    public DateTimeOffset GetTokenExpiry() => _tokenExpiry;
+
     private IPublicClientApplication CreateApp()
     {
         var app = PublicClientApplicationBuilder
