@@ -15,7 +15,8 @@ public class LauncherTokenProvider
 
     public async Task<string> GetTokenAsync()
     {
-        if (!string.IsNullOrEmpty(_cachedToken) && DateTimeOffset.UtcNow < _tokenExpiry.AddMinutes(-5))
+        if (!string.IsNullOrEmpty(_cachedToken) && _tokenExpiry > DateTimeOffset.MinValue 
+            && DateTimeOffset.UtcNow < _tokenExpiry.AddMinutes(-5))
             return _cachedToken;
 
         var response = await _httpClient.GetAsync($"{_launcherUrl}/api/auth/token");
@@ -23,9 +24,11 @@ public class LauncherTokenProvider
         var result = await response.Content.ReadFromJsonAsync<TokenResponse>();
         
         _cachedToken = result!.Token;
-        _tokenExpiry = result.ExpiresOn;
+        _tokenExpiry = result.ExpiresOn != default 
+            ? result.ExpiresOn 
+            : DateTimeOffset.UtcNow.AddHours(1);
         return _cachedToken;
     }
 
-    private record TokenResponse(string Token, DateTimeOffset ExpiresOn);
+    private record TokenResponse(string Token, DateTimeOffset ExpiresOn = default);
 }
