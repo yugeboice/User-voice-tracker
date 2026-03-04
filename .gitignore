@@ -36,6 +36,7 @@ Thumbs.db
 
 # Windows specific
 *.lnk
+nul
 
 # JetBrains IDEs
 .idea/
@@ -73,6 +74,7 @@ memories.json
 
 # Claude temp directories
 tmpclaude-*/
+tmpclaude-*
 
 # Lumina Doc site for reference
 partner/
