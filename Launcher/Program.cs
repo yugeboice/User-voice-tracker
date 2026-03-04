@@ -185,7 +185,8 @@ app.MapGet("/api/auth/token", async () =>
     try
     {
         var token = await launcherTokenProvider();
-        return Results.Ok(new { token });
+        var expiresOn = tokenService?.GetTokenExpiry() ?? DateTimeOffset.UtcNow.AddHours(1);
+        return Results.Ok(new { token, expiresOn });
     }
     catch (Exception ex)
     {

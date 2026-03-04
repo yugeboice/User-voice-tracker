@@ -205,38 +205,61 @@ public class ArenaService
                 capturedAt = cached.CapturedAt;
             }
             
-            // 获取搜索内容 (Block 1: 榜单精确搜索)
+            // 搜索和截图并行执行，截图不阻塞搜索结果返回
+            Task<string?>? searchTask = null;
+            Task<string?>? screenshotTask = null;
+            
+            // Step 1: 启动搜索 (Block 1: 榜单精确搜索)
             if (_searchApi != null)
             {
                 Console.WriteLine($"[Arena] 🔍 Step 1: 搜索 {config.Name} 相关内容...");
-                content = await FetchLeaderboardContentAsync(config, request.Question);
-                Console.WriteLine($"[Arena] 🔍 Step 1 完成: 获取内容 {content?.Length ?? 0} 字符");
+                searchTask = FetchLeaderboardContentAsync(config, request.Question);
             }
             else
             {
                 Console.WriteLine($"[Arena] ⚠ SearchApi 不可用，跳过搜索");
             }
             
-            // 如果没有缓存，截图
+            // Step 2: 启动截图（带超时，不阻塞搜索）
             if (screenshot == null && _cuaApi != null)
             {
-                Console.WriteLine($"[Arena] 📸 Step 2: 截取榜单页面...");
-                screenshot = await CaptureLeaderboardWithRetryAsync(config.Url, 2, leaderboardId);
-                capturedAt = DateTime.UtcNow;
-                
-                if (!string.IsNullOrEmpty(screenshot))
-                {
-                    UpdateCache(leaderboardId, screenshot, capturedAt, content);
-                    Console.WriteLine($"[Arena] 📸 Step 2 完成: 截图成功");
-                }
-                else
-                {
-                    Console.WriteLine($"[Arena] ⚠ Step 2: 截图失败");
-                }
+                Console.WriteLine($"[Arena] 📸 Step 2: 截取榜单页面（后台，超时15秒）...");
+                screenshotTask = CaptureWithTimeoutAsync(config.Url, leaderboardId, TimeSpan.FromSeconds(15));
             }
             else if (_cuaApi == null)
             {
                 Console.WriteLine($"[Arena] ⚠ CuaApi 不可用，跳过截图");
+            }
+
+            // 等待搜索完成（优先级高）
+            if (searchTask != null)
+            {
+                content = await searchTask;
+                Console.WriteLine($"[Arena] 🔍 Step 1 完成: 获取内容 {content?.Length ?? 0} 字符");
+            }
+            
+            // 尝试等截图，但不强制等待
+            if (screenshotTask != null)
+            {
+                try
+                {
+                    screenshot = await screenshotTask;
+                    capturedAt = DateTime.UtcNow;
+                    
+                    if (!string.IsNullOrEmpty(screenshot))
+                    {
+                        UpdateCache(leaderboardId, screenshot, capturedAt, content);
+                        Console.WriteLine($"[Arena] 📸 Step 2 完成: 截图成功");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"[Arena] ⚠ Step 2: 截图失败或超时");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[Arena] ⚠ Step 2: 截图异常: {ex.Message}");
+                }
             }
 
             // 3. 生成回答
@@ -1076,6 +1099,34 @@ public class ArenaService
         lock (_cacheLock)
         {
             _cache[leaderboardId] = new CachedLeaderboardData(screenshot, capturedAt, content);
+        }
+    }
+
+    /// <summary>
+    /// 带超时的截图，避免 CUA 卡死阻塞整个请求。
+    /// 只尝试一次，超时后放弃。
+    /// </summary>
+    private async Task<string?> CaptureWithTimeoutAsync(string url, string leaderboardId, TimeSpan timeout)
+    {
+        using var cts = new CancellationTokenSource(timeout);
+        try
+        {
+            var task = CaptureLeaderboardWithRetryAsync(url, 0, leaderboardId); // 0 retries = 仅尝试1次
+            var completed = await Task.WhenAny(task, Task.Delay(timeout));
+            if (completed == task)
+            {
+                return await task;
+            }
+            else
+            {
+                Console.WriteLine($"[Arena] ⏰ 截图超时 ({timeout.TotalSeconds}s)，跳过");
+                return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[Arena] ⚠ 截图异常: {ex.Message}");
+            return null;
         }
     }
 
