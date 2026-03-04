@@ -213,6 +213,31 @@
             overflow: visible;
         }
 
+        /* Loading overlay for iframe */
+        .iframe-loading {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .iframe-loading .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e0e0e0;
+            border-top-color: #0078d4;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .iframe-loading .loading-text {
+            color: #666;
+            font-size: 14px;
+        }
+
         /* Error overlay for iframe */
         .iframe-error {
             position: absolute;
@@ -332,7 +357,7 @@
     </div>
 
     <script>
-        const GITHUB_BASE = 'https://github.com/ai-microsoft/Lumina-API-Demo/tree/lab/';
+        const GITHUB_BASE = 'https://github.com/ai-microsoft/Lumina-API-Demo/blob/lab/';
 
         // Project emoji icons for visual distinction
         const projectIcons = {
@@ -493,49 +518,26 @@
             }
         }
 
-        // Open or switch to a project
+        // Open or switch to a project - single iframe approach
+        let _openingProject = null; // lock to prevent concurrent opens
         async function openProjectInSidebar(name, url) {
-            if (!state.openedProjects.has(name)) {
-                // Remove any stale iframe with same id
-                const existing = document.getElementById('iframe-' + name);
-                if (existing) existing.remove();
-
-                enterSidebarMode();
-
-                // Health check before loading iframe
-                const ready = await waitForReady(url, 6, 1500);
-
-                const iframe = document.createElement('iframe');
-                iframe.id = 'iframe-' + name;
-                if (ready) {
-                    iframe.src = url;
-                } else {
-                    iframe.src = 'about:blank';
-                    // Show error overlay after small delay
-                    setTimeout(() => showIframeError(name, url), 100);
-                }
-                document.getElementById('projectViewer').appendChild(iframe);
-                state.iframes[name] = iframe;
-                state.openedProjects.add(name);
-            }
+            // Prevent concurrent calls
+            if (_openingProject) return;
             
-            // Switch to this project
-            switchToProject(name);
-        }
+            // If already showing this project, do nothing
+            if (state.activeProject === name && state.iframes[name]) return;
 
-        // Switch active project
-        function switchToProject(name) {
-            // Hide all iframes
-            for (const iframeName in state.iframes) {
-                state.iframes[iframeName].classList.remove('active');
-            }
+            _openingProject = name;
             
-            // Show target iframe
-            if (state.iframes[name]) {
-                state.iframes[name].classList.add('active');
-            }
+            // Set active immediately to block re-entry
+            state.activeProject = name;
             
-            // Update viewer header
+            enterSidebarMode();
+
+            // Remove ALL existing iframes first
+            clearAllIframes();
+
+            // Update header immediately
             const project = state.projects.find(p => p.name === name);
             const icon = projectIcons[name] || '\ud83d\udce6';
             document.getElementById('viewerTitle').innerHTML = icon + ' ' + displayName(name);
@@ -543,17 +545,65 @@
                 document.getElementById('viewerExternal').href = project.url;
             }
 
+            // Show loading overlay while waiting
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.className = 'iframe-loading';
+            loadingOverlay.id = 'iframe-loading-' + name;
+            loadingOverlay.innerHTML = '<div class="spinner"></div><div class="loading-text">Starting ' + displayName(name) + '...</div>';
+            document.getElementById('projectViewer').appendChild(loadingOverlay);
+
+            // Health check before loading iframe
+            const ready = await waitForReady(url, 6, 1500);
+
+            // Remove loading overlay
+            loadingOverlay.remove();
+
+            const iframe = document.createElement('iframe');
+            iframe.id = 'iframe-' + name;
+            iframe.classList.add('active');
+            if (ready) {
+                iframe.src = url;
+            } else {
+                iframe.src = 'about:blank';
+                setTimeout(() => showIframeError(name, url), 100);
+            }
+            document.getElementById('projectViewer').appendChild(iframe);
+            state.iframes[name] = iframe;
+            state.openedProjects.add(name);
+
             state.activeProject = name;
             updateCardStates();
             saveState();
+            _openingProject = null; // unlock
+        }
+
+        // Remove all iframes from the viewer
+        function clearAllIframes() {
+            for (const iframeName in state.iframes) {
+                if (state.iframes[iframeName]) {
+                    state.iframes[iframeName].remove();
+                }
+            }
+            state.iframes = {};
+            state.openedProjects.clear();
+            // Also remove any stale iframes in DOM
+            document.querySelectorAll('#projectViewer iframe').forEach(el => el.remove());
+            // Remove error overlays
+            document.querySelectorAll('.iframe-error').forEach(el => el.remove());
+        }
+
+        // Switch active project (just calls openProjectInSidebar)
+        function switchToProject(name) {
+            const project = state.projects.find(p => p.name === name);
+            if (project && project.url) {
+                openProjectInSidebar(name, project.url);
+            }
         }
 
         // Close viewer and return to full card grid
         function closeViewer() {
-            // Hide all iframes but keep state
-            for (const iframeName in state.iframes) {
-                state.iframes[iframeName].classList.remove('active');
-            }
+            _openingProject = null;
+            clearAllIframes();
             state.activeProject = null;
             document.getElementById('mainContainer').classList.remove('sidebar-mode');
             updateCardStates();
@@ -565,14 +615,8 @@
             if (!hasWebUi) return;
             
             if (running) {
-                // Already running - just open/switch
-                if (state.openedProjects.has(name)) {
-                    switchToProject(name);
-                } else {
-                    openProjectInSidebar(name, url);
-                }
+                await openProjectInSidebar(name, url);
             } else {
-                // Not running - launch first, then open
                 await launchProject(name);
             }
         }
@@ -584,32 +628,13 @@
                 state.projects = projects;
                 renderCards(projects);
                 
-                // Restore sidebar view only if user was in sidebar mode before refresh
-                if (state.inSidebarMode && state.openedProjects.size > 0) {
-                    for (const name of state.openedProjects) {
-                        const project = projects.find(p => p.name === name);
-                        if (project && project.running) {
-                            if (!state.iframes[name]) {
-                                const iframe = document.createElement('iframe');
-                                iframe.src = project.url;
-                                iframe.id = 'iframe-' + name;
-                                document.getElementById('projectViewer').appendChild(iframe);
-                                state.iframes[name] = iframe;
-                            }
-                        } else {
-                            state.openedProjects.delete(name);
-                        }
+                // On first load only: restore sidebar if user was viewing a project before refresh
+                if (state.inSidebarMode && state.activeProject) {
+                    state.inSidebarMode = false; // consume immediately, never run again
+                    const project = projects.find(p => p.name === state.activeProject);
+                    if (project && project.running && project.url) {
+                        await openProjectInSidebar(state.activeProject, project.url);
                     }
-                    
-                    if (state.openedProjects.size > 0) {
-                        enterSidebarMode();
-                        if (state.activeProject && state.openedProjects.has(state.activeProject)) {
-                            switchToProject(state.activeProject);
-                        } else {
-                            switchToProject(Array.from(state.openedProjects)[0]);
-                        }
-                    }
-                    state.inSidebarMode = false; // consumed, future saves reflect actual state
                 }
                 
                 updateCardStates();
@@ -662,7 +687,7 @@
                     </div>
                     <div class="links">
                         ${buttons}
-                        <a class="link-source" href="${GITHUB_BASE}projects/${p.name}" target="_blank" onclick="event.stopPropagation();">View source</a>
+                        <a class="link-source" href="${GITHUB_BASE}projects/${p.name}/README.md" target="_blank" onclick="event.stopPropagation();">📖 Docs</a>
                     </div>
                 `;
                 
@@ -709,24 +734,9 @@
         async function stopProject(name) {
             await fetch('/api/stop/' + name, { method: 'POST' });
             
-            // Remove from opened projects if stopped
-            if (state.openedProjects.has(name)) {
-                state.openedProjects.delete(name);
-                if (state.iframes[name]) {
-                    state.iframes[name].remove();
-                    delete state.iframes[name];
-                }
-                
-                // Switch to another project or exit sidebar mode
-                if (state.activeProject === name) {
-                    if (state.openedProjects.size > 0) {
-                        switchToProject(Array.from(state.openedProjects)[0]);
-                    } else {
-                        state.activeProject = null;
-                        document.getElementById('mainContainer').classList.remove('sidebar-mode');
-                    }
-                }
-                saveState();
+            // If this project was being viewed, close the viewer
+            if (state.activeProject === name) {
+                closeViewer();
             }
             
             await loadProjects();

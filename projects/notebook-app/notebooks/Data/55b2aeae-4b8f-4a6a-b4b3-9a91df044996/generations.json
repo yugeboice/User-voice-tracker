@@ -1,5 +1,16 @@
 [
   {
+    "id": "3734f164-5353-42ff-9861-65726859c3b7",
+    "type": "summary",
+    "title": "Summary",
+    "status": "completed",
+    "content": "# Web Search Integration for Chat Apps: Your Quick Guide\n\n## Quick Overview\nThis guide shows you how to add real-time web search to chat applications, so your AI can find current information online and answer questions with up-to-date facts. It\u0027s like giving your chatbot the ability to \u0022Google\u0022 things before answering.\n\n## Why It Matters\n\u2022 **Solve the \u0022outdated info\u0022 problem** \u2014 Your AI can now answer questions about recent events, current prices, or today\u0027s weather instead of being stuck with old training data\n\u2022 **Build more useful apps** \u2014 Users can ask about breaking news, stock prices, or product launches and get accurate, current answers\n\u2022 **Create competitive advantages** \u2014 While basic chatbots give generic responses, yours will provide real-time, sourced information\n\n## Main Ideas\n\n\u2022 **Three search modes exist**: **Non-reasoning** (fast, direct search), **Agentic** (AI manages multiple searches intelligently), and **Deep research** (extensive investigation using hundreds of sources). Most apps use the first two.\n\n\u2022 **Basic workflow is simple**: User asks question \u2192 System searches web \u2192 AI reads search results \u2192 AI answers using real information. It\u0027s like having a research assistant that instantly finds and summarizes relevant articles.\n\n\u2022 **Query optimization matters**: Instead of searching exactly what users type (\u0022it\u0027s price?\u0022 when referring to GPT-4), smart systems understand context and create better search terms (\u0022GPT-4 API pricing\u0022). This dramatically improves search success.\n\n\u2022 **Smart filtering saves money**: Not every question needs web search. \u0022What is machine learning?\u0022 can be answered from AI\u0027s training, but \u0022Who won the 2024 Nobel Prize?\u0022 requires current info. Teaching AI to decide when to search cuts costs by 50-70%.\n\n\u2022 **API parameters control results**: You can tune search results by setting how many results to get (3-5 for quick answers), how recent they should be (7 days for news, 30 days for tech updates), and which websites to prioritize (like limiting to trusted news sources).\n\n\u2022 **Proper result formatting is crucial**: Raw search results need to be cleaned and structured with clear source labels like \u0022[Source 1]\u0022 so the AI can properly cite where information came from, making answers verifiable and trustworthy.\n\n## Key Takeaways for Students\n\n\u2022 **Start simple, then optimize** \u2014 Build a basic version that searches and answers first, then add smart query optimization and filtering later. Getting something working end-to-end is more valuable than perfecting one piece.\n\n\u2022 **Context is everything** \u2014 The biggest challenge isn\u0027t the search itself, but teaching AI to understand what users really want to know and reformulate vague questions into precise search queries.\n\n\u2022 **Always cite sources** \u2014 Make your AI include clickable references like \u0022[Source 1]\u0022 so users can verify information. This builds trust and helps users dive deeper into topics they find interesting.",
+    "imagePath": null,
+    "imagePrompt": null,
+    "createdAt": "2026-03-04T05:46:13.6347839Z",
+    "completedAt": "2026-03-04T05:46:34.9544058Z"
+  },
+  {
     "id": "b241e300-0ee3-439f-9fa7-b7ef2be715c3",
     "type": "study-guide",
     "title": "Study Guide",
@@ -11,17 +22,6 @@
     "completedAt": null
   },
   {
-    "id": "bcc8cfaa-4722-4a75-9d64-0acd98364b65",
-    "type": "study-guide",
-    "title": "Study Guide",
-    "status": "failed",
-    "content": "Generation failed: Cannot connect to Copilot API at http://localhost:4242. Error: No connection could be made because the target machine actively refused it. (localhost:4242)",
-    "imagePath": null,
-    "imagePrompt": null,
-    "createdAt": "2026-03-03T09:26:08.7427479Z",
-    "completedAt": null
-  },
-  {
     "id": "9ed0b725-c93e-4b22-800b-6430499e4966",
     "type": "faq",
     "title": "Frequently Asked Questions",
@@ -30,6 +30,17 @@
     "imagePath": null,
     "imagePrompt": null,
     "createdAt": "2026-03-03T09:26:17.3040057Z",
+    "completedAt": null
+  },
+  {
+    "id": "bcc8cfaa-4722-4a75-9d64-0acd98364b65",
+    "type": "study-guide",
+    "title": "Study Guide",
+    "status": "failed",
+    "content": "Generation failed: Cannot connect to Copilot API at http://localhost:4242. Error: No connection could be made because the target machine actively refused it. (localhost:4242)",
+    "imagePath": null,
+    "imagePrompt": null,
+    "createdAt": "2026-03-03T09:26:08.7427479Z",
     "completedAt": null
   },
   {

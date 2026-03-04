@@ -1,694 +1,267 @@
-# Lumina API - Minimal Implementation Demo
+# 📓 Notebook - Your AI-Powered Knowledge Hub
 
-[English](#english) | [中文](#中文)
+Notebook is a NotebookLM-inspired workspace that combines AI chat, source management, and intelligent content generation. Create organized knowledge bases, chat with your sources using AI, and generate beautiful infographics with automatic style intelligence.
+
+## 🚀 Quick Start
+
+1. **Start Services**: Ensure both egress-llm (port 4141) and MinimalApiCall (port 8400) are running
+2. **Access the App**: Open [http://localhost:8400/notebook-home.html](http://localhost:8400/notebook-home.html)
+3. **Create a Notebook**: Click "Create New Notebook", give it a name and description
+4. **Add Sources**: Add text, URLs, or use web search to build your knowledge base
+5. **Start Creating**: Chat with AI or generate mindmaps and infographics
+
+## ✨ What Can You Do?
+
+### 📚 Organize Your Knowledge
+Create multiple notebooks for different topics - project research, learning materials, meeting notes, or anything you want to organize. Each notebook is an independent workspace with its own sources and chat history.
+
+**How it works:**
+- Create unlimited notebooks, each with a unique name and description
+- Switch between notebooks from the home page
+- All your work is automatically saved and persists between sessions
+
+### 💬 Chat with AI
+Have intelligent conversations powered by AI. Choose between two modes:
+
+- **💭 General Chat**: Free-form conversation with AI on any topic
+- **📖 Chat with Sources**: AI answers questions based on your notebook sources (RAG mode)
+
+The AI remembers your conversation history and can reference previous messages, making it perfect for iterative discussions and deep dives into topics.
+
+### 🎨 Generate Visual Content
+
+#### Mindmaps
+Transform your sources into structured mindmaps that visualize relationships and hierarchies. Perfect for brainstorming, summarizing complex topics, or planning projects.
+
+#### Infographics with Intelligent Styling
+
+Create stunning infographics using a **Python-based generation pipeline** that automatically adapts visual style based on your content!
+
+**🔄 Generation Pipeline:**
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  Step 1: Content Analysis (Claude LLM)                      │
+│  → Analyzes notebook content                                │
+│  → Generates structured infographic brief (markdown)        │
+└─────────────────────────┬───────────────────────────────────┘
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│  Step 1b: Domain Detection (Keyword Matching)               │
+│  → Scans brief for domain keywords                          │
+│  → Calculates scores: priority × keyword_matches            │
+│  → Anti-keywords can disqualify domains                     │
+│  → Selects highest-scoring domain & variant                 │
+└─────────────────────────┬───────────────────────────────────┘
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│  Step 2: Prompt Construction                                │
+│  → Combines brief + domain-specific rendering instructions  │
+│  → Adds text rendering and safety instructions              │
+└─────────────────────────┬───────────────────────────────────┘
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│  Step 3: Image Generation (gpt-image-1-5)                   │
+│  → Calls egress-llm /chatgpt/convo2im endpoint              │
+│  → Receives SSE stream response                             │
+└─────────────────────────┬───────────────────────────────────┘
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│  Step 4: Save PNG                                           │
+│  → Parses base64 image from SSE stream                      │
+│  → Saves to notebooks/Data/{id}/images/                     │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**🎯 8 Style Domains & Their Variants:**
+
+| Domain | Description | Variants | Example Keywords |
+|--------|-------------|----------|------------------|
+| **Business** | Corporate, finance, enterprise | editorial, minimal-data, corporate | business, strategy, revenue, CEO, market |
+| **History** | Historical events, heritage | vintage-timeline, documentary, archival | WWII, ancient, historical, era, century |
+| **Science** | Scientific, research | laboratory, academic, discovery | research, experiment, data, hypothesis |
+| **Nature & Space** | Natural world, cosmos | cosmic, wildlife, exploration | space, nature, planet, wildlife, outdoor |
+| **Technology** | Tech, digital, innovation | blueprint, futuristic, developer | AI, code, software, innovation, digital |
+| **Lifestyle** | Personal development, wellness | wellness, creative, productivity | health, fitness, mindfulness, balance |
+| **Social** | Society, community, culture | community, cultural, impact | community, social, culture, audience |
+| **Family** | Family, children, education | playful-learning, friendly-guide | kids, children, family, educational, playful |
+
+**🧠 How Domain Detection Works:**
+
+1. **Keyword Scanning**: The system scans your content brief for domain keywords
+2. **Anti-keyword Filtering**: Domains with anti-keywords present are disqualified (e.g., "kids" disqualifies Business, Science, Technology)
+3. **Score Calculation**: `score = domain_priority × matching_keywords_count`
+4. **Variant Selection**: Within the winning domain, variant is chosen based on tone and specific keywords
+
+### 🔍 Source Management
+Build rich knowledge bases by adding diverse sources:
+
+- **📝 Text Sources**: Paste any text content directly
+- **🔗 URL Sources**: Add web pages - the system fetches and processes content automatically
+- **🌐 Web Search**: Enter search terms and add relevant web results instantly
+- **🗑️ Delete Sources**: Remove sources you no longer need
+
+All sources are stored with your notebook and used as context for AI chat (RAG mode) and content generation.
+
+## 🎯 Use Cases
+
+| Scenario | How to Use Notebook |
+|----------|-------------------|
+| **📖 Learning & Research** | Create a notebook per topic, add articles/papers as sources, chat with AI to understand concepts, generate mindmaps to visualize |
+| **💼 Project Management** | Add project docs, meeting notes, and specifications, use chat to clarify requirements, generate infographics for presentations |
+| **✍️ Content Creation** | Gather research sources, brainstorm with AI chat, generate mindmaps to organize ideas, create infographics for social media |
+| **👨‍🎓 Study Notes** | Add lecture notes and textbook excerpts, quiz yourself via chat, create summary mindmaps before exams |
+
+## 💾 How Your Data is Stored
+
+All notebooks, sources, chat history, and generated content are saved in the `notebooks/Data/` folder as JSON files:
+
+```
+Data/
+├── index.json                    # List of all notebooks
+└── {notebook-id}/                # Each notebook has its own folder
+    ├── metadata.json             # Notebook name, description, dates
+    ├── sources.json              # All your sources
+    ├── chat-history.json         # Complete chat conversation
+    ├── generations.json          # Mindmaps and infographics metadata
+    └── images/                   # Generated images
+        ├── {id}.png              # Generated infographic
+        └── prompt_{id}.txt       # Prompt used for generation (for debugging)
+```
+
+**Your data is persistent**: Restart the server anytime - your notebooks will still be there!
+
+## 🛠️ Technical Details
+
+### Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Browser (Web UI)                         │
+│              notebook-home.html / notebook.html             │
+└─────────────────────────────┬───────────────────────────────┘
+                              │ HTTP
+┌─────────────────────────────▼───────────────────────────────┐
+│                C# Backend (port 8400)                       │
+│   NotebookApi.cs  → Notebook CRUD operations                │
+│   ChatApi.cs      → AI chat with RAG                        │
+│   StudioApi.cs    → Calls Python skill for infographics     │
+└──────────────┬──────────────────────────┬───────────────────┘
+               │                          │
+               │ (Chat/Mindmap)           │ (Infographic)
+               │                          │ Process call
+               ▼                          ▼
+┌──────────────────────────┐  ┌───────────────────────────────┐
+│    egress-llm (4141)     │  │  Python Skill                 │
+│    /v1/messages          │  │  infographic-gen.py           │
+│    (Claude LLM)          │  │  ├── content-analyzer.md      │
+└──────────────────────────┘  │  ├── style-config.json        │
+                              │  └── image-prompter.md        │
+                              └──────────────┬────────────────┘
+                                             │
+                              ┌──────────────▼────────────────┐
+                              │    egress-llm (4141)          │
+                              │    /v1/messages (analysis)    │
+                              │    /chatgpt/convo2im (image)  │
+                              └───────────────────────────────┘
+```
+
+### Folder Structure
+```
+notebooks/
+├── Backend/                      # C# API implementation
+│   ├── Models/
+│   │   └── Notebook.cs           # Data models
+│   ├── NotebookApi.cs            # Notebook CRUD
+│   ├── ChatApi.cs                # AI chat with RAG
+│   ├── StudioApi.cs              # Calls Python skill for infographics
+│   ├── ImageGenerationService.cs # Direct image generation (legacy)
+│   └── NotebookStorage.cs        # JSON persistence
+├── Frontend/                     # HTML/JavaScript UI
+│   ├── notebook-home.html        # Notebook list
+│   └── notebook.html             # Notebook workspace
+└── Data/                         # Persisted data (auto-created)
+
+skills/
+└── infographic-gen/              # Python infographic generation skill
+    ├── infographic-gen.py        # Main generation script (4 steps)
+    ├── content-analyzer.md       # LLM system prompt for Step 1
+    ├── image-prompter.md         # Domain-specific rendering instructions
+    ├── style-config.json         # 8 domains, keywords, variants config
+    └── generate_from_prompt.py   # Utility: regenerate from saved prompt
+```
+
+<details>
+<summary><b>📡 API Reference</b></summary>
+
+### Notebook Management
+- `GET /api/notebooks` - List all notebooks
+- `GET /api/notebooks/{id}` - Get specific notebook
+- `POST /api/notebooks` - Create new notebook
+- `PUT /api/notebooks/{id}` - Update notebook
+- `DELETE /api/notebooks/{id}` - Delete notebook
+
+### Sources
+- `GET /api/notebook/sources?notebookId={id}` - Get sources
+- `POST /api/notebook/sources/text` - Add text source
+- `POST /api/notebook/sources/url` - Add URL source  
+- `POST /api/notebook/sources/search` - Add search results
+- `DELETE /api/notebook/sources/{id}?notebookId={id}` - Delete source
+
+### Chat
+- `POST /api/notebook/chat?notebookId={id}` - Send message (streaming)
+- `GET /api/notebook/chat/history?notebookId={id}` - Get history
+- `DELETE /api/notebook/chat/history?notebookId={id}` - Clear history
+
+### Studio (Generation)
+- `POST /api/notebook/studio/generate?notebookId={id}` - Generate content
+- `GET /api/notebook/studio/generations?notebookId={id}` - List generations
+- `GET /api/notebook/studio/generation/{id}?notebookId={id}` - Get specific generation
+- `DELETE /api/notebook/studio/generation/{id}?notebookId={id}` - Delete generation
+
+</details>
+
+## 📝 Tips & Best Practices
+
+- **🎨 Better Infographics**: The system automatically detects domain from your content - just write naturally! Keywords like "kids", "business", "history" will trigger appropriate styles
+- **💬 Effective Chat**: Use "Chat with Sources" mode to get answers grounded in your sources - more accurate and contextual
+- **📚 Organize Sources**: Add sources before generating content - more context = better output
+- **🗂️ Multiple Notebooks**: Don't cram everything into one notebook - create separate notebooks for different projects or topics
+- **🔄 Iterate**: Generate, review, refine your content, generate again - each generation is unique
+- **🐛 Debug Prompts**: Check `images/prompt_{id}.txt` to see exactly what prompt was sent to the image generator
+
+## 🆘 Troubleshooting
+
+**Problem**: Can't access the app  
+**Solution**: Make sure both services are running:
+- egress-llm on port 4141: `Test-NetConnection localhost -Port 4141`
+- MinimalApiCall on port 8400: `Test-NetConnection localhost -Port 8400`
+
+**Problem**: Infographic generation fails with "403 Forbidden"  
+**Solution**: Ensure egress-llm (not copilot-api) is running on port 4141. See `EgressGuide.md` for setup.
+
+**Problem**: "No image data found in API response"  
+**Solution**: The image API response format may have changed. Check egress-llm terminal logs for details.
+
+**Problem**: Generated images don't appear  
+**Solution**: Check `notebooks/Data/{notebook-id}/images/` folder. Check terminal for Python script errors.
+
+**Problem**: Style selection seems off  
+**Solution**: Check terminal output to see domain detection logs (which domain was selected and why). The system shows keyword matches and scores.
+
+**Problem**: Chat or generation feels slow  
+**Solution**: First generation may take longer as the AI warms up. Image generation typically takes 30-90 seconds.
 
 ---
 
-<a name="english"></a>
-## English
+## Access
 
-A minimal Lumina API example. Helps you quickly grasp the basic API usage and freely extend and design your own features based on the concise codebase.
+Main entry point: [http://localhost:8400/notebook-home.html](http://localhost:8400/notebook-home.html)
 
----
-
-## 🚀 Quick Start (DevBox)
-
-### Step 1: Clone the Code
-
-Press `` Ctrl + ` `` in VS Code to open the terminal, then copy and paste:
-
-```powershell
-git clone https://github.com/ai-microsoft/Lumina-API-Demo.git
-cd Lumina-API-Demo
-git checkout minimal-api-call
-```
+Or from homepage: [http://localhost:8400/](http://localhost:8400/) → Click "进入 Notebook →"
 
 ---
 
-### Step 2: One-Click Environment Setup
-
-Run in VS Code terminal:
-
-```powershell
-.\Internal\setup.ps1
-```
-
-This script will automatically install:
-- .NET 8 SDK (runtime environment)
-- Node.js (required for Copilot API)
-- Azure Artifacts Credential Provider (required for downloading Lumina packages)
-
-> ⏱️ First-time installation may take 5-10 minutes, please be patient
-
----
-
-### Step 3: Login and Download Lumina Package
-
-Run the following command:
-
-```powershell
-dotnet restore --interactive
-```
-
-**What happens:**
-1. Browser will automatically open Microsoft login page
-2. Login with your **@microsoft.com** account
-3. After successful login, return to VS Code terminal to see download complete
-
-> 💡 This only needs to be done once, your computer will remember the login state
-
----
-
-### Step 4: Configuration File
-
-Create `appsettings.json` based on `appsettings.Template.json` and fill in your actual configuration:
-
-```powershell
-cp appsettings.Template.json appsettings.json
-```
-
-Then edit `appsettings.json` with your `TenantId`, `ClientId`, and `RedirectUri`.
-
-**Partner Context (Optional)**: The template includes Partner Context configuration for API telemetry and quota management:
-
-```json
-{
-  "PartnerContext": {
-    "Partner": "PM playground",
-    "ScenarioGroup": "APIDemo",
-    "ScenarioName": "",
-    "Application": "",
-    "Component": ""
-  }
-}
-```
-
-You can customize these values for your own partner. See [Partner Context](#partner-context) for details.
-
----
-
-### Step 5: Start Copilot API (LLM Service)
-
-Click **+** in the top right of VS Code terminal to create a new terminal (keep this running), then enter:
-
-```powershell
-npx copilot-api@0.5.14 start
-```
-
-**First run requires GitHub authorization:**
-1. Terminal will display something like: `Please enter the code "A1B2-C3D4" in https://github.com/login/device`
-2. Open browser and visit https://github.com/login/device
-3. Enter the code shown in terminal (e.g., `A1B2-C3D4`)
-4. Click authorize
-5. Return to VS Code terminal to see service started successfully
-
-> ⚠️ **Keep this terminal running, don't close it!**
-
----
-
-### Step 6: Run the Demo!
-
-Click **+** in VS Code terminal to create another new terminal, run:
-
-```powershell
-dotnet run
-```
-
-🎉 **Done!** Open browser and visit **http://localhost:8400**, you'll see a simple web interface to try various Lumina API features:
-
-- **Search + LLM**: Web search with optional LLM summarization
-- **Open + Find**: Open web pages, optionally search within pages
-- **CUA**: Browser automation screenshots
-
----
-
-## ❓ Having Issues?
-
-If you encounter any errors during installation or running, **copy the error message to the Coding Agent**, it can help you troubleshoot!
-
----
-
-## 📚 Let Coding Agent Read Official Documentation
-
-Want the Coding Agent to write more professional Lumina code? Clone the official documentation locally and let it learn before writing code:
-
-```powershell
-git clone https://o365exchange.visualstudio.com/DefaultCollection/O365%20Core/_git/CopilotLumina partner
-```
-
-Then tell the Coding Agent:
-
-> "Please read the Lumina official documentation in the partner folder first, understand the detailed API usage, then help me write code."
-
-This way the Coding Agent can reference official documentation to write more accurate, best-practice code.
-
----
-
-## 📖 Search API Details
-
-Search API is the most commonly used feature. Here's how it works.
-
-### Call Flow
-
-```
-User inputs "AI news"
-       ↓
-Frontend (index.html) → fetch('/api/search', { query: "AI news", topN: 5 })
-       ↓
-Backend (Program.cs) → /api/search route
-       ↓
-SearchApi.cs → _proxy.SearchAsync(request)
-       ↓
-Lumina Cloud Service → Returns search results
-       ↓
-Frontend displays results
-```
-
-### Core Code: SearchApi.cs
-
-```csharp
-public async Task<List<SearchResultItem>> SearchAsync(string query, int topN = 10)
-{
-    // 1. Build request
-    var request = new SearchRequest
-    {
-        Requests = new List<SearchRequestItem>
-        {
-            new SearchRequestItem
-            {
-                Q = query,           // What to search
-                TopN = topN,         // Max results to return
-                Source = "web_with_bing"  // Data source
-            }
-        }
-    };
-
-    // 2. Call Lumina SDK (SDK sends request to Lumina cloud)
-    var response = await _proxy.SearchAsync(request);
-    
-    // 3. Return results list
-    return response?.Results?.Take(topN).ToList() ?? new List<SearchResultItem>();
-}
-```
-
-When `_proxy.SearchAsync(request)` executes, the SDK automatically:
-1. Sends request to Lumina cloud
-2. Waits for Lumina search to complete
-3. Returns the results
-
-### Request Sent to Lumina Cloud
-
-```json
-{
-  "requests": [
-    {
-      "q": "AI news",
-      "topN": 5,
-      "source": "web_with_bing"
-    }
-  ]
-}
-```
-
-### Response from Lumina
-
-```json
-{
-  "pageId": "29893556ad1845189e439459355201d3",
-  "results": [
-    {
-      "answerType": "WebPages",
-      "url": "https://example.com/ai-news-article",
-      "title": "Latest AI News - Example",
-      "semanticDocument": "This article discusses the latest developments in AI..."
-    },
-    {
-      "answerType": "WebPages", 
-      "url": "https://another-site.com/ai-update",
-      "title": "AI Industry Update",
-      "semanticDocument": "The AI industry saw significant changes this week..."
-    }
-  ],
-  "toolState": {
-    "sessionId": "995e40972e2c4cf0af8c50d5efd045e9"
-  }
-}
-```
-
-Each result contains:
-- `url` - Web page link
-- `title` - Title
-- `semanticDocument` - Content summary (can be fed to LLM for summarization)
-
----
-
-## 📁 Project File Description
-
-### 🎯 Extensible Files (Try Vibe Coding)
-
-| File | Description | Extension Scenarios |
-|------|-------------|---------------------|
-| `Program.cs` | Main program, controls the entire service | Chain multiple APIs, add new endpoints |
-| `wwwroot/index.html` | Web interface | Change UI styles, add buttons |
-| `SearchApi.cs` | Search functionality | Change what to search, how many results, only recent days |
-| `OpenApi.cs` | Open web pages and read content | Which URL to open, how many lines to read |
-| `FindApi.cs` | Find keywords in web pages | What words to find, which page to search |
-| `CuaApi.cs` | Browser automation | Which website to open, what actions (click/type/scroll) |
-| `LlmExample.cs` | AI summarization | Change how AI responds, tone, system prompt |
-
-### 🔒 Internal Folder (No modification needed)
-
-| File | Description |
-|------|-------------|
-| `Internal/TokenService.cs` | Authentication service |
-| `Internal/setup.ps1` | One-click setup script |
-
----
-
-## 🎨 Vibe Coding Example: Competitive Analysis Tool
-
-Here's a complete example showing how to combine these APIs into a practical tool through Vibe Coding.
-
-### Scenario: Automated Competitive Analysis
-
-Suppose you want to analyze recent activities of several competitors and generate an analysis report.
-
-#### Step 1: Smart Search Term Generation and Batch Search
-
-> Tell the Coding Agent:
-> 
-> "I want to build a competitive analysis feature. Users just need to input a few competitor names (like OpenAI, Google AI, Anthropic), the system first uses AI to generate more precise search terms based on competitor names (like expanding 'OpenAI' to 'OpenAI latest product launch', 'OpenAI funding news', etc.), then automatically search for news from the past week, returning 5 results per competitor."
-
-The Coding Agent will first call LLM to generate search terms (mainly modify `LlmExample.cs`), then use generated terms for batch search (mainly modify `SearchApi.cs`, `Program.cs`), with Search API's `recency` parameter set to 7 for content from the last 7 days only.
-
-#### Step 2: Get Detailed Content
-
-> "Search results only have titles and summaries, not enough information. I want to automatically open the top 2 news links for each competitor and get the full article content."
-
-The Coding Agent will chain Search and Open APIs (mainly modify `OpenApi.cs`, `Program.cs`), search first then automatically open links to read full text.
-
-#### Step 3: LLM Generate Analysis Report
-
-> "Now with full news content, I want AI to generate an analysis report.
-> 
-> Analysis dimensions:
-> - Product updates: What new features were released recently?
-> - Market strategy: What pricing, partnership, expansion moves?
-> - User feedback: How do users and media rate them?
-> - Competitive insights: What implications do these activities have for us?
-> 
-> Output requirements:
-> - Separate section for each competitor
-> - Use tables to compare key information
-> - End with summary and action recommendations"
-
-The Coding Agent will write these requirements as a system prompt (mainly modify `LlmExample.cs`), having LLM output analysis report in the specified format.
-
-#### Step 4: Capture Product Page Screenshots
-
-> "The analysis report needs images. I want to automatically open each competitor's homepage (like openai.com, anthropic.com) and save screenshots as report illustrations."
-
-The Coding Agent will use CUA's browser automation feature (mainly modify `CuaApi.cs`), opening websites sequentially and taking screenshots.
-
-#### Step 5: Integrate into Complete Feature
-
-> "Chain the above features into a complete workflow: user inputs competitor names and website addresses, one-click generates a complete competitive report with news summaries, detailed analysis, and website screenshots."
-
-The Coding Agent will chain Search → Open → LLM → CUA in `Program.cs` to form the complete workflow.
-
----
-
-## 🌐 Full Web Demo
-
-For a full web application with UI, switch to the `main` branch:
-
-```powershell
-git checkout main
-```
-
----
----
-
-<a name="中文"></a>
-## 中文
-
-一个最小化的 Lumina API 调用示例。帮助你快速掌握 API 基本用法，并在简洁的代码基础上自由扩展、设计你自己的功能。
-
----
-
-## 🚀 快速开始 (DevBox)
-
-### 第一步：下载代码
-
-在 VS Code 中按 `` Ctrl + ` `` 打开终端，复制粘贴以下命令：
-
-```powershell
-git clone https://github.com/ai-microsoft/Lumina-API-Demo.git
-cd Lumina-API-Demo
-git checkout minimal-api-call
-```
-
----
-
-### 第二步：一键安装环境
-
-在 VS Code 终端中运行：
-
-```powershell
-.\Internal\setup.ps1
-```
-
-这个脚本会自动帮你安装：
-- .NET 8 SDK（运行代码的环境）
-- Node.js（运行 Copilot API 需要）
-- Azure Artifacts Credential Provider（下载 Lumina 包需要）
-
-> ⏱️ 首次安装可能需要 5-10 分钟，请耐心等待
-
----
-
-### 第三步：登录并下载 Lumina 包
-
-运行以下命令：
-
-```powershell
-dotnet restore --interactive
-```
-
-**会发生什么：**
-1. 浏览器会自动弹出 Microsoft 登录页面
-2. 用你的 **@microsoft.com** 账号登录
-3. 登录成功后，回到 VS Code 终端，会看到包下载完成
-
-> 💡 这一步只需要做一次，之后电脑会记住你的登录状态
-
----
-
-### 第四步：配置文件
-
-根据模板创建 `appsettings.json` 并填入你的实际配置：
-
-```powershell
-cp appsettings.Template.json appsettings.json
-```
-
-然后编辑 `appsettings.json`，填入你的 `TenantId`、`ClientId` 和 `RedirectUri`。
-
-**Partner Context（可选）**：模板包含了用于 API 遥测和配额管理的 Partner Context 配置：
-
-```json
-{
-  "PartnerContext": {
-    "Partner": "PM playground",
-    "ScenarioGroup": "APIDemo",
-    "ScenarioName": "",
-    "Application": "",
-    "Component": ""
-  }
-}
-```
-
-你可以根据自己的 partner 自定义这些值。详见 [Partner Context](#partner-context) 部分。
-
----
-
-### 第五步：启动 Copilot API（LLM 服务）
-
-在 VS Code 终端右上角点击 **+** 新建一个终端（这个终端要保持运行），输入：
-
-```powershell
-npx copilot-api@0.5.14 start
-```
-
-**首次运行需要 GitHub 授权：**
-1. 终端会显示类似：`Please enter the code "A1B2-C3D4" in https://github.com/login/device`
-2. 打开浏览器，访问 https://github.com/login/device
-3. 输入终端显示的代码（如 `A1B2-C3D4`）
-4. 点击授权
-5. 回到 VS Code 终端，会看到服务启动成功
-
-> ⚠️ **保持这个终端运行，不要关闭！**
-
----
-
-### 第六步：运行 Demo！
-
-在 VS Code 终端右上角点击 **+** 再新建一个终端，运行：
-
-```powershell
-dotnet run
-```
-
-🎉 **大功告成！** 打开浏览器访问 **http://localhost:8400**，你会看到一个简洁的 Web 界面，可以尝试各种 Lumina API 功能：
-
-- **Search + LLM**：Web 搜索，可选用 LLM 总结结果
-- **Open + Find**：打开网页获取内容，可选在页面内查找
-- **CUA**：浏览器自动化截图
-
----
-
-## ❓ 遇到问题？
-
-如果在安装或运行过程中遇到任何错误，**把错误信息复制给Coding Agent**，它可以帮你排查问题！
-
----
-
-## 📚 让 Coding Agent 读官方文档
-
-想让 Coding Agent 写出更专业的 Lumina 代码？可以把官方文档 clone 到本地，让它先学习再写代码：
-
-```powershell
-git clone https://o365exchange.visualstudio.com/DefaultCollection/O365%20Core/_git/CopilotLumina partner
-```
-
-然后告诉 Coding Agent：
-
-> "请先读一下 partner 文件夹里的 Lumina 官方文档，了解 API 的详细用法，然后再帮我写代码。"
-
-这样 Coding Agent 就能参考官方文档，写出更准确、更符合最佳实践的代码。
-
----
-
-## 📖 Search API 详解
-
-Search API 是最常用的功能，下面详细介绍它的工作原理。
-
-### 调用流程
-
-```
-用户输入 "AI news"
-       ↓
-前端 (index.html) → fetch('/api/search', { query: "AI news", topN: 5 })
-       ↓
-后端 (Program.cs) → /api/search 路由
-       ↓
-SearchApi.cs → _proxy.SearchAsync(request)
-       ↓
-Lumina 云端服务 → 返回搜索结果
-       ↓
-前端显示结果
-```
-
-### 核心代码：SearchApi.cs
-
-```csharp
-public async Task<List<SearchResultItem>> SearchAsync(string query, int topN = 10)
-{
-    // 1. 构造请求
-    var request = new SearchRequest
-    {
-        Requests = new List<SearchRequestItem>
-        {
-            new SearchRequestItem
-            {
-                Q = query,           // 搜什么query
-                TopN = topN,         // 最多返回几条结果
-                Source = "web_with_bing"  // 搜索的数据源
-            }
-        }
-    };
-
-    // 2. 调用 Lumina SDK（SDK 会把 request 发送给 Lumina 云端）
-    var response = await _proxy.SearchAsync(request);
-    
-    // 3. 返回结果列表
-    return response?.Results?.Take(topN).ToList() ?? new List<SearchResultItem>();
-}
-```
-
-当执行 `_proxy.SearchAsync(request)` 时，SDK 会自动帮你：
-1. 把请求发给 Lumina 云端
-2. 等 Lumina 搜索完成
-3. 把结果拿回来
-
-### Lumina 云端收到的请求
-
-```json
-{
-  "requests": [
-    {
-      "q": "AI news",
-      "topN": 5,
-      "source": "web_with_bing"
-    }
-  ]
-}
-```
-
-### Lumina 返回的响应
-
-```json
-{
-  "pageId": "29893556ad1845189e439459355201d3",
-  "results": [
-    {
-      "answerType": "WebPages",
-      "url": "https://example.com/ai-news-article",
-      "title": "Latest AI News - Example",
-      "semanticDocument": "This article discusses the latest developments in AI..."
-    },
-    {
-      "answerType": "WebPages", 
-      "url": "https://another-site.com/ai-update",
-      "title": "AI Industry Update",
-      "semanticDocument": "The AI industry saw significant changes this week..."
-    }
-  ],
-  "toolState": {
-    "sessionId": "995e40972e2c4cf0af8c50d5efd045e9"
-  }
-}
-```
-
-每个结果包含：
-- `url` - 网页链接
-- `title` - 标题
-- `semanticDocument` - 内容摘要（可以喂给 LLM 做总结）
-
----
-
-## 📁 项目文件说明
-
-### 🎯 可扩展的文件（Vibe Coding可以尝试的）
-
-| 文件 | 说明 | 扩展场景 |
-|------|------------|--------------|
-| `Program.cs` | 主程序，控制整个服务 | 想串联多个 API、加新接口 |
-| `wwwroot/index.html` | 网页界面 | 想改界面样式、加按钮 |
-| `SearchApi.cs` | 搜索功能 | 想改搜什么、返回几条、只要最近几天的 |
-| `OpenApi.cs` | 打开网页读内容 | 想打开哪个网址、读多少行 |
-| `FindApi.cs` | 在网页里找关键词 | 想找什么词、在哪个页面找 |
-| `CuaApi.cs` | 控制浏览器自动操作 | 想打开什么网站、做什么操作（点击/输入/滚动） |
-| `LlmExample.cs` | AI 总结功能 | 想改 AI 怎么回答、用什么语气、写system prompt|
-
-### 🔒 Internal 文件夹（不需要修改）
-
-| 文件 | 说明 |
-|------|------|
-| `Internal/TokenService.cs` | 身份认证服务 |
-| `Internal/setup.ps1` | 一键安装脚本 |
-
----
-
-## 🎨 Vibe Coding 示例：竞品分析工具
-
-下面用一个完整的例子，展示如何通过 Vibe Coding 把这些 API 组合成一个实用工具。
-
-### 场景：自动化竞品分析
-
-假设你想分析几个竞品最近的动态，生成一份分析报告。
-
-#### 第一步：智能生成搜索词并批量搜索
-
-> 告诉 Coding Agent：
-> 
-> "我想做一个竞品分析功能。用户只需要输入几个竞品名称（比如 OpenAI、Google AI、Anthropic），系统先用 AI 根据竞品名称生成更精准的搜索词（比如把"OpenAI"扩展成"OpenAI 最新产品发布"、"OpenAI 融资新闻"等），然后自动搜索最近一周的新闻，每个竞品返回 5 条结果。"
-
-Coding Agent 会先调用 LLM 生成搜索词（主要改 `LlmExample.cs`），然后用生成的搜索词进行 batch search（主要改 `SearchApi.cs`、`Program.cs`），Search API 的 `recency` 参数设为 7 表示只要最近 7 天的内容。
-
-#### 第二步：获取详细内容
-
-> "搜索结果只有标题和摘要，信息不够。我希望能自动打开每个竞品的前 2 条新闻链接，获取完整的文章内容。"
-
-Coding Agent 会串联 Search 和 Open API（主要改 `OpenApi.cs`、`Program.cs`），先搜索再自动打开链接读取全文。
-
-#### 第三步：LLM 生成分析报告
-
-> "现在有了完整的新闻内容，我希望 AI 能帮我生成一份分析报告。
-> 
-> 分析维度：
-> - 产品功能更新：最近发布了什么新功能？
-> - 市场策略：有什么定价、合作、扩张动作？
-> - 用户反馈：用户和媒体的评价如何？
-> - 竞争洞察：这些动态对我们有什么启示？
-> 
-> 输出要求：
-> - 每个竞品单独一节
-> - 用表格对比关键信息
-> - 最后给出总结和行动建议
-> - 用中文输出，语气专业但易懂"
-
-Coding Agent 会把这些要求写成 system prompt（主要改 `LlmExample.cs`），让 LLM 按照指定格式输出分析报告。
-
-#### 第四步：截取产品页面截图
-
-> "分析报告需要配图。我希望能自动打开各竞品的官网首页（比如 openai.com、anthropic.com），截图保存下来作为报告配图。"
-
-Coding Agent 会用 CUA 的浏览器自动化功能（主要改 `CuaApi.cs`），依次打开网站并截图。
-
-#### 第五步：整合成完整功能
-
-> "把上面的功能串成一个完整流程：用户输入竞品名称和官网地址，一键生成包含新闻摘要、详细分析、官网截图的完整竞品报告。"
-
-Coding Agent 会在 `Program.cs` 里把 Search → Open → LLM → CUA 串联起来，形成完整流程。
-
----
-
-## 🌐 完整 Web Demo
-
-如果你想看带界面的完整 Web 应用，请切换到 `main` 分支：
-
-```powershell
-git checkout main
-```
-
----
-
-## Partner Context
-
-Partner Context is used to identify API callers for telemetry, quota management, and debugging purposes.
-
-### Configuration
-
-Add the `PartnerContext` section to your `appsettings.json`:
-
-```json
-{
-  "PartnerContext": {
-    "Partner": "Your Partner Name",
-    "ScenarioGroup": "Your Scenario Group",
-    "ScenarioName": "Your Scenario Name",
-    "Application": "Your Application",
-    "Component": "Your Component"
-  }
-}
-```
-
-**Fields:**
-- `Partner` (Required): Your partner identifier registered with Lumina team
-- `ScenarioGroup` (Optional): Group name for your scenarios
-- `ScenarioName` (Optional): Specific scenario name
-- `Application` (Optional): Application identifier
-- `Component` (Optional): Component identifier
-
-> **Note**: Fields are hierarchical - you cannot skip levels (e.g., you can't set `ScenarioName` without setting `ScenarioGroup` first).
-
-### How It Works
-
-Partner Context is automatically passed to Lumina APIs:
-
-1. **SDK-based APIs (Search, Open, Find)**: Via `LuminaApiOptions` properties
-2. **HTTP-based APIs (CUA)**: Via `X-Partner`, `X-ScenarioGroup`, etc. HTTP headers
-
-No code changes required - just configure `appsettings.json`!
-
+**Last Updated**: 2026-01-09  
+**Project**: Lumina-API-Demo  
+**Branch**: user/tiantianguo/inforgraphic-gen-claude-skill

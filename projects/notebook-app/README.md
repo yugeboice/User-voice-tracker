@@ -1,694 +1,623 @@
-# Lumina API - Minimal Implementation Demo
+# 📓 Lumina API Demo - Notebook 功能展示
 
-[English](#english) | [中文](#中文)
+<p align="center">
+  <strong>🤖 AI 驱动的智能研究助手 | AI-Powered Research Assistant</strong>
+</p>
+
+<p align="center">
+  <code>RAG 对话</code> · <code>智能搜索</code> · <code>思维导图</code> · <code>信息图生成</code> · <code>学习指南</code>
+</p>
+
+<p align="center">
+  <a href="#中文版本">🇨🇳 中文</a> · <a href="#english-version">🇺🇸 English</a>
+</p>
 
 ---
 
-<a name="english"></a>
-## English
+## 中文版本
 
-A minimal Lumina API example. Helps you quickly grasp the basic API usage and freely extend and design your own features based on the concise codebase.
+### 📖 项目简介
+
+Lumina API Demo 的 Notebook 功能是一个类似 **Google NotebookLM** 的 AI 研究助手，专为**学习与研究**场景设计。它能帮助你：
+
+- 📚 **整合多源信息** - 将文章、网页、文档等资料汇集到一个工作空间
+- 🤖 **与资料对话** - AI 基于你的资料进行深度问答，提供有引用的准确回答  
+- ✨ **自动生成内容** - 一键生成学习指南、摘要、FAQ、思维导图、信息图等多种形式
+
+> 💡 **设计理念**: 让 AI 成为你的研究伙伴，帮助你更快地理解、整理和分享知识。
 
 ---
 
-## 🚀 Quick Start (DevBox)
+### ⚡ 核心亮点
 
-### Step 1: Clone the Code
+<table>
+  <tr>
+    <td align="center" width="25%">
+      <h3>📚</h3>
+      <b>高效整合</b><br/>
+      <sub>一键添加文本、网页、文件或搜索结果作为知识来源</sub>
+    </td>
+    <td align="center" width="25%">
+      <h3>🎯</h3>
+      <b>智能对话</b><br/>
+      <sub>基于 RAG 技术，AI 准确引用你的资料回答问题</sub>
+    </td>
+    <td align="center" width="25%">
+      <h3>🎨</h3>
+      <b>多样生成</b><br/>
+      <sub>支持学习指南、摘要、FAQ、思维导图、信息图等</sub>
+    </td>
+    <td align="center" width="25%">
+      <h3>🔍</h3>
+      <b>Lumina Search</b><br/>
+      <sub>调用 <b>Lumina Search API</b>，AI 结合实时网络信息回答</sub>
+    </td>
+  </tr>
+</table>
 
-Press `` Ctrl + ` `` in VS Code to open the terminal, then copy and paste:
+---
 
-```powershell
-git clone https://github.com/ai-microsoft/Lumina-API-Demo.git
-cd Lumina-API-Demo
-git checkout minimal-api-call
+### 🎯 使用场景
+
+<table>
+  <tr>
+    <td width="33%">
+      <h4>🎓 学术研究</h4>
+      <p>收集多篇论文和资料，让 AI 帮你理清研究脉络，自动生成文献综述和研究要点。</p>
+      <code>适合：研究生、学者、分析师</code>
+    </td>
+    <td width="33%">
+      <h4>💼 会议纪要</h4>
+      <p>将会议记录、邮件和文档汇总，快速生成行动要点、决策摘要和待办事项。</p>
+      <code>适合：项目经理、团队 Lead、秘书</code>
+    </td>
+    <td width="33%">
+      <h4>📖 备考复习</h4>
+      <p>导入课程讲义和教材，AI 自动生成学习指南、FAQ 和练习题，助你高效备考。</p>
+      <code>适合：学生、考证备考者、培训学员</code>
+    </td>
+  </tr>
+</table>
+
+---
+
+### 🖼️ 功能截图
+
+#### 首页 - 笔记本管理
+<img src="notebooks/docs/images/home.png" width="800" alt="首页"/>
+
+管理你的所有笔记本，支持创建、编辑、删除操作。
+
+#### 创建笔记本
+<img src="notebooks/docs/images/new-notebook.png" width="800" alt="创建笔记本"/>
+
+为每个项目或主题创建独立的笔记本空间。
+
+#### 笔记本工作区
+<img src="notebooks/docs/images/workspace.png" width="800" alt="工作区"/>
+
+三栏式布局：左侧来源管理 | 中间智能对话 | 右侧创意生成
+
+#### 添加来源
+<img src="notebooks/docs/images/add-source-by-LuminaSearch.png" width="800" alt="添加来源"/>
+
+支持多种来源类型：
+- 📝 直接输入文本
+- 🔗 粘贴网页链接（自动抓取内容）
+- 📁 上传文件（.txt / .md）
+- 🔍 网络搜索（自动获取相关内容）
+
+#### 智能对话
+<table>
+  <tr>
+    <th align="center" width="50%">RAG 对话模式</th>
+    <th align="center" width="50%">Lumina Search 增强模式</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="notebooks/docs/images/RAG-Chat.png" height="300" alt="RAG对话"/></td>
+    <td align="center"><img src="notebooks/docs/images/Search-chat.png" height="300" alt="Search对话"/></td>
+  </tr>
+  <tr>
+    <td align="center">AI 基于你的资料进行回答，并标注引用来源</td>
+    <td align="center">调用 <b>Lumina Search API</b>，AI 结合实时网络搜索获取更完整的回答</td>
+  </tr>
+</table>
+
+> 💡 **提示**: 开启 Search 模式后，AI 通过 **Lumina Search API** 实时搜索网络，不仅能引用你的资料，还能补充最新信息！
+
+---
+
+### 🎨 内容生成
+
+系统支持多种内容生成形式，帮助你以不同方式理解和展示知识：
+
+| 生成类型 | 说明 | 适用场景 |
+|---------|------|---------|
+| 📖 **学习指南** (Study Guide) | 系统化的学习材料，包含章节、要点和练习 | 备考复习、课程学习 |
+| 📋 **摘要** (Summary) | 精炼的内容概述，抓住核心信息 | 快速了解、汇报准备 |
+| ❓ **FAQ** | 自动生成常见问题与解答 | 知识梳理、答疑准备 |
+| 🎯 **要点提取** (Key Points) | 提炼关键信息，条目清晰 | 会议纪要、重点回顾 |
+| 🧠 **思维导图** (Mindmap) | 可视化知识结构和关联 | 头脑风暴、知识整理 |
+| 🎨 **信息图** (Infographic) | 精美的视觉化信息展示 | 演示汇报、社交分享 |
+
+---
+
+#### 🧠 思维导图生成
+<img src="notebooks/docs/images/generate-mindmap.png" width="800" alt="思维导图生成"/>
+
+一键将笔记本内容转化为结构清晰的思维导图，帮助你：
+- 📊 可视化知识结构
+- 🔗 发现内容关联
+- 📝 快速总结要点
+
+#### 🎨 信息图生成（重点功能）
+<img src="notebooks/docs/images/generate-infographic.png" width="800" alt="信息图生成"/>
+
+AI 自动分析内容，智能选择最匹配的视觉风格，生成专业的信息图。
+
+**智能风格检测** - 系统支持 8 大领域、27 种变体风格：
+
+| 领域 | 风格变体 | 适用场景 |
+|------|---------|---------|
+| 🏢 商业 | 编辑风、数据简约、企业风 | 战略分析、市场报告 |
+| 📜 历史 | 经典时间线、纪录片风、文化传承 | 历史事件、人物传记 |
+| 🔬 科学 | 学术论文、实验视觉、科学插画 | 研究成果、实验报告 |
+| 🌌 自然太空 | 宇宙奇观、自然极简、户外探险 | 天文科普、自然探索 |
+| 💻 技术 | 赛博朋克、等距图、数据仪表板 | 技术架构、产品说明 |
+| 🧘 生活方式 | 禅意极简、活力生活、编辑生活 | 健康养生、生活技巧 |
+| 📱 社交 | Pinterest拼贴、Instagram现代、网红风 | 社交媒体、品牌推广 |
+| 👨‍👩‍👧‍👦 家庭 | 趣味学习、教育故事、插画冒险 | 儿童教育、亲子活动 |
+
+**✨ 自定义风格** - 除了自动检测，你还可以自定义信息图风格：
+
+<img src="notebooks/docs/images/customize-infographic.png" width="800" alt="自定义信息图风格"/>
+
+通过自定义提示词，你可以：
+- 🎨 指定特定的视觉风格（如“扁平化设计”、“手绘插画风”）
+- 🎨 设定配色方案（如“使用暖色调”、“简约黑白风”）
+- 📝 强调特定内容或布局要求
+
+---
+
+### 🌟 信息图作品展示
+
+以下是 AI 自动生成的信息图示例，展示了不同领域和风格的实际效果：
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="notebooks/docs/images/infographic1.png" width="400" alt="信息图示例1"/><br/>
+      <b>🌌 天文科普</b><br/>
+      <sub>风格: 宇宙奇观 · 自然太空</sub>
+    </td>
+    <td align="center">
+      <img src="notebooks/docs/images/infographic2.png" width="400" alt="信息图示例2"/><br/>
+      <b>💼 商业分析</b><br/>
+      <sub>风格: 数据简约 · 商业</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="notebooks/docs/images/infographic3.png" width="400" alt="信息图示例3"/><br/>
+      <b>🔬 科学研究</b><br/>
+      <sub>风格: 学术论文 · 科学</sub>
+    </td>
+    <td align="center">
+      <img src="notebooks/docs/images/infographic4.png" width="400" alt="信息图示例4"/><br/>
+      <b>📚 教育学习</b><br/>
+      <sub>风格: 趣味学习 · 家庭</sub>
+    </td>
+  </tr>
+</table>
+
+> 💡 **提示**: AI 会根据内容自动检测最合适的风格，你也可以通过自定义提示词完全控制生成风格！
+
+---
+
+### 🚀 快速开始
+
+1. **启动服务**
+   ```powershell
+   cd Lumina-API-Demo
+   dotnet run
+   ```
+
+2. **打开应用** - 访问 http://localhost:8400/notebook/
+
+3. **创建笔记本** - 点击 "New Notebook" 创建你的第一个笔记本
+
+4. **添加来源** - 添加文本、链接或上传文件
+
+5. **开始对话** - 与 AI 讨论你的内容，或生成思维导图/信息图
+
+---
+
+### 📁 数据结构
+
 ```
-
----
-
-### Step 2: One-Click Environment Setup
-
-Run in VS Code terminal:
-
-```powershell
-.\Internal\setup.ps1
-```
-
-This script will automatically install:
-- .NET 8 SDK (runtime environment)
-- Node.js (required for Copilot API)
-- Azure Artifacts Credential Provider (required for downloading Lumina packages)
-
-> ⏱️ First-time installation may take 5-10 minutes, please be patient
-
----
-
-### Step 3: Login and Download Lumina Package
-
-Run the following command:
-
-```powershell
-dotnet restore --interactive
-```
-
-**What happens:**
-1. Browser will automatically open Microsoft login page
-2. Login with your **@microsoft.com** account
-3. After successful login, return to VS Code terminal to see download complete
-
-> 💡 This only needs to be done once, your computer will remember the login state
-
----
-
-### Step 4: Configuration File
-
-Create `appsettings.json` based on `appsettings.Template.json` and fill in your actual configuration:
-
-```powershell
-cp appsettings.Template.json appsettings.json
-```
-
-Then edit `appsettings.json` with your `TenantId`, `ClientId`, and `RedirectUri`.
-
-**Partner Context (Optional)**: The template includes Partner Context configuration for API telemetry and quota management:
-
-```json
-{
-  "PartnerContext": {
-    "Partner": "PM playground",
-    "ScenarioGroup": "APIDemo",
-    "ScenarioName": "",
-    "Application": "",
-    "Component": ""
-  }
-}
-```
-
-You can customize these values for your own partner. See [Partner Context](#partner-context) for details.
-
----
-
-### Step 5: Start Copilot API (LLM Service)
-
-Click **+** in the top right of VS Code terminal to create a new terminal (keep this running), then enter:
-
-```powershell
-npx copilot-api@0.5.14 start
-```
-
-**First run requires GitHub authorization:**
-1. Terminal will display something like: `Please enter the code "A1B2-C3D4" in https://github.com/login/device`
-2. Open browser and visit https://github.com/login/device
-3. Enter the code shown in terminal (e.g., `A1B2-C3D4`)
-4. Click authorize
-5. Return to VS Code terminal to see service started successfully
-
-> ⚠️ **Keep this terminal running, don't close it!**
-
----
-
-### Step 6: Run the Demo!
-
-Click **+** in VS Code terminal to create another new terminal, run:
-
-```powershell
-dotnet run
-```
-
-🎉 **Done!** Open browser and visit **http://localhost:8400**, you'll see a simple web interface to try various Lumina API features:
-
-- **Search + LLM**: Web search with optional LLM summarization
-- **Open + Find**: Open web pages, optionally search within pages
-- **CUA**: Browser automation screenshots
-
----
-
-## ❓ Having Issues?
-
-If you encounter any errors during installation or running, **copy the error message to the Coding Agent**, it can help you troubleshoot!
-
----
-
-## 📚 Let Coding Agent Read Official Documentation
-
-Want the Coding Agent to write more professional Lumina code? Clone the official documentation locally and let it learn before writing code:
-
-```powershell
-git clone https://o365exchange.visualstudio.com/DefaultCollection/O365%20Core/_git/CopilotLumina partner
-```
-
-Then tell the Coding Agent:
-
-> "Please read the Lumina official documentation in the partner folder first, understand the detailed API usage, then help me write code."
-
-This way the Coding Agent can reference official documentation to write more accurate, best-practice code.
-
----
-
-## 📖 Search API Details
-
-Search API is the most commonly used feature. Here's how it works.
-
-### Call Flow
-
-```
-User inputs "AI news"
-       ↓
-Frontend (index.html) → fetch('/api/search', { query: "AI news", topN: 5 })
-       ↓
-Backend (Program.cs) → /api/search route
-       ↓
-SearchApi.cs → _proxy.SearchAsync(request)
-       ↓
-Lumina Cloud Service → Returns search results
-       ↓
-Frontend displays results
-```
-
-### Core Code: SearchApi.cs
-
-```csharp
-public async Task<List<SearchResultItem>> SearchAsync(string query, int topN = 10)
-{
-    // 1. Build request
-    var request = new SearchRequest
-    {
-        Requests = new List<SearchRequestItem>
-        {
-            new SearchRequestItem
-            {
-                Q = query,           // What to search
-                TopN = topN,         // Max results to return
-                Source = "web_with_bing"  // Data source
-            }
-        }
-    };
-
-    // 2. Call Lumina SDK (SDK sends request to Lumina cloud)
-    var response = await _proxy.SearchAsync(request);
-    
-    // 3. Return results list
-    return response?.Results?.Take(topN).ToList() ?? new List<SearchResultItem>();
-}
-```
-
-When `_proxy.SearchAsync(request)` executes, the SDK automatically:
-1. Sends request to Lumina cloud
-2. Waits for Lumina search to complete
-3. Returns the results
-
-### Request Sent to Lumina Cloud
-
-```json
-{
-  "requests": [
-    {
-      "q": "AI news",
-      "topN": 5,
-      "source": "web_with_bing"
-    }
-  ]
-}
-```
-
-### Response from Lumina
-
-```json
-{
-  "pageId": "29893556ad1845189e439459355201d3",
-  "results": [
-    {
-      "answerType": "WebPages",
-      "url": "https://example.com/ai-news-article",
-      "title": "Latest AI News - Example",
-      "semanticDocument": "This article discusses the latest developments in AI..."
-    },
-    {
-      "answerType": "WebPages", 
-      "url": "https://another-site.com/ai-update",
-      "title": "AI Industry Update",
-      "semanticDocument": "The AI industry saw significant changes this week..."
-    }
-  ],
-  "toolState": {
-    "sessionId": "995e40972e2c4cf0af8c50d5efd045e9"
-  }
-}
-```
-
-Each result contains:
-- `url` - Web page link
-- `title` - Title
-- `semanticDocument` - Content summary (can be fed to LLM for summarization)
-
----
-
-## 📁 Project File Description
-
-### 🎯 Extensible Files (Try Vibe Coding)
-
-| File | Description | Extension Scenarios |
-|------|-------------|---------------------|
-| `Program.cs` | Main program, controls the entire service | Chain multiple APIs, add new endpoints |
-| `wwwroot/index.html` | Web interface | Change UI styles, add buttons |
-| `SearchApi.cs` | Search functionality | Change what to search, how many results, only recent days |
-| `OpenApi.cs` | Open web pages and read content | Which URL to open, how many lines to read |
-| `FindApi.cs` | Find keywords in web pages | What words to find, which page to search |
-| `CuaApi.cs` | Browser automation | Which website to open, what actions (click/type/scroll) |
-| `LlmExample.cs` | AI summarization | Change how AI responds, tone, system prompt |
-
-### 🔒 Internal Folder (No modification needed)
-
-| File | Description |
-|------|-------------|
-| `Internal/TokenService.cs` | Authentication service |
-| `Internal/setup.ps1` | One-click setup script |
-
----
-
-## 🎨 Vibe Coding Example: Competitive Analysis Tool
-
-Here's a complete example showing how to combine these APIs into a practical tool through Vibe Coding.
-
-### Scenario: Automated Competitive Analysis
-
-Suppose you want to analyze recent activities of several competitors and generate an analysis report.
-
-#### Step 1: Smart Search Term Generation and Batch Search
-
-> Tell the Coding Agent:
-> 
-> "I want to build a competitive analysis feature. Users just need to input a few competitor names (like OpenAI, Google AI, Anthropic), the system first uses AI to generate more precise search terms based on competitor names (like expanding 'OpenAI' to 'OpenAI latest product launch', 'OpenAI funding news', etc.), then automatically search for news from the past week, returning 5 results per competitor."
-
-The Coding Agent will first call LLM to generate search terms (mainly modify `LlmExample.cs`), then use generated terms for batch search (mainly modify `SearchApi.cs`, `Program.cs`), with Search API's `recency` parameter set to 7 for content from the last 7 days only.
-
-#### Step 2: Get Detailed Content
-
-> "Search results only have titles and summaries, not enough information. I want to automatically open the top 2 news links for each competitor and get the full article content."
-
-The Coding Agent will chain Search and Open APIs (mainly modify `OpenApi.cs`, `Program.cs`), search first then automatically open links to read full text.
-
-#### Step 3: LLM Generate Analysis Report
-
-> "Now with full news content, I want AI to generate an analysis report.
-> 
-> Analysis dimensions:
-> - Product updates: What new features were released recently?
-> - Market strategy: What pricing, partnership, expansion moves?
-> - User feedback: How do users and media rate them?
-> - Competitive insights: What implications do these activities have for us?
-> 
-> Output requirements:
-> - Separate section for each competitor
-> - Use tables to compare key information
-> - End with summary and action recommendations"
-
-The Coding Agent will write these requirements as a system prompt (mainly modify `LlmExample.cs`), having LLM output analysis report in the specified format.
-
-#### Step 4: Capture Product Page Screenshots
-
-> "The analysis report needs images. I want to automatically open each competitor's homepage (like openai.com, anthropic.com) and save screenshots as report illustrations."
-
-The Coding Agent will use CUA's browser automation feature (mainly modify `CuaApi.cs`), opening websites sequentially and taking screenshots.
-
-#### Step 5: Integrate into Complete Feature
-
-> "Chain the above features into a complete workflow: user inputs competitor names and website addresses, one-click generates a complete competitive report with news summaries, detailed analysis, and website screenshots."
-
-The Coding Agent will chain Search → Open → LLM → CUA in `Program.cs` to form the complete workflow.
-
----
-
-## 🌐 Full Web Demo
-
-For a full web application with UI, switch to the `main` branch:
-
-```powershell
-git checkout main
-```
-
----
----
-
-<a name="中文"></a>
-## 中文
-
-一个最小化的 Lumina API 调用示例。帮助你快速掌握 API 基本用法，并在简洁的代码基础上自由扩展、设计你自己的功能。
-
----
-
-## 🚀 快速开始 (DevBox)
-
-### 第一步：下载代码
-
-在 VS Code 中按 `` Ctrl + ` `` 打开终端，复制粘贴以下命令：
-
-```powershell
-git clone https://github.com/ai-microsoft/Lumina-API-Demo.git
-cd Lumina-API-Demo
-git checkout minimal-api-call
+notebooks/Data/
+├── index.json                    # 笔记本索引
+└── {notebook-id}/
+    ├── metadata.json             # 笔记本元数据
+    ├── sources.json              # 所有来源内容
+    ├── chat-history.json         # 对话历史
+    ├── generations.json          # 生成记录
+    └── images/                   # 生成的图片
 ```
 
 ---
 
-### 第二步：一键安装环境
+### 🔧 技术架构
 
-在 VS Code 终端中运行：
-
-```powershell
-.\Internal\setup.ps1
+```
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│                 │     │                  │     │                 │
+│   浏览器 UI     │────▶│   C# 后端        │────▶│  egress-llm     │
+│   (HTML/JS)     │◀────│   (ASP.NET)      │◀────│  (AI 服务)      │
+│                 │     │                  │     │                 │
+└─────────────────┘     └──────────────────┘     └─────────────────┘
+                                 │
+                                 │ 调用 Python 技能
+                                 ▼
+                        ┌──────────────────┐
+                        │ infographic-gen  │
+                        │ (信息图生成技能) │
+                        └──────────────────┘
 ```
 
-这个脚本会自动帮你安装：
-- .NET 8 SDK（运行代码的环境）
-- Node.js（运行 Copilot API 需要）
-- Azure Artifacts Credential Provider（下载 Lumina 包需要）
-
-> ⏱️ 首次安装可能需要 5-10 分钟，请耐心等待
+> 📌 **说明**: 目前系统集成了一个 Python 技能 `infographic-gen`，用于生成专业信息图。其他内容（学习指南、摘要、FAQ、思维导图等）由 C# 后端直接调用 LLM 生成。
 
 ---
 
-### 第三步：登录并下载 Lumina 包
+### ❓ 常见问题 (FAQ)
 
-运行以下命令：
+<details>
+<summary><b>📝 支持哪些来源格式？</b></summary>
 
-```powershell
-dotnet restore --interactive
-```
+- **文本**: 直接粘贴任何文本内容
+- **网页**: 粘贴 URL，系统自动抓取内容
+- **文件**: 支持 .txt 和 .md 文件上传
+- **搜索**: 输入关键词，系统自动搜索并添加相关结果
+</details>
 
-**会发生什么：**
-1. 浏览器会自动弹出 Microsoft 登录页面
-2. 用你的 **@microsoft.com** 账号登录
-3. 登录成功后，回到 VS Code 终端，会看到包下载完成
+<details>
+<summary><b>🤖 RAG 对话和 Search 模式有什么区别？</b></summary>
 
-> 💡 这一步只需要做一次，之后电脑会记住你的登录状态
+- **RAG 模式**: AI 仅基于你添加的来源进行回答，回答更准确、可追溯
+- **Search 模式**: 调用 **Lumina Search API** 实时搜索网络获取最新信息，适合需要实时数据的场景
+</details>
 
----
+<details>
+<summary><b>🎨 信息图风格是如何选择的？</b></summary>
 
-### 第四步：配置文件
+AI 会自动分析你的内容，通过关键词检测选择最匹配的领域和风格。例如：
+- 包含“星球、太空、宇宙”→ 自动选择“自然太空”风格
+- 包含“商业、战略、营收”→ 自动选择“商业”风格
+</details>
 
-根据模板创建 `appsettings.json` 并填入你的实际配置：
+<details>
+<summary><b>💾 数据存储在哪里？</b></summary>
 
-```powershell
-cp appsettings.Template.json appsettings.json
-```
+所有数据存储在 `notebooks/Data/` 文件夹中，以 JSON 格式保存。重启服务后数据仍然保留。
+</details>
 
-然后编辑 `appsettings.json`，填入你的 `TenantId`、`ClientId` 和 `RedirectUri`。
+<details>
+<summary><b>⏱️ 信息图生成需要多久？</b></summary>
 
-**Partner Context（可选）**：模板包含了用于 API 遥测和配额管理的 Partner Context 配置：
-
-```json
-{
-  "PartnerContext": {
-    "Partner": "PM playground",
-    "ScenarioGroup": "APIDemo",
-    "ScenarioName": "",
-    "Application": "",
-    "Component": ""
-  }
-}
-```
-
-你可以根据自己的 partner 自定义这些值。详见 [Partner Context](#partner-context) 部分。
+通常需要 30-90 秒，取决于内容复杂度和网络情况。生成过程包括内容分析、风格选择和图像渲染三个步骤。
+</details>
 
 ---
 
-### 第五步：启动 Copilot API（LLM 服务）
+## English Version
 
-在 VS Code 终端右上角点击 **+** 新建一个终端（这个终端要保持运行），输入：
+### 📖 Overview
 
-```powershell
-npx copilot-api@0.5.14 start
-```
+The Notebook feature in Lumina API Demo is an AI research assistant similar to **Google NotebookLM**, designed specifically for **learning and research**. It helps you:
 
-**首次运行需要 GitHub 授权：**
-1. 终端会显示类似：`Please enter the code "A1B2-C3D4" in https://github.com/login/device`
-2. 打开浏览器，访问 https://github.com/login/device
-3. 输入终端显示的代码（如 `A1B2-C3D4`）
-4. 点击授权
-5. 回到 VS Code 终端，会看到服务启动成功
+- 📚 **Consolidate Information** - Gather articles, web pages, and documents into one workspace
+- 🤖 **Chat with Your Sources** - AI provides accurate, cited answers based on your materials
+- ✨ **Auto-Generate Content** - Create study guides, summaries, FAQs, mindmaps, infographics and more with one click
 
-> ⚠️ **保持这个终端运行，不要关闭！**
+> 💡 **Design Philosophy**: Make AI your research partner to help you understand, organize, and share knowledge faster.
 
 ---
 
-### 第六步：运行 Demo！
+### ⚡ Key Features
 
-在 VS Code 终端右上角点击 **+** 再新建一个终端，运行：
-
-```powershell
-dotnet run
-```
-
-🎉 **大功告成！** 打开浏览器访问 **http://localhost:8400**，你会看到一个简洁的 Web 界面，可以尝试各种 Lumina API 功能：
-
-- **Search + LLM**：Web 搜索，可选用 LLM 总结结果
-- **Open + Find**：打开网页获取内容，可选在页面内查找
-- **CUA**：浏览器自动化截图
-
----
-
-## ❓ 遇到问题？
-
-如果在安装或运行过程中遇到任何错误，**把错误信息复制给Coding Agent**，它可以帮你排查问题！
-
----
-
-## 📚 让 Coding Agent 读官方文档
-
-想让 Coding Agent 写出更专业的 Lumina 代码？可以把官方文档 clone 到本地，让它先学习再写代码：
-
-```powershell
-git clone https://o365exchange.visualstudio.com/DefaultCollection/O365%20Core/_git/CopilotLumina partner
-```
-
-然后告诉 Coding Agent：
-
-> "请先读一下 partner 文件夹里的 Lumina 官方文档，了解 API 的详细用法，然后再帮我写代码。"
-
-这样 Coding Agent 就能参考官方文档，写出更准确、更符合最佳实践的代码。
+<table>
+  <tr>
+    <td align="center" width="25%">
+      <h3>📚</h3>
+      <b>Efficient Integration</b><br/>
+      <sub>One-click to add text, URLs, files, or search results as knowledge sources</sub>
+    </td>
+    <td align="center" width="25%">
+      <h3>🎯</h3>
+      <b>Smart Conversation</b><br/>
+      <sub>RAG-powered AI accurately references your materials to answer questions</sub>
+    </td>
+    <td align="center" width="25%">
+      <h3>🎨</h3>
+      <b>Diverse Generation</b><br/>
+      <sub>Supports study guides, summaries, FAQs, mindmaps, infographics and more</sub>
+    </td>
+    <td align="center" width="25%">
+      <h3>🔍</h3>
+      <b>Lumina Search</b><br/>
+      <sub>Powered by <b>Lumina Search API</b> for real-time web information</sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
-## 📖 Search API 详解
+### 🎯 Use Cases
 
-Search API 是最常用的功能，下面详细介绍它的工作原理。
-
-### 调用流程
-
-```
-用户输入 "AI news"
-       ↓
-前端 (index.html) → fetch('/api/search', { query: "AI news", topN: 5 })
-       ↓
-后端 (Program.cs) → /api/search 路由
-       ↓
-SearchApi.cs → _proxy.SearchAsync(request)
-       ↓
-Lumina 云端服务 → 返回搜索结果
-       ↓
-前端显示结果
-```
-
-### 核心代码：SearchApi.cs
-
-```csharp
-public async Task<List<SearchResultItem>> SearchAsync(string query, int topN = 10)
-{
-    // 1. 构造请求
-    var request = new SearchRequest
-    {
-        Requests = new List<SearchRequestItem>
-        {
-            new SearchRequestItem
-            {
-                Q = query,           // 搜什么query
-                TopN = topN,         // 最多返回几条结果
-                Source = "web_with_bing"  // 搜索的数据源
-            }
-        }
-    };
-
-    // 2. 调用 Lumina SDK（SDK 会把 request 发送给 Lumina 云端）
-    var response = await _proxy.SearchAsync(request);
-    
-    // 3. 返回结果列表
-    return response?.Results?.Take(topN).ToList() ?? new List<SearchResultItem>();
-}
-```
-
-当执行 `_proxy.SearchAsync(request)` 时，SDK 会自动帮你：
-1. 把请求发给 Lumina 云端
-2. 等 Lumina 搜索完成
-3. 把结果拿回来
-
-### Lumina 云端收到的请求
-
-```json
-{
-  "requests": [
-    {
-      "q": "AI news",
-      "topN": 5,
-      "source": "web_with_bing"
-    }
-  ]
-}
-```
-
-### Lumina 返回的响应
-
-```json
-{
-  "pageId": "29893556ad1845189e439459355201d3",
-  "results": [
-    {
-      "answerType": "WebPages",
-      "url": "https://example.com/ai-news-article",
-      "title": "Latest AI News - Example",
-      "semanticDocument": "This article discusses the latest developments in AI..."
-    },
-    {
-      "answerType": "WebPages", 
-      "url": "https://another-site.com/ai-update",
-      "title": "AI Industry Update",
-      "semanticDocument": "The AI industry saw significant changes this week..."
-    }
-  ],
-  "toolState": {
-    "sessionId": "995e40972e2c4cf0af8c50d5efd045e9"
-  }
-}
-```
-
-每个结果包含：
-- `url` - 网页链接
-- `title` - 标题
-- `semanticDocument` - 内容摘要（可以喂给 LLM 做总结）
+<table>
+  <tr>
+    <td width="33%">
+      <h4>🎓 Academic Research</h4>
+      <p>Collect papers and materials, let AI help you clarify research context, auto-generate literature reviews and key findings.</p>
+      <code>For: Researchers, Scholars, Analysts</code>
+    </td>
+    <td width="33%">
+      <h4>💼 Meeting Notes</h4>
+      <p>Consolidate meeting recordings, emails and documents, quickly generate action items, decision summaries and to-dos.</p>
+      <code>For: Project Managers, Team Leads, Assistants</code>
+    </td>
+    <td width="33%">
+      <h4>📖 Exam Preparation</h4>
+      <p>Import course lectures and textbooks, AI auto-generates study guides, FAQs and practice questions for efficient studying.</p>
+      <code>For: Students, Certification Candidates, Trainees</code>
+    </td>
+  </tr>
+</table>
 
 ---
 
-## 📁 项目文件说明
+### 🖼️ Feature Screenshots
 
-### 🎯 可扩展的文件（Vibe Coding可以尝试的）
+#### Home - Notebook Management
+<img src="notebooks/docs/images/home.png" width="800" alt="Home"/>
 
-| 文件 | 说明 | 扩展场景 |
-|------|------------|--------------|
-| `Program.cs` | 主程序，控制整个服务 | 想串联多个 API、加新接口 |
-| `wwwroot/index.html` | 网页界面 | 想改界面样式、加按钮 |
-| `SearchApi.cs` | 搜索功能 | 想改搜什么、返回几条、只要最近几天的 |
-| `OpenApi.cs` | 打开网页读内容 | 想打开哪个网址、读多少行 |
-| `FindApi.cs` | 在网页里找关键词 | 想找什么词、在哪个页面找 |
-| `CuaApi.cs` | 控制浏览器自动操作 | 想打开什么网站、做什么操作（点击/输入/滚动） |
-| `LlmExample.cs` | AI 总结功能 | 想改 AI 怎么回答、用什么语气、写system prompt|
+Manage all your notebooks with support for create, edit, and delete operations.
 
-### 🔒 Internal 文件夹（不需要修改）
+#### Create Notebook
+<img src="notebooks/docs/images/new-notebook.png" width="800" alt="Create Notebook"/>
 
-| 文件 | 说明 |
-|------|------|
-| `Internal/TokenService.cs` | 身份认证服务 |
-| `Internal/setup.ps1` | 一键安装脚本 |
+Create a dedicated notebook space for each project or topic.
 
----
+#### Notebook Workspace
+<img src="notebooks/docs/images/workspace.png" width="800" alt="Workspace"/>
 
-## 🎨 Vibe Coding 示例：竞品分析工具
+Three-panel layout: Sources (left) | Chat (center) | Studio (right)
 
-下面用一个完整的例子，展示如何通过 Vibe Coding 把这些 API 组合成一个实用工具。
+#### Add Sources
+<img src="notebooks/docs/images/add-source-by-LuminaSearch.png" width="800" alt="Add Source"/>
 
-### 场景：自动化竞品分析
+Multiple source types supported:
+- 📝 Direct text input
+- 🔗 Paste URL (auto-fetches content)
+- 📁 Upload files (.txt / .md)
+- 🔍 Web search (auto-retrieves relevant content)
 
-假设你想分析几个竞品最近的动态，生成一份分析报告。
+#### Smart Chat
+<table>
+  <tr>
+    <th align="center" width="50%">RAG Chat Mode</th>
+    <th align="center" width="50%">Lumina Search Enhanced Mode</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="notebooks/docs/images/RAG-Chat.png" height="300" alt="RAG Chat"/></td>
+    <td align="center"><img src="notebooks/docs/images/Search-chat.png" height="300" alt="Search Chat"/></td>
+  </tr>
+  <tr>
+    <td align="center">AI answers based on your sources with citations</td>
+    <td align="center">Powered by <b>Lumina Search API</b> for real-time web search results</td>
+  </tr>
+</table>
 
-#### 第一步：智能生成搜索词并批量搜索
-
-> 告诉 Coding Agent：
-> 
-> "我想做一个竞品分析功能。用户只需要输入几个竞品名称（比如 OpenAI、Google AI、Anthropic），系统先用 AI 根据竞品名称生成更精准的搜索词（比如把"OpenAI"扩展成"OpenAI 最新产品发布"、"OpenAI 融资新闻"等），然后自动搜索最近一周的新闻，每个竞品返回 5 条结果。"
-
-Coding Agent 会先调用 LLM 生成搜索词（主要改 `LlmExample.cs`），然后用生成的搜索词进行 batch search（主要改 `SearchApi.cs`、`Program.cs`），Search API 的 `recency` 参数设为 7 表示只要最近 7 天的内容。
-
-#### 第二步：获取详细内容
-
-> "搜索结果只有标题和摘要，信息不够。我希望能自动打开每个竞品的前 2 条新闻链接，获取完整的文章内容。"
-
-Coding Agent 会串联 Search 和 Open API（主要改 `OpenApi.cs`、`Program.cs`），先搜索再自动打开链接读取全文。
-
-#### 第三步：LLM 生成分析报告
-
-> "现在有了完整的新闻内容，我希望 AI 能帮我生成一份分析报告。
-> 
-> 分析维度：
-> - 产品功能更新：最近发布了什么新功能？
-> - 市场策略：有什么定价、合作、扩张动作？
-> - 用户反馈：用户和媒体的评价如何？
-> - 竞争洞察：这些动态对我们有什么启示？
-> 
-> 输出要求：
-> - 每个竞品单独一节
-> - 用表格对比关键信息
-> - 最后给出总结和行动建议
-> - 用中文输出，语气专业但易懂"
-
-Coding Agent 会把这些要求写成 system prompt（主要改 `LlmExample.cs`），让 LLM 按照指定格式输出分析报告。
-
-#### 第四步：截取产品页面截图
-
-> "分析报告需要配图。我希望能自动打开各竞品的官网首页（比如 openai.com、anthropic.com），截图保存下来作为报告配图。"
-
-Coding Agent 会用 CUA 的浏览器自动化功能（主要改 `CuaApi.cs`），依次打开网站并截图。
-
-#### 第五步：整合成完整功能
-
-> "把上面的功能串成一个完整流程：用户输入竞品名称和官网地址，一键生成包含新闻摘要、详细分析、官网截图的完整竞品报告。"
-
-Coding Agent 会在 `Program.cs` 里把 Search → Open → LLM → CUA 串联起来，形成完整流程。
+> 💡 **Tip**: With Search mode enabled, AI uses **Lumina Search API** to search the web in real-time, combining your sources with the latest information!
 
 ---
 
-## 🌐 完整 Web Demo
+### 🎨 Content Generation
 
-如果你想看带界面的完整 Web 应用，请切换到 `main` 分支：
+The system supports multiple content generation types to help you understand and present knowledge in different ways:
 
-```powershell
-git checkout main
+| Generation Type | Description | Use Cases |
+|----------------|-------------|-----------|
+| 📖 **Study Guide** | Systematic learning materials with chapters, key points, and exercises | Exam prep, Course study |
+| 📋 **Summary** | Concise content overview capturing core information | Quick review, Report prep |
+| ❓ **FAQ** | Auto-generated frequently asked questions and answers | Knowledge review, Q&A prep |
+| 🎯 **Key Points** | Extracted key information in clear bullet points | Meeting notes, Quick recap |
+| 🧠 **Mindmap** | Visualize knowledge structure and relationships | Brainstorming, Knowledge mapping |
+| 🎨 **Infographic** | Beautiful visual information display | Presentations, Social sharing |
+
+---
+
+#### 🧠 Mindmap Generation
+<img src="notebooks/docs/images/generate-mindmap.png" width="800" alt="Mindmap Generation"/>
+
+One-click to transform notebook content into clear, structured mindmaps:
+- 📊 Visualize knowledge structure
+- 🔗 Discover content connections
+- 📝 Quickly summarize key points
+
+#### 🎨 Infographic Generation (Featured)
+<img src="notebooks/docs/images/generate-infographic.png" width="800" alt="Infographic Generation"/>
+
+AI automatically analyzes content, intelligently selects the best visual style, and generates professional infographics.
+
+**Intelligent Style Detection** - System supports 8 domains with 27 style variants:
+
+| Domain | Style Variants | Use Cases |
+|--------|---------------|-----------|
+| 🏢 Business | Editorial, Minimal-Data, Corporate | Strategy analysis, Market reports |
+| 📜 History | Timeline-Classic, Documentary, Cultural-Heritage | Historical events, Biographies |
+| 🔬 Science | Academic-Paper, Lab-Visual, Illustrated-Science | Research findings, Experiment reports |
+| 🌌 Nature-Space | Cosmic-Wonder, Nature-Minimal, Outdoor-Adventure | Astronomy, Nature exploration |
+| 💻 Technology | Cyberpunk, Notion-Isometric, Data-Dashboard | Tech architecture, Product docs |
+| 🧘 Lifestyle | Zen-Minimal, Vibrant-Lifestyle, Editorial-Lifestyle | Wellness, Life tips |
+| 📱 Social | Pinterest-Collage, Instagram-Modern, Influencer-Bold | Social media, Branding |
+| 👨‍👩‍👧‍👦 Family | Playful-Learning, Educational-Story, Illustrated-Adventure | Kids education, Family activities |
+
+**✨ Custom Styles** - Beyond auto-detection, you can also customize the infographic style:
+
+<img src="notebooks/docs/images/customize-infographic.png" width="800" alt="Customize Infographic Style"/>
+
+With custom prompts, you can:
+- 🎨 Specify a particular visual style (e.g., "flat design", "hand-drawn illustration")
+- 🎨 Set color schemes (e.g., "warm tones", "minimalist black and white")
+- 📝 Emphasize specific content or layout requirements
+
+---
+
+### 🌟 Infographic Gallery
+
+Here are examples of AI-generated infographics, showcasing different domains and styles:
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="notebooks/docs/images/infographic1.png" width="400" alt="Infographic Example 1"/><br/>
+      <b>🌌 Astronomy</b><br/>
+      <sub>Style: Cosmic Wonder · Nature-Space</sub>
+    </td>
+    <td align="center">
+      <img src="notebooks/docs/images/infographic2.png" width="400" alt="Infographic Example 2"/><br/>
+      <b>💼 Business</b><br/>
+      <sub>Style: Minimal-Data · Business</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="notebooks/docs/images/infographic3.png" width="400" alt="Infographic Example 3"/><br/>
+      <b>🔬 Science</b><br/>
+      <sub>Style: Academic-Paper · Science</sub>
+    </td>
+    <td align="center">
+      <img src="notebooks/docs/images/infographic4.png" width="400" alt="Infographic Example 4"/><br/>
+      <b>📚 Education</b><br/>
+      <sub>Style: Playful-Learning · Family</sub>
+    </td>
+  </tr>
+</table>
+
+> 💡 **Tip**: AI automatically detects the best matching style based on your content, or you can fully control the generation style with custom prompts!
+
+---
+
+### 🚀 Quick Start
+
+1. **Start the Server**
+   ```powershell
+   cd Lumina-API-Demo
+   dotnet run
+   ```
+
+2. **Open the App** - Visit http://localhost:8400/notebook/
+
+3. **Create a Notebook** - Click "New Notebook" to create your first notebook
+
+4. **Add Sources** - Add text, links, or upload files
+
+5. **Start Exploring** - Chat with AI about your content, or generate mindmaps/infographics
+
+---
+
+### 📁 Data Structure
+
+```
+notebooks/Data/
+├── index.json                    # Notebook index
+└── {notebook-id}/
+    ├── metadata.json             # Notebook metadata
+    ├── sources.json              # All source content
+    ├── chat-history.json         # Chat history
+    ├── generations.json          # Generation records
+    └── images/                   # Generated images
 ```
 
 ---
 
-## Partner Context
+### 🔧 Technical Architecture
 
-Partner Context is used to identify API callers for telemetry, quota management, and debugging purposes.
-
-### Configuration
-
-Add the `PartnerContext` section to your `appsettings.json`:
-
-```json
-{
-  "PartnerContext": {
-    "Partner": "Your Partner Name",
-    "ScenarioGroup": "Your Scenario Group",
-    "ScenarioName": "Your Scenario Name",
-    "Application": "Your Application",
-    "Component": "Your Component"
-  }
-}
+```
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│                 │     │                  │     │                 │
+│   Browser UI    │────▶│   C# Backend     │────▶│   egress-llm    │
+│   (HTML/JS)     │◀────│   (ASP.NET)      │◀────│   (AI Service)  │
+│                 │     │                  │     │                 │
+└─────────────────┘     └──────────────────┘     └─────────────────┘
+                                 │
+                                 │ Calls Python Skill
+                                 ▼
+                        ┌──────────────────┐
+                        │ infographic-gen  │
+                        │ (Infographic     │
+                        │  Generation)     │
+                        └──────────────────┘
 ```
 
-**Fields:**
-- `Partner` (Required): Your partner identifier registered with Lumina team
-- `ScenarioGroup` (Optional): Group name for your scenarios
-- `ScenarioName` (Optional): Specific scenario name
-- `Application` (Optional): Application identifier
-- `Component` (Optional): Component identifier
+> 📌 **Note**: Currently the system integrates one Python skill `infographic-gen` for professional infographic generation. Other content types (study guides, summaries, FAQs, mindmaps, etc.) are generated by the C# backend calling LLM directly.
 
-> **Note**: Fields are hierarchical - you cannot skip levels (e.g., you can't set `ScenarioName` without setting `ScenarioGroup` first).
+---
 
-### How It Works
+### ❓ FAQ
 
-Partner Context is automatically passed to Lumina APIs:
+<details>
+<summary><b>📝 What source formats are supported?</b></summary>
 
-1. **SDK-based APIs (Search, Open, Find)**: Via `LuminaApiOptions` properties
-2. **HTTP-based APIs (CUA)**: Via `X-Partner`, `X-ScenarioGroup`, etc. HTTP headers
+- **Text**: Paste any text content directly
+- **URL**: Paste a web link, system auto-fetches content
+- **Files**: Supports .txt and .md file uploads
+- **Search**: Enter keywords, system auto-searches and adds relevant results
+</details>
 
-No code changes required - just configure `appsettings.json`!
+<details>
+<summary><b>🤖 What's the difference between RAG and Search mode?</b></summary>
 
+- **RAG Mode**: AI answers based only on your added sources, more accurate and traceable
+- **Search Mode**: Powered by **Lumina Search API** to search the web in real-time for latest information, suitable for real-time data needs
+</details>
+
+<details>
+<summary><b>🎨 How is the infographic style selected?</b></summary>
+
+AI automatically analyzes your content and selects the best matching domain and style via keyword detection. For example:
+- Contains "planet, space, universe" → Auto-selects "Nature-Space" style
+- Contains "business, strategy, revenue" → Auto-selects "Business" style
+</details>
+
+<details>
+<summary><b>💾 Where is data stored?</b></summary>
+
+All data is stored in the `notebooks/Data/` folder in JSON format. Data persists after server restart.
+</details>
+
+<details>
+<summary><b>⏱️ How long does infographic generation take?</b></summary>
+
+Typically 30-90 seconds, depending on content complexity and network conditions. The process includes content analysis, style selection, and image rendering.
+</details>
+
+---
+
+### 📸 Screenshot Checklist
+
+- [x] 首页 / Home (`home.png`)
+- [x] 创建笔记本 / Create Notebook (`new-notebook.png`)
+- [x] 工作区 / Workspace (`workspace.png`)
+- [x] 添加来源 / Add Source (`add-source-by-LuminaSearch.png`)
+- [x] RAG 对话 / RAG Chat (`RAG-Chat.png`)
+- [x] Search 对话 / Search Chat (`Search-chat.png`)
+- [x] 思维导图生成 / Mindmap Generation (`generate-mindmap.png`)
+- [x] 信息图生成 / Infographic Generation (`generate-infographic.png`)
+- [x] 信息图示例 / Infographic Examples (`infographic1~4.png`)
+
+---
+
+**Last Updated**: 2026-01-30  
+**Project**: Lumina-API-Demo
