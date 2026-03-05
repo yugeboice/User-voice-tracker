@@ -38,14 +38,25 @@ dotnet run
 | [Notebook App](./projects/notebook-app/) | Search, Open, Find, CUA | NotebookLM-inspired workspace: AI chat, source management, mindmaps, and infographic generation |
 | [AI Newsletter (AI Radar)](./projects/ai-newsletter/) | — | Automated AI news aggregation from ChatGPT, Gemini, Genspark |
 
-## How to Add a New Project
+## How to Update Your Project
 
-1. Create a new folder under `projects/` with a descriptive name
-2. Include all necessary files for independent build and run
-3. Assign a unique port in `Program.cs`
-4. Add a `README.md` with setup and usage instructions
-5. Update this README with your project info
-6. Submit a PR
+1. Make sure you're on the `lab` branch and pull the latest changes:
+   ```bash
+   git checkout lab
+   git pull origin lab
+   ```
+2. Create a personal branch from `lab`:
+   ```bash
+   git checkout -b user/<your-alias>/<change-description>
+   ```
+3. Make changes to your project under `projects/<your-project>/`
+4. Commit and push your branch:
+   ```bash
+   git add .
+   git commit -m "Your commit message"
+   git push origin user/<your-alias>/<change-description>
+   ```
+5. Create a PR targeting the `lab` branch and request review
 
 ## Branch Guide
 
