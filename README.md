@@ -28,15 +28,15 @@ dotnet run
 
 ## Projects
 
-| Project | Author | Lumina APIs | Description |
-|---------|--------|------------|-------------|
-| [Arena Watch](./projects/arena-watch/) | vibe coding team | Search, Open, Find, CUA | AI model ranking analysis platform with multi-leaderboard aggregation and smart comparison |
-| [Competitor Trending News](./projects/competitor-trending-news/) | sunting | Search, Open, Find, CUA | Competitive intelligence tool: track competitor news and market trends |
-| [Companion Chat](./projects/companion-chat/) | Fang Wu | Search, Open, Find, CUA | Multi-feature AI companion: chat, PPT generation, TTS, agent system, local knowledge base |
-| [Customer Service Agent](./projects/customer-service-agent/) | — | Search, Open, Find, CUA | Intelligent customer service assistant with knowledge base, multi-language support, and memory learning |
-| [Infographic Gen](./projects/infographic-gen/) | — | Search, Open, Find, CUA | Infographic generation with 8 style domains and Python skill pipeline |
-| [Notebook App](./projects/notebook-app/) | — | Search, Open, Find, CUA | NotebookLM-inspired workspace: AI chat, source management, mindmaps, and infographic generation |
-| [AI Newsletter (AI Radar)](./projects/ai-newsletter/) | Doris | — | Automated AI news aggregation from ChatGPT, Gemini, Genspark |
+| Project | Lumina APIs | Description |
+|---------|------------|-------------|
+| [Arena Watch](./projects/arena-watch/) | Search, Open, Find, CUA | AI model ranking analysis platform with multi-leaderboard aggregation and smart comparison |
+| [Competitor Trending News](./projects/competitor-trending-news/) | Search, Open, Find, CUA | Competitive intelligence tool: track competitor news and market trends |
+| [Companion Chat](./projects/companion-chat/) | Search, Open, Find, CUA | Multi-feature AI companion: chat, PPT generation, TTS, agent system, local knowledge base |
+| [Customer Service Agent](./projects/customer-service-agent/) | Search, Open, Find, CUA | Intelligent customer service assistant with knowledge base, multi-language support, and memory learning |
+| [Infographic Gen](./projects/infographic-gen/) | Search, Open, Find, CUA | Infographic generation with 8 style domains and Python skill pipeline |
+| [Notebook App](./projects/notebook-app/) | Search, Open, Find, CUA | NotebookLM-inspired workspace: AI chat, source management, mindmaps, and infographic generation |
+| [AI Newsletter (AI Radar)](./projects/ai-newsletter/) | — | Automated AI news aggregation from ChatGPT, Gemini, Genspark |
 
 ## How to Add a New Project
 
