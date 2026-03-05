@@ -2,62 +2,50 @@
 
 A collection of educational projects demonstrating various Lumina API use cases, built by team members as part of vibe coding practice sessions.
 
-## Quick Start
+## Getting Started
+
+### Configuration
 
 ```bash
 git clone https://github.com/ai-microsoft/Lumina-API-Demo.git
 cd Lumina-API-Demo
-git checkout lab
+cp appsettings.Template.json appsettings.json
 ```
 
-Open `docs/index.html` in your browser to see the project landing page with links to each running project.
+Edit `appsettings.json` with your configuration. All projects share this root-level configuration file.
+
+### Run
+
+```powershell
+# Terminal 1: Start Copilot API
+npx copilot-api@0.5.14 start
+
+# Terminal 2: Run a project
+cd projects/<project-name>
+dotnet run
+# Open the URL shown in the console output in your browser
+```
 
 ## Projects
 
-| Project | Author | Tech Stack | Port | Description |
-|---------|--------|-----------|------|-------------|
-| [Competitor Trending News](./projects/competitor-trending-news/) | sunting | C#/.NET 8 | 8401 | Competitive intelligence tool: track competitor news and market trends |
-| [Companion Chat](./projects/companion-chat/) | fangwu | C#/.NET 8 | 8402 | Multi-feature demo: companion chat, PPT generation, TTS, local knowledge base |
-| [AI Newsletter (AI Radar)](./projects/ai-newsletter/) | Doris | Node.js | — | Automated AI news aggregation from ChatGPT, Gemini, Genspark |
-
-> More projects coming soon.
-
-## How to Run
-
-### C# Projects (.NET 8)
-
-Each C# project runs on its own port so you can have multiple projects running simultaneously.
-
-```bash
-cd projects/competitor-trending-news
-cp appsettings.Template.json appsettings.json
-# Edit appsettings.json with your Azure AD credentials
-dotnet run
-# Open http://localhost:8401
-```
-
-### Node.js Projects
-
-```bash
-cd projects/ai-newsletter
-npm install
-# See project README for detailed usage
-```
-
-## Prerequisites
-
-- .NET 8 SDK
-- Node.js (for Copilot API proxy and Node.js projects)
-- Azure AD credentials for Lumina API access
+| Project | Author | Lumina APIs | Description |
+|---------|--------|------------|-------------|
+| [Arena Watch](./projects/arena-watch/) | vibe coding team | Search, Open, Find, CUA | AI model ranking analysis platform with multi-leaderboard aggregation and smart comparison |
+| [Competitor Trending News](./projects/competitor-trending-news/) | sunting | Search, Open, Find, CUA | Competitive intelligence tool: track competitor news and market trends |
+| [Companion Chat](./projects/companion-chat/) | Fang Wu | Search, Open, Find, CUA | Multi-feature AI companion: chat, PPT generation, TTS, agent system, local knowledge base |
+| [Customer Service Agent](./projects/customer-service-agent/) | — | Search, Open, Find, CUA | Intelligent customer service assistant with knowledge base, multi-language support, and memory learning |
+| [Infographic Gen](./projects/infographic-gen/) | — | Search, Open, Find, CUA | Infographic generation with 8 style domains and Python skill pipeline |
+| [Notebook App](./projects/notebook-app/) | — | Search, Open, Find, CUA | NotebookLM-inspired workspace: AI chat, source management, mindmaps, and infographic generation |
+| [AI Newsletter (AI Radar)](./projects/ai-newsletter/) | Doris | — | Automated AI news aggregation from ChatGPT, Gemini, Genspark |
 
 ## How to Add a New Project
 
 1. Create a new folder under `projects/` with a descriptive name
 2. Include all necessary files for independent build and run
-3. Assign a unique port (next available: 8404) in `Program.cs`
+3. Assign a unique port in `Program.cs`
 4. Add a `README.md` with setup and usage instructions
-5. Update this README and `docs/index.html` with your project info
-6. Submit a PR to the `lab` branch
+5. Update this README with your project info
+6. Submit a PR
 
 ## Branch Guide
 

@@ -18,6 +18,7 @@ class Program
     static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        builder.Configuration.AddJsonFile(Path.Combine(builder.Environment.ContentRootPath, "..", "..", "appsettings.json"), optional: true, reloadOnChange: true);
         builder.WebHost.UseUrls("http://localhost:8406");
 
         var app = builder.Build();
