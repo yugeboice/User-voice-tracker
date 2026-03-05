@@ -9,10 +9,10 @@ A collection of educational projects demonstrating various Lumina API use cases,
 ```bash
 git clone https://github.com/ai-microsoft/Lumina-API-Demo.git
 cd Lumina-API-Demo
-cp appsettings.Template.json appsettings.json
+cp appsettings.Template.json Launcher/appsettings.json
 ```
 
-Edit `appsettings.json` with your configuration. All projects share this root-level configuration file.
+Edit `Launcher/appsettings.json` with your configuration (Tenant, ClientId, Partner context, etc.). All projects share this configuration through the Launcher.
 
 ### Run
 
@@ -20,10 +20,10 @@ Edit `appsettings.json` with your configuration. All projects share this root-le
 # Terminal 1: Start Copilot API
 npx copilot-api@0.5.14 start
 
-# Terminal 2: Run a project
-cd projects/<project-name>
+# Terminal 2: Start the Launcher (serves all projects)
+cd Launcher
 dotnet run
-# Open the URL shown in the console output in your browser
+# Open http://localhost:8400 in your browser
 ```
 
 ## Projects
