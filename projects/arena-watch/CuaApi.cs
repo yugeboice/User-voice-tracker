@@ -221,9 +221,18 @@ public class CuaApi
             return null;
         }
 
-        // Response structure: { content: { screenshot: "base64..." } }
+        // Response structure: { content: { screenshotUrl: "data:image/png;base64,..." } }
         var result = System.Text.Json.JsonSerializer.Deserialize<CuaGetResponse>(content);
-        var screenshot = result?.Content?.Screenshot;
+        var screenshot = result?.Content?.Screenshot ?? result?.Content?.ScreenshotUrl;
+        
+        // Strip "data:image/png;base64," prefix if present
+        if (screenshot != null && screenshot.StartsWith("data:image"))
+        {
+            var commaIndex = screenshot.IndexOf(',');
+            if (commaIndex > 0)
+                screenshot = screenshot.Substring(commaIndex + 1);
+        }
+        
         Console.WriteLine($"[CUA] Screenshot: {(screenshot != null ? $"{screenshot.Length} chars" : "null")}");
         return screenshot;
     }
@@ -272,4 +281,7 @@ internal class CuaScreenshotContent
 {
     [JsonPropertyName("screenshot")]
     public string? Screenshot { get; set; }
+    
+    [JsonPropertyName("screenshotUrl")]
+    public string? ScreenshotUrl { get; set; }
 }
