@@ -22,7 +22,7 @@ public class CuaApi
         _tokenProvider = tokenProvider;
         _partnerContext = partnerContext;
         _httpClient = new HttpClient();
-        
+
         // Apply Partner Context headers if configured
         ConfigurePartnerContextHeaders();
     }
@@ -110,9 +110,9 @@ public class CuaApi
     public async Task<string?> InitializeAsync()
     {
         var token = await _tokenProvider();
-        _httpClient.DefaultRequestHeaders.Authorization = 
+        _httpClient.DefaultRequestHeaders.Authorization =
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-        
+
         // Add Partner Context headers
         AddPartnerContextHeaders();
 
@@ -121,10 +121,10 @@ public class CuaApi
         var url = $"{_endpoint}/api/agent/computer/initialize";
         Console.WriteLine($"[CUA] POST {url}");
         Console.WriteLine($"[CUA] ComputerId (generated): {computerId}");
-        
+
         var response = await _httpClient.PostAsJsonAsync(url, new { computerId });
         var content = await response.Content.ReadAsStringAsync();
-        
+
         Console.WriteLine($"[CUA] Response: {(int)response.StatusCode} {response.StatusCode}");
         if (content.Length > 200)
             Console.WriteLine($"[CUA] Body: {content[..200]}...");
@@ -139,19 +139,19 @@ public class CuaApi
         _activeComputers.Add(computerId);
         return computerId;
     }
-    
+
     /// <summary>Add Partner Context as HTTP headers for tracking.</summary>
     private void AddPartnerContextHeaders()
     {
         if (_partnerContext == null || !_partnerContext.HasPartnerContext) return;
-        
+
         // Remove existing headers to avoid duplicates
         _httpClient.DefaultRequestHeaders.Remove("X-Lumina-Partner");
         _httpClient.DefaultRequestHeaders.Remove("X-Lumina-ScenarioGroup");
         _httpClient.DefaultRequestHeaders.Remove("X-Lumina-ScenarioName");
         _httpClient.DefaultRequestHeaders.Remove("X-Lumina-Application");
         _httpClient.DefaultRequestHeaders.Remove("X-Lumina-Component");
-        
+
         // Add Partner Context headers
         if (!string.IsNullOrEmpty(_partnerContext.Partner))
             _httpClient.DefaultRequestHeaders.Add("X-Lumina-Partner", _partnerContext.Partner);
@@ -169,7 +169,7 @@ public class CuaApi
     public async Task<bool> PerformActionsAsync(string computerId, CuaAction[] actions, int actionDelayMs = 800)
     {
         var token = await _tokenProvider();
-        _httpClient.DefaultRequestHeaders.Authorization = 
+        _httpClient.DefaultRequestHeaders.Authorization =
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
         var request = new
@@ -204,17 +204,17 @@ public class CuaApi
     public async Task<string?> GetScreenshotAsync(string computerId)
     {
         var token = await _tokenProvider();
-        _httpClient.DefaultRequestHeaders.Authorization = 
+        _httpClient.DefaultRequestHeaders.Authorization =
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
         Console.WriteLine($"[CUA] Get screenshot for {computerId}");
         var response = await _httpClient.PostAsJsonAsync(
             $"{_endpoint}/api/agent/computer/get",
             new { computerId });
-        
+
         var content = await response.Content.ReadAsStringAsync();
         Console.WriteLine($"[CUA] Get Response: {response.StatusCode}, Body length: {content.Length}");
-        
+
         if (!response.IsSuccessStatusCode)
         {
             Console.WriteLine($"[CUA] Get Error: {content}");
@@ -224,7 +224,7 @@ public class CuaApi
         // Response structure: { content: { screenshotUrl: "data:image/png;base64,..." } }
         var result = System.Text.Json.JsonSerializer.Deserialize<CuaGetResponse>(content);
         var screenshot = result?.Content?.Screenshot ?? result?.Content?.ScreenshotUrl;
-        
+
         // Strip "data:image/png;base64," prefix if present
         if (screenshot != null && screenshot.StartsWith("data:image"))
         {
@@ -232,7 +232,7 @@ public class CuaApi
             if (commaIndex > 0)
                 screenshot = screenshot.Substring(commaIndex + 1);
         }
-        
+
         Console.WriteLine($"[CUA] Screenshot: {(screenshot != null ? $"{screenshot.Length} chars" : "null")}");
         return screenshot;
     }
@@ -241,13 +241,13 @@ public class CuaApi
     public async Task ReleaseAsync(string computerId)
     {
         var token = await _tokenProvider();
-        _httpClient.DefaultRequestHeaders.Authorization = 
+        _httpClient.DefaultRequestHeaders.Authorization =
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
         var response = await _httpClient.PostAsJsonAsync(
             $"{_endpoint}/api/agent/computer/release",
             new { computerId });
-        
+
         Console.WriteLine($"[CUA] Release {computerId}: {response.StatusCode}");
         _activeComputers.Remove(computerId);
     }
@@ -281,7 +281,7 @@ internal class CuaScreenshotContent
 {
     [JsonPropertyName("screenshot")]
     public string? Screenshot { get; set; }
-    
+
     [JsonPropertyName("screenshotUrl")]
     public string? ScreenshotUrl { get; set; }
 }
