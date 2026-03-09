@@ -1,0 +1,155 @@
+Generated at: 2026-01-12 12:16:09
+
+Create a professional, educational infographic in LANDSCAPE format (16:9 or 4:3 aspect ratio) based on this specification:
+
+# INFOGRAPHIC BRIEF
+
+**Title**: The Science Behind Nature's Greatest Light Show
+**One-sentence takeaway**: Solar particles dancing with Earth's atmosphere create the magical aurora displays that light up polar skies.
+**Topic domain**: academic
+**Tone**: calm
+**Aspect ratio**: landscape (16:9)
+**Target audience**: Science enthusiasts, students, and anyone curious about natural phenomena
+
+# CONTENT OUTLINE
+
+## a) What it is - Brief Definition/Overview
+The Aurora Borealis (Northern Lights) and Aurora Australis (Southern Lights) are spectacular natural light displays created when charged particles from the Sun collide with gases in Earth's upper atmosphere, producing shimmering curtains of green, purple, pink, and blue light across polar skies.
+
+## b) Why it matters - Relevance and Impact
+• **Cosmic Connection**: Demonstrates how Earth exists within an active solar system where invisible space weather creates visible wonders
+• **Scientific Understanding**: Helps researchers study space weather effects on satellite communications, GPS systems, and power grids
+• **Cultural Heritage**: Has inspired indigenous mythologies and human imagination for millennia across polar cultures
+
+## c) Key Points - Most Important Concepts
+
+**Solar Wind Journey**: Million-mph charged particles stream from the Sun's corona toward Earth, carrying the raw energy that powers aurora displays
+
+**Magnetic Field Interaction**: Earth's magnetosphere deflects most solar particles, but some become trapped and funneled toward magnetic poles where the magic happens
+
+**Atmospheric Chemistry**: Collision altitude determines color - oxygen at 60 miles creates common green glow, higher oxygen produces rare red, while nitrogen generates blue and purple hues
+
+**11-Year Solar Cycle**: Aurora intensity follows the Sun's magnetic field reversals, with solar maximum periods producing more frequent and vivid displays than quiet solar minimum years
+
+**Geographic Sweet Spots**: The auroral oval around each magnetic pole offers optimal viewing, including northern Canada, Alaska, Scandinavia, and Antarctica's surrounding regions
+
+**Ancient Mythologies**: Inuit saw spirits playing ball with walrus skulls, Norse cultures believed them to be Valkyrie armor reflections, Finns imagined firefox tails creating sky sparks
+
+**Modern Threats**: Light pollution and climate change increasingly threaten visibility, while shifting magnetic poles may alter future viewing locations
+
+## d) How to Apply/Use
+• Check space weather forecasts using satellite monitoring data to plan aurora-viewing expeditions
+• Travel to auroral oval locations during solar maximum periods for best viewing opportunities
+• Use modern prediction technology and magnetometer readings to time photography sessions
+
+## e) Visual Suggestions per Section
+- Hero illustration showing Earth surrounded by magnetic field lines with colorful aurora
+- Particle journey diagram with flowing arrows from Sun to Earth
+- Color chemistry breakdown with altitude markers
+- Geographic viewing zone map with highlighted optimal locations
+- Cultural mythology illustrations with indigenous art style elements
+
+# LAYOUT PLAN
+
+**Layout Type**: HERO-FOCUS - Perfect for this visually-striking natural phenomenon
+
+**Visual Hierarchy**: 
+[Large hero illustration of Earth with aurora corona and title overlay] → [Solar particle journey flow diagram] → [Color chemistry breakdown cards] → [Geographic viewing zones with cultural elements] → [Modern science and threats footer]
+
+**Component Layout**: 
+- Top 50%: Dramatic hero scene showing Earth from space with aurora displays wrapping around polar regions, title overlaid on aurora glow
+- Middle 35%: Three-column grid with solar wind journey (left), atmospheric chemistry color guide (center), and viewing locations map (right)
+- Bottom 15%: Horizontal band showing cultural mythology icons, modern technology elements, and source attribution
+
+**Visual Flow**: 
+Circular flow starting from hero Earth image → following particle path from Sun → down to chemistry explanations → across to geographic zones → cultural stories → back to scientific understanding
+
+**Density**: 
+Balanced information density with spacious hero area and organized content grid below, allowing aurora illustrations to breathe while maintaining educational depth
+
+# STYLE GUIDE (ACADEMIC DOMAIN)
+
+**Look**: Contemporary infographic style with scientific elegance, space-themed aesthetic that balances educational content with visual wonder
+
+**Layout**: Modular but dynamic composition featuring geometric space elements, layered transparency effects showing atmospheric layers, isometric Earth illustration with flowing particle streams
+
+**Typography**: Geometric sans-serif headers (Montserrat Bold) for scientific authority, clean body text (Source Sans Pro) for readability, monospace accents for data points and measurements
+
+**Colors**: Deep space palette - midnight navy background, electric aurora greens and purples, cosmic blue accents, silver/white for scientific data, gradient overlays mimicking real aurora colors
+
+**Visual Elements**: 
+- 3D isometric Earth with magnetic field line illustrations
+- Flowing particle stream animations with directional arrows
+- Layered atmospheric zones with transparency gradients
+- Scientific diagram aesthetics with clean connecting lines
+- Subtle star field background texture
+- Geometric badge elements for key statistics
+
+**Include**: Network-style connecting lines between concepts, layered transparency showing atmospheric depth, glowing effects mimicking real aurora properties, space-age geometric frames for text content
+
+**Specific Text to Render**:
+- Main Title: "The Science Behind Nature's Greatest Light Show"
+- Subtitle: "How Solar Particles Create Aurora Displays"
+- Section Headers: "Solar Wind Journey" | "Magnetic Interaction" | "Color Chemistry" | "Best Viewing Zones" | "Cultural Legends" | "Modern Science"
+- Key Stats: "1 million mph solar wind speed" | "50-400 miles altitude" | "11-year solar cycle" | "60 miles = green glow"
+- Geographic Labels: "Northern Canada" | "Alaska" | "Scandinavia" | "Antarctica" | "Auroral Oval"
+- Cultural Elements: "Inuit Spirits" | "Norse Valkyries" | "Finnish Firefox"
+- Footer: "Sources: Atmospheric Physics Research | Space Weather Monitoring | Indigenous Cultural Studies"
+
+```
+### NATURE MINIMAL STYLE (Ecology & Environment)
+
+#### Color Palette:
+- Background: Soft cream (#FAF8F5) or pale green (#F0F4F0)
+- Primary: Forest green (#4A7C59), Earth brown (#8B7355)
+- Accent: Sage (#9CAF88), Clay (#C4A57B)
+- Text: Dark charcoal (#2C3E50)
+
+#### Typography:
+- Clean organic sans-serif
+- Headlines: 36-48pt, regular to medium weight
+- Body: 14-16pt, generous line spacing (1.8x)
+
+#### Layout & Composition:
+- Clean, peaceful composition
+- 50-60% whitespace
+- Organic shapes and curves
+- Balanced asymmetry
+
+#### Visual Elements:
+- Simple botanical illustrations
+- Organic shapes (leaves, waves, stones)
+- Minimal line art
+- Natural photography (when needed)
+- Subtle textures (paper, linen)
+
+#### Mood & References:
+- Calm, serene, sustainable
+- Think: Patagonia, REI educational materials
+- Environmental awareness
+
+#### Key Features:
+- Clean and peaceful
+- Nature-inspired shapes
+- Sustainable aesthetic
+- Breathing room
+
+#### Avoid:
+- Busy patterns
+- Harsh contrasts
+- Industrial elements
+```
+
+## GENERAL RENDERING RULES:
+- Follow the specified layout type from description precisely
+- Maintain visual hierarchy and clear information flow
+- ALL TEXT MUST BE IN ENGLISH ONLY - no Chinese, Japanese, Korean, or other non-English characters
+- Do NOT add decorative foreign language text (e.g., Japanese characters in Japanese Minimal style)
+- Balance aesthetics with readability - information must be clear
+- Create depth through layering, shadows, and visual rhythm
+- Include source citations in footer (minimalist style)
+
+CRITICAL LANGUAGE ENFORCEMENT:
+- Render ALL visible text in English alphabet characters only
+- If style mentions Asian aesthetics, use the aesthetic principles but English text only
+- No foreign language decorations, no untranslated text, English only everywhere

@@ -1,6 +1,7 @@
 using Microsoft.Lumina.Client.Models.Sonicberry;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace MinimalApiCall;
 
@@ -66,9 +67,7 @@ public class TrendingNewsApi
 
         try
         {
-            // Search for recent news (last 1 day)
-            var searchQuery = $"{competitor} news";
-            var searchResults = await _searchApi.SearchWithRecencyAsync(searchQuery, topN, recencyDays: 1);
+            var searchResults = await SearchCompetitorNewsWithFallbackAsync(competitor, topN);
 
             foreach (var searchResult in searchResults)
             {
@@ -89,6 +88,12 @@ public class TrendingNewsApi
                     allNews.Add(newsItem);
                 }
             }
+
+            allNews = allNews
+                .Where(n => !string.IsNullOrWhiteSpace(n.Url))
+                .GroupBy(n => n.Url, StringComparer.OrdinalIgnoreCase)
+                .Select(g => g.First())
+                .ToList();
         }
         catch (Exception ex)
         {
@@ -101,6 +106,18 @@ public class TrendingNewsApi
             .Take(topN)
             .ToList();
 
+        var usedFallback = false;
+        if (topNews.Count == 0)
+        {
+            var fallbackNews = await FetchFromBingNewsRssAsync(competitor, topN);
+            if (fallbackNews.Count > 0)
+            {
+                usedFallback = true;
+                topNews = fallbackNews;
+                Console.WriteLine($"[Trending News] Fallback RSS returned {topNews.Count} items for {competitor}");
+            }
+        }
+
         Console.WriteLine($"[Trending News] Found {topNews.Count} news items for {competitor}");
 
         var result = new SingleCompetitorNewsResult
@@ -109,7 +126,9 @@ public class TrendingNewsApi
             News = topNews,
             LastUpdated = DateTime.UtcNow,
             Success = topNews.Count > 0,
-            Message = topNews.Count > 0 ? "成功获取最新新闻" : "未找到相关新闻",
+            Message = topNews.Count > 0
+                ? (usedFallback ? "成功获取最新新闻（RSS 兜底）" : "成功获取最新新闻")
+                : "未找到相关新闻（已尝试多个查询与时间范围）",
             FromCache = false
         };
 
@@ -172,10 +191,8 @@ public class TrendingNewsApi
             try
             {
                 Console.WriteLine($"  Searching: {competitor}");
-                
-                // Search for recent news (last 1 day)
-                var searchQuery = $"{competitor} news";
-                var results = await _searchApi.SearchWithRecencyAsync(searchQuery, topN, recencyDays: 1);
+
+                var results = await SearchCompetitorNewsWithFallbackAsync(competitor, topN);
 
                 foreach (var result in results)
                 {
@@ -196,12 +213,28 @@ public class TrendingNewsApi
                         allNews.Add(newsItem);
                     }
                 }
+
+                if (!allNews.Any(n => n.Competitor.Equals(competitor, StringComparison.OrdinalIgnoreCase)))
+                {
+                    var fallbackNews = await FetchFromBingNewsRssAsync(competitor, topN);
+                    allNews.AddRange(fallbackNews);
+                    if (fallbackNews.Count > 0)
+                    {
+                        Console.WriteLine($"[Trending News] Batch fallback RSS returned {fallbackNews.Count} items for {competitor}");
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"  Error searching {competitor}: {ex.Message}");
             }
         }
+
+        allNews = allNews
+            .Where(n => !string.IsNullOrWhiteSpace(n.Url))
+            .GroupBy(n => n.Url, StringComparer.OrdinalIgnoreCase)
+            .Select(g => g.First())
+            .ToList();
 
         // Sort by score and take top N
         var topNews = allNews
@@ -234,6 +267,98 @@ public class TrendingNewsApi
         }
 
         return apiResult;
+    }
+
+    private async Task<List<SearchResultItem>> SearchCompetitorNewsWithFallbackAsync(string competitor, int topN)
+    {
+        var queries = BuildSearchQueries(competitor);
+        var recencyOptions = new[] { 1, 7, 30 };
+
+        foreach (var recencyDays in recencyOptions)
+        {
+            foreach (var query in queries)
+            {
+                var results = await _searchApi.SearchWithRecencyAsync(query, topN, recencyDays);
+                if (results.Count > 0)
+                {
+                    Console.WriteLine($"[Trending News] Found {results.Count} results for '{query}' (recency={recencyDays}d)");
+                    return results;
+                }
+            }
+        }
+
+        return new List<SearchResultItem>();
+    }
+
+    private static List<string> BuildSearchQueries(string competitor)
+    {
+        var normalized = competitor.Trim();
+        if (normalized.Equals("X (Twitter)", StringComparison.OrdinalIgnoreCase))
+        {
+            return new List<string>
+            {
+                "X Twitter latest news",
+                "Twitter latest news",
+                "X platform news"
+            };
+        }
+
+        return new List<string>
+        {
+            $"{normalized} latest news",
+            $"{normalized} company news",
+            $"{normalized} AI news"
+        };
+    }
+
+    private async Task<List<NewsItem>> FetchFromBingNewsRssAsync(string competitor, int topN)
+    {
+        try
+        {
+            var query = Uri.EscapeDataString($"{competitor} news");
+            var url = $"https://www.bing.com/news/search?q={query}&format=RSS";
+
+            using var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(12) };
+            var rssXml = await httpClient.GetStringAsync(url);
+            var doc = XDocument.Parse(rssXml);
+
+            var items = doc.Descendants("item")
+                .Take(topN)
+                .Select(item =>
+                {
+                    var title = item.Element("title")?.Value?.Trim() ?? string.Empty;
+                    var link = item.Element("link")?.Value?.Trim() ?? string.Empty;
+                    var description = item.Element("description")?.Value?.Trim() ?? "No description available";
+                    var source = item.Element("source")?.Value?.Trim();
+                    var pubDateText = item.Element("pubDate")?.Value;
+                    var publishedDate = DateTime.UtcNow;
+                    if (DateTime.TryParse(pubDateText, out var parsedDate))
+                    {
+                        publishedDate = parsedDate.ToUniversalTime();
+                    }
+
+                    return new NewsItem
+                    {
+                        Title = title,
+                        Description = description.Length > 240 ? description[..240] + "..." : description,
+                        Url = link,
+                        Source = !string.IsNullOrWhiteSpace(source) ? source : ExtractSource(link),
+                        PublishedDate = publishedDate,
+                        Thumbnail = null,
+                        Competitor = competitor,
+                        Score = 8
+                    };
+                })
+                .Where(n => !string.IsNullOrWhiteSpace(n.Title) && !string.IsNullOrWhiteSpace(n.Url))
+                .ToList();
+
+            return items;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[Trending News] RSS fallback failed for {competitor}: {ex.Message}");
+            return new List<NewsItem>();
+        }
     }
 
     private string ExtractDescription(SearchResultItem result)

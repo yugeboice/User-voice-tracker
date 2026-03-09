@@ -193,9 +193,12 @@
                         <h3 id="currentCompetitorName" style="margin: 0; color: #0078d4;">竞品名称</h3>
                         <div>
                             <button onclick="refreshCurrentCompetitor()" id="refreshCompetitorBtn" class="btn-secondary">🔄 刷新</button>
+                            <button onclick="diagnoseCurrentCompetitor()" id="diagnoseCompetitorBtn" class="btn-secondary">🧪 诊断搜索</button>
                             <span id="competitorLastUpdated" class="last-updated" style="margin-left: 15px;"></span>
                         </div>
                     </div>
+
+                    <div id="diagnosticsPanel" class="result" style="display:none; margin-top: 10px;"></div>
                     
                     <!-- News Grid -->
                     <div id="competitorNewsGrid" class="news-grid" style="margin-top: 20px;"></div>
@@ -406,11 +409,57 @@
             document.getElementById('competitorDetailView').style.display = 'none';
             document.getElementById('competitorListView').style.display = 'block';
             currentViewingCompetitor = '';
+            document.getElementById('diagnosticsPanel').style.display = 'none';
         }
 
         function refreshCurrentCompetitor() {
             if (currentViewingCompetitor) {
                 viewCompetitorNews(currentViewingCompetitor, true);
+            }
+        }
+
+        async function diagnoseCurrentCompetitor() {
+            if (!currentViewingCompetitor) return;
+
+            const panel = document.getElementById('diagnosticsPanel');
+            const btn = document.getElementById('diagnoseCompetitorBtn');
+            panel.style.display = 'block';
+            panel.innerHTML = '<p class="loading">🧪 正在诊断搜索参数（query × recency）...</p>';
+            btn.disabled = true;
+
+            try {
+                const res = await fetch('/api/trending-news/diagnostics', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        competitor: currentViewingCompetitor,
+                        topN: 10,
+                        recencyDays: [1, 7, 30]
+                    })
+                });
+                const data = await res.json();
+
+                if (!res.ok) {
+                    panel.innerHTML = `<p class="error">诊断失败：${data?.message || JSON.stringify(data)}</p>`;
+                    return;
+                }
+
+                let html = `<h4>🧪 搜索诊断 - ${data.competitor}</h4>`;
+                html += `<p><strong>是否命中结果：</strong>${data.hasAnyResult ? '✅ 有结果' : '❌ 无结果'}</p>`;
+                html += '<div style="font-size:12px; color:#666; margin-bottom:8px;">每一行代表一次请求（关键词 + 时间范围）</div>';
+                html += '<pre style="white-space:pre-wrap;">';
+                (data.runs || []).forEach((r, i) => {
+                    const titles = (r.sampleTitles || []).filter(t => t).slice(0, 2).join(' | ');
+                    html += `${i + 1}. recency=${r.recencyDays}d | count=${r.count} | query=${r.query}`;
+                    if (titles) html += `\n   sample: ${titles}`;
+                    html += '\n';
+                });
+                html += '</pre>';
+                panel.innerHTML = html;
+            } catch (e) {
+                panel.innerHTML = `<p class="error">诊断失败：${e.message}</p>`;
+            } finally {
+                btn.disabled = false;
             }
         }
 

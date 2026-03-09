@@ -11,7 +11,10 @@ class Program
     static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        builder.Configuration.AddJsonFile(Path.Combine(builder.Environment.ContentRootPath, "..", "..", "appsettings.json"), optional: true, reloadOnChange: true);
+        builder.Configuration
+            .AddJsonFile(Path.Combine(builder.Environment.ContentRootPath, "..", "..", "Launcher", "appsettings.json"), optional: true, reloadOnChange: true)
+            .AddJsonFile(Path.Combine(builder.Environment.ContentRootPath, "..", "..", "appsettings.json"), optional: true, reloadOnChange: true)
+            .AddJsonFile(Path.Combine(builder.Environment.ContentRootPath, "..", "..", "..", "appsettings.json"), optional: true, reloadOnChange: true);
         builder.WebHost.UseUrls("http://localhost:8401");
 
         var app = builder.Build();
@@ -236,6 +239,53 @@ class Program
             return Results.Ok(status);
         });
 
+        // POST /api/trending-news/diagnostics - Diagnose search query/recency combinations
+        app.MapPost("/api/trending-news/diagnostics", async (WebTrendingNewsDiagnosticsRequest req) =>
+        {
+            EnsureInit();
+            if (searchApi == null)
+                return Results.BadRequest("Trending News not configured. Ensure Lumina endpoint is set.");
+
+            var competitor = req.Competitor?.Trim();
+            if (string.IsNullOrWhiteSpace(competitor))
+                return Results.BadRequest("Competitor is required");
+
+            var queries = competitor.Equals("X (Twitter)", StringComparison.OrdinalIgnoreCase)
+                ? new[] { "X Twitter latest news", "Twitter latest news", "X platform news" }
+                : new[] { $"{competitor} latest news", $"{competitor} company news", $"{competitor} AI news" };
+
+            var recencyDaysList = req.RecencyDays?.Length > 0 ? req.RecencyDays : new[] { 1, 7, 30 };
+            var runs = new List<object>();
+
+            foreach (var recencyDays in recencyDaysList)
+            {
+                foreach (var query in queries)
+                {
+                    var results = await searchApi.SearchWithRecencyAsync(query, req.TopN, recencyDays);
+                    runs.Add(new
+                    {
+                        query,
+                        recencyDays,
+                        count = results.Count,
+                        sampleTitles = results.Take(3).Select(r => r.Title ?? "").ToList()
+                    });
+                }
+            }
+
+            var hasAnyResult = runs.Any(r =>
+            {
+                var countProp = r.GetType().GetProperty("count");
+                return countProp != null && (int)(countProp.GetValue(r) ?? 0) > 0;
+            });
+
+            return Results.Ok(new
+            {
+                competitor,
+                topN = req.TopN,
+                hasAnyResult,
+                runs
+            });
+        });
         // Serve index.html as default
         app.MapGet("/", () => Results.Redirect("/index.html"));
 
@@ -275,3 +325,4 @@ record WebSingleCompetitorRequest(string Competitor, bool ForceRefresh = false, 
 record WebTrendingNewsRequest(string[]? Competitors = null, bool ForceRefresh = false, int TopN = 10);
 record WebStockPriceRequest(string[] Competitors);
 record WebTrendingNewsStatusRequest(string[]? Competitors = null);
+record WebTrendingNewsDiagnosticsRequest(string Competitor, int TopN = 10, int[]? RecencyDays = null);

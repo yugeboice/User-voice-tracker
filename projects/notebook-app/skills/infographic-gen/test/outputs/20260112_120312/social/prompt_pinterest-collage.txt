@@ -1,0 +1,129 @@
+Generated at: 2026-01-12 12:25:16
+
+Create a professional, educational infographic in LANDSCAPE format (16:9 or 4:3 aspect ratio) based on this specification:
+
+# INFOGRAPHIC BRIEF
+
+**Title**: Master Your Digital Presence: The Modern Creator's Guide
+**One-sentence takeaway**: Build authentic engagement and sustainable growth through quality content, genuine community connections, and strategic platform optimization.
+**Topic domain**: professional
+**Tone**: confident
+**Aspect ratio**: landscape (16:9)
+**Target audience**: Content creators, digital marketers, and business professionals looking to enhance their social media strategy
+
+# CONTENT OUTLINE
+
+**a) What it is - Digital Presence Mastery**
+The strategic approach to building authentic brand connections across social media platforms through quality content creation, meaningful audience engagement, and data-driven optimization techniques.
+
+**b) Why it matters - Relevance and Impact**
+• Modern audiences demand authentic, valuable content over promotional messaging
+• Genuine engagement drives higher conversion rates than follower count metrics
+• Platform algorithms increasingly reward authentic interactions and consistent quality
+
+**c) Key Points - 7 Essential Concepts**
+
+**Content Quality Revolution**
+Focus on authentic voice and consistent aesthetic over posting frequency. Short-form videos under 60 seconds generate highest interaction rates, while visual storytelling drives engagement better than text-only posts.
+
+**Strategic Engagement Tactics** 
+Respond to comments within first hour for algorithmic boost. Create conversation starters through thought-provoking questions and provide value first through entertainment, education, or inspiration.
+
+**Community Building Excellence**
+Develop exclusive groups, host live sessions, and create hashtag campaigns that encourage participation. Cross-platform promotion requires tailoring content to each platform's unique culture.
+
+**Influencer Evolution**
+Micro and nano-influencers deliver higher engagement than celebrities. Audiences value relatability over reach, preferring genuine product experiences and transparent partnerships.
+
+**Social Commerce Integration**
+Platforms now offer direct shopping features within feeds, streamlining customer journey from discovery to conversion without leaving apps.
+
+**AI-Powered Optimization**
+Artificial intelligence tools help optimize posting times, analyze performance metrics, and generate content ideas while maintaining human authenticity.
+
+**Meaningful Metrics Focus**
+Track save rates, click-throughs, and conversion rates rather than vanity metrics. Monitor audience sentiment and customer lifetime value for deeper campaign insights.
+
+**d) How to Apply**
+Develop editorial calendars for consistent posting, create behind-the-scenes content for authenticity, use interactive posts like polls and Q&As, host virtual events for real-time engagement, and adapt quickly to platform changes while maintaining brand voice.
+
+**e) Visual Suggestions**
+Hero image showing diverse creators on multiple devices, engagement metrics dashboard visualization, platform-specific content examples, community interaction illustrations, and trending chart graphics.
+
+# LAYOUT PLAN
+
+**Layout Type**: MOSAIC - Magazine-style with varied card sizes and organic arrangement
+
+**Visual Hierarchy**: 
+[Dynamic hero title with creator collage] → [Key insight callout highlighting authenticity over followers] → [Flowing content sections with mixed sizes] → [Platform-specific visual examples] → [Metrics dashboard visualization] → [Sources footnote]
+
+**Component Layout**: 
+Asymmetric title placement in upper-left with overlapping creator imagery, varied section sizes creating visual interest, mixed content blocks including data visualization cards, platform mockups, and tip callouts rather than uniform grid structure.
+
+**Visual Flow**: 
+Z-pattern starting with hero title and creator visuals, flowing to main content sections arranged in descending importance, connecting through subtle directional elements and color relationships, ending with actionable metrics section.
+
+**Density**: 
+Balanced information density with strategic white space allowing breathing room between content sections while maximizing educational value through organized visual hierarchy.
+
+# STYLE GUIDE (PROFESSIONAL Domain)
+
+**Look**: Modern, confident, editorial magazine style with dynamic visual energy and premium feel
+
+**Layout**: Asymmetric compositions with overlapping content cards, dynamic angles creating movement, and varied section proportions avoiding rigid grid structure
+
+**Typography**: Bold sans-serif titles (Montserrat Bold) with serif accents for key statistics, varied font weights creating clear hierarchy, and clean body text at readable sizes
+
+**Colors**: Electric blue primary (#2563EB) with charcoal gray neutrals (#374151) and gold metallic accent (#F59E0B) for premium data highlights and call-to-action elements
+
+**Visual Elements**: 
+Abstract geometric shapes framing content sections, stylized data visualization with contemporary styling, subtle gradients on card backgrounds, cropped photography showing diverse creators, platform interface mockups, and connecting lines with sophisticated styling rather than basic arrows
+
+**Specific text to render**:
+- Main title: "Master Your Digital Presence: The Modern Creator's Guide"
+- Subtitle: "Build authentic engagement and sustainable growth through strategic content creation"
+- Section headers: "Content Quality Revolution", "Strategic Engagement Tactics", "Community Building Excellence", "Influencer Evolution", "Social Commerce Integration", "AI-Powered Optimization", "Meaningful Metrics Focus"
+- Key statistics: "60 seconds = highest interaction", "First hour response = algorithm boost", "Micro-influencers = higher engagement"
+- Call-out boxes: "Quality Over Quantity", "Authenticity Beats Reach", "Value First, Ask Second"
+- Platform labels: "TikTok", "Instagram Reels", "LinkedIn", "Social Commerce"
+- Metrics labels: "Save Rates", "Click-Through", "Conversion Rates", "Customer Lifetime Value"
+- Footer sources: "Based on current social media research and platform analytics data"
+
+```
+### PINTEREST COLLAGE STYLE (Social Inspiration)
+
+#### Color Palette:
+- Background: Soft cream or warm white
+- Pastels: Blush pink, sage green, terracotta
+- Accent: Dusty rose or muted gold
+
+#### Visual Elements:
+- Collage-style photo blocks
+- Varied angles (0-5 degree tilts)
+- Overlapping layers
+- Hand-drawn doodles (sparingly)
+- Botanical elements
+
+#### Mood & References:
+- Warm, inviting, Pinterest mood boards
+
+#### Key Features:
+- Photo-heavy
+- Mixed media layering
+- Organic arrangement
+- Decorative flourishes (sparingly)
+```
+
+## GENERAL RENDERING RULES:
+- Follow the specified layout type from description precisely
+- Maintain visual hierarchy and clear information flow
+- ALL TEXT MUST BE IN ENGLISH ONLY - no Chinese, Japanese, Korean, or other non-English characters
+- Do NOT add decorative foreign language text (e.g., Japanese characters in Japanese Minimal style)
+- Balance aesthetics with readability - information must be clear
+- Create depth through layering, shadows, and visual rhythm
+- Include source citations in footer (minimalist style)
+
+CRITICAL LANGUAGE ENFORCEMENT:
+- Render ALL visible text in English alphabet characters only
+- If style mentions Asian aesthetics, use the aesthetic principles but English text only
+- No foreign language decorations, no untranslated text, English only everywhere
