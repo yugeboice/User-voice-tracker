@@ -83,3 +83,6 @@ partner/
 Directory.Build.props
 
 net8.0/
+
+# Screenshots generated at runtime
+wwwroot/screenshots/
