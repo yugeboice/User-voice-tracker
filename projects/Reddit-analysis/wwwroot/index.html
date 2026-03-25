@@ -763,7 +763,11 @@
         var uniqueKw = {};
         for (var kwi = 0; kwi < mm.keywords.length; kwi++) uniqueKw[mm.keywords[kwi]] = true;
         mm.keywords = Object.keys(uniqueKw);
+        var uniqueKwEn = {};
+        for (var kei = 0; kei < mm.keywords_en.length; kei++) uniqueKwEn[mm.keywords_en[kei]] = true;
+        mm.keywords_en = Object.keys(uniqueKwEn);
         mm.summary = mm.summaries.join('\n\n');
+        mm.summary_en = mm.summaries_en.join('\n\n');
         result.push(mm);
       }
       return result;
@@ -1013,8 +1017,8 @@
       var sections = summary.split(/^##\s+/m);
       for (var i = 0; i < sections.length; i++) {
         var sec = sections[i];
-        /* Pain points: sections containing 痛点/问题/不满 */
-        if (sec.indexOf('痛点') !== -1 || sec.indexOf('Pain') !== -1 || sec.indexOf('问题') !== -1) {
+        /* Pain points: sections containing 痛点/问题/不满 or English equivalents */
+        if (sec.indexOf('痛点') !== -1 || sec.indexOf('Pain') !== -1 || sec.indexOf('问题') !== -1 || sec.indexOf('Issue') !== -1 || sec.indexOf('Complaint') !== -1) {
           var painLines = sec.split('\n');
           for (var j = 0; j < painLines.length; j++) {
             var pl = painLines[j].trim();
@@ -1038,9 +1042,10 @@
             }
           }
         }
-        /* Strengths: sections containing 赞赏/优势/亮点/认可/正面 */
+        /* Strengths: sections containing 赞赏/优势/亮点/认可/正面 or English equivalents */
         if (sec.indexOf('赞赏') !== -1 || sec.indexOf('优势') !== -1 || sec.indexOf('亮点') !== -1
-            || sec.indexOf('Strength') !== -1 || sec.indexOf('认可') !== -1 || sec.indexOf('期望') !== -1) {
+            || sec.indexOf('Strength') !== -1 || sec.indexOf('认可') !== -1 || sec.indexOf('期望') !== -1
+            || sec.indexOf('Highlight') !== -1 || sec.indexOf('Positive') !== -1 || sec.indexOf('Praise') !== -1) {
           var strLines = sec.split('\n');
           for (var k = 0; k < strLines.length; k++) {
             var sl = strLines[k].trim();
@@ -1071,7 +1076,7 @@
           }
         }
         /* Recommendations: sections containing 建议/洞察/action */
-        if (sec.indexOf('建议') !== -1 || sec.indexOf('洞察') !== -1 || sec.indexOf('Action') !== -1 || sec.indexOf('action') !== -1) {
+        if (sec.indexOf('建议') !== -1 || sec.indexOf('洞察') !== -1 || sec.indexOf('Action') !== -1 || sec.indexOf('action') !== -1 || sec.indexOf('Recommendation') !== -1 || sec.indexOf('Suggestion') !== -1) {
           var recLines = sec.split('\n');
           for (var r = 0; r < recLines.length; r++) {
             var rl = recLines[r].trim();
@@ -1370,6 +1375,7 @@
         if (line.length < 6) continue;
         /* Skip lines starting with "总体概述" etc as they're section titles */
         if (/^(总体概述|情感分析|话题分布|典型帖子|建议|痛点|优势|行动)/.test(line)) continue;
+        if (/^(Overall|Sentiment|Topic|Typical|Recommendation|Pain|Strength|Action|Summary|Key Finding)/i.test(line)) continue;
         return truncate(line, 200);
       }
       return truncate(L(p, 'summary').replace(/^[\s#*\-]+/,''), 200);
@@ -2047,11 +2053,14 @@
         var sec = sections[si];
         var lines = sec.split('\n');
 
-        /* Section: 最满意/最不满意 */
-        if (sec.indexOf('最满意') !== -1 && sec.indexOf('最不满意') !== -1) {
-          /* Extract "最满意" paragraph */
+        /* Section: 最满意/最不满意 or Most/Least Satisfied */
+        if ((sec.indexOf('最满意') !== -1 && sec.indexOf('最不满意') !== -1)
+            || (/most satisfied/i.test(sec) && /least satisfied/i.test(sec))
+            || (sec.indexOf('Satisfaction') !== -1 || sec.indexOf('satisfaction') !== -1)) {
+          /* Extract "最满意" / "Most Satisfied" paragraph */
           for (var i = 0; i < lines.length; i++) {
             var line = lines[i].trim();
+            /* Chinese patterns */
             if (line.indexOf('相对最满意') !== -1 || (line.indexOf('最满意') !== -1 && line.indexOf('最不满意') === -1)) {
               /* Format: **相对最满意：GitHub Copilot。** reason... */
               var msMat = line.match(/最满意[：:]\s*(.+?)[。.]\*\*\s*(.*)/);
@@ -2060,12 +2069,22 @@
                 var product = msMat[1].replace(/[*]/g, '').trim();
                 var reason = (msMat[2] || '').replace(/\*\*/g, '').trim();
                 if (!reason) {
-                  /* Reason may be rest of line after product */
                   var afterProd = line.slice(line.indexOf(product) + product.length).replace(/^[。.\s*]+/, '').replace(/\*\*/g, '');
                   if (afterProd.length > 5) reason = afterProd;
                 }
                 if (!reason && i + 1 < lines.length) reason = lines[i + 1].trim().replace(/\*\*/g, '');
                 result.mostSatisfied = { product: cleanProductName(product), reason: reason.slice(0, 200) };
+              }
+            }
+            /* English patterns for most satisfied */
+            if (!result.mostSatisfied && /most satisfied/i.test(line)) {
+              var msMatEn = line.match(/most satisfied[：:]\s*\*?\*?(.+?)[。.]\*?\*?\s*(.*)/i);
+              if (!msMatEn) msMatEn = line.match(/most satisfied[：:]\s*\*?\*?([^。.*]+)/i);
+              if (msMatEn) {
+                var productEn = msMatEn[1].replace(/[*]/g, '').trim();
+                var reasonEn = (msMatEn[2] || '').replace(/\*\*/g, '').trim();
+                if (!reasonEn && i + 1 < lines.length) reasonEn = lines[i + 1].trim().replace(/\*\*/g, '');
+                result.mostSatisfied = { product: cleanProductName(productEn), reason: reasonEn.slice(0, 200) };
               }
             }
             if (line.indexOf('最不满意') !== -1 && line.indexOf('相对最满意') === -1) {
@@ -2082,23 +2101,38 @@
                 result.leastSatisfied = { product: cleanProductName(product2), reason: reason2.slice(0, 200) };
               }
             }
+            /* English patterns for least satisfied */
+            if (!result.leastSatisfied && /least satisfied/i.test(line)) {
+              var lsMatEn = line.match(/least satisfied[：:]\s*\*?\*?(.+?)[。.]\*?\*?\s*(.*)/i);
+              if (!lsMatEn) lsMatEn = line.match(/least satisfied[：:]\s*\*?\*?([^。.*]+)/i);
+              if (lsMatEn) {
+                var productEn2 = lsMatEn[1].replace(/[*]/g, '').trim();
+                var reasonEn2 = (lsMatEn[2] || '').replace(/\*\*/g, '').trim();
+                if (!reasonEn2 && i + 1 < lines.length) reasonEn2 = lines[i + 1].trim().replace(/\*\*/g, '');
+                result.leastSatisfied = { product: cleanProductName(productEn2), reason: reasonEn2.slice(0, 200) };
+              }
+            }
           }
         }
 
-        /* Section: 共同痛点 */
-        if (sec.indexOf('共同痛点') !== -1 || sec.indexOf('共性') !== -1) {
+        /* Section: 共同痛点 or Shared Pain Points */
+        if (sec.indexOf('共同痛点') !== -1 || sec.indexOf('共性') !== -1
+            || /shared pain/i.test(sec) || /common pain/i.test(sec) || /common issue/i.test(sec)) {
           for (var j = 0; j < lines.length; j++) {
             var pLine = lines[j].trim();
             var ppMatch = pLine.match(/^\d+\.\s+\*\*(.+?)[：:]\*\*\s*(.+)/);
             if (!ppMatch) ppMatch = pLine.match(/^\d+\.\s+\*\*(.+?)\*\*[：:]\s*(.+)/);
+            /* English format: 1. **Title**: description */
+            if (!ppMatch) ppMatch = pLine.match(/^\d+\.\s+\*\*(.+?)\*\*:\s*(.+)/);
             if (ppMatch) {
               result.sharedPainPoints.push({ title: ppMatch[1].trim(), detail: ppMatch[2].replace(/\*\*/g, '').trim() });
             }
           }
         }
 
-        /* Section: 独特优劣势 */
-        if (sec.indexOf('独特优劣势') !== -1 || sec.indexOf('独特') !== -1 && sec.indexOf('优') !== -1) {
+        /* Section: 独特优劣势 or Unique Traits */
+        if (sec.indexOf('独特优劣势') !== -1 || (sec.indexOf('独特') !== -1 && sec.indexOf('优') !== -1)
+            || /unique trait/i.test(sec) || /unique advantage/i.test(sec) || /unique strength/i.test(sec)) {
           for (var k = 0; k < lines.length; k++) {
             var tLine = lines[k].trim();
             var tMatch = tLine.match(/^-\s+\*\*(.+?)\*\*(.+)/);
@@ -2106,13 +2140,20 @@
               var prodName = cleanProductName(tMatch[1]);
               var details = tMatch[2];
               var adv = '', disadv = '';
+              /* Chinese patterns */
               var advMatch = details.match(/独有优势[：:]\s*(.+?)(?:[；;]|独有劣势|$)/);
               var disadvMatch = details.match(/独有劣势[：:]\s*(.+?)(?:[；;]|独有优势|$)/);
+              /* English patterns */
+              if (!advMatch) advMatch = details.match(/[Uu]nique [Aa]dvantage[：:]\s*(.+?)(?:[；;]|[Uu]nique [Dd]isadvantage|$)/);
+              if (!disadvMatch) disadvMatch = details.match(/[Uu]nique [Dd]isadvantage[：:]\s*(.+?)(?:[；;]|[Uu]nique [Aa]dvantage|$)/);
+              /* Also match "Advantage:" / "Disadvantage:" */
+              if (!advMatch) advMatch = details.match(/[Aa]dvantage[：:]\s*(.+?)(?:[；;]|[Dd]isadvantage|$)/);
+              if (!disadvMatch) disadvMatch = details.match(/[Dd]isadvantage[：:]\s*(.+?)(?:[；;]|[Aa]dvantage|$)/);
               if (advMatch) adv = advMatch[1].replace(/\*\*/g, '').trim();
               if (disadvMatch) disadv = disadvMatch[1].replace(/\*\*/g, '').trim();
               /* If only one mentioned, extract the whole text */
               if (!adv && !disadv) {
-                if (details.indexOf('优势') !== -1) adv = details.replace(/^[：:;\s]+/, '').replace(/\*\*/g, '').trim();
+                if (details.indexOf('优势') !== -1 || /advantage/i.test(details)) adv = details.replace(/^[：:;\s]+/, '').replace(/\*\*/g, '').trim();
                 else disadv = details.replace(/^[：:;\s]+/, '').replace(/\*\*/g, '').trim();
               }
               result.uniqueTraits.push({ product: prodName, advantage: truncate(adv, 100), disadvantage: truncate(disadv, 100) });
@@ -2120,8 +2161,9 @@
           }
         }
 
-        /* Section: 竞争动态 */
-        if (sec.indexOf('竞争动态') !== -1 || sec.indexOf('新兴') !== -1 && sec.indexOf('动态') !== -1) {
+        /* Section: 竞争动态 or Competitive Dynamics */
+        if (sec.indexOf('竞争动态') !== -1 || (sec.indexOf('新兴') !== -1 && sec.indexOf('动态') !== -1)
+            || /competitive dynamic/i.test(sec) || /emerging trend/i.test(sec) || /market dynamic/i.test(sec)) {
           for (var d = 0; d < lines.length; d++) {
             var dLine = lines[d].trim();
             var dMatch = dLine.match(/^-\s+\*\*(.+?)[：:]\*\*\s*(.+)/);
@@ -2132,8 +2174,9 @@
           }
         }
 
-        /* Section: 建议 */
-        if (sec.indexOf('可操作建议') !== -1 || sec.indexOf('建议') !== -1 && si > 0) {
+        /* Section: 建议 or Recommendations */
+        if (sec.indexOf('可操作建议') !== -1 || (sec.indexOf('建议') !== -1 && si > 0)
+            || /[Rr]ecommendation/i.test(sec) || /[Aa]ctionable/i.test(sec)) {
           for (var r = 0; r < lines.length; r++) {
             var rLine = lines[r].trim();
             /* Format A: 1. **target：** text */

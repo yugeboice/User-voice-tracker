@@ -10,22 +10,22 @@
     {
       "file": "report_de61b91f_20260319_104928.json",
       "run_id": "de61b91f",
-      "period_start": "2026-03-05",
-      "period_end": "2026-03-19",
+      "period_start": "2026-02-24",
+      "period_end": "2026-03-09",
       "total_valid_posts": 79
     },
     {
       "file": "report_43c5af8e_20260312_071352.json",
       "run_id": "43c5af8e",
-      "period_start": "2026-02-26",
-      "period_end": "2026-03-12",
+      "period_start": "2026-02-10",
+      "period_end": "2026-02-23",
       "total_valid_posts": 78
     },
     {
       "file": "report_e33d9e83_20260312_071321.json",
       "run_id": "e33d9e83",
-      "period_start": "2026-02-26",
-      "period_end": "2026-03-12",
+      "period_start": "2026-01-27",
+      "period_end": "2026-02-09",
       "total_valid_posts": 67
     }
   ]

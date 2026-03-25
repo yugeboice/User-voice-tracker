@@ -428,9 +428,11 @@ def get_latest_report() -> Path | None:
     """Find the most recent report file."""
     if not REPORTS_DIR.exists():
         return None
-    files = sorted(REPORTS_DIR.glob("report_*.json"), reverse=True)
+    files = list(REPORTS_DIR.glob("report_*.json"))
     # Filter out analysis md files
     files = [f for f in files if not f.stem.endswith("_analysis_zh") and not f.stem.endswith("_analysis_en")]
+    # Sort by file modification time (most recent first) since filenames use random hash prefixes
+    files.sort(key=lambda f: f.stat().st_mtime, reverse=True)
     return files[0] if files else None
 
 
