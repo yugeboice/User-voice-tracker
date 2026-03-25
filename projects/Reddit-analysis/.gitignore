@@ -1,0 +1,31 @@
+# Python
+scripts/venv/
+scripts/vendor/
+__pycache__/
+*.pyc
+*.pyo
+
+# Data (user-specific, generated at runtime)
+data/reddit.db
+data/reddit.db-journal
+data/reports/
+data/last_run.json
+data/screenshots/
+
+# Lumina sidecar credentials (never commit)
+lumina/appsettings.json
+lumina/bin/
+lumina/obj/
+
+# Temp / test files
+lumina_test_results.md
+tmp_check.js
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

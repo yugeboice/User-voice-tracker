@@ -1,0 +1,6 @@
+# Core (scraper)
+requests>=2.28.0
+
+# Lumina enrichment (optional)
+# Requires: dotnet SDK installed, lumina/appsettings.json configured
+# No Python packages needed — lumina_client.py uses stdlib only (urllib, subprocess)
