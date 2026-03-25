@@ -1528,26 +1528,41 @@
       /* Build evaluative keywords from summaries, pain points and key_points */
       var freq = {}, colorMap = {};
 
-      /* Predefined evaluative keyword patterns to extract */
+      /* Predefined evaluative keyword patterns to extract (zh: re, en: re_en) */
       var evalPatterns = [
         /* Negative evaluative patterns */
-        {re:/幻觉/g, kw:'幻觉问题', en:'Hallucination'}, {re:/退化/g, kw:'能力退化', en:'Degradation'}, {re:/限制|限额|限流/g, kw:'使用限制', en:'Usage Limits'},
-        {re:/太慢|速度慢|响应慢|延迟/g, kw:'响应太慢', en:'Slow Response'}, {re:/太贵|价格高|定价|订阅/g, kw:'定价过高', en:'Overpriced'},
-        {re:/Bug|bug|缺陷|故障/g, kw:'Bug频发', en:'Frequent Bugs'}, {re:/上下文.*丢失|忘记.*上下文|上下文.*不足/g, kw:'上下文丢失', en:'Context Loss'},
-        {re:/拒绝|审查|过度.*安全|内容.*审查/g, kw:'过度审查', en:'Over-censorship'}, {re:/不稳定|不一致|质量.*波动/g, kw:'质量不稳定', en:'Inconsistent Quality'},
-        {re:/混乱|困惑|不清楚|费解/g, kw:'体验混乱', en:'Confusing UX'}, {re:/翻车|失误|错误/g, kw:'基础能力失误', en:'Basic Errors'},
-        {re:/点击诱饵|引导语|操控/g, kw:'点击诱饵', en:'Clickbait'}, {re:/断裂|迭代.*断|不兼容/g, kw:'版本断裂', en:'Version Break'},
-        {re:/安全.*漏洞|安全.*隐患|伪造/g, kw:'安全隐患', en:'Security Risk'}, {re:/僵化|灵活性.*差|不够灵活/g, kw:'交互僵化', en:'Rigid Interaction'},
+        {re:/幻觉/g, re_en:/hallucin/gi, kw:'幻觉问题', en:'Hallucination'},
+        {re:/退化/g, re_en:/degrad|regress|worse|declin/gi, kw:'能力退化', en:'Degradation'},
+        {re:/限制|限额|限流/g, re_en:/limit|throttl|cap|restrict|quota/gi, kw:'使用限制', en:'Usage Limits'},
+        {re:/太慢|速度慢|响应慢|延迟/g, re_en:/slow|latenc|lag|delay/gi, kw:'响应太慢', en:'Slow Response'},
+        {re:/太贵|价格高|定价|订阅/g, re_en:/expens|pric|cost|subscri|overpric/gi, kw:'定价过高', en:'Overpriced'},
+        {re:/Bug|bug|缺陷|故障/g, re_en:/\bbug|crash|glitch|broken|defect/gi, kw:'Bug频发', en:'Frequent Bugs'},
+        {re:/上下文.*丢失|忘记.*上下文|上下文.*不足/g, re_en:/context.{0,10}(loss|lost|forget|limit|window)/gi, kw:'上下文丢失', en:'Context Loss'},
+        {re:/拒绝|审查|过度.*安全|内容.*审查/g, re_en:/refus|censor|over.?safe|content.?filter|guardrail/gi, kw:'过度审查', en:'Over-censorship'},
+        {re:/不稳定|不一致|质量.*波动/g, re_en:/inconsist|unstabl|unreliab|hit.?or.?miss|erratic/gi, kw:'质量不稳定', en:'Inconsistent Quality'},
+        {re:/混乱|困惑|不清楚|费解/g, re_en:/confus|unclear|clutter|unintuitive|messy/gi, kw:'体验混乱', en:'Confusing UX'},
+        {re:/翻车|失误|错误/g, re_en:/\berror|mistake|wrong|fail|incorrect/gi, kw:'基础能力失误', en:'Basic Errors'},
+        {re:/点击诱饵|引导语|操控/g, re_en:/clickbait|manipulat|dark.?pattern/gi, kw:'点击诱饵', en:'Clickbait'},
+        {re:/断裂|迭代.*断|不兼容/g, re_en:/break.?change|incompatib|version.?break|backward/gi, kw:'版本断裂', en:'Version Break'},
+        {re:/安全.*漏洞|安全.*隐患|伪造/g, re_en:/secur.{0,8}(risk|vuln|issue|flaw)|fake|forg/gi, kw:'安全隐患', en:'Security Risk'},
+        {re:/僵化|灵活性.*差|不够灵活/g, re_en:/rigid|inflexib|lack.{0,6}flexib/gi, kw:'交互僵化', en:'Rigid Interaction'},
         /* Positive evaluative patterns */
-        {re:/创意.*生成|创意.*写作|创意.*能力/g, kw:'创意生成强', en:'Creative Generation'}, {re:/代码.*能力|编程.*能力|编码/g, kw:'代码能力强', en:'Strong Coding'},
-        {re:/推理.*能力|逻辑.*能力|深度.*推理/g, kw:'推理能力强', en:'Strong Reasoning'}, {re:/生态|插件|扩展|MCP/g, kw:'生态丰富', en:'Rich Ecosystem'},
-        {re:/速度.*快|快速|高效/g, kw:'响应快速', en:'Fast Response'}, {re:/准确|精确|可靠/g, kw:'输出准确', en:'Accurate Output'},
-        {re:/便宜|免费|性价比/g, kw:'性价比高', en:'Good Value'}, {re:/易用|简单|上手.*快|体验.*好/g, kw:'易用性好', en:'Easy to Use'},
-        {re:/多模态|图片|视觉|语音/g, kw:'多模态能力', en:'Multimodal'}, {re:/集成|API|接口/g, kw:'集成便捷', en:'Easy Integration'},
+        {re:/创意.*生成|创意.*写作|创意.*能力/g, re_en:/creativ|imaginat|writing.{0,6}(abilit|skill)/gi, kw:'创意生成强', en:'Creative Generation'},
+        {re:/代码.*能力|编程.*能力|编码/g, re_en:/cod(?:e|ing)|program|develop|engineer/gi, kw:'代码能力强', en:'Strong Coding'},
+        {re:/推理.*能力|逻辑.*能力|深度.*推理/g, re_en:/reason|logic|think|intellig|deep.?think/gi, kw:'推理能力强', en:'Strong Reasoning'},
+        {re:/生态|插件|扩展|MCP/g, re_en:/ecosystem|plugin|extension|MCP|integrat/gi, kw:'生态丰富', en:'Rich Ecosystem'},
+        {re:/速度.*快|快速|高效/g, re_en:/\bfast|quick|efficien|speed|snappy/gi, kw:'响应快速', en:'Fast Response'},
+        {re:/准确|精确|可靠/g, re_en:/accurat|precis|reliab|trustworth|dependab/gi, kw:'输出准确', en:'Accurate Output'},
+        {re:/便宜|免费|性价比/g, re_en:/\bfree\b|cheap|afford|value|cost.?effect/gi, kw:'性价比高', en:'Good Value'},
+        {re:/易用|简单|上手.*快|体验.*好/g, re_en:/easy.?to.?use|user.?friend|intuiti|simple|smooth/gi, kw:'易用性好', en:'Easy to Use'},
+        {re:/多模态|图片|视觉|语音/g, re_en:/multimodal|vision|image|voice|audio|visual/gi, kw:'多模态能力', en:'Multimodal'},
+        {re:/集成|API|接口/g, re_en:/\bAPI\b|integrat|interface|endpoint|SDK/gi, kw:'集成便捷', en:'Easy Integration'},
         /* Feature request patterns */
-        {re:/希望|期望|期待|需要|缺少/g, kw:'功能诉求', en:'Feature Requests'}, {re:/竞品|对比|替代|切换/g, kw:'竞品对比', en:'Competitor Comparison'},
-        {re:/上手难|学习.*曲线|门槛/g, kw:'上手难度高', en:'Steep Learning Curve'}, {re:/信任|信心|透明/g, kw:'信任问题', en:'Trust Issues'},
-        {re:/迁移|切换|替换/g, kw:'用户迁移', en:'User Migration'},
+        {re:/希望|期望|期待|需要|缺少/g, re_en:/wish|hope|want|need|miss|lack|request/gi, kw:'功能诉求', en:'Feature Requests'},
+        {re:/竞品|对比|替代|切换/g, re_en:/compet|compar|alternat|switch|vs\b|versus/gi, kw:'竞品对比', en:'Competitor Comparison'},
+        {re:/上手难|学习.*曲线|门槛/g, re_en:/learning.?curve|steep|barrier|difficult.?to.?learn/gi, kw:'上手难度高', en:'Steep Learning Curve'},
+        {re:/信任|信心|透明/g, re_en:/trust|confiden|transparen|credib/gi, kw:'信任问题', en:'Trust Issues'},
+        {re:/迁移|切换|替换/g, re_en:/migrat|switch|replac|transition/gi, kw:'用户迁移', en:'User Migration'},
       ];
 
       for (var i=0;i<filteredProducts.length;i++) {
@@ -1567,7 +1582,9 @@
         var summary = L(p, 'summary');
         for (var ei=0;ei<evalPatterns.length;ei++) {
           var pat = evalPatterns[ei];
-          var matches = summary.match(pat.re);
+          var useRe = (currentLang === 'en' && pat.re_en) ? pat.re_en : pat.re;
+          useRe.lastIndex = 0;
+          var matches = summary.match(useRe);
           if (matches) {
             var count = matches.length;
             var kwLabel = (currentLang === 'en' && pat.en) ? pat.en : pat.kw;
@@ -1584,8 +1601,10 @@
             var kp = kps[k];
             for (var ei2=0;ei2<evalPatterns.length;ei2++) {
               var pat2 = evalPatterns[ei2];
-              if (pat2.re.test(kp)) {
-                pat2.re.lastIndex = 0;
+              var useRe2 = (currentLang === 'en' && pat2.re_en) ? pat2.re_en : pat2.re;
+              useRe2.lastIndex = 0;
+              if (useRe2.test(kp)) {
+                useRe2.lastIndex = 0;
                 var kwLabel2 = (currentLang === 'en' && pat2.en) ? pat2.en : pat2.kw;
                 freq[kwLabel2] = (freq[kwLabel2]||0) + 1;
                 if (!colorMap[kwLabel2]) colorMap[kwLabel2] = color;
@@ -1594,17 +1613,15 @@
           }
         }
 
-        /* 3. Extract sentiment-specific Chinese phrases from key_points (Chinese mode only) */
+        /* 3. Chinese mode only: extract 2-6 char Chinese phrases from key_points */
         if (currentLang !== 'en') {
         for (var j2=0;j2<posts.length;j2++) {
           var kps2 = posts[j2].key_points || [];
           for (var k2=0;k2<kps2.length;k2++) {
-            /* Extract 2-6 char evaluative Chinese phrases */
             var cnPhrases = kps2[k2].match(/[\u4e00-\u9fff]{2,6}/g);
             if (cnPhrases) {
               for (var cp=0;cp<cnPhrases.length;cp++) {
                 var phrase = cnPhrases[cp];
-                /* Only keep evaluative/sentiment words, skip common/filler words */
                 var skipWords = ['的是','可以','这个','那个','一个','没有','不是','他们','我们','你们','什么','为什么',
                   '已经','因为','但是','如果','虽然','或者','而且','以及','关于','通过','之后','之前','其他',
                   '所有','非常','时候','能够','使用','需要','功能','产品','模型','用户','问题','版本','内容','工具',
@@ -1617,14 +1634,19 @@
             }
           }
         }
-        } /* end if not en */
+        }
       }
 
-      /* Filter: keep evaluative keywords from patterns (high priority) and high-freq Chinese phrases */
+      /* Filter: keep evalPattern keywords + LLM keywords (high priority) and high-freq phrases */
       var patternKeywords = {};
       for (var ei3=0;ei3<evalPatterns.length;ei3++) {
         var kwL = (currentLang === 'en' && evalPatterns[ei3].en) ? evalPatterns[ei3].en : evalPatterns[ei3].kw;
         patternKeywords[kwL] = true;
+      }
+      /* Also mark LLM-extracted keywords as high priority */
+      for (var pi=0;pi<filteredProducts.length;pi++) {
+        var kwArr = LA(filteredProducts[pi], 'keywords');
+        for (var ki2=0;ki2<kwArr.length;ki2++) { patternKeywords[kwArr[ki2]] = true; }
       }
 
       var entries = Object.keys(freq).map(function(k){return {word:k, count:freq[k], isPredefined:!!patternKeywords[k]};});
@@ -1634,8 +1656,8 @@
         return b.count - a.count;
       });
       /* Take top predefined + top general, deduplicate substrings */
-      var predefined = entries.filter(function(e){return e.isPredefined && e.count >= 1;}).slice(0,25);
-      var organic = entries.filter(function(e){return !e.isPredefined && e.count >= 3;}).slice(0,20);
+      var predefined = entries.filter(function(e){return e.isPredefined && e.count >= 1;}).slice(0,40);
+      var organic = entries.filter(function(e){return !e.isPredefined && e.count >= 2;}).slice(0,25);
       var combined = predefined.concat(organic);
 
       /* Deduplicate: remove shorter words that are substrings of longer ones */

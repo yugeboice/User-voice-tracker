@@ -211,16 +211,63 @@ Do NOT translate product names. Keep translations concise.
     return parsed if isinstance(parsed, list) else []
 
 
+def extract_keywords(
+    product_name: str, summary_zh: str, summary_en: str,
+    endpoint: str, model: str,
+) -> dict | None:
+    """Extract bilingual evaluative keywords from product summaries via LLM.
+
+    Returns {"zh": ["kw1", ...], "en": ["kw1", ...]}
+    """
+    prompt = f"""Analyze the following product intelligence summary for "{product_name}" and extract evaluative keywords/phrases for a word cloud visualization.
+
+Extract 15-20 keywords in BOTH Chinese and English. Focus on:
+- Pain points and complaints (e.g., 幻觉问题/Hallucination, 响应慢/Slow Response)
+- Strengths and praised features (e.g., 代码能力强/Strong Coding, 推理出色/Great Reasoning)
+- Feature requests and user needs (e.g., 功能缺失/Missing Features)
+- Sentiment keywords (e.g., 失望/Disappointed, 印象深刻/Impressive)
+- Product-specific technical terms (e.g., Agent模式/Agent Mode, MCP集成/MCP Integration)
+
+Rules:
+- Each keyword should be 2-6 Chinese characters OR 1-3 English words
+- Keywords must be evaluative or descriptive, NOT generic (avoid: 用户/users, 产品/product, 功能/feature)
+- Chinese and English lists should correspond 1:1 (same meaning, same order)
+- More negative/positive sentiment words, fewer neutral descriptions
+
+Chinese summary:
+{summary_zh[:2000]}
+
+English summary:
+{summary_en[:2000]}
+
+Return JSON: {{"zh": ["Chinese keyword1", "Chinese keyword2", ...], "en": ["English keyword1", "English keyword2", ...]}}"""
+
+    response = call_llm(prompt, SYSTEM_PROMPT_JSON, endpoint, model)
+    if not response:
+        return None
+    result = parse_json_response(response)
+    if isinstance(result, dict) and "zh" in result and "en" in result:
+        # Ensure lists are same length
+        min_len = min(len(result["zh"]), len(result["en"]))
+        result["zh"] = result["zh"][:min_len]
+        result["en"] = result["en"][:min_len]
+        return result
+    return None
+
+
 # ---------------------------------------------------------------------------
 # Main translation pipeline
 # ---------------------------------------------------------------------------
 
 def is_already_translated(report_data: dict) -> bool:
-    """Check if report already has _en fields."""
+    """Check if report already has all _en fields including keywords."""
     if not report_data.get("cross_product_comparison_en"):
         return False
     products = report_data.get("products", [])
     if products and not products[0].get("summary_en"):
+        return False
+    # Also check keywords
+    if products and (not products[0].get("keywords") or len(products[0].get("keywords", [])) < 5):
         return False
     return True
 
@@ -242,33 +289,41 @@ def translate_report(report_path: Path, endpoint: str, model: str, force: bool =
 
     # 1. Translate cross_product_comparison (1 LLM call)
     cpc = data.get("cross_product_comparison", "")
-    if cpc:
-        log.info("[1/4] Translating cross-product comparison...")
+    if cpc and (not data.get("cross_product_comparison_en") or force):
+        log.info("[1/5] Translating cross-product comparison...")
         data["cross_product_comparison_en"] = translate_markdown(cpc, endpoint, model)
         llm_calls += 1
+    elif cpc:
+        log.info("[1/5] Cross-product comparison: already translated, skipping.")
     else:
         data["cross_product_comparison_en"] = ""
 
-    # 2. Translate per-product summaries (1 LLM call per product — markdown can be large)
-    log.info("[2/4] Translating product summaries (%d products)...", len(products))
+    # 2. Translate per-product summaries (1 LLM call per product)
+    log.info("[2/5] Translating product summaries (%d products)...", len(products))
     for i, p in enumerate(products):
         name = p.get("product_name", f"Product {i}")
         summary = p.get("summary", "")
-        if summary:
+        if summary and (not p.get("summary_en") or force):
             log.info("  Summary: %s (%d chars)", name, len(summary))
             p["summary_en"] = translate_markdown(summary, endpoint, model)
             llm_calls += 1
+        elif summary:
+            log.info("  Summary: %s (already done, skipping)", name)
         else:
             p["summary_en"] = ""
 
     # 3. Translate structured fields per product (1 LLM call per product)
-    log.info("[3/4] Translating structured fields...")
+    log.info("[3/5] Translating structured fields...")
     for i, p in enumerate(products):
         name = p.get("product_name", f"Product {i}")
         has_structured = any([p.get("pain_points"), p.get("strengths"),
-                              p.get("recommendations"), p.get("keywords")])
+                              p.get("recommendations")])
         if not has_structured:
             log.info("  Structured: %s (no fields, skipping)", name)
+            continue
+        already = p.get("pain_points") and p["pain_points"][0].get("text_en")
+        if already and not force:
+            log.info("  Structured: %s (already done, skipping)", name)
             continue
         log.info("  Structured: %s", name)
         translated = translate_structured_fields(p, endpoint, model)
@@ -296,21 +351,46 @@ def translate_report(report_path: Path, endpoint: str, model: str, force: bool =
             p["keywords_en"] = translated["keywords"]
 
     # 4. Translate typical_posts per product (1 LLM call per product)
-    log.info("[4/4] Translating typical posts...")
+    log.info("[4/5] Translating typical posts...")
     for i, p in enumerate(products):
         name = p.get("product_name", f"Product {i}")
         posts = p.get("typical_posts", [])
-        if posts:
-            log.info("  Posts: %s (%d posts)", name, len(posts))
-            translated_posts = translate_posts(posts, endpoint, model)
-            llm_calls += 1
+        if not posts:
+            continue
+        if posts[0].get("key_points_en") and not force:
+            log.info("  Posts: %s (already done, skipping)", name)
+            continue
+        log.info("  Posts: %s (%d posts)", name, len(posts))
+        translated_posts = translate_posts(posts, endpoint, model)
+        llm_calls += 1
 
-            # Apply translations back
-            for j, post in enumerate(posts):
-                if j < len(translated_posts):
-                    tp = translated_posts[j]
-                    post["sentiment_reason_en"] = tp.get("sentiment_reason", "")
-                    post["key_points_en"] = tp.get("key_points", [])
+        # Apply translations back
+        for j, post in enumerate(posts):
+            if j < len(translated_posts):
+                tp = translated_posts[j]
+                post["sentiment_reason_en"] = tp.get("sentiment_reason", "")
+                post["key_points_en"] = tp.get("key_points", [])
+
+    # 5. Extract bilingual keywords per product via LLM (1 call per product)
+    log.info("[5/5] Extracting bilingual keywords...")
+    for i, p in enumerate(products):
+        name = p.get("product_name", f"Product {i}")
+        # Skip if keywords already populated (unless force)
+        if p.get("keywords") and len(p["keywords"]) >= 5 and not force:
+            log.info("  Keywords: %s (already has %d, skipping)", name, len(p["keywords"]))
+            continue
+        summary_zh = p.get("summary", "")
+        summary_en = p.get("summary_en", "")
+        if not summary_zh and not summary_en:
+            log.info("  Keywords: %s (no summary, skipping)", name)
+            continue
+        log.info("  Keywords: %s", name)
+        kw_result = extract_keywords(name, summary_zh, summary_en, endpoint, model)
+        llm_calls += 1
+        if kw_result:
+            p["keywords"] = kw_result.get("zh", [])
+            p["keywords_en"] = kw_result.get("en", [])
+            log.info("    -> %d zh, %d en keywords", len(p["keywords"]), len(p["keywords_en"]))
 
     # Save updated JSON
     report_path.write_text(

@@ -72,6 +72,9 @@ def main():
         "--port", str(args.port),
     ]
 
+    deploy_cmd = [PYTHON, str(SCRIPTS_DIR / "deploy.py")]
+    notify_cmd = [PYTHON, str(SCRIPTS_DIR / "notify.py")]
+
     if args.scrape_only:
         run_step("Scraping Reddit", scrape_cmd)
     elif args.analyze_only:
@@ -81,16 +84,21 @@ def main():
         run_step("Starting Dashboard", serve_cmd)
     else:
         # Full pipeline
-        if not run_step("Step 1/4: Scraping Reddit", scrape_cmd):
+        if not run_step("Step 1/5: Scraping Reddit", scrape_cmd):
             sys.exit(1)
-        if not run_step("Step 2/4: Analyzing with LLM", analyze_cmd):
+        if not run_step("Step 2/5: Analyzing with LLM", analyze_cmd):
             print("\n[WARNING] LLM analysis failed - dashboard may show without analysis.")
             print("  Check that Copilot API is running: npx copilot-api@0.5.14 start")
             print("  Or run analysis separately: python analyze.py\n")
         else:
-            if not run_step("Step 3/4: Translating to English", translate_cmd):
+            if not run_step("Step 3/5: Translating to English", translate_cmd):
                 print("\n[WARNING] Translation failed - English mode will fall back to Chinese.\n")
-        run_step("Step 4/4: Starting Dashboard", serve_cmd)
+        if not run_step("Step 4/5: Deploying to GitHub Pages", deploy_cmd):
+            print("\n[WARNING] Deploy failed - skipping Teams notification.\n")
+        else:
+            if not run_step("Step 5/5: Sending Teams Notification", notify_cmd):
+                print("\n[WARNING] Teams notification failed.\n")
+        run_step("Starting Dashboard", serve_cmd)
 
 
 if __name__ == "__main__":
