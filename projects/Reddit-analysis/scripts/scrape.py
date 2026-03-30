@@ -317,7 +317,8 @@ def scrape_subreddit_posts(
 
     while len(posts) < limit:
         batch_size = min(MAX_RSS_PER_PAGE, limit - len(posts))
-        url = f"{RSS_BASE}/r/{subreddit}/new.rss?limit={batch_size}"
+        feed_type = "new"
+        url = f"{RSS_BASE}/r/{subreddit}/{feed_type}.rss?limit={batch_size}"
         if after_param:
             url += f"&after={after_param}"
 
@@ -325,8 +326,15 @@ def scrape_subreddit_posts(
         log.info("[%s] Fetching page %d (have %d/%d posts)...", subreddit, page, len(posts), limit)
 
         root = fetch_rss(session, url)
+        # Some smaller/restricted subreddits intermittently fail on new.rss.
+        # On first-page failure, fall back to hot.rss to avoid full subreddit dropout.
+        if root is None and page == 1 and not after_param:
+            feed_type = "hot"
+            fallback_url = f"{RSS_BASE}/r/{subreddit}/{feed_type}.rss?limit={batch_size}"
+            log.warning("[%s] new.rss failed on first page, trying hot.rss fallback...", subreddit)
+            root = fetch_rss(session, fallback_url)
         if root is None:
-            log.error("[%s] Failed to fetch RSS page %d, stopping", subreddit, page)
+            log.error("[%s] Failed to fetch %s RSS page %d, stopping", subreddit, feed_type, page)
             break
 
         entries = root.findall("atom:entry", ATOM_NS)
@@ -644,7 +652,7 @@ def main():
     parser = argparse.ArgumentParser(description="Reddit Competitive Intelligence Scraper")
     parser.add_argument(
         "--subreddits",
-        default="ChatGPT,ClaudeAI,Gemini,GithubCopilot,MicrosoftCopilot",
+        default="ChatGPT,ChatGPTcomplaints,ClaudeAI,claude,GeminiAI,GoogleGeminiAI,GithubCopilot,MicrosoftCopilot,microsoft_365_copilot",
         help="Comma-separated subreddit names (default: all 5 competitors)",
     )
     parser.add_argument("--days", type=int, default=14, help="Time window in days (default: 14)")

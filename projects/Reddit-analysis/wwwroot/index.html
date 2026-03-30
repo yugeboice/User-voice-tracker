@@ -808,14 +808,14 @@
       if (prevIdx >= reportIndex.length) return;
       var prevFile = reportIndex[prevIdx].file;
       try {
-        var resp = await fetch('/data/reports/' + prevFile);
+        var resp = await fetch('data/reports/' + prevFile);
         if (resp.ok) prevReportData = await resp.json();
       } catch(e) { /* ignore */ }
     }
 
     async function loadReportIndex() {
       try {
-        var resp = await fetch('/data/reports/index.json');
+        var resp = await fetch('data/reports/index.json');
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
@@ -1147,13 +1147,19 @@
       var minFreq = Math.min.apply(null, words.map(function(w){return w.freq;}));
       var placed = [];
 
+      /* Detect if words are predominantly English (longer avg text) */
+      var avgLen = 0;
+      for (var ai = 0; ai < Math.min(words.length, 10); ai++) avgLen += words[ai].text.length;
+      avgLen = avgLen / Math.min(words.length, 10);
+      var isEnglish = avgLen > 5; /* Chinese keywords avg ~3-4 chars, English avg ~10+ */
+
       /* Seeded random for consistent layout */
       var seed = 42;
       function seededRandom() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
 
       /* Elliptical cloud boundary - words must fit inside this ellipse */
       var cx = W / 2, cy = H / 2;
-      var rx = W * 0.46, ry = H * 0.44;
+      var rx = W * 0.48, ry = H * 0.46;
       function isInEllipse(x, y, w, h) {
         /* Check all 4 corners of the bounding box */
         var corners = [[x,y],[x+w,y],[x,y+h],[x+w,y+h]];
@@ -1165,34 +1171,42 @@
         return true;
       }
 
+      /* Font size ranges: English needs smaller sizes because words are much wider */
+      var fontMin = isEnglish ? 10 : 12;
+      var fontMax = isEnglish ? 26 : 40;
+      var fontRange = fontMax - fontMin;
+      /* Spiral params: English needs tighter step and longer search */
+      var spiralMax = isEnglish ? 2000 : 1400;
+      var spiralStep = isEnglish ? 1.5 : 2.2;
+      var spiralGrowth = isEnglish ? 0.065 : 0.085;
+
       for (var i = 0; i < words.length && i < 50; i++) {
         var w = words[i];
         var freqRatio = maxFreq > minFreq ? (w.freq - minFreq) / (maxFreq - minFreq) : 0.5;
-        /* Size range: 12px (smallest) to 40px (largest) */
-        var fontSize = Math.round(12 + freqRatio * 28);
+        var fontSize = Math.round(fontMin + freqRatio * fontRange);
 
         /* Slight random rotation for organic feel */
         var rotation = 0;
         if (i > 2 && seededRandom() > 0.65) {
-          rotation = (seededRandom() - 0.5) * 0.3; /* radians, about ±8° */
+          rotation = (seededRandom() - 0.5) * (isEnglish ? 0.15 : 0.3);
         }
 
         ctx.save();
         ctx.font = '700 ' + fontSize + 'px "Inter", -apple-system, sans-serif';
         var metrics = ctx.measureText(w.text);
-        var tw = metrics.width + 8;
-        var th = fontSize + 6;
+        var tw = metrics.width + 6;
+        var th = fontSize + 4;
         ctx.restore();
 
         /* Bounding box after rotation (approximate) */
         var absCos = Math.abs(Math.cos(rotation)), absSin = Math.abs(Math.sin(rotation));
-        var bw = tw * absCos + th * absSin + 4;
-        var bh = tw * absSin + th * absCos + 4;
+        var bw = tw * absCos + th * absSin + 2;
+        var bh = tw * absSin + th * absCos + 2;
 
         var ok = false;
         /* Archimedean spiral placement from center */
-        for (var angle = 0; angle < 1400; angle += 2.2) {
-          var r = 1.5 + angle * 0.085;
+        for (var angle = 0; angle < spiralMax; angle += spiralStep) {
+          var r = 1.5 + angle * spiralGrowth;
           var x = cx + r * Math.cos(angle * 0.15) - bw / 2;
           var y = cy + r * Math.sin(angle * 0.15) - bh / 2;
           /* Must be inside ellipse */
@@ -1660,18 +1674,22 @@
       var organic = entries.filter(function(e){return !e.isPredefined && e.count >= 2;}).slice(0,25);
       var combined = predefined.concat(organic);
 
-      /* Deduplicate: remove shorter words that are substrings of longer ones */
+      /* Deduplicate: for Chinese use substring matching; for English use case-insensitive exact match only */
       var deduped = [];
+      var isEnCloud = currentLang === 'en';
       for (var di=0;di<combined.length;di++) {
         var isDupe = false;
+        var wLower = combined[di].word.toLowerCase();
         for (var dj=0;dj<deduped.length;dj++) {
-          if (deduped[dj].word !== combined[di].word &&
-              (deduped[dj].word.indexOf(combined[di].word) !== -1 || combined[di].word.indexOf(deduped[dj].word) !== -1)) {
-            /* Keep the one with higher count */
-            if (combined[di].count > deduped[dj].count) {
-              deduped[dj] = combined[di]; /* Replace */
+          var eLower = deduped[dj].word.toLowerCase();
+          if (eLower === wLower) { isDupe = true; break; }
+          if (!isEnCloud) {
+            /* Chinese: substring dedup */
+            if (deduped[dj].word !== combined[di].word &&
+                (deduped[dj].word.indexOf(combined[di].word) !== -1 || combined[di].word.indexOf(deduped[dj].word) !== -1)) {
+              if (combined[di].count > deduped[dj].count) deduped[dj] = combined[di];
+              isDupe = true; break;
             }
-            isDupe = true; break;
           }
         }
         if (!isDupe) deduped.push(combined[di]);
@@ -2166,16 +2184,20 @@
               var advMatch = details.match(/独有优势[：:]\s*(.+?)(?:[；;]|独有劣势|$)/);
               var disadvMatch = details.match(/独有劣势[：:]\s*(.+?)(?:[；;]|独有优势|$)/);
               /* English patterns */
-              if (!advMatch) advMatch = details.match(/[Uu]nique [Aa]dvantage[：:]\s*(.+?)(?:[；;]|[Uu]nique [Dd]isadvantage|$)/);
-              if (!disadvMatch) disadvMatch = details.match(/[Uu]nique [Dd]isadvantage[：:]\s*(.+?)(?:[；;]|[Uu]nique [Aa]dvantage|$)/);
-              /* Also match "Advantage:" / "Disadvantage:" */
-              if (!advMatch) advMatch = details.match(/[Aa]dvantage[：:]\s*(.+?)(?:[；;]|[Dd]isadvantage|$)/);
-              if (!disadvMatch) disadvMatch = details.match(/[Dd]isadvantage[：:]\s*(.+?)(?:[；;]|[Aa]dvantage|$)/);
+              if (!advMatch) advMatch = details.match(/[Uu]nique [Aa]dvantage[：:]\s*(.+?)(?:[；;]|[Uu]nique\s+(?:[Dd]isadvantage|[Ww]eakness)|$)/);
+              if (!disadvMatch) disadvMatch = details.match(/[Uu]nique [Dd]isadvantage[：:]\s*(.+?)(?:[；;]|[Uu]nique\s+(?:[Aa]dvantage|[Ss]trength)|$)/);
+              if (!advMatch) advMatch = details.match(/[Uu]nique [Ss]trength[：:]\s*(.+?)(?:[；;]|[Uu]nique\s+(?:[Ww]eakness|[Dd]isadvantage)|$)/);
+              if (!disadvMatch) disadvMatch = details.match(/[Uu]nique [Ww]eakness[：:]\s*(.+?)(?:[；;]|[Uu]nique\s+(?:[Ss]trength|[Aa]dvantage)|$)/);
+              /* Also match "Advantage:" / "Disadvantage:" / "Strength:" / "Weakness:" */
+              if (!advMatch) advMatch = details.match(/[Aa]dvantage[：:]\s*(.+?)(?:[；;]|(?:[Dd]isadvantage|[Ww]eakness)|$)/);
+              if (!disadvMatch) disadvMatch = details.match(/[Dd]isadvantage[：:]\s*(.+?)(?:[；;]|(?:[Aa]dvantage|[Ss]trength)|$)/);
+              if (!advMatch) advMatch = details.match(/[Ss]trength[：:]\s*(.+?)(?:[；;]|(?:[Ww]eakness|[Dd]isadvantage)|$)/);
+              if (!disadvMatch) disadvMatch = details.match(/[Ww]eakness[：:]\s*(.+?)(?:[；;]|(?:[Ss]trength|[Aa]dvantage)|$)/);
               if (advMatch) adv = advMatch[1].replace(/\*\*/g, '').trim();
               if (disadvMatch) disadv = disadvMatch[1].replace(/\*\*/g, '').trim();
               /* If only one mentioned, extract the whole text */
               if (!adv && !disadv) {
-                if (details.indexOf('优势') !== -1 || /advantage/i.test(details)) adv = details.replace(/^[：:;\s]+/, '').replace(/\*\*/g, '').trim();
+                if (details.indexOf('优势') !== -1 || /advantage|strength/i.test(details)) adv = details.replace(/^[：:;\s]+/, '').replace(/\*\*/g, '').trim();
                 else disadv = details.replace(/^[：:;\s]+/, '').replace(/\*\*/g, '').trim();
               }
               result.uniqueTraits.push({ product: prodName, advantage: truncate(adv, 100), disadvantage: truncate(disadv, 100) });
@@ -2386,9 +2408,9 @@
       await loadReportIndex();
       loadReportList();
       try {
-        var resp = await fetch('/data/reports/latest.json');
+        var resp = await fetch('data/reports/latest.json');
         if (resp.ok) { reportData = await resp.json(); }
-        else { resp = await fetch('/report.json'); if (resp.ok) reportData = await resp.json(); }
+        else { resp = await fetch('report.json'); if (resp.ok) reportData = await resp.json(); }
         if (reportData) {
           products = consolidateProducts(reportData.products || [], reportData);
           products.sort(function(a,b){ return (PRODUCT_ORDER.indexOf(a.product_name)===-1?99:PRODUCT_ORDER.indexOf(a.product_name)) - (PRODUCT_ORDER.indexOf(b.product_name)===-1?99:PRODUCT_ORDER.indexOf(b.product_name)); });

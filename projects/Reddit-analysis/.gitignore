@@ -29,3 +29,4 @@ tmp_check.js
 # OS
 .DS_Store
 Thumbs.db
+scripts/share.config.json
