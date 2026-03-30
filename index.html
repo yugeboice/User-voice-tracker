@@ -1,0 +1,2427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Voice Tracker</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+  <style>
+    :root {
+      --clr-chatgpt: #10A37F;
+      --clr-claude: #D97706;
+      --clr-copilot: #6366F1;
+      --clr-gemini: #4285F4;
+      --clr-m365: #0078D4;
+      --clr-pos: #16A34A;
+      --clr-neg: #DC2626;
+      --clr-neu: #6B7280;
+      --clr-mix: #F59E0B;
+      --bg-page: #F8F9FA;
+      --bg-card: #FFFFFF;
+      --border: #E5E7EB;
+      --text-primary: #111827;
+      --text-secondary: #6B7280;
+      --text-muted: #9CA3AF;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-lg: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-page); color: var(--text-primary); line-height:1.6; min-height:100vh;
+    }
+    .header {
+      position:sticky; top:0; z-index:100; background:#fff;
+      border-bottom:1px solid var(--border); box-shadow:0 1px 4px rgba(0,0,0,0.06);
+      display:flex; align-items:center; justify-content:space-between; padding:10px 32px;
+    }
+    .header-left { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+    .header-title { font-size:18px; font-weight:700; }
+    .header-subtitle { font-size:13px; color:var(--text-secondary); font-weight:500; }
+    .period-badge {
+      display:inline-flex; align-items:center; gap:6px; background:#EEF2FF; color:#4338CA;
+      font-size:12px; font-weight:600; padding:4px 12px; border-radius:20px;
+    }
+    .header-right { display:flex; align-items:center; gap:12px; }
+    .report-selector {
+      padding:6px 12px; border:1px solid var(--border); border-radius:8px;
+      font-size:13px; background:#fff; cursor:pointer; min-width:200px;
+    }
+    .lang-toggle-group { display:flex; gap:0; border:1px solid #D1D5DB; border-radius:6px; overflow:hidden; }
+    .lang-btn { padding:4px 12px; font-size:12px; border:none; background:#fff; cursor:pointer;
+      color:#6B7280; font-weight:500; transition:all 0.15s; }
+    .lang-btn.active { background:#4338CA; color:#fff; font-weight:700; }
+    .lang-btn:hover:not(.active) { background:#F3F4F6; }
+    .container { max-width:1440px; margin:0 auto; padding:24px 32px; }
+    .section { margin-bottom:32px; }
+    .section-title {
+      font-size:16px; font-weight:700; margin-bottom:16px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .section-title::before {
+      content:''; width:4px; height:20px; background:#4338CA; border-radius:2px;
+    }
+    .card {
+      background:var(--bg-card); border-radius:var(--radius);
+      box-shadow:var(--shadow); border:1px solid var(--border); overflow:hidden;
+    }
+    .card-body { padding:20px; }
+    .scorecard-row { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
+    .scorecard-card {
+      background:var(--bg-card); border-radius:var(--radius);
+      box-shadow:var(--shadow); border:1px solid var(--border); overflow:hidden;
+    }
+    .scorecard-bar { height:4px; width:100%; }
+    .scorecard-body { padding:16px; }
+    .scorecard-name { font-size:14px; font-weight:700; margin-bottom:4px; }
+    .scorecard-sources { font-size:10px; color:var(--text-muted); margin-bottom:8px; line-height:1.4; }
+    .scorecard-sources a { color:var(--text-muted); text-decoration:none; }
+    .scorecard-sources a:hover { color:#4338CA; text-decoration:underline; }
+    .scorecard-metric { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+    .scorecard-pct { font-size:32px; font-weight:800; line-height:1; }
+    .scorecard-pct-label { font-size:12px; color:var(--text-secondary); }
+    .traffic-light { width:14px; height:14px; border-radius:50%; display:inline-block; flex-shrink:0; }
+    .tl-green { background:var(--clr-pos); box-shadow:0 0 6px rgba(22,163,74,0.4); }
+    .tl-yellow { background:var(--clr-mix); box-shadow:0 0 6px rgba(245,158,11,0.4); }
+    .tl-red { background:var(--clr-neg); box-shadow:0 0 6px rgba(220,38,38,0.4); }
+    .scorecard-posts {
+      display:inline-block; font-size:11px; font-weight:600; color:var(--text-secondary);
+      background:#F3F4F6; padding:2px 8px; border-radius:10px; margin-bottom:8px;
+    }
+    .scorecard-delta {
+      font-size:11px; margin-bottom:8px; color:var(--text-secondary); line-height:1.4;
+    }
+    .scorecard-delta .delta-val { font-weight:700; }
+    .scorecard-delta .delta-up { color:var(--clr-pos); }
+    .scorecard-delta .delta-down { color:var(--clr-neg); }
+    .scorecard-delta .delta-flat { color:var(--text-muted); }
+    .scorecard-pain {
+      font-size:12px; color:var(--clr-neg); white-space:nowrap;
+      overflow:hidden; text-overflow:ellipsis; margin-bottom:8px;
+    }
+    .scorecard-finding {
+      background:#FFFBEB; border-left:3px solid var(--clr-mix); padding:6px 10px;
+      font-size:11px; color:#92400E; border-radius:0 4px 4px 0; line-height:1.4;
+      cursor:pointer; transition:background 0.15s;
+      display:flex; align-items:baseline; gap:4px;
+    }
+    .scorecard-finding:hover { background:#FEF3C7; }
+    .scorecard-finding .finding-text {
+      flex:1; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+    }
+    .scorecard-finding .finding-arrow {
+      flex-shrink:0; font-size:13px; color:#B45309; transition:transform 0.15s;
+    }
+    .scorecard-finding:hover .finding-arrow { transform:translateX(2px); }
+    .cols-7-5 { display:grid; grid-template-columns:7fr 5fr; gap:20px; }
+    .cols-6-6 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .cols-2x2 { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:16px; }
+    .heatmap-table { width:100%; border-collapse:collapse; font-size:12px; }
+    .heatmap-table th {
+      padding:8px 6px; text-align:center; font-weight:600;
+      color:var(--text-secondary); border-bottom:2px solid var(--border);
+    }
+    .heatmap-table td {
+      padding:8px 6px; text-align:center; border-bottom:1px solid var(--border);
+      font-weight:600; border-radius:4px;
+    }
+    .heatmap-table .product-cell { text-align:left; font-weight:700; font-size:13px; }
+    .heatmap-toggle { display:flex; gap:4px; margin-bottom:12px; }
+    .heatmap-toggle button {
+      padding:4px 12px; border:1px solid var(--border); background:#fff;
+      border-radius:6px; font-size:12px; cursor:pointer; font-weight:500;
+    }
+    .heatmap-toggle button.active { background:#4338CA; color:#fff; border-color:#4338CA; }
+    .product-filter-bar {
+      display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; align-items:center;
+    }
+    .product-filter-btn {
+      padding:4px 12px; border:1px solid var(--border); background:#fff;
+      border-radius:16px; font-size:11px; cursor:pointer; font-weight:600;
+      transition:all 0.15s;
+    }
+    .product-filter-btn.active { color:#fff; border-color:transparent; }
+    .product-filter-btn:hover:not(.active) { background:#F3F4F6; }
+    .keyword-cloud { display:none; /* Replaced by canvas word cloud */ }
+    .keyword-chip {
+      display:inline-block; padding:4px 12px; border-radius:20px;
+      font-weight:600; cursor:default; white-space:nowrap;
+    }
+    .product-tabs { display:flex; gap:4px; margin-bottom:16px; overflow-x:auto; padding-bottom:4px; }
+    .product-tab {
+      padding:8px 20px; border:2px solid var(--border); background:#fff;
+      border-radius:8px 8px 0 0; font-size:13px; font-weight:600;
+      cursor:pointer; white-space:nowrap; transition:all 0.15s;
+    }
+    .product-tab.active { border-bottom-color:transparent; color:#fff; }
+    .product-tab:hover:not(.active) { background:#F3F4F6; }
+    .dd-list { list-style:none; padding:0; }
+    .dd-list li {
+      display:flex; align-items:flex-start; gap:8px; padding:8px 0;
+      border-bottom:1px solid #F3F4F6; font-size:13px; line-height:1.5;
+    }
+    .dd-list li:last-child { border-bottom:none; }
+    .dd-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; margin-top:6px; }
+    .severity-badge {
+      font-size:10px; font-weight:700; padding:1px 6px; border-radius:4px;
+      flex-shrink:0; text-transform:uppercase;
+    }
+    .sev-high { background:#FEE2E2; color:#991B1B; }
+    .sev-medium { background:#FEF3C7; color:#92400E; }
+    .sev-low { background:#DBEAFE; color:#1E40AF; }
+    .priority-badge { font-size:10px; font-weight:700; padding:2px 8px; border-radius:4px; flex-shrink:0; }
+    .pri-p0 { background:#DC2626; color:#fff; }
+    .pri-p1 { background:#F59E0B; color:#fff; }
+    .pri-p2 { background:#6B7280; color:#fff; }
+    .filter-bar { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; align-items:center; }
+    .filter-bar select, .filter-bar input {
+      padding:6px 12px; border:1px solid var(--border); border-radius:8px; font-size:13px; background:#fff;
+    }
+    .filter-bar input { flex:1; min-width:200px; }
+    .evidence-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .evidence-card {
+      background:var(--bg-card); border-radius:var(--radius); box-shadow:var(--shadow);
+      border:1px solid var(--border); overflow:hidden; display:flex; flex-direction:column;
+    }
+    .evidence-card-bar { height:3px; width:100%; }
+    .evidence-card-body { padding:14px; flex:1; display:flex; flex-direction:column; gap:8px; }
+    .evidence-card-meta { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+    .pill { display:inline-block; padding:2px 8px; border-radius:10px; font-size:11px; font-weight:600; }
+    .pill-sentiment-positive { background:#DCFCE7; color:#166534; }
+    .pill-sentiment-negative { background:#FEE2E2; color:#991B1B; }
+    .pill-sentiment-neutral { background:#F3F4F6; color:#374151; }
+    .pill-sentiment-mixed { background:#FEF3C7; color:#92400E; }
+    .pill-topic { background:#EEF2FF; color:#4338CA; }
+    .evidence-title {
+      font-size:13px; font-weight:700; line-height:1.4;
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+    }
+    .evidence-body {
+      font-size:12px; color:var(--text-secondary);
+      display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;
+      overflow:hidden; line-height:1.5;
+    }
+    .evidence-keypoints { display:flex; flex-wrap:wrap; gap:4px; }
+    .evidence-kp { font-size:11px; background:#F0FDF4; color:#166534; padding:2px 6px; border-radius:4px; }
+    .evidence-footer {
+      display:flex; align-items:center; justify-content:space-between;
+      font-size:11px; color:var(--text-muted); margin-top:auto;
+    }
+    .evidence-footer a { color:#4338CA; text-decoration:none; font-weight:600; }
+    .evidence-footer a:hover { text-decoration:underline; }
+    .show-more-btn {
+      display:block; width:100%; padding:12px; border:1px dashed var(--border);
+      background:#fff; border-radius:var(--radius); font-size:13px; font-weight:600;
+      color:#4338CA; cursor:pointer; margin-top:16px; text-align:center;
+    }
+    .show-more-btn:hover { background:#F5F3FF; }
+    .history-strip { display:flex; gap:12px; overflow-x:auto; padding:8px 0; }
+    .history-card {
+      flex-shrink:0; width:180px; padding:12px; background:var(--bg-card);
+      border:1px solid var(--border); border-radius:var(--radius);
+      cursor:pointer; transition:all 0.15s; font-size:12px;
+    }
+    .history-card:hover { box-shadow:var(--shadow-lg); border-color:#4338CA; }
+    .history-card.active { border-color:#4338CA; background:#EEF2FF; }
+    .history-card-id {
+      font-weight:700; font-size:13px; margin-bottom:4px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .history-card-date { color:var(--text-secondary); }
+    .footer {
+      background:#F3F4F6; border-top:1px solid var(--border); padding:16px 32px;
+      text-align:center; font-size:12px; color:var(--text-secondary);
+    }
+    .loading-overlay {
+      position:fixed; inset:0; background:rgba(255,255,255,0.85);
+      display:flex; align-items:center; justify-content:center;
+      z-index:200; font-size:16px; font-weight:600; color:var(--text-secondary);
+    }
+    .loading-spinner {
+      width:36px; height:36px; border:3px solid var(--border);
+      border-top-color:#4338CA; border-radius:50%;
+      animation:spin 0.8s linear infinite; margin-right:12px;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    @media (max-width:1200px) {
+      .scorecard-row { grid-template-columns:repeat(3,1fr); }
+      .evidence-grid { grid-template-columns:repeat(2,1fr); }
+    }
+    @media (max-width:900px) {
+      .header { padding:10px 16px; flex-wrap:wrap; }
+      .container { padding:16px; }
+      .scorecard-row { grid-template-columns:repeat(2,1fr); }
+      .cols-7-5, .cols-6-6, .cols-2x2 { grid-template-columns:1fr; }
+      .evidence-grid { grid-template-columns:1fr; }
+    }
+    @media (max-width:600px) {
+      .scorecard-row { grid-template-columns:1fr; }
+      .header-left { flex-wrap:wrap; }
+      .report-selector { min-width:140px; }
+    }
+    .chart-container { position:relative; width:100%; }
+    .chart-container canvas { width:100% !important; }
+    .mt-16 { margin-top:16px; }
+    .hidden { display:none !important; }
+    /* Markdown rendered content */
+    .md-content { font-size:13px; line-height:1.8; color:var(--text-primary); }
+    .md-content h1 { font-size:18px; font-weight:800; margin:20px 0 12px; color:#1E293B; border-bottom:2px solid var(--border); padding-bottom:8px; }
+    .md-content h2 { font-size:15px; font-weight:700; margin:18px 0 10px; color:#334155; }
+    .md-content h3 { font-size:14px; font-weight:600; margin:14px 0 8px; color:#475569; }
+    .md-content p { margin:8px 0; }
+    .md-content strong { font-weight:700; color:#1E293B; }
+    .md-content em { font-style:italic; }
+    .md-content code { background:#F1F5F9; padding:1px 5px; border-radius:3px; font-size:12px; font-family:monospace; }
+    .md-content ul, .md-content ol { margin:8px 0 8px 20px; }
+    .md-content li { margin:4px 0; }
+    .md-content hr { border:none; border-top:1px solid var(--border); margin:16px 0; }
+    .md-content table { width:100%; border-collapse:collapse; margin:12px 0; font-size:12px; }
+    .md-content table th { background:#F8FAFC; padding:8px 12px; text-align:left; font-weight:700; border:1px solid var(--border); }
+    .md-content table td { padding:8px 12px; border:1px solid var(--border); vertical-align:top; }
+    .md-content table tr:hover { background:#F8FAFC; }
+    .md-content blockquote { border-left:3px solid #818CF8; padding:4px 12px; margin:8px 0; background:#F8FAFC; color:#475569; }
+    /* Key finding callout */
+    .key-finding-callout {
+      background:linear-gradient(135deg,#FFFBEB,#FEF3C7); border:1px solid #FDE68A;
+      border-left:4px solid var(--clr-mix); padding:12px 20px; border-radius:0 8px 8px 0;
+      font-size:13px; color:#78350F; line-height:1.6; margin-top:16px;
+      display:flex; align-items:flex-start; gap:10px;
+    }
+    .key-finding-callout .callout-icon { font-size:18px; flex-shrink:0; }
+    .key-finding-callout .callout-text { flex:1; }
+    .key-finding-callout strong { color:#92400E; }
+    /* Cross-product structured cards */
+    .cp-highlight-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+    .cp-highlight-card {
+      border-radius:var(--radius); padding:16px 20px;
+      border-left:4px solid; line-height:1.6; font-size:13px;
+    }
+    .cp-highlight-card .cp-hl-label {
+      font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px;
+    }
+    .cp-highlight-card .cp-hl-product { font-size:18px; font-weight:800; margin-bottom:4px; }
+    .cp-highlight-card .cp-hl-desc { color:var(--text-secondary); }
+    .cp-pain-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px; margin-bottom:16px; }
+    .cp-pain-card {
+      background:#FFF5F5; border:1px solid #FECACA; border-radius:var(--radius);
+      padding:14px 16px; font-size:13px; line-height:1.6;
+    }
+    .cp-pain-card .cp-pain-num {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:22px; height:22px; border-radius:50%; background:#DC2626; color:#fff;
+      font-size:11px; font-weight:700; margin-right:8px; flex-shrink:0;
+    }
+    .cp-pain-card .cp-pain-title { font-weight:700; color:#991B1B; }
+    .cp-pain-card .cp-pain-detail { color:#7F1D1D; margin-top:4px; }
+    .cp-traits-table { width:100%; border-collapse:separate; border-spacing:0; font-size:12px; margin-bottom:16px; }
+    .cp-traits-table th {
+      padding:10px 12px; text-align:left; font-weight:700; font-size:12px;
+      background:#F8FAFC; border-bottom:2px solid var(--border);
+    }
+    .cp-traits-table td {
+      padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.5;
+    }
+    .cp-traits-table .cp-product-name { font-weight:700; white-space:nowrap; }
+    .cp-adv-pill { display:inline-block; padding:2px 8px; border-radius:10px; font-size:11px; font-weight:600; margin:1px 2px; }
+    .cp-adv-pos { background:#DCFCE7; color:#166534; }
+    .cp-adv-neg { background:#FEE2E2; color:#991B1B; }
+    .cp-dynamics-list { display:flex; flex-direction:column; gap:10px; margin-bottom:16px; }
+    .cp-dynamics-item {
+      background:linear-gradient(135deg,#EEF2FF,#F0F4FF); border:1px solid #C7D2FE;
+      border-radius:var(--radius); padding:12px 16px; font-size:13px; line-height:1.6;
+      display:flex; align-items:flex-start; gap:10px;
+    }
+    .cp-dynamics-icon { font-size:18px; flex-shrink:0; line-height:1.4; }
+    .cp-dynamics-text { flex:1; }
+    .cp-dynamics-text strong { color:#3730A3; }
+    .cp-recs-list { display:flex; flex-direction:column; gap:8px; }
+    .cp-rec-item {
+      display:flex; align-items:flex-start; gap:10px; padding:10px 14px;
+      background:#fff; border:1px solid var(--border); border-radius:8px;
+      font-size:13px; line-height:1.5;
+    }
+    .cp-rec-target {
+      display:inline-block; padding:2px 10px; border-radius:10px;
+      font-size:11px; font-weight:700; flex-shrink:0;
+    }
+    @media (max-width:900px) {
+      .cp-highlight-row { grid-template-columns:1fr; }
+    }
+    /* Section dividers */
+    .page-section-divider {
+      margin:40px 0 24px; padding:0 0 12px;
+      border-bottom:2px solid #E0E3EB;
+      display:flex; align-items:center; gap:12px;
+    }
+    .page-section-divider .section-num {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:32px; height:32px; border-radius:50%; background:#4338CA; color:#fff;
+      font-size:14px; font-weight:800; flex-shrink:0;
+    }
+    .page-section-divider .section-label {
+      font-size:17px; font-weight:800; color:#1E293B; letter-spacing:0.3px;
+    }
+    .page-section-divider .section-desc {
+      font-size:12px; color:var(--text-secondary); margin-left:auto;
+    }
+    /* Canvas word cloud */
+    .wordcloud-canvas-wrap {
+      margin-top:4px; border:1px solid var(--border); border-radius:10px;
+      overflow:hidden; background:#FAFBFC;
+    }
+    .wordcloud-canvas-wrap canvas { display:block; width:100%; }
+    /* Trend section */
+    .trend-grid { display:grid; grid-template-columns:7fr 5fr; gap:20px; }
+    .trend-delta-card { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid #F3F4F6; }
+    .trend-delta-card:last-child { border-bottom:none; }
+    .trend-product-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+    .trend-product-name { font-size:13px; font-weight:600; flex:1; }
+    .trend-delta-value { font-size:13px; font-weight:700; }
+    @media (max-width:900px) {
+      .trend-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="loading-spinner"></div>
+    <span data-i18n="loading">加载报告数据...</span>
+  </div>
+
+  <header class="header">
+    <div class="header-left">
+      <span class="header-title" data-i18n="title">AI Voice Tracker</span>
+      <span class="header-subtitle" data-i18n="subtitle">基于Reddit头部粉丝社区的AI产品用户声音追踪</span>
+      <span id="periodBadge" class="period-badge"></span>
+    </div>
+    <div class="header-right">
+      <select id="reportSelector" class="report-selector" onchange="onReportSelect(this.value)">
+        <option value="" data-i18n="selectReport">选择报告...</option>
+      </select>
+      <div class="lang-toggle-group">
+        <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">中文</button>
+        <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- ===== SECTION I: Cross-Product Comparison ===== -->
+    <div class="page-section-divider">
+      <span class="section-num">1</span>
+      <span class="section-label" data-i18n="sectionCrossProduct">跨产品对比</span>
+      <span class="section-desc" data-i18n="sectionCrossProductDesc">全局视角：产品间横向比较</span>
+    </div>
+
+    <div class="section">
+      <div class="section-title" data-i18n="execSummary">管理层摘要</div>
+      <div id="scorecardRow" class="scorecard-row"></div>
+      <div id="keyFindingCallout" class="key-finding-callout hidden">
+        <span class="callout-icon">&#x1F4A1;</span>
+        <span id="keyFindingText" class="callout-text"></span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title" data-i18n="hotTopics">热点话题与关键词</div>
+      <div id="topicProductFilter" class="product-filter-bar"></div>
+      <div class="cols-6-6">
+        <div class="card"><div class="card-body">
+          <div class="chart-container" style="height:320px"><canvas id="topicBarChart"></canvas></div>
+        </div></div>
+        <div class="card"><div class="card-body">
+          <div style="font-size:13px;font-weight:600;margin-bottom:12px;color:var(--text-secondary)" data-i18n="keywordCloud">关键词云</div>
+          <div id="keywordCloud" class="keyword-cloud"></div>
+          <div class="wordcloud-canvas-wrap"><canvas id="wordCloudCanvas" width="560" height="380"></canvas></div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title" data-i18n="sentimentCompare">情感对比分析</div>
+      <div class="cols-7-5">
+        <div class="card"><div class="card-body">
+          <div class="chart-container" style="height:320px"><canvas id="sentimentBarChart"></canvas></div>
+        </div></div>
+        <div class="card"><div class="card-body">
+          <div class="heatmap-toggle">
+            <button class="active" onclick="toggleHeatmap('count',this)" data-i18n="count">数量</button>
+            <button onclick="toggleHeatmap('pct',this)" data-i18n="percentage">百分比</button>
+          </div>
+          <div id="heatmapContainer"></div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title" data-i18n="crossProductLabel">跨产品对比分析</div>
+      <div class="card"><div class="card-body">
+        <div id="crossProductAnalysis"></div>
+      </div></div>
+    </div>
+
+    <!-- ===== SECTION II: Product Analysis ===== -->
+    <div class="page-section-divider">
+      <span class="section-num">2</span>
+      <span class="section-label" data-i18n="sectionProductAnalysis">产品深度分析</span>
+      <span class="section-desc" data-i18n="sectionProductAnalysisDesc">逐一拆解：各产品详情与用户原声</span>
+    </div>
+
+    <div class="section">
+      <div class="section-title" data-i18n="productDeepDive">产品深度分析</div>
+      <div id="productTabs" class="product-tabs"></div>
+      <div id="deepDiveContent"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title" data-i18n="evidenceWall">原始帖子证据墙</div>
+      <div class="filter-bar">
+        <select id="filterProduct" onchange="filterEvidence()"><option value="" data-i18n="allProducts">全部产品</option></select>
+        <select id="filterSentiment" onchange="filterEvidence()">
+          <option value="" data-i18n="allSentiments">全部情感</option>
+          <option value="positive" data-i18n="sentiment_positive">正面</option>
+          <option value="negative" data-i18n="sentiment_negative">负面</option>
+          <option value="neutral" data-i18n="sentiment_neutral">中性</option>
+          <option value="mixed" data-i18n="sentiment_mixed">混合</option>
+        </select>
+        <select id="filterTopic" onchange="filterEvidence()"><option value="" data-i18n="allTopics">全部话题</option></select>
+        <input id="filterKeyword" type="text" placeholder="搜索关键词..." data-i18n-placeholder="searchKeyword" oninput="filterEvidence()">
+      </div>
+      <div id="evidenceGrid" class="evidence-grid"></div>
+      <button id="showMoreBtn" class="show-more-btn hidden" onclick="showMoreEvidence()" data-i18n="loadMore">加载更多帖子</button>
+    </div>
+
+    <!-- ===== SECTION III: Community Heat Analysis ===== -->
+    <div class="page-section-divider">
+      <span class="section-num">3</span>
+      <span class="section-label" data-i18n="sectionCommunityHeat">社区热度分析</span>
+      <span class="section-desc" data-i18n="sectionCommunityHeatDesc">趋势洞察：讨论量、互动量与历史变化</span>
+    </div>
+
+    <div class="section">
+      <div class="section-title" data-i18n="bubbleLabel">讨论量 vs 正面率 (气泡=互动量)</div>
+      <div class="card"><div class="card-body">
+        <div class="chart-container" style="height:360px"><canvas id="bubbleChart"></canvas></div>
+      </div></div>
+    </div>
+
+    <div class="section" id="trendSection">
+      <div class="section-title" data-i18n="trendDelta">趋势变化</div>
+      <div class="trend-grid">
+        <div class="card"><div class="card-body">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--text-secondary)" data-i18n="sentimentTrend">正面率历史趋势</div>
+          <div class="chart-container" style="height:280px"><canvas id="trendLineChart"></canvas></div>
+        </div></div>
+        <div class="card"><div class="card-body">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--text-secondary)" data-i18n="deltaSummary">本期变化摘要</div>
+          <div id="trendDeltaCards"></div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title" data-i18n="historyReports">历史报告</div>
+      <div id="historyStrip" class="history-strip"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span data-i18n="footerText">数据来源: Reddit公开帖子 | 分析模型: AI情感与话题分类 | 本报告仅供内部竞争情报参考</span>
+  </footer>
+
+  <script>
+    /* ======= REGISTER DATALABELS PLUGIN ======= */
+    Chart.register(ChartDataLabels);
+    Chart.defaults.plugins.datalabels = { display: false };
+
+    /* ======= CONSTANTS ======= */
+    var PRODUCT_COLORS = {
+      'ChatGPT':'#10A37F','Claude':'#D97706','GitHub Copilot':'#6366F1',
+      'Gemini':'#4285F4','M365 Copilot':'#0078D4'
+    };
+    var PRODUCT_ORDER = ['M365 Copilot','ChatGPT','Gemini','Claude','GitHub Copilot'];
+    var SENTIMENT_COLORS = {positive:'#16A34A',negative:'#DC2626',neutral:'#6B7280',mixed:'#F59E0B'};
+
+    /* Product → subreddit mapping for source links */
+    var PRODUCT_SUBREDDITS = {
+      'ChatGPT': ['ChatGPT','ChatGPTcomplaints'],
+      'Claude': ['ClaudeAI','claude'],
+      'Gemini': ['GeminiAI','GoogleGeminiAI'],
+      'GitHub Copilot': ['GithubCopilot'],
+      'M365 Copilot': ['MicrosoftCopilot','microsoft_365_copilot']
+    };
+
+    /* ======= I18N ======= */
+    var currentLang = 'zh';
+    var I18N = {
+      zh: {
+        title:'AI Voice Tracker', subtitle:'基于Reddit头部粉丝社区的AI产品用户声音追踪', loading:'加载报告数据...',
+        selectReport:'选择报告...', execSummary:'管理层摘要', sentimentCompare:'情感对比分析',
+        count:'数量', percentage:'百分比', hotTopics:'热点话题与关键词', keywordCloud:'关键词云',
+        productDeepDive:'产品深度分析', evidenceWall:'原始帖子证据墙', allProducts:'全部产品',
+        allSentiments:'全部情感', allTopics:'全部话题', searchKeyword:'搜索关键词...',
+        loadMore:'加载更多帖子', strategicAnalysis:'战略分析',
+        bubbleLabel:'讨论量 vs 正面率 (气泡=互动量)', rankingLabel:'正面率排行',
+        crossProductLabel:'跨产品对比分析', historyReports:'历史报告',
+        footerText:'数据来源: Reddit公开帖子 | 分析模型: AI情感与话题分类 | 本报告仅供内部竞争情报参考',
+        positiveRate:'正面率', validPosts:'有效帖子', noData:'暂无数据',
+        painPoints:'痛点问题', strengths:'产品优势', topicDist:'话题分布',
+        actionItems:'行动建议', noSuggestions:'暂无建议', viewOriginal:'查看原帖',
+        comments:'评论', clickToLoad:'点击加载', noHistory:'暂无历史报告',
+        noCrossProduct:'暂无跨产品对比分析数据。', all:'全部',
+        positive:'正面',negative:'负面',neutral:'中性',mixed:'混合',
+        vsPrev:'对比上期', prevPeriod:'上期',
+        product:'产品', total:'总计',
+        sentiment_positive:'正面',sentiment_negative:'负面',sentiment_neutral:'中性',sentiment_mixed:'混合',
+        topic_model_capability:'模型能力',topic_product_experience:'产品体验',
+        topic_feature_request:'功能需求',topic_bug_report:'缺陷报告',
+        topic_pricing:'定价/订阅',topic_integration:'集成/API',
+        topic_comparison:'产品对比',topic_other:'其他',
+        topic_use_case:'使用场景',topic_news_update:'新闻动态',topic_meta:'社区讨论',
+        posts:'帖子', posRatePct:'正面率 (%)', discussionVol:'讨论量 (帖子数)',
+        trendDelta:'趋势变化', sentimentTrend:'正面率历史趋势', deltaSummary:'本期变化摘要',
+        keyFinding:'本期关键发现', noTrend:'至少需要两期报告才能显示趋势',
+        sentimentUp:'情绪上升', sentimentDown:'情绪下降', sentimentFlat:'情绪持平',
+        postsChange:'帖子量变化',
+        severity_high:'高', severity_medium:'中', severity_low:'低',
+        pendingRecommendation:'待后续分析生成具体建议',
+        sentimentTone:'情感基调', positiveSent:'正面情感', negativeSent:'负面情感',
+        mostSatisfied:'最满意', leastSatisfied:'最不满意',
+        sharedPainPoints:'跨产品共同痛点', uniqueTraits:'各产品独特优劣势',
+        competitiveDynamics:'新兴竞争动态', actionableRecs:'可操作建议',
+        advantage:'优势', disadvantage:'劣势',
+        satisfactionCompare:'用户满意度对比', noComparisonData:'暂无跨产品对比数据',
+        sectionCrossProduct:'跨产品对比', sectionCrossProductDesc:'全局视角：产品间横向比较',
+        sectionProductAnalysis:'产品深度分析', sectionProductAnalysisDesc:'逐一拆解：各产品详情与用户原声',
+        sectionCommunityHeat:'社区热度分析', sectionCommunityHeatDesc:'趋势洞察：讨论量、互动量与历史变化',
+        dataLangNote:''
+      },
+      en: {
+        title:'AI Voice Tracker', subtitle:"Tracking user sentiment from Reddit's top AI product communities", loading:'Loading report data...',
+        selectReport:'Select report...', execSummary:'Executive Summary', sentimentCompare:'Sentiment Comparison',
+        count:'Count', percentage:'Percentage', hotTopics:'Hot Topics & Keywords', keywordCloud:'Keyword Cloud',
+        productDeepDive:'Product Deep Dive', evidenceWall:'Evidence Wall', allProducts:'All Products',
+        allSentiments:'All Sentiments', allTopics:'All Topics', searchKeyword:'Search keywords...',
+        loadMore:'Load more posts', strategicAnalysis:'Strategic Analysis',
+        bubbleLabel:'Volume vs Positive Rate (bubble=engagement)', rankingLabel:'Positive Rate Ranking',
+        crossProductLabel:'Cross-Product Comparison', historyReports:'Report History',
+        footerText:'Source: Reddit public posts | Model: AI sentiment & topic analysis | Internal use only',
+        positiveRate:'Positive Rate', validPosts:'valid posts', noData:'No data',
+        painPoints:'Pain Points', strengths:'Strengths', topicDist:'Topic Distribution',
+        actionItems:'Action Items', noSuggestions:'No suggestions', viewOriginal:'View post',
+        comments:'comments', clickToLoad:'Click to load', noHistory:'No history',
+        noCrossProduct:'No cross-product comparison data available.', all:'All',
+        positive:'Positive',negative:'Negative',neutral:'Neutral',mixed:'Mixed',
+        vsPrev:'vs prev', prevPeriod:'prev period',
+        product:'Product', total:'Total',
+        sentiment_positive:'Positive',sentiment_negative:'Negative',sentiment_neutral:'Neutral',sentiment_mixed:'Mixed',
+        topic_model_capability:'Model Capability',topic_product_experience:'Product Experience',
+        topic_feature_request:'Feature Request',topic_bug_report:'Bug Report',
+        topic_pricing:'Pricing',topic_integration:'Integration/API',
+        topic_comparison:'Comparison',topic_other:'Other',
+        topic_use_case:'Use Case',topic_news_update:'News',topic_meta:'Meta/Community',
+        posts:'posts', posRatePct:'Positive Rate (%)', discussionVol:'Discussion Volume (posts)',
+        trendDelta:'Trend Analysis', sentimentTrend:'Positive Rate Trend', deltaSummary:'Period Delta Summary',
+        keyFinding:'Key Finding', noTrend:'Need at least 2 reports for trend',
+        sentimentUp:'Sentiment up', sentimentDown:'Sentiment down', sentimentFlat:'Sentiment flat',
+        postsChange:'Posts change',
+        severity_high:'HIGH', severity_medium:'MED', severity_low:'LOW',
+        pendingRecommendation:'Pending future analysis for specific recommendations',
+        sentimentTone:'Tone', positiveSent:'Positive', negativeSent:'Negative',
+        mostSatisfied:'Most satisfied', leastSatisfied:'Least satisfied',
+        sharedPainPoints:'Shared Pain Points', uniqueTraits:'Unique Traits per Product',
+        competitiveDynamics:'Emerging Competitive Dynamics', actionableRecs:'Actionable Recommendations',
+        advantage:'Strength', disadvantage:'Weakness',
+        satisfactionCompare:'Satisfaction Comparison', noComparisonData:'No cross-product comparison data available',
+        sectionCrossProduct:'Cross-Product Comparison', sectionCrossProductDesc:'Global view: horizontal comparison across products',
+        sectionProductAnalysis:'Product Deep Dive', sectionProductAnalysisDesc:'Detailed analysis: per-product insights & user evidence',
+        sectionCommunityHeat:'Community Heat Analysis', sectionCommunityHeatDesc:'Trends: discussion volume, engagement & historical changes',
+        dataLangNote:'Note: Analysis content is in Chinese, sourced from user discussions.'
+      }
+    };
+
+    function t(key) { return (I18N[currentLang] && I18N[currentLang][key]) || key; }
+
+    /* Bilingual field selection: prefer _en field in English mode, fallback to original */
+    function L(obj, field) {
+      if (!obj) return '';
+      if (currentLang === 'en') {
+        var enField = field + '_en';
+        if (obj[enField] !== undefined && obj[enField] !== '') return obj[enField];
+      }
+      return obj[field] || '';
+    }
+    /* Array bilingual selection: prefer _en array in English mode */
+    function LA(obj, field) {
+      if (!obj) return [];
+      if (currentLang === 'en') {
+        var enField = field + '_en';
+        if (obj[enField] && obj[enField].length > 0) return obj[enField];
+      }
+      return obj[field] || [];
+    }
+
+    function getSentimentLabel(key) { return t('sentiment_'+key) || key; }
+    function getTopicLabel(key) { return t('topic_'+key) || key; }
+
+    function setLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+      applyI18n();
+      renderAll();
+    }
+
+    function applyI18n() {
+      var elems = document.querySelectorAll('[data-i18n]');
+      for (var i=0;i<elems.length;i++) {
+        var key = elems[i].getAttribute('data-i18n');
+        if (I18N[currentLang][key]) elems[i].textContent = I18N[currentLang][key];
+      }
+      var placeholders = document.querySelectorAll('[data-i18n-placeholder]');
+      for (var j=0;j<placeholders.length;j++) {
+        var pk = placeholders[j].getAttribute('data-i18n-placeholder');
+        if (I18N[currentLang][pk]) placeholders[j].placeholder = I18N[currentLang][pk];
+      }
+    }
+
+    /* ======= STATE ======= */
+    var reportData = null;
+    var prevReportData = null;
+    var reportIndex = [];
+    var products = [];
+    var allPosts = [];
+    var filteredPosts = [];
+    var evidenceShown = 0;
+    var EVIDENCE_PAGE = 12;
+    var heatmapMode = 'count';
+    var activeProductTab = 0;
+    var topicFilterProduct = '';
+    var chartInstances = {};
+
+    /* ======= CONSOLIDATION ======= */
+    function consolidateProducts(rawProducts, rData) {
+      var map = {};
+      for (var i = 0; i < rawProducts.length; i++) {
+        var p = rawProducts[i];
+        var name = p.product_name;
+        if (!map[name]) {
+          map[name] = {
+            product_name: name, subreddits: [], post_count: 0,
+            valid_post_count: 0, filtered_count: 0, summaries: [], summaries_en: [],
+            sentiment_distribution: {positive:0,negative:0,neutral:0,mixed:0},
+            topic_distribution: {}, typical_posts: [],
+            pain_points: [], strengths: [], recommendations: [], keywords: [], keywords_en: []
+          };
+        }
+        var m = map[name];
+        if (p.subreddit && m.subreddits.indexOf(p.subreddit) === -1) m.subreddits.push(p.subreddit);
+        m.post_count += p.post_count || 0;
+        m.valid_post_count += p.valid_post_count || 0;
+        m.filtered_count += p.filtered_count || 0;
+        if (p.summary) m.summaries.push(p.summary);
+        if (p.summary_en) m.summaries_en.push(p.summary_en);
+        var sents = ['positive','negative','neutral','mixed'];
+        for (var si = 0; si < sents.length; si++) {
+          var sk = sents[si];
+          m.sentiment_distribution[sk] += (p.sentiment_distribution && p.sentiment_distribution[sk]) || 0;
+        }
+        if (p.topic_distribution) {
+          var tkeys = Object.keys(p.topic_distribution);
+          for (var ti = 0; ti < tkeys.length; ti++) {
+            var tk = tkeys[ti];
+            m.topic_distribution[tk] = (m.topic_distribution[tk] || 0) + p.topic_distribution[tk];
+          }
+        }
+        if (p.typical_posts) m.typical_posts = m.typical_posts.concat(p.typical_posts);
+        if (p.pain_points) m.pain_points = m.pain_points.concat(p.pain_points);
+        if (p.strengths) m.strengths = m.strengths.concat(p.strengths);
+        if (p.recommendations) m.recommendations = m.recommendations.concat(p.recommendations);
+        if (p.keywords) m.keywords = m.keywords.concat(p.keywords);
+        if (p.keywords_en) m.keywords_en = m.keywords_en.concat(p.keywords_en);
+      }
+      /* Apply chart_data overrides if available */
+      var cd = rData && rData.chart_data;
+      if (cd) {
+        for (var n in map) {
+          if (cd[n]) {
+            if (cd[n].sentiment) map[n].sentiment_distribution = cd[n].sentiment;
+            if (cd[n].topics) map[n].topic_distribution = cd[n].topics;
+          }
+        }
+      }
+      var result = [];
+      var keys = Object.keys(map);
+      for (var ki = 0; ki < keys.length; ki++) {
+        var mm = map[keys[ki]];
+        var uniqueKw = {};
+        for (var kwi = 0; kwi < mm.keywords.length; kwi++) uniqueKw[mm.keywords[kwi]] = true;
+        mm.keywords = Object.keys(uniqueKw);
+        var uniqueKwEn = {};
+        for (var kei = 0; kei < mm.keywords_en.length; kei++) uniqueKwEn[mm.keywords_en[kei]] = true;
+        mm.keywords_en = Object.keys(uniqueKwEn);
+        mm.summary = mm.summaries.join('\n\n');
+        mm.summary_en = mm.summaries_en.join('\n\n');
+        result.push(mm);
+      }
+      return result;
+    }
+
+    /* ======= LOAD DATA ======= */
+    async function loadReport(url) {
+      showLoading(true);
+      try {
+        var resp = await fetch(url);
+        if (!resp.ok) throw new Error('Fetch failed: ' + resp.status);
+        reportData = await resp.json();
+        products = consolidateProducts(reportData.products || [], reportData);
+        products.sort(function(a,b){ return (PRODUCT_ORDER.indexOf(a.product_name)===-1?99:PRODUCT_ORDER.indexOf(a.product_name)) - (PRODUCT_ORDER.indexOf(b.product_name)===-1?99:PRODUCT_ORDER.indexOf(b.product_name)); });
+        buildAllPosts();
+        await loadPrevReport();
+        renderAll();
+      } catch (e) {
+        console.error('Failed to load report:', e);
+        document.getElementById('loadingOverlay').innerHTML =
+          '<span style="color:var(--clr-neg)">' + t('loading') + ' ' + e.message + '</span>';
+      } finally {
+        showLoading(false);
+      }
+    }
+
+    async function loadPrevReport() {
+      prevReportData = null;
+      if (!reportData || reportIndex.length < 2) return;
+      var currentEnd = (reportData.period && reportData.period.end) || '';
+      var currentFile = null;
+      for (var i = 0; i < reportIndex.length; i++) {
+        if (reportIndex[i].file && reportData.run_id && reportIndex[i].run_id === reportData.run_id) {
+          currentFile = i; break;
+        }
+      }
+      var prevIdx = currentFile !== null ? currentFile + 1 : 1;
+      if (prevIdx >= reportIndex.length) return;
+      var prevFile = reportIndex[prevIdx].file;
+      try {
+        var resp = await fetch('/data/reports/' + prevFile);
+        if (resp.ok) prevReportData = await resp.json();
+      } catch(e) { /* ignore */ }
+    }
+
+    async function loadReportIndex() {
+      try {
+        var resp = await fetch('/data/reports/index.json');
+        if (!resp.ok) return;
+        var data = await resp.json();
+        reportIndex = data.reports || [];
+        var sel = document.getElementById('reportSelector');
+        for (var i = 0; i < reportIndex.length; i++) {
+          var r = reportIndex[i];
+          var opt = document.createElement('option');
+          opt.value = r.file;
+          var dateLabel = (r.period_start||'').slice(0,10) + ' ~ ' + (r.period_end||'').slice(0,10);
+          opt.textContent = dateLabel + ' (' + (r.total_valid_posts||0) + ' ' + t('posts') + ')';
+          sel.appendChild(opt);
+        }
+      } catch(e) { console.log('No report index available'); }
+    }
+
+    async function loadReportList() {
+      try {
+        var resp = await fetch('/api/reddit/reports');
+        if (!resp.ok) return;
+        var list = await resp.json();
+        var sel = document.getElementById('reportSelector');
+        if (Array.isArray(list) && sel.options.length <= 1) {
+          for (var i = 0; i < list.length; i++) {
+            var r = list[i];
+            var opt = document.createElement('option');
+            opt.value = r.id || r.run_id || r;
+            opt.textContent = (typeof r === 'object' && r.period_start)
+              ? (r.period_start.slice(0,10) + ' ~ ' + (r.period_end||'').slice(0,10) + ' (' + (r.total_valid_posts||0) + ' ' + t('posts') + ')')
+              : (typeof r === 'string' ? r : (r.id || r.run_id || ''));
+            sel.appendChild(opt);
+          }
+        }
+      } catch(e) { /* silent */ }
+    }
+
+    function onReportSelect(val) {
+      if (!val) return;
+      if (val.endsWith('.json')) {
+        loadReport('/data/reports/' + val);
+      } else {
+        loadReport('/api/reddit/reports/' + val);
+      }
+    }
+
+    function showLoading(show) {
+      document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
+    }
+
+    /* ======= HELPERS ======= */
+    function buildAllPosts() {
+      allPosts = [];
+      for (var i = 0; i < products.length; i++) {
+        var p = products[i];
+        var color = getProductColor(p.product_name);
+        var posts = p.typical_posts || [];
+        for (var j = 0; j < posts.length; j++) {
+          var post = Object.assign({}, posts[j]);
+          post._product = p.product_name;
+          post._color = color;
+          allPosts.push(post);
+        }
+      }
+    }
+
+    function getProductColor(name) { return PRODUCT_COLORS[name] || '#6B7280'; }
+    function getSentimentTotal(sd) { return (sd.positive||0)+(sd.negative||0)+(sd.neutral||0)+(sd.mixed||0); }
+    function getPositiveRate(sd) { var tot=getSentimentTotal(sd); return tot===0?0:((sd.positive||0)/tot)*100; }
+    function trafficLightClass(pct) { return pct>=60?'tl-green':pct>=40?'tl-yellow':'tl-red'; }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function truncate(str, len) {
+      if (!str) return ''; return str.length > len ? str.slice(0, len) + '...' : str;
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      try {
+        var locale = currentLang === 'en' ? 'en-US' : 'zh-CN';
+        return new Date(dateStr).toLocaleDateString(locale, {month:'short',day:'numeric'});
+      } catch(e) { return dateStr; }
+    }
+
+    function formatDateRange(start, end) {
+      if (!start || !end) return '';
+      var s = start.slice(0,10), e = end.slice(0,10);
+      return s + ' ~ ' + e;
+    }
+
+    function destroyChart(key) {
+      if (chartInstances[key]) { chartInstances[key].destroy(); chartInstances[key] = null; }
+    }
+
+    function hexToRgba(hex, alpha) {
+      var r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+      return 'rgba('+r+','+g+','+b+','+alpha+')';
+    }
+
+    /* ======= MARKDOWN RENDERER ======= */
+    function renderMarkdown(md) {
+      if (!md) return '';
+      var lines = md.split('\n');
+      var html = '';
+      var inTable = false, inList = false, listType = '';
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i];
+        var trimmed = line.trim();
+        /* Horizontal rule */
+        if (/^---+$/.test(trimmed)) {
+          if (inList) { html += '</' + listType + '>'; inList = false; }
+          if (inTable) { html += '</tbody></table>'; inTable = false; }
+          html += '<hr>'; continue;
+        }
+        /* Table detection */
+        if (trimmed.indexOf('|') !== -1 && trimmed.charAt(0) === '|') {
+          /* Check if separator row */
+          if (/^\|[\s\-:|]+\|$/.test(trimmed)) continue;
+          if (inList) { html += '</' + listType + '>'; inList = false; }
+          if (!inTable) {
+            inTable = true;
+            html += '<table><thead><tr>';
+            var cells = trimmed.split('|').filter(function(c){return c.trim()!=='';});
+            for (var ci=0;ci<cells.length;ci++) html += '<th>' + inlineMd(cells[ci].trim()) + '</th>';
+            html += '</tr></thead><tbody>';
+            /* Skip separator row if next line is one */
+            if (i+1 < lines.length && /^\|[\s\-:|]+\|$/.test(lines[i+1].trim())) i++;
+            continue;
+          }
+          html += '<tr>';
+          var tds = trimmed.split('|').filter(function(c){return c.trim()!=='';});
+          for (var ti=0;ti<tds.length;ti++) html += '<td>' + inlineMd(tds[ti].trim()) + '</td>';
+          html += '</tr>';
+          continue;
+        }
+        if (inTable && trimmed.charAt(0) !== '|') { html += '</tbody></table>'; inTable = false; }
+        /* Headers */
+        var hMatch = trimmed.match(/^(#{1,3})\s+(.+)/);
+        if (hMatch) {
+          if (inList) { html += '</' + listType + '>'; inList = false; }
+          var level = hMatch[1].length;
+          html += '<h' + level + '>' + inlineMd(hMatch[2]) + '</h' + level + '>';
+          continue;
+        }
+        /* Numbered list */
+        var olMatch = trimmed.match(/^\d+\.\s+(.+)/);
+        if (olMatch) {
+          if (!inList || listType !== 'ol') {
+            if (inList) html += '</' + listType + '>';
+            html += '<ol>'; inList = true; listType = 'ol';
+          }
+          html += '<li>' + inlineMd(olMatch[1]) + '</li>';
+          continue;
+        }
+        /* Bullet list */
+        var ulMatch = trimmed.match(/^[-*]\s+(.+)/);
+        if (ulMatch) {
+          if (!inList || listType !== 'ul') {
+            if (inList) html += '</' + listType + '>';
+            html += '<ul>'; inList = true; listType = 'ul';
+          }
+          html += '<li>' + inlineMd(ulMatch[1]) + '</li>';
+          continue;
+        }
+        /* Close list if non-list line */
+        if (inList && trimmed === '') { html += '</' + listType + '>'; inList = false; continue; }
+        if (inList && trimmed !== '') { html += '</' + listType + '>'; inList = false; }
+        /* Empty line as paragraph break */
+        if (trimmed === '') { html += ''; continue; }
+        /* Regular paragraph */
+        html += '<p>' + inlineMd(trimmed) + '</p>';
+      }
+      if (inList) html += '</' + listType + '>';
+      if (inTable) html += '</tbody></table>';
+      return html;
+    }
+
+    function inlineMd(text) {
+      if (!text) return '';
+      /* Escape HTML first */
+      text = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      /* Bold */
+      text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      /* Italic */
+      text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
+      /* Code */
+      text = text.replace(/`(.+?)`/g, '<code>$1</code>');
+      /* Links [text](url) */
+      text = text.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+      return text;
+    }
+
+    /* ======= SUMMARY PARSER (extract structured data from markdown summaries) ======= */
+    function extractFromSummary(summary) {
+      var result = { pain_points: [], strengths: [], recommendations: [] };
+      if (!summary) return result;
+      var sections = summary.split(/^##\s+/m);
+      for (var i = 0; i < sections.length; i++) {
+        var sec = sections[i];
+        /* Pain points: sections containing 痛点/问题/不满 or English equivalents */
+        if (sec.indexOf('痛点') !== -1 || sec.indexOf('Pain') !== -1 || sec.indexOf('问题') !== -1 || sec.indexOf('Issue') !== -1 || sec.indexOf('Complaint') !== -1) {
+          var painLines = sec.split('\n');
+          for (var j = 0; j < painLines.length; j++) {
+            var pl = painLines[j].trim();
+            /* Format A: 1. **title**：description */
+            var pm = pl.match(/^\d+\.\s+\*\*(.+?)\*\*[：:](.+)/);
+            if (pm) {
+              result.pain_points.push({ text: pm[1] + '：' + pm[2].trim(), severity: determineSeverity(result.pain_points.length) });
+              continue;
+            }
+            /* Format B: 1. **title**。extra text OR 1. **text with colon inside** rest */
+            var pm2 = pl.match(/^\d+\.\s+\*\*(.+?)\*\*[。.]?\s*(.+)?/);
+            if (pm2 && pm2[1].length > 3) {
+              var ptext = pm2[1] + (pm2[2] ? '。' + pm2[2].replace(/\*\*/g,'').trim() : '');
+              result.pain_points.push({ text: ptext, severity: determineSeverity(result.pain_points.length) });
+              continue;
+            }
+            /* Format C: - **title**：description */
+            var pm3 = pl.match(/^[-*]\s+\*\*(.+?)\*\*[：:](.+)/);
+            if (pm3) {
+              result.pain_points.push({ text: pm3[1] + '：' + pm3[2].trim(), severity: determineSeverity(result.pain_points.length) });
+            }
+          }
+        }
+        /* Strengths: sections containing 赞赏/优势/亮点/认可/正面 or English equivalents */
+        if (sec.indexOf('赞赏') !== -1 || sec.indexOf('优势') !== -1 || sec.indexOf('亮点') !== -1
+            || sec.indexOf('Strength') !== -1 || sec.indexOf('认可') !== -1 || sec.indexOf('期望') !== -1
+            || sec.indexOf('Highlight') !== -1 || sec.indexOf('Positive') !== -1 || sec.indexOf('Praise') !== -1) {
+          var strLines = sec.split('\n');
+          for (var k = 0; k < strLines.length; k++) {
+            var sl = strLines[k].trim();
+            /* Format A: - **title**：description */
+            var sm = sl.match(/^[-*]\s+\*\*(.+?)\*\*[：:](.+)/);
+            if (sm) {
+              result.strengths.push({ text: sm[1] + '：' + sm[2].trim() });
+              continue;
+            }
+            /* Format B: - **title**——description */
+            var sm2 = sl.match(/^[-*]\s+\*\*(.+?)\*\*——(.+)/);
+            if (sm2) {
+              result.strengths.push({ text: sm2[1] + '：' + sm2[2].trim() });
+              continue;
+            }
+            /* Format C: - **title** followed by text without colon */
+            var sm3 = sl.match(/^[-*]\s+\*\*(.+?)\*\*\s*(.+)?/);
+            if (sm3 && sm3[1].length > 3) {
+              var stext = sm3[1] + (sm3[2] ? '：' + sm3[2].replace(/\*\*/g,'').trim() : '');
+              result.strengths.push({ text: stext });
+              continue;
+            }
+            /* Format D: - plain text description (no bold) */
+            var sm4 = sl.match(/^[-*]\s+(.{8,})/);
+            if (sm4 && result.strengths.length < 10) {
+              result.strengths.push({ text: sm4[1].replace(/\*\*/g,'').trim() });
+            }
+          }
+        }
+        /* Recommendations: sections containing 建议/洞察/action */
+        if (sec.indexOf('建议') !== -1 || sec.indexOf('洞察') !== -1 || sec.indexOf('Action') !== -1 || sec.indexOf('action') !== -1 || sec.indexOf('Recommendation') !== -1 || sec.indexOf('Suggestion') !== -1) {
+          var recLines = sec.split('\n');
+          for (var r = 0; r < recLines.length; r++) {
+            var rl = recLines[r].trim();
+            /* Table format: | **P0** | text | */
+            var rm = rl.match(/\|\s*\*\*(P[012])\*\*\s*\|\s*(.+?)\s*\|/);
+            if (rm) {
+              result.recommendations.push({ priority: rm[1], text: rm[2].replace(/\*\*/g,'').trim() });
+              continue;
+            }
+            /* Numbered format: 1. **P0**：text */
+            var rm2 = rl.match(/^\d+\.\s+\*\*(P[012])\*\*[：:]\s*(.+)/);
+            if (rm2) {
+              result.recommendations.push({ priority: rm2[1], text: rm2[2].replace(/\*\*/g,'').trim() });
+              continue;
+            }
+            /* Numbered format without P-prefix: 1. **title**——text */
+            var rm3 = rl.match(/^\d+\.\s+\*\*(.+?)\*\*[——\-\-]+(.+)/);
+            if (rm3) {
+              var pri = result.recommendations.length <= 1 ? 'P0' : result.recommendations.length <= 3 ? 'P1' : 'P2';
+              result.recommendations.push({ priority: pri, text: rm3[1] + '：' + rm3[2].replace(/\*\*/g,'').trim() });
+              continue;
+            }
+            /* Numbered format: 1. **title**：text (no P prefix) */
+            var rm4 = rl.match(/^\d+\.\s+\*\*(.+?)\*\*[：:]\s*(.+)/);
+            if (rm4) {
+              var pri2 = result.recommendations.length <= 1 ? 'P0' : result.recommendations.length <= 3 ? 'P1' : 'P2';
+              result.recommendations.push({ priority: pri2, text: rm4[1] + '：' + rm4[2].replace(/\*\*/g,'').trim() });
+              continue;
+            }
+            /* Numbered format: 1. **title**，text (comma separator) */
+            var rm5 = rl.match(/^\d+\.\s+\*\*(.+?)\*\*[，,]\s*(.+)/);
+            if (rm5) {
+              var pri3 = result.recommendations.length <= 1 ? 'P0' : result.recommendations.length <= 3 ? 'P1' : 'P2';
+              result.recommendations.push({ priority: pri3, text: rm5[1] + '：' + rm5[2].replace(/\*\*/g,'').trim() });
+            }
+          }
+        }
+      }
+      return result;
+    }
+
+    function determineSeverity(index) { return index <= 1 ? 'high' : index <= 3 ? 'medium' : 'low'; }
+
+    /* ======= CANVAS WORD CLOUD — colorful cloud layout ======= */
+    var CLOUD_PALETTE = [
+      '#4338CA','#DC2626','#059669','#D97706','#7C3AED','#DB2777','#0891B2',
+      '#EA580C','#2563EB','#16A34A','#9333EA','#E11D48','#0D9488','#C026D3',
+      '#B45309','#4F46E5','#BE123C','#0E7490','#7C2D12','#6D28D9'
+    ];
+    function drawWordCloud(canvas, words) {
+      var dpr = window.devicePixelRatio || 1;
+      var displayW = canvas.parentElement.clientWidth || 560;
+      var displayH = 380;
+      canvas.style.width = displayW + 'px';
+      canvas.style.height = displayH + 'px';
+      canvas.width = displayW * dpr;
+      canvas.height = displayH * dpr;
+      var ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+      var W = displayW, H = displayH;
+
+      /* Draw subtle background */
+      ctx.fillStyle = '#FAFBFC';
+      ctx.fillRect(0, 0, W, H);
+
+      if (!words || words.length === 0) return;
+      var maxFreq = Math.max.apply(null, words.map(function(w){return w.freq;}));
+      var minFreq = Math.min.apply(null, words.map(function(w){return w.freq;}));
+      var placed = [];
+
+      /* Detect if words are predominantly English (longer avg text) */
+      var avgLen = 0;
+      for (var ai = 0; ai < Math.min(words.length, 10); ai++) avgLen += words[ai].text.length;
+      avgLen = avgLen / Math.min(words.length, 10);
+      var isEnglish = avgLen > 5; /* Chinese keywords avg ~3-4 chars, English avg ~10+ */
+
+      /* Seeded random for consistent layout */
+      var seed = 42;
+      function seededRandom() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+
+      /* Elliptical cloud boundary - words must fit inside this ellipse */
+      var cx = W / 2, cy = H / 2;
+      var rx = W * 0.48, ry = H * 0.46;
+      function isInEllipse(x, y, w, h) {
+        /* Check all 4 corners of the bounding box */
+        var corners = [[x,y],[x+w,y],[x,y+h],[x+w,y+h]];
+        for (var c = 0; c < 4; c++) {
+          var dx = (corners[c][0] - cx) / rx;
+          var dy = (corners[c][1] - cy) / ry;
+          if (dx * dx + dy * dy > 1) return false;
+        }
+        return true;
+      }
+
+      /* Font size ranges: English needs smaller sizes because words are much wider */
+      var fontMin = isEnglish ? 10 : 12;
+      var fontMax = isEnglish ? 26 : 40;
+      var fontRange = fontMax - fontMin;
+      /* Spiral params: English needs tighter step and longer search */
+      var spiralMax = isEnglish ? 2000 : 1400;
+      var spiralStep = isEnglish ? 1.5 : 2.2;
+      var spiralGrowth = isEnglish ? 0.065 : 0.085;
+
+      for (var i = 0; i < words.length && i < 50; i++) {
+        var w = words[i];
+        var freqRatio = maxFreq > minFreq ? (w.freq - minFreq) / (maxFreq - minFreq) : 0.5;
+        var fontSize = Math.round(fontMin + freqRatio * fontRange);
+
+        /* Slight random rotation for organic feel */
+        var rotation = 0;
+        if (i > 2 && seededRandom() > 0.65) {
+          rotation = (seededRandom() - 0.5) * (isEnglish ? 0.15 : 0.3);
+        }
+
+        ctx.save();
+        ctx.font = '700 ' + fontSize + 'px "Inter", -apple-system, sans-serif';
+        var metrics = ctx.measureText(w.text);
+        var tw = metrics.width + 6;
+        var th = fontSize + 4;
+        ctx.restore();
+
+        /* Bounding box after rotation (approximate) */
+        var absCos = Math.abs(Math.cos(rotation)), absSin = Math.abs(Math.sin(rotation));
+        var bw = tw * absCos + th * absSin + 2;
+        var bh = tw * absSin + th * absCos + 2;
+
+        var ok = false;
+        /* Archimedean spiral placement from center */
+        for (var angle = 0; angle < spiralMax; angle += spiralStep) {
+          var r = 1.5 + angle * spiralGrowth;
+          var x = cx + r * Math.cos(angle * 0.15) - bw / 2;
+          var y = cy + r * Math.sin(angle * 0.15) - bh / 2;
+          /* Must be inside ellipse */
+          if (!isInEllipse(x, y, bw, bh)) continue;
+          /* Check collision with placed words */
+          var collision = false;
+          for (var j = 0; j < placed.length; j++) {
+            var p = placed[j];
+            if (!(x + bw < p.x - 2 || x > p.x + p.w + 2 || y + bh < p.y - 2 || y > p.y + p.h + 2)) {
+              collision = true; break;
+            }
+          }
+          if (!collision) {
+            /* Assign color from palette (each word gets a unique color) */
+            var wordColor = CLOUD_PALETTE[i % CLOUD_PALETTE.length];
+            /* Draw the word */
+            ctx.save();
+            var alpha = 0.6 + freqRatio * 0.4;
+            ctx.globalAlpha = alpha;
+            ctx.translate(x + bw/2, y + bh/2);
+            ctx.rotate(rotation);
+            ctx.font = '700 ' + fontSize + 'px "Inter", -apple-system, sans-serif';
+            ctx.fillStyle = wordColor;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(w.text, 0, 0);
+            ctx.restore();
+
+            placed.push({ x: x, y: y, w: bw, h: bh });
+            ok = true;
+            break;
+          }
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    /* ======= RENDER ALL ======= */
+    function renderAll() {
+      renderPeriod(); renderScorecard(); renderKeyFinding(); renderSentimentBar(); renderHeatmap();
+      renderTopicProductFilter(); renderTopicBar(); renderKeywordCloud();
+      renderProductTabs(); renderDeepDive();
+      renderEvidence(); renderBubbleChart();
+      renderCrossProduct(); renderTrend(); renderHistory();
+    }
+
+    /* ======= PERIOD BADGE ======= */
+    function renderPeriod() {
+      var badge = document.getElementById('periodBadge');
+      if (reportData && reportData.period) {
+        badge.textContent = formatDateRange(reportData.period.start, reportData.period.end);
+        badge.style.display = '';
+      } else { badge.style.display = 'none'; }
+    }
+
+    /* ======= KEY FINDING CALLOUT ======= */
+    function renderKeyFinding() {
+      var callout = document.getElementById('keyFindingCallout');
+      var textEl = document.getElementById('keyFindingText');
+      /* Extract key finding from cross-product comparison first line of substance */
+      var cpc = reportData && L(reportData, 'cross_product_comparison');
+      var finding = '';
+      if (cpc) {
+        var isEN = currentLang === 'en';
+        var lines = cpc.split('\n');
+        for (var i = 0; i < lines.length; i++) {
+          var line = lines[i].trim();
+          /* Look for satisfaction pattern in both languages */
+          if (!isEN && (line.indexOf('最满意') !== -1 || line.indexOf('最不满意') !== -1)) {
+            finding = line.replace(/^\*\*/, '').replace(/\*\*$/, ''); break;
+          }
+          if (isEN && (/most satisfied/i.test(line) || /least satisfied/i.test(line))) {
+            finding = line.replace(/^\*\*/, '').replace(/\*\*$/, ''); break;
+          }
+          if (!finding && line.indexOf('**') !== -1 && line.length > 20 && !line.startsWith('#') && !line.startsWith('|')) {
+            finding = line; break;
+          }
+        }
+      }
+      /* Fallback: build from data */
+      if (!finding && products.length > 0) {
+        var sorted = products.slice().sort(function(a,b){ return getPositiveRate(b.sentiment_distribution) - getPositiveRate(a.sentiment_distribution); });
+        var best = sorted[0], worst = sorted[sorted.length - 1];
+        finding = t('keyFinding') + ': ' + best.product_name + ' ' + Math.round(getPositiveRate(best.sentiment_distribution)) + '% '
+          + t('positiveRate') + ' ▲ | ' + worst.product_name + ' ' + Math.round(getPositiveRate(worst.sentiment_distribution)) + '% ▼';
+      }
+      if (finding) {
+        textEl.innerHTML = inlineMd(finding);
+        callout.classList.remove('hidden');
+      } else {
+        callout.classList.add('hidden');
+      }
+    }
+
+    /* ======= SCORECARD ======= */
+    function renderScorecard() {
+      var row = document.getElementById('scorecardRow');
+      row.innerHTML = '';
+      var prevProducts = null;
+      var prevPeriodLabel = '';
+      if (prevReportData) {
+        prevProducts = consolidateProducts(prevReportData.products || [], prevReportData);
+        var pp = prevReportData.period;
+        if (pp) prevPeriodLabel = formatDateRange(pp.start, pp.end);
+      }
+      for (var i = 0; i < products.length; i++) {
+        var p = products[i];
+        var color = getProductColor(p.product_name);
+        var sd = p.sentiment_distribution;
+        var posRate = getPositiveRate(sd);
+        var topPain = getTopPainPoint(p);
+        var finding = getKeyFinding(p);
+        var displayPain = topPain;
+        var displayFinding = finding;
+
+        /* Source subreddits from actual data + known mapping */
+        var subs = (p.subreddits || []).slice();
+        var knownSubs = PRODUCT_SUBREDDITS[p.product_name] || [];
+        for (var ks=0; ks<knownSubs.length; ks++) {
+          if (subs.indexOf(knownSubs[ks]) === -1 && subs.indexOf('r/'+knownSubs[ks]) === -1) {
+            subs.push(knownSubs[ks]);
+          }
+        }
+        var sourceHtml = subs.map(function(sub) {
+          var name = sub.replace(/^r\//,'');
+          return '<a href="https://www.reddit.com/r/'+escapeHtml(name)+'/" target="_blank" rel="noopener">r/'+escapeHtml(name)+'</a>';
+        }).join(', ');
+
+        /* Delta vs previous period */
+        var deltaHtml = '';
+        if (prevProducts) {
+          var prevP = prevProducts.find(function(pp){return pp.product_name===p.product_name;});
+          if (prevP) {
+            var prevRate = getPositiveRate(prevP.sentiment_distribution);
+            var diff = posRate - prevRate;
+            var cls = diff > 0.5 ? 'delta-up' : diff < -0.5 ? 'delta-down' : 'delta-flat';
+            var arrow = diff > 0.5 ? '&#x25B2;' : diff < -0.5 ? '&#x25BC;' : '&#x25AC;';
+            var sign = diff > 0 ? '+' : '';
+            deltaHtml = '<div class="scorecard-delta">'
+              + '<span class="delta-val '+cls+'">' + arrow + ' ' + sign + Math.round(diff) + '%</span> '
+              + t('vsPrev')
+              + (prevPeriodLabel ? ' <span style="color:var(--text-muted);font-size:10px">(' + escapeHtml(prevPeriodLabel) + ')</span>' : '')
+              + '</div>';
+          }
+        }
+
+        row.innerHTML += '<div class="scorecard-card">'
+          + '<div class="scorecard-bar" style="background:'+color+'"></div>'
+          + '<div class="scorecard-body">'
+          + '<div class="scorecard-name" style="color:'+color+'">'+escapeHtml(p.product_name)+'</div>'
+          + '<div class="scorecard-sources">'+sourceHtml+'</div>'
+          + '<div class="scorecard-metric">'
+          + '<span class="scorecard-pct" style="color:#16A34A">'+Math.round(posRate)+'%</span>'
+          + '<span class="traffic-light '+trafficLightClass(posRate)+'"></span>'
+          + '<span class="scorecard-pct-label">'+t('positiveRate')+'</span></div>'
+          + '<div class="scorecard-posts">'+p.valid_post_count+' '+t('validPosts')+'</div>'
+          + deltaHtml
+          + (displayPain ? '<div class="scorecard-pain" title="'+escapeHtml(displayPain)+'">&#x26A0; '+escapeHtml(truncate(displayPain,40))+'</div>' : '')
+          + (displayFinding ? '<div class="scorecard-finding" title="'+escapeHtml(displayFinding)+'" onclick="navigateToDeepDive('+i+')">'
+            +'<span class="finding-text">'+escapeHtml(truncate(displayFinding,150))+'</span>'
+            +'<span class="finding-arrow">&#8594;</span></div>' : '')
+          + '</div></div>';
+      }
+    }
+
+    function getTopPainPoint(p) {
+      if (p.pain_points && p.pain_points.length > 0) return L(p.pain_points[0], 'text');
+      var neg = (p.typical_posts||[]).find(function(t){return t.sentiment_label==='negative';});
+      return neg ? neg.title : '';
+    }
+
+    function getKeyFinding(p) {
+      if (!L(p, 'summary')) return '';
+      /* Extract first meaningful sentence: skip markdown headers, blank lines, prefixes */
+      var lines = L(p, 'summary').split('\n');
+      for (var li = 0; li < lines.length; li++) {
+        var line = lines[li].replace(/^#{1,4}\s*[一二三四五六七八九十\d]*[、.．]?\s*/,'').replace(/^\*{1,2}|^\-\s*/,'').trim();
+        if (!line) continue;
+        /* Skip lines that are just section headers (very short or all punctuation) */
+        if (line.length < 6) continue;
+        /* Skip lines starting with "总体概述" etc as they're section titles */
+        if (/^(总体概述|情感分析|话题分布|典型帖子|建议|痛点|优势|行动)/.test(line)) continue;
+        if (/^(Overall|Sentiment|Topic|Typical|Recommendation|Pain|Strength|Action|Summary|Key Finding)/i.test(line)) continue;
+        return truncate(line, 200);
+      }
+      return truncate(L(p, 'summary').replace(/^[\s#*\-]+/,''), 200);
+    }
+
+    /* ======= SENTIMENT BAR ======= */
+    function renderSentimentBar() {
+      destroyChart('sentimentBar');
+      var sorted = products.slice().sort(function(a,b){
+        return getPositiveRate(b.sentiment_distribution) - getPositiveRate(a.sentiment_distribution);
+      });
+      var labels = sorted.map(function(p){return p.product_name;});
+      var sentiments = ['positive','neutral','mixed','negative'];
+      var datasets = sentiments.map(function(s){
+        return {
+          label: getSentimentLabel(s),
+          data: sorted.map(function(p){return p.sentiment_distribution[s]||0;}),
+          backgroundColor: SENTIMENT_COLORS[s], borderRadius: 2
+        };
+      });
+      var ctx = document.getElementById('sentimentBarChart').getContext('2d');
+      chartInstances['sentimentBar'] = new Chart(ctx, {
+        type:'bar', data:{labels:labels,datasets:datasets},
+        options:{
+          indexAxis:'y', responsive:true, maintainAspectRatio:false,
+          plugins:{legend:{position:'top',labels:{usePointStyle:true,pointStyle:'circle',font:{size:11}}},
+            datalabels:{
+              display:function(ctx){return ctx.dataset.data[ctx.dataIndex]>0;},
+              formatter:function(value,ctx){
+                var total=0;ctx.chart.data.datasets.forEach(function(ds){total+=ds.data[ctx.dataIndex]||0;});
+                return total>0?Math.round(value/total*100)+'%':'';
+              },
+              color:'#fff',font:{size:10,weight:'bold'},anchor:'center',align:'center'
+            }
+          },
+          scales:{
+            x:{stacked:true,grid:{display:false},ticks:{font:{size:11}}},
+            y:{stacked:true,grid:{display:false},ticks:{font:{size:12,weight:'bold'}}}
+          }
+        }
+      });
+    }
+
+    /* ======= HEATMAP ======= */
+    function renderHeatmap() {
+      var container = document.getElementById('heatmapContainer');
+      var sentiments = ['positive','negative','neutral','mixed'];
+      var html = '<table class="heatmap-table"><thead><tr><th>'+t('product')+'</th>';
+      for (var si=0;si<sentiments.length;si++) html += '<th>'+getSentimentLabel(sentiments[si])+'</th>';
+      html += '<th>'+t('total')+'</th></tr></thead><tbody>';
+      var allVals = [];
+      for (var pi=0;pi<products.length;pi++) {
+        var total = getSentimentTotal(products[pi].sentiment_distribution);
+        for (var sj=0;sj<sentiments.length;sj++) {
+          var v = products[pi].sentiment_distribution[sentiments[sj]]||0;
+          allVals.push(heatmapMode==='pct' ? (total>0?v/total*100:0) : v);
+        }
+      }
+      var maxVal = Math.max.apply(null, allVals.concat([1]));
+      for (var pk=0;pk<products.length;pk++) {
+        var p = products[pk], sd = p.sentiment_distribution, total = getSentimentTotal(sd);
+        html += '<tr><td class="product-cell" style="color:'+getProductColor(p.product_name)+'">'+escapeHtml(p.product_name)+'</td>';
+        for (var sl=0;sl<sentiments.length;sl++) {
+          var raw = sd[sentiments[sl]]||0;
+          var val = heatmapMode==='pct' ? (total>0?raw/total*100:0) : raw;
+          var intensity = Math.min(val/maxVal,1);
+          var bg = hexToRgba(SENTIMENT_COLORS[sentiments[sl]], 0.1+intensity*0.5);
+          var display = heatmapMode==='pct' ? Math.round(val)+'%' : raw;
+          html += '<td style="background:'+bg+'">'+display+'</td>';
+        }
+        html += '<td style="font-weight:700">'+total+'</td></tr>';
+      }
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+
+    function toggleHeatmap(mode, btn) {
+      heatmapMode = mode;
+      var btns = document.querySelectorAll('.heatmap-toggle button');
+      for (var i=0;i<btns.length;i++) btns[i].classList.remove('active');
+      btn.classList.add('active');
+      renderHeatmap();
+    }
+
+    /* ======= TOPIC PRODUCT FILTER ======= */
+    function renderTopicProductFilter() {
+      var container = document.getElementById('topicProductFilter');
+      var html = '<button class="product-filter-btn'+(topicFilterProduct===''?' active':'')+'" '
+        + 'style="'+(topicFilterProduct===''?'background:#4338CA;color:#fff;':'')+'" '
+        + 'onclick="setTopicFilter(\'\')">'+t('all')+'</button>';
+      for (var i=0;i<products.length;i++) {
+        var name = products[i].product_name;
+        var color = getProductColor(name);
+        var isActive = topicFilterProduct === name;
+        html += '<button class="product-filter-btn'+(isActive?' active':'')+'" '
+          + 'style="'+(isActive?'background:'+color+';color:#fff;':'')+'" '
+          + 'onclick="setTopicFilter(\''+escapeHtml(name)+'\')">'+escapeHtml(name)+'</button>';
+      }
+      container.innerHTML = html;
+    }
+
+    function setTopicFilter(productName) {
+      topicFilterProduct = productName;
+      renderTopicProductFilter();
+      renderTopicBar();
+      renderKeywordCloud();
+    }
+
+    /* ======= TOPIC BAR — FIX: destroy canvas properly to prevent height growth ======= */
+    function renderTopicBar() {
+      destroyChart('topicBar');
+      var filteredProducts = topicFilterProduct
+        ? products.filter(function(p){return p.product_name===topicFilterProduct;})
+        : products;
+      var agg = {};
+      for (var i=0;i<filteredProducts.length;i++) {
+        var td = filteredProducts[i].topic_distribution;
+        if (td) { var ks = Object.keys(td); for (var j=0;j<ks.length;j++) agg[ks[j]] = (agg[ks[j]]||0)+td[ks[j]]; }
+      }
+      var entries = Object.keys(agg).map(function(k){return [k,agg[k]];});
+      entries.sort(function(a,b){return b[1]-a[1];});
+      var sorted = entries.slice(0,8);
+      var labels = sorted.map(function(e){return getTopicLabel(e[0]);});
+      var values = sorted.map(function(e){return e[1];});
+
+      /* FIX: Replace the canvas element entirely to prevent height accumulation */
+      var wrapper = document.getElementById('topicBarChart').parentElement;
+      wrapper.innerHTML = '<canvas id="topicBarChart"></canvas>';
+      var ctx = document.getElementById('topicBarChart').getContext('2d');
+
+      chartInstances['topicBar'] = new Chart(ctx, {
+        type:'bar',
+        data:{labels:labels,datasets:[{data:values,backgroundColor:'#818CF8',borderRadius:4}]},
+        options:{
+          indexAxis:'y',responsive:true,maintainAspectRatio:false,
+          plugins:{legend:{display:false},datalabels:{display:true,anchor:'end',align:'right',offset:4,font:{size:11,weight:'600'},color:'#374151'}},
+          scales:{x:{grid:{display:false},ticks:{font:{size:11}}},y:{grid:{display:false},ticks:{font:{size:12}}}}
+        }
+      });
+    }
+
+    /* ======= KEYWORD CLOUD — Evaluative keywords from summary analysis ======= */
+    function renderKeywordCloud() {
+      var container = document.getElementById('keywordCloud');
+      container.innerHTML = ''; /* Remove chip cloud, only use canvas */
+      var filteredProducts = topicFilterProduct
+        ? products.filter(function(p){return p.product_name===topicFilterProduct;})
+        : products;
+
+      /* Build evaluative keywords from summaries, pain points and key_points */
+      var freq = {}, colorMap = {};
+
+      /* Predefined evaluative keyword patterns to extract (zh: re, en: re_en) */
+      var evalPatterns = [
+        /* Negative evaluative patterns */
+        {re:/幻觉/g, re_en:/hallucin/gi, kw:'幻觉问题', en:'Hallucination'},
+        {re:/退化/g, re_en:/degrad|regress|worse|declin/gi, kw:'能力退化', en:'Degradation'},
+        {re:/限制|限额|限流/g, re_en:/limit|throttl|cap|restrict|quota/gi, kw:'使用限制', en:'Usage Limits'},
+        {re:/太慢|速度慢|响应慢|延迟/g, re_en:/slow|latenc|lag|delay/gi, kw:'响应太慢', en:'Slow Response'},
+        {re:/太贵|价格高|定价|订阅/g, re_en:/expens|pric|cost|subscri|overpric/gi, kw:'定价过高', en:'Overpriced'},
+        {re:/Bug|bug|缺陷|故障/g, re_en:/\bbug|crash|glitch|broken|defect/gi, kw:'Bug频发', en:'Frequent Bugs'},
+        {re:/上下文.*丢失|忘记.*上下文|上下文.*不足/g, re_en:/context.{0,10}(loss|lost|forget|limit|window)/gi, kw:'上下文丢失', en:'Context Loss'},
+        {re:/拒绝|审查|过度.*安全|内容.*审查/g, re_en:/refus|censor|over.?safe|content.?filter|guardrail/gi, kw:'过度审查', en:'Over-censorship'},
+        {re:/不稳定|不一致|质量.*波动/g, re_en:/inconsist|unstabl|unreliab|hit.?or.?miss|erratic/gi, kw:'质量不稳定', en:'Inconsistent Quality'},
+        {re:/混乱|困惑|不清楚|费解/g, re_en:/confus|unclear|clutter|unintuitive|messy/gi, kw:'体验混乱', en:'Confusing UX'},
+        {re:/翻车|失误|错误/g, re_en:/\berror|mistake|wrong|fail|incorrect/gi, kw:'基础能力失误', en:'Basic Errors'},
+        {re:/点击诱饵|引导语|操控/g, re_en:/clickbait|manipulat|dark.?pattern/gi, kw:'点击诱饵', en:'Clickbait'},
+        {re:/断裂|迭代.*断|不兼容/g, re_en:/break.?change|incompatib|version.?break|backward/gi, kw:'版本断裂', en:'Version Break'},
+        {re:/安全.*漏洞|安全.*隐患|伪造/g, re_en:/secur.{0,8}(risk|vuln|issue|flaw)|fake|forg/gi, kw:'安全隐患', en:'Security Risk'},
+        {re:/僵化|灵活性.*差|不够灵活/g, re_en:/rigid|inflexib|lack.{0,6}flexib/gi, kw:'交互僵化', en:'Rigid Interaction'},
+        /* Positive evaluative patterns */
+        {re:/创意.*生成|创意.*写作|创意.*能力/g, re_en:/creativ|imaginat|writing.{0,6}(abilit|skill)/gi, kw:'创意生成强', en:'Creative Generation'},
+        {re:/代码.*能力|编程.*能力|编码/g, re_en:/cod(?:e|ing)|program|develop|engineer/gi, kw:'代码能力强', en:'Strong Coding'},
+        {re:/推理.*能力|逻辑.*能力|深度.*推理/g, re_en:/reason|logic|think|intellig|deep.?think/gi, kw:'推理能力强', en:'Strong Reasoning'},
+        {re:/生态|插件|扩展|MCP/g, re_en:/ecosystem|plugin|extension|MCP|integrat/gi, kw:'生态丰富', en:'Rich Ecosystem'},
+        {re:/速度.*快|快速|高效/g, re_en:/\bfast|quick|efficien|speed|snappy/gi, kw:'响应快速', en:'Fast Response'},
+        {re:/准确|精确|可靠/g, re_en:/accurat|precis|reliab|trustworth|dependab/gi, kw:'输出准确', en:'Accurate Output'},
+        {re:/便宜|免费|性价比/g, re_en:/\bfree\b|cheap|afford|value|cost.?effect/gi, kw:'性价比高', en:'Good Value'},
+        {re:/易用|简单|上手.*快|体验.*好/g, re_en:/easy.?to.?use|user.?friend|intuiti|simple|smooth/gi, kw:'易用性好', en:'Easy to Use'},
+        {re:/多模态|图片|视觉|语音/g, re_en:/multimodal|vision|image|voice|audio|visual/gi, kw:'多模态能力', en:'Multimodal'},
+        {re:/集成|API|接口/g, re_en:/\bAPI\b|integrat|interface|endpoint|SDK/gi, kw:'集成便捷', en:'Easy Integration'},
+        /* Feature request patterns */
+        {re:/希望|期望|期待|需要|缺少/g, re_en:/wish|hope|want|need|miss|lack|request/gi, kw:'功能诉求', en:'Feature Requests'},
+        {re:/竞品|对比|替代|切换/g, re_en:/compet|compar|alternat|switch|vs\b|versus/gi, kw:'竞品对比', en:'Competitor Comparison'},
+        {re:/上手难|学习.*曲线|门槛/g, re_en:/learning.?curve|steep|barrier|difficult.?to.?learn/gi, kw:'上手难度高', en:'Steep Learning Curve'},
+        {re:/信任|信心|透明/g, re_en:/trust|confiden|transparen|credib/gi, kw:'信任问题', en:'Trust Issues'},
+        {re:/迁移|切换|替换/g, re_en:/migrat|switch|replac|transition/gi, kw:'用户迁移', en:'User Migration'},
+      ];
+
+      for (var i=0;i<filteredProducts.length;i++) {
+        var p = filteredProducts[i], color = getProductColor(p.product_name);
+
+        /* 0. Use LLM-extracted keywords if available */
+        var kwList = LA(p, 'keywords');
+        for (var ki=0;ki<kwList.length;ki++) {
+          var kw = kwList[ki];
+          if (kw && kw.length > 1) {
+            freq[kw] = (freq[kw]||0) + 3;
+            if (!colorMap[kw]) colorMap[kw] = color;
+          }
+        }
+
+        /* 1. Extract from summary text (richest source) */
+        var summary = L(p, 'summary');
+        for (var ei=0;ei<evalPatterns.length;ei++) {
+          var pat = evalPatterns[ei];
+          var useRe = (currentLang === 'en' && pat.re_en) ? pat.re_en : pat.re;
+          useRe.lastIndex = 0;
+          var matches = summary.match(useRe);
+          if (matches) {
+            var count = matches.length;
+            var kwLabel = (currentLang === 'en' && pat.en) ? pat.en : pat.kw;
+            freq[kwLabel] = (freq[kwLabel]||0) + count;
+            if (!colorMap[kwLabel]) colorMap[kwLabel] = color;
+          }
+        }
+
+        /* 2. Extract evaluative phrases from key_points */
+        var posts = p.typical_posts || [];
+        for (var j=0;j<posts.length;j++) {
+          var kps = LA(posts[j], 'key_points');
+          for (var k=0;k<kps.length;k++) {
+            var kp = kps[k];
+            for (var ei2=0;ei2<evalPatterns.length;ei2++) {
+              var pat2 = evalPatterns[ei2];
+              var useRe2 = (currentLang === 'en' && pat2.re_en) ? pat2.re_en : pat2.re;
+              useRe2.lastIndex = 0;
+              if (useRe2.test(kp)) {
+                useRe2.lastIndex = 0;
+                var kwLabel2 = (currentLang === 'en' && pat2.en) ? pat2.en : pat2.kw;
+                freq[kwLabel2] = (freq[kwLabel2]||0) + 1;
+                if (!colorMap[kwLabel2]) colorMap[kwLabel2] = color;
+              }
+            }
+          }
+        }
+
+        /* 3. Chinese mode only: extract 2-6 char Chinese phrases from key_points */
+        if (currentLang !== 'en') {
+        for (var j2=0;j2<posts.length;j2++) {
+          var kps2 = posts[j2].key_points || [];
+          for (var k2=0;k2<kps2.length;k2++) {
+            var cnPhrases = kps2[k2].match(/[\u4e00-\u9fff]{2,6}/g);
+            if (cnPhrases) {
+              for (var cp=0;cp<cnPhrases.length;cp++) {
+                var phrase = cnPhrases[cp];
+                var skipWords = ['的是','可以','这个','那个','一个','没有','不是','他们','我们','你们','什么','为什么',
+                  '已经','因为','但是','如果','虽然','或者','而且','以及','关于','通过','之后','之前','其他',
+                  '所有','非常','时候','能够','使用','需要','功能','产品','模型','用户','问题','版本','内容','工具',
+                  '不过','只是','目前','现在','就是','还是','认为','觉得','表示','帖子','社区','讨论','评论'];
+                if (skipWords.indexOf(phrase) === -1 && phrase.length >= 2) {
+                  freq[phrase] = (freq[phrase]||0) + 1;
+                  if (!colorMap[phrase]) colorMap[phrase] = color;
+                }
+              }
+            }
+          }
+        }
+        }
+      }
+
+      /* Filter: keep evalPattern keywords + LLM keywords (high priority) and high-freq phrases */
+      var patternKeywords = {};
+      for (var ei3=0;ei3<evalPatterns.length;ei3++) {
+        var kwL = (currentLang === 'en' && evalPatterns[ei3].en) ? evalPatterns[ei3].en : evalPatterns[ei3].kw;
+        patternKeywords[kwL] = true;
+      }
+      /* Also mark LLM-extracted keywords as high priority */
+      for (var pi=0;pi<filteredProducts.length;pi++) {
+        var kwArr = LA(filteredProducts[pi], 'keywords');
+        for (var ki2=0;ki2<kwArr.length;ki2++) { patternKeywords[kwArr[ki2]] = true; }
+      }
+
+      var entries = Object.keys(freq).map(function(k){return {word:k, count:freq[k], isPredefined:!!patternKeywords[k]};});
+      /* Sort: predefined patterns first, then by frequency */
+      entries.sort(function(a,b){
+        if (a.isPredefined !== b.isPredefined) return a.isPredefined ? -1 : 1;
+        return b.count - a.count;
+      });
+      /* Take top predefined + top general, deduplicate substrings */
+      var predefined = entries.filter(function(e){return e.isPredefined && e.count >= 1;}).slice(0,40);
+      var organic = entries.filter(function(e){return !e.isPredefined && e.count >= 2;}).slice(0,25);
+      var combined = predefined.concat(organic);
+
+      /* Deduplicate: for Chinese use substring matching; for English use case-insensitive exact match only */
+      var deduped = [];
+      var isEnCloud = currentLang === 'en';
+      for (var di=0;di<combined.length;di++) {
+        var isDupe = false;
+        var wLower = combined[di].word.toLowerCase();
+        for (var dj=0;dj<deduped.length;dj++) {
+          var eLower = deduped[dj].word.toLowerCase();
+          if (eLower === wLower) { isDupe = true; break; }
+          if (!isEnCloud) {
+            /* Chinese: substring dedup */
+            if (deduped[dj].word !== combined[di].word &&
+                (deduped[dj].word.indexOf(combined[di].word) !== -1 || combined[di].word.indexOf(deduped[dj].word) !== -1)) {
+              if (combined[di].count > deduped[dj].count) deduped[dj] = combined[di];
+              isDupe = true; break;
+            }
+          }
+        }
+        if (!isDupe) deduped.push(combined[di]);
+      }
+
+      var sorted = deduped.slice(0,40);
+
+      /* Draw the word cloud canvas */
+      var canvas = document.getElementById('wordCloudCanvas');
+      if (canvas) {
+        var wcWords = sorted.map(function(item) {
+          return { text: item.word, freq: item.count, color: colorMap[item.word] || '#6B7280' };
+        });
+        drawWordCloud(canvas, wcWords);
+      }
+      if (sorted.length === 0) {
+        container.innerHTML = '<span style="color:var(--text-muted);font-size:12px">'+t('noData')+'</span>';
+      }
+    }
+
+    /* ======= PRODUCT TABS ======= */
+    function renderProductTabs() {
+      var tabsEl = document.getElementById('productTabs');
+      tabsEl.innerHTML = products.map(function(p,i){
+        var color = getProductColor(p.product_name);
+        var active = i === activeProductTab;
+        return '<div class="product-tab'+(active?' active':'')+'"'
+          +' style="'+(active?'background:'+color+';border-color:'+color:'')+'"'
+          +' onclick="switchProductTab('+i+')">'+escapeHtml(p.product_name)+'</div>';
+      }).join('');
+    }
+
+    function switchProductTab(idx) {
+      activeProductTab = idx;
+      renderProductTabs();
+      renderDeepDive();
+    }
+
+    function navigateToDeepDive(idx) {
+      switchProductTab(idx);
+      var el = document.getElementById('productTabs');
+      if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    /* ======= DEEP DIVE ======= */
+    function renderDeepDive() {
+      var container = document.getElementById('deepDiveContent');
+      if (products.length === 0) {
+        container.innerHTML = '<div class="card"><div class="card-body">'+t('noData')+'</div></div>';
+        return;
+      }
+      var p = products[activeProductTab];
+      container.innerHTML =
+        '<div class="cols-2x2">'
+        +'<div class="card"><div class="card-body">'
+        +'<div style="font-size:13px;font-weight:700;color:var(--clr-neg);margin-bottom:12px">'+t('painPoints')+'</div>'
+        +'<ul class="dd-list" id="ddPainPoints"></ul></div></div>'
+        +'<div class="card"><div class="card-body">'
+        +'<div style="font-size:13px;font-weight:700;color:var(--clr-pos);margin-bottom:12px">'+t('strengths')+'</div>'
+        +'<ul class="dd-list" id="ddStrengths"></ul></div></div>'
+        +'<div class="card"><div class="card-body">'
+        +'<div style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--text-secondary)">'+t('topicDist')+'</div>'
+        +'<div class="chart-container" style="height:240px"><canvas id="ddTopicDonut"></canvas></div></div></div>'
+        +'<div class="card"><div class="card-body">'
+        +'<div style="font-size:13px;font-weight:700;color:#4338CA;margin-bottom:12px">'+t('actionItems')+'</div>'
+        +'<ul class="dd-list" id="ddRecommendations"></ul></div></div>'
+        +'</div>';
+
+      var painList = document.getElementById('ddPainPoints');
+      var pains = getPainPoints(p);
+      painList.innerHTML = pains.slice(0,8).map(function(pp){
+        return '<li><span class="dd-dot" style="background:var(--clr-neg)"></span>'
+          +(pp.severity?'<span class="severity-badge sev-'+pp.severity+'">'+(t('severity_'+pp.severity)||pp.severity)+'</span>':'')
+          +'<span>'+escapeHtml(L(pp, 'text'))+'</span></li>';
+      }).join('') || '<li style="color:var(--text-muted)">'+t('noData')+'</li>';
+
+      var strengthList = document.getElementById('ddStrengths');
+      var strs = getStrengths(p);
+      strengthList.innerHTML = strs.slice(0,8).map(function(s){
+        return '<li><span class="dd-dot" style="background:var(--clr-pos)"></span>'
+          +'<span>'+escapeHtml(L(s, 'text'))+'</span></li>';
+      }).join('') || '<li style="color:var(--text-muted)">'+t('noData')+'</li>';
+
+      destroyChart('ddDonut');
+      var td = p.topic_distribution || {};
+      var topicKeys = Object.keys(td).filter(function(k){return td[k]>0;});
+      if (topicKeys.length > 0) {
+        var donutColors = ['#818CF8','#F472B6','#34D399','#FBBF24','#60A5FA','#A78BFA','#FB923C','#94A3B8'];
+        var ctx = document.getElementById('ddTopicDonut').getContext('2d');
+        chartInstances['ddDonut'] = new Chart(ctx, {
+          type:'doughnut',
+          data:{
+            labels:topicKeys.map(function(k){return getTopicLabel(k);}),
+            datasets:[{data:topicKeys.map(function(k){return td[k];}),backgroundColor:donutColors.slice(0,topicKeys.length),borderWidth:0}]
+          },
+          options:{
+            responsive:true,maintainAspectRatio:false,cutout:'55%',
+            plugins:{legend:{position:'right',labels:{usePointStyle:true,pointStyle:'circle',font:{size:11},padding:8}},
+              datalabels:{display:function(ctx){return ctx.dataset.data[ctx.dataIndex]>0;},
+                formatter:function(value,ctx){var total=0;ctx.dataset.data.forEach(function(d){total+=d;});return total>0?Math.round(value/total*100)+'%':'';},
+                color:'#fff',font:{size:10,weight:'bold'},anchor:'center',align:'center'}
+            }
+          }
+        });
+      }
+
+      var recList = document.getElementById('ddRecommendations');
+      var recs = getRecommendations(p);
+      recList.innerHTML = recs.slice(0,8).map(function(r){
+        var priClass = r.priority ? 'pri-'+r.priority.toLowerCase() : 'pri-p2';
+        return '<li><span class="priority-badge '+priClass+'">'+escapeHtml(r.priority||'P2')+'</span>'
+          +'<span>'+escapeHtml(L(r, 'text'))+'</span></li>';
+      }).join('') || '<li style="color:var(--text-muted)">'+t('noSuggestions')+'</li>';
+    }
+
+    function getPainPoints(p) {
+      if (p.pain_points && p.pain_points.length > 0) return p.pain_points;
+      /* Fallback: parse from summary markdown */
+      var parsed = extractFromSummary(L(p, 'summary'));
+      if (parsed.pain_points.length > 0) return parsed.pain_points;
+      /* Last resort: extract key_points from negative posts */
+      var negPosts = (p.typical_posts||[]).filter(function(t){return t.sentiment_label==='negative';});
+      var results = [];
+      for (var i=0;i<negPosts.length && results.length<5;i++) {
+        var kps = LA(negPosts[i], 'key_points');
+        for (var j=0;j<kps.length && results.length<5;j++) {
+          if (kps[j].length > 4) {
+            results.push({text:kps[j], severity:'medium'});
+          }
+        }
+        if (results.length === 0 && negPosts[i].title && negPosts[i].title.length > 4) {
+          results.push({text:negPosts[i].title, severity:'medium'});
+        }
+      }
+      return results;
+    }
+
+    function getStrengths(p) {
+      if (p.strengths && p.strengths.length > 0) return p.strengths;
+      var parsed = extractFromSummary(L(p, 'summary'));
+      if (parsed.strengths.length > 0) return parsed.strengths;
+      /* Last resort: extract key_points from positive posts */
+      var posPosts = (p.typical_posts||[]).filter(function(t){return t.sentiment_label==='positive';});
+      var results = [];
+      for (var i=0;i<posPosts.length && results.length<5;i++) {
+        var kps = LA(posPosts[i], 'key_points');
+        for (var j=0;j<kps.length && results.length<5;j++) {
+          if (kps[j].length > 4) {
+            results.push({text:kps[j]});
+          }
+        }
+      }
+      return results;
+    }
+
+    function getRecommendations(p) {
+      if (p.recommendations && p.recommendations.length > 0) return p.recommendations;
+      var parsed = extractFromSummary(L(p, 'summary'));
+      if (parsed.recommendations.length > 0) return parsed.recommendations;
+      return [{priority:'P2',text: t('pendingRecommendation')}];
+    }
+
+    /* ======= EVIDENCE WALL ======= */
+    function filterEvidence() {
+      var prodVal = document.getElementById('filterProduct').value;
+      var sentVal = document.getElementById('filterSentiment').value;
+      var topicVal = document.getElementById('filterTopic').value;
+      var keyword = document.getElementById('filterKeyword').value.toLowerCase();
+      filteredPosts = allPosts.filter(function(p){
+        if (prodVal && p._product !== prodVal) return false;
+        if (sentVal && p.sentiment_label !== sentVal) return false;
+        if (topicVal && p.topic_category !== topicVal) return false;
+        if (keyword) {
+          var hay = ((p.title||'')+' '+(p.body||'')+' '+LA(p, 'key_points').join(' ')).toLowerCase();
+          if (hay.indexOf(keyword) === -1) return false;
+        }
+        return true;
+      });
+      evidenceShown = 0;
+      document.getElementById('evidenceGrid').innerHTML = '';
+      showMoreEvidence();
+    }
+
+    function renderEvidence() {
+      var prodSelect = document.getElementById('filterProduct');
+      prodSelect.innerHTML = '<option value="">'+t('allProducts')+'</option>';
+      for (var i=0;i<products.length;i++) {
+        prodSelect.innerHTML += '<option value="'+escapeHtml(products[i].product_name)+'">'+escapeHtml(products[i].product_name)+'</option>';
+      }
+      var topicSelect = document.getElementById('filterTopic');
+      topicSelect.innerHTML = '<option value="">'+t('allTopics')+'</option>';
+      var topics = {};
+      for (var j=0;j<allPosts.length;j++) { if (allPosts[j].topic_category) topics[allPosts[j].topic_category]=true; }
+      var tkeys = Object.keys(topics);
+      for (var k=0;k<tkeys.length;k++) {
+        topicSelect.innerHTML += '<option value="'+tkeys[k]+'">'+getTopicLabel(tkeys[k])+'</option>';
+      }
+      filteredPosts = allPosts.slice();
+      evidenceShown = 0;
+      var grid = document.getElementById('evidenceGrid');
+      /* Show language notice in English mode only when _en fields are missing */
+      var hasEnFields = allPosts.length > 0 && allPosts[0].key_points_en && allPosts[0].key_points_en.length > 0;
+      var langNote = (currentLang === 'en' && !hasEnFields) ? t('dataLangNote') : '';
+      grid.innerHTML = langNote ? '<div style="color:#9CA3AF;font-size:11px;font-style:italic;padding:4px 0 8px;text-align:center">'+escapeHtml(langNote)+'</div>' : '';
+      showMoreEvidence();
+    }
+
+    function showMoreEvidence() {
+      var grid = document.getElementById('evidenceGrid');
+      var batch = filteredPosts.slice(evidenceShown, evidenceShown + EVIDENCE_PAGE);
+      for (var i=0;i<batch.length;i++) grid.innerHTML += buildEvidenceCard(batch[i]);
+      evidenceShown += batch.length;
+      var btn = document.getElementById('showMoreBtn');
+      if (evidenceShown < filteredPosts.length) {
+        btn.classList.remove('hidden');
+        btn.textContent = t('loadMore') + ' ('+evidenceShown+'/'+filteredPosts.length+')';
+      } else { btn.classList.add('hidden'); }
+    }
+
+    function buildEvidenceCard(post) {
+      var sentClass = 'pill-sentiment-'+(post.sentiment_label||'neutral');
+      var sentLabel = getSentimentLabel(post.sentiment_label||'neutral');
+      var topicLabel = getTopicLabel(post.topic_category||'');
+      var keypoints = LA(post, 'key_points').slice(0,3);
+      var date = formatDate(post.created_utc);
+      var url = post.url||'#';
+      var titleText = post.title || '';
+      var bodyText = post.body || '';
+      return '<div class="evidence-card">'
+        +'<div class="evidence-card-bar" style="background:'+post._color+'"></div>'
+        +'<div class="evidence-card-body">'
+        +'<div class="evidence-card-meta">'
+        +'<span class="pill" style="background:'+hexToRgba(post._color,0.15)+';color:'+post._color+'">'+escapeHtml(post._product)+'</span>'
+        +'<span class="pill '+sentClass+'">'+sentLabel+'</span>'
+        +(topicLabel?'<span class="pill pill-topic">'+escapeHtml(topicLabel)+'</span>':'')
+        +'</div>'
+        +'<div class="evidence-title">'+escapeHtml(titleText)+'</div>'
+        +'<div class="evidence-body">'+escapeHtml(bodyText)+'</div>'
+        +(keypoints.length>0?'<div class="evidence-keypoints">'+keypoints.map(function(kp){return '<span class="evidence-kp">'+escapeHtml(truncate(kp,30))+'</span>';}).join('')+'</div>':'')
+        +'<div class="evidence-footer">'
+        +'<span>'+date+(post.num_comments!=null?' | '+post.num_comments+' '+t('comments'):'')+'</span>'
+        +'<a href="'+escapeHtml(url)+'" target="_blank" rel="noopener">'+t('viewOriginal')+' &rarr;</a>'
+        +'</div></div></div>';
+    }
+
+    /* ======= STRATEGIC: BUBBLE CHART ======= */
+    function renderBubbleChart() {
+      destroyChart('bubble');
+      var data = products.map(function(p){
+        var posRate = getPositiveRate(p.sentiment_distribution);
+        var engagement = (p.typical_posts||[]).reduce(function(s,t){return s+(t.num_comments||0);},0);
+        return {
+          x:p.valid_post_count, y:posRate,
+          r:Math.max(6,Math.min(30,Math.sqrt(engagement)*1.5)),
+          label:p.product_name, color:getProductColor(p.product_name)
+        };
+      });
+      var ctx = document.getElementById('bubbleChart').getContext('2d');
+      chartInstances['bubble'] = new Chart(ctx, {
+        type:'bubble',
+        data:{datasets:data.map(function(d){
+          return {
+            label:d.label, data:[{x:d.x,y:d.y,r:d.r}],
+            backgroundColor:hexToRgba(d.color,0.6), borderColor:d.color, borderWidth:2
+          };
+        })},
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          plugins:{
+            legend:{display:true,position:'top',labels:{usePointStyle:true,pointStyle:'circle',font:{size:11}}},
+            tooltip:{callbacks:{label:function(c){var ds=c.dataset,pt=c.raw;return ds.label+': '+t('posts')+'='+pt.x+', '+t('positiveRate')+'='+Math.round(pt.y)+'%';}}},
+            datalabels:{display:true,anchor:'end',align:'top',offset:4,formatter:function(v,ctx){return ctx.dataset.label;},font:{size:10},color:'#374151'}
+          },
+          scales:{
+            x:{title:{display:true,text:t('discussionVol'),font:{size:11}},grid:{color:'#F3F4F6'}},
+            y:{title:{display:true,text:t('posRatePct'),font:{size:11}},min:0,max:100,grid:{color:'#F3F4F6'}}
+          }
+        }
+      });
+    }
+
+    /* ======= CROSS PRODUCT — STRUCTURED VISUAL RENDERING ======= */
+    function renderCrossProduct() {
+      var el = document.getElementById('crossProductAnalysis');
+      var cpc = reportData && L(reportData, 'cross_product_comparison');
+      if (!cpc) {
+        el.innerHTML = '<p style="color:var(--text-muted)">' + t('noComparisonData') + '</p>';
+        return;
+      }
+
+      var parsed = parseCrossProductMarkdown(cpc);
+      var html = '';
+
+      /* 1. Most/Least satisfied highlight cards (skip the satisfaction table — already in sentiment bar above) */
+      if (parsed.mostSatisfied || parsed.leastSatisfied) {
+        html += '<div class="cp-highlight-row">';
+        if (parsed.mostSatisfied) {
+          var msColor = getProductColor(parsed.mostSatisfied.product) || 'var(--clr-pos)';
+          html += '<div class="cp-highlight-card" style="border-left-color:var(--clr-pos);background:#F0FDF4">'
+            + '<div class="cp-hl-label" style="color:var(--clr-pos)">' + t('mostSatisfied') + '</div>'
+            + '<div class="cp-hl-product" style="color:' + msColor + '">' + escapeHtml(parsed.mostSatisfied.product) + '</div>'
+            + '<div class="cp-hl-desc">' + escapeHtml(parsed.mostSatisfied.reason) + '</div>'
+            + '</div>';
+        }
+        if (parsed.leastSatisfied) {
+          var lsColor = getProductColor(parsed.leastSatisfied.product) || 'var(--clr-neg)';
+          html += '<div class="cp-highlight-card" style="border-left-color:var(--clr-neg);background:#FFF5F5">'
+            + '<div class="cp-hl-label" style="color:var(--clr-neg)">' + t('leastSatisfied') + '</div>'
+            + '<div class="cp-hl-product" style="color:' + lsColor + '">' + escapeHtml(parsed.leastSatisfied.product) + '</div>'
+            + '<div class="cp-hl-desc">' + escapeHtml(parsed.leastSatisfied.reason) + '</div>'
+            + '</div>';
+        }
+        html += '</div>';
+      }
+
+      /* 2. Shared Pain Points */
+      if (parsed.sharedPainPoints.length > 0) {
+        html += '<div style="font-size:13px;font-weight:700;color:var(--clr-neg);margin:16px 0 10px;display:flex;align-items:center;gap:6px">'
+          + '<span style="font-size:16px">&#x26A0;</span> ' + t('sharedPainPoints') + '</div>';
+        html += '<div class="cp-pain-grid">';
+        for (var i = 0; i < parsed.sharedPainPoints.length; i++) {
+          var pp = parsed.sharedPainPoints[i];
+          html += '<div class="cp-pain-card">'
+            + '<div style="display:flex;align-items:flex-start">'
+            + '<span class="cp-pain-num">' + (i + 1) + '</span>'
+            + '<div><span class="cp-pain-title">' + escapeHtml(pp.title) + '</span>'
+            + '<div class="cp-pain-detail">' + escapeHtml(pp.detail) + '</div>'
+            + '</div></div></div>';
+        }
+        html += '</div>';
+      }
+
+      /* 3. Unique Traits per Product (table) */
+      if (parsed.uniqueTraits.length > 0) {
+        html += '<div style="font-size:13px;font-weight:700;color:#4338CA;margin:16px 0 10px;display:flex;align-items:center;gap:6px">'
+          + '<span style="font-size:16px">&#x1F50D;</span> ' + t('uniqueTraits') + '</div>';
+        html += '<table class="cp-traits-table"><thead><tr>'
+          + '<th>' + t('product') + '</th>'
+          + '<th>' + t('advantage') + '</th>'
+          + '<th>' + t('disadvantage') + '</th>'
+          + '</tr></thead><tbody>';
+        for (var j = 0; j < parsed.uniqueTraits.length; j++) {
+          var tr = parsed.uniqueTraits[j];
+          var pColor = getProductColor(tr.product);
+          html += '<tr>'
+            + '<td class="cp-product-name" style="color:' + pColor + '">' + escapeHtml(tr.product) + '</td>'
+            + '<td>' + (tr.advantage ? '<span class="cp-adv-pill cp-adv-pos">' + escapeHtml(tr.advantage) + '</span>' : '-') + '</td>'
+            + '<td>' + (tr.disadvantage ? '<span class="cp-adv-pill cp-adv-neg">' + escapeHtml(tr.disadvantage) + '</span>' : '-') + '</td>'
+            + '</tr>';
+        }
+        html += '</tbody></table>';
+      }
+
+      /* 4. Competitive Dynamics */
+      if (parsed.dynamics.length > 0) {
+        html += '<div style="font-size:13px;font-weight:700;color:#4338CA;margin:16px 0 10px;display:flex;align-items:center;gap:6px">'
+          + '<span style="font-size:16px">&#x1F680;</span> ' + t('competitiveDynamics') + '</div>';
+        html += '<div class="cp-dynamics-list">';
+        var dynIcons = ['&#x26A1;', '&#x1F3AF;', '&#x1F504;', '&#x1F6E1;'];
+        for (var d = 0; d < parsed.dynamics.length; d++) {
+          html += '<div class="cp-dynamics-item">'
+            + '<span class="cp-dynamics-icon">' + (dynIcons[d % dynIcons.length]) + '</span>'
+            + '<span class="cp-dynamics-text">' + inlineMd(parsed.dynamics[d]) + '</span>'
+            + '</div>';
+        }
+        html += '</div>';
+      }
+
+      /* 5. Cross-Product Level Recommendations */
+      if (parsed.recommendations.length > 0) {
+        html += '<div style="font-size:13px;font-weight:700;color:#059669;margin:16px 0 10px;display:flex;align-items:center;gap:6px">'
+          + '<span style="font-size:16px">&#x2705;</span> ' + t('actionableRecs') + '</div>';
+        html += '<div class="cp-recs-list">';
+        for (var r = 0; r < parsed.recommendations.length; r++) {
+          var rec = parsed.recommendations[r];
+          var targetColor = getProductColor(rec.target) || '#6B7280';
+          html += '<div class="cp-rec-item">'
+            + '<span class="cp-rec-target" style="background:' + hexToRgba(targetColor, 0.15) + ';color:' + targetColor + '">'
+            + escapeHtml(rec.target) + '</span>'
+            + '<span>' + escapeHtml(rec.text) + '</span>'
+            + '</div>';
+        }
+        html += '</div>';
+      }
+
+      el.innerHTML = html || '<p style="color:var(--text-muted)">' + t('noComparisonData') + '</p>';
+    }
+
+    /* ======= PARSE CROSS-PRODUCT MARKDOWN INTO STRUCTURED DATA ======= */
+    function parseCrossProductMarkdown(md) {
+      var result = {
+        mostSatisfied: null, leastSatisfied: null,
+        sharedPainPoints: [], uniqueTraits: [], dynamics: [], recommendations: []
+      };
+      if (!md) return result;
+
+      /* Split by ## sections */
+      var sections = md.split(/\n##\s+/);
+
+      for (var si = 0; si < sections.length; si++) {
+        var sec = sections[si];
+        var lines = sec.split('\n');
+
+        /* Section: 最满意/最不满意 or Most/Least Satisfied */
+        if ((sec.indexOf('最满意') !== -1 && sec.indexOf('最不满意') !== -1)
+            || (/most satisfied/i.test(sec) && /least satisfied/i.test(sec))
+            || (sec.indexOf('Satisfaction') !== -1 || sec.indexOf('satisfaction') !== -1)) {
+          /* Extract "最满意" / "Most Satisfied" paragraph */
+          for (var i = 0; i < lines.length; i++) {
+            var line = lines[i].trim();
+            /* Chinese patterns */
+            if (line.indexOf('相对最满意') !== -1 || (line.indexOf('最满意') !== -1 && line.indexOf('最不满意') === -1)) {
+              /* Format: **相对最满意：GitHub Copilot。** reason... */
+              var msMat = line.match(/最满意[：:]\s*(.+?)[。.]\*\*\s*(.*)/);
+              if (!msMat) msMat = line.match(/最满意[：:]\s*\*?\*?([^。*]+)/);
+              if (msMat) {
+                var product = msMat[1].replace(/[*]/g, '').trim();
+                var reason = (msMat[2] || '').replace(/\*\*/g, '').trim();
+                if (!reason) {
+                  var afterProd = line.slice(line.indexOf(product) + product.length).replace(/^[。.\s*]+/, '').replace(/\*\*/g, '');
+                  if (afterProd.length > 5) reason = afterProd;
+                }
+                if (!reason && i + 1 < lines.length) reason = lines[i + 1].trim().replace(/\*\*/g, '');
+                result.mostSatisfied = { product: cleanProductName(product), reason: reason.slice(0, 200) };
+              }
+            }
+            /* English patterns for most satisfied */
+            if (!result.mostSatisfied && /most satisfied/i.test(line)) {
+              var msMatEn = line.match(/most satisfied[：:]\s*\*?\*?(.+?)[。.]\*?\*?\s*(.*)/i);
+              if (!msMatEn) msMatEn = line.match(/most satisfied[：:]\s*\*?\*?([^。.*]+)/i);
+              if (msMatEn) {
+                var productEn = msMatEn[1].replace(/[*]/g, '').trim();
+                var reasonEn = (msMatEn[2] || '').replace(/\*\*/g, '').trim();
+                if (!reasonEn && i + 1 < lines.length) reasonEn = lines[i + 1].trim().replace(/\*\*/g, '');
+                result.mostSatisfied = { product: cleanProductName(productEn), reason: reasonEn.slice(0, 200) };
+              }
+            }
+            if (line.indexOf('最不满意') !== -1 && line.indexOf('相对最满意') === -1) {
+              var lsMat = line.match(/最不满意[：:]\s*(.+?)[。.]\*\*\s*(.*)/);
+              if (!lsMat) lsMat = line.match(/最不满意[：:]\s*\*?\*?([^。*]+)/);
+              if (lsMat) {
+                var product2 = lsMat[1].replace(/[*]/g, '').trim();
+                var reason2 = (lsMat[2] || '').replace(/\*\*/g, '').trim();
+                if (!reason2) {
+                  var afterProd2 = line.slice(line.indexOf(product2) + product2.length).replace(/^[。.\s*]+/, '').replace(/\*\*/g, '');
+                  if (afterProd2.length > 5) reason2 = afterProd2;
+                }
+                if (!reason2 && i + 1 < lines.length) reason2 = lines[i + 1].trim().replace(/\*\*/g, '');
+                result.leastSatisfied = { product: cleanProductName(product2), reason: reason2.slice(0, 200) };
+              }
+            }
+            /* English patterns for least satisfied */
+            if (!result.leastSatisfied && /least satisfied/i.test(line)) {
+              var lsMatEn = line.match(/least satisfied[：:]\s*\*?\*?(.+?)[。.]\*?\*?\s*(.*)/i);
+              if (!lsMatEn) lsMatEn = line.match(/least satisfied[：:]\s*\*?\*?([^。.*]+)/i);
+              if (lsMatEn) {
+                var productEn2 = lsMatEn[1].replace(/[*]/g, '').trim();
+                var reasonEn2 = (lsMatEn[2] || '').replace(/\*\*/g, '').trim();
+                if (!reasonEn2 && i + 1 < lines.length) reasonEn2 = lines[i + 1].trim().replace(/\*\*/g, '');
+                result.leastSatisfied = { product: cleanProductName(productEn2), reason: reasonEn2.slice(0, 200) };
+              }
+            }
+          }
+        }
+
+        /* Section: 共同痛点 or Shared Pain Points */
+        if (sec.indexOf('共同痛点') !== -1 || sec.indexOf('共性') !== -1
+            || /shared pain/i.test(sec) || /common pain/i.test(sec) || /common issue/i.test(sec)) {
+          for (var j = 0; j < lines.length; j++) {
+            var pLine = lines[j].trim();
+            var ppMatch = pLine.match(/^\d+\.\s+\*\*(.+?)[：:]\*\*\s*(.+)/);
+            if (!ppMatch) ppMatch = pLine.match(/^\d+\.\s+\*\*(.+?)\*\*[：:]\s*(.+)/);
+            /* English format: 1. **Title**: description */
+            if (!ppMatch) ppMatch = pLine.match(/^\d+\.\s+\*\*(.+?)\*\*:\s*(.+)/);
+            if (ppMatch) {
+              result.sharedPainPoints.push({ title: ppMatch[1].trim(), detail: ppMatch[2].replace(/\*\*/g, '').trim() });
+            }
+          }
+        }
+
+        /* Section: 独特优劣势 or Unique Traits */
+        if (sec.indexOf('独特优劣势') !== -1 || (sec.indexOf('独特') !== -1 && sec.indexOf('优') !== -1)
+            || /unique trait/i.test(sec) || /unique advantage/i.test(sec) || /unique strength/i.test(sec)) {
+          for (var k = 0; k < lines.length; k++) {
+            var tLine = lines[k].trim();
+            var tMatch = tLine.match(/^-\s+\*\*(.+?)\*\*(.+)/);
+            if (tMatch) {
+              var prodName = cleanProductName(tMatch[1]);
+              var details = tMatch[2];
+              var adv = '', disadv = '';
+              /* Chinese patterns */
+              var advMatch = details.match(/独有优势[：:]\s*(.+?)(?:[；;]|独有劣势|$)/);
+              var disadvMatch = details.match(/独有劣势[：:]\s*(.+?)(?:[；;]|独有优势|$)/);
+              /* English patterns */
+              if (!advMatch) advMatch = details.match(/[Uu]nique [Aa]dvantage[：:]\s*(.+?)(?:[；;]|[Uu]nique\s+(?:[Dd]isadvantage|[Ww]eakness)|$)/);
+              if (!disadvMatch) disadvMatch = details.match(/[Uu]nique [Dd]isadvantage[：:]\s*(.+?)(?:[；;]|[Uu]nique\s+(?:[Aa]dvantage|[Ss]trength)|$)/);
+              if (!advMatch) advMatch = details.match(/[Uu]nique [Ss]trength[：:]\s*(.+?)(?:[；;]|[Uu]nique\s+(?:[Ww]eakness|[Dd]isadvantage)|$)/);
+              if (!disadvMatch) disadvMatch = details.match(/[Uu]nique [Ww]eakness[：:]\s*(.+?)(?:[；;]|[Uu]nique\s+(?:[Ss]trength|[Aa]dvantage)|$)/);
+              /* Also match "Advantage:" / "Disadvantage:" / "Strength:" / "Weakness:" */
+              if (!advMatch) advMatch = details.match(/[Aa]dvantage[：:]\s*(.+?)(?:[；;]|(?:[Dd]isadvantage|[Ww]eakness)|$)/);
+              if (!disadvMatch) disadvMatch = details.match(/[Dd]isadvantage[：:]\s*(.+?)(?:[；;]|(?:[Aa]dvantage|[Ss]trength)|$)/);
+              if (!advMatch) advMatch = details.match(/[Ss]trength[：:]\s*(.+?)(?:[；;]|(?:[Ww]eakness|[Dd]isadvantage)|$)/);
+              if (!disadvMatch) disadvMatch = details.match(/[Ww]eakness[：:]\s*(.+?)(?:[；;]|(?:[Ss]trength|[Aa]dvantage)|$)/);
+              if (advMatch) adv = advMatch[1].replace(/\*\*/g, '').trim();
+              if (disadvMatch) disadv = disadvMatch[1].replace(/\*\*/g, '').trim();
+              /* If only one mentioned, extract the whole text */
+              if (!adv && !disadv) {
+                if (details.indexOf('优势') !== -1 || /advantage|strength/i.test(details)) adv = details.replace(/^[：:;\s]+/, '').replace(/\*\*/g, '').trim();
+                else disadv = details.replace(/^[：:;\s]+/, '').replace(/\*\*/g, '').trim();
+              }
+              result.uniqueTraits.push({ product: prodName, advantage: truncate(adv, 100), disadvantage: truncate(disadv, 100) });
+            }
+          }
+        }
+
+        /* Section: 竞争动态 or Competitive Dynamics */
+        if (sec.indexOf('竞争动态') !== -1 || (sec.indexOf('新兴') !== -1 && sec.indexOf('动态') !== -1)
+            || /competitive dynamic/i.test(sec) || /emerging trend/i.test(sec) || /market dynamic/i.test(sec)) {
+          for (var d = 0; d < lines.length; d++) {
+            var dLine = lines[d].trim();
+            var dMatch = dLine.match(/^-\s+\*\*(.+?)[：:]\*\*\s*(.+)/);
+            if (!dMatch) dMatch = dLine.match(/^-\s+\*\*(.+?)\*\*[：:]\s*(.+)/);
+            if (dMatch) {
+              result.dynamics.push('**' + dMatch[1] + '** ' + dMatch[2]);
+            }
+          }
+        }
+
+        /* Section: 建议 or Recommendations */
+        if (sec.indexOf('可操作建议') !== -1 || (sec.indexOf('建议') !== -1 && si > 0)
+            || /[Rr]ecommendation/i.test(sec) || /[Aa]ctionable/i.test(sec)) {
+          for (var r = 0; r < lines.length; r++) {
+            var rLine = lines[r].trim();
+            /* Format A: 1. **target：** text */
+            var rMatch = rLine.match(/^\d+\.\s+\*\*(.+?)[：:]\*\*\s*(.+)/);
+            /* Format B: 1. **target**： text */
+            if (!rMatch) rMatch = rLine.match(/^\d+\.\s+\*\*(.+?)\*\*[：:]\s*(.+)/);
+            /* Format C: 1. **ProductName：text content,** extra text */
+            if (!rMatch) {
+              var fmtC = rLine.match(/^\d+\.\s+\*\*(.+?)[：:](.+?)\*\*\s*(.*)/);
+              if (fmtC) {
+                rMatch = [null, fmtC[1], fmtC[2].replace(/[,，]$/, '').trim() + (fmtC[3] ? ' ' + fmtC[3] : '')];
+              }
+            }
+            /* Format D: 1. **ProductName：text.** extra text */
+            if (!rMatch) {
+              var fmtD = rLine.match(/^\d+\.\s+\*\*(.+?)[：:](.+?)[。.]\*\*\s*(.*)/);
+              if (fmtD) {
+                rMatch = [null, fmtD[1], fmtD[2].trim() + (fmtD[3] ? ' ' + fmtD[3] : '')];
+              }
+            }
+            if (rMatch) {
+              var target = rMatch[1].replace(/——/g, ' ').replace(/--/g, ' ').trim();
+              var recText = rMatch[2].replace(/\*\*/g, '').trim();
+              /* Try to extract product name from target */
+              var knownProducts = ['ChatGPT', 'Claude', 'GitHub Copilot', 'Gemini', 'M365 Copilot'];
+              var foundProduct = '';
+              for (var kp = 0; kp < knownProducts.length; kp++) {
+                if (target.indexOf(knownProducts[kp]) !== -1) { foundProduct = knownProducts[kp]; break; }
+              }
+              /* Handle combined targets like "Gemini/M365 Copilot" */
+              if (!foundProduct && target.indexOf('/') !== -1) {
+                var parts = target.split('/');
+                for (var pp = 0; pp < parts.length; pp++) {
+                  var ptrim = parts[pp].trim();
+                  for (var kp2 = 0; kp2 < knownProducts.length; kp2++) {
+                    if (ptrim.indexOf(knownProducts[kp2]) !== -1) { foundProduct = ptrim; break; }
+                  }
+                  if (foundProduct) break;
+                }
+                if (!foundProduct) foundProduct = target.slice(0, 25);
+              }
+              result.recommendations.push({
+                target: foundProduct || target.slice(0, 25),
+                text: recText.slice(0, 200)
+              });
+            }
+          }
+        }
+      }
+
+      return result;
+    }
+
+    function cleanProductName(raw) {
+      var cleaned = raw.replace(/[*]/g, '').replace(/[。.，,：:]/g, '').trim();
+      /* Check longer names first to avoid 'Copilot' matching before 'M365 Copilot' */
+      var productMap = [
+        ['M365 Copilot', 'M365 Copilot'], ['GitHub Copilot', 'GitHub Copilot'],
+        ['ChatGPT', 'ChatGPT'], ['chatgpt', 'ChatGPT'],
+        ['Claude', 'Claude'], ['claude', 'Claude'],
+        ['Gemini', 'Gemini'], ['gemini', 'Gemini'],
+        ['M365', 'M365 Copilot'], ['Copilot', 'GitHub Copilot']
+      ];
+      for (var i = 0; i < productMap.length; i++) {
+        if (cleaned.indexOf(productMap[i][0]) !== -1) return productMap[i][1];
+      }
+      return cleaned;
+    }
+
+    /* ======= TREND DELTA ======= */
+    function renderTrend() {
+      var section = document.getElementById('trendSection');
+      var deltaContainer = document.getElementById('trendDeltaCards');
+      destroyChart('trendLine');
+
+      if (!prevReportData) {
+        /* Hide trend section or show placeholder */
+        deltaContainer.innerHTML = '<div style="color:var(--text-muted);font-size:13px;padding:20px 0;text-align:center">' + t('noTrend') + '</div>';
+        /* Still try to show single-point chart */
+        if (products.length > 0) renderTrendChart([reportData]);
+        return;
+      }
+
+      /* Build trend data from current + previous (could extend to more reports) */
+      var allReports = [prevReportData, reportData];
+      renderTrendChart(allReports);
+
+      /* Delta cards */
+      var prevProducts = consolidateProducts(prevReportData.products || [], prevReportData);
+      var html = '';
+      for (var i = 0; i < products.length; i++) {
+        var p = products[i];
+        var color = getProductColor(p.product_name);
+        var curRate = getPositiveRate(p.sentiment_distribution);
+        var prevP = prevProducts.find(function(pp) { return pp.product_name === p.product_name; });
+        if (!prevP) continue;
+        var prevRate = getPositiveRate(prevP.sentiment_distribution);
+        var diff = curRate - prevRate;
+        var cls = diff > 0.5 ? 'delta-up' : diff < -0.5 ? 'delta-down' : 'delta-flat';
+        var icon = diff > 0.5 ? '&#x25B2;' : diff < -0.5 ? '&#x25BC;' : '&#x25AC;';
+        var sign = diff > 0 ? '+' : '';
+        var postsDiff = p.valid_post_count - (prevP.valid_post_count || 0);
+        var postsSign = postsDiff > 0 ? '+' : '';
+
+        html += '<div class="trend-delta-card">'
+          + '<span class="trend-product-dot" style="background:' + color + '"></span>'
+          + '<span class="trend-product-name" style="color:' + color + '">' + escapeHtml(p.product_name) + '</span>'
+          + '<span class="trend-delta-value ' + cls + '">' + icon + ' ' + sign + Math.round(diff) + '%</span>'
+          + '<span style="font-size:11px;color:var(--text-muted);margin-left:8px">' + t('postsChange') + ': ' + postsSign + postsDiff + '</span>'
+          + '</div>';
+      }
+      deltaContainer.innerHTML = html || '<div style="color:var(--text-muted);font-size:13px">' + t('noData') + '</div>';
+    }
+
+    function renderTrendChart(reports) {
+      destroyChart('trendLine');
+      var labels = reports.map(function(r) {
+        return r.period ? formatDateRange(r.period.start, r.period.end) : '?';
+      });
+      /* Build datasets per product */
+      var productNames = {};
+      for (var ri = 0; ri < reports.length; ri++) {
+        var rp = consolidateProducts(reports[ri].products || [], reports[ri]);
+        for (var pi = 0; pi < rp.length; pi++) productNames[rp[pi].product_name] = true;
+      }
+      var datasets = [];
+      var names = Object.keys(productNames);
+      for (var ni = 0; ni < names.length; ni++) {
+        var name = names[ni];
+        var color = getProductColor(name);
+        var dataPoints = [];
+        for (var rj = 0; rj < reports.length; rj++) {
+          var rp2 = consolidateProducts(reports[rj].products || [], reports[rj]);
+          var found = rp2.find(function(p) { return p.product_name === name; });
+          dataPoints.push(found ? Math.round(getPositiveRate(found.sentiment_distribution)) : null);
+        }
+        datasets.push({
+          label: name, data: dataPoints,
+          borderColor: color, backgroundColor: hexToRgba(color, 0.1),
+          borderWidth: 2, pointRadius: 5, pointBackgroundColor: color,
+          fill: false, tension: 0.3
+        });
+      }
+      var wrapper = document.getElementById('trendLineChart').parentElement;
+      wrapper.innerHTML = '<canvas id="trendLineChart"></canvas>';
+      var ctx = document.getElementById('trendLineChart').getContext('2d');
+      chartInstances['trendLine'] = new Chart(ctx, {
+        type: 'line',
+        data: { labels: labels, datasets: datasets },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'circle', font: { size: 11 } } },
+            datalabels: { display: true, anchor: 'end', align: 'top', offset: 4,
+              formatter: function(v) { return v != null ? v + '%' : ''; },
+              font: { size: 10, weight: '600' },
+              color: function(ctx) { return ctx.dataset.borderColor; }
+            }
+          },
+          scales: {
+            y: { min: 0, max: 100, ticks: { callback: function(v) { return v + '%'; }, font: { size: 11 } }, grid: { color: '#F3F4F6' } },
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+          }
+        }
+      });
+    }
+
+    /* ======= HISTORY ======= */
+    function renderHistory() {
+      var strip = document.getElementById('historyStrip');
+      var html = '';
+      for (var i=0;i<reportIndex.length;i++) {
+        var r = reportIndex[i];
+        var isActive = reportData && reportData.run_id === r.run_id;
+        var dateLabel = (r.period_start||'').slice(0,10) + ' ~ ' + (r.period_end||'').slice(0,10);
+        html += '<div class="history-card'+(isActive?' active':'')+'" onclick="onReportSelect(\''+escapeHtml(r.file)+'\')">'
+          +'<div class="history-card-id">'+escapeHtml(dateLabel)+'</div>'
+          +'<div class="history-card-date">'+(r.total_valid_posts||0)+' '+t('posts')+' | '+t('clickToLoad')+'</div></div>';
+      }
+      if (!html) html = '<div style="font-size:13px;color:var(--text-muted);padding:8px">'+t('noHistory')+'</div>';
+      strip.innerHTML = html;
+    }
+
+    /* ======= INIT ======= */
+    (async function init() {
+      await loadReportIndex();
+      loadReportList();
+      try {
+        var resp = await fetch('/data/reports/latest.json');
+        if (resp.ok) { reportData = await resp.json(); }
+        else { resp = await fetch('/report.json'); if (resp.ok) reportData = await resp.json(); }
+        if (reportData) {
+          products = consolidateProducts(reportData.products || [], reportData);
+          products.sort(function(a,b){ return (PRODUCT_ORDER.indexOf(a.product_name)===-1?99:PRODUCT_ORDER.indexOf(a.product_name)) - (PRODUCT_ORDER.indexOf(b.product_name)===-1?99:PRODUCT_ORDER.indexOf(b.product_name)); });
+          buildAllPosts();
+          await loadPrevReport();
+          renderAll();
+        }
+      } catch(e) { console.error('Failed to load initial report:', e); }
+      finally { showLoading(false); }
+    })();
+  </script>
+</body>
+
+</html>

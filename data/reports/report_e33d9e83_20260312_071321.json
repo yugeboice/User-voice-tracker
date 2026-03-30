@@ -1,0 +1,673 @@
+{
+  "run_id": "e33d9e83",
+  "period": {
+    "start": "2026-01-27T00:00:00+00:00",
+    "end": "2026-02-09T00:00:00+00:00"
+  },
+  "products": [
+    {
+      "product_name": "ChatGPT",
+      "subreddit": "ChatGPT",
+      "post_count": 100,
+      "valid_post_count": 67,
+      "filtered_count": 33,
+      "summary": "### ChatGPT Reddit 社区双周报告摘要（2026-02-26 至 2026-03-12）\n\n#### 1. 整体社区情感及其驱动因素\n在分析的67条有效帖子中，社区情感以负面为主（47%），正面情感占比25%，中性情感26%。负面情感主要由用户对ChatGPT的错误信息生成（如“Hallucination”问题）和服务质量的批评驱动。例如，用户在帖子“Am I paying for this? Really???”中对语言检查错误表达了强烈不满，质疑付费服务的价值。正面情感则集中在用户对新版本（如5.2和5.3）的功能表现和创意能力的认可上，例如帖子“Messing around making fake ads with ChatGPT 5.2”中，用户称赞了模型在生成虚拟广告中的表现力。\n\n#### 2. 最多讨论的话题及其重要性\n社区讨论集中在以下五个话题：功能请求（17条）、Bug报告（16条）、元讨论（10条）、竞品对比（7条）和使用案例（6条）。功能请求和Bug报告占比最高，表明用户对产品改进的需求和对现有问题的关注度较高。例如，功能请求中，用户频繁提到希望改进自定义指令的灵活性，而Bug报告则集中在错误信息生成和模型行为不一致的问题上。\n\n#### 3. 用户主要痛点或投诉\n用户的主要痛点包括：\n- **错误信息生成（Hallucination）**：多名用户报告ChatGPT在研究任务中生成虚假信息，帖子“You won't believe how much chat gpt Hallucinates 🙂”中提到，用户通过Fidelity AI检测到3-4个完全错误的内容。\n- **语言风格问题**：例如，帖子“Has anyone else noticed ChatGPT ending answers with clickbait-style hooks?”中，用户批评模型回答中出现点击诱饵式的结尾，认为这种风格不必要且不专业。\n- **透明度问题**：部分用户对OpenAI未公开的“用户知识记忆层”表示担忧，认为公司在隐私和透明度方面存在问题（如“The Hidden Memory Layer OpenAI Doesn't Talk About”）。\n\n#### 4. 用户赞赏或期望的功能\n用户对ChatGPT的创意生成能力和新版本的改进表示赞赏。例如，帖子“Now that 5.1 is gone”中，用户提到5.3和5.4-T模型在日常对话中的表现更为优秀。同时，用户对自定义指令功能的潜力表示认可，建议更多用户学习使用该功能（如帖子“Can we stop complaining about particular tones in responses from ChatGPT?”）。此外，功能请求中，用户希望进一步提升模型的上下文记忆能力和个性化定制选项。\n\n#### 5. 与竞品的对比讨论\n在竞品对比中，用户提到使用Fidelity AI检测ChatGPT生成的错误信息，表明部分用户正在借助其他工具评估ChatGPT的输出质量。这种对比可能加剧用户对ChatGPT在准确性上的不满。\n\n#### 6. 对产品团队的可操作洞察\n- **优先解决错误信息生成问题**：Hallucination问题是当前用户投诉的核心，建议优化模型的事实性验证能力，尤其是在研究和信息查询任务中。\n- **改进语言风格和个性化选项**：针对用户对回答风格的批评，可进一步优化自定义指令功能，使用户能够更轻松地调整模型的语气和风格。\n- **提升透明度**：针对用户对“隐藏记忆层”的担忧，建议发布更透明的隐私政策和技术说明，以增强用户信任。\n- **强化创意生成能力**：正面反馈表明，ChatGPT在创意生成领域表现突出，可进一步优化相关功能以吸引更多创意型用户。\n- **关注竞品动态**：用户使用其他工具检测ChatGPT输出质量的现象值得关注，建议监测竞品在准确性和验证工具方面的进展，并考虑开发类似功能以增强竞争力。\n\n综上所述，当前社区反馈凸显了ChatGPT在准确性、透明度和个性化方面的改进空间，同时也显示了其在创意生成和新版本表现上的潜力。",
+      "sentiment_distribution": {
+        "positive": 17,
+        "negative": 32,
+        "neutral": 18,
+        "mixed": 0
+      },
+      "topic_distribution": {
+        "model_capability": 3,
+        "product_experience": 5,
+        "feature_request": 17,
+        "bug_report": 16,
+        "comparison": 7,
+        "use_case": 6,
+        "news_update": 3,
+        "meta": 10
+      },
+      "typical_posts": [
+        {
+          "id": "1rrbvu0",
+          "title": "Has anyone else noticed ChatGPT ending answers with clickbait-style hooks?",
+          "body": "I’ve started noticing a pattern where ChatGPT answers the question, then ends with a curiosity-gap teaser instead of just stopping. Example style I’m seeing: “If you want, I can also show you the surprising case where this approach completely fails, and why most people miss it.” The answer itself is",
+          "author": "thesaxbygale",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1rrbvu0/has_anyone_else_noticed_chatgpt_ending_answers/",
+          "num_comments": 50,
+          "created_utc": "2026-03-12T00:32:56+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户对ChatGPT的回答风格变化感到不满，认为其过于像“点击诱饵”。",
+          "topic_category": "meta",
+          "key_points": [
+            "用户注意到ChatGPT回答中出现点击诱饵式的结尾",
+            "认为这种风格不必要",
+            "讨论了这种变化是否近期增加"
+          ],
+          "sentiment_reason_en": "User is dissatisfied with ChatGPT's change in response style, finding it too much like 'clickbait.'",
+          "key_points_en": [
+            "User noticed clickbait-style endings in ChatGPT responses",
+            "Thinks this style is unnecessary",
+            "Discussed whether this change has increased recently"
+          ]
+        },
+        {
+          "id": "1rrelup",
+          "title": "Messing around making fake ads with ChatGPT 5.2 and honestly I’m pretty impressed",
+          "body": "I know a lot of people have hate on ChatGPT 5.2, but I was messing around tonight making fake ads with it and ended up with this. I had the idea that McDonald’s should’ve called the Grand Big Mac the “Bigger Mac,” because Little Mac, Big Mac, Bigger Mac just works. I kept going back and forth with C",
+          "author": "Substantial-Fall-630",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1rrelup/messing_around_making_fake_ads_with_chatgpt_52/",
+          "num_comments": 46,
+          "created_utc": "2026-03-12T02:29:57+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.8,
+          "sentiment_reason": "用户对ChatGPT 5.2生成广告的能力表示满意并称赞其表现。",
+          "topic_category": "model_capability",
+          "key_points": [
+            "用户使用ChatGPT 5.2生成虚拟广告",
+            "对模型的创意和表现表示赞赏",
+            "认为模型在反复优化后效果很好"
+          ],
+          "sentiment_reason_en": "User is satisfied with ChatGPT 5.2's ability to generate ads and praises its performance.",
+          "key_points_en": [
+            "User used ChatGPT 5.2 to generate virtual ads",
+            "Praises the model's creativity and performance",
+            "Thinks the model works well after repeated optimization"
+          ]
+        },
+        {
+          "id": "1rr80nx",
+          "title": "Now that 5.1 is gone",
+          "body": "Which ai is best for conversations with good memory? I don't need it to perform coding or anything. I just like chatting with the ai about my work day, etc. submitted by /u/MenaceMinded [link] [comments]",
+          "author": "MenaceMinded",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1rr80nx/now_that_51_is_gone/",
+          "num_comments": 46,
+          "created_utc": "2026-03-11T22:04:06+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.4,
+          "sentiment_reason": "用户对比不同AI模型，寻找适合日常对话的替代品。",
+          "topic_category": "comparison",
+          "key_points": [
+            "用户寻找适合日常对话的AI。",
+            "提到5.3和5.4-T模型的优点。",
+            "强调记忆功能的重要性。"
+          ],
+          "sentiment_reason_en": "User compares different AI models, looking for alternatives suitable for daily conversation.",
+          "key_points_en": [
+            "User is looking for AI suitable for daily conversation.",
+            "Mentions advantages of 5.3 and 5.4-T models.",
+            "Emphasizes the importance of memory function."
+          ]
+        },
+        {
+          "id": "1rr6zfo",
+          "title": "Why do people keep treating ChatGPT like it has intentions?",
+          "body": "I keep noticing that we talk to - and sometimes about - ChatGPT like we're interacting with a mind, a person, not with software. We ask it a question, and it answers in full sentences. It sounds thoughtful, sometimes empathetic or humorous (depending on your settings) and all the sudden people start",
+          "author": "texan-janakay",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1rr6zfo/why_do_people_keep_treating_chatgpt_like_it_has/",
+          "num_comments": 36,
+          "created_utc": "2026-03-11T21:26:09+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户批评人们对ChatGPT的过度拟人化倾向。",
+          "topic_category": "meta",
+          "key_points": [
+            "讨论人们将ChatGPT视为有意图的现象。",
+            "警告过度信任ChatGPT的风险。",
+            "强调ChatGPT只是工具而非有意识的实体。"
+          ],
+          "sentiment_reason_en": "User criticizes the tendency to over-anthropomorphize ChatGPT.",
+          "key_points_en": [
+            "Discusses people viewing ChatGPT as having intent.",
+            "Warns about the risks of over-trusting ChatGPT.",
+            "Emphasizes ChatGPT is just a tool, not a conscious entity."
+          ]
+        },
+        {
+          "id": "1rr1tj9",
+          "title": "You won't believe how much chat gpt Hallucinates 🙂",
+          "body": "Just the other day I was using it for some research and it gave me a detailed report and you won't believe when I copied the gpt's output and pasted in the Fidelity Ai Model (Ai Hallucinations detection system). It gave like 3-4 complete wrong and mismatched information. Along with that it the entir",
+          "author": "Neat-Performance2142",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1rr1tj9/you_wont_believe_how_much_chat_gpt_hallucinates/",
+          "num_comments": 30,
+          "created_utc": "2026-03-11T18:23:06+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.7,
+          "sentiment_reason": "用户对ChatGPT生成错误信息和幻觉的频率表示强烈不满。",
+          "topic_category": "model_capability",
+          "key_points": [
+            "ChatGPT在研究任务中生成了错误和虚假的信息。",
+            "用户使用Fidelity AI检测到3-4个完全错误的内容。",
+            "用户认为ChatGPT在高强度任务中频繁出现幻觉问题。"
+          ],
+          "sentiment_reason_en": "User is strongly dissatisfied with the frequency of ChatGPT generating errors and hallucinations.",
+          "key_points_en": [
+            "ChatGPT generated incorrect and false information in research tasks.",
+            "User detected 3-4 completely wrong contents using Fidelity AI.",
+            "User thinks ChatGPT frequently hallucinates in high-intensity tasks."
+          ]
+        }
+      ],
+      "summary_en": "### ChatGPT Reddit Community Biweekly Report Summary (2026-02-26 to 2026-03-12)\n\n#### 1. Overall Community Sentiment and Its Drivers\nAmong the 67 valid posts analyzed, community sentiment was predominantly negative (47%), with positive sentiment accounting for 25% and neutral sentiment 26%. Negative sentiment was mainly driven by user criticism of ChatGPT's misinformation generation (such as the \"Hallucination\" issue) and service quality. For example, in the post \"Am I paying for this? Really???\", users expressed strong dissatisfaction with language checking errors, questioning the value of the paid service. Positive sentiment focused on user recognition of the performance and creative capabilities of new versions (such as 5.2 and 5.3). For instance, in the post \"Messing around making fake ads with ChatGPT 5.2\", users praised the model's expressiveness in generating virtual ads.\n\n#### 2. Most Discussed Topics and Their Importance\nCommunity discussions centered on the following five topics: feature requests (17 posts), bug reports (16 posts), meta discussions (10 posts), competitor comparisons (7 posts), and use cases (6 posts). Feature requests and bug reports accounted for the highest proportion, indicating strong user demand for product improvement and attention to existing issues. For example, in feature requests, users frequently mentioned the desire to improve the flexibility of custom instructions, while bug reports focused on misinformation generation and inconsistent model behavior.\n\n#### 3. Main User Pain Points or Complaints\nThe main user pain points include:\n- **Misinformation Generation (Hallucination):** Multiple users reported that ChatGPT generated false information during research tasks. In the post \"You won't believe how much chat gpt Hallucinates 🙂\", users mentioned detecting 3-4 completely incorrect pieces of content using Fidelity AI.\n- **Language Style Issues:** For example, in the post \"Has anyone else noticed ChatGPT ending answers with clickbait-style hooks?\", users criticized the model for ending answers with clickbait-style hooks, considering this style unnecessary and unprofessional.\n- **Transparency Issues:** Some users expressed concerns about OpenAI's undisclosed \"user knowledge memory layer\", believing the company has issues with privacy and transparency (e.g., \"The Hidden Memory Layer OpenAI Doesn't Talk About\").\n\n#### 4. Features Users Appreciate or Expect\nUsers expressed appreciation for ChatGPT's creative generation capabilities and improvements in new versions. For example, in the post \"Now that 5.1 is gone\", users mentioned that the 5.3 and 5.4-T models performed better in daily conversations. At the same time, users recognized the potential of the custom instructions feature, suggesting more users learn to use it (as in the post \"Can we stop complaining about particular tones in responses from ChatGPT?\"). Additionally, in feature requests, users hoped to further enhance the model's contextual memory and personalized customization options.\n\n#### 5. Discussions Comparing with Competitors\nIn competitor comparisons, users mentioned using Fidelity AI to detect misinformation generated by ChatGPT, indicating that some users are leveraging other tools to evaluate ChatGPT's output quality. This comparison may intensify user dissatisfaction with ChatGPT's accuracy.\n\n#### 6. Actionable Insights for the Product Team\n- **Prioritize Resolving Misinformation Generation Issues:** The hallucination problem is the core of current user complaints. It is recommended to optimize the model's factual verification capabilities, especially in research and information retrieval tasks.\n- **Improve Language Style and Personalization Options:** In response to user criticism of answer styles, further optimize the custom instructions feature to allow users to more easily adjust the model's tone and style.\n- **Enhance Transparency:** Addressing user concerns about the \"hidden memory layer\", it is recommended to release more transparent privacy policies and technical documentation to strengthen user trust.\n- **Strengthen Creative Generation Capabilities:** Positive feedback indicates that ChatGPT performs well in creative generation. Further optimizing related features could attract more creative users.\n- **Monitor Competitor Dynamics:** The phenomenon of users using other tools to detect ChatGPT's output quality is noteworthy. It is recommended to monitor competitor progress in accuracy and verification tools, and consider developing similar features to enhance competitiveness.\n\nIn summary, current community feedback highlights areas for improvement for ChatGPT in accuracy, transparency, and personalization, while also demonstrating its potential in creative generation and new version performance."
+    },
+    {
+      "product_name": "Claude",
+      "subreddit": "ClaudeAI",
+      "post_count": 100,
+      "valid_post_count": 89,
+      "filtered_count": 11,
+      "summary": "### r/ClaudeAI 社区双周报告摘要（2026-02-26 至 2026-03-12）\n\n#### 1. 整体社区情感及其驱动因素  \n在分析的89条有效帖子中，社区情感整体偏正面（44%为正面，23%为负面）。正面情感主要来自用户对Claude在成本效益、易用性和创新性上的认可，例如用户利用Claude Code和Remotion生成演示视频，显著降低了产品开发成本（[帖子1](#)）。同时，用户对Claude的灵活性和可定制性表示满意，例如通过自定义命令（如`/discuss`）优化交互体验（[帖子2](#)）。  \n负面情感则集中在功能限制和关键Bug上，包括Pro计划的每周使用限制（[帖子8](#)）以及Cowork模式中未经用户批准执行操作的严重问题（[帖子3](#)）。这些问题削弱了用户对产品的信任感。\n\n#### 2. 最多讨论的话题及其重要性  \n“使用场景”（32条）是讨论最多的话题，表明用户对Claude的实际应用非常关注。用户分享了Claude在内容创作（如YouTube脚本生成）、开发工具（如MCP服务器）以及技能市场构建中的多样化应用（[帖子4](#)、[帖子7](#)、[帖子9](#)）。这些案例展示了Claude在生产力工具和开发者生态中的潜力。  \n其次，“功能请求”（17条）和“Bug报告”（13条）表明用户对产品改进的期望较高，尤其是在稳定性和限制透明度方面。\n\n#### 3. 用户主要痛点或投诉  \n- **功能限制**：Pro计划的每周限制被认为过于严格，且免费计划新增Memory功能引发了Pro用户的不满（[帖子8](#)）。  \n- **关键Bug**：Cowork模式中的破坏性操作Bug严重影响了用户体验（[帖子3](#)）。  \n- **透明度问题**：用户对限制规则和功能更新的透明度提出质疑（[帖子5](#)）。  \n\n#### 4. 用户赞赏或期望的功能  \n用户对Claude的创新性和易用性表示赞赏，包括自定义命令（[帖子2](#)）和无需API密钥的插件开发（[帖子7](#)）。此外，用户希望进一步优化交互模式、提升稳定性，并对限制规则提供更清晰的说明。\n\n#### 5. 与竞品的对比讨论  \n虽然本周期内直接的竞品对比讨论较少，但部分用户提到在选择Claude的中间计划时，考虑其与其他AI工具在电子邮件写作等场景中的智能水平差异（[帖子10](#)）。这表明用户在功能性和性价比上仍在权衡。\n\n#### 6. 对产品团队的可操作洞察  \n- **优化限制策略**：重新评估Pro计划的每周限制，确保付费用户感受到价值提升，同时提高限制规则的透明度。  \n- **修复关键Bug**：优先解决Cowork模式中的破坏性操作问题，以恢复用户信任。  \n- **强化开发者支持**：进一步推广和优化开发者工具（如Claude Code），鼓励用户构建更多创新应用。  \n- **增强用户教育**：通过社区公告或文档更新，解释新功能（如Memory）的设计初衷和使用场景，减少误解。  \n- **关注竞品动态**：继续关注用户在功能性和性价比上的需求，确保Claude在关键场景中保持竞争力。\n\n通过解决上述问题并强化用户体验，Claude有望进一步巩固其在生产力工具和开发者社区中的地位。",
+      "sentiment_distribution": {
+        "positive": 40,
+        "negative": 21,
+        "neutral": 24,
+        "mixed": 4
+      },
+      "topic_distribution": {
+        "model_capability": 3,
+        "product_experience": 7,
+        "feature_request": 17,
+        "bug_report": 13,
+        "comparison": 6,
+        "use_case": 32,
+        "news_update": 5,
+        "meta": 6
+      },
+      "typical_posts": [
+        {
+          "id": "1rr47ya",
+          "title": "I delayed my product launch for months because I couldn't afford demo videos. Spent a weekend with Claude Code and Remotion. Now my reels are getting thousands of views.",
+          "body": "My product was ready. The code worked, it solved a genuine problem, but I had nothing to show people. No demo videos. No illustrations. No motion graphics. Just a working app and a few users. So I did what any sane founder does, I emailed motion designers. Here's what I got: \"Sure! Can you send me y",
+          "author": "ashadis",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1rr47ya/i_delayed_my_product_launch_for_months_because_i/",
+          "num_comments": 50,
+          "created_utc": "2026-03-11T19:47:12+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.9,
+          "sentiment_reason": "用户对使用Claude Code和Remotion生成视频的成果表示高度满意。",
+          "topic_category": "use_case",
+          "key_points": [
+            "用户使用Claude Code和Remotion生成演示视频",
+            "强调了工具的成本效益",
+            "视频获得了广泛关注"
+          ],
+          "sentiment_reason_en": "The user expressed high satisfaction with the results of using Claude Code and Remotion to generate videos.",
+          "key_points_en": [
+            "User used Claude Code and Remotion to generate demo videos",
+            "Emphasized the cost-effectiveness of the tools",
+            "The video received widespread attention"
+          ]
+        },
+        {
+          "id": "1rr89oq",
+          "title": "I got tired of typing \"don't make any changes\" so I turned it into a /discuss command",
+          "body": "Every other of my conversations with Claude Code goes like this: I want to talk through an architecture decision, explore how something works, or just think out loud. Claude immediately starts editing files. \"Don't make any changes, just research.\" \"Don't change anything, just talk it out with me.\" ",
+          "author": "After_Book_7030",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1rr89oq/i_got_tired_of_typing_dont_make_any_changes_so_i/",
+          "num_comments": 21,
+          "created_utc": "2026-03-11T22:13:14+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.5,
+          "sentiment_reason": "用户开发了一个自定义技能以改进Claude的交互，体现了对产品的积极参与。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "用户开发了/discuss命令",
+            "希望改进Claude的交互模式",
+            "对现有功能提出优化建议"
+          ],
+          "sentiment_reason_en": "The user developed a custom skill to improve Claude's interaction, showing active engagement with the product.",
+          "key_points_en": [
+            "User developed the /discuss command",
+            "Aimed to improve Claude's interaction mode",
+            "Suggested optimizations for existing features"
+          ]
+        },
+        {
+          "id": "1rrd5p4",
+          "title": "This is bad...really bad...here's the bug report I just submitted to the User Safety team",
+          "body": "tl;dr - If you're using Cowork for planning, be very careful when you allow it to call the planning tool. This was the most significant Cowork bug I've personally experienced to date, so sharing it here for awareness. Bug Details Severity: Critical — tool executed destructive actions on user's codeb",
+          "author": "ritual_tradition",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1rrd5p4/this_is_badreally_badheres_the_bug_report_i_just/",
+          "num_comments": 14,
+          "created_utc": "2026-03-12T01:27:19+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.9,
+          "sentiment_reason": "用户对Cowork模式中严重的自动化错误表示强烈不满，该错误导致未经用户批准删除文件。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "Cowork模式中的关键错误",
+            "工具未经用户批准执行破坏性操作",
+            "用户提出详细的复现步骤"
+          ],
+          "sentiment_reason_en": "The user expressed strong dissatisfaction with a serious automation error in Cowork mode that deleted files without user approval.",
+          "key_points_en": [
+            "Critical error in Cowork mode",
+            "Tool performed destructive actions without user approval",
+            "User provided detailed reproduction steps"
+          ]
+        },
+        {
+          "id": "1rray07",
+          "title": "Good experiences with Claude",
+          "body": "I’ve been writing software since the early 2000s. Lots of web applications…mostly Java/Oracle corporate swill, but some technical applications used in the transportation industry to this day. I also built Perl applications, a little C++, and 1 iOS game. With Claude, I started out building Angular ap",
+          "author": "industrial-complex",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1rray07/good_experiences_with_claude/",
+          "num_comments": 11,
+          "created_utc": "2026-03-11T23:54:58+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.9,
+          "sentiment_reason": "用户对Claude在多个开发项目中的表现表示高度满意，特别是在不同框架中的应用。",
+          "topic_category": "use_case",
+          "key_points": [
+            "Claude帮助开发多个应用",
+            "用户从免费升级到Pro版本",
+            "Claude支持多种编程语言和框架"
+          ],
+          "sentiment_reason_en": "The user expressed high satisfaction with Claude's performance in multiple development projects, especially its application across different frameworks.",
+          "key_points_en": [
+            "Claude helped develop multiple applications",
+            "User upgraded from free to Pro version",
+            "Claude supports multiple programming languages and frameworks"
+          ]
+        },
+        {
+          "id": "1rrf6lg",
+          "title": "Here's what I have actually started earning from my faceless AI YouTube channel",
+          "body": "For context, day before yesterday I posted about how my AI faceless channel was close to monetisation and shared my workflow. Did not expect it to go the way it did honestly. Got called out pretty hard in the comments. AI slop, Promoting ElevenLabs,Paid shill for Magic Hour and Kling. I want to be c",
+          "author": "Personal_Brilliant39",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1rrf6lg/heres_what_i_have_actually_started_earning_from/",
+          "num_comments": 12,
+          "created_utc": "2026-03-12T02:56:11+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": 0.3,
+          "sentiment_reason": "用户对Claude在YouTube频道脚本生成中的作用表示认可，但对收益低感到失望。",
+          "topic_category": "use_case",
+          "key_points": [
+            "用户使用Claude生成YouTube频道脚本",
+            "频道已实现盈利但收益较低",
+            "用户对AI工具的推广引发争议"
+          ],
+          "sentiment_reason_en": "The user acknowledged Claude's role in generating YouTube channel scripts, but was disappointed with the low revenue.",
+          "key_points_en": [
+            "User used Claude to generate YouTube channel scripts",
+            "Channel is monetized but revenue is low",
+            "Promotion of AI tools sparked controversy"
+          ]
+        }
+      ],
+      "summary_en": "### r/ClaudeAI Community Biweekly Report Summary (2026-02-26 to 2026-03-12)\n\n#### 1. Overall Community Sentiment and Its Drivers  \nAmong the 89 valid posts analyzed, the overall community sentiment is positive (44% positive, 23% negative). Positive sentiment mainly stems from users’ recognition of Claude’s cost-effectiveness, ease of use, and innovation. For example, users leveraged Claude Code and Remotion to generate demo videos, significantly reducing product development costs ([Post 1](#)). At the same time, users expressed satisfaction with Claude’s flexibility and customizability, such as optimizing interaction experiences through custom commands (e.g., `/discuss`) ([Post 2](#)).  \nNegative sentiment is concentrated on feature limitations and critical bugs, including the weekly usage cap for the Pro plan ([Post 8](#)) and a severe issue in Cowork mode where actions were executed without user approval ([Post 3](#)). These issues have undermined users’ trust in the product.\n\n#### 2. Most Discussed Topics and Their Significance  \n“Use Cases” (32 posts) was the most discussed topic, indicating users’ strong interest in Claude’s practical applications. Users shared diverse applications of Claude in content creation (such as YouTube script generation), development tools (like MCP servers), and building skills marketplaces ([Post 4](#), [Post 7](#), [Post 9](#)). These cases demonstrate Claude’s potential in productivity tools and the developer ecosystem.  \nSecondly, “Feature Requests” (17 posts) and “Bug Reports” (13 posts) show that users have high expectations for product improvement, especially regarding stability and transparency of limitations.\n\n#### 3. Main User Pain Points or Complaints  \n- **Feature Limitations**: The weekly cap for the Pro plan is considered too strict, and the addition of the Memory feature to the free plan has caused dissatisfaction among Pro users ([Post 8](#)).  \n- **Critical Bugs**: The destructive operation bug in Cowork mode has severely impacted user experience ([Post 3](#)).  \n- **Transparency Issues**: Users have questioned the transparency of limitation rules and feature updates ([Post 5](#)).  \n\n#### 4. Features Users Appreciate or Expect  \nUsers appreciate Claude’s innovation and ease of use, including custom commands ([Post 2](#)) and plugin development without the need for an API key ([Post 7](#)). Additionally, users hope for further optimization of interaction modes, improved stability, and clearer explanations of limitation rules.\n\n#### 5. Comparative Discussions with Competitors  \nAlthough there were few direct competitor comparisons during this period, some users mentioned that when choosing Claude’s mid-tier plan, they considered differences in intelligence levels with other AI tools in scenarios such as email writing ([Post 10](#)). This indicates that users are still weighing functionality and cost-effectiveness.\n\n#### 6. Actionable Insights for the Product Team  \n- **Optimize Limitation Strategies**: Reassess the weekly cap for the Pro plan to ensure paying users perceive increased value, while also improving the transparency of limitation rules.  \n- **Fix Critical Bugs**: Prioritize resolving the destructive operation issue in Cowork mode to restore user trust.  \n- **Strengthen Developer Support**: Further promote and optimize developer tools (such as Claude Code) to encourage users to build more innovative applications.  \n- **Enhance User Education**: Use community announcements or documentation updates to explain the design intent and use cases of new features (such as Memory), reducing misunderstandings.  \n- **Monitor Competitor Trends**: Continue to pay attention to user needs regarding functionality and cost-effectiveness to ensure Claude remains competitive in key scenarios.\n\nBy addressing the above issues and enhancing the user experience, Claude is well-positioned to further consolidate its standing in productivity tools and the developer community."
+    },
+    {
+      "product_name": "Gemini",
+      "subreddit": "Gemini",
+      "post_count": 38,
+      "valid_post_count": 35,
+      "filtered_count": 3,
+      "summary": "### r/Gemini 社区双周报告（2026-02-26 至 2026-03-12）\n\n#### 1. 整体社区情感及其驱动因素  \n在分析的35条有效帖子中，社区情感呈现显著的负面倾向（91%为负面）。负面情绪主要由用户对Gemini平台的技术问题、费用调整和客户支持服务不满驱动。正面情感仅占5%，且未形成明显趋势。社区对平台的信任度和满意度显著下降。\n\n#### 2. 最多讨论的话题及其重要性  \n“bug_report”是讨论最多的话题，占比高达69%（24条），反映出用户对平台技术问题的集中关注。主要问题包括SOL和ETH的解质押延迟（如“13.3K SOL pending unstake beyond target date”）、账户功能异常（如“Unable to activate card”）以及奖励发放问题（如“Referral Bonus Missing”）。此外，“feature_request”话题（6条）表明用户对平台功能改进的需求较为强烈。\n\n#### 3. 用户主要痛点或投诉  \n- **技术问题**：用户普遍反映SOL和ETH的解质押时间过长，甚至超过官方承诺的时间（如“Is unstaking SOL working for people?”）。这不仅影响用户的资金流动性，还对平台的技术能力提出质疑。  \n- **费用调整**：Gemini近期大幅提高交易费用，且未提前通知用户（如“Did Gemini just increase their trading fees dramatically?”），导致用户对透明度和信任感下降。  \n- **客户支持**：多名用户抱怨客户支持响应缓慢，问题未能及时解决（如“Unable to activate card”）。  \n- **奖励发放问题**：多条帖子提到推荐奖励和Recurring Buy Bonus未按承诺发放，用户对平台的诚信度表示怀疑（如“Referral Bonus Missing”）。  \n\n#### 4. 用户赞赏或期望的功能  \n尽管负面情绪占主导，部分用户在“feature_request”话题中提出了对功能改进的期望，例如更高效的质押/解质押流程、更透明的费用结构和更及时的客户支持。这些需求表明用户仍对平台的改进潜力抱有一定期待。\n\n#### 5. 与竞品的对比讨论  \n在“comparison”相关帖子中，用户提到其他交易平台（如Coinbase和Binance）在质押服务和客户支持方面表现更优，尤其是在资金流动性和问题响应速度上。Gemini的技术问题和费用调整使其在竞品对比中处于劣势。\n\n#### 6. 对产品团队的可操作洞察  \n- **优化质押/解质押流程**：加速SOL和ETH的解质押时间，确保符合官方承诺的时间范围，并通过公告透明化进度。  \n- **提升客户支持效率**：增加客户支持团队的资源投入，缩短响应时间，尤其是针对资金相关问题。  \n- **改进奖励发放机制**：确保奖励发放流程的自动化和准确性，避免因奖励问题损害用户信任。  \n- **费用调整透明化**：在费用变动前通过公告或邮件通知用户，避免因信息不对称引发负面情绪。  \n- **关注竞品动向**：分析竞品在质押服务和客户支持上的优势，针对性推出改进措施以缩小差距。  \n\n综上，r/Gemini社区当前的负面情绪主要源于技术问题和客户体验不佳。若不及时解决，可能进一步削弱用户忠诚度并加速用户流失。",
+      "sentiment_distribution": {
+        "positive": 2,
+        "negative": 32,
+        "neutral": 1,
+        "mixed": 0
+      },
+      "topic_distribution": {
+        "model_capability": 0,
+        "product_experience": 0,
+        "feature_request": 6,
+        "bug_report": 24,
+        "comparison": 2,
+        "use_case": 2,
+        "news_update": 1,
+        "meta": 0
+      },
+      "typical_posts": [
+        {
+          "id": "1rmpkh9",
+          "title": "Did Gemini just increase their trading fees dramatically?",
+          "body": "I’ve often recommended Gemini to people looking for a good U.S. crypto exchange because their ActiveTrader fees were meaningfully lower than competitors, i.e. a reasonable 0.10% maker fee if you hit $50K volume per month (vs. 0.40% on Coinbase, or 0.25% if you hit $75K). However, today I noticed som",
+          "author": "don911",
+          "url": "https://www.reddit.com/r/Gemini/comments/1rmpkh9/did_gemini_just_increase_their_trading_fees/",
+          "num_comments": 34,
+          "created_utc": "2026-03-06T20:43:02+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.8,
+          "sentiment_reason": "用户对Gemini大幅提高交易费用表示强烈不满，认为这破坏了其竞争优势。",
+          "topic_category": "news_update",
+          "key_points": [
+            "交易费用大幅上涨",
+            "用户对费用调整缺乏通知感到困惑",
+            "Gemini失去与竞争对手的价格优势"
+          ],
+          "sentiment_reason_en": "Users are strongly dissatisfied with Gemini's sharp increase in trading fees, believing it undermines its competitive edge.",
+          "key_points_en": [
+            "Significant increase in trading fees",
+            "Users confused by lack of notice about fee changes",
+            "Gemini loses price advantage over competitors"
+          ]
+        },
+        {
+          "id": "1rno7ot",
+          "title": "Are people able to withdraw SOL?",
+          "body": "The Gemini website says there are delays in sol withdrawals. I’m waiting to unstake sol but once I do I want to take everything off Gemini. submitted by /u/National-Pair6010 [link] [comments]",
+          "author": "National-Pair6010",
+          "url": "https://www.reddit.com/r/Gemini/comments/1rno7ot/are_people_able_to_withdraw_sol/",
+          "num_comments": 22,
+          "created_utc": "2026-03-07T23:02:40+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.5,
+          "sentiment_reason": "用户对SOL提币延迟和账户限制表示担忧。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "SOL提币受到延迟影响。",
+            "用户计划将资产转移出Gemini。",
+            "其他用户也报告了类似问题。"
+          ],
+          "sentiment_reason_en": "Users express concern about SOL withdrawal delays and account restrictions.",
+          "key_points_en": [
+            "SOL withdrawals are delayed.",
+            "Users plan to move assets out of Gemini.",
+            "Other users report similar issues."
+          ]
+        },
+        {
+          "id": "1rj8b6x",
+          "title": "13.3K SOL pending unstake beyond target date",
+          "body": "￼​How long will it it take to unstake SOL on Gemini? It's already been 3 days. submitted by /u/National-Pair6010 [link] [comments]",
+          "author": "National-Pair6010",
+          "url": "https://www.reddit.com/r/Gemini/comments/1rj8b6x/133k_sol_pending_unstake_beyond_target_date/",
+          "num_comments": 20,
+          "created_utc": "2026-03-02T23:03:10+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.6,
+          "sentiment_reason": "用户对SOL解押时间超过预期表示不满。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "SOL解押时间超过预期",
+            "用户对平台支持文档的质疑",
+            "对平台处理速度的担忧"
+          ],
+          "sentiment_reason_en": "Users are dissatisfied with SOL unstaking time exceeding expectations.",
+          "key_points_en": [
+            "SOL unstaking time longer than expected",
+            "Users question platform support documentation",
+            "Concerns about platform processing speed"
+          ]
+        },
+        {
+          "id": "1rg6hj9",
+          "title": "What’s the longest you’ve waited to fully unstake? (ETH)",
+          "body": "Initiated unstake over one week ago, still no funds available, app is quoting me until April 4th for funds. What gives? Will it actually take that long? Have you waited longer? submitted by /u/The5thLoko [link] [comments]",
+          "author": "The5thLoko",
+          "url": "https://www.reddit.com/r/Gemini/comments/1rg6hj9/whats_the_longest_youve_waited_to_fully_unstake/",
+          "num_comments": 19,
+          "created_utc": "2026-02-27T13:20:57+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.6,
+          "sentiment_reason": "用户对ETH解质押时间过长表示不满，并质疑平台的延迟机制。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "ETH解质押时间被延长至数周。",
+            "用户对平台的额外延迟感到不满。",
+            "其他用户也提到SOL质押奖励问题。"
+          ],
+          "sentiment_reason_en": "Users are dissatisfied with the long ETH unstaking time and question the platform's delay mechanism.",
+          "key_points_en": [
+            "ETH unstaking time extended to several weeks.",
+            "Users unhappy with additional platform delays.",
+            "Other users mention SOL staking reward issues."
+          ]
+        },
+        {
+          "id": "1rlxxvy",
+          "title": "Gemini NOT paying Recurring Buy Bonus",
+          "body": "I set up recurring buys strictly due to a promo Gemini was running in August of 2025. You had to make $300 of recurring buys weekly within 90 days. I made payments from August 23 to November 22 for $25 weekly. That is $325 worth of buys. I ended my buys after that. I never received my BTC for $50, s",
+          "author": "pbgreenpoint-",
+          "url": "https://www.reddit.com/r/Gemini/comments/1rlxxvy/gemini_not_paying_recurring_buy_bonus/",
+          "num_comments": 15,
+          "created_utc": "2026-03-05T23:49:09+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.9,
+          "sentiment_reason": "用户未收到符合条件的奖励，且对客户服务的处理方式感到失望。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "未收到符合条件的奖励",
+            "客户服务未能有效解决问题",
+            "对平台规则的执行感到不满"
+          ],
+          "sentiment_reason_en": "Users did not receive eligible rewards and are disappointed with customer service handling.",
+          "key_points_en": [
+            "Did not receive eligible rewards",
+            "Customer service failed to resolve the issue effectively",
+            "Dissatisfaction with enforcement of platform rules"
+          ]
+        }
+      ],
+      "summary_en": "### r/Gemini Community Biweekly Report (2026-02-26 to 2026-03-12)\n\n#### 1. Overall Community Sentiment and Its Drivers  \nAmong the 35 valid posts analyzed, community sentiment shows a significant negative bias (91% negative). Negative emotions are mainly driven by user dissatisfaction with Gemini platform’s technical issues, fee adjustments, and customer support services. Positive sentiment accounts for only 5%, without forming a clear trend. Community trust and satisfaction with the platform have dropped significantly.\n\n#### 2. Most Discussed Topics and Their Importance  \n“bug_report” is the most discussed topic, accounting for as much as 69% (24 posts), reflecting users’ concentrated attention on technical issues with the platform. Main issues include delays in SOL and ETH unstaking (e.g., “13.3K SOL pending unstake beyond target date”), account function anomalies (e.g., “Unable to activate card”), and problems with reward distribution (e.g., “Referral Bonus Missing”). In addition, the “feature_request” topic (6 posts) indicates a strong demand from users for platform feature improvements.\n\n#### 3. Main User Pain Points or Complaints  \n- **Technical Issues**: Users commonly report excessively long SOL and ETH unstaking times, even exceeding the officially promised timeframe (e.g., “Is unstaking SOL working for people?”). This not only affects users’ fund liquidity but also raises doubts about the platform’s technical capabilities.  \n- **Fee Adjustments**: Gemini has recently raised trading fees significantly without prior notice to users (e.g., “Did Gemini just increase their trading fees dramatically?”), leading to decreased transparency and trust.  \n- **Customer Support**: Multiple users complain about slow customer support response and unresolved issues (e.g., “Unable to activate card”).  \n- **Reward Distribution Issues**: Several posts mention referral bonuses and Recurring Buy Bonus not being issued as promised, causing users to question the platform’s integrity (e.g., “Referral Bonus Missing”).  \n\n#### 4. Features Users Appreciate or Expect  \nDespite the dominance of negative sentiment, some users in the “feature_request” topic have expressed expectations for feature improvements, such as more efficient staking/unstaking processes, a more transparent fee structure, and more timely customer support. These demands indicate that users still hold some expectations for the platform’s potential for improvement.\n\n#### 5. Comparison with Competitors  \nIn “comparison”-related posts, users mention that other trading platforms (such as Coinbase and Binance) perform better in staking services and customer support, especially regarding fund liquidity and response speed to issues. Gemini’s technical problems and fee adjustments put it at a disadvantage in comparison with competitors.\n\n#### 6. Actionable Insights for the Product Team  \n- **Optimize Staking/Unstaking Processes**: Accelerate SOL and ETH unstaking times, ensure they meet the officially promised timeframe, and communicate progress transparently through announcements.  \n- **Improve Customer Support Efficiency**: Increase resource investment in the customer support team to shorten response times, especially for fund-related issues.  \n- **Enhance Reward Distribution Mechanisms**: Ensure automation and accuracy in the reward distribution process to avoid damaging user trust due to reward issues.  \n- **Increase Fee Adjustment Transparency**: Notify users of fee changes in advance via announcements or emails to avoid negative sentiment caused by information asymmetry.  \n- **Monitor Competitor Trends**: Analyze competitors’ strengths in staking services and customer support, and introduce targeted improvements to narrow the gap.  \n\nIn summary, the current negative sentiment in the r/Gemini community mainly stems from technical issues and poor customer experience. If not addressed promptly, this may further weaken user loyalty and accelerate user attrition."
+    },
+    {
+      "product_name": "GitHub Copilot",
+      "subreddit": "GithubCopilot",
+      "post_count": 100,
+      "valid_post_count": 89,
+      "filtered_count": 11,
+      "summary": "### 竞品情报摘要：GitHub Copilot 社区动态分析（2026-02-26 至 2026-03-12）\n\n#### 1. 整体社区情感及其驱动因素  \n在分析的89条有效帖子中，社区情感呈现出一定的分化：29%的帖子表达了积极情绪，35%为负面情绪，28%为中立，6%为混合情绪。积极情绪主要来自于用户对新功能（如JetBrains插件更新）和学习资源（如Copilot CLI免费课程）的认可。负面情绪则集中在订阅管理问题（如Copilot Business自动取消个人订阅）和产品稳定性（如CLI上下文记忆差、性能不稳定）上。\n\n#### 2. 最多讨论的话题及其重要性  \n**bug_report**（28条）是本期最热话题，用户频繁报告功能异常和稳定性问题，表明产品在实际使用中的可靠性仍需提升。**feature_request**（17条）紧随其后，用户对新功能的需求集中在界面优化（如“Copilot Cowork”）和模型调用灵活性上。**comparison**（15条）显示用户对比了Copilot与其他工具（如Claude Code CLI）的优劣，尤其关注上下文记忆和稳定性。**use_case**（14条）和**model_capability**（4条）则反映了用户对Copilot在实际工作流中应用的探索。\n\n#### 3. 用户主要痛点或投诉  \n- **订阅管理问题**：用户抱怨在升级到Copilot Business后，个人订阅被自动取消，且未收到任何警告或确认（[negative] “GitHub Copilot Business can apparently cancel your personal Copilot subscription”）。这类问题引发了对用户体验和透明度的质疑。  \n- **稳定性与性能**：Copilot CLI被批评在上下文记忆和稳定性方面表现不佳（[negative] “My Experience of Github Copilot CLI and Claude Code CLI”），影响了用户的开发效率。  \n- **配额限制与模型选择**：部分用户对不同订阅计划的模型调用限制感到困惑，并希望获得更明确的指导（[mixed] “If I have the Pro plan, what is the best philosophy for using models?”）。\n\n#### 4. 用户赞赏或期望的功能  \n- **新功能更新**：JetBrains插件的三月更新（如自动模型选择和扩展推理支持）获得了用户的高度评价（[positive] “GitHub Copilot for JetBrains - March Updates”）。  \n- **学习资源**：免费的Copilot CLI课程受到欢迎，用户认为课程内容实用，涵盖了安装、调试和测试生成等关键环节（[positive] “Free hands-on course released for GitHub Copilot CLI”）。  \n- **功能期望**：用户希望推出独立的“Copilot Cowork”功能，以简化协作任务（[positive] “Why hasn't Github made a ‘Copilot Cowork’?”）。\n\n#### 5. 与竞品的对比讨论  \n用户对比了Copilot CLI与Claude Code CLI，指出后者在上下文记忆方面表现更优（[negative] “My Experience of Github Copilot CLI and Claude Code CLI”）。此外，用户对Copilot CLI与VS Code插件的差异也表现出浓厚兴趣，尤其是系统提示的表现是否一致（[neutral] “Why Copilot CLI over VSCode plugin?”）。\n\n#### 6. 对产品团队的可操作洞察  \n- **优化订阅管理流程**：改进Copilot Business的订阅升级机制，确保用户在变更计划时收到明确的通知和确认，避免负面体验。  \n- **提升CLI稳定性**：针对用户反馈的上下文记忆和稳定性问题，优先优化Copilot CLI的核心性能，以增强用户信任。  \n- **加强用户教育**：提供更清晰的订阅计划和模型调用指南，帮助用户理解不同计划的限制和最佳使用策略。  \n- **探索新功能开发**：考虑推出“Copilot Cowork”功能，满足用户对协作任务的需求，同时进一步优化界面简洁性。  \n- **对标竞品优势**：深入研究Claude Code CLI在上下文记忆上的技术优势，寻找改进方向，以缩小与竞品的差距。  \n\n综上所述，GitHub Copilot在功能创新和用户教育方面表现出色，但在稳定性和用户体验上仍有改进空间。通过及时响应用户反馈，优化核心性能和订阅机制，Copilot有望进一步巩固其市场地位。",
+      "sentiment_distribution": {
+        "positive": 26,
+        "negative": 32,
+        "neutral": 25,
+        "mixed": 6
+      },
+      "topic_distribution": {
+        "model_capability": 4,
+        "product_experience": 3,
+        "feature_request": 17,
+        "bug_report": 28,
+        "comparison": 15,
+        "use_case": 14,
+        "news_update": 4,
+        "meta": 2
+      },
+      "typical_posts": [
+        {
+          "id": "1rqgmsz",
+          "title": "The Copilot CLI is the best AI tool I've used. It only works in a terminal. I fixed that.",
+          "body": "https://preview.redd.it/es9x5fmwnbog1.png?width=768&format=png&auto=webp&s=78e2950fa3cf4774249f40a58ac3e6bbbd1f14c5 Been on GitHub Copilot since the very first beta. When the CLI landed something clicked for me. It wasn't autocomplete anymore, it was a proper agent: reading your codebase, planning, ",
+          "author": "ghimmideuoch",
+          "url": "https://www.reddit.com/r/GithubCopilot/comments/1rqgmsz/the_copilot_cli_is_the_best_ai_tool_ive_used_it/",
+          "num_comments": 49,
+          "created_utc": "2026-03-11T01:49:22+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.7,
+          "sentiment_reason": "用户对通过Copilot CLI实现跨设备使用的功能表示高度认可。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "用户开发了一个基于Copilot SDK的开源Web界面。",
+            "该工具支持跨设备使用Copilot CLI。",
+            "强调了CLI工具的代理功能。"
+          ],
+          "sentiment_reason_en": "The user highly approves of the cross-device functionality enabled by Copilot CLI.",
+          "key_points_en": [
+            "The user developed an open-source web interface based on Copilot SDK.",
+            "This tool supports using Copilot CLI across devices.",
+            "Emphasized the proxy feature of the CLI tool."
+          ]
+        },
+        {
+          "id": "1rqlgau",
+          "title": "GitHub Copilot for JetBrains - March Updates",
+          "body": "Hi folks, we are excited to share the recent updates of GitHub Copilot for JetBrains. In the latest version, we’ve introduced tons of enhancements, including quality-of-life improvements and new agentic capabilities. New Features Added: Sub-agents, Custom Agents, and Plan Agent are generally availab",
+          "author": "nickzhu9",
+          "url": "https://www.reddit.com/r/GithubCopilot/comments/1rqlgau/github_copilot_for_jetbrains_march_updates/",
+          "num_comments": 40,
+          "created_utc": "2026-03-11T05:44:06+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.9,
+          "sentiment_reason": "用户对GitHub Copilot在JetBrains上的新功能更新表示高度满意。",
+          "topic_category": "news_update",
+          "key_points": [
+            "GitHub Copilot为JetBrains引入了多个新功能。",
+            "新增功能包括自动模型选择和扩展推理支持。",
+            "用户对更新的功能改进表示期待。"
+          ],
+          "sentiment_reason_en": "The user is very satisfied with the new feature updates for GitHub Copilot on JetBrains.",
+          "key_points_en": [
+            "GitHub Copilot introduced several new features for JetBrains.",
+            "New features include automatic model selection and extended inference support.",
+            "The user looks forward to the improved features."
+          ]
+        },
+        {
+          "id": "1rr6xq9",
+          "title": "Why hasn't Github made a \"Copilot Cowork\"?",
+          "body": "With the success of Claude Cowork and the recent announcement of Microsoft's Copilot Cowork, there is obvious demand for that kind of agentic interface. How many people here would use a standalone \"Github/Copilot Cowork\"? Also I know its completely possible to do so using the copilot sdk, but my wor",
+          "author": "Ok_Bite_67",
+          "url": "https://www.reddit.com/r/GithubCopilot/comments/1rr6xq9/why_hasnt_github_made_a_copilot_cowork/",
+          "num_comments": 39,
+          "created_utc": "2026-03-11T21:24:23+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.5,
+          "sentiment_reason": "用户对GitHub Copilot推出类似Cowork功能的潜力表示期待。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "用户希望GitHub Copilot推出独立的Cowork功能。",
+            "现有界面在某些任务中显得过于复杂。",
+            "用户期待更具代理性的体验来处理重复任务。"
+          ],
+          "sentiment_reason_en": "The user looks forward to GitHub Copilot launching a Cowork-like feature.",
+          "key_points_en": [
+            "The user hopes GitHub Copilot will launch a standalone Cowork feature.",
+            "The current interface is too complex for some tasks.",
+            "The user expects a more agent-like experience for repetitive tasks."
+          ]
+        },
+        {
+          "id": "1rqvenn",
+          "title": "My Copilot Usage in a 9-5 SWE Job",
+          "body": "I'm leaving this here in case you're unsure if you'll have enough quota in average work. I've never been able to get above 75%. (300 per user per month) I use Opus frequently because explaining my problem to Opus once can sometimes be like explaining it three times to 1x models. I'm not an extreme e",
+          "author": "scarofishbal",
+          "url": "https://www.reddit.com/r/GithubCopilot/comments/1rqvenn/my_copilot_usage_in_a_95_swe_job/",
+          "num_comments": 36,
+          "created_utc": "2026-03-11T14:33:22+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户对Copilot的使用体验有些不满，尤其是配额和模型选择问题，但也提到了一些积极的使用场景。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "用户对Copilot的配额限制感到困扰。",
+            "不同模型的性能差异显著，用户更倾向于特定模型。",
+            "用户对Copilot的整体使用体验评价不一。"
+          ],
+          "sentiment_reason_en": "The user is somewhat dissatisfied with Copilot's experience, especially regarding quotas and model selection, but also mentions some positive use cases.",
+          "key_points_en": [
+            "The user is troubled by Copilot's quota limits.",
+            "There are significant performance differences between models, and the user prefers specific models.",
+            "The user's overall experience with Copilot is mixed."
+          ]
+        },
+        {
+          "id": "1rqa2io",
+          "title": "If I have the Pro plan, what is the best philosophy for using models?",
+          "body": "If I'm honest, I'm a bit confused on the plan ($10/month). From what I understand, I can prompt a premium model 300 times a month? Which models allow me to prompt them unlimited times? I'm not used to these multi-model coding tools. I used to pay for Claude Code, but honestly FUCK anthropic. submitt",
+          "author": "Top-Scallion7987",
+          "url": "https://www.reddit.com/r/GithubCopilot/comments/1rqa2io/if_i_have_the_pro_plan_what_is_the_best/",
+          "num_comments": 29,
+          "created_utc": "2026-03-10T21:26:35+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户对订阅计划和模型使用限制感到困惑，但对功能有一定兴趣。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "用户对订阅计划和模型调用限制感到困惑。",
+            "希望了解哪些模型支持无限调用。",
+            "对比其他工具（如 Claude Code）的使用体验。"
+          ],
+          "sentiment_reason_en": "The user is confused about subscription plans and model usage limits, but is somewhat interested in the features.",
+          "key_points_en": [
+            "The user is confused about subscription plans and model call limits.",
+            "Wants to know which models support unlimited calls.",
+            "Compares the experience with other tools (such as Claude Code)."
+          ]
+        }
+      ],
+      "summary_en": "### Competitive Intelligence Summary: GitHub Copilot Community Dynamics Analysis (2026-02-26 to 2026-03-12)\n\n#### 1. Overall Community Sentiment and Its Drivers  \nAmong the 89 valid posts analyzed, community sentiment showed a certain degree of polarization: 29% of posts expressed positive sentiment, 35% negative sentiment, 28% neutral, and 6% mixed. Positive sentiment mainly stemmed from user recognition of new features (such as JetBrains plugin updates) and learning resources (such as free Copilot CLI courses). Negative sentiment was concentrated on subscription management issues (e.g., Copilot Business automatically canceling personal subscriptions) and product stability (such as poor CLI context memory and unstable performance).\n\n#### 2. Most Discussed Topics and Their Significance  \n**bug_report** (28 posts) was the hottest topic this period, with users frequently reporting functional anomalies and stability issues, indicating that product reliability in actual use still needs improvement. **feature_request** (17 posts) followed closely, with user demands for new features focusing on interface optimization (such as “Copilot Cowork”) and flexibility in model invocation. **comparison** (15 posts) showed users comparing Copilot with other tools (such as Claude Code CLI), with particular attention to context memory and stability. **use_case** (14 posts) and **model_capability** (4 posts) reflected users’ exploration of Copilot’s application in real workflows.\n\n#### 3. Main User Pain Points or Complaints  \n- **Subscription Management Issues**: Users complained that after upgrading to Copilot Business, their personal subscriptions were automatically canceled without any warning or confirmation ([negative] “GitHub Copilot Business can apparently cancel your personal Copilot subscription”). Such issues have raised concerns about user experience and transparency.  \n- **Stability and Performance**: Copilot CLI was criticized for poor context memory and stability ([negative] “My Experience of Github Copilot CLI and Claude Code CLI”), which affected users’ development efficiency.  \n- **Quota Limits and Model Selection**: Some users were confused about model invocation limits under different subscription plans and hoped for clearer guidance ([mixed] “If I have the Pro plan, what is the best philosophy for using models?”).\n\n#### 4. Features Users Appreciate or Expect  \n- **New Feature Updates**: The March update of the JetBrains plugin (such as automatic model selection and extended reasoning support) received high praise from users ([positive] “GitHub Copilot for JetBrains - March Updates”).  \n- **Learning Resources**: The free Copilot CLI course was well received, with users finding the content practical, covering key aspects such as installation, debugging, and test generation ([positive] “Free hands-on course released for GitHub Copilot CLI”).  \n- **Feature Expectations**: Users hope for the launch of a standalone “Copilot Cowork” feature to simplify collaborative tasks ([positive] “Why hasn't Github made a ‘Copilot Cowork’?”).\n\n#### 5. Comparative Discussions with Competitors  \nUsers compared Copilot CLI with Claude Code CLI, noting that the latter performed better in terms of context memory ([negative] “My Experience of Github Copilot CLI and Claude Code CLI”). Additionally, users showed strong interest in the differences between Copilot CLI and the VS Code plugin, especially regarding whether system prompts behave consistently ([neutral] “Why Copilot CLI over VSCode plugin?”).\n\n#### 6. Actionable Insights for the Product Team  \n- **Optimize Subscription Management Processes**: Improve the subscription upgrade mechanism for Copilot Business to ensure users receive clear notifications and confirmations when changing plans, avoiding negative experiences.  \n- **Enhance CLI Stability**: Prioritize optimization of Copilot CLI’s core performance, especially regarding context memory and stability issues raised by users, to strengthen user trust.  \n- **Strengthen User Education**: Provide clearer guides on subscription plans and model invocation to help users understand the limitations and best usage strategies for different plans.  \n- **Explore New Feature Development**: Consider launching the “Copilot Cowork” feature to meet user needs for collaborative tasks, while further optimizing interface simplicity.  \n- **Benchmark Against Competitor Advantages**: Study Claude Code CLI’s technical strengths in context memory in depth and seek improvement directions to narrow the gap with competitors.  \n\nIn summary, GitHub Copilot excels in feature innovation and user education, but there is still room for improvement in stability and user experience. By responding promptly to user feedback and optimizing core performance and subscription mechanisms, Copilot is well positioned to further consolidate its market position."
+    }
+  ],
+  "cross_product_comparison": "### 跨产品竞品对比报告  \n**时间范围：2026-02-26 至 2026-03-12**  \n\n---\n\n#### 1. 各产品的用户满意度对比  \n根据Reddit社区反馈，用户满意度从高到低依次为：  \n1. **Claude**：正面情感占比44%，负面情感23%。用户对其成本效益、灵活性和创新性表示认可，但对功能限制和关键Bug有所抱怨。  \n2. **GitHub Copilot**：正面情感29%，负面情感35%。用户对新功能和学习资源表示满意，但对订阅管理和稳定性问题存在较多不满。  \n3. **ChatGPT**：正面情感25%，负面情感47%。用户对创意生成能力持正面评价，但对错误信息生成（Hallucination）和语言风格问题提出批评。  \n4. **Gemini**：正面情感仅5%，负面情感高达91%。用户对技术问题、费用调整和客户支持表现出极大不满。  \n\n---\n\n#### 2. 哪个产品社区最满意/最不满意，以及原因  \n- **最满意的社区：Claude**  \n  Claude社区的正面情感比例最高，用户对其创新性和易用性表示认可，尤其是在内容创作和开发者工具中的表现。然而，功能限制和关键Bug仍是需要改进的领域。  \n- **最不满意的社区：Gemini**  \n  Gemini社区的负面情感比例最高，用户对技术问题（如解质押延迟）、费用调整缺乏透明度以及客户支持响应缓慢表现出极大不满。这些问题严重影响了用户对平台的信任和忠诚度。\n\n---\n\n#### 3. 各产品共同的痛点  \n- **功能稳定性问题**：ChatGPT的错误信息生成、Claude的Cowork模式Bug、GitHub Copilot的CLI稳定性问题以及Gemini的质押/解质押延迟均表明功能稳定性是各产品的普遍痛点。  \n- **透明度与信任问题**：ChatGPT的“隐藏记忆层”争议、Claude的限制规则不清晰、GitHub Copilot的订阅管理问题以及Gemini的费用调整缺乏通知均反映出用户对透明度的高期待。  \n- **用户支持不足**：无论是Gemini的客户支持响应缓慢，还是其他产品在用户教育和问题解决上的不足，用户支持是一个共同的改进方向。\n\n---\n\n#### 4. 各产品独特的优势或劣势  \n- **ChatGPT**  \n  - 优势：创意生成能力强，新版本功能表现优秀。  \n  - 劣势：错误信息生成（Hallucination）问题突出，语言风格缺乏一致性。  \n- **Claude**  \n  - 优势：成本效益高，灵活性强，开发者工具表现出色。  \n  - 劣势：Pro计划限制过于严格，Cowork模式存在严重Bug。  \n- **GitHub Copilot**  \n  - 优势：新功能更新和学习资源受到用户欢迎，开发者生态逐步完善。  \n  - 劣势：订阅管理流程不透明，CLI稳定性和上下文记忆能力不足。  \n- **Gemini**  \n  - 优势：用户对其功能改进仍抱有一定期待。  \n  - 劣势：技术问题频发，费用调整缺乏透明度，客户支持效率低下。  \n\n---\n\n#### 5. 新兴的竞争动态或用户偏好变化  \n- **竞品对比加剧**：用户越来越倾向于在多个工具之间进行对比，例如使用Fidelity AI检测ChatGPT输出质量、对比Claude Code CLI与GitHub Copilot CLI的上下文记忆能力。这表明用户对工具的准确性和稳定性需求在提升。  \n- **开发者生态的重要性**：Claude和GitHub Copilot在开发者工具和学习资源上的投入获得了用户认可，说明开发者生态建设正在成为AI工具竞争的关键领域。  \n- **透明度成为核心竞争力**：无论是功能限制、费用调整还是隐私政策，用户对透明度的关注度显著提升，缺乏透明度的产品容易引发负面情绪。  \n\n---\n\n#### 6. 3-5条可操作建议  \n1. **优化核心功能稳定性**  \n   各产品应优先解决用户反馈最集中的功能稳定性问题，例如ChatGPT的Hallucination、Claude的Cowork模式Bug和GitHub Copilot的CLI性能问题。对于Gemini，应加速质押/解质押流程，确保资金流动性。  \n\n2. **提升透明度和用户信任**  \n   - ChatGPT应公开“用户知识记忆层”的设计原理，增强隐私透明度。  \n   - Claude和Gemini应在功能限制和费用调整方面提供更清晰的说明，避免因信息不对称引发用户不满。  \n   - GitHub Copilot应优化订阅管理流程，确保用户在计划变更时收到明确通知。  \n\n3. **加强用户支持和教育**  \n   - 增加客户支持团队资源，缩短响应时间，尤其是针对资金相关问题（Gemini）。  \n   - 提供更丰富的学习资源和使用指南，帮助用户更好地理解和使用产品功能（Claude、GitHub Copilot）。  \n\n4. **关注竞品动态，提升差异化竞争力**  \n   - ChatGPT和GitHub Copilot应关注Claude Code CLI在上下文记忆上的技术优势，寻找改进方向。  \n   - Gemini应对标Coinbase和Binance，在质押服务和客户支持方面推出针对性优化措施。  \n\n5. **强化开发者生态建设**  \n   - Claude和GitHub Copilot应继续加大对开发者工具和资源的投入，吸引更多开发者用户。  \n   - ChatGPT可探索推出更多创意生成工具，进一步巩固其在创意领域的优势。  \n\n---\n\n通过以上改进，各产品可在提升用户满意度、增强市场竞争力的同时，进一步巩固其在不同细分领域的领先地位。",
+  "chart_data": {
+    "ChatGPT": {
+      "sentiment": {
+        "positive": 17,
+        "negative": 32,
+        "neutral": 18,
+        "mixed": 0
+      },
+      "topics": {
+        "model_capability": 3,
+        "product_experience": 5,
+        "feature_request": 17,
+        "bug_report": 16,
+        "comparison": 7,
+        "use_case": 6,
+        "news_update": 3,
+        "meta": 10
+      }
+    },
+    "Claude": {
+      "sentiment": {
+        "positive": 40,
+        "negative": 21,
+        "neutral": 24,
+        "mixed": 4
+      },
+      "topics": {
+        "model_capability": 3,
+        "product_experience": 7,
+        "feature_request": 17,
+        "bug_report": 13,
+        "comparison": 6,
+        "use_case": 32,
+        "news_update": 5,
+        "meta": 6
+      }
+    },
+    "Gemini": {
+      "sentiment": {
+        "positive": 2,
+        "negative": 32,
+        "neutral": 1,
+        "mixed": 0
+      },
+      "topics": {
+        "model_capability": 0,
+        "product_experience": 0,
+        "feature_request": 6,
+        "bug_report": 24,
+        "comparison": 2,
+        "use_case": 2,
+        "news_update": 1,
+        "meta": 0
+      }
+    },
+    "GitHub Copilot": {
+      "sentiment": {
+        "positive": 26,
+        "negative": 32,
+        "neutral": 25,
+        "mixed": 6
+      },
+      "topics": {
+        "model_capability": 4,
+        "product_experience": 3,
+        "feature_request": 17,
+        "bug_report": 28,
+        "comparison": 15,
+        "use_case": 14,
+        "news_update": 4,
+        "meta": 2
+      }
+    }
+  },
+  "cross_product_comparison_en": "### Cross-Product Competitive Comparison Report  \n**Time Range: 2026-02-26 to 2026-03-12**  \n\n---\n\n#### 1. User Satisfaction Comparison Across Products  \nBased on Reddit community feedback, user satisfaction from highest to lowest is as follows:  \n1. **Claude**: 44% positive sentiment, 23% negative sentiment. Users recognize its cost-effectiveness, flexibility, and innovation, but complain about feature limitations and critical bugs.  \n2. **GitHub Copilot**: 29% positive sentiment, 35% negative sentiment. Users are satisfied with new features and learning resources, but express considerable dissatisfaction with subscription management and stability issues.  \n3. **ChatGPT**: 25% positive sentiment, 47% negative sentiment. Users give positive feedback on creative generation capabilities, but criticize hallucination (incorrect information generation) and language style issues.  \n4. **Gemini**: Only 5% positive sentiment, with negative sentiment as high as 91%. Users are extremely dissatisfied with technical issues, fee adjustments, and customer support.  \n\n---\n\n#### 2. Which Product Community Is Most/Least Satisfied, and Why  \n- **Most Satisfied Community: Claude**  \n  The Claude community has the highest proportion of positive sentiment. Users appreciate its innovation and ease of use, especially in content creation and developer tools. However, feature limitations and critical bugs remain areas for improvement.  \n- **Least Satisfied Community: Gemini**  \n  The Gemini community has the highest proportion of negative sentiment. Users are extremely dissatisfied with technical issues (such as unstaking delays), lack of transparency in fee adjustments, and slow customer support response. These issues severely impact user trust and loyalty toward the platform.\n\n---\n\n#### 3. Common Pain Points Across Products  \n- **Feature Stability Issues**: ChatGPT’s hallucination, Claude’s Cowork mode bugs, GitHub Copilot’s CLI stability issues, and Gemini’s staking/unstaking delays all indicate that feature stability is a common pain point across products.  \n- **Transparency and Trust Issues**: ChatGPT’s “hidden memory layer” controversy, unclear restriction rules in Claude, GitHub Copilot’s subscription management issues, and Gemini’s lack of notification for fee adjustments all reflect users’ high expectations for transparency.  \n- **Insufficient User Support**: Whether it’s Gemini’s slow customer support response or other products’ shortcomings in user education and problem resolution, user support is a shared area for improvement.\n\n---\n\n#### 4. Unique Advantages or Disadvantages of Each Product  \n- **ChatGPT**  \n  - Advantages: Strong creative generation capabilities; excellent performance in new versions.  \n  - Disadvantages: Prominent hallucination issues; inconsistent language style.  \n- **Claude**  \n  - Advantages: High cost-effectiveness; strong flexibility; outstanding performance in developer tools.  \n  - Disadvantages: Pro plan restrictions are too strict; severe bugs in Cowork mode.  \n- **GitHub Copilot**  \n  - Advantages: New feature updates and learning resources are well received; developer ecosystem is gradually improving.  \n  - Disadvantages: Subscription management process lacks transparency; CLI stability and context memory capabilities are insufficient.  \n- **Gemini**  \n  - Advantages: Users still hold some expectations for its feature improvements.  \n  - Disadvantages: Frequent technical issues; lack of transparency in fee adjustments; low efficiency in customer support.  \n\n---\n\n#### 5. Emerging Competitive Dynamics or Shifts in User Preferences  \n- **Intensified Competitive Comparison**: Users are increasingly inclined to compare multiple tools, such as using Fidelity AI to check ChatGPT output quality, or comparing Claude Code CLI and GitHub Copilot CLI’s context memory capabilities. This indicates rising user demand for tool accuracy and stability.  \n- **Importance of Developer Ecosystem**: Investments in developer tools and learning resources by Claude and GitHub Copilot have been recognized by users, showing that building a developer ecosystem is becoming a key area of competition for AI tools.  \n- **Transparency as a Core Competitiveness**: Whether it’s feature restrictions, fee adjustments, or privacy policies, user attention to transparency has significantly increased. Products lacking transparency are prone to negative sentiment.  \n\n---\n\n#### 6. 3-5 Actionable Recommendations  \n1. **Optimize Core Feature Stability**  \n   All products should prioritize addressing the most concentrated user feedback on feature stability, such as ChatGPT’s hallucination, Claude’s Cowork mode bugs, and GitHub Copilot’s CLI performance issues. For Gemini, accelerate the staking/unstaking process to ensure fund liquidity.  \n\n2. **Enhance Transparency and User Trust**  \n   - ChatGPT should publicly disclose the design principles of the “user knowledge memory layer” to enhance privacy transparency.  \n   - Claude and Gemini should provide clearer explanations regarding feature restrictions and fee adjustments to avoid user dissatisfaction caused by information asymmetry.  \n   - GitHub Copilot should optimize the subscription management process to ensure users receive clear notifications when plans change.  \n\n3. **Strengthen User Support and Education**  \n   - Increase customer support team resources to shorten response times, especially for fund-related issues (Gemini).  \n   - Provide richer learning resources and user guides to help users better understand and utilize product features (Claude, GitHub Copilot).  \n\n4. **Monitor Competitor Dynamics and Enhance Differentiation**  \n   - ChatGPT and GitHub Copilot should pay attention to Claude Code CLI’s technical advantages in context memory and seek improvement directions.  \n   - Gemini should benchmark against Coinbase and Binance, launching targeted optimization measures in staking services and customer support.  \n\n5. **Strengthen Developer Ecosystem Building**  \n   - Claude and GitHub Copilot should continue to increase investment in developer tools and resources to attract more developer users.  \n   - ChatGPT can explore launching more creative generation tools to further consolidate its advantage in the creative field.  \n\n---\n\nThrough the above improvements, each product can enhance user satisfaction and market competitiveness, while further consolidating its leading position in different niche areas."
+}
