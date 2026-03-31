@@ -55,7 +55,7 @@
       color:#6B7280; font-weight:500; transition:all 0.15s; }
     .lang-btn.active { background:#4338CA; color:#fff; font-weight:700; }
     .lang-btn:hover:not(.active) { background:#F3F4F6; }
-    .container { max-width:1440px; margin:0 auto; padding:24px 32px; }
+    .container { max-width:1440px; margin:0 auto; padding:24px 24px; }
     .section { margin-bottom:32px; }
     .section-title {
       font-size:16px; font-weight:700; margin-bottom:16px;
@@ -69,20 +69,24 @@
       box-shadow:var(--shadow); border:1px solid var(--border); overflow:hidden;
     }
     .card-body { padding:20px; }
-    .scorecard-row { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
+    .scorecard-row { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; align-items:stretch; }
     .scorecard-card {
       background:var(--bg-card); border-radius:var(--radius);
       box-shadow:var(--shadow); border:1px solid var(--border); overflow:hidden;
+      display:flex; flex-direction:column;
     }
-    .scorecard-bar { height:4px; width:100%; }
-    .scorecard-body { padding:16px; }
-    .scorecard-name { font-size:14px; font-weight:700; margin-bottom:4px; }
-    .scorecard-sources { font-size:10px; color:var(--text-muted); margin-bottom:8px; line-height:1.4; }
+    .scorecard-bar { height:4px; width:100%; flex-shrink:0; }
+    .scorecard-body { padding:16px; display:flex; flex-direction:column; flex:1; }
+    .scorecard-header { min-height:24px; display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
+    .scorecard-name { font-size:14px; font-weight:700; }
+    .scorecard-sources { font-size:10px; color:var(--text-muted); margin-bottom:8px; line-height:1.4; min-height:28px; }
     .scorecard-sources a { color:var(--text-muted); text-decoration:none; }
     .scorecard-sources a:hover { color:#4338CA; text-decoration:underline; }
     .scorecard-metric { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
     .scorecard-pct { font-size:32px; font-weight:800; line-height:1; }
     .scorecard-pct-label { font-size:12px; color:var(--text-secondary); }
+    .scorecard-stats { margin-bottom:auto; }
+    .scorecard-bottom { margin-top:auto; }
     .traffic-light { width:14px; height:14px; border-radius:50%; display:inline-block; flex-shrink:0; }
     .tl-green { background:var(--clr-pos); box-shadow:0 0 6px rgba(22,163,74,0.4); }
     .tl-yellow { background:var(--clr-mix); box-shadow:0 0 6px rgba(245,158,11,0.4); }
@@ -172,6 +176,12 @@
     .sev-high { background:#FEE2E2; color:#991B1B; }
     .sev-medium { background:#FEF3C7; color:#92400E; }
     .sev-low { background:#DBEAFE; color:#1E40AF; }
+    .post-refs { margin-left:4px; }
+    .post-refs a {
+      font-size:10px; color:#9CA3AF; text-decoration:none; margin-left:2px;
+      vertical-align:super; line-height:1;
+    }
+    .post-refs a:hover { color:#4338CA; text-decoration:underline; }
     .priority-badge { font-size:10px; font-weight:700; padding:2px 8px; border-radius:4px; flex-shrink:0; }
     .pri-p0 { background:#DC2626; color:#fff; }
     .pri-p1 { background:#F59E0B; color:#fff; }
@@ -350,6 +360,52 @@
     @media (max-width:900px) {
       .cp-highlight-row { grid-template-columns:1fr; }
     }
+    /* Left sidebar navigation */
+    .page-layout { display:flex; align-items:flex-start; }
+    .sidenav {
+      position:sticky; top:60px; width:176px; flex-shrink:0; margin-right:24px;
+      background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
+      box-shadow:var(--shadow); padding:14px 0; z-index:50;
+      max-height:calc(100vh - 80px); overflow-y:auto;
+    }
+    .sidenav-title {
+      font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px;
+      color:var(--text-muted); padding:0 14px 8px; border-bottom:1px solid var(--border); margin-bottom:6px;
+    }
+    .sidenav-item {
+      display:flex; align-items:center; gap:8px; padding:7px 14px;
+      font-size:12px; font-weight:500; color:var(--text-secondary); cursor:pointer;
+      border-left:3px solid transparent; transition:all 0.15s; text-decoration:none;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .sidenav-item:hover { background:#F5F3FF; color:#4338CA; border-left-color:#C7D2FE; }
+    .sidenav-item.active { background:#EEF2FF; color:#4338CA; border-left-color:#4338CA; font-weight:700; }
+    .sidenav-group-label {
+      font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px;
+      color:var(--text-muted); padding:10px 14px 4px;
+    }
+    .main-content { flex:1; min-width:0; }
+    @media (max-width:1200px) { .sidenav { display:none; } .main-content { flex:1; } }
+    /* Summary headline above scorecard */
+    .exec-headline {
+      background:linear-gradient(135deg,#EEF2FF,#F0F4FF); border:1px solid #C7D2FE;
+      border-left:4px solid #4338CA; border-radius:0 8px 8px 0; padding:12px 18px;
+      font-size:14px; font-weight:600; color:#1E293B; line-height:1.6; margin-bottom:16px;
+    }
+    /* Scorecard detail link button */
+    .scorecard-detail-btn {
+      display:inline-flex; align-items:center; gap:3px;
+      font-size:11px; font-weight:600; color:#4338CA; cursor:pointer;
+      background:#EEF2FF; border:none; border-radius:4px; padding:2px 7px;
+      vertical-align:middle; text-decoration:none; transition:background 0.15s;
+    }
+    .scorecard-detail-btn:hover { background:#C7D2FE; }
+    /* Scorecard top3 keywords chips */
+    .scorecard-top3 { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+    .scorecard-kw-chip {
+      display:inline-block; padding:2px 7px; border-radius:10px;
+      font-size:10px; font-weight:600; background:#F3F4F6; color:#374151;
+    }
     /* Section dividers */
     .page-section-divider {
       margin:40px 0 24px; padding:0 0 12px;
@@ -410,6 +466,43 @@
   </header>
 
   <div class="container">
+    <div class="page-layout">
+    <!-- ===== LEFT SIDEBAR NAV ===== -->
+    <nav class="sidenav" id="sideNav">
+      <div class="sidenav-title" data-i18n="navTitle">导航</div>
+      <div class="sidenav-group-label" data-i18n="sectionCrossProduct">跨产品对比</div>
+      <a class="sidenav-item" href="#sec-summary" onclick="navClick(this)">
+        <span>📊</span><span data-i18n="execSummary">关键摘要</span>
+      </a>
+      <a class="sidenav-item" href="#sec-cross" onclick="navClick(this)">
+        <span>🔀</span><span data-i18n="crossProductLabel">跨产品对比分析</span>
+      </a>
+      <a class="sidenav-item" href="#sec-sentiment" onclick="navClick(this)">
+        <span>📈</span><span data-i18n="sentimentCompare">情感对比分析</span>
+      </a>
+      <a class="sidenav-item" href="#sec-topics" onclick="navClick(this)">
+        <span>🔥</span><span data-i18n="hotTopics">热点话题与关键词</span>
+      </a>
+      <div class="sidenav-group-label" data-i18n="sectionProductAnalysis">产品深度分析</div>
+      <a class="sidenav-item" href="#sec-deepdive" onclick="navClick(this)">
+        <span>🔍</span><span data-i18n="productDeepDive">产品深度分析</span>
+      </a>
+      <a class="sidenav-item" href="#sec-evidence" onclick="navClick(this)">
+        <span>📋</span><span data-i18n="evidenceWall">原始帖子证据墙</span>
+      </a>
+      <div class="sidenav-group-label" data-i18n="sectionCommunityHeat">社区热度分析</div>
+      <a class="sidenav-item" href="#sec-bubble" onclick="navClick(this)">
+        <span>💬</span><span data-i18n="bubbleLabel">讨论量 vs 正面率</span>
+      </a>
+      <a class="sidenav-item" href="#sec-trend" onclick="navClick(this)">
+        <span>📉</span><span data-i18n="trendDelta">趋势变化</span>
+      </a>
+      <a class="sidenav-item" href="#sec-history" onclick="navClick(this)">
+        <span>🗂</span><span data-i18n="historyReports">历史报告</span>
+      </a>
+    </nav>
+
+    <div class="main-content">
     <!-- ===== SECTION I: Cross-Product Comparison ===== -->
     <div class="page-section-divider">
       <span class="section-num">1</span>
@@ -417,31 +510,20 @@
       <span class="section-desc" data-i18n="sectionCrossProductDesc">全局视角：产品间横向比较</span>
     </div>
 
-    <div class="section">
-      <div class="section-title" data-i18n="execSummary">管理层摘要</div>
+    <div class="section" id="sec-summary">
+      <div class="section-title" data-i18n="execSummary">关键摘要</div>
+      <div id="execHeadline" class="exec-headline hidden"></div>
       <div id="scorecardRow" class="scorecard-row"></div>
-      <div id="keyFindingCallout" class="key-finding-callout hidden">
-        <span class="callout-icon">&#x1F4A1;</span>
-        <span id="keyFindingText" class="callout-text"></span>
-      </div>
     </div>
 
-    <div class="section">
-      <div class="section-title" data-i18n="hotTopics">热点话题与关键词</div>
-      <div id="topicProductFilter" class="product-filter-bar"></div>
-      <div class="cols-6-6">
-        <div class="card"><div class="card-body">
-          <div class="chart-container" style="height:320px"><canvas id="topicBarChart"></canvas></div>
-        </div></div>
-        <div class="card"><div class="card-body">
-          <div style="font-size:13px;font-weight:600;margin-bottom:12px;color:var(--text-secondary)" data-i18n="keywordCloud">关键词云</div>
-          <div id="keywordCloud" class="keyword-cloud"></div>
-          <div class="wordcloud-canvas-wrap"><canvas id="wordCloudCanvas" width="560" height="380"></canvas></div>
-        </div></div>
-      </div>
+    <div class="section" id="sec-cross">
+      <div class="section-title" data-i18n="crossProductLabel">跨产品对比分析</div>
+      <div class="card"><div class="card-body">
+        <div id="crossProductAnalysis"></div>
+      </div></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-sentiment">
       <div class="section-title" data-i18n="sentimentCompare">情感对比分析</div>
       <div class="cols-7-5">
         <div class="card"><div class="card-body">
@@ -457,11 +539,19 @@
       </div>
     </div>
 
-    <div class="section">
-      <div class="section-title" data-i18n="crossProductLabel">跨产品对比分析</div>
-      <div class="card"><div class="card-body">
-        <div id="crossProductAnalysis"></div>
-      </div></div>
+    <div class="section" id="sec-topics">
+      <div class="section-title" data-i18n="hotTopics">热点话题与关键词</div>
+      <div id="topicProductFilter" class="product-filter-bar"></div>
+      <div class="cols-6-6">
+        <div class="card"><div class="card-body">
+          <div class="chart-container" style="height:320px"><canvas id="topicBarChart"></canvas></div>
+        </div></div>
+        <div class="card"><div class="card-body">
+          <div style="font-size:13px;font-weight:600;margin-bottom:12px;color:var(--text-secondary)" data-i18n="keywordCloud">关键词云</div>
+          <div id="keywordCloud" class="keyword-cloud"></div>
+          <div class="wordcloud-canvas-wrap"><canvas id="wordCloudCanvas" width="560" height="380"></canvas></div>
+        </div></div>
+      </div>
     </div>
 
     <!-- ===== SECTION II: Product Analysis ===== -->
@@ -471,13 +561,13 @@
       <span class="section-desc" data-i18n="sectionProductAnalysisDesc">逐一拆解：各产品详情与用户原声</span>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-deepdive">
       <div class="section-title" data-i18n="productDeepDive">产品深度分析</div>
       <div id="productTabs" class="product-tabs"></div>
       <div id="deepDiveContent"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-evidence">
       <div class="section-title" data-i18n="evidenceWall">原始帖子证据墙</div>
       <div class="filter-bar">
         <select id="filterProduct" onchange="filterEvidence()"><option value="" data-i18n="allProducts">全部产品</option></select>
@@ -502,14 +592,14 @@
       <span class="section-desc" data-i18n="sectionCommunityHeatDesc">趋势洞察：讨论量、互动量与历史变化</span>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-bubble">
       <div class="section-title" data-i18n="bubbleLabel">讨论量 vs 正面率 (气泡=互动量)</div>
       <div class="card"><div class="card-body">
         <div class="chart-container" style="height:360px"><canvas id="bubbleChart"></canvas></div>
       </div></div>
     </div>
 
-    <div class="section" id="trendSection">
+    <div class="section" id="sec-trend">
       <div class="section-title" data-i18n="trendDelta">趋势变化</div>
       <div class="trend-grid">
         <div class="card"><div class="card-body">
@@ -523,10 +613,13 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-history">
       <div class="section-title" data-i18n="historyReports">历史报告</div>
       <div id="historyStrip" class="history-strip"></div>
     </div>
+
+    </div><!-- /main-content -->
+    </div><!-- /page-layout -->
   </div>
 
   <footer class="footer">
@@ -560,7 +653,7 @@
     var I18N = {
       zh: {
         title:'AI Voice Tracker', subtitle:'基于Reddit头部粉丝社区的AI产品用户声音追踪', loading:'加载报告数据...',
-        selectReport:'选择报告...', execSummary:'管理层摘要', sentimentCompare:'情感对比分析',
+        selectReport:'选择报告...', execSummary:'关键摘要', sentimentCompare:'情感对比分析',
         count:'数量', percentage:'百分比', hotTopics:'热点话题与关键词', keywordCloud:'关键词云',
         productDeepDive:'产品深度分析', evidenceWall:'原始帖子证据墙', allProducts:'全部产品',
         allSentiments:'全部情感', allTopics:'全部话题', searchKeyword:'搜索关键词...',
@@ -598,7 +691,12 @@
         sectionCrossProduct:'跨产品对比', sectionCrossProductDesc:'全局视角：产品间横向比较',
         sectionProductAnalysis:'产品深度分析', sectionProductAnalysisDesc:'逐一拆解：各产品详情与用户原声',
         sectionCommunityHeat:'社区热度分析', sectionCommunityHeatDesc:'趋势洞察：讨论量、互动量与历史变化',
-        dataLangNote:''
+        dataLangNote:'',
+        detailRead:'详细解读', topDiscussions:'热门讨论',
+        navTitle:'导航', navGroupOverview:'总览', navGroupProduct:'产品', navGroupTrend:'趋势',
+        navExecSummary:'管理层摘要', navCross:'跨产品对比', navSentiment:'情感分析',
+        navTopics:'热点话题', navDeepDive:'产品深度分析', navEvidence:'证据墙',
+        navBubble:'讨论量对比', navTrend:'趋势变化', navHistory:'历史报告'
       },
       en: {
         title:'AI Voice Tracker', subtitle:"Tracking user sentiment from Reddit's top AI product communities", loading:'Loading report data...',
@@ -640,7 +738,12 @@
         sectionCrossProduct:'Cross-Product Comparison', sectionCrossProductDesc:'Global view: horizontal comparison across products',
         sectionProductAnalysis:'Product Deep Dive', sectionProductAnalysisDesc:'Detailed analysis: per-product insights & user evidence',
         sectionCommunityHeat:'Community Heat Analysis', sectionCommunityHeatDesc:'Trends: discussion volume, engagement & historical changes',
-        dataLangNote:'Note: Analysis content is in Chinese, sourced from user discussions.'
+        dataLangNote:'Note: Analysis content is in Chinese, sourced from user discussions.',
+        detailRead:'Full Breakdown', topDiscussions:'Top Discussions',
+        navTitle:'Navigation', navGroupOverview:'Overview', navGroupProduct:'Products', navGroupTrend:'Trends',
+        navExecSummary:'Executive Summary', navCross:'Cross-Product', navSentiment:'Sentiment',
+        navTopics:'Hot Topics', navDeepDive:'Product Deep Dive', navEvidence:'Evidence Wall',
+        navBubble:'Volume Chart', navTrend:'Trend Analysis', navHistory:'Report History'
       }
     };
 
@@ -819,12 +922,16 @@
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
+        /* Sort by period_end descending (newest first); hide entries with 0 posts; keep latest 2 */
+        reportIndex = reportIndex.filter(function(r){ return r.total_valid_posts !== 0; });
+        reportIndex.sort(function(a,b){ return (b.period_end||'').localeCompare(a.period_end||''); });
+        reportIndex = reportIndex.slice(0, 2);
         var sel = document.getElementById('reportSelector');
         for (var i = 0; i < reportIndex.length; i++) {
           var r = reportIndex[i];
           var opt = document.createElement('option');
           opt.value = r.file;
-          var dateLabel = (r.period_start||'').slice(0,10) + ' ~ ' + (r.period_end||'').slice(0,10);
+          var dateLabel = formatDateRange(r.period_start, r.period_end);
           opt.textContent = dateLabel + ' (' + (r.total_valid_posts||0) + ' ' + t('posts') + ')';
           sel.appendChild(opt);
         }
@@ -838,6 +945,9 @@
         var list = await resp.json();
         var sel = document.getElementById('reportSelector');
         if (Array.isArray(list) && sel.options.length <= 1) {
+          /* Filter out entries explicitly having 0 posts and sort newest first */
+          list = list.filter(function(r){ return typeof r === 'object' ? (r.total_valid_posts !== 0) : true; });
+          list.sort(function(a,b){ return typeof a === 'object' && typeof b === 'object' ? (b.period_end||'').localeCompare(a.period_end||'') : 0; });
           for (var i = 0; i < list.length; i++) {
             var r = list[i];
             var opt = document.createElement('option');
@@ -884,6 +994,17 @@
     function getSentimentTotal(sd) { return (sd.positive||0)+(sd.negative||0)+(sd.neutral||0)+(sd.mixed||0); }
     function getPositiveRate(sd) { var tot=getSentimentTotal(sd); return tot===0?0:((sd.positive||0)/tot)*100; }
     function trafficLightClass(pct) { return pct>=60?'tl-green':pct>=40?'tl-yellow':'tl-red'; }
+    function sentimentColor(pct) { return pct>=60?'var(--clr-pos)':pct>=40?'var(--clr-mix)':'var(--clr-neg)'; }
+    function sentimentTooltip(pct) {
+      if (currentLang === 'en') {
+        return pct >= 60 ? 'Positive rate ≥60%: community feedback is mostly positive'
+             : pct >= 40 ? 'Positive rate 40-60%: community feedback is mixed'
+             : 'Positive rate <40%: community feedback skews negative';
+      }
+      return pct >= 60 ? '正面率≥60%：社区反馈以正面为主'
+           : pct >= 40 ? '正面率40-60%：社区反馈褒贬不一'
+           : '正面率<40%：社区反馈偏负面';
+    }
 
     function escapeHtml(str) {
       if (!str) return '';
@@ -892,6 +1013,17 @@
 
     function truncate(str, len) {
       if (!str) return ''; return str.length > len ? str.slice(0, len) + '...' : str;
+    }
+
+    function postRefsHtml(postIds, max) {
+      if (!postIds || !postIds.length) return '';
+      var n = Math.min(postIds.length, max || 3);
+      var html = '<span class="post-refs">';
+      for (var i = 0; i < n; i++) {
+        html += '<a href="https://www.reddit.com/comments/' + postIds[i]
+          + '/" target="_blank" rel="noopener" title="Reddit #' + postIds[i] + '">[' + (i + 1) + ']</a>';
+      }
+      return html + '</span>';
     }
 
     function formatDate(dateStr) {
@@ -904,7 +1036,12 @@
 
     function formatDateRange(start, end) {
       if (!start || !end) return '';
-      var s = start.slice(0,10), e = end.slice(0,10);
+      var s = start.slice(0,10);
+      /* end is exclusive (midnight), subtract 1 day to show inclusive end date */
+      var parts = end.slice(0,10).split('-');
+      var endDate = new Date(Date.UTC(+parts[0], +parts[1]-1, +parts[2]));
+      endDate.setUTCDate(endDate.getUTCDate() - 1);
+      var e = endDate.getUTCFullYear() + '-' + String(endDate.getUTCMonth()+1).padStart(2,'0') + '-' + String(endDate.getUTCDate()).padStart(2,'0');
       return s + ' ~ ' + e;
     }
 
@@ -1246,11 +1383,12 @@
 
     /* ======= RENDER ALL ======= */
     function renderAll() {
-      renderPeriod(); renderScorecard(); renderKeyFinding(); renderSentimentBar(); renderHeatmap();
+      renderPeriod(); renderScorecard(); renderExecHeadline(); renderSentimentBar(); renderHeatmap();
       renderTopicProductFilter(); renderTopicBar(); renderKeywordCloud();
       renderProductTabs(); renderDeepDive();
       renderEvidence(); renderBubbleChart();
       renderCrossProduct(); renderTrend(); renderHistory();
+      applyI18n();
     }
 
     /* ======= PERIOD BADGE ======= */
@@ -1262,43 +1400,48 @@
       } else { badge.style.display = 'none'; }
     }
 
-    /* ======= KEY FINDING CALLOUT ======= */
-    function renderKeyFinding() {
-      var callout = document.getElementById('keyFindingCallout');
-      var textEl = document.getElementById('keyFindingText');
-      /* Extract key finding from cross-product comparison first line of substance */
-      var cpc = reportData && L(reportData, 'cross_product_comparison');
-      var finding = '';
-      if (cpc) {
-        var isEN = currentLang === 'en';
-        var lines = cpc.split('\n');
-        for (var i = 0; i < lines.length; i++) {
-          var line = lines[i].trim();
-          /* Look for satisfaction pattern in both languages */
-          if (!isEN && (line.indexOf('最满意') !== -1 || line.indexOf('最不满意') !== -1)) {
-            finding = line.replace(/^\*\*/, '').replace(/\*\*$/, ''); break;
-          }
-          if (isEN && (/most satisfied/i.test(line) || /least satisfied/i.test(line))) {
-            finding = line.replace(/^\*\*/, '').replace(/\*\*$/, ''); break;
-          }
-          if (!finding && line.indexOf('**') !== -1 && line.length > 20 && !line.startsWith('#') && !line.startsWith('|')) {
-            finding = line; break;
-          }
+    /* ======= EXEC HEADLINE (one-sentence summary above scorecard) ======= */
+    function renderExecHeadline() {
+      var el = document.getElementById('execHeadline');
+      if (!el) return;
+      if (products.length === 0) { el.classList.add('hidden'); return; }
+
+      /* Find M365 Copilot (or Copilot) product and its top pain point */
+      var m365 = products.find(function(p){ return p.product_name === 'M365 Copilot'; })
+              || products.find(function(p){ return /copilot/i.test(p.product_name); });
+      var topPain = '';
+      if (m365) {
+        var pp = m365.pain_points || [];
+        if (pp.length > 0) topPain = L(pp[0], 'text');
+      }
+
+      var sorted = products.slice().sort(function(a,b){ return getPositiveRate(b.sentiment_distribution) - getPositiveRate(a.sentiment_distribution); });
+      var best = sorted[0], worst = sorted[sorted.length - 1];
+      var bestRate = Math.round(getPositiveRate(best.sentiment_distribution));
+      var worstRate = Math.round(getPositiveRate(worst.sentiment_distribution));
+
+      var finding;
+      if (m365 && topPain) {
+        var m365Rate = Math.round(getPositiveRate(m365.sentiment_distribution));
+        if (currentLang === 'en') {
+          finding = 'M365 Copilot (' + m365Rate + '% positive) — top complaint: ' + topPain
+            + '. Best: ' + best.product_name + ' ' + bestRate + '%, Worst: ' + worst.product_name + ' ' + worstRate + '%';
+        } else {
+          finding = 'M365 Copilot（正面率 ' + m365Rate + '%）— 用户最大痛点：' + topPain
+            + '。最佳：' + best.product_name + ' ' + bestRate + '%，最差：' + worst.product_name + ' ' + worstRate + '%';
+        }
+      } else {
+        if (currentLang === 'en') {
+          finding = best.product_name + ' leads at ' + bestRate + '% positive, '
+            + worst.product_name + ' trails at ' + worstRate + '%';
+        } else {
+          finding = best.product_name + ' 正面率最高 ' + bestRate + '%，'
+            + worst.product_name + ' 最低 ' + worstRate + '%';
         }
       }
-      /* Fallback: build from data */
-      if (!finding && products.length > 0) {
-        var sorted = products.slice().sort(function(a,b){ return getPositiveRate(b.sentiment_distribution) - getPositiveRate(a.sentiment_distribution); });
-        var best = sorted[0], worst = sorted[sorted.length - 1];
-        finding = t('keyFinding') + ': ' + best.product_name + ' ' + Math.round(getPositiveRate(best.sentiment_distribution)) + '% '
-          + t('positiveRate') + ' ▲ | ' + worst.product_name + ' ' + Math.round(getPositiveRate(worst.sentiment_distribution)) + '% ▼';
-      }
-      if (finding) {
-        textEl.innerHTML = inlineMd(finding);
-        callout.classList.remove('hidden');
-      } else {
-        callout.classList.add('hidden');
-      }
+
+      el.textContent = finding;
+      el.classList.remove('hidden');
     }
 
     /* ======= SCORECARD ======= */
@@ -1317,17 +1460,32 @@
         var color = getProductColor(p.product_name);
         var sd = p.sentiment_distribution;
         var posRate = getPositiveRate(sd);
-        var topPain = getTopPainPoint(p);
-        var finding = getKeyFinding(p);
-        var displayPain = topPain;
-        var displayFinding = finding;
+        /* Top 3 keywords for this product */
+        var kwArr = LA(p, 'keywords');
+        var top3Html = '';
+        if (kwArr && kwArr.length > 0) {
+          var kwChips = kwArr.slice(0, 3).map(function(kw) {
+            return '<span class="scorecard-kw-chip">'+escapeHtml(kw)+'</span>';
+          }).join('');
+          top3Html = '<div class="scorecard-top3">'+kwChips+'</div>';
+        }
 
-        /* Source subreddits from actual data + known mapping */
-        var subs = (p.subreddits || []).slice();
+        /* Source subreddits from actual data + known mapping (dedup with normalization) */
+        var rawSubs = (p.subreddits || []).slice();
         var knownSubs = PRODUCT_SUBREDDITS[p.product_name] || [];
         for (var ks=0; ks<knownSubs.length; ks++) {
-          if (subs.indexOf(knownSubs[ks]) === -1 && subs.indexOf('r/'+knownSubs[ks]) === -1) {
-            subs.push(knownSubs[ks]);
+          rawSubs.push(knownSubs[ks]);
+        }
+        /* Normalize: strip r/, split on +, dedup case-insensitively */
+        var seen = {};
+        var subs = [];
+        for (var si=0; si<rawSubs.length; si++) {
+          var parts = rawSubs[si].replace(/^r\//,'').split('+');
+          for (var pi=0; pi<parts.length; pi++) {
+            var name = parts[pi].trim();
+            if (!name) continue;
+            var key = name.toLowerCase();
+            if (!seen[key]) { seen[key] = true; subs.push(name); }
           }
         }
         var sourceHtml = subs.map(function(sub) {
@@ -1356,18 +1514,22 @@
         row.innerHTML += '<div class="scorecard-card">'
           + '<div class="scorecard-bar" style="background:'+color+'"></div>'
           + '<div class="scorecard-body">'
+          + '<div class="scorecard-header">'
           + '<div class="scorecard-name" style="color:'+color+'">'+escapeHtml(p.product_name)+'</div>'
+          + '<button class="scorecard-detail-btn" onclick="navigateToDeepDive('+i+')">'+t('detailRead')+' →</button>'
+          + '</div>'
           + '<div class="scorecard-sources">'+sourceHtml+'</div>'
-          + '<div class="scorecard-metric">'
-          + '<span class="scorecard-pct" style="color:#16A34A">'+Math.round(posRate)+'%</span>'
+          + '<div class="scorecard-metric" title="'+sentimentTooltip(posRate)+'">'
+          + '<span class="scorecard-pct" style="color:'+sentimentColor(posRate)+'">'+Math.round(posRate)+'%</span>'
           + '<span class="traffic-light '+trafficLightClass(posRate)+'"></span>'
           + '<span class="scorecard-pct-label">'+t('positiveRate')+'</span></div>'
+          + '<div class="scorecard-stats">'
           + '<div class="scorecard-posts">'+p.valid_post_count+' '+t('validPosts')+'</div>'
           + deltaHtml
-          + (displayPain ? '<div class="scorecard-pain" title="'+escapeHtml(displayPain)+'">&#x26A0; '+escapeHtml(truncate(displayPain,40))+'</div>' : '')
-          + (displayFinding ? '<div class="scorecard-finding" title="'+escapeHtml(displayFinding)+'" onclick="navigateToDeepDive('+i+')">'
-            +'<span class="finding-text">'+escapeHtml(truncate(displayFinding,150))+'</span>'
-            +'<span class="finding-arrow">&#8594;</span></div>' : '')
+          + '</div>'
+          + '<div class="scorecard-bottom">'
+          + top3Html
+          + '</div>'
           + '</div></div>';
       }
     }
@@ -1734,6 +1896,40 @@
       if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
     }
 
+    /* ======= SIDEBAR NAVIGATION ======= */
+    function navClick(linkEl) {
+      var href = linkEl.getAttribute('href');
+      var target = href && document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+      document.querySelectorAll('.sidenav-item').forEach(function(a) { a.classList.remove('active'); });
+      linkEl.classList.add('active');
+    }
+
+    /* Highlight sidebar item on scroll */
+    (function() {
+      var ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            var anchors = ['sec-summary','sec-cross','sec-sentiment','sec-topics','sec-deepdive','sec-evidence','sec-bubble','sec-trend','sec-history'];
+            var current = anchors[0];
+            for (var i = 0; i < anchors.length; i++) {
+              var el = document.getElementById(anchors[i]);
+              if (el && el.getBoundingClientRect().top <= 90) current = anchors[i];
+            }
+            document.querySelectorAll('.sidenav-item').forEach(function(a) {
+              var href = (a.getAttribute('href')||'').replace('#','');
+              a.classList.toggle('active', href === current);
+            });
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    })();
+
     /* ======= DEEP DIVE ======= */
     function renderDeepDive() {
       var container = document.getElementById('deepDiveContent');
@@ -1763,14 +1959,14 @@
       painList.innerHTML = pains.slice(0,8).map(function(pp){
         return '<li><span class="dd-dot" style="background:var(--clr-neg)"></span>'
           +(pp.severity?'<span class="severity-badge sev-'+pp.severity+'">'+(t('severity_'+pp.severity)||pp.severity)+'</span>':'')
-          +'<span>'+escapeHtml(L(pp, 'text'))+'</span></li>';
+          +'<span>'+escapeHtml(L(pp, 'text'))+postRefsHtml(pp.post_ids)+'</span></li>';
       }).join('') || '<li style="color:var(--text-muted)">'+t('noData')+'</li>';
 
       var strengthList = document.getElementById('ddStrengths');
       var strs = getStrengths(p);
       strengthList.innerHTML = strs.slice(0,8).map(function(s){
         return '<li><span class="dd-dot" style="background:var(--clr-pos)"></span>'
-          +'<span>'+escapeHtml(L(s, 'text'))+'</span></li>';
+          +'<span>'+escapeHtml(L(s, 'text'))+postRefsHtml(s.post_ids)+'</span></li>';
       }).join('') || '<li style="color:var(--text-muted)">'+t('noData')+'</li>';
 
       destroyChart('ddDonut');
@@ -1983,6 +2179,27 @@
       var parsed = parseCrossProductMarkdown(cpc);
       var html = '';
 
+      /* Build product -> post_ids lookup from structured per-product data */
+      var prodPostIds = {}; // { productName: { strengths: [...], pains: [...] } }
+      if (reportData.products) {
+        for (var pi = 0; pi < reportData.products.length; pi++) {
+          var prod = reportData.products[pi];
+          var pName = prod.product_name || '';
+          var entry = { strengths: [], pains: [] };
+          var sArr = prod.strengths || [];
+          for (var si = 0; si < sArr.length; si++) {
+            if (sArr[si].post_ids) entry.strengths = entry.strengths.concat(sArr[si].post_ids);
+          }
+          var ppArr = prod.pain_points || [];
+          for (var ppi = 0; ppi < ppArr.length; ppi++) {
+            if (ppArr[ppi].post_ids) entry.pains = entry.pains.concat(ppArr[ppi].post_ids);
+          }
+          prodPostIds[pName] = entry;
+          var cName = cleanProductName(pName);
+          if (cName && cName !== pName) prodPostIds[cName] = entry;
+        }
+      }
+
       /* 1. Most/Least satisfied highlight cards (skip the satisfaction table — already in sentiment bar above) */
       if (parsed.mostSatisfied || parsed.leastSatisfied) {
         html += '<div class="cp-highlight-row">';
@@ -2012,10 +2229,26 @@
         html += '<div class="cp-pain-grid">';
         for (var i = 0; i < parsed.sharedPainPoints.length; i++) {
           var pp = parsed.sharedPainPoints[i];
+          /* Gather post_ids from all products' pain_points for shared pains */
+          var sharedRefs = [];
+          var prods = reportData.products || [];
+          for (var sp = 0; sp < prods.length && sharedRefs.length < 3; sp++) {
+            var ppList = prods[sp].pain_points || [];
+            for (var spi = 0; spi < ppList.length && sharedRefs.length < 3; spi++) {
+              if (ppList[spi].post_ids && ppList[spi].post_ids.length > 0) {
+                var ppText = (ppList[spi].text || '').toLowerCase();
+                var ppTitle = (pp.title || '').toLowerCase();
+                if (ppTitle && ppText && (ppText.indexOf(ppTitle.slice(0,4)) !== -1 || ppTitle.indexOf(ppText.slice(0,4)) !== -1)) {
+                  sharedRefs = sharedRefs.concat(ppList[spi].post_ids.slice(0, 2));
+                }
+              }
+            }
+          }
           html += '<div class="cp-pain-card">'
             + '<div style="display:flex;align-items:flex-start">'
             + '<span class="cp-pain-num">' + (i + 1) + '</span>'
             + '<div><span class="cp-pain-title">' + escapeHtml(pp.title) + '</span>'
+            + postRefsHtml(sharedRefs, 3)
             + '<div class="cp-pain-detail">' + escapeHtml(pp.detail) + '</div>'
             + '</div></div></div>';
         }
@@ -2034,10 +2267,11 @@
         for (var j = 0; j < parsed.uniqueTraits.length; j++) {
           var tr = parsed.uniqueTraits[j];
           var pColor = getProductColor(tr.product);
+          var pLookup = prodPostIds[tr.product] || { strengths: [], pains: [] };
           html += '<tr>'
             + '<td class="cp-product-name" style="color:' + pColor + '">' + escapeHtml(tr.product) + '</td>'
-            + '<td>' + (tr.advantage ? '<span class="cp-adv-pill cp-adv-pos">' + escapeHtml(tr.advantage) + '</span>' : '-') + '</td>'
-            + '<td>' + (tr.disadvantage ? '<span class="cp-adv-pill cp-adv-neg">' + escapeHtml(tr.disadvantage) + '</span>' : '-') + '</td>'
+            + '<td>' + (tr.advantage ? '<span class="cp-adv-pill cp-adv-pos">' + escapeHtml(tr.advantage) + '</span>' + postRefsHtml(pLookup.strengths, 3) : '-') + '</td>'
+            + '<td>' + (tr.disadvantage ? '<span class="cp-adv-pill cp-adv-neg">' + escapeHtml(tr.disadvantage) + '</span>' + postRefsHtml(pLookup.pains, 3) : '-') + '</td>'
             + '</tr>';
         }
         html += '</tbody></table>';
@@ -2086,8 +2320,8 @@
       };
       if (!md) return result;
 
-      /* Split by ## sections */
-      var sections = md.split(/\n##\s+/);
+      /* Split by ## or ### sections */
+      var sections = md.split(/\n#{2,3}\s+/);
 
       for (var si = 0; si < sections.length; si++) {
         var sec = sections[si];
@@ -2096,15 +2330,18 @@
         /* Section: 最满意/最不满意 or Most/Least Satisfied */
         if ((sec.indexOf('最满意') !== -1 && sec.indexOf('最不满意') !== -1)
             || (/most satisfied/i.test(sec) && /least satisfied/i.test(sec))
-            || (sec.indexOf('Satisfaction') !== -1 || sec.indexOf('satisfaction') !== -1)) {
+            || (sec.indexOf('Satisfaction') !== -1 || sec.indexOf('satisfaction') !== -1)
+            || sec.indexOf('满意度极值') !== -1) {
           /* Extract "最满意" / "Most Satisfied" paragraph */
           for (var i = 0; i < lines.length; i++) {
             var line = lines[i].trim();
             /* Chinese patterns */
             if (line.indexOf('相对最满意') !== -1 || (line.indexOf('最满意') !== -1 && line.indexOf('最不满意') === -1)) {
-              /* Format: **相对最满意：GitHub Copilot。** reason... */
+              /* Format A: **相对最满意：Product。** reason... */
               var msMat = line.match(/最满意[：:]\s*(.+?)[。.]\*\*\s*(.*)/);
               if (!msMat) msMat = line.match(/最满意[：:]\s*\*?\*?([^。*]+)/);
+              /* Format B: **最满意社区**：Product。reason... */
+              if (!msMat) msMat = line.match(/最满意[^*]*\*\*[：:]\s*(.+?)[。.]\s*(.*)/);
               if (msMat) {
                 var product = msMat[1].replace(/[*]/g, '').trim();
                 var reason = (msMat[2] || '').replace(/\*\*/g, '').trim();
@@ -2130,6 +2367,8 @@
             if (line.indexOf('最不满意') !== -1 && line.indexOf('相对最满意') === -1) {
               var lsMat = line.match(/最不满意[：:]\s*(.+?)[。.]\*\*\s*(.*)/);
               if (!lsMat) lsMat = line.match(/最不满意[：:]\s*\*?\*?([^。*]+)/);
+              /* Format B: **最不满意社区**：Product。reason... */
+              if (!lsMat) lsMat = line.match(/最不满意[^*]*\*\*[：:]\s*(.+?)[。.]\s*(.*)/);
               if (lsMat) {
                 var product2 = lsMat[1].replace(/[*]/g, '').trim();
                 var reason2 = (lsMat[2] || '').replace(/\*\*/g, '').trim();
@@ -2160,10 +2399,10 @@
             || /shared pain/i.test(sec) || /common pain/i.test(sec) || /common issue/i.test(sec)) {
           for (var j = 0; j < lines.length; j++) {
             var pLine = lines[j].trim();
-            var ppMatch = pLine.match(/^\d+\.\s+\*\*(.+?)[：:]\*\*\s*(.+)/);
-            if (!ppMatch) ppMatch = pLine.match(/^\d+\.\s+\*\*(.+?)\*\*[：:]\s*(.+)/);
+            var ppMatch = pLine.match(/^(?:\d+\.|[-*])\s+\*\*(.+?)[：:]\*\*\s*(.+)/);
+            if (!ppMatch) ppMatch = pLine.match(/^(?:\d+\.|[-*])\s+\*\*(.+?)\*\*[：:]\s*(.+)/);
             /* English format: 1. **Title**: description */
-            if (!ppMatch) ppMatch = pLine.match(/^\d+\.\s+\*\*(.+?)\*\*:\s*(.+)/);
+            if (!ppMatch) ppMatch = pLine.match(/^(?:\d+\.|[-*])\s+\*\*(.+?)\*\*:\s*(.+)/);
             if (ppMatch) {
               result.sharedPainPoints.push({ title: ppMatch[1].trim(), detail: ppMatch[2].replace(/\*\*/g, '').trim() });
             }
@@ -2172,37 +2411,67 @@
 
         /* Section: 独特优劣势 or Unique Traits */
         if (sec.indexOf('独特优劣势') !== -1 || (sec.indexOf('独特') !== -1 && sec.indexOf('优') !== -1)
+            || sec.indexOf('优势与劣势') !== -1 || sec.indexOf('优劣势') !== -1
             || /unique trait/i.test(sec) || /unique advantage/i.test(sec) || /unique strength/i.test(sec)) {
+          var KNOWN_PRODUCTS = ['ChatGPT','Claude','Gemini','M365 Copilot','Copilot'];
+          var curProd = null, curAdv = '', curDisadv = '';
+          function flushTrait() {
+            if (curProd) {
+              result.uniqueTraits.push({ product: curProd, advantage: truncate(curAdv, 100), disadvantage: truncate(curDisadv, 100) });
+            }
+            curProd = null; curAdv = ''; curDisadv = '';
+          }
           for (var k = 0; k < lines.length; k++) {
             var tLine = lines[k].trim();
+            /* Format A: single-line "- **Product** 独有优势：xxx；独有劣势：xxx" */
             var tMatch = tLine.match(/^-\s+\*\*(.+?)\*\*(.+)/);
             if (tMatch) {
-              var prodName = cleanProductName(tMatch[1]);
-              var details = tMatch[2];
-              var adv = '', disadv = '';
-              /* Chinese patterns */
-              var advMatch = details.match(/独有优势[：:]\s*(.+?)(?:[；;]|独有劣势|$)/);
-              var disadvMatch = details.match(/独有劣势[：:]\s*(.+?)(?:[；;]|独有优势|$)/);
-              /* English patterns */
-              if (!advMatch) advMatch = details.match(/[Uu]nique [Aa]dvantage[：:]\s*(.+?)(?:[；;]|[Uu]nique\s+(?:[Dd]isadvantage|[Ww]eakness)|$)/);
-              if (!disadvMatch) disadvMatch = details.match(/[Uu]nique [Dd]isadvantage[：:]\s*(.+?)(?:[；;]|[Uu]nique\s+(?:[Aa]dvantage|[Ss]trength)|$)/);
-              if (!advMatch) advMatch = details.match(/[Uu]nique [Ss]trength[：:]\s*(.+?)(?:[；;]|[Uu]nique\s+(?:[Ww]eakness|[Dd]isadvantage)|$)/);
-              if (!disadvMatch) disadvMatch = details.match(/[Uu]nique [Ww]eakness[：:]\s*(.+?)(?:[；;]|[Uu]nique\s+(?:[Ss]trength|[Aa]dvantage)|$)/);
-              /* Also match "Advantage:" / "Disadvantage:" / "Strength:" / "Weakness:" */
-              if (!advMatch) advMatch = details.match(/[Aa]dvantage[：:]\s*(.+?)(?:[；;]|(?:[Dd]isadvantage|[Ww]eakness)|$)/);
-              if (!disadvMatch) disadvMatch = details.match(/[Dd]isadvantage[：:]\s*(.+?)(?:[；;]|(?:[Aa]dvantage|[Ss]trength)|$)/);
-              if (!advMatch) advMatch = details.match(/[Ss]trength[：:]\s*(.+?)(?:[；;]|(?:[Ww]eakness|[Dd]isadvantage)|$)/);
-              if (!disadvMatch) disadvMatch = details.match(/[Ww]eakness[：:]\s*(.+?)(?:[；;]|(?:[Ss]trength|[Aa]dvantage)|$)/);
-              if (advMatch) adv = advMatch[1].replace(/\*\*/g, '').trim();
-              if (disadvMatch) disadv = disadvMatch[1].replace(/\*\*/g, '').trim();
-              /* If only one mentioned, extract the whole text */
-              if (!adv && !disadv) {
-                if (details.indexOf('优势') !== -1 || /advantage|strength/i.test(details)) adv = details.replace(/^[：:;\s]+/, '').replace(/\*\*/g, '').trim();
-                else disadv = details.replace(/^[：:;\s]+/, '').replace(/\*\*/g, '').trim();
+              var candidateName = cleanProductName(tMatch[1]);
+              var isProduct = false;
+              for (var pi = 0; pi < KNOWN_PRODUCTS.length; pi++) {
+                if (candidateName === KNOWN_PRODUCTS[pi] || candidateName.indexOf(KNOWN_PRODUCTS[pi]) !== -1) { isProduct = true; break; }
               }
-              result.uniqueTraits.push({ product: prodName, advantage: truncate(adv, 100), disadvantage: truncate(disadv, 100) });
+              if (isProduct) {
+                flushTrait();
+                curProd = candidateName;
+                var details = tMatch[2];
+                /* Try to extract advantage/disadvantage from same line */
+                var advMatch = details.match(/(?:独有)?优势[：:]\s*(.+?)(?:[；;]|(?:独有)?劣势|$)/);
+                var disadvMatch = details.match(/(?:独有)?劣势[：:]\s*(.+?)(?:[；;]|(?:独有)?优势|$)/);
+                if (!advMatch) advMatch = details.match(/[Aa]dvantage[：:]\s*(.+?)(?:[；;]|[Dd]isadvantage|[Ww]eakness|$)/);
+                if (!disadvMatch) disadvMatch = details.match(/[Dd]isadvantage[：:]\s*(.+?)(?:[；;]|[Aa]dvantage|[Ss]trength|$)/);
+                if (!advMatch) advMatch = details.match(/[Ss]trength[：:]\s*(.+?)(?:[；;]|[Ww]eakness|[Dd]isadvantage|$)/);
+                if (!disadvMatch) disadvMatch = details.match(/[Ww]eakness[：:]\s*(.+?)(?:[；;]|[Ss]trength|[Aa]dvantage|$)/);
+                if (advMatch) curAdv = advMatch[1].replace(/\*\*/g, '').trim();
+                if (disadvMatch) curDisadv = disadvMatch[1].replace(/\*\*/g, '').trim();
+                continue;
+              }
+            }
+            /* Format B: "- **Product**" alone on a line (multi-line format) */
+            var tMatch2 = tLine.match(/^-\s+\*\*(.+?)\*\*\s*$/);
+            if (tMatch2) {
+              var candidateName2 = cleanProductName(tMatch2[1]);
+              var isProduct2 = false;
+              for (var pi2 = 0; pi2 < KNOWN_PRODUCTS.length; pi2++) {
+                if (candidateName2 === KNOWN_PRODUCTS[pi2] || candidateName2.indexOf(KNOWN_PRODUCTS[pi2]) !== -1) { isProduct2 = true; break; }
+              }
+              if (isProduct2) {
+                flushTrait();
+                curProd = candidateName2;
+                continue;
+              }
+            }
+            /* Sub-bullet lines: "  - 优势：xxx" or "  - 劣势：xxx" */
+            if (curProd) {
+              var subAdv = tLine.match(/^-\s+(?:独有)?优势[：:]\s*(.+)/);
+              if (!subAdv) subAdv = tLine.match(/^-\s+(?:[Aa]dvantage|[Ss]trength)[：:]\s*(.+)/);
+              if (subAdv) { curAdv = subAdv[1].replace(/\*\*/g, '').trim(); continue; }
+              var subDisadv = tLine.match(/^-\s+(?:独有)?劣势[：:]\s*(.+)/);
+              if (!subDisadv) subDisadv = tLine.match(/^-\s+(?:[Dd]isadvantage|[Ww]eakness)[：:]\s*(.+)/);
+              if (subDisadv) { curDisadv = subDisadv[1].replace(/\*\*/g, '').trim(); continue; }
             }
           }
+          flushTrait();
         }
 
         /* Section: 竞争动态 or Competitive Dynamics */
@@ -2210,8 +2479,8 @@
             || /competitive dynamic/i.test(sec) || /emerging trend/i.test(sec) || /market dynamic/i.test(sec)) {
           for (var d = 0; d < lines.length; d++) {
             var dLine = lines[d].trim();
-            var dMatch = dLine.match(/^-\s+\*\*(.+?)[：:]\*\*\s*(.+)/);
-            if (!dMatch) dMatch = dLine.match(/^-\s+\*\*(.+?)\*\*[：:]\s*(.+)/);
+            var dMatch = dLine.match(/^(?:\d+\.|[-*])\s+\*\*(.+?)[：:]\*\*\s*(.+)/);
+            if (!dMatch) dMatch = dLine.match(/^(?:\d+\.|[-*])\s+\*\*(.+?)\*\*[：:]\s*(.+)/);
             if (dMatch) {
               result.dynamics.push('**' + dMatch[1] + '** ' + dMatch[2]);
             }
@@ -2282,7 +2551,7 @@
         ['ChatGPT', 'ChatGPT'], ['chatgpt', 'ChatGPT'],
         ['Claude', 'Claude'], ['claude', 'Claude'],
         ['Gemini', 'Gemini'], ['gemini', 'Gemini'],
-        ['M365', 'M365 Copilot'], ['Copilot', 'GitHub Copilot']
+        ['M365', 'M365 Copilot'], ['Copilot', 'Copilot']
       ];
       for (var i = 0; i < productMap.length; i++) {
         if (cleaned.indexOf(productMap[i][0]) !== -1) return productMap[i][1];
@@ -2292,7 +2561,7 @@
 
     /* ======= TREND DELTA ======= */
     function renderTrend() {
-      var section = document.getElementById('trendSection');
+      var section = document.getElementById('sec-trend');
       var deltaContainer = document.getElementById('trendDeltaCards');
       destroyChart('trendLine');
 
@@ -2394,7 +2663,7 @@
       for (var i=0;i<reportIndex.length;i++) {
         var r = reportIndex[i];
         var isActive = reportData && reportData.run_id === r.run_id;
-        var dateLabel = (r.period_start||'').slice(0,10) + ' ~ ' + (r.period_end||'').slice(0,10);
+        var dateLabel = formatDateRange(r.period_start, r.period_end);
         html += '<div class="history-card'+(isActive?' active':'')+'" onclick="onReportSelect(\''+escapeHtml(r.file)+'\')">'
           +'<div class="history-card-id">'+escapeHtml(dateLabel)+'</div>'
           +'<div class="history-card-date">'+(r.total_valid_posts||0)+' '+t('posts')+' | '+t('clickToLoad')+'</div></div>';
