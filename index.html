@@ -69,24 +69,24 @@
       box-shadow:var(--shadow); border:1px solid var(--border); overflow:hidden;
     }
     .card-body { padding:20px; }
-    .scorecard-row { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; align-items:stretch; }
+    .scorecard-row { display:grid; grid-template-columns:repeat(5,1fr); grid-template-rows:repeat(5,auto); gap:16px; align-items:stretch; }
     .scorecard-card {
       background:var(--bg-card); border-radius:var(--radius);
       box-shadow:var(--shadow); border:1px solid var(--border); overflow:hidden;
-      display:flex; flex-direction:column;
+      display:grid; grid-row:span 5; grid-template-rows:subgrid; gap:0;
     }
-    .scorecard-bar { height:4px; width:100%; flex-shrink:0; }
-    .scorecard-body { padding:16px; display:flex; flex-direction:column; flex:1; }
-    .scorecard-header { min-height:24px; display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
+    .scorecard-bar { height:4px; width:100%; }
+    .scorecard-body { padding:16px 16px 0; }
+    .scorecard-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
     .scorecard-name { font-size:14px; font-weight:700; }
-    .scorecard-sources { font-size:10px; color:var(--text-muted); margin-bottom:8px; line-height:1.4; min-height:28px; }
+    .scorecard-sources { padding:0 16px; font-size:10px; color:var(--text-muted); line-height:1.4; }
     .scorecard-sources a { color:var(--text-muted); text-decoration:none; }
     .scorecard-sources a:hover { color:#4338CA; text-decoration:underline; }
-    .scorecard-metric { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+    .scorecard-metric { padding:0 16px; display:flex; align-items:center; gap:10px; }
     .scorecard-pct { font-size:32px; font-weight:800; line-height:1; }
     .scorecard-pct-label { font-size:12px; color:var(--text-secondary); }
-    .scorecard-stats { margin-bottom:auto; }
-    .scorecard-bottom { margin-top:auto; }
+    .scorecard-stats { padding:0 16px; }
+    .scorecard-bottom { padding:0 16px 16px; align-self:end; }
     .traffic-light { width:14px; height:14px; border-radius:50%; display:inline-block; flex-shrink:0; }
     .tl-green { background:var(--clr-pos); box-shadow:0 0 6px rgba(22,163,74,0.4); }
     .tl-yellow { background:var(--clr-mix); box-shadow:0 0 6px rgba(245,158,11,0.4); }
@@ -1513,11 +1513,12 @@
         }
 
         row.innerHTML += '<div class="scorecard-card">'
-          + '<div class="scorecard-bar" style="background:'+color+'"></div>'
           + '<div class="scorecard-body">'
+          + '<div class="scorecard-bar" style="background:'+color+'"></div>'
           + '<div class="scorecard-header">'
           + '<div class="scorecard-name" style="color:'+color+'">'+escapeHtml(p.product_name)+'</div>'
           + '<button class="scorecard-detail-btn" onclick="navigateToDeepDive('+i+')">'+t('detailRead')+' →</button>'
+          + '</div>'
           + '</div>'
           + '<div class="scorecard-sources">'+sourceHtml+'</div>'
           + '<div class="scorecard-metric" title="'+sentimentTooltip(posRate)+'">'
@@ -1531,7 +1532,7 @@
           + '<div class="scorecard-bottom">'
           + top3Html
           + '</div>'
-          + '</div></div>';
+          + '</div>';
       }
     }
 
