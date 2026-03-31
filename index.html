@@ -2089,7 +2089,7 @@
       /* Show language notice in English mode only when _en fields are missing */
       var hasEnFields = allPosts.length > 0 && allPosts[0].key_points_en && allPosts[0].key_points_en.length > 0;
       var langNote = (currentLang === 'en' && !hasEnFields) ? t('dataLangNote') : '';
-      grid.innerHTML = langNote ? '<div style="color:#9CA3AF;font-size:11px;font-style:italic;padding:4px 0 8px;text-align:center">'+escapeHtml(langNote)+'</div>' : '';
+      grid.innerHTML = langNote ? '<div style="color:#9CA3AF;font-size:11px;font-style:italic;padding:4px 0 8px;text-align:center;grid-column:1/-1">'+escapeHtml(langNote)+'</div>' : '';
       showMoreEvidence();
     }
 
@@ -2436,8 +2436,8 @@
                 curProd = candidateName;
                 var details = tMatch[2];
                 /* Try to extract advantage/disadvantage from same line */
-                var advMatch = details.match(/(?:独有)?优势[：:]\s*(.+?)(?:[；;]|(?:独有)?劣势|$)/);
-                var disadvMatch = details.match(/(?:独有)?劣势[：:]\s*(.+?)(?:[；;]|(?:独有)?优势|$)/);
+                var advMatch = details.match(/\*{0,2}(?:独有)?优势\*{0,2}[：:]\s*(.+?)(?:[；;]|\*{0,2}(?:独有)?劣势|$)/);
+                var disadvMatch = details.match(/\*{0,2}(?:独有)?劣势\*{0,2}[：:]\s*(.+?)(?:[；;]|\*{0,2}(?:独有)?优势|$)/);
                 if (!advMatch) advMatch = details.match(/[Aa]dvantage[：:]\s*(.+?)(?:[；;]|[Dd]isadvantage|[Ww]eakness|$)/);
                 if (!disadvMatch) disadvMatch = details.match(/[Dd]isadvantage[：:]\s*(.+?)(?:[；;]|[Aa]dvantage|[Ss]trength|$)/);
                 if (!advMatch) advMatch = details.match(/[Ss]trength[：:]\s*(.+?)(?:[；;]|[Ww]eakness|[Dd]isadvantage|$)/);
@@ -2461,13 +2461,13 @@
                 continue;
               }
             }
-            /* Sub-bullet lines: "  - 优势：xxx" or "  - 劣势：xxx" */
+            /* Sub-bullet lines: "  - 优势：xxx" or "  - **优势**：xxx" */
             if (curProd) {
-              var subAdv = tLine.match(/^-\s+(?:独有)?优势[：:]\s*(.+)/);
-              if (!subAdv) subAdv = tLine.match(/^-\s+(?:[Aa]dvantage|[Ss]trength)[：:]\s*(.+)/);
+              var subAdv = tLine.match(/^-\s+\*{0,2}(?:独有)?优势\*{0,2}[：:]\s*(.+)/);
+              if (!subAdv) subAdv = tLine.match(/^-\s+\*{0,2}(?:[Aa]dvantages?|[Ss]trengths?)\*{0,2}[：:]\s*(.+)/);
               if (subAdv) { curAdv = subAdv[1].replace(/\*\*/g, '').trim(); continue; }
-              var subDisadv = tLine.match(/^-\s+(?:独有)?劣势[：:]\s*(.+)/);
-              if (!subDisadv) subDisadv = tLine.match(/^-\s+(?:[Dd]isadvantage|[Ww]eakness)[：:]\s*(.+)/);
+              var subDisadv = tLine.match(/^-\s+\*{0,2}(?:独有)?劣势\*{0,2}[：:]\s*(.+)/);
+              if (!subDisadv) subDisadv = tLine.match(/^-\s+\*{0,2}(?:[Dd]isadvantages?|[Ww]eakness(?:es)?)\*{0,2}[：:]\s*(.+)/);
               if (subDisadv) { curDisadv = subDisadv[1].replace(/\*\*/g, '').trim(); continue; }
             }
           }
