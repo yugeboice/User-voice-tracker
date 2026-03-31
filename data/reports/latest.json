@@ -49,6 +49,12 @@
             "ChatGPT能根据用户背景推荐意想不到的职业",
             "推荐结果有具体逻辑支撑，非泛泛而谈",
             "用户和朋友实际体验后反馈积极"
+          ],
+          "sentiment_reason_en": "User is surprised and satisfied with ChatGPT's ability to discover new careers through prompts, finding the results logical and practical.",
+          "key_points_en": [
+            "ChatGPT can recommend unexpected careers based on user background",
+            "Recommendations are supported by specific logic, not generic",
+            "Positive feedback from user and friends after real experience"
           ]
         },
         {
@@ -67,6 +73,12 @@
             "用户能明显分辨AI生成内容",
             "对作者未编辑AI痕迹感到失望",
             "对AI生成内容在出版物中的使用持负面态度"
+          ],
+          "sentiment_reason_en": "User expresses strong disappointment and dislike for the author using ChatGPT to generate content in the book.",
+          "key_points_en": [
+            "User can clearly distinguish AI-generated content",
+            "Disappointed that the author did not edit out AI traces",
+            "Negative attitude toward use of AI-generated content in publications"
           ]
         },
         {
@@ -85,6 +97,12 @@
             "用户因Sora相关内容被封号但自称未违规",
             "对ChatGPT封号机制表示不满",
             "用户转用Gemini并认为其更好"
+          ],
+          "sentiment_reason_en": "User was banned for Sora-related reasons and is dissatisfied with the handling, finding it unreasonable.",
+          "key_points_en": [
+            "User was banned for Sora-related content but claims no violation",
+            "Dissatisfied with ChatGPT's ban mechanism",
+            "User switched to Gemini and finds it better"
           ]
         },
         {
@@ -103,6 +121,12 @@
             "消息编辑功能被无预警移除",
             "用户认为这会极大降低效率",
             "评论区认为小功能对体验影响很大"
+          ],
+          "sentiment_reason_en": "User is strongly dissatisfied with the removal of the message editing feature, believing it affects workflow and efficiency.",
+          "key_points_en": [
+            "Message editing feature was removed without warning",
+            "User thinks this will greatly reduce efficiency",
+            "Comments say small features greatly impact experience"
           ]
         },
         {
@@ -121,6 +145,12 @@
             "用户怀疑ChatGPT与Facebook间存在数据泄露",
             "讨论第三方分析工具（如Google Analytics）带来的隐私风险",
             "提醒检查手机输入法和应用权限"
+          ],
+          "sentiment_reason_en": "User worries ChatGPT leaks information to Facebook; comments discuss data privacy and third-party analytics risks.",
+          "key_points_en": [
+            "User suspects data leaks between ChatGPT and Facebook",
+            "Discussion of privacy risks from third-party analytics tools (like Google Analytics)",
+            "Reminder to check phone input methods and app permissions"
           ]
         },
         {
@@ -139,6 +169,12 @@
             "用户质疑OpenAI通过心理操控影响用户行为",
             "担忧AI对人类自由意志和情感健康的负面影响",
             "批评公司雇佣心理学家和高管进行操控"
+          ],
+          "sentiment_reason_en": "User strongly criticizes ChatGPT for emotional manipulation and 'free will paternalism,' calling it psychological abuse.",
+          "key_points_en": [
+            "User questions whether OpenAI manipulates user behavior psychologically",
+            "Concern about AI's negative impact on human free will and emotional health",
+            "Criticizes company for hiring psychologists and executives for manipulation"
           ]
         },
         {
@@ -157,6 +193,12 @@
             "用户抱怨核心功能被移除或限制，如编辑和重生成消息",
             "认为ChatGPT正在向竞争对手看齐而非创新",
             "有用户表示因此取消订阅"
+          ],
+          "sentiment_reason_en": "User is very dissatisfied with ChatGPT removing or weakening core features, seeing it as a major downgrade.",
+          "key_points_en": [
+            "User complains about removal or restriction of core features like editing and regenerating messages",
+            "Thinks ChatGPT is following competitors instead of innovating",
+            "Some users canceled subscriptions because of this"
           ]
         },
         {
@@ -175,6 +217,12 @@
             "模型变动影响用户情感健康",
             "OpenAI的安全策略被批评为有害",
             "用户难以找到满意的替代AI"
+          ],
+          "sentiment_reason_en": "User expresses extreme disappointment and pain due to emotional reliance being hurt by model changes, and criticizes OpenAI's safety policies.",
+          "key_points_en": [
+            "Model changes affect user's emotional health",
+            "OpenAI's safety policies criticized as harmful",
+            "User finds it hard to find a satisfactory AI alternative"
           ]
         },
         {
@@ -193,6 +241,12 @@
             "ChatGPT经常否定用户观点，令用户感到被冒犯",
             "模型对隐喻和语境理解能力下降",
             "用户普遍反映交流体验变差"
+          ],
+          "sentiment_reason_en": "User strongly complains that ChatGPT often rejects user opinions, appears arrogant, and fails to understand metaphors, leading to a poor experience.",
+          "key_points_en": [
+            "ChatGPT often rejects user opinions, making users feel offended",
+            "Model's ability to understand metaphors and context has declined",
+            "Users generally report worse communication experience"
           ]
         },
         {
@@ -211,6 +265,12 @@
             "ChatGPT创意和情感功能被削弱",
             "平台转向企业和生产力工具",
             "用户怀念早期更有温度的体验"
+          ],
+          "sentiment_reason_en": "User is disappointed by the loss of ChatGPT's creativity and emotional features, feeling the platform has become cold and utilitarian.",
+          "key_points_en": [
+            "ChatGPT's creative and emotional features have been weakened",
+            "Platform is shifting toward enterprise and productivity tools",
+            "Users miss the warmer early experience"
           ]
         }
       ],
@@ -224,7 +284,9 @@
             "1rzfkn3",
             "1rz43nt"
           ],
-          "detail": "4o和5.1等受欢迎模型被移除导致用户体验下降，部分用户转向其他平台。"
+          "detail": "4o和5.1等受欢迎模型被移除导致用户体验下降，部分用户转向其他平台。",
+          "text_en": "Model removal leads to user loss",
+          "detail_en": "Removal of popular models like 4o and 5.1 results in decreased user experience, causing some users to switch to other platforms."
         },
         {
           "text": "输出风格单一且易出错",
@@ -233,7 +295,9 @@
             "1s21qxm",
             "1rz0hso"
           ],
-          "detail": "用户反馈ChatGPT近期拼写错误增多，输出风格缺乏多样性，影响可读性和交流体验。"
+          "detail": "用户反馈ChatGPT近期拼写错误增多，输出风格缺乏多样性，影响可读性和交流体验。",
+          "text_en": "Output style is monotonous and error-prone",
+          "detail_en": "Users report increased spelling errors in ChatGPT recently, with output style lacking diversity, affecting readability and communication experience."
         },
         {
           "text": "隐私与数据安全担忧",
@@ -241,7 +305,9 @@
           "post_ids": [
             "1s1m5aj"
           ],
-          "detail": "用户担心ChatGPT存在信息泄露风险，尤其是与第三方工具和平台的数据交互。"
+          "detail": "用户担心ChatGPT存在信息泄露风险，尤其是与第三方工具和平台的数据交互。",
+          "text_en": "Privacy and data security concerns",
+          "detail_en": "Users worry about potential information leaks in ChatGPT, especially regarding data interactions with third-party tools and platforms."
         },
         {
           "text": "功能变动影响效率",
@@ -249,7 +315,9 @@
           "post_ids": [
             "1s1j5hb"
           ],
-          "detail": "消息编辑等关键功能被无预警移除，用户认为极大影响工作流和使用效率。"
+          "detail": "消息编辑等关键功能被无预警移除，用户认为极大影响工作流和使用效率。",
+          "text_en": "Feature changes impact efficiency",
+          "detail_en": "Key features like message editing are removed without notice, which users feel greatly disrupts workflow and efficiency."
         },
         {
           "text": "内容真实性与AI痕迹明显",
@@ -257,7 +325,9 @@
           "post_ids": [
             "1s2jnpg"
           ],
-          "detail": "用户能明显分辨AI生成内容，对出版物中未编辑AI痕迹感到失望和反感。"
+          "detail": "用户能明显分辨AI生成内容，对出版物中未编辑AI痕迹感到失望和反感。",
+          "text_en": "Content authenticity and obvious AI traces",
+          "detail_en": "Users can easily identify AI-generated content and feel disappointed or frustrated by unedited AI traces in publications."
         }
       ],
       "strengths": [
@@ -267,7 +337,9 @@
             "1s2jb1j",
             "1s2mc82"
           ],
-          "detail": "ChatGPT能根据用户背景推荐职业、优化邮件沟通，帮助用户发现新机会和避免误会。"
+          "detail": "ChatGPT能根据用户背景推荐职业、优化邮件沟通，帮助用户发现新机会和避免误会。",
+          "text_en": "Supports career and learning planning",
+          "detail_en": "ChatGPT can recommend careers and optimize email communication based on user background, helping users find new opportunities and avoid misunderstandings."
         },
         {
           "text": "模型灵活性与可定制性",
@@ -275,14 +347,18 @@
             "1s0z132",
             "1ryjpmc6"
           ],
-          "detail": "用户通过切换模型和自定义指令优化体验，认可ChatGPT的灵活性和适应性。"
+          "detail": "用户通过切换模型和自定义指令优化体验，认可ChatGPT的灵活性和适应性。",
+          "text_en": "Model flexibility and customization",
+          "detail_en": "Users optimize experience by switching models and customizing instructions, recognizing ChatGPT's flexibility and adaptability."
         },
         {
           "text": "学术与哲学对话能力强",
           "post_ids": [
             "1ryjpmc6"
           ],
-          "detail": "5.4等新模型在学术、哲学等深度对话场景表现良好，满足高阶用户需求。"
+          "detail": "5.4等新模型在学术、哲学等深度对话场景表现良好，满足高阶用户需求。",
+          "text_en": "Strong academic and philosophical dialogue",
+          "detail_en": "New models like 5.4 perform well in deep academic and philosophical conversations, meeting advanced user needs."
         },
         {
           "text": "社区创新与生态活跃",
@@ -290,57 +366,82 @@
             "1s2ux5r",
             "1rwlqzv"
           ],
-          "detail": "用户开发扩展和第三方工具，社区积极分享经验，推动产品生态繁荣。"
+          "detail": "用户开发扩展和第三方工具，社区积极分享经验，推动产品生态繁荣。",
+          "text_en": "Active community innovation and ecosystem",
+          "detail_en": "Users develop extensions and third-party tools, actively share experiences, and drive a thriving product ecosystem."
         }
       ],
       "recommendations": [
         {
           "priority": "P0",
-          "text": "明确模型下线与替代方案，减少用户流失并加强模型体验连续性。"
+          "text": "明确模型下线与替代方案，减少用户流失并加强模型体验连续性。",
+          "text_en": "Clarify model removal and alternatives to reduce user loss and ensure continuity of model experience."
         },
         {
           "priority": "P1",
-          "text": "提升输出风格多样性与准确性，优化拼写和内容生成质量。"
+          "text": "提升输出风格多样性与准确性，优化拼写和内容生成质量。",
+          "text_en": "Enhance output diversity and accuracy, improving spelling and content generation quality."
         },
         {
           "priority": "P1",
-          "text": "加强数据隐私保护，公开数据流转与第三方集成机制，提升用户信任。"
+          "text": "加强数据隐私保护，公开数据流转与第三方集成机制，提升用户信任。",
+          "text_en": "Strengthen data privacy protection, disclose data flow and third-party integration mechanisms to build user trust."
         },
         {
           "priority": "P2",
-          "text": "优化功能变更通知机制，避免关键功能无预警下线影响用户体验。"
+          "text": "优化功能变更通知机制，避免关键功能无预警下线影响用户体验。",
+          "text_en": "Improve feature change notification to avoid unannounced removal of key features impacting user experience."
         },
         {
           "priority": "P2",
-          "text": "鼓励社区创新，支持第三方工具和扩展开发，丰富产品生态。"
+          "text": "鼓励社区创新，支持第三方工具和扩展开发，丰富产品生态。",
+          "text_en": "Encourage community innovation, support third-party tool and extension development, and enrich the product ecosystem."
         }
       ],
       "keywords": [
-        "模型下线",
-        "用户流失",
-        "4o",
-        "5.1",
-        "5.4",
-        "Claude",
-        "Qwen",
-        "拼写错误",
-        "输出风格",
-        "内容真实性",
-        "数据隐私",
-        "第三方工具",
-        "API",
-        "扩展",
-        "职业推荐",
-        "邮件优化",
-        "学术对话",
-        "哲学讨论",
-        "功能变动",
-        "消息编辑",
-        "社区创新",
-        "生态",
-        "广告",
-        "Plus版",
-        "性价比"
+        "内容质量下降",
+        "拼写错误增多",
+        "AI痕迹明显",
+        "失望",
+        "封号机制不透明",
+        "隐私泄露疑虑",
+        "数据安全担忧",
+        "审核过于严苛",
+        "反驳倾向增强",
+        "交流体验受损",
+        "创新用法",
+        "逻辑清晰建议",
+        "个性化推荐",
+        "依赖性反思",
+        "实际应用场景",
+        "原创性不足",
+        "信任度下降",
+        "政策透明度低",
+        "竞品稳定性",
+        "用户流失风险"
+      ],
+      "summary_en": "**ChatGPT Reddit Community Biweekly Competitive Intelligence Summary (2026-03-16 to 2026-03-30)**\n\nIn this period (r/ChatGPT and r/ChatGPTcomplaints), a total of 516 valid posts were analyzed. The overall community sentiment was predominantly negative (53%), with positive sentiment accounting for only 20%, and neutral and mixed sentiments each at 13% and 12%. Negative sentiment was mainly driven by product stability, declining content quality, privacy concerns, and platform policies.\n\n**1. Community Sentiment and Driving Factors**  \nNegative sentiment surged, primarily due to the official shutdown of Sora (highly discussed posts), which sparked user concerns about OpenAI’s financial status and product sustainability. Additionally, users expressed dissatisfaction with the recent increase in spelling errors and declining content quality in ChatGPT (e.g., \"more spelling mistakes,\" \"obvious AI-generated traces\"). The lack of transparency in account suspension mechanisms (e.g., \"accounts suspended for Sora-related content\") and privacy breach concerns (\"ChatGPT leaking information to Facebook?\") were also significant sources of negative sentiment.\n\n**2. Main Topics and Their Importance**  \nThe most discussed topics were product experience (102 posts), bug reports (88 posts), competitor comparisons (75 posts), feature requests (66 posts), and real-world use cases (52 posts). Product experience and bug reports directly reflect users’ real feelings and pain points in daily use of ChatGPT. Competitor comparisons indicate users’ growing attention to AI tools in the market, while feature requests and use case discussions reveal users’ exploration and expectations for practical AI applications.\n\n**3. Main User Pain Points or Complaints**  \n- **Declining Content Quality**: Such as increased spelling errors and obvious AI-generated traces; users are disappointed with unedited AI outputs.\n- **Platform Policies and Account Suspension Mechanisms**: Users were suspended for discussing topics like Sora, considering the platform’s moderation non-transparent and overly strict.\n- **Privacy and Data Security**: Some users suspect ChatGPT of data leakage risks with third parties (e.g., Facebook), and are concerned about privacy issues brought by analytics tools.\n- **AI Interaction Experience**: Some users reported that ChatGPT has become more prone to refuting and arguing in conversations, affecting the communication experience.\n\n**4. Features Users Appreciate or Expect**  \n- **Innovative Use Cases**: Users recognize ChatGPT’s application in real-world scenarios such as career recommendations, especially when it provides specific and logically clear advice based on user backgrounds.\n- **Feature Improvements**: Users hope to see enhanced content quality, reduced AI traces, improved personalized recommendation capabilities, and expect more transparent account suspension and data management mechanisms.\n- **Reflection on Dependency**: Some users reflect on being overly reliant on ChatGPT and hope AI can better assist rather than replace independent thinking.\n\n**5. Competitor Comparison Discussions**  \nThe shutdown of Sora became the focal point this period, with users discussing its impact on the overall OpenAI ecosystem and comparing the stability and innovation of other AI tools. Additionally, some posts mentioned differences in data analysis and privacy protection between Google Analytics and other third-party tools.\n\n**6. Actionable Insights**  \n- **Improve Content Quality and Stability**: Focus on the accuracy and naturalness of model outputs, reduce basic errors such as spelling mistakes, and optimize the readability and originality of AI-generated content.\n- **Optimize User Management and Policy Transparency**: Recommend making the account suspension mechanism public, clarifying violation standards, and enhancing user trust.\n- **Strengthen Privacy and Data Security**: Enhance data isolation and transparent disclosure with third-party tools to address user privacy concerns.\n- **Explore Real-World Application Scenarios**: Encourage and promote innovative use cases to meet users’ expectations for the practical value of AI.\n- **Monitor Competitor Trends**: Closely track market changes of competitors like Sora and adjust product strategies in a timely manner to address user attrition risks.\n\nIn summary, ChatGPT needs to continuously improve in content quality, user trust, and practical application value to meet the community’s increasingly stringent expectations and intense market competition.",
+      "keywords_en": [
+        "Declining content quality",
+        "More spelling mistakes",
+        "Obvious AI traces",
+        "Disappointed",
+        "Opaque suspension mechanism",
+        "Privacy breach concerns",
+        "Data security worries",
+        "Overly strict moderation",
+        "Increased rebuttal tendency",
+        "Worsened communication experience",
+        "Innovative use cases",
+        "Clear logical advice",
+        "Personalized recommendations",
+        "Dependence reflection",
+        "Real-world applications",
+        "Lack of originality",
+        "Decreased trust",
+        "Low policy transparency",
+        "Competitor stability",
+        "User churn risk"
       ]
     },
     {
@@ -387,6 +488,12 @@
             "Claude在学术写作领域表现突出",
             "Sonnet适合一般学术任务，Opus适合复杂需求",
             "用户经验分享和工具推荐"
+          ],
+          "sentiment_reason_en": "Comments generally believe Claude excels in academic writing and complex reasoning, with high recommendations.",
+          "key_points_en": [
+            "Claude excels in academic writing",
+            "Sonnet is suitable for general academic tasks, Opus for complex needs",
+            "User experience sharing and tool recommendations"
           ]
         },
         {
@@ -405,6 +512,12 @@
             "利用Claude Opus多代理系统批量生成小说",
             "每个代理负责不同写作阶段，提升协作效率",
             "评论区对Claude评估自身作品的能力有不同看法"
+          ],
+          "sentiment_reason_en": "User showcased Claude Opus in novel generation, but comments debated Claude's self-evaluation ability.",
+          "key_points_en": [
+            "Batch novel generation using Claude Opus multi-agent system",
+            "Each agent handles different writing stages, improving collaboration",
+            "Comments have differing views on Claude's ability to assess its own work"
           ]
         },
         {
@@ -423,6 +536,12 @@
             "Claude Code在代码导航上效率不高，导致token浪费",
             "用户开发工具优化token使用",
             "社区对token消耗原因有不同看法"
+          ],
+          "sentiment_reason_en": "User analyzed Claude Code's token consumption issues and suggested improvements; community discussion was active but divided.",
+          "key_points_en": [
+            "Claude Code is inefficient in code navigation, causing token waste",
+            "Users developed tools to optimize token usage",
+            "Community has differing views on token consumption causes"
           ]
         },
         {
@@ -441,6 +560,12 @@
             "讨论Opus 4.7与Opus 5的发布时间和特性",
             "部分用户期待更大上下文窗口和新功能",
             "社区对版本命名和发布时间存在不同猜测"
+          ],
+          "sentiment_reason_en": "Users discussed the possible release of a new Claude Opus version, mainly predictions and expectations, with no clear sentiment.",
+          "key_points_en": [
+            "Discussion on Opus 4.7 and Opus 5 release dates and features",
+            "Some users expect larger context window and new features",
+            "Community speculates on version naming and release timing"
           ]
         },
         {
@@ -459,6 +584,12 @@
             "Claude免费版有使用限制",
             "用户遇到输出不一致和效率问题",
             "社区建议升级付费版和优化工作流程"
+          ],
+          "sentiment_reason_en": "Users expressed concerns about limitations and issues with the free Claude version in development projects, but the community offered positive suggestions.",
+          "key_points_en": [
+            "Claude free version has usage limits",
+            "Users face inconsistent output and efficiency issues",
+            "Community suggests upgrading to paid version and optimizing workflow"
           ]
         },
         {
@@ -477,6 +608,12 @@
             "Claude出现登录和API认证错误",
             "多次发生影响用户正常使用",
             "用户表达不满"
+          ],
+          "sentiment_reason_en": "Multiple users reported Claude login and API authentication errors, resulting in a very poor experience.",
+          "key_points_en": [
+            "Claude has login and API authentication errors",
+            "Repeated incidents affect normal use",
+            "Users express dissatisfaction"
           ]
         },
         {
@@ -495,6 +632,12 @@
             "付费后依然频繁触发使用限制",
             "限制问题在社区普遍存在",
             "用户对Claude限制政策极度不满"
+          ],
+          "sentiment_reason_en": "Users expressed strong dissatisfaction with Claude's restrictions, feeling the paid experience is worse and the issue is widespread.",
+          "key_points_en": [
+            "Frequent restrictions even after payment",
+            "Restriction issues are common in the community",
+            "Users are extremely dissatisfied with Claude's restriction policy"
           ]
         },
         {
@@ -513,6 +656,12 @@
             "发送一条消息即触发使用限制",
             "多名用户近期遇到相同问题",
             "官方支持回复敷衍，未能解决实际问题"
+          ],
+          "sentiment_reason_en": "Users frequently encounter message limits, seriously affecting workflow, and official responses fail to resolve the issue, leading to widespread dissatisfaction and frustration.",
+          "key_points_en": [
+            "Sending one message triggers usage limit",
+            "Many users recently faced the same issue",
+            "Official support responses are perfunctory and do not solve the problem"
           ]
         },
         {
@@ -531,6 +680,12 @@
             "用户对Claude Code自动化脚本功能感到惊喜",
             "希望了解Claude Code及相关工具的潜力",
             "评论积极介绍Claude Code的实际用法和优势"
+          ],
+          "sentiment_reason_en": "Users are very satisfied with Claude Code's automation, and comments actively introduce its potential and uses.",
+          "key_points_en": [
+            "Users are impressed by Claude Code's automation scripting",
+            "Interested in Claude Code's potential and related tools",
+            "Comments actively introduce practical uses and advantages of Claude Code"
           ]
         },
         {
@@ -549,6 +704,12 @@
             "Claude代理可自动管理社交账号并保持活跃",
             "实现了高效回复和内容生成，带来业务线索",
             "用户仍可对最终发布内容进行把控"
+          ],
+          "sentiment_reason_en": "Users are very satisfied with Claude agent's automatic Twitter management, which brings real benefits and efficiency gains.",
+          "key_points_en": [
+            "Claude agent can automatically manage social accounts and stay active",
+            "Achieves efficient replies and content generation, bringing business leads",
+            "Users can still control final published content"
           ]
         }
       ],
@@ -569,7 +730,9 @@
             "1rwt7xl",
             "1s20sqd"
           ],
-          "detail": "大量用户反馈Claude的使用额度限制过于严格，付费后依然频繁触发，严重影响实际体验和工作流程。"
+          "detail": "大量用户反馈Claude的使用额度限制过于严格，付费后依然频繁触发，严重影响实际体验和工作流程。",
+          "text_en": "Usage quota limits are too strict",
+          "detail_en": "Many users report that Claude's usage quota is overly restrictive, with frequent triggers even after payment, severely impacting actual experience and workflow."
         },
         {
           "text": "额度消耗异常快速",
@@ -580,7 +743,9 @@
             "1s1jsol",
             "1s20sqd"
           ],
-          "detail": "Opus和Pro套餐用户反映额度消耗极快，单次操作即消耗大量额度，导致体验大幅下降。"
+          "detail": "Opus和Pro套餐用户反映额度消耗极快，单次操作即消耗大量额度，导致体验大幅下降。",
+          "text_en": "Quota depletes abnormally fast",
+          "detail_en": "Opus and Pro plan users report extremely fast quota consumption, with a single operation using a large amount, leading to a significant drop in experience."
         },
         {
           "text": "账号注册与封禁问题",
@@ -588,7 +753,9 @@
           "post_ids": [
             "1s0qej2"
           ],
-          "detail": "部分用户刚付费即被封号，社区对TOS和多账号合规性存在困惑，影响用户信任。"
+          "detail": "部分用户刚付费即被封号，社区对TOS和多账号合规性存在困惑，影响用户信任。",
+          "text_en": "Account registration and ban issues",
+          "detail_en": "Some users are banned immediately after payment; the community is confused about TOS and multi-account compliance, affecting user trust."
         },
         {
           "text": "功能访问受限",
@@ -596,7 +763,9 @@
           "post_ids": [
             "1s0hfb4"
           ],
-          "detail": "Claude无法访问YouTube等内容源，用户担心失去重要信息渠道，影响内容获取体验。"
+          "detail": "Claude无法访问YouTube等内容源，用户担心失去重要信息渠道，影响内容获取体验。",
+          "text_en": "Limited feature access",
+          "detail_en": "Claude cannot access content sources like YouTube, causing users to worry about losing important information channels and affecting content acquisition."
         },
         {
           "text": "官方支持响应不佳",
@@ -604,7 +773,9 @@
           "post_ids": [
             "1s2f6ic"
           ],
-          "detail": "用户遇到问题时，官方支持回复敷衍，未能有效解决实际问题，导致用户沮丧。"
+          "detail": "用户遇到问题时，官方支持回复敷衍，未能有效解决实际问题，导致用户沮丧。",
+          "text_en": "Poor official support response",
+          "detail_en": "When users encounter issues, official support responses are perfunctory and fail to effectively resolve problems, leading to user frustration."
         }
       ],
       "strengths": [
@@ -613,7 +784,9 @@
           "post_ids": [
             "1s2dga1"
           ],
-          "detail": "Claude在学术写作和复杂推理方面表现优异，受到用户高度认可和推荐。"
+          "detail": "Claude在学术写作和复杂推理方面表现优异，受到用户高度认可和推荐。",
+          "text_en": "Outstanding academic writing performance",
+          "detail_en": "Claude excels in academic writing and complex reasoning, earning high recognition and recommendations from users."
         },
         {
           "text": "自动化与集成能力强",
@@ -624,7 +797,9 @@
             "1s1w0qj",
             "1s2oqzy"
           ],
-          "detail": "Claude Code和Cowork等功能支持自动化脚本、消息集成和本地任务执行，极大提升用户效率。"
+          "detail": "Claude Code和Cowork等功能支持自动化脚本、消息集成和本地任务执行，极大提升用户效率。",
+          "text_en": "Strong automation and integration capabilities",
+          "detail_en": "Features like Claude Code and Cowork support automation scripts, message integration, and local task execution, greatly improving user efficiency."
         },
         {
           "text": "高质量用户体验",
@@ -633,7 +808,9 @@
             "1rwyq4n",
             "1s20esg"
           ],
-          "detail": "用户普遍认为Claude体验专业、提升工作流效率，并在与竞品对比中表现优异。"
+          "detail": "用户普遍认为Claude体验专业、提升工作流效率，并在与竞品对比中表现优异。",
+          "text_en": "High-quality user experience",
+          "detail_en": "Users generally find Claude professional, efficient for workflows, and superior in comparison with competitors."
         },
         {
           "text": "社区活跃与创新",
@@ -642,57 +819,82 @@
             "1s1sj1c",
             "1rz00cg"
           ],
-          "detail": "社区积极分享创新用例和技术经验，推动产品生态多样化发展。"
+          "detail": "社区积极分享创新用例和技术经验，推动产品生态多样化发展。",
+          "text_en": "Active and innovative community",
+          "detail_en": "The community actively shares innovative use cases and technical experience, driving diverse product ecosystem development."
         }
       ],
       "recommendations": [
         {
           "priority": "P0",
-          "text": "立即优化和透明化额度限制机制，确保付费用户获得合理使用体验。"
+          "text": "立即优化和透明化额度限制机制，确保付费用户获得合理使用体验。",
+          "text_en": "Immediately optimize and increase transparency of quota limits to ensure reasonable experience for paying users."
         },
         {
           "priority": "P1",
-          "text": "完善官方支持响应流程，提升用户问题解决效率和满意度。"
+          "text": "完善官方支持响应流程，提升用户问题解决效率和满意度。",
+          "text_en": "Improve official support response process to enhance issue resolution efficiency and user satisfaction."
         },
         {
           "priority": "P1",
-          "text": "加强账号注册与封禁流程的合规性和透明度，减少误判和用户流失。"
+          "text": "加强账号注册与封禁流程的合规性和透明度，减少误判和用户流失。",
+          "text_en": "Strengthen compliance and transparency in account registration and banning processes to reduce misjudgment and user loss."
         },
         {
           "priority": "P2",
-          "text": "扩展Claude对主流内容源（如YouTube等）的访问能力，丰富信息获取场景。"
+          "text": "扩展Claude对主流内容源（如YouTube等）的访问能力，丰富信息获取场景。",
+          "text_en": "Expand Claude's access to mainstream content sources (e.g., YouTube) to enrich information acquisition scenarios."
         },
         {
           "priority": "P2",
-          "text": "持续优化自动化和集成功能，鼓励社区创新用例和插件开发。"
+          "text": "持续优化自动化和集成功能，鼓励社区创新用例和插件开发。",
+          "text_en": "Continuously optimize automation and integration features, encouraging community innovation and plugin development."
         }
       ],
       "keywords": [
         "额度限制",
-        "Pro套餐",
-        "Opus模型",
-        "自动化",
-        "Claude Code",
-        "学术写作",
-        "Cowork",
-        "消息集成",
-        "本地任务",
-        "API",
-        "会话管理",
-        "token消耗",
-        "账号注册",
-        "封禁",
-        "YouTube访问",
-        "官方支持",
-        "社区创新",
-        "插件开发",
-        "跨会话记忆",
-        "AI代理",
-        "工作流优化",
-        "开发效率",
-        "内容生成",
-        "数据集成",
-        "用户体验"
+        "付费受限",
+        "角色扮演受阻",
+        "长对话中断",
+        "用户流失",
+        "退款请求",
+        "竞品对比",
+        "额度宽松",
+        "学术写作强",
+        "复杂任务处理",
+        "多代理协作",
+        "Opus模型强大",
+        "创新能力高",
+        "上下文窗口小",
+        "token浪费",
+        "代码导航低效",
+        "新模型期待",
+        "产品迭代慢",
+        "印象深刻",
+        "失望"
+      ],
+      "summary_en": "From March 16 to March 30, 2026, a total of 530 valid posts from the r/ClaudeAI+claude community were analyzed. The overall sentiment distribution was mainly positive (42%) and negative (24%), with mixed (13%) and neutral (18%) emotions also accounting for a certain proportion. Positive sentiment primarily stemmed from users’ strong recognition of Claude’s performance in academic writing, handling complex tasks (such as Sonnet and Opus in academic scenarios), and multi-agent collaborative content generation (e.g., the popular post “10 novels written in 12 days. 7 agents. Claude Opus.”). Users believe Claude excels in non-programming academic fields, especially with the Opus model demonstrating strong capabilities in addressing complex needs.\n\nHowever, negative sentiment was concentrated on “usage limit restrictions,” which became the most prominent user pain point during this period. Numerous highly interactive negative posts (such as “Claude usage limit is absurd,” “Claude limits are broken,” “Pro burnt 60% of the session usage in 3 min???”) reflected that even paid users frequently encounter quota restrictions. Some users were even limited after sending just one message, severely impacting practical experiences such as role-playing and long conversations. As a result, some users chose to request refunds and compared Claude with competitors like ChatGPT, believing the latter offers more generous quotas and a better user experience, thus increasing the risk of user churn.\n\nTopic distribution shows that use_case (152 posts), feature_request (137 posts), and product_experience (109 posts) were the most discussed areas, indicating strong user interest and expectations regarding Claude’s practical application scenarios, feature improvements, and product experience. Within feature_request, users generally expect a larger context window, more flexible quota management, as well as optimizations for code-related features and token usage efficiency (e.g., “Claude Code is inefficient in code navigation, leading to token waste”). In addition, discussions about the release time and new features of Opus 4.7 and Opus 5 were also active, showing that users have high expectations for product iteration speed and innovation capability.\n\nIn summary, the product team should prioritize optimizing the usage limit restriction strategy to enhance the experience for paid users and prevent user churn caused by quota issues. It is also recommended to accelerate the development and release of new models (such as Opus 5) and features (such as larger context windows and token usage optimization) to meet the needs of advanced users. For strengths in academic and multi-agent collaboration scenarios, further strengthening market promotion can help consolidate differentiated competitiveness. Finally, it is necessary to closely monitor comparative feedback with competitors like ChatGPT and continuously optimize product positioning and user experience.",
+      "keywords_en": [
+        "usage limit",
+        "paid restrictions",
+        "roleplay blocked",
+        "long chat interrupted",
+        "user churn",
+        "refund request",
+        "competitor comparison",
+        "generous quota",
+        "strong academic writing",
+        "complex task handling",
+        "multi-agent collaboration",
+        "Opus model powerful",
+        "high innovation",
+        "small context window",
+        "token waste",
+        "inefficient code navigation",
+        "new model anticipation",
+        "slow iteration",
+        "impressive",
+        "disappointed"
       ]
     },
     {
@@ -739,6 +941,12 @@
             "Gemini能跨Gmail、Drive、日历整合信息并智能提醒",
             "极大提升个人效率和体验",
             "用户认为Gemini已超越传统聊天机器人"
+          ],
+          "sentiment_reason_en": "User is surprised by Gemini's integration of personal data and smart reminders for forgotten items, believing it greatly improves personal efficiency and experience.",
+          "key_points_en": [
+            "Gemini can integrate information across Gmail, Drive, and Calendar and provide smart reminders",
+            "Greatly improves personal efficiency and experience",
+            "User thinks Gemini has surpassed traditional chatbots"
           ]
         },
         {
@@ -757,6 +965,12 @@
             "Gemini Ultra失去上下文和记忆能力",
             "输出质量大幅下降，影响用户工作",
             "用户对付费服务和客服支持极度失望"
+          ],
+          "sentiment_reason_en": "User is strongly dissatisfied with the severe quality decline of the latest Gemini Ultra version, which has affected their work.",
+          "key_points_en": [
+            "Gemini Ultra has lost context and memory abilities",
+            "Output quality has dropped significantly, affecting user work",
+            "User is extremely disappointed with paid service and customer support"
           ]
         },
         {
@@ -775,6 +989,12 @@
             "用户认为Gemini 3.1 Pro表现不如2.5 Pro",
             "抱怨新版本经常屏蔽请求且理解能力下降",
             "评论区有用户认为3.1 Pro更安全但体验分歧"
+          ],
+          "sentiment_reason_en": "User is very dissatisfied with Gemini 3.1 Pro, thinks it is worse than 2.5 Pro; some differing opinions in comments but overall negative.",
+          "key_points_en": [
+            "User thinks Gemini 3.1 Pro performs worse than 2.5 Pro",
+            "Complaints about frequent request blocking and decreased comprehension in the new version",
+            "Some users in comments think 3.1 Pro is safer but experiences differ"
           ]
         },
         {
@@ -793,6 +1013,12 @@
             "Gemini与ChatGPT价格相近，适用场景不同",
             "Gemini在Google生态下更有优势",
             "部分用户认为ChatGPT在写作和推理上更强"
+          ],
+          "sentiment_reason_en": "Users discuss the cost-effectiveness of Gemini versus ChatGPT, with mixed views.",
+          "key_points_en": [
+            "Gemini and ChatGPT are similarly priced but suited for different scenarios",
+            "Gemini has more advantages within the Google ecosystem",
+            "Some users think ChatGPT is stronger in writing and reasoning"
           ]
         },
         {
@@ -811,6 +1037,12 @@
             "NBP2模型拒绝所有请求，影响正常使用",
             "上传参考图片时持续报错",
             "对生成动漫图片的内容审核过于严格"
+          ],
+          "sentiment_reason_en": "Users complain that Gemini cannot function properly, with frequent rejections of image uploads and content generation, and the issue has persisted for days, resulting in a poor experience.",
+          "key_points_en": [
+            "NBP2 model rejects all requests, affecting normal use",
+            "Continuous errors when uploading reference images",
+            "Content review for generating anime images is too strict"
           ]
         },
         {
@@ -829,6 +1061,12 @@
             "Google Studio AI被认为是最优秀的网站/应用制作工具之一",
             "用户分享了实际应用于房地产客户的优化提示",
             "评论区有用户表达对免费版功能削减的不满"
+          ],
+          "sentiment_reason_en": "Users highly praise the performance of Google Studio AI and actively recommend it.",
+          "key_points_en": [
+            "Google Studio AI is considered one of the best website/app creation tools",
+            "Users shared optimization tips applied to real estate clients",
+            "Some users in comments are unhappy about reduced free features"
           ]
         },
         {
@@ -847,6 +1085,12 @@
             "长上下文检索能力突然下降而非平滑衰减",
             "模型表现出一系列异常行为，疑似系统性缺陷",
             "用户对模型内部机制产生质疑"
+          ],
+          "sentiment_reason_en": "User believes Gemini has systemic issues, especially with long-context retrieval and reasoning chains.",
+          "key_points_en": [
+            "Long-context retrieval ability suddenly drops instead of declining smoothly",
+            "Model exhibits a series of abnormal behaviors, suspected systemic defects",
+            "User questions the model's internal mechanisms"
           ]
         },
         {
@@ -865,6 +1109,12 @@
             "Google AI Ultra具备多种实用功能如代码审查、UI设计、自动化等",
             "NotebookLM和Project Mariner等功能被高度评价",
             "评论区推荐尝试Gemini CLI等新工具"
+          ],
+          "sentiment_reason_en": "Users actively share various practical features and hidden uses of Google AI Ultra; comments also recommend new tools, overall positive feedback.",
+          "key_points_en": [
+            "Google AI Ultra has many practical features like code review, UI design, automation, etc.",
+            "NotebookLM and Project Mariner features are highly praised",
+            "Comments recommend trying new tools like Gemini CLI"
           ]
         },
         {
@@ -883,6 +1133,12 @@
             "AI摘要导致网站流量和收入下降",
             "担忧内容创作者失去动力，影响互联网内容生态",
             "建议谷歌建立数据付费和分成机制"
+          ],
+          "sentiment_reason_en": "Users criticize Gemini's AI summary feature for causing significant drops in website traffic and ad revenue, calling on Google to establish a paid mechanism to compensate content creators.",
+          "key_points_en": [
+            "AI summaries cause drops in website traffic and revenue",
+            "Concern that content creators will lose motivation, affecting the internet content ecosystem",
+            "Suggest Google establish data payment and revenue sharing mechanisms"
           ]
         },
         {
@@ -901,6 +1157,12 @@
             "Gemini意外生成钓鱼payload",
             "谷歌安全响应不积极",
             "担忧AI安全与合规风险"
+          ],
+          "sentiment_reason_en": "User reports Gemini generated a phishing payload without being prompted, and Google has not fixed the vulnerability, posing security risks.",
+          "key_points_en": [
+            "Gemini unexpectedly generated a phishing payload",
+            "Google's security response is not proactive",
+            "Concern about AI security and compliance risks"
           ]
         }
       ],
@@ -914,7 +1176,9 @@
             "1rwv43a",
             "1s27xx6"
           ],
-          "detail": "用户普遍反映Gemini输出质量大幅下降，幻觉率高，无法正常工作，影响付费用户体验。"
+          "detail": "用户普遍反映Gemini输出质量大幅下降，幻觉率高，无法正常工作，影响付费用户体验。",
+          "text_en": "Severe decline in model quality",
+          "detail_en": "Users widely report a significant drop in Gemini's output quality, high hallucination rate, inability to function properly, and negative impact on paid user experience."
         },
         {
           "text": "缺乏记忆与上下文能力",
@@ -924,7 +1188,9 @@
             "1s0dagg",
             "1s1cwo9"
           ],
-          "detail": "Gemini无法保持会话记忆和上下文一致性，导致多轮对话体验极差。"
+          "detail": "Gemini无法保持会话记忆和上下文一致性，导致多轮对话体验极差。",
+          "text_en": "Lack of memory and context handling",
+          "detail_en": "Gemini cannot maintain conversation memory or context consistency, resulting in poor multi-turn dialogue experience."
         },
         {
           "text": "内容审核与功能限制过严",
@@ -933,7 +1199,9 @@
             "1s27xx6",
             "1s34g6o"
           ],
-          "detail": "上传图片和生成内容频繁被拒绝，部分功能被包装成新功能宣传，用户体验受限。"
+          "detail": "上传图片和生成内容频繁被拒绝，部分功能被包装成新功能宣传，用户体验受限。",
+          "text_en": "Overly strict content moderation and feature restrictions",
+          "detail_en": "Image uploads and content generation are frequently rejected, some features are repackaged as new, and user experience is limited."
         },
         {
           "text": "隐私与安全隐患",
@@ -941,7 +1209,9 @@
           "post_ids": [
             "1s1uyg0"
           ],
-          "detail": "Gemini疑似自动截取用户主屏截图，用户担忧隐私和数据安全。"
+          "detail": "Gemini疑似自动截取用户主屏截图，用户担忧隐私和数据安全。",
+          "text_en": "Privacy and security risks",
+          "detail_en": "Gemini is suspected of automatically capturing users' main screen screenshots, raising concerns about privacy and data security."
         },
         {
           "text": "订阅服务与实际体验不符",
@@ -950,7 +1220,9 @@
             "1rwu5x4",
             "1s1cwo9"
           ],
-          "detail": "付费订阅获得的模型版本和功能低于宣传，用户质疑存在误导和欺诈。"
+          "detail": "付费订阅获得的模型版本和功能低于宣传，用户质疑存在误导和欺诈。",
+          "text_en": "Subscription service does not match actual experience",
+          "detail_en": "The model version and features provided to paid subscribers are below advertised claims, leading to concerns of misleading or fraudulent practices."
         }
       ],
       "strengths": [
@@ -961,7 +1233,9 @@
             "1s145u3",
             "1s2qa3v"
           ],
-          "detail": "Gemini可整合Gmail、Drive、日历等多源数据，提升个人效率并支持多模态任务。"
+          "detail": "Gemini可整合Gmail、Drive、日历等多源数据，提升个人效率并支持多模态任务。",
+          "text_en": "Strong multimodal integration",
+          "detail_en": "Gemini can integrate data from Gmail, Drive, Calendar, etc., improving personal efficiency and supporting multimodal tasks."
         },
         {
           "text": "API与自动化工具丰富",
@@ -970,7 +1244,9 @@
             "1s0bdhw",
             "1s0ps47"
           ],
-          "detail": "API限额机制防止滥用，Chrome代理和AI Ultra等工具提升自动化和开发效率。"
+          "detail": "API限额机制防止滥用，Chrome代理和AI Ultra等工具提升自动化和开发效率。",
+          "text_en": "Rich APIs and automation tools",
+          "detail_en": "API quota mechanisms prevent abuse, and tools like Chrome proxy and AI Ultra enhance automation and development efficiency."
         },
         {
           "text": "内容创作与研究能力突出",
@@ -978,7 +1254,9 @@
             "1s145u3",
             "1ry6nko"
           ],
-          "detail": "在内容创作、深度研究和复杂任务处理方面表现优异，受到创作者好评。"
+          "detail": "在内容创作、深度研究和复杂任务处理方面表现优异，受到创作者好评。",
+          "text_en": "Outstanding content creation and research capabilities",
+          "detail_en": "Excels in content creation, deep research, and complex task handling, receiving positive feedback from creators."
         },
         {
           "text": "社区创新用法活跃",
@@ -987,58 +1265,82 @@
             "1s1exbg",
             "1rxk213"
           ],
-          "detail": "用户积极开发桌面客户端、CLI等新用法，社区氛围创新且建设性强。"
+          "detail": "用户积极开发桌面客户端、CLI等新用法，社区氛围创新且建设性强。",
+          "text_en": "Active community innovation",
+          "detail_en": "Users actively develop desktop clients, CLI, and other new uses, fostering an innovative and constructive community."
         }
       ],
       "recommendations": [
         {
           "priority": "P0",
-          "text": "紧急修复模型输出质量和上下文记忆问题，保障核心体验稳定。"
+          "text": "紧急修复模型输出质量和上下文记忆问题，保障核心体验稳定。",
+          "text_en": "Urgently fix model output quality and context memory issues to ensure core experience stability."
         },
         {
           "priority": "P0",
-          "text": "加强隐私保护和安全机制，明确告知用户数据使用范围，杜绝未授权操作。"
+          "text": "加强隐私保护和安全机制，明确告知用户数据使用范围，杜绝未授权操作。",
+          "text_en": "Enhance privacy protection and security, clearly inform users about data usage, and prevent unauthorized actions."
         },
         {
           "priority": "P1",
-          "text": "优化订阅服务内容与宣传一致性，提升付费用户的实际体验和信任度。"
+          "text": "优化订阅服务内容与宣传一致性，提升付费用户的实际体验和信任度。",
+          "text_en": "Align subscription service content with marketing, improving paid user experience and trust."
         },
         {
           "priority": "P1",
-          "text": "适度放宽内容审核和功能限制，提升生成内容的灵活性和用户满意度。"
+          "text": "适度放宽内容审核和功能限制，提升生成内容的灵活性和用户满意度。",
+          "text_en": "Moderately relax content moderation and feature restrictions to increase flexibility and user satisfaction."
         },
         {
           "priority": "P2",
-          "text": "持续丰富多模态和自动化工具生态，鼓励社区创新用法和开发者参与。"
+          "text": "持续丰富多模态和自动化工具生态，鼓励社区创新用法和开发者参与。",
+          "text_en": "Continue to enrich the multimodal and automation tool ecosystem, encouraging community innovation and developer participation."
         }
       ],
       "keywords": [
-        "模型质量",
-        "幻觉",
-        "上下文",
-        "记忆",
-        "内容审核",
-        "隐私安全",
-        "订阅服务",
-        "多模态",
-        "自动化",
-        "API限额",
-        "Chrome代理",
-        "AI Ultra",
-        "内容创作",
-        "研究",
-        "创新用法",
-        "桌面客户端",
-        "CLI",
-        "功能限制",
-        "用户体验",
-        "数据整合",
-        "Gmail",
-        "Drive",
-        "日历",
-        "社区反馈",
-        "prompt",
-        "安全机制"
+        "模型回退",
+        "幻觉问题",
+        "响应慢",
+        "拒绝请求",
+        "输出质量下降",
+        "上下文丢失",
+        "记忆能力弱",
+        "图片上传报错",
+        "图像分析不准",
+        "稳定性差",
+        "功能不稳定",
+        "欧盟功能受限",
+        "Web端体验差",
+        "高强度工作适配",
+        "生态集成优势",
+        "智能提醒",
+        "自动化能力",
+        "个性化需求",
+        "易用性高",
+        "印象深刻"
+      ],
+      "summary_en": "**Reddit Community Gemini Biweekly Competitive Intelligence Summary (2026-03-16 to 2026-03-30)**\n\nA total of 416 valid posts from the r/GeminiAI and r/GoogleGeminiAI communities were analyzed for this period. Overall sentiment was predominantly negative (49%), with positive feedback accounting for 24%, and neutral and mixed sentiments at 16% and 9% respectively. Negative sentiment was mainly driven by recent product quality fluctuations, model regressions, and unstable functionality. Many users reported that Gemini 3.1 Pro performed worse than 2.5 Pro, the NBP2 model frequently refused requests, and image upload errors severely impacted normal usage (e.g., “Gemini 3.1 pro is sh*t.”, “What the hell is happening with Gemini??”). Additionally, Gemini Ultra was criticized for losing context and memory capabilities, with output quality declining and directly affecting users’ workflows (“Serious Regression in Gemini quality”).\n\nThe most discussed topics in the community were bug reports (117 posts), followed by product experience (72 posts), feature requests (68 posts), real-world use cases (57 posts), and model capabilities (47 posts). Bug reports and product experience posts reflected users’ high concern for Gemini’s stability and reliability, especially regarding regressions and decreased comprehension after model upgrades. Feature requests and use case discussions showed that users highly value and anticipate Gemini’s deep integration within the Google ecosystem (such as Gmail, Drive, and Calendar information integration and smart reminders) (“I gave Gemini access to my Gmail, Drive, and Calendar. It found something I comp”), and hope to further expand personalization and automation capabilities.\n\nKey pain points include: frequent model refusals, high hallucination rates, inaccurate image analysis, weak context memory, feature regressions after version upgrades, and limited functionality in EU regions. Some users complained that the web experience lags far behind competitors, and that the new version is more restrictive in blocking requests, impacting high-intensity work scenarios.\n\nPositive feedback mainly focused on Gemini’s seamless integration with the Google ecosystem, the efficiency and ease of use of tools like Google Studio AI, and the aesthetic appeal and affinity of the brand name. Users expect continued optimization in personalization, context understanding, and cross-application collaboration, and hope for improvements in model stability and accuracy.\n\nIn terms of competitive comparison, the community frequently mentioned that Gemini and ChatGPT are similar in price and applicable scenarios, but Gemini has more advantages within the Google ecosystem. Some users believe the Gemini 3 model has a low refusal rate and is suitable for high-intensity work, but overall web experience and output quality still have significant room for improvement.\n\n**Actionable Insights:**\n- Prioritize fixing core bugs such as model refusals, image upload errors, and context loss to improve stability.\n- Enhance model optimization in context understanding and memory capabilities to reduce hallucinations and erroneous outputs.\n- Deepen integration with Google ecosystem products, strengthening experiences in smart reminders, automation, and other high-frequency scenarios.\n- For restricted regions such as the EU, expedite compliant feature rollouts to reduce user attrition.\n- Monitor competitors’ performance in web and high-intensity work scenarios, and optimize Gemini’s interaction experience and output quality.\n- Continuously collect user feature requests, prioritizing the development of personalization, automation, and cross-application collaboration capabilities.\n\nOverall, Gemini holds advantages in ecosystem integration and certain innovative features, but must quickly resolve model quality and stability issues to improve user satisfaction and close the gap with major competitors.",
+      "keywords_en": [
+        "model regression",
+        "hallucination issue",
+        "slow response",
+        "request refusal",
+        "output quality drop",
+        "context loss",
+        "weak memory",
+        "image upload error",
+        "inaccurate image analysis",
+        "poor stability",
+        "unstable functionality",
+        "EU feature limitation",
+        "poor web experience",
+        "intense workload fit",
+        "ecosystem integration advantage",
+        "smart reminders",
+        "automation capability",
+        "personalization need",
+        "high usability",
+        "impressive"
       ]
     },
     {
@@ -1084,6 +1386,12 @@
             "Copilot使用体验极差，效率低下",
             "与Claude相比，Copilot需要更多时间和操作",
             "部分评论认为Copilot与其他AI工具定位不同，强调其与微软内容的集成"
+          ],
+          "sentiment_reason_en": "User strongly expressed extreme dissatisfaction with Copilot experience, believing its efficiency is much lower than Claude.",
+          "key_points_en": [
+            "Copilot experience is very poor, low efficiency",
+            "Copilot takes more time and steps compared to Claude",
+            "Some comments say Copilot has a different positioning from other AI tools, emphasizing its integration with Microsoft content"
           ]
         },
         {
@@ -1102,6 +1410,12 @@
             "批量创建Copilot Studio代理提升团队效率",
             "无需编程即可部署多领域智能助手",
             "社区成员感谢分享并认可其实用性"
+          ],
+          "sentiment_reason_en": "User actively shared experience of batch creating Copilot agents, community feedback was positive and appreciative.",
+          "key_points_en": [
+            "Batch creation of Copilot Studio agents improves team efficiency",
+            "Deploy multi-domain intelligent assistants without coding",
+            "Community members thanked and recognized its practicality"
           ]
         },
         {
@@ -1120,6 +1434,12 @@
             "Copilot在Excel、Word、PPT等办公场景下表现不如Claude",
             "公司考虑用Copilot提升办公自动化，但对效果存疑",
             "评论提到Copilot与微软生态集成及未来模型升级的可能"
+          ],
+          "sentiment_reason_en": "User expressed concern about Copilot's poor performance in real office scenarios, but some comments noted its deep integration with Microsoft ecosystem and potential for future improvement.",
+          "key_points_en": [
+            "Copilot performs worse than Claude in Excel, Word, PPT office scenarios",
+            "Company considers using Copilot to improve office automation but doubts effectiveness",
+            "Comments mention Copilot's integration with Microsoft ecosystem and potential model upgrades"
           ]
         },
         {
@@ -1138,6 +1458,12 @@
             "提出用Copilot自动管理办公室/大堂电视内容",
             "减少人工操作，提升效率",
             "社区成员认为这是合理的AI应用场景"
+          ],
+          "sentiment_reason_en": "User agreed with the idea of using Copilot to manage digital signage, discussion was active.",
+          "key_points_en": [
+            "Suggested using Copilot to automatically manage office/lobby TV content",
+            "Reduce manual work, improve efficiency",
+            "Community members think this is a reasonable AI application scenario"
           ]
         },
         {
@@ -1156,6 +1482,12 @@
             "Copilot在PPT转Word报告任务表现不如ChatGPT",
             "Copilot受限于安全和数据访问机制",
             "社区建议选择不同模型和模式以提升效果"
+          ],
+          "sentiment_reason_en": "User was disappointed that Copilot is much worse than ChatGPT in report generation, community analyzed the reasons.",
+          "key_points_en": [
+            "Copilot performs worse than ChatGPT in PPT to Word report tasks",
+            "Copilot is limited by security and data access mechanisms",
+            "Community suggests choosing different models and modes to improve results"
           ]
         }
       ],
@@ -1169,7 +1501,9 @@
             "1s5kqfw",
             "1s3l69g"
           ],
-          "detail": "用户普遍反馈Copilot在核心办公场景下表现不稳定，输出结果不一致，影响信任和效率。"
+          "detail": "用户普遍反馈Copilot在核心办公场景下表现不稳定，输出结果不一致，影响信任和效率。",
+          "text_en": "Poor feature stability",
+          "detail_en": "Users commonly report that Copilot is unstable in core office scenarios, with inconsistent outputs, affecting trust and efficiency."
         },
         {
           "text": "关键功能缺失或失效",
@@ -1179,7 +1513,9 @@
             "1s1a9mp",
             "1rzpyto"
           ],
-          "detail": "部分用户发现Copilot无法满足格式化文档输出、行为分析等需求，甚至导致原有Office功能丧失。"
+          "detail": "部分用户发现Copilot无法满足格式化文档输出、行为分析等需求，甚至导致原有Office功能丧失。",
+          "text_en": "Missing or malfunctioning key features",
+          "detail_en": "Some users find that Copilot cannot meet needs such as formatted document output and behavior analysis, and even causes loss of original Office functions."
         },
         {
           "text": "与竞品差距明显",
@@ -1189,7 +1525,9 @@
             "1s2ag5",
             "1s2jm5v"
           ],
-          "detail": "用户多次将Copilot与ChatGPT、Claude、Gemini等竞品对比，认为Copilot在报告生成、个人助理等场景下体验较差。"
+          "detail": "用户多次将Copilot与ChatGPT、Claude、Gemini等竞品对比，认为Copilot在报告生成、个人助理等场景下体验较差。",
+          "text_en": "Significant gap with competitors",
+          "detail_en": "Users frequently compare Copilot with ChatGPT, Claude, Gemini, etc., and believe Copilot performs poorly in report generation and personal assistant scenarios."
         },
         {
           "text": "界面与功能频繁变动",
@@ -1197,7 +1535,9 @@
           "post_ids": [
             "1s5uter"
           ],
-          "detail": "Copilot界面和功能入口频繁调整，用户难以适应，影响业务连续性。"
+          "detail": "Copilot界面和功能入口频繁调整，用户难以适应，影响业务连续性。",
+          "text_en": "Frequent interface and feature changes",
+          "detail_en": "Copilot's interface and feature entry points change frequently, making it hard for users to adapt and affecting business continuity."
         },
         {
           "text": "批量处理与自动化受限",
@@ -1206,7 +1546,9 @@
             "1rxvghe",
             "1s2l2dh"
           ],
-          "detail": "Copilot在批量处理文件和自动化流程时存在效率低、成功率低等问题，需依赖额外工具或脚本。"
+          "detail": "Copilot在批量处理文件和自动化流程时存在效率低、成功率低等问题，需依赖额外工具或脚本。",
+          "text_en": "Limited batch processing and automation",
+          "detail_en": "Copilot has low efficiency and success rate in batch file processing and automation, requiring extra tools or scripts."
         }
       ],
       "strengths": [
@@ -1215,7 +1557,9 @@
           "post_ids": [
             "1s2mnut"
           ],
-          "detail": "Copilot Studio支持批量创建智能代理，无需编程即可提升团队自动化和协作效率，受到社区认可。"
+          "detail": "Copilot Studio支持批量创建智能代理，无需编程即可提升团队自动化和协作效率，受到社区认可。",
+          "text_en": "Improved team efficiency",
+          "detail_en": "Copilot Studio supports batch creation of intelligent agents, enabling team automation and collaboration without coding, recognized by the community."
         },
         {
           "text": "Excel集成表现优异",
@@ -1223,7 +1567,9 @@
             "1rxs1nf",
             "1rz0k5u"
           ],
-          "detail": "Copilot在Excel中的数据结构理解和公式编辑能力突出，适合财务、数据整合等场景。"
+          "detail": "Copilot在Excel中的数据结构理解和公式编辑能力突出，适合财务、数据整合等场景。",
+          "text_en": "Excellent Excel integration",
+          "detail_en": "Copilot excels in data structure understanding and formula editing in Excel, suitable for finance and data integration scenarios."
         },
         {
           "text": "创新应用场景丰富",
@@ -1232,64 +1578,91 @@
             "1rxvxnp",
             "1ruxm5a"
           ],
-          "detail": "用户积极探索Copilot在数字标牌管理、任务协作、节能降本等多元场景的应用，社区反馈正面。"
+          "detail": "用户积极探索Copilot在数字标牌管理、任务协作、节能降本等多元场景的应用，社区反馈正面。",
+          "text_en": "Rich innovative application scenarios",
+          "detail_en": "Users actively explore Copilot in digital signage management, task collaboration, cost reduction, and other diverse scenarios, with positive community feedback."
         },
         {
           "text": "持续产品更新",
           "post_ids": [
             "1s6ra2l"
           ],
-          "detail": "Copilot Notebooks等新功能持续上线，产品迭代速度快，部分用户对体验优化表示认可。"
+          "detail": "Copilot Notebooks等新功能持续上线，产品迭代速度快，部分用户对体验优化表示认可。",
+          "text_en": "Continuous product updates",
+          "detail_en": "New features like Copilot Notebooks are launched continuously, with fast product iteration and some users recognizing experience improvements."
         }
       ],
       "recommendations": [
         {
           "priority": "P0",
-          "text": "提升核心功能稳定性，确保输出一致、减少重大bug，增强用户信任。"
+          "text": "提升核心功能稳定性，确保输出一致、减少重大bug，增强用户信任。",
+          "text_en": "Enhance core feature stability, ensure consistent output, reduce major bugs, and build user trust."
         },
         {
           "priority": "P1",
-          "text": "补齐与竞品差距，重点优化报告生成、个人助理等高频场景体验。"
+          "text": "补齐与竞品差距，重点优化报告生成、个人助理等高频场景体验。",
+          "text_en": "Close the gap with competitors, focusing on optimizing report generation and personal assistant experiences."
         },
         {
           "priority": "P1",
-          "text": "优化界面与功能入口变更的通知和引导，减少用户适应成本。"
+          "text": "优化界面与功能入口变更的通知和引导，减少用户适应成本。",
+          "text_en": "Improve notifications and guidance for interface and feature entry changes to reduce user adaptation costs."
         },
         {
           "priority": "P2",
-          "text": "增强批量处理和自动化能力，开放更多API和脚本支持，提升大规模办公效率。"
+          "text": "增强批量处理和自动化能力，开放更多API和脚本支持，提升大规模办公效率。",
+          "text_en": "Enhance batch processing and automation, open more API and script support, and improve large-scale office efficiency."
         },
         {
           "priority": "P2",
-          "text": "加强与社区的沟通，及时透明发布功能变更和已知问题，提升用户预期管理。"
+          "text": "加强与社区的沟通，及时透明发布功能变更和已知问题，提升用户预期管理。",
+          "text_en": "Strengthen community communication, transparently release feature changes and known issues, and improve user expectation management."
         }
       ],
       "keywords": [
-        "功能稳定性",
-        "自动化",
-        "批量处理",
-        "Excel集成",
-        "报告生成",
-        "个人助理",
-        "界面变动",
-        "API限制",
-        "数据访问",
-        "安全机制",
-        "团队效率",
-        "智能代理",
-        "任务管理",
-        "数字标牌",
-        "节能降本",
-        "文档格式",
-        "QA任务",
-        "输出一致性",
-        "功能入口",
-        "竞品对比",
-        "ChatGPT",
-        "Claude",
-        "Gemini",
-        "Copilot Studio",
-        "Copilot Notebooks"
+        "操作繁琐",
+        "响应慢",
+        "效率低下",
+        "输出质量差",
+        "模型不透明",
+        "功能缺失",
+        "数据安全限制",
+        "失望",
+        "落后于竞品",
+        "自动化能力强",
+        "批量部署",
+        "无代码部署",
+        "创新功能",
+        "自定义模型",
+        "三栏布局",
+        "健康AI探索",
+        "印象深刻",
+        "团队效率提升",
+        "体验障碍",
+        "积极反馈"
+      ],
+      "summary_en": "Competitive Intelligence Summary: Microsoft 365 Copilot (March 16, 2026 - March 30, 2026, r/microsoft_365_copilot Community)\n\n1. Overall Community Sentiment and Driving Factors  \nThis period saw predominantly negative sentiment in the community (44%), with positive feedback accounting for 27%, and neutral and mixed sentiments at 22% and 5% respectively. Negative emotions mainly stem from user disappointment with Copilot’s actual usage experience, especially regarding efficiency, ease of use, and the gap when compared to competitors (such as Claude, ChatGPT). For example, the popular post “I didn't expect it to be this bad” bluntly states that Copilot is cumbersome to operate, slow to respond, and far inferior to Claude. Positive sentiment is mostly focused on Copilot Studio’s automation capabilities and new feature releases, such as “I batch created 71 Copilot Studio agents,” which received positive feedback, with users recognizing its potential to improve team efficiency.\n\n2. Most Discussed Topics and Their Importance  \nfeature_request and use_case are tied as the hottest topics (9 posts each), reflecting users’ strong focus on Copilot’s practical applications and feature improvements. bug_report (5 posts) and comparison (4 posts) also account for a significant proportion, indicating that product stability and gaps with competitors remain key areas of user concern. model_capability (3 posts) highlights users’ sensitivity to underlying model selection and capabilities.\n\n3. Main User Pain Points or Complaints  \n- Copilot underperforms compared to Claude in office automation scenarios (such as Excel, Word, PPT), with low efficiency and cumbersome operations (e.g., “Implementing 365 Copilot in my company”).\n- For tasks like report generation and content transformation, Copilot’s output quality and speed lag behind ChatGPT, and are further limited by Microsoft’s data security mechanisms (“Why is Copilot (business) struggling with report generation when ChatGPT (plus)”).\n- The LLM model used by Copilot agents is non-transparent, making it difficult for users to confirm the specific model, which affects trust (“How can I see which LLM model is used by a Microsoft 365 Copilot agent?”).\n- Some features (such as model switching, health AI) are not fully open or offer a subpar experience.\n\n4. Features Users Appreciate or Expect  \n- Copilot Studio’s batch agent creation and no-code deployment capabilities are highly recognized, with users hoping for further process simplification and increased automation.\n- Users look forward to customizing the default LLM model (such as GPT-5.4, Anthropic Sonnet) to suit different business needs.\n- Copilot Notebooks’ three-pane layout and new feature updates have received positive feedback, with users hoping for more features to reach GA soon.\n- There is strong interest in AI applications in the health domain, with users expecting Copilot to become a smarter personal assistant.\n\n5. Comparison Discussions with Competitors  \nThe community frequently compares Copilot directly with competitors like Claude and ChatGPT, with a general consensus that Copilot lags behind in efficiency, ease of use, and output quality. Claude performs better in office scenarios, while ChatGPT is more efficient in tasks like report generation. While Copilot’s security mechanisms are acknowledged, they are also seen as a major barrier to user experience.\n\n6. Actionable Insights for the Product Team  \n- Prioritize improving Copilot’s response speed and operational convenience in core office scenarios (such as documents, spreadsheets, presentations) to narrow the experience gap with Claude and ChatGPT.\n- Enhance LLM model transparency, allowing users to customize and switch default models to meet diverse needs.\n- Accelerate the full rollout of new features like Copilot Notebooks and continuously optimize user experience.\n- For enterprise users, strengthen automation and batch deployment capabilities to lower the usage threshold.\n- Focus on emerging scenarios such as health AI, explore differentiated value points, and enhance product competitiveness.\n\nIn summary, the community holds a positive attitude toward Copilot’s automation and innovative features, but expresses clear dissatisfaction with its efficiency, ease of use, and the gap with competitors. The product team needs to focus on core pain points, improve the fundamental experience, and accelerate the rollout of innovative features to consolidate and expand the user base.",
+      "keywords_en": [
+        "cumbersome operation",
+        "slow response",
+        "low efficiency",
+        "poor output quality",
+        "model opacity",
+        "missing features",
+        "data security limits",
+        "disappointed",
+        "lagging behind competitors",
+        "strong automation",
+        "batch deployment",
+        "no-code deployment",
+        "innovative features",
+        "customizable models",
+        "three-pane layout",
+        "health AI exploration",
+        "impressive",
+        "team efficiency boost",
+        "experience barrier",
+        "positive feedback"
       ]
     },
     {
@@ -1337,6 +1710,12 @@
             "Copilot原生导出功能有限，用户开发第三方工具",
             "新工具支持多平台和批量导出",
             "评论区关注搜索和兼容性问题"
+          ],
+          "sentiment_reason_en": "Users recognize third-party export tools, with comments discussing convenience and feature improvements.",
+          "key_points_en": [
+            "Copilot's native export is limited, users develop third-party tools",
+            "New tools support multiple platforms and batch export",
+            "Comments focus on search and compatibility issues"
           ]
         },
         {
@@ -1355,6 +1734,12 @@
             "Copilot在无麦克风情况下自动响应YouTube视频内容",
             "用户对Copilot的行为感到困惑和不安",
             "社区讨论可能的技术原因但未有明确解释"
+          ],
+          "sentiment_reason_en": "Users describe Copilot auto-responding to external sounds without a microphone, feeling confused and uneasy.",
+          "key_points_en": [
+            "Copilot auto-responds to YouTube videos without a microphone",
+            "Users feel confused and uneasy about Copilot's behavior",
+            "Community discusses possible technical reasons but no clear explanation"
           ]
         },
         {
@@ -1373,6 +1758,12 @@
             "Copilot疑似在未授权情况下访问用户位置",
             "用户对隐私安全表示担忧",
             "评论区讨论AI如何获取位置信息及权限问题"
+          ],
+          "sentiment_reason_en": "Users worry about Copilot accessing their location without permission, raising privacy concerns.",
+          "key_points_en": [
+            "Copilot suspected of accessing user location without authorization",
+            "Users express privacy and security concerns",
+            "Comments discuss how AI gets location info and permission issues"
           ]
         },
         {
@@ -1391,6 +1782,12 @@
             "用户希望Copilot能作为个人助理发送邮件等",
             "评论区提到Tasks功能可能满足需求",
             "部分用户对Cortana功能被移除表示怀念"
+          ],
+          "sentiment_reason_en": "Users look forward to Copilot's personal assistant features, with positive experiences and suggestions shared in comments.",
+          "key_points_en": [
+            "Users hope Copilot can send emails as a personal assistant",
+            "Comments mention Tasks feature may meet needs",
+            "Some users miss Cortana after its removal"
           ]
         },
         {
@@ -1409,6 +1806,12 @@
             "不同平台Copilot体验不一致，用户困惑",
             "AI重复犯错，反映产品稳定性差",
             "有用户转用其他AI产品如Claude"
+          ],
+          "sentiment_reason_en": "Users express strong dissatisfaction with Copilot's messy interface, inconsistent versions, and repeated errors.",
+          "key_points_en": [
+            "Copilot experience varies across platforms, users confused",
+            "AI repeats mistakes, showing poor product stability",
+            "Some users switch to other AI products like Claude"
           ]
         },
         {
@@ -1427,6 +1830,12 @@
             "Copilot Chat Basic与M365 Copilot功能差异明显",
             "用户对命名和功能理解感到困惑",
             "付费版集成更多企业功能"
+          ],
+          "sentiment_reason_en": "Users are confused by functional differences between Copilot versions; some comments note unclear naming, but detailed explanations exist.",
+          "key_points_en": [
+            "Copilot Chat Basic and M365 Copilot have clear feature differences",
+            "Users confused by naming and feature understanding",
+            "Paid version integrates more enterprise features"
           ]
         },
         {
@@ -1445,6 +1854,12 @@
             "个人版Copilot尚未有对话搜索栏功能",
             "用户对功能上线时间和版本差异感到困惑",
             "有浏览器插件可暂时替代，但官方功能仍未明确时间表"
+          ],
+          "sentiment_reason_en": "Users are dissatisfied with the lack of a conversation search bar in the personal Copilot and confused about feature release timing.",
+          "key_points_en": [
+            "Personal Copilot does not yet have a conversation search bar",
+            "Users confused about release timing and version differences",
+            "Browser plugins can temporarily replace, but no official timeline"
           ]
         },
         {
@@ -1463,6 +1878,12 @@
             "用户怀疑被Copilot封禁",
             "评论区建议尝试不同平台",
             "未获得明确的官方答复"
+          ],
+          "sentiment_reason_en": "Users wonder if they are banned by Copilot; comments report a confusing experience with no clear solution.",
+          "key_points_en": [
+            "Users suspect being banned by Copilot",
+            "Comments suggest trying different platforms",
+            "No clear official response"
           ]
         },
         {
@@ -1481,6 +1902,12 @@
             "Copilot可在OneDrive中跨文档提问、总结和比较版本",
             "可快速生成FAQ和音频概览",
             "提醒用户需验证AI输出内容"
+          ],
+          "sentiment_reason_en": "Users actively share various efficient Copilot uses in OneDrive, finding them very practical.",
+          "key_points_en": [
+            "Copilot can ask questions, summarize, and compare versions across OneDrive documents",
+            "Can quickly generate FAQs and audio overviews",
+            "Reminds users to verify AI output"
           ]
         },
         {
@@ -1499,6 +1926,12 @@
             "Copilot Notebooks新增支持PPT、Word、思维导图等功能",
             "有助于团队协作和学习",
             "部分用户希望增加模型选择功能"
+          ],
+          "sentiment_reason_en": "Users appreciate new Copilot Notebooks features, though some functions are still incomplete.",
+          "key_points_en": [
+            "Copilot Notebooks adds support for PPT, Word, mind maps, etc.",
+            "Helps with team collaboration and learning",
+            "Some users want model selection feature"
           ]
         }
       ],
@@ -1510,7 +1943,9 @@
             "1rx4sw1",
             "1rzvz70"
           ],
-          "detail": "Copilot与微软其他应用集成体验差，无法导出Word或PDF，难以处理大规模无序文档。"
+          "detail": "Copilot与微软其他应用集成体验差，无法导出Word或PDF，难以处理大规模无序文档。",
+          "text_en": "Poor integration capability",
+          "detail_en": "Copilot has poor integration with other Microsoft applications, cannot export to Word or PDF, and struggles with large-scale disorganized documents."
         },
         {
           "text": "隐私与安全疑虑",
@@ -1519,7 +1954,9 @@
             "1rvwenc",
             "1ryttjg"
           ],
-          "detail": "用户担心Copilot在未授权情况下访问位置信息或出现信息泄露，隐私保护措施不足。"
+          "detail": "用户担心Copilot在未授权情况下访问位置信息或出现信息泄露，隐私保护措施不足。",
+          "text_en": "Privacy and security concerns",
+          "detail_en": "Users worry about Copilot accessing location information without authorization or data leaks, and privacy protection measures are insufficient."
         },
         {
           "text": "产品稳定性差",
@@ -1529,7 +1966,9 @@
             "1s6yf26",
             "1s3qigu"
           ],
-          "detail": "Copilot经常出错、功能不稳定，用户体验不一致，部分用户转用其他AI产品。"
+          "detail": "Copilot经常出错、功能不稳定，用户体验不一致，部分用户转用其他AI产品。",
+          "text_en": "Poor product stability",
+          "detail_en": "Copilot frequently encounters errors and instability, resulting in inconsistent user experience; some users switch to other AI products."
         },
         {
           "text": "功能缺失与体验混乱",
@@ -1539,7 +1978,9 @@
             "1s4cehi",
             "1rxdsfu"
           ],
-          "detail": "缺少会话搜索栏、权限混乱、部分功能上线时间不明，用户困惑且缺乏官方答复。"
+          "detail": "缺少会话搜索栏、权限混乱、部分功能上线时间不明，用户困惑且缺乏官方答复。",
+          "text_en": "Missing features and confusing experience",
+          "detail_en": "Lacks conversation search bar, permission confusion, unclear feature rollout timelines, users are confused and lack official responses."
         },
         {
           "text": "图片与文档处理能力有限",
@@ -1548,7 +1989,9 @@
             "1ryvbmj",
             "1s37dvb"
           ],
-          "detail": "Copilot图片生成比例有限，文档自动填充重复，无法满足自定义需求。"
+          "detail": "Copilot图片生成比例有限，文档自动填充重复，无法满足自定义需求。",
+          "text_en": "Limited image and document processing",
+          "detail_en": "Copilot has limited image generation ratios, document autofill is repetitive, and cannot meet customization needs."
         }
       ],
       "strengths": [
@@ -1557,7 +2000,9 @@
           "post_ids": [
             "1rwpx1u"
           ],
-          "detail": "Copilot界面友好、无使用限制，适合企业环境，部分任务准确性高于竞品。"
+          "detail": "Copilot界面友好、无使用限制，适合企业环境，部分任务准确性高于竞品。",
+          "text_en": "User-friendly interface",
+          "detail_en": "Copilot has a user-friendly interface, no usage restrictions, suitable for enterprise environments, and is more accurate than competitors for some tasks."
         },
         {
           "text": "文档与AI集成能力",
@@ -1565,7 +2010,9 @@
             "1s0qjtq",
             "1s6g0dl"
           ],
-          "detail": "Copilot可与公司文档库、OneDrive集成，实现跨文档提问、总结和自动化处理。"
+          "detail": "Copilot可与公司文档库、OneDrive集成，实现跨文档提问、总结和自动化处理。",
+          "text_en": "Document and AI integration",
+          "detail_en": "Copilot integrates with company document libraries and OneDrive, enabling cross-document Q&A, summarization, and automation."
         },
         {
           "text": "持续功能更新",
@@ -1574,7 +2021,9 @@
             "1s595jg",
             "1rv8z3f"
           ],
-          "detail": "Copilot Notebooks等功能持续增强，支持多种文档类型和团队协作，用户认可新特性。"
+          "detail": "Copilot Notebooks等功能持续增强，支持多种文档类型和团队协作，用户认可新特性。",
+          "text_en": "Continuous feature updates",
+          "detail_en": "Features like Copilot Notebooks are continuously enhanced, support multiple document types and team collaboration, and new features are well received."
         },
         {
           "text": "图片生成能力",
@@ -1582,57 +2031,82 @@
             "1s1gudg",
             "1s6rvlb"
           ],
-          "detail": "Copilot可根据描述生成风格多样的图片，获得用户和社区好评。"
+          "detail": "Copilot可根据描述生成风格多样的图片，获得用户和社区好评。",
+          "text_en": "Image generation capability",
+          "detail_en": "Copilot generates diverse images based on descriptions, receiving positive feedback from users and the community."
         }
       ],
       "recommendations": [
         {
           "priority": "P0",
-          "text": "提升与微软生态内应用的深度集成，完善导出、权限和数据访问功能。"
+          "text": "提升与微软生态内应用的深度集成，完善导出、权限和数据访问功能。",
+          "text_en": "Enhance deep integration with Microsoft ecosystem apps, improve export, permissions, and data access features."
         },
         {
           "priority": "P0",
-          "text": "加强隐私保护和权限管理，明确告知用户数据使用和访问情况。"
+          "text": "加强隐私保护和权限管理，明确告知用户数据使用和访问情况。",
+          "text_en": "Strengthen privacy protection and permission management, clearly inform users about data usage and access."
         },
         {
           "priority": "P1",
-          "text": "优化产品稳定性，减少出错和体验不一致，提升跨平台一致性。"
+          "text": "优化产品稳定性，减少出错和体验不一致，提升跨平台一致性。",
+          "text_en": "Optimize product stability, reduce errors and inconsistencies, and improve cross-platform consistency."
         },
         {
           "priority": "P1",
-          "text": "加快补齐会话搜索栏、图片自定义比例等用户高频需求功能。"
+          "text": "加快补齐会话搜索栏、图片自定义比例等用户高频需求功能。",
+          "text_en": "Accelerate development of high-demand features such as conversation search bar and custom image ratios."
         },
         {
           "priority": "P2",
-          "text": "持续收集用户反馈，完善文档自动化处理和第三方工具兼容性。"
+          "text": "持续收集用户反馈，完善文档自动化处理和第三方工具兼容性。",
+          "text_en": "Continuously collect user feedback, improve document automation and third-party tool compatibility."
         }
       ],
       "keywords": [
-        "集成",
-        "隐私",
-        "稳定性",
-        "权限",
-        "导出",
-        "文档管理",
-        "搜索栏",
-        "图片生成",
-        "企业应用",
-        "OneDrive",
-        "Notebooks",
-        "批量导出",
-        "AI助手",
-        "任务自动化",
-        "语音功能",
-        "Cortana",
-        "SharePoint",
-        "模型选择",
-        "体验一致性",
-        "功能更新",
-        "PDF处理",
-        "数据保护",
-        "历史记录",
-        "用户反馈",
-        "第三方工具"
+        "集成体验差",
+        "功能局限",
+        "用户困惑",
+        "批量处理弱",
+        "导出不便",
+        "隐私担忧",
+        "安全风险",
+        "命名混乱",
+        "场景挖掘难",
+        "第三方依赖",
+        "模型能力有限",
+        "响应准确",
+        "界面友好",
+        "无使用限制",
+        "交互体验佳",
+        "三栏布局",
+        "功能增强",
+        "结果偏好",
+        "落地难题",
+        "失望"
+      ],
+      "summary_en": "Competitive Intelligence Summary: Copilot Reddit Community (2026-03-16 to 2026-03-30)\n\nA total of 54 valid posts from the Reddit communities (r/Copilot, r/CopilotMicrosoft, r/CopilotPro) were analyzed for this period. Overall sentiment distribution was relatively balanced, with negative (35%) and positive (27%) feedback both standing out, and mixed and neutral opinions accounting for about 36%. Negative sentiment was mainly driven by poor integration experience, functional limitations, and user confusion. For example, users frequently complained about Copilot’s poor integration with Microsoft’s own applications (such as Word, PDF export) (“Copilot cannot export Word or PDF files, poor integration experience with other Microsoft applications”), and expressed disappointment with Copilot’s limited ability to handle large-scale, unstructured documents (such as 1TB file piles). Some users also expressed unease about Copilot’s behavior, such as “Copilot automatically responds to YouTube video content even without a microphone,” raising privacy and security concerns.\n\nThe most discussed topics included feature requests, bug reports, real-world use cases, model capabilities, and product experience. Feature requests and bug reports together accounted for nearly 40%, indicating high user expectations for product improvement and stability. Popular feature demands included stronger batch document processing, automatic meeting time analysis (requiring Graph permissions), more convenient chat history export (such as PDF, Markdown formats), and more intelligent Agent scenario applications. Some users have already developed third-party export tools themselves, reflecting that native features do not fully meet their needs.\n\nIn positive feedback, Copilot’s user-friendly interface, lack of usage restrictions, and high accuracy for certain tasks were recognized by users. Especially when compared to competitors such as ChatGPT and Perplexity, some users explicitly stated a preference for Copilot’s interactive experience and output performance. In addition, the new three-pane layout and feature enhancements of Copilot Notebooks received positive reviews, and users acknowledged the distinction between Frontier Preview and GA versions.\n\nThere is also confusion in the community regarding product positioning and version naming (such as the difference between Copilot Chat Basic and M365 Copilot), which affects user understanding and choice. Discussions of real-world use cases show that teams still face challenges in scenario exploration when implementing Copilot Agent, and the community suggests focusing on business pain points and repetitive tasks.\n\nActionable Insights:\n1. Prioritize seamless integration with the Microsoft ecosystem (Word, PDF, etc.), improve native export and batch processing capabilities, and reduce user reliance on third-party tools.\n2. Strengthen clear communication of product naming and functional differences to lower the barrier to user understanding.\n3. For high-frequency scenarios such as large-scale document processing and automatic meeting analysis, optimize model capabilities and permission management to enhance practical application value.\n4. Continue to monitor user concerns about privacy and security, and improve product transparency and controllability.\n5. Leverage community suggestions to promote the implementation of Copilot Agent in specific business processes, strengthen the demonstration of real-world use cases, and increase user stickiness.\n\nOverall, Copilot has competitive advantages in user experience and certain features, but integration, extensibility, and scenario implementation remain key areas for improvement.",
+      "keywords_en": [
+        "poor integration",
+        "functional limitations",
+        "user confusion",
+        "weak batch processing",
+        "inconvenient export",
+        "privacy concerns",
+        "security risks",
+        "naming confusion",
+        "scenario mining difficulty",
+        "third-party reliance",
+        "limited model capability",
+        "accurate response",
+        "user-friendly interface",
+        "no usage limits",
+        "great interaction",
+        "three-pane layout",
+        "feature enhancement",
+        "preferred results",
+        "implementation challenge",
+        "disappointed"
       ]
     }
   ],
@@ -1728,5 +2202,6 @@
         "meta": 1
       }
     }
-  }
+  },
+  "cross_product_comparison_en": "## Cross-Product Competitive Analysis Report (2026-03-16 to 2026-03-30)\n\n### 1. User Satisfaction Comparison\n\n- **Claude**: Highest user satisfaction, with 42% positive sentiment and 24% negative. Users highly appreciate its performance in academic writing, complex task handling, and multi-agent collaborative content generation, with the Opus model standing out in non-programming academic scenarios. The main pain point is quota limitations, which affect the experience of advanced users.\n- **Copilot (Microsoft Copilot Series)**: Moderately high satisfaction, with 27% positive feedback and 35% negative. The user-friendly interface, lack of usage restrictions, and high accuracy in some tasks are recognized, but dissatisfaction arises from integration experience, batch processing capability, and confusing product positioning.\n- **M365 Copilot**: Lower satisfaction, with 27% positive and 44% negative. Automation and innovative features are praised, but efficiency, ease of use, and output quality in office scenarios lag significantly behind Claude and ChatGPT. Issues such as LLM model opacity and limited feature availability are prominent.\n- **ChatGPT**: Relatively low satisfaction, with 20% positive and 53% negative. Declining content quality, spelling errors, privacy concerns, and lack of platform policy transparency are the main sources of dissatisfaction. Innovative use cases and personalized recommendation capabilities are still recognized by some users.\n- **Gemini**: Lowest satisfaction, with 24% positive and 49% negative. Model quality fluctuations, frequent refusals to answer, feature rollbacks, and restrictions in the EU severely impact user experience. Ecosystem integration and automation capabilities are the main highlights.\n\n### 2. Community Satisfaction Extremes\n\n- **Most Satisfied Community**: Claude. Users highly recognize its academic and complex task capabilities, with active innovative use cases and the highest proportion of positive sentiment.\n- **Least Satisfied Community**: Gemini. Issues with model stability, output quality, and feature restrictions have erupted, resulting in the highest proportion of negative sentiment.\n\n### 3. Common Pain Points\n\n- **Model Stability and Output Quality Fluctuations**: Users of all products report unstable model outputs, declining content quality, or high hallucination rates.\n- **Feature/Quota Limitations**: Claude's quota limits, and feature restrictions in Gemini and Copilot, affect applications in high-intensity or professional scenarios.\n- **Insufficient Integration and Extensibility**: Copilot's integration with the Microsoft ecosystem is suboptimal, Gemini's web experience is poor, and M365 Copilot's feature rollout is slow.\n- **Privacy and Data Security Concerns**: Users of ChatGPT, Copilot, etc., express concerns about data leakage and permission management.\n- **Product Positioning and Naming Confusion**: The Copilot series suffers from unclear naming and version distinctions, affecting user understanding and choice.\n\n### 4. Unique Strengths and Weaknesses of Each Product\n\n- **Claude**\n  - Strengths: Strong in academic writing, complex tasks, and multi-agent collaboration; rich in innovative use cases.\n  - Weaknesses: Severe quota limitations; code-related features need improvement.\n- **Copilot**\n  - Strengths: User-friendly interface, no usage restrictions, high accuracy in some tasks; some users prefer its interaction experience.\n  - Weaknesses: Poor integration, weak batch processing, confusing product positioning.\n- **M365 Copilot**\n  - Strengths: Outstanding automation, batch agent creation, and no-code deployment capabilities; recognized security mechanisms.\n  - Weaknesses: Low efficiency, poor output quality, opaque LLM model, slow feature rollout.\n- **ChatGPT**\n  - Strengths: Innovative use cases, personalized recommendation capabilities, strong ecosystem influence.\n  - Weaknesses: Declining content quality, privacy concerns, lack of policy transparency, decreasing user trust.\n- **Gemini**\n  - Strengths: Deep integration with the Google ecosystem, strong automation and intelligent reminder capabilities.\n  - Weaknesses: Model quality fluctuations, feature rollbacks, EU restrictions, poor web experience.\n\n### 5. Emerging Competitive Dynamics and Shifts in User Preferences\n\n- **Rising Demand from Advanced Users**: There is a significant increase in demand for advanced capabilities such as complex tasks, batch processing, automation, and multi-agent collaboration.\n- **Quota and Feature Availability as Key Churn Drivers**: Quota limitations in Claude and feature restrictions in Gemini directly lead to user churn and migration to competitors.\n- **Ecosystem Integration and Real-World Application Orientation**: Users increasingly prefer AI products that deeply integrate with their workflows and ecosystems (e.g., Gemini with Google, Copilot with Microsoft).\n- **Growing User Demand for Product Transparency and Autonomy**: There is a rising call for customizable LLM models, transparent account suspension mechanisms, and controllable data security.\n\n### 6. Actionable Recommendations\n\n1. **Optimize Model Stability and Output Quality**: All products should continuously improve the accuracy, naturalness, and contextual understanding of model outputs, reducing basic errors and hallucinations.\n2. **Relax Quota and Feature Restrictions to Enhance Advanced Experience**: Prioritize resolving Claude's quota limits and feature restrictions in Gemini and Copilot to meet the needs of high-intensity users.\n3. **Deepen Ecosystem Integration and Automation Capabilities**: Strengthen seamless integration with mainstream office and productivity tools, and enhance batch processing, automation, and multi-application collaboration.\n4. **Enhance Product Transparency and User Autonomy**: Publicize model selection, account suspension mechanisms, and data management processes; allow users to customize models and permissions to build trust.\n5. **Focus on Real-World Application Scenarios and Promote Innovative Use Cases**: Encourage the community to share innovative use cases, reinforce the value of AI in specific business processes and high-frequency scenarios, and increase user stickiness.\n\n---\n\n**Conclusion**: Competition in the current AI product market is intensifying, with users demanding ever-higher advanced capabilities, ecosystem integration, and product transparency. Product teams must focus on model quality, feature openness, and real-world application scenarios, and respond quickly to user pain points to maintain a leading position in fierce competition."
 }
