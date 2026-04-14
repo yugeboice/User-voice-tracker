@@ -437,6 +437,9 @@
     .trend-product-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
     .trend-product-name { font-size:13px; font-weight:600; flex:1; }
     .trend-delta-value { font-size:13px; font-weight:700; }
+    .trend-delta-value.delta-up { color:var(--clr-pos); }
+    .trend-delta-value.delta-down { color:var(--clr-neg); }
+    .trend-delta-value.delta-flat { color:var(--text-muted); }
     @media (max-width:900px) {
       .trend-grid { grid-template-columns:1fr; }
     }
@@ -798,6 +801,7 @@
     /* ======= STATE ======= */
     var reportData = null;
     var prevReportData = null;
+    var allHistoricalReports = [];  /* all loaded reports, oldest-first */
     var reportIndex = [];
     var products = [];
     var allPosts = [];
@@ -900,21 +904,42 @@
 
     async function loadPrevReport() {
       prevReportData = null;
+      allHistoricalReports = [];
       if (!reportData || reportIndex.length < 2) return;
       var currentEnd = (reportData.period && reportData.period.end) || '';
       var currentFile = null;
+      /* Try matching by run_id first */
       for (var i = 0; i < reportIndex.length; i++) {
         if (reportIndex[i].file && reportData.run_id && reportIndex[i].run_id === reportData.run_id) {
           currentFile = i; break;
         }
       }
-      var prevIdx = currentFile !== null ? currentFile + 1 : 1;
-      if (prevIdx >= reportIndex.length) return;
-      var prevFile = reportIndex[prevIdx].file;
-      try {
-        var resp = await fetch('data/reports/' + prevFile);
-        if (resp.ok) prevReportData = await resp.json();
-      } catch(e) { /* ignore */ }
+      /* Fallback: match by period_end when run_id lookup fails */
+      if (currentFile === null && currentEnd) {
+        var curEnd = currentEnd.slice(0, 10);
+        for (var i = 0; i < reportIndex.length; i++) {
+          if ((reportIndex[i].period_end || '').slice(0, 10) === curEnd) {
+            currentFile = i; break;
+          }
+        }
+      }
+      /* Load ALL reports after current (older ones) for trend chart */
+      var startIdx = currentFile !== null ? currentFile + 1 : 1;
+      if (startIdx >= reportIndex.length) return;
+      /* Load previous reports (oldest to newest order for chart) */
+      for (var j = reportIndex.length - 1; j >= startIdx; j--) {
+        try {
+          var resp = await fetch('data/reports/' + reportIndex[j].file);
+          if (resp.ok) {
+            var data = await resp.json();
+            allHistoricalReports.push(data);
+          }
+        } catch(e) { /* ignore */ }
+      }
+      /* prevReportData = the immediately preceding report (for delta cards) */
+      if (allHistoricalReports.length > 0) {
+        prevReportData = allHistoricalReports[allHistoricalReports.length - 1];
+      }
     }
 
     async function loadReportIndex() {
@@ -923,10 +948,9 @@
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
-        /* Sort by period_end descending (newest first); hide entries with 0 posts; keep latest 2 */
+        /* Sort by period_end descending (newest first); hide entries with 0 posts */
         reportIndex = reportIndex.filter(function(r){ return r.total_valid_posts !== 0; });
         reportIndex.sort(function(a,b){ return (b.period_end||'').localeCompare(a.period_end||''); });
-        reportIndex = reportIndex.slice(0, 2);
         var sel = document.getElementById('reportSelector');
         for (var i = 0; i < reportIndex.length; i++) {
           var r = reportIndex[i];
@@ -946,16 +970,16 @@
         var list = await resp.json();
         var sel = document.getElementById('reportSelector');
         if (Array.isArray(list) && sel.options.length <= 1) {
-          /* Filter out entries explicitly having 0 posts and sort newest first */
+          /* Filter out entries with 0 valid posts and sort newest first */
           list = list.filter(function(r){ return typeof r === 'object' ? (r.total_valid_posts !== 0) : true; });
           list.sort(function(a,b){ return typeof a === 'object' && typeof b === 'object' ? (b.period_end||'').localeCompare(a.period_end||'') : 0; });
           for (var i = 0; i < list.length; i++) {
             var r = list[i];
             var opt = document.createElement('option');
-            opt.value = r.id || r.run_id || r;
+            opt.value = r.file || r.id || r.run_id || r;
             opt.textContent = (typeof r === 'object' && r.period_start)
-              ? (r.period_start.slice(0,10) + ' ~ ' + (r.period_end||'').slice(0,10) + ' (' + (r.total_valid_posts||0) + ' ' + t('posts') + ')')
-              : (typeof r === 'string' ? r : (r.id || r.run_id || ''));
+              ? (formatDateRange(r.period_start, r.period_end) + ' (' + (r.total_valid_posts||0) + ' ' + t('posts') + ')')
+              : (typeof r === 'string' ? r : (r.file || r.id || ''));
             sel.appendChild(opt);
           }
         }
@@ -2575,8 +2599,8 @@
         return;
       }
 
-      /* Build trend data from current + previous (could extend to more reports) */
-      var allReports = [prevReportData, reportData];
+      /* Build trend data from all historical reports + current */
+      var allReports = allHistoricalReports.concat([reportData]);
       renderTrendChart(allReports);
 
       /* Delta cards */

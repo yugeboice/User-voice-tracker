@@ -4,8 +4,8 @@
       "file": "report_9d8bb56c_20260331_091624.json",
       "run_id": "9d8bb56c",
       "period_start": "2026-03-02",
-      "period_end": "2026-03-15",
-      "generated_at": "2026-03-31T17:16:24+08:00",
+      "period_end": "2026-03-16",
+      "generated_at": 1774953169.7490664,
       "product_count": 5,
       "total_posts": 3041,
       "total_valid_posts": 2328
@@ -15,10 +15,20 @@
       "run_id": "db2ee453",
       "period_start": "2026-03-16",
       "period_end": "2026-03-30",
-      "generated_at": "2026-03-30T09:25:49+08:00",
+      "generated_at": 1774935109.6097207,
       "product_count": 5,
       "total_posts": 2052,
       "total_valid_posts": 1638
+    },
+    {
+      "file": "report_8e0776af_20260413_081418.json",
+      "run_id": "8e0776af",
+      "period_start": "2026-03-30",
+      "period_end": "2026-04-13",
+      "generated_at": 1776142757.200897,
+      "product_count": 5,
+      "total_posts": 14554,
+      "total_valid_posts": 7324
     }
   ]
 }
