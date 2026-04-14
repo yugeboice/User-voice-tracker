@@ -3,6 +3,21 @@
 
 <head>
   <meta charset="UTF-8">
+  <script>
+    /* Auto-detect base path for GitHub Pages deployment */
+    (function(){
+      var path = location.pathname;
+      /* If served under a subpath (e.g. /User-voice-tracker/), set <base> */
+      var idx = path.indexOf('/', 1);
+      if (idx > 0 && path.charAt(path.length-1) !== '/') {
+        /* e.g. /User-voice-tracker -> /User-voice-tracker/ */
+        var base = path.substring(0, idx + 1);
+        document.write('<base href="' + base + '">');
+      } else if (idx > 0) {
+        document.write('<base href="' + path.substring(0, idx + 1) + '">');
+      }
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Voice Tracker</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
@@ -885,14 +900,17 @@
     async function loadReport(url) {
       showLoading(true);
       try {
+        console.log('[loadReport] fetching:', url);
         var resp = await fetch(url);
         if (!resp.ok) throw new Error('Fetch failed: ' + resp.status);
         reportData = await resp.json();
+        console.log('[loadReport] loaded period:', reportData.period);
         products = consolidateProducts(reportData.products || [], reportData);
         products.sort(function(a,b){ return (PRODUCT_ORDER.indexOf(a.product_name)===-1?99:PRODUCT_ORDER.indexOf(a.product_name)) - (PRODUCT_ORDER.indexOf(b.product_name)===-1?99:PRODUCT_ORDER.indexOf(b.product_name)); });
         buildAllPosts();
         await loadPrevReport();
         renderAll();
+        console.log('[loadReport] renderAll done');
       } catch (e) {
         console.error('Failed to load report:', e);
         document.getElementById('loadingOverlay').innerHTML =
@@ -965,7 +983,7 @@
 
     async function loadReportList() {
       try {
-        var resp = await fetch('/api/reddit/reports');
+        var resp = await fetch('api/reddit/reports');
         if (!resp.ok) return;
         var list = await resp.json();
         var sel = document.getElementById('reportSelector');
@@ -988,10 +1006,11 @@
 
     function onReportSelect(val) {
       if (!val) return;
+      console.log('[onReportSelect] val:', val);
       if (val.endsWith('.json')) {
-        loadReport('/data/reports/' + val);
+        loadReport('data/reports/' + val);
       } else {
-        loadReport('/api/reddit/reports/' + val);
+        loadReport('data/reports/' + val + '.json');
       }
     }
 
