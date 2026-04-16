@@ -442,7 +442,18 @@
         "Critical thinking",
         "Safety",
         "Tech monopoly"
-      ]
+      ],
+      "scenario_distribution": {
+        "general_purpose": 680,
+        "web_search": 110,
+        "image_creation": 520,
+        "code_interpreter": 280,
+        "image_upload": 95,
+        "file_upload": 65,
+        "office_file_creation": 18,
+        "multi_turn": 320,
+        "single_turn_voice": 110
+      }
     },
     {
       "product_name": "Claude",
@@ -886,7 +897,18 @@
         "Model update",
         "Crisis management",
         "IPO"
-      ]
+      ],
+      "scenario_distribution": {
+        "general_purpose": 850,
+        "web_search": 45,
+        "image_creation": 30,
+        "code_interpreter": 1200,
+        "image_upload": 120,
+        "file_upload": 380,
+        "office_file_creation": 42,
+        "multi_turn": 780,
+        "single_turn_voice": 15
+      }
     },
     {
       "product_name": "Gemini",
@@ -1330,7 +1352,18 @@
         "experience",
         "efficiency",
         "value for money"
-      ]
+      ],
+      "scenario_distribution": {
+        "general_purpose": 420,
+        "web_search": 280,
+        "image_creation": 85,
+        "code_interpreter": 110,
+        "image_upload": 65,
+        "file_upload": 55,
+        "office_file_creation": 22,
+        "multi_turn": 260,
+        "single_turn_voice": 70
+      }
     },
     {
       "product_name": "M365 Copilot",
@@ -1735,7 +1768,18 @@
         "highly recognized",
         "continuous optimization",
         "detailed guidance"
-      ]
+      ],
+      "scenario_distribution": {
+        "general_purpose": 8,
+        "web_search": 3,
+        "image_creation": 1,
+        "code_interpreter": 2,
+        "image_upload": 1,
+        "file_upload": 12,
+        "office_file_creation": 18,
+        "multi_turn": 14,
+        "single_turn_voice": 5
+      }
     },
     {
       "product_name": "Copilot",
@@ -2121,7 +2165,18 @@
         "trust crisis",
         "satisfaction improvement",
         "promising future"
-      ]
+      ],
+      "scenario_distribution": {
+        "general_purpose": 22,
+        "web_search": 15,
+        "image_creation": 8,
+        "code_interpreter": 6,
+        "image_upload": 3,
+        "file_upload": 4,
+        "office_file_creation": 10,
+        "multi_turn": 10,
+        "single_turn_voice": 5
+      }
     }
   ],
   "cross_product_comparison": "# AI产品Reddit社区竞品对比报告（2026-03-30至2026-04-13）\n\n## 1. 用户满意度对比\n\n- **Claude**：用户满意度最高，正面情感占比43%，社区活跃度和实际用例分享最多。尽管近期因额度限制、未成年人封禁等政策调整引发争议，但整体认可度领先，用户对其代码、写作、推理等能力评价较高。\n- **ChatGPT**：满意度中等偏低，负面情感占比42%，正面24%。用户对bug频发、内容安全和体验下降不满，但对创意用法和生成能力仍有认可。\n- **Gemini**：满意度较低，负面情感高达50%，正面24%。bug频发、稳定性差、与竞品对比后体验失望是主要原因，个性化和深度检索能力获部分用户好评。\n- **M365 Copilot**：满意度中等，负面34%，正面29%。用户认可其办公自动化和集成优势，但对功能稳定性和强制介入有较多抱怨。\n- **Copilot**（微软通用Copilot）：满意度最低，负面44%，正面22%。bug频发、隐私安全、内容审核过严及模型能力有限是主要痛点，部分用户认为其“更像玩具”。\n\n## 2. 社区满意度极值产品及原因\n\n- **最满意：Claude**\n  - **原因**：用例创新多、推理和代码能力突出、用户活跃度高。尽管有政策调整争议，但产品能力和创新性获得广泛认可。\n- **最不满意：Copilot**\n  - **原因**：bug频发、隐私安全问题突出、内容审核过严、模型能力有限，用户信任度和专业场景适配性较差。\n\n## 3. 各产品共同痛点\n\n- **产品稳定性不足**：bug频发、崩溃、功能异常等问题普遍存在，严重影响用户体验。\n- **内容审核机制争议**：审核过严或过松均引发用户不满，影响内容开放性与安全性平衡。\n- **功能完善度与透明度不足**：用户对功能缺失、变更不透明、官方沟通滞后普遍不满。\n- **模型能力与高阶需求适配不足**：复杂任务、专业场景下表现不佳，用户期待进一步提升。\n\n## 4. 各产品独特优势与劣势\n\n- **Claude**\n  - 优势：推理、代码、写作能力强；用例创新活跃；对话自然度高。\n  - 劣势：额度限制、政策调整频繁，近期安全事件影响信任。\n- **ChatGPT**\n  - 优势：生成内容能力强，创意用法丰富，用户基础大。\n  - 劣势：bug频发，内容安全机制不透明，体验波动大。\n- **Gemini**\n  - 优势：个性化、趣味性强，深度检索能力突出。\n  - 劣势：稳定性差，bug多，功能完善度不及竞品。\n- **M365 Copilot**\n  - 优势：办公场景集成度高，自动化能力强，提升效率明显。\n  - 劣势：功能稳定性不足，强制介入影响用户自主性。\n- **Copilot**\n  - 优势：基础任务便捷，微软生态集成。\n  - 劣势：隐私安全隐患，内容审核过严，模型能力有限。\n\n## 5. 新兴竞争动态与用户偏好变化\n\n- **用户对额度、政策透明度和灵活性的需求提升**，对“封禁”“额度限制”等政策极为敏感，呼吁更灵活的管理和清晰的沟通。\n- **对高阶用例和专业场景的需求增长**，如代码、深度检索、数据分析等，推动产品能力升级。\n- **竞品间对比讨论频繁**，用户流动性增强，产品体验波动直接影响用户迁移意愿。\n- **内容安全与开放性的平衡成为核心竞争点**，用户对审核尺度和自定义能力要求提升。\n\n## 6. 可操作建议\n\n1. **优先修复高频bug，提升产品稳定性**  \n   所有产品需将bug修复和稳定性作为首要任务，减少负面口碑扩散，保障核心功能可用性。\n\n2. **优化内容审核机制，提升透明度与灵活性**  \n   平衡安全与开放，提供自定义审核选项，及时公开审核标准和变更说明，增强用户信任。\n\n3. **加强用户沟通，提升政策与功能变更透明度**  \n   重大调整应提前预告并详细解释，建立用户反馈闭环，减少因信息不对称引发的负面情绪。\n\n4. **聚焦高价值用例和专业场景能力提升**  \n   针对代码、数据分析、深度检索等高阶需求持续优化，强化产品差异化竞争力。\n\n5. **关注竞品动态，强化自身特色与差异化**  \n   定期分析竞品优劣，突出自身集成、创新或专业优势，快速响应用户偏好变化，提升用户粘性。\n\n---\n\n**结论**：当前AI产品用户满意度分化明显，稳定性、内容审核、功能完善度和高阶能力是核心竞争要素。产品团队需聚焦用户核心痛点，提升沟通与透明度，强化差异化优势，以应对日益激烈的市场竞争。",

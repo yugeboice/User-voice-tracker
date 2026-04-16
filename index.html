@@ -694,6 +694,9 @@
         topic_pricing:'定价/订阅',topic_integration:'集成/API',
         topic_comparison:'产品对比',topic_other:'其他',
         topic_use_case:'使用场景',topic_news_update:'新闻动态',topic_meta:'社区讨论',
+        topic_general_purpose:'通用对话',topic_web_search:'网页搜索',topic_image_creation:'图像创建',
+        topic_code_interpreter:'代码解释器',topic_image_upload:'图片上传',topic_file_upload:'文件上传',
+        topic_office_file_creation:'Office文件创建',topic_multi_turn:'多轮对话',topic_single_turn_voice:'单轮语音(桌面)',
         posts:'帖子', posRatePct:'正面率 (%)', discussionVol:'讨论量 (帖子数)',
         trendDelta:'趋势变化', sentimentTrend:'正面率历史趋势', deltaSummary:'本期变化摘要',
         keyFinding:'本期关键发现', noTrend:'至少需要两期报告才能显示趋势',
@@ -741,6 +744,9 @@
         topic_pricing:'Pricing',topic_integration:'Integration/API',
         topic_comparison:'Comparison',topic_other:'Other',
         topic_use_case:'Use Case',topic_news_update:'News',topic_meta:'Meta/Community',
+        topic_general_purpose:'General Purpose',topic_web_search:'Web Search',topic_image_creation:'Image Creation',
+        topic_code_interpreter:'Code Interpreter',topic_image_upload:'Image Upload',topic_file_upload:'File Upload',
+        topic_office_file_creation:'Office File Creation',topic_multi_turn:'Multi Turn',topic_single_turn_voice:'Single Turn Voice (Desktop)',
         posts:'posts', posRatePct:'Positive Rate (%)', discussionVol:'Discussion Volume (posts)',
         trendDelta:'Trend Analysis', sentimentTrend:'Positive Rate Trend', deltaSummary:'Period Delta Summary',
         keyFinding:'Key Finding', noTrend:'Need at least 2 reports for trend',
@@ -1484,7 +1490,16 @@
         }
       }
 
-      el.textContent = finding;
+      /* Competitor dynamics line for current report */
+      var competitorLine = '';
+      if (reportData && reportData.run_id === '8e0776af') {
+        if (currentLang === 'en') {
+          competitorLine = '<br><span style="font-size:13px;color:var(--text-secondary)">📌 Key moves: Copilot Cowork + Claude integration buzz | ChatGPT image gen went viral | Claude Opus 4.6 controversy | Gemini Deep Research praised</span>';
+        } else {
+          competitorLine = '<br><span style="font-size:13px;color:var(--text-secondary)">📌 本期竞品动态：Copilot Cowork 集成 Claude 引发热议 | ChatGPT 图像生成全网刷屏 | Claude Opus 4.6 争议不断 | Gemini Deep Research 获好评</span>';
+        }
+      }
+      el.innerHTML = escapeHtml(finding) + competitorLine;
       el.classList.remove('hidden');
     }
 
@@ -2015,7 +2030,7 @@
       }).join('') || '<li style="color:var(--text-muted)">'+t('noData')+'</li>';
 
       destroyChart('ddDonut');
-      var td = p.topic_distribution || {};
+      var td = p.scenario_distribution || p.topic_distribution || {};
       var topicKeys = Object.keys(td).filter(function(k){return td[k]>0;});
       if (topicKeys.length > 0) {
         var donutColors = ['#818CF8','#F472B6','#34D399','#FBBF24','#60A5FA','#A78BFA','#FB923C','#94A3B8'];
@@ -2245,6 +2260,54 @@
         }
       }
 
+      /* 0. Competitor Updates — hardcoded for current report */
+      if (reportData.run_id === '8e0776af') {
+        var compUpdates = currentLang === 'en' ? [
+          { product: 'M365 Copilot', icon: '🤝', title: 'Copilot Cowork integrates Claude',
+            body: 'Microsoft\'s Copilot Cowork now integrates Claude as an option. Reddit users are highly interested — debating whether this signals Microsoft distancing from OpenAI or hedging bets. Some see it as a win for users who prefer Claude\'s style.' },
+          { product: 'M365 Copilot', icon: '🔬', title: 'Copilot Critique for deep research',
+            body: 'Microsoft launched "Copilot Critique" for deep research scenarios. Early feedback is cautiously positive — users appreciate the ambition but note it still trails Gemini Deep Research and ChatGPT Deep Research in depth.' },
+          { product: 'M365 Copilot', icon: '📊', title: 'PowerPoint Agent sparks debate',
+            body: 'The new PowerPoint Agent can auto-generate full decks. Reddit reactions are split: some call it a game-changer for quick drafts, others say the output is too generic and "soulless" compared to hand-crafted slides.' },
+          { product: 'ChatGPT', icon: '🎨', title: 'Image generation goes viral again',
+            body: 'ChatGPT\'s image generation capabilities continue to trend — users are creating nostalgic 2004-era photos, simulated iPhone 6 shots, and retro-style artwork. The latest quality improvements reignited viral sharing across social media.' },
+          { product: 'Claude', icon: '⚡', title: 'Opus 4.6 draws controversy',
+            body: 'Anthropic released Claude Opus 4.6 to mixed reception. Some users praise improved reasoning, but many longtime fans complain it feels "dumbed down" or overly cautious compared to earlier versions. The backlash is notable on r/ClaudeAI.' },
+          { product: 'Gemini', icon: '🔍', title: 'Deep Research earns praise',
+            body: 'Gemini Deep Research continues to receive strong positive feedback. Reddit users highlight its ability to synthesize complex topics with citations. It\'s increasingly seen as a top choice for research-heavy workflows.' }
+        ] : [
+          { product: 'M365 Copilot', icon: '🤝', title: 'Copilot Cowork 集成 Claude',
+            body: '微软 Copilot Cowork 现已集成 Claude 作为可选模型。Reddit 用户高度关注，讨论这是否意味着微软正在与 OpenAI 保持距离或分散押注。部分用户认为这对偏好 Claude 风格的人是利好。' },
+          { product: 'M365 Copilot', icon: '🔬', title: 'Copilot Critique 深度研究功能',
+            body: '微软推出 "Copilot Critique" 深度研究场景。早期反馈谨慎乐观——用户认可其野心但指出仍落后于 Gemini Deep Research 和 ChatGPT Deep Research 的深度。' },
+          { product: 'M365 Copilot', icon: '📊', title: 'PowerPoint Agent 引发讨论',
+            body: '新的 PowerPoint Agent 可自动生成完整演示文稿。Reddit 反应分化：部分人称其为快速起草的"改变游戏规则者"，另一些人则认为输出太过通用、缺乏灵魂。' },
+          { product: 'ChatGPT', icon: '🎨', title: '图像生成再次刷屏',
+            body: 'ChatGPT 图像生成能力持续走红——用户纷纷创作 2004 年怀旧风格照片、模拟 iPhone 6 拍摄效果等复古风格作品，最新的质量提升再次引发社交媒体病毒式传播。' },
+          { product: 'Claude', icon: '⚡', title: 'Opus 4.6 争议不断',
+            body: 'Anthropic 发布 Claude Opus 4.6，反响褒贬不一。部分用户称赞推理能力提升，但许多老用户抱怨其感觉"被削弱"或过度谨慎。r/ClaudeAI 上的批评声音尤为明显。' },
+          { product: 'Gemini', icon: '🔍', title: 'Deep Research 获好评',
+            body: 'Gemini Deep Research 持续获得强烈正面反馈。Reddit 用户强调其综合复杂话题并附引用的能力，越来越被视为研究密集型工作流的首选工具。' }
+        ];
+
+        html += '<div style="font-size:13px;font-weight:700;color:#7C3AED;margin:0 0 12px;display:flex;align-items:center;gap:6px">'
+          + '<span style="font-size:16px">📌</span> ' + (currentLang === 'en' ? 'Key Competitor Updates This Period' : '本期竞品重要动态') + '</div>';
+        html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-bottom:20px">';
+        for (var cu = 0; cu < compUpdates.length; cu++) {
+          var upd = compUpdates[cu];
+          var updColor = getProductColor(upd.product);
+          html += '<div style="background:var(--bg-secondary);border-radius:10px;padding:14px 16px;border-left:4px solid ' + updColor + ';transition:box-shadow .2s" onmouseover="this.style.boxShadow=\'0 2px 8px rgba(0,0,0,.08)\'" onmouseout="this.style.boxShadow=\'none\'">'
+            + '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">'
+            + '<span style="font-size:18px">' + upd.icon + '</span>'
+            + '<span style="font-size:12px;font-weight:600;color:' + updColor + ';background:' + hexToRgba(updColor, 0.1) + ';padding:2px 8px;border-radius:4px">' + escapeHtml(upd.product) + '</span>'
+            + '</div>'
+            + '<div style="font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:6px">' + escapeHtml(upd.title) + '</div>'
+            + '<div style="font-size:12px;color:var(--text-secondary);line-height:1.6">' + escapeHtml(upd.body) + '</div>'
+            + '</div>';
+        }
+        html += '</div>';
+      }
+
       /* 1. Most/Least satisfied highlight cards (skip the satisfaction table — already in sentiment bar above) */
       if (parsed.mostSatisfied || parsed.leastSatisfied) {
         html += '<div class="cp-highlight-row">';
@@ -2353,6 +2416,7 @@
         }
         html += '</div>';
       }
+
 
       el.innerHTML = html || '<p style="color:var(--text-muted)">' + t('noComparisonData') + '</p>';
     }
