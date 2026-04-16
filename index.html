@@ -2590,6 +2590,8 @@
             var dLine = lines[d].trim();
             var dMatch = dLine.match(/^(?:\d+\.|[-*])\s+\*\*(.+?)[：:]\*\*\s*(.+)/);
             if (!dMatch) dMatch = dLine.match(/^(?:\d+\.|[-*])\s+\*\*(.+?)\*\*[：:]\s*(.+)/);
+            /* Fallback: - **text**，rest or - **text** rest (no colon) */
+            if (!dMatch) dMatch = dLine.match(/^(?:\d+\.|[-*])\s+\*\*(.+?)\*\*[，,。.\s]\s*(.+)/);
             if (dMatch) {
               result.dynamics.push('**' + dMatch[1] + '** ' + dMatch[2]);
             }
@@ -2617,6 +2619,19 @@
               var fmtD = rLine.match(/^\d+\.\s+\*\*(.+?)[：:](.+?)[。.]\*\*\s*(.*)/);
               if (fmtD) {
                 rMatch = [null, fmtD[1], fmtD[2].trim() + (fmtD[3] ? ' ' + fmtD[3] : '')];
+              }
+            }
+            /* Format E: 1. **title**\n   description (no colon, description on next line) */
+            if (!rMatch) {
+              var fmtE = rLine.match(/^\d+\.\s+\*\*(.+?)\*\*\s*$/);
+              if (fmtE) {
+                var nextDesc = (r + 1 < lines.length) ? lines[r + 1].trim() : '';
+                if (nextDesc && !nextDesc.match(/^\d+\.\s/)) {
+                  rMatch = [null, fmtE[1], nextDesc];
+                  r++; /* skip the description line */
+                } else {
+                  rMatch = [null, fmtE[1], fmtE[1]];
+                }
               }
             }
             if (rMatch) {
