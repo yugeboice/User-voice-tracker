@@ -655,7 +655,7 @@
       'ChatGPT':'#10A37F','Claude':'#D97706','GitHub Copilot':'#6366F1',
       'Gemini':'#4285F4','M365 Copilot':'#0078D4'
     };
-    var PRODUCT_ORDER = ['M365 Copilot','ChatGPT','Gemini','Claude','GitHub Copilot'];
+    var PRODUCT_ORDER = ['M365 Copilot','ChatGPT','Gemini','Claude','Copilot','GitHub Copilot'];
     var SENTIMENT_COLORS = {positive:'#16A34A',negative:'#DC2626',neutral:'#6B7280',mixed:'#F59E0B'};
 
     /* Product → subreddit mapping for source links */
@@ -1490,14 +1490,17 @@
         }
       }
 
-      /* Competitor dynamics line for current report */
+      /* Competitor dynamics line: prefer exec_news_summary (curated reaction summary) over raw titles */
       var competitorLine = '';
-      if (reportData && reportData.run_id === '8e0776af') {
-        if (currentLang === 'en') {
-          competitorLine = '<br><span style="font-size:13px;color:var(--text-secondary)">📌 Key moves: Copilot Cowork + Claude integration buzz | ChatGPT image gen went viral | Claude Opus 4.6 controversy | Gemini Deep Research praised</span>';
-        } else {
-          competitorLine = '<br><span style="font-size:13px;color:var(--text-secondary)">📌 本期竞品动态：Copilot Cowork 集成 Claude 引发热议 | ChatGPT 图像生成全网刷屏 | Claude Opus 4.6 争议不断 | Gemini Deep Research 获好评</span>';
-        }
+      if (reportData && reportData.exec_news_summary) {
+        var newsTxt = currentLang === 'en' ? (reportData.exec_news_summary.en || reportData.exec_news_summary.zh) : reportData.exec_news_summary.zh;
+        if (newsTxt) competitorLine = '<br><span style="font-size:13px;color:var(--text-secondary);line-height:1.6">' + escapeHtml(newsTxt) + '</span>';
+      } else if (reportData && reportData.competitor_updates && reportData.competitor_updates.length > 0) {
+        var highlights = reportData.competitor_updates.slice(0, 4).map(function(u) {
+          var t = currentLang === 'en' ? (u.title_en || u.title) : u.title;
+          return (u.icon || '') + ' ' + t;
+        }).join(' | ');
+        competitorLine = '<br><span style="font-size:13px;color:var(--text-secondary)">' + highlights + '</span>';
       }
       el.innerHTML = escapeHtml(finding) + competitorLine;
       el.classList.remove('hidden');
@@ -2017,16 +2020,24 @@
       var painList = document.getElementById('ddPainPoints');
       var pains = getPainPoints(p);
       painList.innerHTML = pains.slice(0,8).map(function(pp){
-        return '<li><span class="dd-dot" style="background:var(--clr-neg)"></span>'
+        var detail = L(pp, 'detail');
+        return '<li><div style="display:flex;align-items:flex-start;gap:6px"><span class="dd-dot" style="background:var(--clr-neg);margin-top:6px;flex-shrink:0"></span>'
+          +'<div style="flex:1;min-width:0">'
           +(pp.severity?'<span class="severity-badge sev-'+pp.severity+'">'+(t('severity_'+pp.severity)||pp.severity)+'</span>':'')
-          +'<span>'+escapeHtml(L(pp, 'text'))+postRefsHtml(pp.post_ids)+'</span></li>';
+          +'<span style="font-weight:600">'+escapeHtml(L(pp, 'text'))+'</span>'+postRefsHtml(pp.post_ids)
+          +(detail?'<div style="font-size:11px;color:var(--text-secondary);line-height:1.55;margin-top:4px">'+escapeHtml(detail)+'</div>':'')
+          +'</div></div></li>';
       }).join('') || '<li style="color:var(--text-muted)">'+t('noData')+'</li>';
 
       var strengthList = document.getElementById('ddStrengths');
       var strs = getStrengths(p);
       strengthList.innerHTML = strs.slice(0,8).map(function(s){
-        return '<li><span class="dd-dot" style="background:var(--clr-pos)"></span>'
-          +'<span>'+escapeHtml(L(s, 'text'))+postRefsHtml(s.post_ids)+'</span></li>';
+        var detail = L(s, 'detail');
+        return '<li><div style="display:flex;align-items:flex-start;gap:6px"><span class="dd-dot" style="background:var(--clr-pos);margin-top:6px;flex-shrink:0"></span>'
+          +'<div style="flex:1;min-width:0">'
+          +'<span style="font-weight:600">'+escapeHtml(L(s, 'text'))+'</span>'+postRefsHtml(s.post_ids)
+          +(detail?'<div style="font-size:11px;color:var(--text-secondary);line-height:1.55;margin-top:4px">'+escapeHtml(detail)+'</div>':'')
+          +'</div></div></li>';
       }).join('') || '<li style="color:var(--text-muted)">'+t('noData')+'</li>';
 
       destroyChart('ddDonut');
@@ -2237,6 +2248,22 @@
       }
 
       var parsed = parseCrossProductMarkdown(cpc);
+      /* Override parsed highlights with structured JSON data if available */
+      if (reportData.cross_product_highlights) {
+        var hl = reportData.cross_product_highlights;
+        if (hl.most_satisfied) {
+          parsed.mostSatisfied = {
+            product: hl.most_satisfied.product,
+            reason: currentLang === 'en' ? (hl.most_satisfied.reason_en || hl.most_satisfied.reason) : hl.most_satisfied.reason
+          };
+        }
+        if (hl.least_satisfied) {
+          parsed.leastSatisfied = {
+            product: hl.least_satisfied.product,
+            reason: currentLang === 'en' ? (hl.least_satisfied.reason_en || hl.least_satisfied.reason) : hl.least_satisfied.reason
+          };
+        }
+      }
       var html = '';
 
       /* Build product -> post_ids lookup from structured per-product data */
@@ -2260,49 +2287,38 @@
         }
       }
 
-      /* 0. Competitor Updates — hardcoded for current report */
-      if (reportData.run_id === '8e0776af') {
-        var compUpdates = currentLang === 'en' ? [
-          { product: 'M365 Copilot', icon: '🤝', title: 'Copilot Cowork integrates Claude',
-            body: 'Microsoft\'s Copilot Cowork now integrates Claude as an option. Reddit users are highly interested — debating whether this signals Microsoft distancing from OpenAI or hedging bets. Some see it as a win for users who prefer Claude\'s style.' },
-          { product: 'M365 Copilot', icon: '🔬', title: 'Critique deep research launched',
-            body: '"Introducing Critique, a new multi-model deep research in M365 Copilot" (score=24, positive) — gained attention, but significantly less buzz compared to Gemini Deep Research (users praised "visiting 368 websites is INSANE").' },
-          { product: 'M365 Copilot', icon: '📊', title: 'PowerPoint Agent pain point',
-            body: 'PowerPoint Agent drew user attention but poor experience — "Edit with Copilot in PowerPoint takes a long time to respond" is a medium-severity pain point this period.' },
-          { product: 'ChatGPT', icon: '🎨', title: 'Image generation goes viral again',
-            body: 'ChatGPT\'s image generation capabilities continue to trend — users are creating nostalgic 2004-era photos, simulated iPhone 6 shots, and retro-style artwork. The latest quality improvements reignited viral sharing across social media.' },
-          { product: 'Claude', icon: '⚡', title: 'Opus 4.6 controversy',
-            body: '"Something happened to Opus 4.6\'s reasoning effort" (score=3628, negative) — users report degraded reasoning, car wash test 5/5 failures. "The golden age is over" became the community sentiment. Positive dropped with 34% negative/mixed — capability + quota disputes compounding.' },
-          { product: 'Gemini', icon: '🔍', title: 'Deep Research praised',
-            body: '"Gemini Deep Research visiting 368 websites is INSANE, way above ChatGPT" — the sole highlight this period. But overall 50% negative, 360 bugs reported — one bright feature cannot save systemic quality issues.' }
-        ] : [
-          { product: 'M365 Copilot', icon: '🤝', title: 'Copilot Cowork 集成 Claude',
-            body: '微软 Copilot Cowork 现已集成 Claude 作为可选模型。Reddit 用户高度关注，讨论这是否意味着微软正在与 OpenAI 保持距离或分散押注。部分用户认为这对偏好 Claude 风格的人是利好。' },
-          { product: 'M365 Copilot', icon: '🔬', title: 'Critique 深度研究功能发布',
-            body: '"Introducing Critique, a new multi-model deep research in M365 Copilot"（score=24，正面）——新功能获得关注，但与 Gemini 的 Deep Research（用户赞"visiting 368 websites is INSANE"）相比声量明显不足。' },
-          { product: 'M365 Copilot', icon: '📊', title: 'PowerPoint Agent',
-            body: 'PowerPoint Agent 被用户关注但体验不佳——"Edit with Copilot in PowerPoint takes a long time to respond"是本期中等严重度痛点。' },
-          { product: 'ChatGPT', icon: '🎨', title: '图像生成再次刷屏',
-            body: 'ChatGPT 图像生成能力持续走红——用户纷纷创作 2004 年怀旧风格照片、模拟 iPhone 6 拍摄效果等复古风格作品，最新的质量提升再次引发社交媒体病毒式传播。' },
-          { product: 'Claude', icon: '⚡', title: 'Opus 4.6 发布引发争议',
-            body: '"Something happened to Opus 4.6\'s reasoning effort"（score=3628，负面）——用户反馈新版推理能力下降，car wash test 5/5 失败。"The golden age is over" 成为社区情绪。正面43%但负面/混合34%——能力争议 + 额度争议双重打击。' },
-          { product: 'Gemini', icon: '🔍', title: 'Deep Research 获认可',
-            body: '"Gemini Deep Research visiting 368 websites is INSANE, way above ChatGPT"——这是 Gemini 本期唯一的高光时刻。但整体负面50%，bug 360条，一个亮点功能无法挽救系统性的质量问题。' }
-        ];
-
+      /* 0. Competitor Updates — read from report JSON */
+      var compUpdates = reportData.competitor_updates;
+      if (compUpdates && compUpdates.length > 0) {
         html += '<div style="font-size:13px;font-weight:700;color:#7C3AED;margin:0 0 12px;display:flex;align-items:center;gap:6px">'
           + '<span style="font-size:16px">📌</span> ' + (currentLang === 'en' ? 'Key Competitor Updates This Period' : '本期竞品重要动态') + '</div>';
         html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-bottom:20px">';
         for (var cu = 0; cu < compUpdates.length; cu++) {
           var upd = compUpdates[cu];
           var updColor = getProductColor(upd.product);
+          var updTitle = currentLang === 'en' ? (upd.title_en || upd.title) : upd.title;
+          var updBody = currentLang === 'en' ? (upd.body_en || upd.body) : upd.body;
+          var srcHtml = '';
+          if (upd.sources && upd.sources.length > 0) {
+            srcHtml = '<div style="margin-top:10px;padding-top:8px;border-top:1px dashed var(--border-color);display:flex;flex-wrap:wrap;gap:4px;align-items:center">'
+              + '<span style="font-size:10px;color:var(--text-muted);font-weight:600;margin-right:2px">' + (currentLang === 'en' ? 'SOURCES:' : '原帖：') + '</span>';
+            for (var si = 0; si < upd.sources.length && si < 4; si++) {
+              var src = upd.sources[si];
+              var srcUrl = src.url || ('https://reddit.com/comments/' + src.id);
+              srcHtml += '<a href="' + escapeHtml(srcUrl) + '" target="_blank" rel="noopener" title="' + escapeHtml(src.title) + '"'
+                + ' style="font-size:10px;background:' + hexToRgba(updColor, 0.08) + ';color:' + updColor + ';padding:2px 6px;border-radius:4px;text-decoration:none;border:1px solid ' + hexToRgba(updColor, 0.2) + '">'
+                + '#' + (si + 1) + ' ' + (src.score || 0) + '↑</a>';
+            }
+            srcHtml += '</div>';
+          }
           html += '<div style="background:var(--bg-secondary);border-radius:10px;padding:14px 16px;border-left:4px solid ' + updColor + ';transition:box-shadow .2s" onmouseover="this.style.boxShadow=\'0 2px 8px rgba(0,0,0,.08)\'" onmouseout="this.style.boxShadow=\'none\'">'
             + '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">'
-            + '<span style="font-size:18px">' + upd.icon + '</span>'
+            + '<span style="font-size:18px">' + (upd.icon || '') + '</span>'
             + '<span style="font-size:12px;font-weight:600;color:' + updColor + ';background:' + hexToRgba(updColor, 0.1) + ';padding:2px 8px;border-radius:4px">' + escapeHtml(upd.product) + '</span>'
             + '</div>'
-            + '<div style="font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:6px">' + escapeHtml(upd.title) + '</div>'
-            + '<div style="font-size:12px;color:var(--text-secondary);line-height:1.6">' + escapeHtml(upd.body) + '</div>'
+            + '<div style="font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:6px">' + escapeHtml(updTitle) + '</div>'
+            + '<div style="font-size:12px;color:var(--text-secondary);line-height:1.6">' + escapeHtml(updBody) + '</div>'
+            + srcHtml
             + '</div>';
         }
         html += '</div>';
@@ -2799,7 +2815,7 @@
     /* ======= INIT ======= */
     (async function init() {
       await loadReportIndex();
-      loadReportList();
+      await loadReportList();
       try {
         var resp = await fetch('data/reports/latest.json');
         if (resp.ok) { reportData = await resp.json(); }
@@ -2810,6 +2826,9 @@
           buildAllPosts();
           await loadPrevReport();
           renderAll();
+          /* Auto-select the latest report in dropdown */
+          var sel = document.getElementById('reportSelector');
+          if (sel && sel.options.length > 1) { sel.selectedIndex = 1; }
         }
       } catch(e) { console.error('Failed to load initial report:', e); }
       finally { showLoading(false); }

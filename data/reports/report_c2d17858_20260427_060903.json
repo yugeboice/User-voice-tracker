@@ -2233,51 +2233,353 @@
   "competitor_updates": [
     {
       "product": "ChatGPT",
-      "icon": "🚀",
-      "title": "GPT-5.5 发布",
-      "title_en": "GPT-5.5 Released",
-      "body": "OpenAI发布GPT-5.5，号称\"A new class of intelligence\"。API定价$5/$30/1M tokens。Reddit用户热议其与Claude Opus 4.7的对比——SWE-bench Pro上Claude仍领先(64.3% vs 58.6%)。",
-      "body_en": "OpenAI released GPT-5.5, claiming \"A new class of intelligence.\" API pricing at $5/$30/1M tokens. Reddit users debated its comparison with Claude Opus 4.7 — Claude still leads SWE-bench Pro (64.3% vs 58.6%)."
+      "icon": "🟢",
+      "title": "GPT-5.5发布引发Reddit热议",
+      "title_en": "GPT-5.5 Launch Reddit Reactions",
+      "body": "反响积极：发布后 11 天内 125 帖讨论，已分析 68 帖中 37% 正面、26% 负面。用户称比 5.3/5.4 明显提升，不再「说教」、个性更强；图像生成令人惊艳（如 1995 年巴黎场景）。GitHub Copilot 已集成但请求费率高达 7.5x。",
+      "body_en": "Positive reception: 125 posts in 11 days post-launch, 37% positive vs 26% negative across 68 analyzed. Users say it's less preachy than 5.3/5.4 with stronger personality; image generation impressed (e.g., Paris 1995 scene). Now in GitHub Copilot but at 7.5x request cost.",
+      "sentiment": "positive",
+      "key_points": [
+        "用户普遍认为GPT-5.5比前代更自然、更少说教",
+        "图像生成质量大幅提升但手部仍有问题",
+        "GitHub Copilot集成费用较高，7.5倍请求消耗引发讨论"
+      ],
+      "key_points_en": [
+        "Users find GPT-5.5 less preachy and more opinionated than predecessors",
+        "Image generation quality impressed users despite hand rendering issues",
+        "GitHub Copilot integration at 7.5x premium requests raised cost concerns"
+      ],
+      "stats": {
+        "name": "GPT-5.5",
+        "release": "2026-04-15",
+        "posts": 125,
+        "comments": 1883,
+        "score": 2669,
+        "classified": 68,
+        "pos": 25,
+        "neg": 18,
+        "mix": 10,
+        "neu": 15,
+        "pos_pct": 37,
+        "neg_pct": 26,
+        "mix_pct": 15,
+        "neu_pct": 22,
+        "days": 11
+      },
+      "sources": [
+        {
+          "id": "1stql3u",
+          "title": "ChatGPT 5.5 is here!",
+          "score": 435,
+          "comments": 143,
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1stql3u/chatgpt_55_is_here/"
+        },
+        {
+          "id": "1st3xm6",
+          "title": "OpenAI appears to be gearing up for a major strategic move",
+          "score": 414,
+          "comments": 157,
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1st3xm6/openai_appears_to_be_gearing_up_for_a_major/"
+        },
+        {
+          "id": "1suogyf",
+          "title": "GPT-5.5 is generally available for GitHub Copilot",
+          "score": 207,
+          "comments": 206,
+          "url": "https://www.reddit.com/r/GithubCopilot/comments/1suogyf/gpt55_is_generally_available_for_github_copilot/"
+        },
+        {
+          "id": "1stqi0r",
+          "title": "ChatGPT 5.5 Released!",
+          "score": 185,
+          "comments": 85,
+          "url": "https://www.reddit.com/r/GithubCopilot/comments/1stqi0r/chatgpt_55_released/"
+        }
+      ]
     },
     {
       "product": "ChatGPT",
-      "icon": "⚠️",
-      "title": "军事合同争议引发大规模退订",
-      "title_en": "Military Contract Controversy Triggers Mass Cancellations",
-      "body": "2.5M+用户取消/承诺停用ChatGPT，App卸载量单日飙升300%。Claude一度登顶App Store。",
-      "body_en": "2.5M+ users canceled or pledged to stop using ChatGPT. App uninstalls spiked 300% in one day. Claude briefly topped the App Store."
+      "icon": "🟢",
+      "title": "Reddit用户热议GPT Image 2.0的强大表现",
+      "title_en": "Reddit Users Rave About GPT Image 2.0",
+      "body": "用户高度好评：发布 5 天内 170 帖、1,642 评论，已分析 133 帖中 47%（63 帖）正面，仅 20% 负面。亮点：时尚拼贴、体育海报、3D 漫画、复杂网格大幅提升；短板：自然风景生成弱、纹理伪影、细节小错（如 logo、纹身）。",
+      "body_en": "Strong reception: 170 posts and 1,642 comments in 5 days; 47% (63 posts) positive vs only 20% negative across 133 analyzed. Wins: fashion collages, sports posters, 3D caricatures, complex grids. Weaknesses: nature scenes, tiling artifacts, minor logo/tattoo errors.",
+      "sentiment": "positive",
+      "key_points": [
+        "复杂拼贴和网格生成能力大幅提升，可处理10倍以上复杂度",
+        "体育海报和3D漫画效果令人印象深刻",
+        "自然风景生成效果明显不如前代模型",
+        "部分用户反映图像存在奇怪的纹理伪影和污垢层",
+        "细节方面仍有小问题如logo错误、纹身不准确等"
+      ],
+      "key_points_en": [
+        "Complex collage and grid generation vastly improved, handling 10x more complexity",
+        "Sports graphics and 3D caricatures are impressive",
+        "Nature scene generation is notably worse than previous models",
+        "Some users report persistent tiling texture and grime artifacts",
+        "Minor detail issues remain such as wrong logos and inaccurate tattoos"
+      ],
+      "stats": {
+        "name": "GPT Image 2.0",
+        "release": "2026-04-21",
+        "posts": 170,
+        "comments": 1642,
+        "score": 6113,
+        "classified": 133,
+        "pos": 63,
+        "neg": 26,
+        "mix": 24,
+        "neu": 20,
+        "pos_pct": 47,
+        "neg_pct": 20,
+        "mix_pct": 18,
+        "neu_pct": 15,
+        "days": 5
+      },
+      "sources": [
+        {
+          "id": "1sv0lv1",
+          "title": "Image 2.0 is unreal",
+          "score": 2695,
+          "comments": 132,
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1sv0lv1/image_20_is_unreal/"
+        },
+        {
+          "id": "1ssw3zi",
+          "title": "GPT-Image 2 \"White Smoke Attack\"",
+          "score": 511,
+          "comments": 28,
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1ssw3zi/gptimage_2_white_smoke_attack/"
+        },
+        {
+          "id": "1sryveb",
+          "title": "GPT IMAGE 2 is superb",
+          "score": 418,
+          "comments": 78,
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1sryveb/gpt_image_2_is_superb/"
+        },
+        {
+          "id": "1ssnaos",
+          "title": "GPT Image 2 did this...",
+          "score": 381,
+          "comments": 61,
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1ssnaos/gpt_image_2_did_this/"
+        }
+      ]
     },
     {
       "product": "Claude",
-      "icon": "⚡",
-      "title": "Opus 4.7发布 + Code三重Bug事件",
-      "title_en": "Opus 4.7 Released + Code Triple-Bug Incident",
-      "body": "Opus 4.7在SWE-bench Pro达64.3%（#1），但Claude Code过去一个月经历三重叠加bug导致体验下降。Anthropic发布postmortem并重置用户额度。",
-      "body_en": "Opus 4.7 reached 64.3% on SWE-bench Pro (#1), but Claude Code suffered three stacked bugs over the past month causing degraded experience. Anthropic released a postmortem and reset user limits."
+      "icon": "🟡",
+      "title": "Claude Opus 4.7发布后用户反馈与Bug事后分析",
+      "title_en": "Claude Opus 4.7 Launch & Postmortem",
+      "body": "评价两极偏负面：发布 13 天内引爆 759 帖、11,526 评论（讨论量约为另两者的 4-6 倍）。已分析 393 帖中 42%（164 帖）负面 > 21%（83 帖）正面。负面集中在过度字面化、视觉退化（花束被画成粪便状）；Anthropic 发布 postmortem 确认 Claude Code 三个叠加 Bug。少数 power user 仍捍卫为强大升级。",
+      "body_en": "Polarized, leaning negative: 759 posts and 11,526 comments in 13 days (4-6x the others). Of 393 analyzed, 42% (164) negative > 21% (83) positive. Complaints: overly literal, visual regressions (flower bouquets rendered as brown smears). Anthropic postmortem confirmed three compounding Claude Code bugs. Some power users still defend it as a major upgrade.",
+      "sentiment": "mixed",
+      "key_points": [
+        "Anthropic确认Claude Code存在三个叠加Bug并发布事后分析",
+        "用户反映模型退步：指令过于字面化、视觉生成出错",
+        "部分高级用户认为问题在于使用方式而非模型本身"
+      ],
+      "key_points_en": [
+        "Anthropic confirmed three compounding bugs in Claude Code via postmortem",
+        "Users reported regressions: overly literal responses, broken image generation",
+        "Power users argued the issue was setup/harness, not the model itself"
+      ],
+      "stats": {
+        "name": "Claude Opus 4.7",
+        "release": "2026-04-13",
+        "posts": 759,
+        "comments": 11526,
+        "score": 37005,
+        "classified": 393,
+        "pos": 83,
+        "neg": 164,
+        "mix": 86,
+        "neu": 60,
+        "pos_pct": 21,
+        "neg_pct": 42,
+        "mix_pct": 22,
+        "neu_pct": 15,
+        "days": 13
+      },
+      "sources": [
+        {
+          "id": "1ss8h1x",
+          "title": "An open letter to Anthropic",
+          "score": 3631,
+          "comments": 545,
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1ss8h1x/an_open_letter_to_anthropic/"
+        },
+        {
+          "id": "1sn57af",
+          "title": "Introducing Claude Opus 4.7, our most capable Opus model yet.",
+          "score": 3310,
+          "comments": 799,
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1sn57af/introducing_claude_opus_47_our_most_capable_opus/"
+        },
+        {
+          "id": "1snhfzd",
+          "title": "Claude Opus 4.7 is a serious regression, not an upgrade.",
+          "score": 3211,
+          "comments": 808,
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1snhfzd/claude_opus_47_is_a_serious_regression_not_an/"
+        },
+        {
+          "id": "1sn6y50",
+          "title": "Opus 4.7 sure was fun for about 15 minutes",
+          "score": 3090,
+          "comments": 358,
+          "url": "https://www.reddit.com/r/claude/comments/1sn6y50/opus_47_sure_was_fun_for_about_15_minutes/"
+        }
+      ]
     },
     {
       "product": "Copilot",
-      "icon": "🚫",
-      "title": "GitHub Copilot暂停新注册、收紧限额",
-      "title_en": "GitHub Copilot Pauses Signups, Tightens Limits",
-      "body": "Pro/Pro+/Student新注册暂停。Opus模型从Pro移除。原因：agentic coding导致运营成本翻倍。考虑转向token计费模式。开发者强烈反弹。",
-      "body_en": "Pro/Pro+/Student signups paused. Opus models removed from Pro. Reason: agentic coding nearly doubled operating costs. Token-based billing being considered. Significant developer backlash."
+      "icon": "🔴",
+      "title": "GitHub Copilot Pro+ 用户强烈反弹",
+      "title_en": "GitHub Copilot Pro+ User Backlash",
+      "body": "GitHub Copilot Pro+ 用户普遍不满：产品频繁改动导致体验下降，Claude Opus 模型要求升级计划；严重的速率限制问题，学生版和付费版用户仅一个提示就被限流；冷却时间后仍无法使用，时间估算被指「不准确」。部分忠实用户选择离开，认为产品已不再是当初订阅的版本。但也有非开发者用户（如财务经理）表示离不开该工具。",
+      "body_en": "GitHub Copilot Pro+ users are frustrated over degraded product quality, aggressive rate limiting after single prompts, forced plan upgrades, and frequent changes. Long-time loyal users are leaving, citing the product is no longer what they subscribed for. Student plan users also face severe restrictions. Some non-developer users like finance managers still find it valuable.",
+      "sentiment": "negative",
+      "stats": {
+        "classified": 2,
+        "pos": 1,
+        "neg": 1,
+        "mix": 0,
+        "neu": 0,
+        "total": 6,
+        "comments": 592
+      },
+      "sources": [
+        {
+          "id": "1smjbvq",
+          "title": "The cost of code use to be a middleware for our brains.",
+          "score": 876,
+          "comments": 122,
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1smjbvq/the_cost_of_code_use_to_be_a_middleware_for_our/"
+        },
+        {
+          "id": "1srj6xi",
+          "title": "GitHub Copilot is not the same product you signed up for, breakdown of everything they changed.",
+          "score": 273,
+          "comments": 180,
+          "url": "https://www.reddit.com/r/GithubCopilot/comments/1srj6xi/github_copilot_is_not_the_same_product_you_signed/"
+        },
+        {
+          "id": "1sv4y31",
+          "title": "Goodbye from a loyal user",
+          "score": 225,
+          "comments": 106,
+          "url": "https://www.reddit.com/r/GithubCopilot/comments/1sv4y31/goodbye_from_a_loyal_user/"
+        },
+        {
+          "id": "1sv2y6g",
+          "title": "It was good while it lasted 🫡",
+          "score": 132,
+          "comments": 77,
+          "url": "https://www.reddit.com/r/GithubCopilot/comments/1sv2y6g/it_was_good_while_it_lasted/"
+        },
+        {
+          "id": "1srschs",
+          "title": "I don't want to do my job without Copilot Pro anymore.",
+          "score": 114,
+          "comments": 39,
+          "url": "https://www.reddit.com/r/CopilotPro/comments/1srschs/i_dont_want_to_do_my_job_without_copilot_pro/"
+        }
+      ]
     },
     {
       "product": "Gemini",
-      "icon": "🌟",
-      "title": "Gemini April Drop + Deep Research Max",
-      "title_en": "Gemini April Drop + Deep Research Max",
-      "body": "个人智能(连接Gmail/Photos/Calendar)、Notebooks、Mac App、Lyria 3 Pro音乐生成。Deep Research Max自主研究agent。但整体负面情绪仍高达51%。",
-      "body_en": "Personal Intelligence (connecting Gmail/Photos/Calendar), Notebooks, Mac App, Lyria 3 Pro music generation. Deep Research Max autonomous agent. But overall negative sentiment remains at 51%."
+      "icon": "🟢",
+      "title": "Gemini April Drop / Nano Banana Pro 反响",
+      "title_en": "Gemini April Drop / Nano Banana Reception",
+      "body": "用户对Gemini四月更新反响积极，笔记本功能终于登陆Gemini应用获460赞。项目文件夹功能也终于上线，用户称「等了好几年」。但也有用户焦虑Gemini迭代速度，称ChatGPT 5.5和Opus 4.7已发布，质问Gemini 3.2何时到来。Nano Banana Pro与ChatGPT图像生成的对比讨论也引发关注。",
+      "body_en": "Users reacted positively to Gemini's April updates, with Notebooks integration and project folders receiving praise after long waits. However, some expressed concern about Gemini falling behind competitors like ChatGPT 5.5 and Opus 4.7, asking when Gemini 3.2 would arrive. A comparison between Nano Banana Pro and ChatGPT Image 2.0 also drew discussion.",
+      "sentiment": "positive",
+      "stats": {
+        "classified": 4,
+        "pos": 2,
+        "neg": 0,
+        "mix": 1,
+        "neu": 1,
+        "total": 4,
+        "comments": 248
+      },
+      "sources": [
+        {
+          "id": "1srjv44",
+          "title": "Notebooks arrive in Gemini app!",
+          "score": 460,
+          "comments": 116,
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1srjv44/notebooks_arrive_in_gemini_app/"
+        },
+        {
+          "id": "1suj9o5",
+          "title": "Gemini 3.2",
+          "score": 147,
+          "comments": 77,
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1suj9o5/gemini_32/"
+        },
+        {
+          "id": "1ss8qhs",
+          "title": "ChatGPT Image 2.0 vs Gemini Nano Banana Pro",
+          "score": 80,
+          "comments": 28,
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1ss8qhs/chatgpt_image_20_vs_gemini_nano_banana_pro/"
+        },
+        {
+          "id": "1sr1vcc",
+          "title": "Projects Folders are finally here",
+          "score": 55,
+          "comments": 27,
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1sr1vcc/projects_folders_are_finally_here/"
+        }
+      ]
     },
     {
       "product": "M365 Copilot",
-      "icon": "📊",
-      "title": "April更新：视频会议摘要、Researcher",
-      "title_en": "April Updates: Meeting Video Recap, Researcher",
-      "body": "Copilot Chat新增视频会议摘要、Researcher支持PPT/PDF/音频输出、Employee Self-Service agent、AI视频生成管控。",
-      "body_en": "Copilot Chat adds video meeting recap, Researcher supports PPT/PDF/audio output, Employee Self-Service agent, AI video generation controls."
+      "icon": "🟡",
+      "title": "M365 Copilot 4 月新功能用户反馈",
+      "title_en": "M365 Copilot April Update Reception",
+      "body": "「M365 Copilot」用户讨论集中在三个方面：一是利用内置调度器每天自动运行「参谋长简报」提示词，无需Power Automate；二是关于反AI群体的争论，有人认为批评AI如同「真正的农民不用拖拉机」；三是企业级提示词库的构建，用户希望按部门和应用分类整理可搜索的Copilot提示词集合。",
+      "body_en": "Users discuss three topics: using Copilot's built-in scheduler for daily automated briefings without Power Automate, debating anti-AI sentiment compared to rejecting tractors in farming, and building enterprise prompt libraries organized by department for FinTech companies.",
+      "sentiment": "mixed",
+      "stats": {
+        "classified": 3,
+        "pos": 2,
+        "neg": 0,
+        "mix": 1,
+        "neu": 0,
+        "total": 3,
+        "comments": 376
+      },
+      "sources": [
+        {
+          "id": "1su626c",
+          "title": "I've been running a \"chief of staff\" briefing in Copilot every morning and here's the full prompt and how to schedule it",
+          "score": 262,
+          "comments": 46,
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1su626c/ive_been_running_a_chief_of_staff_briefing_in/"
+        },
+        {
+          "id": "1stbebb",
+          "title": "The anti-AI crowd is giving “real farmers don’t use tractors” energy, and it’s getting old.",
+          "score": 228,
+          "comments": 325,
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1stbebb/the_antiai_crowd_is_giving_real_farmers_dont_use/"
+        },
+        {
+          "id": "1srr0ll",
+          "title": "What's your go to Copilot prompt library? Building an enterprise collection and want the best sources",
+          "score": 27,
+          "comments": 5,
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1srr0ll/whats_your_go_to_copilot_prompt_library_building/"
+        }
+      ]
     }
-  ]
+  ],
+  "exec_news_summary": {
+    "zh": "本期三大焦点：🟢 GPT-5.5（4-15 发布）反响积极，125 帖中 37% 正面（25/68），用户称更有个性、不再说教；🟢 GPT Image 2.0（4-21 发布）47% 正面（63/133）—— 拼贴/海报/复杂网格惊艳，自然风景仍弱；🟡 Claude Opus 4.7（4-13 发布）讨论量爆炸（759 帖、11,526 评论，是另两者数倍），但 42% 负面 > 21% 正面，Anthropic 发 postmortem 解释 Code 三重 bug。",
+    "en": "Three key narratives: 🟢 GPT-5.5 (4/15) well received — 37% positive of 68 analyzed posts, users say less preachy with stronger personality; 🟢 GPT Image 2.0 (4/21) 47% positive (63/133) — collages/posters/grids stunning, nature scenes still weak; 🟡 Claude Opus 4.7 (4/13) drove explosive discussion (759 posts, 11,526 comments, multiples of others), but 42% negative > 21% positive; Anthropic postmortem explains three Claude Code bugs."
+  }
 }

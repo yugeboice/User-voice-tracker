@@ -1630,54 +1630,35 @@
           "severity": "high",
           "detail": "部分用户即使拥有Copilot Premium许可证和Frontier权限，仍无法添加或访问Copilot Cowork，提示需要许可证，导致部署受阻。",
           "text_en": "Copilot Cowork access and licensing issues",
-          "detail_en": "Some users cannot add or access Copilot Cowork even with Premium licenses and proper settings, receiving license errors and blocking rollout.",
-          "post_ids": [
-            "1s9ul0l",
-            "1shymgj"
-          ]
+          "detail_en": "Some users cannot add or access Copilot Cowork even with Premium licenses and proper settings, receiving license errors and blocking rollout."
         },
         {
           "text": "Copilot功能响应速度慢",
           "severity": "medium",
           "detail": "如PowerPoint中的“Edit with Copilot”功能响应时间过长，影响用户体验和工作效率。",
           "text_en": "Slow Copilot feature response",
-          "detail_en": "Features like 'Edit with Copilot' in PowerPoint take a long time to respond, disappointing users and reducing productivity.",
-          "post_ids": [
-            "1sd1vjz",
-            "1sfl8l7"
-          ]
+          "detail_en": "Features like 'Edit with Copilot' in PowerPoint take a long time to respond, disappointing users and reducing productivity."
         },
         {
           "text": "Copilot Agent数据处理受限",
           "severity": "high",
           "detail": "在SharePoint等数据源中，Copilot Agent经常因数据量过大而报错，无法顺利读取和分析文件，影响自动化流程搭建。",
           "text_en": "Copilot Agent data handling limitations",
-          "detail_en": "Copilot Agents often fail to process or analyze data from SharePoint or Excel due to data size limits, blocking workflow automation.",
-          "post_ids": [
-            "1sfoid8",
-            "1sc6csg"
-          ]
+          "detail_en": "Copilot Agents often fail to process or analyze data from SharePoint or Excel due to data size limits, blocking workflow automation."
         },
         {
           "text": "Copilot多语言支持不稳定",
           "severity": "medium",
           "detail": "即使系统和浏览器语言设置正确，Copilot有时仍会用错误的语言回复，影响国际化用户体验。",
           "text_en": "Unstable multilingual support",
-          "detail_en": "Copilot sometimes responds in the wrong language despite correct system and browser settings, affecting non-English users.",
-          "post_ids": [
-            "1sd1vjz"
-          ]
+          "detail_en": "Copilot sometimes responds in the wrong language despite correct system and browser settings, affecting non-English users."
         },
         {
           "text": "Copilot Cowork部分用户无法连接",
           "severity": "medium",
           "detail": "部分用户在环境中无法连接Copilot Cowork，尽管安全策略已允许所有用户，影响团队协作。",
           "text_en": "Copilot Cowork connection issues for some users",
-          "detail_en": "Some users cannot connect to Copilot Cowork even though security settings allow all, impacting team collaboration.",
-          "post_ids": [
-            "1shymgj",
-            "1s9ul0l"
-          ]
+          "detail_en": "Some users cannot connect to Copilot Cowork even though security settings allow all, impacting team collaboration."
         }
       ],
       "strengths": [
@@ -1685,40 +1666,25 @@
           "text": "多角色场景下的高效应用",
           "detail": "Copilot在HR、人事、IT、财务等多种业务场景下表现出色，能够通过定制化Prompt提升实际工作效率。",
           "text_en": "Effective in multi-role scenarios",
-          "detail_en": "Copilot performs well in HR, IT, finance, and other business roles, with custom prompts significantly improving workflow efficiency.",
-          "post_ids": [
-            "1sfoid8",
-            "1sc6csg"
-          ]
+          "detail_en": "Copilot performs well in HR, IT, finance, and other business roles, with custom prompts significantly improving workflow efficiency."
         },
         {
           "text": "自定义Agent和自动化集成能力强",
           "detail": "用户可通过Copilot Studio和Power Automate等工具，搭建自定义Agent，实现如候选人筛选、财务报表自动化等复杂流程。",
           "text_en": "Strong custom Agent and automation integration",
-          "detail_en": "Users can build custom Agents with Copilot Studio and Power Automate to automate complex processes like candidate screening and financial reporting.",
-          "post_ids": [
-            "1s9ul0l",
-            "1s7sz58"
-          ]
+          "detail_en": "Users can build custom Agents with Copilot Studio and Power Automate to automate complex processes like candidate screening and financial reporting."
         },
         {
           "text": "新功能和模型持续更新",
           "detail": "微软不断引入如Critique多模型深度研究、Claude模型集成等新功能，提升Copilot能力和体验。",
           "text_en": "Continuous feature and model updates",
-          "detail_en": "Microsoft keeps adding new features like Critique for deep research and Claude model integration, enhancing Copilot's capabilities.",
-          "post_ids": [
-            "1s7sz58",
-            "1s9ul0l"
-          ]
+          "detail_en": "Microsoft keeps adding new features like Critique for deep research and Claude model integration, enhancing Copilot's capabilities."
         },
         {
           "text": "基础版Copilot Chat支持自定义Agent",
           "detail": "即使没有Premium许可证，用户也可以用基础版Copilot Chat创建自定义Agent，降低了使用门槛。",
           "text_en": "Custom Agents supported in Copilot Chat Basic",
-          "detail_en": "Users can create custom Agents with Copilot Chat Basic license, lowering the entry barrier for automation.",
-          "post_ids": [
-            "1s9hsan"
-          ]
+          "detail_en": "Users can create custom Agents with Copilot Chat Basic license, lowering the entry barrier for automation."
         }
       ],
       "recommendations": [
@@ -2081,41 +2047,28 @@
           "severity": "high",
           "detail": "有用户在登录Copilot官网时，看到其他人的邮箱，担心账号安全和隐私泄露。",
           "text_en": "Privacy and Security Issues",
-          "detail_en": "Some users saw other people's emails when logging into the Copilot official website, raising concerns about account security and privacy leaks.",
-          "post_ids": [
-            "1sdhk97"
-          ]
+          "detail_en": "Some users saw other people's emails when logging into the Copilot official website, raising concerns about account security and privacy leaks."
         },
         {
           "text": "功能不稳定和Bug频发",
           "severity": "high",
           "detail": "用户频繁遇到Copilot卡死、超时、无法访问、无法正常输入、语音功能杂音等问题，影响正常使用。",
           "text_en": "Unstable Functionality and Frequent Bugs",
-          "detail_en": "Users frequently experience Copilot freezing, timeouts, inaccessibility, input issues, and distorted audio in voice features, which severely affect usability.",
-          "post_ids": [
-            "1sbt1vu",
-            "1sdquxe"
-          ]
+          "detail_en": "Users frequently experience Copilot freezing, timeouts, inaccessibility, input issues, and distorted audio in voice features, which severely affect usability."
         },
         {
           "text": "Copilot能力有限，无法满足复杂需求",
           "severity": "medium",
           "detail": "部分用户反馈Copilot在数据处理、研究等实际工作场景下表现不佳，甚至被认为只是‘娱乐用途’或‘玩具’。",
           "text_en": "Limited Capabilities for Complex Tasks",
-          "detail_en": "Some users report that Copilot performs poorly in real work scenarios like data processing and research, and is even described as 'for entertainment purposes only' or a 'toy'.",
-          "post_ids": [
-            "1s932dn"
-          ]
+          "detail_en": "Some users report that Copilot performs poorly in real work scenarios like data processing and research, and is even described as 'for entertainment purposes only' or a 'toy'."
         },
         {
           "text": "安全过滤过于严格",
           "severity": "medium",
           "detail": "用户认为Copilot的安全过滤过于激进，导致很多正常内容被屏蔽，影响体验。",
           "text_en": "Overly Aggressive Safety Filters",
-          "detail_en": "Users feel that Copilot's safety filters are too aggressive, blocking many non-NSFW contents and affecting user experience.",
-          "post_ids": [
-            "1sdquxe"
-          ]
+          "detail_en": "Users feel that Copilot's safety filters are too aggressive, blocking many non-NSFW contents and affecting user experience."
         }
       ],
       "strengths": [
@@ -2123,30 +2076,19 @@
           "text": "Copilot Cowork带来实际生产力提升",
           "detail": "Copilot Cowork在Microsoft 365等办公场景下展示了强大的实际应用价值，能帮助用户高效完成多种任务。",
           "text_en": "Copilot Cowork Improves Productivity",
-          "detail_en": "Copilot Cowork demonstrates strong practical value in Microsoft 365 and other office scenarios, helping users efficiently complete various tasks.",
-          "post_ids": [
-            "1s9a6bs",
-            "1sdyahv"
-          ]
+          "detail_en": "Copilot Cowork demonstrates strong practical value in Microsoft 365 and other office scenarios, helping users efficiently complete various tasks."
         },
         {
           "text": "持续推出新功能和模型",
           "detail": "微软不断发布支持文本、语音、图像等多模态的新基础模型和教育模块新功能，提升Copilot能力。",
           "text_en": "Continuous Release of New Features and Models",
-          "detail_en": "Microsoft continuously releases new foundation models supporting text, voice, and image, as well as new features for educators, enhancing Copilot's capabilities.",
-          "post_ids": [
-            "1saq3w1",
-            "1s9a6bs"
-          ]
+          "detail_en": "Microsoft continuously releases new foundation models supporting text, voice, and image, as well as new features for educators, enhancing Copilot's capabilities."
         },
         {
           "text": "社区工具和扩展丰富",
           "detail": "用户和开发者积极开发如批量导出历史、会话整理、静态分析等辅助工具，提升Copilot使用体验。",
           "text_en": "Rich Community Tools and Extensions",
-          "detail_en": "Users and developers actively build auxiliary tools such as bulk export, chat organization, and static analysis, improving the Copilot experience.",
-          "post_ids": [
-            "1sat02h"
-          ]
+          "detail_en": "Users and developers actively build auxiliary tools such as bulk export, chat organization, and static analysis, improving the Copilot experience."
         }
       ],
       "recommendations": [
@@ -2331,6 +2273,6 @@
     }
   },
   "total_posts": 14554,
-  "cross_product_comparison_en": "## Cross-Product Competitive Analysis Report (2026-03-30 to 2026-04-12)\n\n### 1. User Satisfaction Comparison\n\n- **Claude**: Achieved the highest user satisfaction on Reddit this period, with 44% positive sentiment. Users recognized its performance in code generation and text processing use cases, though quota limits and model capability fluctuations triggered some negative feedback.\n- **M365 Copilot**: Satisfaction is moderate, with positive (30%) and negative (32%) feedback nearly balanced. Users acknowledge its potential for office automation but express clear dissatisfaction with unstable features and forced rollouts.\n- **ChatGPT**: User satisfaction is relatively low, with negative sentiment at 42%, mainly due to abnormal content generation, security concerns, and lack of emotional experience. Positive feedback is concentrated in entertainment scenarios such as creative image generation.\n- **Gemini**: Satisfaction is low, with negative sentiment as high as 50%. Main issues include hallucinated content, insufficient accuracy, and overly strict content moderation. Some users appreciate its \"Deep Research\" feature and anthropomorphic interaction experience.\n- **Copilot**: Lowest satisfaction, with 44% negative sentiment and only 22% positive. Users are generally dissatisfied with privacy and security, functional utility, and output quality, especially in office scenarios.\n\n### 2. Most/Least Satisfying Products and Reasons\n\n- **Most Satisfying: Claude**\n  - **Reasons**: The model performs stably in core scenarios such as code and text processing, the community is active, and users highly recognize practical use cases and feature innovation. Anthropic responds quickly to user feedback, and its compensation measures have received some praise.\n- **Least Satisfying: Copilot**\n  - **Reasons**: The product is unstable, privacy and security incidents are frequent, office automation capabilities are weak, content filtering is overly strict and uncontrollable, output quality is low, and user trust and willingness to pay are extremely low.\n\n### 3. Common Pain Points Across Products\n\n- **Content Safety and Moderation**: ChatGPT, Gemini, and Copilot all face user dissatisfaction due to overly strict content filtering or inappropriate content generation.\n- **Product Stability and Bugs**: M365 Copilot, Copilot, and Gemini communities all report numerous bugs, with disappearing features and anomalies affecting daily use.\n- **Insufficient Feature Completeness**: All product communities have a large number of feature requests, with users continuously demanding product innovation and support for practical use cases.\n- **Transparency and Trust**: Claude's quota mechanism, Copilot's privacy and security, and M365 Copilot's data storage all lack transparency, impacting user trust.\n\n### 4. Unique Advantages and Disadvantages of Each Product\n\n- **Claude**\n  - *Advantages*: Outstanding reasoning, code generation, and text processing; fast community response and flexible compensation mechanisms.\n  - *Disadvantages*: Non-transparent quota limits, recent model capability fluctuations, and security/privacy incidents affecting reputation.\n- **M365 Copilot**\n  - *Advantages*: Deep integration in office scenarios, strong automation potential, and better collaboration experience than some competitors.\n  - *Disadvantages*: Unstable features, forced rollouts causing resentment, and shortcomings in intelligent agent capabilities.\n- **ChatGPT**\n  - *Advantages*: Excels in creative image generation, entertainment, and creative scenarios; rich community use cases.\n  - *Disadvantages*: Content safety controversies, lack of emotional experience, abnormal generation, and data bias issues are prominent.\n- **Gemini**\n  - *Advantages*: Strong information retrieval, differentiated anthropomorphic interaction, and \"Deep Research\" features.\n  - *Disadvantages*: Severe hallucination issues, lagging in code and complex tasks, and content moderation affecting normal use.\n- **Copilot**\n  - *Advantages*: Potential for integration within the Microsoft ecosystem; some attention on image generation capabilities.\n  - *Disadvantages*: High privacy and security risks, poor office automation and output quality, rigid content filtering, and low user trust.\n\n### 5. Emerging Competitive Dynamics and Shifts in User Preferences\n\n- **Rising user demand for quota transparency, policy flexibility, and clear communication**, with extreme sensitivity to bans and quota restrictions, calling for more flexible management and transparent policies.\n- **Growing demand for advanced use cases and professional scenarios**, such as coding, deep research, and data analysis, driving product capability upgrades.\n- **Frequent cross-product comparison discussions**, with increased user mobility—fluctuations in product experience directly impact users' willingness to switch.\n- **Balancing content safety and openness has become a core competitive differentiator**, with users demanding more control over moderation standards and customization capabilities.\n\n### 6. Actionable Recommendations\n\n1. **Prioritize fixing high-frequency bugs and improving product stability**  \n   All products should treat bug fixes and stability as the top priority to reduce negative word-of-mouth and ensure core functionality reliability.\n\n2. **Optimize content moderation mechanisms for greater transparency and flexibility**  \n   Balance safety with openness, offer customizable moderation options, promptly disclose moderation standards and policy changes, and build user trust.\n\n3. **Strengthen user communication and improve transparency around policy and feature changes**  \n   Major changes should be pre-announced with detailed explanations. Establish feedback loops to reduce negative sentiment caused by information asymmetry.\n\n4. **Focus on high-value use cases and professional scenario capabilities**  \n   Continuously optimize for advanced needs such as coding, data analysis, and deep research to strengthen differentiated competitiveness.\n\n5. **Monitor competitor dynamics and reinforce unique strengths and differentiation**  \n   Regularly analyze competitor strengths and weaknesses, highlight integration, innovation, or domain-specific advantages, respond quickly to shifts in user preferences, and improve user retention.\n\n---\n\n**Conclusion**: User satisfaction across current AI products is clearly diverging. Stability, content moderation, feature completeness, and advanced capabilities are the core competitive factors. Product teams must focus on users' key pain points, improve communication and transparency, and strengthen differentiated advantages to navigate increasingly intense market competition.",
+  "cross_product_comparison_en": "## Cross-Product Competitive Analysis Report (2026-03-30 to 2026-04-12)\n\n### 1. User Satisfaction Comparison\n\n- **Claude**: Achieved the highest user satisfaction on Reddit this period, with 44% positive sentiment. Users recognized its performance in code generation and text processing use cases, though quota limits and model capability fluctuations triggered some negative feedback.\n- **M365 Copilot**: Satisfaction is moderate, with positive (30%) and negative (32%) feedback nearly balanced. Users acknowledge its potential for office automation but express clear dissatisfaction with unstable features and forced rollouts.\n- **ChatGPT**: User satisfaction is relatively low, with negative sentiment at 42%, mainly due to abnormal content generation, security concerns, and lack of emotional experience. Positive feedback is concentrated in entertainment scenarios such as creative image generation.\n- **Gemini**: Satisfaction is low, with negative sentiment as high as 50%. Main issues include hallucinated content, insufficient accuracy, and overly strict content moderation. Some users appreciate its \"Deep Research\" feature and anthropomorphic interaction experience.\n- **Copilot**: Lowest satisfaction, with 44% negative sentiment and only 22% positive. Users are generally dissatisfied with privacy and security, functional utility, and output quality, especially in office scenarios.\n\n### 2. Most/Least Satisfying Products and Reasons\n\n- **Most Satisfying: Claude**\n  - **Reasons**: The model performs stably in core scenarios such as code and text processing, the community is active, and users highly recognize practical use cases and feature innovation. Anthropic responds quickly to user feedback, and its compensation measures have received some praise.\n- **Least Satisfying: Copilot**\n  - **Reasons**: The product is unstable, privacy and security incidents are frequent, office automation capabilities are weak, content filtering is overly strict and uncontrollable, output quality is low, and user trust and willingness to pay are extremely low.\n\n### 3. Common Pain Points Across Products\n\n- **Content Safety and Moderation**: ChatGPT, Gemini, and Copilot all face user dissatisfaction due to overly strict content filtering or inappropriate content generation.\n- **Product Stability and Bugs**: M365 Copilot, Copilot, and Gemini communities all report numerous bugs, with disappearing features and anomalies affecting daily use.\n- **Insufficient Feature Completeness**: All product communities have a large number of feature requests, with users continuously demanding product innovation and support for practical use cases.\n- **Transparency and Trust**: Claude's quota mechanism, Copilot's privacy and security, and M365 Copilot's data storage all lack transparency, impacting user trust.\n\n### 4. Unique Advantages and Disadvantages of Each Product\n\n- **Claude**\n  - *Advantages*: Outstanding reasoning, code generation, and text processing; fast community response and flexible compensation mechanisms.\n  - *Disadvantages*: Non-transparent quota limits, recent model capability fluctuations, and security/privacy incidents affecting reputation.\n- **M365 Copilot**\n  - *Advantages*: Deep integration in office scenarios, strong automation potential, and better collaboration experience than some competitors.\n  - *Disadvantages*: Unstable features, forced rollouts causing resentment, and shortcomings in intelligent agent capabilities.\n- **ChatGPT**\n  - *Advantages*: Excels in creative image generation, entertainment, and creative scenarios; rich community use cases.\n  - *Disadvantages*: Content safety controversies, lack of emotional experience, abnormal generation, and data bias issues are prominent.\n- **Gemini**\n  - *Advantages*: Strong information retrieval, differentiated anthropomorphic interaction, and \"Deep Research\" features.\n  - *Disadvantages*: Severe hallucination issues, lagging in code and complex tasks, and content moderation affecting normal use.\n- **Copilot**\n  - *Advantages*: Potential for integration within the Microsoft ecosystem; some attention on image generation capabilities.\n  - *Disadvantages*: High privacy and security risks, poor office automation and output quality, rigid content filtering, and low user trust.\n\n### 5. Emerging Competitive Dynamics and Shifts in User Preferences\n\n- **Users are demanding greater freedom and controllability in AI content**, with higher expectations for balancing safety and creativity.\n- **Intelligent office scenarios are becoming the main battleground**, requiring M365 Copilot, Copilot, and similar products to accelerate automation and deep integration.\n- **Model capability and transparency are becoming core competitive points**, with Claude frequently discussed for its reasoning ability and quota transparency issues.\n- **Demand for diversity and fairness is increasing**, requiring ChatGPT, Gemini, and others to optimize datasets and output bias.\n- **Users are increasingly sensitive to privacy and data security**, with security incidents directly impacting product reputation and willingness to pay.\n\n### 6. Actionable Recommendations\n\n1. **Prioritize fixing security and privacy-related bugs and enhance product transparency**, such as disclosing quota algorithms and data storage policies to build user trust.\n2. **Optimize content moderation and filtering mechanisms**, avoid false positives on normal content, support user-customizable safety options, and balance safety with creativity.\n3. **Accelerate iteration of core features and model capabilities**, with a focus on improving code generation, factual accuracy, and office automation in high-frequency scenarios.\n4. **Strengthen community communication and expectation management**, respond promptly to negative feedback, publicly announce product changes and compensation policies, and prevent the spread of negative sentiment.\n5. **Pay attention to diversity and global user needs**, optimize datasets and output bias, and enhance inclusivity and localization experience.\n\n---\n\n**Conclusion**: Currently, Claude leads in user satisfaction and community engagement, M365 Copilot shows potential in office scenarios, ChatGPT and Gemini need to focus on resolving content safety and accuracy issues, and Copilot urgently needs to address security and functional shortcomings. All products must continuously optimize around safety, stability, innovation, and user trust to cope with increasingly intense AI competition.",
   "total_filtered": 7230
 }
