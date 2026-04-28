@@ -2002,28 +2002,44 @@
           "severity": "high",
           "detail": "用户反馈 Copilot Cowork 功能强大但非常不稳定，出现了多个 bug，包括错误识别模型、页面无响应等问题，影响了日常使用。",
           "text_en": "Copilot Cowork is powerful but currently very buggy",
-          "detail_en": "Users report that while Copilot Cowork is powerful, it is also very buggy at the moment, with issues such as model misidentification and unresponsive pages, which negatively impact daily use."
+          "detail_en": "Users report that while Copilot Cowork is powerful, it is also very buggy at the moment, with issues such as model misidentification and unresponsive pages, which negatively impact daily use.",
+          "post_ids": [
+            "1sk72yo",
+            "1sr3azp",
+            "1sq0vqf"
+          ]
         },
         {
           "text": "Copilot 在组邮箱和文件附件等场景下存在功能限制",
           "severity": "medium",
           "detail": "用户反映 Copilot 在组邮箱、个人代理的文件附件处理等方面存在限制，影响了实际业务需求的满足。",
           "text_en": "Copilot has limitations with group mailboxes and file attachments",
-          "detail_en": "Users report limitations when using Copilot with group mailboxes and attaching files in personal agents, which hinders meeting real business needs."
+          "detail_en": "Users report limitations when using Copilot with group mailboxes and attaching files in personal agents, which hinders meeting real business needs.",
+          "post_ids": [
+            "1smjxog",
+            "1ssr1dx"
+          ]
         },
         {
           "text": "Copilot 与 OneDrive、Confluence 等第三方或本地数据源集成存在问题",
           "severity": "medium",
           "detail": "有用户反馈 Copilot 在与 OneDrive 数据同步、Confluence on-prem 连接器配置等方面遇到困难，影响数据访问和集成体验。",
           "text_en": "Copilot integration issues with OneDrive, Confluence, and other data sources",
-          "detail_en": "Users report difficulties integrating Copilot with OneDrive data and configuring the Confluence on-prem connector, which affects data access and integration experience."
+          "detail_en": "Users report difficulties integrating Copilot with OneDrive data and configuring the Confluence on-prem connector, which affects data access and integration experience.",
+          "post_ids": [
+            "1suau3y",
+            "1srpvyd"
+          ]
         },
         {
           "text": "AI 治理和权限管理工具缺乏",
           "severity": "high",
           "detail": "企业用户反映在快速采用 AI 工具的过程中，缺乏有效的治理和权限管理工具，带来合规和安全风险。",
           "text_en": "Lack of AI governance and permission management tools",
-          "detail_en": "Enterprise users report a lack of effective governance and permission management tools as they rapidly adopt AI tools, leading to compliance and security risks."
+          "detail_en": "Enterprise users report a lack of effective governance and permission management tools as they rapidly adopt AI tools, leading to compliance and security risks.",
+          "post_ids": [
+            "1sm1d53"
+          ]
         }
       ],
       "strengths": [
@@ -2031,19 +2047,32 @@
           "text": "Copilot 支持多样化的业务场景和创新用法",
           "detail": "用户在日常简报、BI 报告支持、自动化检索等多种场景下成功应用 Copilot，提升了工作效率。",
           "text_en": "Copilot supports diverse business scenarios and innovative use cases",
-          "detail_en": "Users successfully apply Copilot in various scenarios such as daily briefings, BI report support, and automated retrieval, improving work efficiency."
+          "detail_en": "Users successfully apply Copilot in various scenarios such as daily briefings, BI report support, and automated retrieval, improving work efficiency.",
+          "post_ids": [
+            "1su626c",
+            "1smt70a",
+            "1ssx3pu"
+          ]
         },
         {
           "text": "Copilot Cowork Skills 功能提升了输出的个性化和相关性",
           "detail": "用户通过 Cowork Skills 功能获得了更符合个人风格和需求的输出，增强了 AI 的实用性。",
           "text_en": "Copilot Cowork Skills feature improves personalization and relevance of outputs",
-          "detail_en": "Users leverage Cowork Skills to get outputs more aligned with their personal style and needs, enhancing the practical value of AI."
+          "detail_en": "Users leverage Cowork Skills to get outputs more aligned with their personal style and needs, enhancing the practical value of AI.",
+          "post_ids": [
+            "1slqr2u",
+            "1slxidi"
+          ]
         },
         {
           "text": "Copilot 拥有丰富的模型和工具集成能力",
           "detail": "如 GPT-IMAGE 2.0、PowerPoint 全自动生成、Microsoft Graph API 检索等，拓展了 Copilot 的应用边界。",
           "text_en": "Copilot offers rich model and tool integration capabilities",
-          "detail_en": "Features like GPT-IMAGE 2.0, full PowerPoint generation, and Microsoft Graph API retrieval expand Copilot's application boundaries."
+          "detail_en": "Features like GPT-IMAGE 2.0, full PowerPoint generation, and Microsoft Graph API retrieval expand Copilot's application boundaries.",
+          "post_ids": [
+            "1stxbra",
+            "1srj4xm"
+          ]
         }
       ],
       "recommendations": [
