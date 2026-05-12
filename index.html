@@ -953,7 +953,7 @@
       /* Load previous reports (oldest to newest order for chart) */
       for (var j = reportIndex.length - 1; j >= startIdx; j--) {
         try {
-          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1778584962');
+          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1778585073');
           if (resp.ok) {
             var data = await resp.json();
             allHistoricalReports.push(data);
@@ -968,7 +968,7 @@
 
     async function loadReportIndex() {
       try {
-        var resp = await fetch('data/reports/index.json?v=1778584962');
+        var resp = await fetch('data/reports/index.json?v=1778585073');
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
@@ -1490,40 +1490,23 @@
         }
       }
 
-      /* Competitor dynamics line: structured display from exec_news_summary */
+      /* Competitor dynamics line: one line per product from exec_news_summary */
       var competitorLine = '';
       if (reportData && reportData.exec_news_summary) {
         var newsTxt = currentLang === 'en' ? (reportData.exec_news_summary.en || reportData.exec_news_summary.zh) : reportData.exec_news_summary.zh;
         if (newsTxt) {
-          /* Split by product markers like **ChatGPT** or 🟢ChatGPT etc, then render as mini cards */
-          var segments = newsTxt.split(/(?=\*\*[A-Z])|(?=[🟢🟡🔴]\s*\*?\*?[A-Z])/);
-          var cards = [];
+          /* Split by product markers */
+          var segments = newsTxt.split(/(?=[🟢🟡🔴]\s*\*?\*?[A-Z])|(?=\*\*[A-Z])/);
+          var lines = [];
           for (var si = 0; si < segments.length; si++) {
             var seg = segments[si].trim();
             if (!seg) continue;
-            /* Extract product name and icon */
-            var iconMatch = seg.match(/^([🟢🟡🔴])\s*/);
-            var icon = iconMatch ? iconMatch[1] : '📊';
-            if (iconMatch) seg = seg.substring(iconMatch[0].length);
-            seg = seg.replace(/^\*\*/,'').replace(/\*\*\s*/,'');
-            /* Find product name (first word before space or emoji) */
-            var nameMatch = seg.match(/^(ChatGPT|Claude|Gemini|Copilot|M365\s*Copilot)/i);
-            var prodName = nameMatch ? nameMatch[1] : '';
-            var body = prodName ? seg.substring(prodName.length).replace(/^\s*[:：]\s*/,'').trim() : seg;
-            /* Clean trailing separators */
-            body = body.replace(/[;；。]\s*$/, '');
-            if (body) {
-              var pColor = getProductColor(prodName) || '#6366F1';
-              cards.push('<div style="display:flex;gap:8px;padding:10px 14px;background:var(--bg-card);border-radius:10px;border-left:3px solid '+pColor+'">'
-                + '<span style="font-size:18px;flex-shrink:0;margin-top:1px">'+icon+'</span>'
-                + '<div style="font-size:13px;line-height:1.65;color:var(--text-secondary)">'
-                + '<strong style="color:var(--text-primary)">'+escapeHtml(prodName)+'</strong> '
-                + escapeHtml(body)+'</div></div>');
-            }
+            seg = seg.replace(/[;；。]\s*$/, '');
+            lines.push(escapeHtml(seg));
           }
-          if (cards.length > 0) {
-            competitorLine = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-top:12px">'
-              + cards.join('') + '</div>';
+          if (lines.length > 0) {
+            competitorLine = '<div style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-top:10px">'
+              + lines.join('<br>') + '</div>';
           }
         }
       } else if (reportData && reportData.competitor_updates && reportData.competitor_updates.length > 0) {
@@ -2848,7 +2831,7 @@
       await loadReportIndex();
       await loadReportList();
       try {
-        var resp = await fetch('data/reports/latest.json?v=1778584962');
+        var resp = await fetch('data/reports/latest.json?v=1778585073');
         if (resp.ok) { reportData = await resp.json(); }
         else { resp = await fetch('report.json'); if (resp.ok) reportData = await resp.json(); }
         if (reportData) {
