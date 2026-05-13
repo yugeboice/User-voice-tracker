@@ -1,14 +1,14 @@
 {
   "reports": [
     {
-      "file": "report_f0a678e1_20260510_185408.json",
-      "run_id": "f0a678e1",
+      "file": "report_c1f59103_20260513_073943.json",
+      "run_id": "c1f59103",
       "period_start": "2026-04-28",
       "period_end": "2026-05-12",
-      "generated_at": 1778461439.014525,
+      "generated_at": 1778688689.8012266,
       "product_count": 5,
       "total_posts": 11318,
-      "total_valid_posts": 7162
+      "total_valid_posts": 5791
     },
     {
       "file": "report_c2d17858_20260427_060903.json",
