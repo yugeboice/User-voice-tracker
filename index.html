@@ -953,7 +953,7 @@
       /* Load previous reports (oldest to newest order for chart) */
       for (var j = reportIndex.length - 1; j >= startIdx; j--) {
         try {
-          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1778723275');
+          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1778723890');
           if (resp.ok) {
             var data = await resp.json();
             allHistoricalReports.push(data);
@@ -968,7 +968,7 @@
 
     async function loadReportIndex() {
       try {
-        var resp = await fetch('data/reports/index.json?v=1778723275');
+        var resp = await fetch('data/reports/index.json?v=1778723890');
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
@@ -1043,6 +1043,7 @@
     function getProductColor(name) { return PRODUCT_COLORS[name] || '#6B7280'; }
     function getSentimentTotal(sd) { return (sd.positive||0)+(sd.negative||0)+(sd.neutral||0)+(sd.mixed||0); }
     function getPositiveRate(sd) { var tot=getSentimentTotal(sd); return tot===0?0:((sd.positive||0)/tot)*100; }
+    function getNegativeRate(sd) { var tot=getSentimentTotal(sd); return tot===0?0:((sd.negative||0)/tot)*100; }
     function trafficLightClass(pct) { return pct>=60?'tl-green':pct>=40?'tl-yellow':'tl-red'; }
     function sentimentColor(pct) { return pct>=60?'var(--clr-pos)':pct>=40?'var(--clr-mix)':'var(--clr-neg)'; }
     function sentimentTooltip(pct) {
@@ -1460,9 +1461,18 @@
       var m365 = products.find(function(p){ return p.product_name === 'M365 Copilot'; })
               || products.find(function(p){ return /copilot/i.test(p.product_name); });
       var topPain = '';
+      var topPainPostCount = 0;
+      var topPainPct = '';
       if (m365) {
         var pp = m365.pain_points || [];
-        if (pp.length > 0) topPain = L(pp[0], 'text');
+        if (pp.length > 0) {
+          topPain = L(pp[0], 'text');
+          topPainPostCount = (pp[0].post_ids || []).length;
+          var totalValid = m365.valid_post_count || 0;
+          if (totalValid > 0 && topPainPostCount > 0) {
+            topPainPct = Math.round(topPainPostCount / totalValid * 100) + '%';
+          }
+        }
       }
 
       var sorted = products.slice().sort(function(a,b){ return getPositiveRate(b.sentiment_distribution) - getPositiveRate(a.sentiment_distribution); });
@@ -1473,11 +1483,19 @@
       var finding;
       if (m365 && topPain) {
         var m365Rate = Math.round(getPositiveRate(m365.sentiment_distribution));
+        var m365Neg = Math.round(getNegativeRate(m365.sentiment_distribution));
+        var bugCount = (m365.topic_distribution || {}).bug_report || 0;
+        var m365Valid = m365.valid_post_count || 0;
+        var bugPct = m365Valid > 0 ? Math.round(bugCount / m365Valid * 100) : 0;
+        var painDetail = topPainPostCount > 0 ? ('（' + topPainPostCount + '帖提及' + (topPainPct ? '，占' + topPainPct : '') + '）') : '';
         if (currentLang === 'en') {
-          finding = 'M365 Copilot (' + m365Rate + '% positive) — top complaint: ' + topPain
+          var painDetailEn = topPainPostCount > 0 ? ' (' + topPainPostCount + ' posts' + (topPainPct ? ', ' + topPainPct : '') + ')' : '';
+          finding = 'M365 Copilot (' + m365Rate + '% positive, ' + m365Neg + '% negative) — top complaint: ' + topPain + painDetailEn
+            + '; bug reports ' + bugCount + ' posts (' + bugPct + '% of total)'
             + '. Best: ' + best.product_name + ' ' + bestRate + '%, Worst: ' + worst.product_name + ' ' + worstRate + '%';
         } else {
-          finding = 'M365 Copilot（正面率 ' + m365Rate + '%）— 用户最大痛点：' + topPain
+          finding = 'M365 Copilot（正面率 ' + m365Rate + '%，负面率 ' + m365Neg + '%）— 用户最大痛点：' + topPain + painDetail
+            + '，Bug报告 ' + bugCount + ' 帖（占 ' + bugPct + '%）'
             + '。最佳：' + best.product_name + ' ' + bestRate + '%，最差：' + worst.product_name + ' ' + worstRate + '%';
         }
       } else {
@@ -1490,34 +1508,52 @@
         }
       }
 
-      /* Competitor dynamics line: one line per product from exec_news_summary */
+      /* Competitor dynamics: build from competitor_updates (rich data + per-product icon) */
       var competitorLine = '';
-      if (reportData && reportData.exec_news_summary) {
+      if (reportData && reportData.competitor_updates && reportData.competitor_updates.length > 0) {
+        /* Group by product, pick first (top) event per product */
+        var seen = {};
+        var topEvents = [];
+        for (var ci = 0; ci < reportData.competitor_updates.length; ci++) {
+          var cu = reportData.competitor_updates[ci];
+          if (!seen[cu.product]) {
+            seen[cu.product] = true;
+            topEvents.push(cu);
+          }
+        }
+        var lines = topEvents.map(function(u) {
+          var icon = u.icon || '';
+          var name = u.product;
+          var body = currentLang === 'en' ? (u.body_en || u.body) : u.body;
+          var title = currentLang === 'en' ? (u.title_en || u.title) : u.title;
+          /* Use body (has stats) if available, otherwise title */
+          var desc = body || title;
+          /* Truncate body to ~80 chars for readability */
+          if (desc.length > 100) desc = desc.substring(0, 97) + '...';
+          return icon + ' <strong>' + escapeHtml(name) + '</strong> ' + escapeHtml(desc);
+        });
+        if (lines.length > 0) {
+          competitorLine = '<div style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-top:10px">'
+            + lines.join('<br>') + '</div>';
+        }
+      } else if (reportData && reportData.exec_news_summary) {
+        /* Fallback: use exec_news_summary text */
         var newsTxt = currentLang === 'en' ? (reportData.exec_news_summary.en || reportData.exec_news_summary.zh) : reportData.exec_news_summary.zh;
         if (newsTxt) {
-          /* Split by semicolons, then render each segment as a line */
           var segments = newsTxt.split(/[;；]/);
-          var lines = [];
+          var flines = [];
           for (var si = 0; si < segments.length; si++) {
             var seg = segments[si].trim();
             if (!seg) continue;
-            /* Remove leading label like "本期三大焦点：" — keep it only for first line */
             var safe = escapeHtml(seg);
-            /* Convert **bold** to <strong> */
             safe = safe.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-            lines.push(safe);
+            flines.push(safe);
           }
-          if (lines.length > 0) {
+          if (flines.length > 0) {
             competitorLine = '<div style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-top:10px">'
-              + lines.join('<br>') + '</div>';
+              + flines.join('<br>') + '</div>';
           }
         }
-      } else if (reportData && reportData.competitor_updates && reportData.competitor_updates.length > 0) {
-        var highlights = reportData.competitor_updates.slice(0, 4).map(function(u) {
-          var t = currentLang === 'en' ? (u.title_en || u.title) : u.title;
-          return (u.icon || '') + ' ' + t;
-        }).join(' | ');
-        competitorLine = '<br><span style="font-size:13px;color:var(--text-secondary)">' + highlights + '</span>';
       }
       el.innerHTML = escapeHtml(finding) + competitorLine;
       el.classList.remove('hidden');
@@ -2834,7 +2870,7 @@
       await loadReportIndex();
       await loadReportList();
       try {
-        var resp = await fetch('data/reports/latest.json?v=1778723275');
+        var resp = await fetch('data/reports/latest.json?v=1778723890');
         if (resp.ok) { reportData = await resp.json(); }
         else { resp = await fetch('report.json'); if (resp.ok) reportData = await resp.json(); }
         if (reportData) {
