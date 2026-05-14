@@ -953,7 +953,7 @@
       /* Load previous reports (oldest to newest order for chart) */
       for (var j = reportIndex.length - 1; j >= startIdx; j--) {
         try {
-          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1778689285');
+          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1778723275');
           if (resp.ok) {
             var data = await resp.json();
             allHistoricalReports.push(data);
@@ -968,7 +968,7 @@
 
     async function loadReportIndex() {
       try {
-        var resp = await fetch('data/reports/index.json?v=1778689285');
+        var resp = await fetch('data/reports/index.json?v=1778723275');
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
@@ -1495,14 +1495,17 @@
       if (reportData && reportData.exec_news_summary) {
         var newsTxt = currentLang === 'en' ? (reportData.exec_news_summary.en || reportData.exec_news_summary.zh) : reportData.exec_news_summary.zh;
         if (newsTxt) {
-          /* Split by product markers */
-          var segments = newsTxt.split(/(?=[🟢🟡🔴]\s*\*?\*?[A-Z])|(?=\*\*[A-Z])/);
+          /* Split by semicolons, then render each segment as a line */
+          var segments = newsTxt.split(/[;；]/);
           var lines = [];
           for (var si = 0; si < segments.length; si++) {
             var seg = segments[si].trim();
             if (!seg) continue;
-            seg = seg.replace(/[;；。]\s*$/, '');
-            lines.push(escapeHtml(seg));
+            /* Remove leading label like "本期三大焦点：" — keep it only for first line */
+            var safe = escapeHtml(seg);
+            /* Convert **bold** to <strong> */
+            safe = safe.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+            lines.push(safe);
           }
           if (lines.length > 0) {
             competitorLine = '<div style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-top:10px">'
@@ -2831,7 +2834,7 @@
       await loadReportIndex();
       await loadReportList();
       try {
-        var resp = await fetch('data/reports/latest.json?v=1778689285');
+        var resp = await fetch('data/reports/latest.json?v=1778723275');
         if (resp.ok) { reportData = await resp.json(); }
         else { resp = await fetch('report.json'); if (resp.ok) reportData = await resp.json(); }
         if (reportData) {
