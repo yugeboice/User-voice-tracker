@@ -707,7 +707,7 @@
         sentimentTone:'情感基调', positiveSent:'正面情感', negativeSent:'负面情感',
         mostSatisfied:'最满意', leastSatisfied:'负面最高/正面最低',
         sharedPainPoints:'跨产品共同痛点', uniqueTraits:'各产品独特优劣势',
-        competitiveDynamics:'新兴竞争动态', actionableRecs:'可操作建议',
+        competitiveDynamics:'跨产品竞争趋势', actionableRecs:'可操作建议',
         advantage:'优势', disadvantage:'劣势',
         satisfactionCompare:'用户满意度对比', noComparisonData:'暂无跨产品对比数据',
         sectionCrossProduct:'跨产品对比', sectionCrossProductDesc:'全局视角：产品间横向比较',
@@ -757,7 +757,7 @@
         sentimentTone:'Tone', positiveSent:'Positive', negativeSent:'Negative',
         mostSatisfied:'Most satisfied', leastSatisfied:'Highest negative / Lowest positive',
         sharedPainPoints:'Shared Pain Points', uniqueTraits:'Unique Traits per Product',
-        competitiveDynamics:'Emerging Competitive Dynamics', actionableRecs:'Actionable Recommendations',
+        competitiveDynamics:'Cross-Product Competitive Trends', actionableRecs:'Actionable Recommendations',
         advantage:'Strength', disadvantage:'Weakness',
         satisfactionCompare:'Satisfaction Comparison', noComparisonData:'No cross-product comparison data available',
         sectionCrossProduct:'Cross-Product Comparison', sectionCrossProductDesc:'Global view: horizontal comparison across products',
@@ -1493,12 +1493,12 @@
         var worstSuffixEn = (worst.product_name === 'M365 Copilot') ? '' : (', Worst: ' + worst.product_name + ' ' + worstRate + '%');
         if (currentLang === 'en') {
           var painDetailEn = topPainPostCount > 0 ? ' (' + topPainPostCount + ' posts' + (topPainPct ? ', ' + topPainPct : '') + ')' : '';
-          finding = 'M365 Copilot (' + m365Rate + '% positive, ' + m365Neg + '% negative) — '
+          finding = '📊 M365 Copilot (' + m365Rate + '% positive, ' + m365Neg + '% negative) — '
             + 'bug reports ' + bugCount + ' posts (' + bugPct + '% of total)'
             + '; notable issue: ' + topPain + painDetailEn
             + '. Best: ' + best.product_name + ' ' + bestRate + '%' + worstSuffixEn;
         } else {
-          finding = 'M365 Copilot（正面率 ' + m365Rate + '%，负面率 ' + m365Neg + '%）— '
+          finding = '📊 M365 Copilot（正面率 ' + m365Rate + '%，负面率 ' + m365Neg + '%）— '
             + 'Bug报告 ' + bugCount + ' 帖（占 ' + bugPct + '%）'
             + '，突出问题：' + topPain + painDetail
             + '。最佳：' + best.product_name + ' ' + bestRate + '%' + worstSuffix;
