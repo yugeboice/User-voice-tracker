@@ -705,7 +705,7 @@
         severity_high:'高', severity_medium:'中', severity_low:'低',
         pendingRecommendation:'待后续分析生成具体建议',
         sentimentTone:'情感基调', positiveSent:'正面情感', negativeSent:'负面情感',
-        mostSatisfied:'最满意', leastSatisfied:'最不满意',
+        mostSatisfied:'最满意', leastSatisfied:'负面最高/正面最低',
         sharedPainPoints:'跨产品共同痛点', uniqueTraits:'各产品独特优劣势',
         competitiveDynamics:'新兴竞争动态', actionableRecs:'可操作建议',
         advantage:'优势', disadvantage:'劣势',
@@ -755,7 +755,7 @@
         severity_high:'HIGH', severity_medium:'MED', severity_low:'LOW',
         pendingRecommendation:'Pending future analysis for specific recommendations',
         sentimentTone:'Tone', positiveSent:'Positive', negativeSent:'Negative',
-        mostSatisfied:'Most satisfied', leastSatisfied:'Least satisfied',
+        mostSatisfied:'Most satisfied', leastSatisfied:'Highest negative / Lowest positive',
         sharedPainPoints:'Shared Pain Points', uniqueTraits:'Unique Traits per Product',
         competitiveDynamics:'Emerging Competitive Dynamics', actionableRecs:'Actionable Recommendations',
         advantage:'Strength', disadvantage:'Weakness',
@@ -953,7 +953,7 @@
       /* Load previous reports (oldest to newest order for chart) */
       for (var j = reportIndex.length - 1; j >= startIdx; j--) {
         try {
-          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1778763637');
+          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1778763920');
           if (resp.ok) {
             var data = await resp.json();
             allHistoricalReports.push(data);
@@ -968,7 +968,7 @@
 
     async function loadReportIndex() {
       try {
-        var resp = await fetch('data/reports/index.json?v=1778763637');
+        var resp = await fetch('data/reports/index.json?v=1778763920');
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
@@ -2874,7 +2874,7 @@
       await loadReportIndex();
       await loadReportList();
       try {
-        var resp = await fetch('data/reports/latest.json?v=1778763637');
+        var resp = await fetch('data/reports/latest.json?v=1778763920');
         if (resp.ok) { reportData = await resp.json(); }
         else { resp = await fetch('report.json'); if (resp.ok) reportData = await resp.json(); }
         if (reportData) {
