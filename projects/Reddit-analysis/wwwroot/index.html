@@ -1493,12 +1493,14 @@
         var worstSuffixEn = (worst.product_name === 'M365 Copilot') ? '' : (', Worst: ' + worst.product_name + ' ' + worstRate + '%');
         if (currentLang === 'en') {
           var painDetailEn = topPainPostCount > 0 ? ' (' + topPainPostCount + ' posts' + (topPainPct ? ', ' + topPainPct : '') + ')' : '';
-          finding = 'M365 Copilot (' + m365Rate + '% positive, ' + m365Neg + '% negative) — top complaint: ' + topPain + painDetailEn
-            + '; bug reports ' + bugCount + ' posts (' + bugPct + '% of total)'
+          finding = 'M365 Copilot (' + m365Rate + '% positive, ' + m365Neg + '% negative) — '
+            + 'bug reports ' + bugCount + ' posts (' + bugPct + '% of total)'
+            + '; notable issue: ' + topPain + painDetailEn
             + '. Best: ' + best.product_name + ' ' + bestRate + '%' + worstSuffixEn;
         } else {
-          finding = 'M365 Copilot（正面率 ' + m365Rate + '%，负面率 ' + m365Neg + '%）— 用户最大痛点：' + topPain + painDetail
-            + '，Bug报告 ' + bugCount + ' 帖（占 ' + bugPct + '%）'
+          finding = 'M365 Copilot（正面率 ' + m365Rate + '%，负面率 ' + m365Neg + '%）— '
+            + 'Bug报告 ' + bugCount + ' 帖（占 ' + bugPct + '%）'
+            + '，突出问题：' + topPain + painDetail
             + '。最佳：' + best.product_name + ' ' + bestRate + '%' + worstSuffix;
         }
       } else {
