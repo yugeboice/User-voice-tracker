@@ -953,7 +953,7 @@
       /* Load previous reports (oldest to newest order for chart) */
       for (var j = reportIndex.length - 1; j >= startIdx; j--) {
         try {
-          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1778723890');
+          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1778762926');
           if (resp.ok) {
             var data = await resp.json();
             allHistoricalReports.push(data);
@@ -968,7 +968,7 @@
 
     async function loadReportIndex() {
       try {
-        var resp = await fetch('data/reports/index.json?v=1778723890');
+        var resp = await fetch('data/reports/index.json?v=1778762926');
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
@@ -1488,15 +1488,18 @@
         var m365Valid = m365.valid_post_count || 0;
         var bugPct = m365Valid > 0 ? Math.round(bugCount / m365Valid * 100) : 0;
         var painDetail = topPainPostCount > 0 ? ('（' + topPainPostCount + '帖提及' + (topPainPct ? '，占' + topPainPct : '') + '）') : '';
+        /* Skip "worst" if it's M365 itself to avoid repetition */
+        var worstSuffix = (worst.product_name === 'M365 Copilot') ? '' : ('，最差：' + worst.product_name + ' ' + worstRate + '%');
+        var worstSuffixEn = (worst.product_name === 'M365 Copilot') ? '' : (', Worst: ' + worst.product_name + ' ' + worstRate + '%');
         if (currentLang === 'en') {
           var painDetailEn = topPainPostCount > 0 ? ' (' + topPainPostCount + ' posts' + (topPainPct ? ', ' + topPainPct : '') + ')' : '';
           finding = 'M365 Copilot (' + m365Rate + '% positive, ' + m365Neg + '% negative) — top complaint: ' + topPain + painDetailEn
             + '; bug reports ' + bugCount + ' posts (' + bugPct + '% of total)'
-            + '. Best: ' + best.product_name + ' ' + bestRate + '%, Worst: ' + worst.product_name + ' ' + worstRate + '%';
+            + '. Best: ' + best.product_name + ' ' + bestRate + '%' + worstSuffixEn;
         } else {
           finding = 'M365 Copilot（正面率 ' + m365Rate + '%，负面率 ' + m365Neg + '%）— 用户最大痛点：' + topPain + painDetail
             + '，Bug报告 ' + bugCount + ' 帖（占 ' + bugPct + '%）'
-            + '。最佳：' + best.product_name + ' ' + bestRate + '%，最差：' + worst.product_name + ' ' + worstRate + '%';
+            + '。最佳：' + best.product_name + ' ' + bestRate + '%' + worstSuffix;
         }
       } else {
         if (currentLang === 'en') {
@@ -1522,14 +1525,13 @@
           }
         }
         var lines = topEvents.map(function(u) {
-          var icon = u.icon || '';
+          var productEmojis = {'ChatGPT':'💬','Claude':'🧠','Gemini':'💎','Copilot':'🔷','M365 Copilot':'📊'};
+          var icon = productEmojis[u.product] || u.icon || '📌';
           var name = u.product;
           var body = currentLang === 'en' ? (u.body_en || u.body) : u.body;
           var title = currentLang === 'en' ? (u.title_en || u.title) : u.title;
-          /* Use body (has stats) if available, otherwise title */
+          /* Use full body (has stats) — no truncation for richer detail */
           var desc = body || title;
-          /* Truncate body to ~80 chars for readability */
-          if (desc.length > 100) desc = desc.substring(0, 97) + '...';
           return icon + ' <strong>' + escapeHtml(name) + '</strong> ' + escapeHtml(desc);
         });
         if (lines.length > 0) {
@@ -2870,7 +2872,7 @@
       await loadReportIndex();
       await loadReportList();
       try {
-        var resp = await fetch('data/reports/latest.json?v=1778723890');
+        var resp = await fetch('data/reports/latest.json?v=1778762926');
         if (resp.ok) { reportData = await resp.json(); }
         else { resp = await fetch('report.json'); if (resp.ok) reportData = await resp.json(); }
         if (reportData) {
