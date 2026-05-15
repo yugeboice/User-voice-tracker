@@ -1,14 +1,34 @@
 {
   "reports": [
     {
-      "file": "report_9d8bb56c_20260331_091624.json",
-      "run_id": "9d8bb56c",
-      "period_start": "2026-03-02",
-      "period_end": "2026-03-16",
-      "generated_at": 1774953169.7490664,
+      "file": "report_c1f59103_20260513_073943.json",
+      "run_id": "c1f59103",
+      "period_start": "2026-04-28",
+      "period_end": "2026-05-12",
+      "generated_at": 1778688689.8012266,
       "product_count": 5,
-      "total_posts": 3041,
-      "total_valid_posts": 2328
+      "total_posts": 11318,
+      "total_valid_posts": 5791
+    },
+    {
+      "file": "report_c2d17858_20260427_060903.json",
+      "run_id": "c2d17858",
+      "period_start": "2026-04-13",
+      "period_end": "2026-04-27",
+      "generated_at": 1777347413.728717,
+      "product_count": 5,
+      "total_posts": 15288,
+      "total_valid_posts": 7670
+    },
+    {
+      "file": "report_8e0776af_20260413_081418.json",
+      "run_id": "8e0776af",
+      "period_start": "2026-03-30",
+      "period_end": "2026-04-13",
+      "generated_at": 1777346510.8270574,
+      "product_count": 5,
+      "total_posts": 14554,
+      "total_valid_posts": 7324
     },
     {
       "file": "report_db2ee453_20260330_092549.json",
@@ -21,14 +41,34 @@
       "total_valid_posts": 1638
     },
     {
-      "file": "report_8e0776af_20260413_081418.json",
-      "run_id": "8e0776af",
-      "period_start": "2026-03-30",
-      "period_end": "2026-04-13",
-      "generated_at": 1776142757.200897,
+      "file": "report_9d8bb56c_20260331_091624.json",
+      "run_id": "9d8bb56c",
+      "period_start": "2026-03-02",
+      "period_end": "2026-03-16",
+      "generated_at": 1776146811.0507617,
       "product_count": 5,
-      "total_posts": 14554,
-      "total_valid_posts": 7324
+      "total_posts": 3041,
+      "total_valid_posts": 2328
+    },
+    {
+      "file": "report_43c5af8e_20260312_071352.json",
+      "run_id": "43c5af8e",
+      "period_start": "2026-02-10",
+      "period_end": "2026-02-23",
+      "generated_at": 1774435688.3844168,
+      "product_count": 4,
+      "total_posts": 338,
+      "total_valid_posts": 304
+    },
+    {
+      "file": "report_e33d9e83_20260312_071321.json",
+      "run_id": "e33d9e83",
+      "period_start": "2026-01-27",
+      "period_end": "2026-02-09",
+      "generated_at": 1774436879.194571,
+      "product_count": 4,
+      "total_posts": 338,
+      "total_valid_posts": 280
     }
   ]
 }
