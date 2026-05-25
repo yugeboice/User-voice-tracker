@@ -953,7 +953,7 @@
       /* Load previous reports (oldest to newest order for chart) */
       for (var j = reportIndex.length - 1; j >= startIdx; j--) {
         try {
-          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1778765636');
+          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1779699096');
           if (resp.ok) {
             var data = await resp.json();
             allHistoricalReports.push(data);
@@ -968,7 +968,7 @@
 
     async function loadReportIndex() {
       try {
-        var resp = await fetch('data/reports/index.json?v=1778765636');
+        var resp = await fetch('data/reports/index.json?v=1779699096');
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
@@ -1607,10 +1607,23 @@
             if (!seen[key]) { seen[key] = true; subs.push(name); }
           }
         }
-        var sourceHtml = subs.map(function(sub) {
+        var sourceHtml = '';
+        var officialSubs = [];
+        var keywordCount = 0;
+        for (var si2=0; si2<subs.length; si2++) {
+          if (subs[si2].indexOf('_keyword_') === 0) {
+            keywordCount++;
+          } else {
+            officialSubs.push(subs[si2]);
+          }
+        }
+        sourceHtml = officialSubs.map(function(sub) {
           var name = sub.replace(/^r\//,'');
           return '<a href="https://www.reddit.com/r/'+escapeHtml(name)+'/" target="_blank" rel="noopener">r/'+escapeHtml(name)+'</a>';
         }).join(', ');
+        if (keywordCount > 0) {
+          sourceHtml += '<span style="color:var(--text-muted);font-size:11px;margin-left:4px">+' + keywordCount + ' keyword subs</span>';
+        }
 
         /* Delta vs previous period */
         var deltaHtml = '';
@@ -2874,7 +2887,7 @@
       await loadReportIndex();
       await loadReportList();
       try {
-        var resp = await fetch('data/reports/latest.json?v=1778765636');
+        var resp = await fetch('data/reports/latest.json?v=1779699096');
         if (resp.ok) { reportData = await resp.json(); }
         else { resp = await fetch('report.json'); if (resp.ok) reportData = await resp.json(); }
         if (reportData) {
