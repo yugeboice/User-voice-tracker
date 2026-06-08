@@ -953,7 +953,7 @@
       /* Load previous reports (oldest to newest order for chart) */
       for (var j = reportIndex.length - 1; j >= startIdx; j--) {
         try {
-          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1779699096');
+          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1780903787');
           if (resp.ok) {
             var data = await resp.json();
             allHistoricalReports.push(data);
@@ -968,7 +968,7 @@
 
     async function loadReportIndex() {
       try {
-        var resp = await fetch('data/reports/index.json?v=1779699096');
+        var resp = await fetch('data/reports/index.json?v=1780903787');
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
@@ -2678,6 +2678,8 @@
             if (!dMatch) dMatch = dLine.match(/^(?:\d+\.|[-*])\s+\*\*(.+?)\*\*[：:]\s*(.+)/);
             /* Fallback: - **text**，rest or - **text** rest (no colon) */
             if (!dMatch) dMatch = dLine.match(/^(?:\d+\.|[-*])\s+\*\*(.+?)\*\*[，,。.\s]\s*(.+)/);
+            /* Fallback: bold anywhere after bullet, e.g. "- 用户对**xxx**需求..." or "- **xxx**成为..." */
+            if (!dMatch) dMatch = dLine.match(/^(?:\d+\.|[-*])\s+(?:.*?)\*\*(.+?)\*\*(.{2,})/);
             if (dMatch) {
               result.dynamics.push('**' + dMatch[1] + '** ' + dMatch[2]);
             }
@@ -2887,7 +2889,7 @@
       await loadReportIndex();
       await loadReportList();
       try {
-        var resp = await fetch('data/reports/latest.json?v=1779699096');
+        var resp = await fetch('data/reports/latest.json?v=1780903787');
         if (resp.ok) { reportData = await resp.json(); }
         else { resp = await fetch('report.json'); if (resp.ok) reportData = await resp.json(); }
         if (reportData) {
