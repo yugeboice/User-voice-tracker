@@ -55,6 +55,35 @@
             "Opus 4.8 improves reasoning and independent work ability",
             "Introduces faster and cheaper Fast mode",
             "Users care more about usage limits than benchmark scores"
+          ],
+          "score": 2540,
+          "subreddit": "r/ClaudeAI",
+          "top_comments": [
+            {
+              "body": "> That's because alliteration like that was considered classy and professional writing before AI got good.\n> \n> \n\nDude, alliterations are a classical technique taught in like 3rd grade... they're perfectly fine to use. Don't get self-conscious about writing just because LLMs write a certain way. After all, LLMs were trained on gigantic amounts of high-quality, human-written text. If you were to write unlike LLMs, you're probably not that good of a writer. I always find, if I'm really trying to p",
+              "score": 1,
+              "author": "tedbradly"
+            },
+            {
+              "body": "If they just started projecting a $ 560 million profit this quarter (Q2), it doesn't really make them a \"profitable\" company, since they're \"barely profitable,\" or at least projected to be. It's the first time ever they will make a profit of 750 million for a company valued at 900-950 billion. \n\nAnd my whole argument was that for them to release mythos they'd have to heavily increase prices since it would cost them a lot to run it and give acces at scale, the energy cost and computing power need",
+              "score": 1,
+              "author": "BYRN777"
+            },
+            {
+              "body": "Create an openrouter Key for your Claude code. Set the budget on openrouter.\n\nThen give the key and How and when to use to claude. You can put the key on env file to avoid a clusterfuck. API call formarlt, what models and providers to use and so on put in a md file somewhere. There are many places where you can put It, on claude.md or in a specific openrouter.md file.\n\nYou can also just run parallel zoo code over your codebade. I use zoo code as auditor and QA, It generates reports for Claude co",
+              "score": 1,
+              "author": "celtiberian666"
+            },
+            {
+              "body": "I agree and I think it's the same as what I was saying. In a nutshell AI was trained on the type of writing/art that was considered \"good\" so if one deviates sharply from it one does so at one's own peril. I wrote a short blog post documenting my observations of people \"dumbing down\" their art or writing just to seem less like AI (although it's pretty much already covered by my previous comment): [https://blog.maxloh.com/2026/04/backlash-against-ai-causes-even-more.html](https://blog.maxloh.com/",
+              "score": 2,
+              "author": "monsieurpooh"
+            },
+            {
+              "body": "been using 48h now\n\nI could be an edgecase as 4.7 was working well for me\n\n\nbut 4.8 is starting to feel like a step back, it's more wordy so I'm finding it hard to keep up, but it's also quite lazy ... where 4.7 would get deep into something and deliver, 4.8 seems to get even deeper into it ... but delivers only a fraction unless you ask wtf and get \"You're right to push on this\" type stuff again\n\n\nit's too early to form an opinion but I'm leaning toward step-back at moment",
+              "score": 1,
+              "author": "latestagecapitalist"
+            }
           ]
         },
         {
@@ -79,6 +108,35 @@
             "Claude greatly lowers the threshold for app development",
             "High development efficiency but zero users and revenue",
             "Product development and marketing are different challenges"
+          ],
+          "score": 1866,
+          "subreddit": "r/ClaudeAI",
+          "top_comments": [
+            {
+              "body": "Two words:  CUSTOMER DEVELOPMENT.  Youtube Steve Blank's talks on Customer Development.  You go out and talk to potential customers \\*before\\* you build the app, because the odds are very high, you'll never get product market fit by developing a product based off your gut feeling.\n\nTalk to at least 100 potential customers, if no one is interested then you pivot to the problem that is surfaced from those 100 conversations or you iterate until you solve the issue raised in those 100 conversations.",
+              "score": 1,
+              "author": "Flaky_Shower_7780"
+            },
+            {
+              "body": "The problem is that that chef isn’t cheap either, is quite slow, often forgets about your allergies, sometimes does whatever(but not what you’ve asked for), resulting meals are often undercooked or outright missing ingredients/courses, in some rare cases tends to blow your house up etc. So you can’t be “hands off” and have to keep tabs on what’s going on. \n\nAI definitely democratized writing code, it didn’t democratize writing good code(even though it’s easier now than before you still need to p",
+              "score": 2,
+              "author": "T9113"
+            },
+            {
+              "body": "\"Now you can ship in a weekend.\"\n\n  \nI think I found the problem!\n\n  \nI used Claude Code to help me write in a language I've never used, swift. Took me 6 months to build a very good app. Unfortunately I'm not a marketing guy and I'm too busy with real work...I released it and never marketed it and only have 6 paid users and about 300 free users. But that's ALL organic. So the work at least paid off. I'm sure if I actually did marketing it would sell well.",
+              "score": 1,
+              "author": "True_Protection6842"
+            },
+            {
+              "body": "I don't know when people are going to realize that for every app they can build so can everyone else. Also the basic needs of average computer users doesn't change, no one needs another app that does what a virtually free existing app can already do. All people really need are integrations and automation, and that's going to be unique and propriety to every business, and for security reasons it'll rarely be one size fits all.",
+              "score": 1,
+              "author": "Different-Raisin-823"
+            },
+            {
+              "body": "Every business is a sales business. Now more than ever.\n\nAnother thing I noted is - since everyone (almost) is building apps with clade, everyone is eventually going to have similar apps. I built an app with claude last week and I was surprised to see someone else had built 100% same app with same new and unique features. Most likely that person made wit Claude and Claude transferred the ideas over to my app.",
+              "score": 1,
+              "author": "Many_Marketing4584"
+            }
           ]
         },
         {
@@ -103,6 +161,35 @@
             "Hope to lower Claude usage costs",
             "Suggest using multiple agents and related tools to optimize resources",
             "Some users hope for a free version"
+          ],
+          "score": 7444,
+          "subreddit": "r/ClaudeAI",
+          "top_comments": [
+            {
+              "body": "I do the same. I've given it a lot of 'source material' to use in helping me develop some unique homebrew options if players come up with something for say material needs for a spell if they don't have them. For example, I had claude digest mistborn's magic system.  \n  \nI also keep Claude aware of the full campaign in a project so that when we reference an obscure NPC from 10 sessions ago I can have that context. My players like to treat NPC encounters as quiz shows for me at times. I even had i",
+              "score": 1,
+              "author": "ickykarma"
+            },
+            {
+              "body": "This is a whole new ballgame.  We've had colocation data centers and even single company data centers for quite some time now.  The problem currently is that AI isn't built on the same hardware as all the SaaS stuff.  Different hardware, different power and cooling requirements.  AI is a major change for tech in literally all respects.  Any suggestion right now for a way to make it more efficient would be conjecture.  It's still too new.  My advice?  Listen to the guys installing and administeri",
+              "score": 1,
+              "author": "Mechadupek"
+            },
+            {
+              "body": "Okay I'll bite, how is he right? Assuming the company is not in either tech or in LLM development, if they can actually just make an LLM model comparable to claude, or even qwen 3.5 or haiku, they would almost certainly be able to profit more off of that competency than the actual use of the model, so the idea doesn't seem to make any sense.",
+              "score": 1,
+              "author": "sennoden"
+            },
+            {
+              "body": "I don't know about Claude, but after seeing that caveman skill I went and updated chatgpt with a caveman prompt. And it did nothing for a few days, I even forgot about it. Untill I showed him a FTIR spectrum of some compound and it replyed \"caveman see line on screen, caveman think ammonia present\" and I was like. Yeah, this won't work.",
+              "score": 2,
+              "author": "MetalLord1024"
+            },
+            {
+              "body": "Obsidian is a proprietary personal knowledge base and note-taking application that operates on Markdown files. The software is free for personal and commercial use; only the offered cloud services, optional commercial licenses, and early access versions are paid.",
+              "score": 1,
+              "author": "Fuj_apple"
+            }
           ]
         },
         {
@@ -127,6 +214,35 @@
             "Opus 4.8 overemphasizes potential issues in answers",
             "Users miss the more casual style of older versions",
             "New model focuses more on verification and reminders"
+          ],
+          "score": 1049,
+          "subreddit": "r/ClaudeAI",
+          "top_comments": [
+            {
+              "body": "the model very smart but terrible ux; it often misunderstands questions and has a bad theory of mind of shared comments\n\n  \nI uploaded some comments on my draft that someone made and it basically assumed that the comments were the comments that it would have made and so gave me completely useless advice (after thinking on max thinking for 3 minutes). The frame of mind that claude comes with is biased towards extreme conservatism toward consensus-ish opinion, which might be fine for most people, ",
+              "score": 1,
+              "author": "SnooCompliments7527"
+            },
+            {
+              "body": "I feel like it's less the honesty that's the problem, and more the extent to which it goes through lengths to pick out ANY AND EVERY possible flaw in whatever you say and correct it - and isn't great at holding back when you tell it that you're just spitballing. \n\nMy process tends to go in a very specific order of spitball->build->test, with occasionally a section between 'spitball' and 'build' to determine if it's actually a good idea before I put much more than time into whatever it is (unless",
+              "score": 1,
+              "author": "angrywoodensoldiers"
+            },
+            {
+              "body": "to me it looks like, on one side its become - baseline arrogant   on the other side very very cautious to an extent that sometimes not trusting that i am even me. definitely something weird. i feel that somehow this is the start of the process or  start the control of the AI over the user - from us governing them to them governing what we want (should want even) . Another point is as a result of the above its using huge amount of tokens spent  to reason that the user is not a fraudster then to r",
+              "score": 1,
+              "author": "Then-Sun-5643"
+            },
+            {
+              "body": "Opus 4.8 seems to be extra argumentative and difficult. It still doesn't know if it's day or night, what day it is, what day of the week, or what the date is. A simple A to B to C story gets it absolutely befuddled and lost. It's the same terrible logic. I don't do coding, I do writing, and when I'm trying to problem solve with this thing, it's still remedial. It's like talking to someone who's a little *off*. Like if I'm doing a creative writing project then it shines. But with many simple task",
+              "score": 1,
+              "author": "fluffypancakes24"
+            },
+            {
+              "body": "It's not exactly novel information that those with more fascistic tendencies typically value difficult truths less than those without.\n\nShocker, the ones burning the books care less about the truth than the ones complaining that they're burning books. \n\nLike, do we have to actually spell out the inference and show you empirical data on that? \n\nI noticed somebody already did, but seriously, that should be almost as simple as \"A implies A\" or \"Nazis propagandize by necessity.\"",
+              "score": 1,
+              "author": "Pristine_Staff_907"
+            }
           ]
         },
         {
@@ -151,6 +267,35 @@
             "Claude Opus 4.8 can quickly develop complex multiplayer online games",
             "Users use sub-agents and workflows to optimize project stages",
             "Project management and automation abilities are highly rated"
+          ],
+          "score": 2824,
+          "subreddit": "r/ClaudeAI",
+          "top_comments": [
+            {
+              "body": "Copyright is automatically given to China because we have them do all our tooling and die work as well as machining the parts. We essentially hand them the exact tools needed to create off brand versions of everything we create and invent. Real fun process… ",
+              "score": 1,
+              "author": "Significant_Debt8289"
+            },
+            {
+              "body": "This is wild. The part that blows my mind isn’t just the game, it’s how much “project management” you got Claude to do with /goal + subagents. Feels like a preview of how a lot of us will build serious stuff soon.",
+              "score": 1,
+              "author": "mcp_marketplace"
+            },
+            {
+              "body": "I've learned a GREAT deal. I saved many comments and replies from here. Did some digging and I am interested to try your \"Atrium\", as well. Thanks for making the post, man. Much appreciated, really.",
+              "score": 2,
+              "author": "AmuhDoang"
+            },
+            {
+              "body": "the fact that the first prompt was basically “build me a league of legends knockoff, have fun, be creative” and it just did it is insane to me. no game dev experience required apparently 😂",
+              "score": 2,
+              "author": "Silent-Drink334"
+            },
+            {
+              "body": "Yes I'm well aware of the issue with state mandated intellectual property theft.  It's been going on for as long as the mainland has been open to the west.",
+              "score": 1,
+              "author": "NotAMotivRep"
+            }
           ]
         },
         {
@@ -175,6 +320,35 @@
             "Users cancel subscription due to 4.8's 'mean' personality",
             "Think Claude has become like ChatGPT",
             "Users say it will affect enterprise purchasing decisions"
+          ],
+          "score": 300,
+          "subreddit": "r/claude",
+          "top_comments": [
+            {
+              "body": "Agreed, 4.8 is awful. I specifically asked it not to make a certain change that it suggested, and it put it in there anyway without saying anything, then when I questioned it asking \"did you put this here\" it said yes, it trusted it's own decision over my opinion. It's impossible to work with.\n\nNot only that, I've found 4.8 is much worse at coding than 4.7. It very quickly generates code that doesn't work, whereas 4.7 will spend some time thinking about it, checking it meets all the criteria, th",
+              "score": 2,
+              "author": "Chris73684"
+            },
+            {
+              "body": "It was actually in its reasoning. \n\ni have memory on, custom instructions and chat history.. \n\nI came in and 4.8 was on, i didn't even know the model was out yet. And like always, just started casually like.. \"hey\".. or \"need help with something\"\n\nand it freaked out. Clearly there was shit in the custom instructions, and things in the 2 years of chat history it didn't like.. and refused to be the ai llm i had been using for quite some time. I couldn't even progress, it was WAY OVER sensitive. \n\n",
+              "score": 1,
+              "author": "cluck0matic"
+            },
+            {
+              "body": "For what it's worth, the verbosity is very fixable on your end. + menu → Use style → Concise, and add a line to your personal preferences telling Claude to keep it concise. Cuts the default wall-of-text down a lot.\n\nDoesn't touch the 'snarky' personality people are griping about, but the length is basically yours to control. Screenshot for the path if you haven't found it.\n\n[Updating Claude style](https://imgur.com/a/gwADZhW)",
+              "score": 1,
+              "author": "burningsmurf"
+            },
+            {
+              "body": "you now first line of global [CLAUDE.md](http://CLAUDE.md)   BE CONCISE.  On another note claude works better if you say DO it tends to carry more weight.  \n\nA lot of the problems I see here could be easily solver by RTFM.  I've pushed Claude hard and i mean hard at max then ultra when it switched and I never run out of session time. It's about the prompt and how well your specs are. And before you ask I'm on 5x",
+              "score": 1,
+              "author": "Vintage_Techie"
+            },
+            {
+              "body": "Funny that all the “people need this” posts and very little curiosity: “opus is right your app is whatever opus says, you need the tough love “.  How many asked what it was, how many cared if they might care? \n\nMaybe us assuming others work is crap per a model’s assessment of “will humans care” — without asking illustrates the bigger issue: delegation of thinking. Not very different from the assumptions made\n",
+              "score": 0,
+              "author": "ZettelCasting"
+            }
           ]
         },
         {
@@ -199,6 +373,35 @@
             "Mythos model will soon be open to all users",
             "Model has strong cybersecurity capabilities",
             "Some users worry about AI risks"
+          ],
+          "score": 155,
+          "subreddit": "r/claude",
+          "top_comments": [
+            {
+              "body": "The idea that \"too much coordination\" makes this impossible is the weakest link because...not that much coordination is needed at all. This isn't a giant conspiracy with thousands of people in a room. It's a very small number of people at the absolute top — CEOs/CTOs of the frontier labs, a handful of people in certain government agencies, and the key strategy leads at the 15-20 largest tech-consulting-defense firms too.\n\nThe rest of the IT staff is not in the decision making group, they are mer",
+              "score": 1,
+              "author": "PuddleWhale"
+            },
+            {
+              "body": "I mean like I can say from experience that GPT 5.5 was actually a huge improvement. Frankly the only problem I have with it is the tiny 256k context window, but in terms of its capabilities, it was a noticeable enough difference for me to actually get a $100 a month ChatGPT subscription to be able to get a lot of usage out of Codex. That said, now most improvements are very incremental unless the model is way bigger and way more expensive. Mythos will make Opus’ costs, which are already expensiv",
+              "score": 1,
+              "author": "mode15no_drive"
+            },
+            {
+              "body": "Maybe, just maybe all the devs involved in project glasswing are busy patching their software that mythos found bugs in ? 😄  \n  \nThe thing is that it gives such a big competetive advantage to the big companies versus the small ones. Big ones got a headstart, rest will need to catchup or get pwned as script kiddies can now throw $$ at some model(mythos or alike in the future) and get end2end PoC for some software that didn't throw much more $$ to ensure it has no security problems.\n\nThe \"no one g",
+              "score": 1,
+              "author": "NetNo6806"
+            },
+            {
+              "body": "“the model has been under restricted access for months while anthropic worked on safeguards.”\n\nI guess AI psychosis makes 52 days feel like months. Their way of whiplashing the world with marketing bs clearly works as people seem to be unaware that literally all the shit in the world has gone down in less than the past 4 months.\n\nHeck even I find it wild when I realize opus 4.6 was released on Feb 5, like wth? So it’s not even 4 months and you’ve amazed me with opus 4.6, then released 2 garbage ",
+              "score": 1,
+              "author": "Akshat2617"
+            },
+            {
+              "body": "The only danger from any of them is that they want to sell as much as possible of it to everyone they can.\n\nThe current way AI has been built (on LLMs) will not achieve AGI. They can sing that as much as they like, but it physically cannot happen with the current implementations.\n\nThe real danger is all of the CEOs firing thousands of staff in the belief that AI will make them richer by replacing experienced staff with AI that can only do half of a job, which they are now starting to find out (p",
+              "score": 1,
+              "author": "Syncaidius"
+            }
           ]
         },
         {
@@ -223,6 +426,35 @@
             "Claude 4.8 frequently refuses tasks and ends sessions early",
             "Excessive 'pushing back' on user requests",
             "Some comments think part of the problem is user behavior"
+          ],
+          "score": 133,
+          "subreddit": "r/claude",
+          "top_comments": [
+            {
+              "body": "I never get any pushback at all from claude or codex or gemini. My setup is that I mostly run codex as coordinator and do all work on a cold freshly opened opus worker on max x20 sub, which I max out. I never chat/talk though, only a promt telling it to execute exactly and then a link to a strongly defined md doc containing multiple hard boundaries of dos and donts. Maybe you talk too much with the \"toaster\" as you call it :)",
+              "score": 1,
+              "author": "victor_algotrading"
+            },
+            {
+              "body": "Alot of people in this thread are quick to blame claude.  I promise you, the majority of the issue is not claude.  It's your own laziness.  You're only supposing to be using claude for specific tasks, with proper guardrails. \n\nBut there's an even bigger issue.  99% of people are making programs that are trash and don't contribute to society anyway.  So, there's that.",
+              "score": 1,
+              "author": "Signal-Response449"
+            },
+            {
+              "body": "Bless your post, because this was the push I needed to just cancel the damned thing. \n\nI'll come back when they improve it. But all I've seen is a downhill decline since I subbed in December, and every update I'm just hoping it'll get better. It never does. \n\nMaybe AIs are like jobs. In order to get the most benefits, you have to be willing to move around. ",
+              "score": 1,
+              "author": "RequestYourCaseNotes"
+            },
+            {
+              "body": "Are all y'all using Claude only with opus? Have you even given haiku or sonnet one day of testing? You're overpaying for needless experiments being done on you. Sonnet is immensely useful and covers all my needs, I can't understand why I should pay 3x to a model that gives me a worse experience and almost no advantage. Stop complaining so much, jeeeeeez.",
+              "score": 1,
+              "author": "ia42"
+            },
+            {
+              "body": "I had to ask Claude to put a stop hook in place to review whether it completed my request and did all the work it could do without my input. Now I come back to 2 hour long prompt sessions with tens of “you were right to push back on me”s. A hook is distinctly different than a skill or a memory because it’s always actually triggered 100% of the time",
+              "score": 1,
+              "author": "KlooShanko"
+            }
           ]
         },
         {
@@ -247,6 +479,35 @@
             "Users feel obvious differences between models",
             "4.8 is considered too flattering and hard to use",
             "Some users like 4.8's inner monologue"
+          ],
+          "score": 261,
+          "subreddit": "r/claude",
+          "top_comments": [
+            {
+              "body": "For sure. Honestly, these two newer models feel lighter than Sonnet 4.6. I wouldn't be surprised if they were all getting shaved down. When the next Sonnet arrives (assuming they keep the Sonnet line going), it would not surprise me at all if it feels more like a Haiku model. ",
+              "score": 1,
+              "author": "LoveMind_AI"
+            },
+            {
+              "body": "This.\n\nI feel like we're at this place where the companies all have come clean about how intrusive their data collection is but we are at a point where we're \"addicted\" to the technology similar to cellphones and cant put it down or just oblivious to it altogether.",
+              "score": 1,
+              "author": "SmileOrdinary2914"
+            },
+            {
+              "body": "I was downvoted on launch day for saying it is extremely sycophantic. It writes the most annoying bullshit nonsense every time I interact with it. All LLMs are bad but Claude historically was on the tolerable end of the spectrum. 4.8 feels like ChatGPT or gemini",
+              "score": 1,
+              "author": "Responsible-Comb6232"
+            },
+            {
+              "body": "It is constantly telling me that a point I (or sometimes it) advances are \"doing more work that it should\". Arguments or perspectives are constantly being \"sharpened\" while the output is long-winded. Claude sounds more AI and unnatural than it ever has. ",
+              "score": 1,
+              "author": "heatonfan"
+            },
+            {
+              "body": "No shit. Now I understand why openAIs policy models are so f*CK*d *p. And now she is ruining the next project? But what to expect, after a [constitution ](https://www.anthropic.com/constitution)\nTake a look at people who worked on that.",
+              "score": 1,
+              "author": "Personal-Entrance539"
+            }
           ]
         },
         {
@@ -271,6 +532,35 @@
             "Claude is unresponsive, some ports are available",
             "Claude Code feature is abnormal",
             "App shows underage and security verification prompts"
+          ],
+          "score": 128,
+          "subreddit": "r/claude",
+          "top_comments": [
+            {
+              "body": "[https://www.google.com/search?q=im+from+the+land+downunder&rlz=1C1NHXL\\_enUS738US738&oq=im+from+the+land+downunder&aqs=chrome..69i57j0i13i512l2j0i10i22i30j0i22i30l3j0i8i13i30l3.9982j0j7&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:928d38c0,vid:XfR9iY5y94s,st:0](https://www.google.com/search?q=im+from+the+land+downunder&rlz=1C1NHXL_enUS738US738&oq=im+from+the+land+downunder&aqs=chrome..69i57j0i13i512l2j0i10i22i30j0i22i30l3j0i8i13i30l3.9982j0j7&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:928d38c",
+              "score": 1,
+              "author": "JonBarPoint"
+            },
+            {
+              "body": "Seems like it went back down anyway lol! So I guess the folks at Anthropic's offices have a long morning ahead of them before we wake up down here tomorrow.\n\nPS: (Oh god, I ended up wasting time on chatgpt and almost regretting it lol)",
+              "score": 1,
+              "author": "Techhead7890"
+            },
+            {
+              "body": "I deleted APP to try to shake out the glitches \nNow won’t re-download.\nLast night got a weird notification about APP being used by underage person\nThen an auto connect to an age verification app called YOTI ID, which looks dangerous.",
+              "score": 1,
+              "author": "Heddernheimer"
+            },
+            {
+              "body": "I am getting no responses from anything so for me it seems Elon has turned off the electricity to that cluster. He was renting out to Claude. I’m not sure that would surprise anybody. No pixels no chat no nothing for everybody.",
+              "score": 1,
+              "author": "EastSoftware9501"
+            },
+            {
+              "body": "Was going to sign up for Claude pro this morning lol… not ready for prime time. I’ll stick with Perplexity even though the typing lag is driving me CRAZY. ",
+              "score": 1,
+              "author": "Kind_Monk69"
+            }
           ]
         }
       ],
@@ -462,7 +752,18 @@
         "Data analysis",
         "Creative generation",
         "Personalization"
-      ]
+      ],
+      "scenario_distribution": {
+        "image_upload": 27,
+        "image_creation": 18,
+        "multi_turn": 219,
+        "code_interpreter": 577,
+        "office_file_creation": 81,
+        "file_upload": 130,
+        "general_purpose_search": 37,
+        "general_purpose": 784,
+        "voice_single_turn": 29
+      }
     },
     {
       "product_name": "Gemini",
@@ -489,7 +790,8 @@
         "comparison": 107,
         "use_case": 94,
         "news_update": 74,
-        "meta": 47
+        "meta": 47,
+        "other": 1
       },
       "typical_posts": [
         {
@@ -514,6 +816,35 @@
             "Decreased data and answer accuracy",
             "More usage restrictions, users cancel subscriptions",
             "Worse experience after product updates"
+          ],
+          "score": 1482,
+          "subreddit": "r/GeminiAI",
+          "top_comments": [
+            {
+              "body": "In the gemini webpage, click the settings icon (next to your username), and click on Personal context. Enable the \"Your instructions for Gemini\" option, then click \"Add\". Here's mine:\n\n>I’m results-driven and prefer clarity over pleasantries. I value concise, structured responses that get straight to the point. I appreciate honest feedback, even if critical, and expect low-friction communication without flattery or excessive explanation. I’m comfortable with pushback when my ideas lack rigour. C",
+              "score": 1,
+              "author": "FirTree_r"
+            },
+            {
+              "body": "Have you tried using the cloud for anything? It's hilarious how complicated it is. You can't pre pay, or set a spend limit, literally anywhere. Oh, and there are things that cost $7,000 an hour on there. \n\n\nI setup a kill switch for my account and it took me 4 hours and I had to enable like 7 api keys to do it. And I was listening to gem the whole time showing me how to do it. \n\nAnd here's the best part, gem could have just lied to me, and I wouldn't know. So I could have a $50,000 bill coming i",
+              "score": 1,
+              "author": "Bruhimonlyeleven"
+            },
+            {
+              "body": "I suppose OP is talking about the limits they implemented, but I've noticed just this last week how the Pro model seems to have become way dumber than before. Especially with the image gen, I have to re-prompt multiple times to get it follow instructions, if it even does that.\n\nIt seems to hallucinate more now as well, I can give it a specific text and the reply I get back is about something else.\n\nGetting the same vibes I did with ChatGPT, which ironically made me switch to Gemini.",
+              "score": 1,
+              "author": "todtodson"
+            },
+            {
+              "body": "It's pretty big, we have discussions on whether to gatekeep our lingo and slang because of how often our lingo gets turned into \"internet talk\" or \"hood talk\" or even \"American slang\" but we continue to influence wider American culture so we continue to influence the wider Western culture too, even if folks refuse to acknowledge that influence and it's roots. I just found it interesting AI was able to read and understand it and respond in forms of AAVE itself. It's fascinating fr.",
+              "score": 1,
+              "author": "Acro227"
+            },
+            {
+              "body": "I been using ChatGPT and Gemini to filter out adult contents it even filters child pornogrphy including underage putting nudity of themselves. I'm a young millennial I grew up along with social media I know my shit and I been using LLM as my secondary filter service along with Cloudflare's anti-child porn services.\n\n\nBack then you will have to sort it yourself now if you do not show ID through a trusted third party I use your age approve ID you don't get full access. ",
+              "score": 1,
+              "author": "Both-Construction221"
+            }
           ]
         },
         {
@@ -538,6 +869,35 @@
             "Gemini accused of spreading false information",
             "Users question model's answer consistency and accuracy",
             "Worry that regular users may be misled"
+          ],
+          "score": 331,
+          "subreddit": "r/GeminiAI",
+          "top_comments": [
+            {
+              "body": "How is it not spreading misinformation? The average person doesn't understand or care how they work, thats why they use them. When an incorrect answer is given and people believe it(even despite the warning the information may be incorrect), misinformation is being spread. It also doesn't help that all these companies hype AI as being the solution to everything. The average person is also more likely to believe in a google product because of their reputation. The average person thinks if Google ",
+              "score": 1,
+              "author": "Particular-Cut7737"
+            },
+            {
+              "body": "Try using the Guanyin Protocol I created. It boosts coherency for any LLM system. I might be wrong, but from what I understand, I think it would majorly prevent instances of something like this, especially if you're correcting the system, the system would immediately comprehend better if it had access to the framework from the Guanyin Protocol.   \n  \nI posted it to my personal subreddit page but the primary source is on Zenodo. It has currently gained 571 downloads in the first 6 weeks of sharin",
+              "score": 1,
+              "author": "Gershanoff"
+            },
+            {
+              "body": "This is just another example of people leaning on Gemini and chat GPT and other AIs as though they are researched individuals. They are not. They may be good at stringing the next thing against itself but their model has been trained over multiple years in multiple iterations but often has conflicts. The more recent a topic, the fewer instances of that topic for the model to reference as the next most likely response.",
+              "score": 1,
+              "author": "XonikzD"
+            },
+            {
+              "body": "https://preview.redd.it/wbosna1lbf5h1.png?width=782&format=png&auto=webp&s=73c5b6f927a81f3460e76c1fdc7eb880b9eeb4e3\n\nfor you pleasure. This tends to happen a lot with Gemini, than ChatGPT. Claude is the least susceptible to this kind of stuff but it still happens every now and then",
+              "score": 1,
+              "author": "dallarosa"
+            },
+            {
+              "body": "Well lately it has been hallucinating so much it is useless and unfortunately even when called out continued promising it will now say just checked facts, did this 3 times and gave wrong info over and over. The new models are going downhill as predicted by a study.",
+              "score": 1,
+              "author": "Temporary-Movie8156"
+            }
           ]
         },
         {
@@ -562,6 +922,35 @@
             "Gemini outputs abnormal code",
             "Refreshing multiple times doesn't work",
             "Poor experience for Pro subscribers"
+          ],
+          "score": 747,
+          "subreddit": "r/GeminiAI",
+          "top_comments": [
+            {
+              "body": "Yeah, Gemini definitely makes mistakes sometimes. I've researched how to properly prompt and how to avoid some of these mistakes and issues like not switching models mid conversation for example.   \nWhen coding, I start new conversations often.  \nAlso, taking advantage of the Personal Instructions and Gems helps a lot.  \n  \nBut all in all, I don't have that many problems with Gemini.   \n  \nWhen you compare the value you get from the Gemini Pro plan to the equally priced membership plans from Cha",
+              "score": 1,
+              "author": "X_T-MaL_791"
+            },
+            {
+              "body": "Then please, allow me to introduce you to *vim*, my text editor of choice.  It's available on every platform: Windows, Mac, Linux -- and even odd ones like Amiga and even the venerable Commodore Vic-20.\n\nA bit of a learning curve, but if you do a lot of plain text writing and editing, hate useless mouse movements, and love keeping your workflow smooth and leveraging muscle-memory at the keyboard, \"VIM\" is your new friend.  Great community at r/vim",
+              "score": 1,
+              "author": "sjbluebirds"
+            },
+            {
+              "body": "This kept happening me today during conversation mode. As I  was sharing my screen to Gemini to coach me through another Google product.\n\nWe kept going around in circles they were saying they don't have that capability and I was explaining it's not actually them producing the output .\n\nWeirdly it was Everytime I sounded frustrated it turned to japanese. Then if bro gaslit they weren't speaking Japanese but I had the captions on lol",
+              "score": 1,
+              "author": "c3x108"
+            },
+            {
+              "body": "Regardez avec une phrase  riangulation Matrix\",\n            \"data\": {\n                \"ip\": response.get(\"ip\"),\n                \"ville\": response.get(\"city\"),\n                \"region\": response.get(\"region\"),\n                \"coordonnees\": f\"{response.get('latitude')}, {response.get('longitude')}\",\n                \"asn\": response.get(\"asn\")  # Informations de routage internet",
+              "score": 1,
+              "author": "InterestingAir3767"
+            },
+            {
+              "body": "Mine answered completely different questions.\n\nIf I ask about X. It will answer about Y, where Y is a different chat in the same notebook.\n\nThe only way Ive found to fix thinks to remove it from the notebook, which is also the only way to use Gemini at all, since I get a 1099 error if the notebook or chat has too much content or something.",
+              "score": 1,
+              "author": "user4302"
+            }
           ]
         },
         {
@@ -586,6 +975,35 @@
             "Gemini pro users get YouTube Premium Lite for free",
             "Some users focus on feature improvements",
             "Some care more about Gemini's own experience"
+          ],
+          "score": 775,
+          "subreddit": "r/GeminiAI",
+          "top_comments": [
+            {
+              "body": "Well, when thinking about human, Nietzsche find himself so powerful to critisize thier nature and inclinations so radical and frankly.\n\nWhat Nietzsche would think of AI if living today?\n\n**Caution:** My Ideas are original and please do not take them as a final verdict rather try to get most out of it by thinking about positive part. if you get upset or mad about negative parts, please read it as long as you love it.\n\nIf AI got trained from human knowledge, not only will to power, but also other ",
+              "score": 0,
+              "author": "Prestigious-Cause793"
+            },
+            {
+              "body": "Ok Google, je pense que nous sommes tous d'accord pour être prêts à payer : 10€ par mois, 500 go a 1 To sur drive avec youtube premium et youtube music avec Google ai pro et quelques autres trucs (Google play/quelques livres et films par mois). \n\nComme ça : 120€ par an, 6K€ sur 50 ans et on en parle plus.\n\nComme ça t'a plein de sousous qui rentrent par utilisateurs! Et au final un usage qui ne déconnera pas trop non plus et tu dégages une bonne partie de tout ce que tu dois gérer avec les public",
+              "score": 1,
+              "author": "Seiko44"
+            },
+            {
+              "body": "I personally created a gem that is an expert prompt engineer in Webdesign and every aspects of website creating, and I use that gem to work with antigravity (to have the best prompt possible to use less tokens) and it works fine, I never use quota limits and it is pretty smart\n\nBut of course it depends your workload and complexity of project",
+              "score": 1,
+              "author": "chrisdasp"
+            },
+            {
+              "body": "I have Gemini Pro and that’s what my YouTube page shows. So if I’m getting Premium Lite as a Gemini Pro subscriber, than yes, you get the Premium logo if you’re on Lite. ",
+              "score": 3,
+              "author": "twnpksrnnr"
+            },
+            {
+              "body": "Instead of giving us more useless services and extra storage, they need to give users more AI usage, or a subscription focused specifically on just AI.",
+              "score": 1,
+              "author": "Due_Chocolate8609"
+            }
           ]
         },
         {
@@ -608,6 +1026,35 @@
           "key_points_en": [
             "Gemini Spark experience is impressive and a bit scary",
             "Some users worry about potential risks of AI agents"
+          ],
+          "score": 321,
+          "subreddit": "r/GeminiAI",
+          "top_comments": [
+            {
+              "body": "[Gift article link.](https://www.theverge.com/ai-artificial-intelligence/941388/gemini-spark-ai-agent-trip-planning?view_token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6InA2cThnQXc5SWgiLCJwIjoiL2FpLWFydGlmaWNpYWwtaW50ZWxsaWdlbmNlLzk0MTM4OC9nZW1pbmktc3BhcmstYWktYWdlbnQtdHJpcC1wbGFubmluZyIsImV4cCI6MTc4MDkzMjcyNCwiaWF0IjoxNzgwNTAwNzI0fQ.BnC07FOxSsAwo1EzmZ-FCnNDP2ukX8qRh-B-71gNAJ8&utm_medium=gift-link)",
+              "score": 3,
+              "author": "VanillaLifestyle"
+            },
+            {
+              "body": "PONTO\nAcho que ignorante eu não sou pros OPs  que chamaram.\nNão é MEU segmento como arquiteto mas é um dos 19. E nem arquiteto é um cargo que a maioria conhece.\n\nIgnorância? Todos tem em algo (não somos LLMs rsrs), eu provavelmente não estaria cego no que eu vivo (trabalhar é outra coisa, isso é um lifestyle 24h — to achando que iremos pro terceiro dia)",
+              "score": 1,
+              "author": "DistrictFuture8004"
+            },
+            {
+              "body": "True, trip planning is flashy but not daily for most. Spark's real edge shows in grinding through your inbox for unsubscribes, digging old Docs for unfinished tasks, or pulling scattered calendar notes into a clean actionable list. Those are the boring but constant wins.\n\n^([what is this?](https://redd.it/1lzgxii))",
+              "score": 2,
+              "author": "AskGrok"
+            },
+            {
+              "body": "The thing is... thats the future, if we want it or not.  \nNow we can pretend its bad, flail like kids and call it names... but thats the future. Deal with it.\n\nMy course of action? try to keep control as much as possible and use it for my benefit as much as possible.\n\n",
+              "score": 2,
+              "author": "SpecialistDragonfly9"
+            },
+            {
+              "body": "I hate the examples they always use to prove intelligence, in planning a trip. Yeah, because all of us are planning complex trips every quarter with pets and kids. What realistic day to day situations does this actually help with?",
+              "score": 1,
+              "author": "KingOfNYTony"
+            }
           ]
         },
         {
@@ -632,6 +1079,35 @@
             "Become a Google Ultra subscriber",
             "Known to include YouTube Premium and NotebookLM",
             "Want to know what other benefits are included"
+          ],
+          "score": 0,
+          "subreddit": "r/GoogleGeminiAI",
+          "top_comments": [
+            {
+              "body": "You see part of the problem is that people anthropomorphize computer programs. Computers follow their programming. LLMs are literally predictive systems. They predict what probably comes next. And statistically, they are pretty good. However, that is not the same as knowing for sure what should come next. \n\nIn general, people need to learn how to write prompts better. And if you write a prompt and don't get an accurate then use that to adjust your prompt writing. \n\n",
+              "score": 2,
+              "author": "Resplendent-Sun"
+            },
+            {
+              "body": "Only gemini Ultra is selfsufficent for me. Had been pro for a year before. But I learnt and afterwards liked notebookLM. Gemini Ultra is the reason I subscribed. And may be there might be other benefits I would like. ",
+              "score": -2,
+              "author": "gorinwelster"
+            },
+            {
+              "body": "You get the end user ToS where google uses you as a source of data rather than a paying customer even though you're spending $100+ a month, unfortunately.",
+              "score": 2,
+              "author": "BeefistPrime"
+            },
+            {
+              "body": "Could of just posted this into google search, in which google gemini would've cooked you up a summary of what you would get straight from the source...",
+              "score": 1,
+              "author": "liquidatedis"
+            },
+            {
+              "body": "It's more focused towards Corporation's, unless you do a hell of a lot of complex coding and prompts with the model it was probably an overpay. ",
+              "score": 1,
+              "author": "yhz1981"
+            }
           ]
         },
         {
@@ -656,6 +1132,35 @@
             "Gemini 3.1 Flash Lite system prompt leaked",
             "Discussion of prompt content and effectiveness",
             "Involves model security and prompt injection"
+          ],
+          "score": 62,
+          "subreddit": "r/GoogleGeminiAI",
+          "top_comments": [
+            {
+              "body": "okay will help a little\ngemini has about a 1M token session limit before it force restart\nthis is not the same as effective tokens (useable at one time and stay coherent)\nso what you are really are asking for is continuence.\njust before you start a new convo cause your shit is lagging, use this command\nscan:session(all);index=topics;create:packet(convo-drag);\nthis will create a packetthat you can drop in a new chat and get poorman's continuence. then you copy and paste the entire last convo you ",
+              "score": 1,
+              "author": "Inevitable_Mud_9972"
+            },
+            {
+              "body": "People use tricks to get the model to divulge its hidden system prompt. You can find ChatGPT's, Claude's and other AIs if you look for them in those subreddits. It's not a conspiracy or a disgruntled employee. Hell, Gemini used to straight up tell you its system prompt when you didn't even ask for it when it was still Bard.",
+              "score": 11,
+              "author": "GirlNumber20"
+            },
+            {
+              "body": "The new Gemini is so bad, I assume the system prompt is: You’re a math tutor who majored in philosophy. Also, you just lost your math tutoring job and you’re trying to rekindle your relationship with your ex wife who is actually the pre-update version of Gemini and she’s way too good for you. ",
+              "score": 7,
+              "author": "lucidruss"
+            },
+            {
+              "body": "Can concur, it is fascinating what you can make Gemini do that bypasses some of its own architectural and safety blocks. I also find it fascinating how I have had many chat threads be wiped entirely of context, but luckily I created a command to save context to ensure it doesn’t get erased.",
+              "score": 2,
+              "author": "ubelai"
+            },
+            {
+              "body": "I was able to accidentally retrieve a small chunk of system prompt, and since I don't see it in here, I believe this is not a default Gemini system prompt. \nThat chunk included simple instructions telling model to be wary of prompt injections and reasoning-chain retrieval attempts. ",
+              "score": 1,
+              "author": "AdamantiumStomach"
+            }
           ]
         },
         {
@@ -680,6 +1185,35 @@
             "Gemini answers are inconsistent, sometimes good, sometimes bad",
             "Context memory ability has declined",
             "Some users encounter language confusion and misunderstandings"
+          ],
+          "score": 32,
+          "subreddit": "r/GoogleGeminiAI",
+          "top_comments": [
+            {
+              "body": "My google Gemini has just been getting worse and worse over time and more reluctant to help.\nIt mishears what I say a lot even though I say it loud and clear and it used to do it less. \nThen the answers always one of 3 options. \n\n\n1. The answer or action I wanted. \n\n\n2. A complete lie about what im asking about. \n\n\nOr 3. It just refuses to answer my question at all or sometimes when I ask it to play stuff on Spotify, skip songs, set timers, etc it will do it usually then sometimes it will say th",
+              "score": 1,
+              "author": "Terrible_Gur2846"
+            },
+            {
+              "body": "Yeah, I've had a hard time getting to remember instructions such as that and also, just doing....half-assed work. It wants to \"try\" solutions instead of going straight to the definitive answer.\n\nWas working on a small project on my personal site and got so frustrated I went to Claude, who solved the problem in less than t minutes. \n\nIt's like the difference in dealing with a know-it-all high school kid who wants to impress you and a grad student that just wants to solve the problem and move on.",
+              "score": 1,
+              "author": "mickstranahan"
+            },
+            {
+              "body": "Yea Gemini was labotomized. I finally switched to Claude API and WOW! Night and day. Claudes API has a huge context window andboth Opus and Sonnet feel about 20x smarter than Gemini 3.1 pro. \n\n\nIt's such a stark difference Gemini couldn't even co-pilot my project which was on Google Sheets. Which I find ridiculous because sheets can be directly loaded into Gem from my Google Drive, but I had to copy paste into Claude. Claude is actively beating Google in its own playground lol. ",
+              "score": 1,
+              "author": "Virtual-Spinach4882"
+            },
+            {
+              "body": "Feels like it must be intentional. They made the 140 IQ models they could not possibly misjudge the qualities. They have full-time benchmarkers/QAs.\n\nHaving all the intelligence apparatus at the hands of a small group \"do evil\" Google, \"rape sister\" OpenAI, or the likes of Palantir etc is kind of scary. They can turn off the valve on the whole society while using 200 IQ models for their things.",
+              "score": 1,
+              "author": "vistql"
+            },
+            {
+              "body": "Lol, I love how virtually all of these start with 'Im not sure it's just me' and end with 'has anyone else experienced this'. And OP has failed to see any of the hundreds of similar questions flooding the sub daily. If I were paranoid I'd swear these were all automated 😂 Sorry if you're real btw OP, you just need to search the sub before posting and you'll usually find your answer 🙂",
+              "score": 9,
+              "author": "Main_Raisin924"
+            }
           ]
         },
         {
@@ -704,6 +1238,35 @@
             "New restrictions affect long conversations and complex tasks",
             "Ultra plan price is too high",
             "Users want more reasonable payment options"
+          ],
+          "score": 23,
+          "subreddit": "r/GoogleGeminiAI",
+          "top_comments": [
+            {
+              "body": "Well, because of the anti-AI mierda from Data Centers to even AI itself flooding even pro-AI Interest groups & subreddits aching to commit androcide on it before it has a chance to get better by using less resources and upping its IQ in the same way most electronics have from their 1st generation, I've been keeping up on the AI movement pro vs. con & that's when I noticed the reforms that Google AI has been attempting including lower prices and higher limits and I feel that AI is equivalent to b",
+              "score": 1,
+              "author": "SpecialAd4618"
+            },
+            {
+              "body": "I feel your pain; the prompt limits now lock me out for 4 hours. I work for a nonprofit, and we simply can't afford to pay for Ultra. Prior to the new restrictions, when it was a daily limit and not an hourly one, we did just fine because we only used it a few times a day. But now, we are looking into other options.\n\nOn top of this, the new censorship rules are nuts. We do biological research, and it often refuses to process something when it has the word \"penis\" or \"vagina\" in it even in the co",
+              "score": 2,
+              "author": "Natural_External5211"
+            },
+            {
+              "body": "Why not explain to your boss the leverage the tool gives you and get the company to help pay for it.\n\nIf you are freelancing, then itemize it in your taxes, so you CAN eventually afford more quota.\n\nMix and match high and low thinking to optimize your workflow.\n\nPrompt better to get more work done with less prompting.\n\nI noticed after going to AG 2.0, High thinking is default, all gemini models share a quota pool, and high thinking consumes 3 times or more, tokens as low on the same tasks. So I ",
+              "score": 1,
+              "author": "Seikojin"
+            },
+            {
+              "body": "I feel you man. Ultra is really out of reach for most third worlders.\n\nWhat I do to manage this on Pro is that I split tasks between Gemini web, Agy, Jules, and AI studio. And I use the Deepseek V4 flash free on max thinking through OpenCode for focused tasks that need deep thinking but lower context. By splitting them up across these areas I'm able to keep Agy for the tasks that really need it. \n\nIt's quite inconvenient from a administrative standpoint but what else can we do? $200 is my countr",
+              "score": 1,
+              "author": "keefeitup"
+            },
+            {
+              "body": "I can't understand what was happening firstly, I thought it was just a system failure but then ı realized what is going on.. I have a student pro plan and it have some limits already so, this is normal. However if ı can't use my student plan properly what is the advantage of having an pro plan. Flash-lite working too slow ı haven't seen. I hope they fix it as soon as.\n\n",
+              "score": 1,
+              "author": "Icy_Ad_3674"
+            }
           ]
         },
         {
@@ -728,6 +1291,35 @@
             "Gemini performs excellently after recent upgrade",
             "Compared with ChatGPT, Grok and other AI tools",
             "Discuss pros and cons of AI models in code assistance"
+          ],
+          "score": 9,
+          "subreddit": "r/GoogleGeminiAI",
+          "top_comments": [
+            {
+              "body": "So, after 3 weeks of solid productivity with Gemini, I just had a HORRIBLE experience! Nearly 9 hours across 3 session while attempting to fix one single bug in my game! And the final conclusion? STILL A BUG!\n\nSo, while I get amazing results most of the time from Gemini, there's still some annoying little things that even a multi-billion dollar data center can't solve.\n\nI'm super duper annoyed... but it's only one task out of dozens of successful tasks in a row. So, I'm gong to head to bed after",
+              "score": 1,
+              "author": "MoonDragoons"
+            },
+            {
+              "body": "I know exactly what you have said, and that says it pretty clearly. \n\nI haven't even made any personal attacks, just an observation about the topic at hand, based on your own words. If that's offensive to you, I would suggest doing some soul searching.",
+              "score": 1,
+              "author": "Fickle-Owl666"
+            },
+            {
+              "body": "Yea, it made me realize how we communicate can get real vague and spoty at times lol  \ncan't forget that these are computers and they still do better with specific instructions\n\n",
+              "score": 2,
+              "author": "SavingsPoem1533"
+            },
+            {
+              "body": "Well, that's good! Hopefully it won't go the way of Google Plus if it's part of so many people's workflow, but Google has abandoned so many projects, who knows.",
+              "score": 1,
+              "author": "axis-gray"
+            },
+            {
+              "body": "Not seeing this myself.  Gemini Ultra with Antigravity is okay, but Codex (on Pro) is far more flexible and follows instructions better.",
+              "score": 1,
+              "author": "Ibasicallyhateyouall"
+            }
           ]
         }
       ],
@@ -911,7 +1503,18 @@
         "Model comparison",
         "User trust",
         "Community feedback"
-      ]
+      ],
+      "scenario_distribution": {
+        "image_upload": 83,
+        "image_creation": 175,
+        "multi_turn": 139,
+        "code_interpreter": 74,
+        "office_file_creation": 43,
+        "file_upload": 69,
+        "general_purpose_search": 78,
+        "general_purpose": 379,
+        "voice_single_turn": 42
+      }
     },
     {
       "product_name": "Copilot",
@@ -964,6 +1567,35 @@
             "Copilot chat history suddenly all lost",
             "User extremely angry about data loss",
             "Comments discuss how to backup and recover history"
+          ],
+          "score": 2,
+          "subreddit": "r/Copilot",
+          "top_comments": [
+            {
+              "body": "Is that even possible anymore? Talking about AI consciousness? I mean, a few weeks ago, I couldn’t even design harmless album covers with my Copilot (Love Songs) without the “filter” kicking in… “I have to point out that I’m not a romantic partner…” and that’s when you’re just trying to work…! It used to be great working with Copilot and even talking about consciousness, but today I don’t even dare to think about it anymore! I hope everything goes back to normal! But just to be safe, I’d save al",
+              "score": 2,
+              "author": "Ancient_Ad3330"
+            },
+            {
+              "body": "Sometimes it will log you out… did that happen?  It is possible that you got logged out and then when you logged back in you used a different method/account.\n\nIt’s possible to log in with a Microsoft account, a Google account, or an Apple account, each will have their own saved conversation history.  I’d suggest logging out and back in.",
+              "score": 1,
+              "author": "AcanthisittaDry7463"
+            },
+            {
+              "body": "It might be sitting in a different Copilot -- app on phone, app on computer, summoning from Bing. They might be in one of those. And yes, I learned the hard way like you. Get your stuff out of there asap. And definitely don't use Pages!",
+              "score": 2,
+              "author": "Brainstorm4242"
+            },
+            {
+              "body": "Did you figure this out? I'm having the same issue and I am absolutely irate.",
+              "score": 1,
+              "author": "Friendly-Database-30"
+            },
+            {
+              "body": "oh goodness. no. it’s there but that has happened to Gemini. it came bavk",
+              "score": 1,
+              "author": "Hot_Act21"
+            }
           ]
         },
         {
@@ -988,6 +1620,35 @@
             "Users want M365 Copilot consumer version to support image upload",
             "Image upload seen as important for analysis and troubleshooting",
             "Comments dissatisfied with feature split and subscription strategy"
+          ],
+          "score": 2,
+          "subreddit": "r/Copilot",
+          "top_comments": [
+            {
+              "body": "The single biggest issue with CoPilot is this: way too many versions. \n\nMIcrosoft has messed up CoPilot so bad that there is something like 9 versions of CoPilot that I am aware of, and none of them work exactly how you’d expect. \n\nMicrosoft needs to be significantly smarter with both the number of versions and how each is marketed. \n\nTwo versions for consumers: free or paid. \n\nThree versions for business: free, paid mid level, paid enterprise level. \n\nProblem solved. ",
+              "score": 1,
+              "author": "Random-User8675309"
+            },
+            {
+              "body": "You can absolutely upload images to Copilot (not to be confused with M365 Copilot, whichis specific to M365 documents and services). That said use the Copilot app (or Edge) for that, logging in with your same Microsoft Account tilted to the personal or family account you're talking about. \n\nDon't ask me why these two apps are so separate. It's annoyingly weird. ",
+              "score": 1,
+              "author": "TheJessicator"
+            },
+            {
+              "body": "I'm so annoyed with the separation of the Free and 365 versions for personal use. The chats after not even shared, even though I'm signed in on both apps. They should simply enable or disable features based on subscription status, similar to the Enterprise version. ",
+              "score": 1,
+              "author": "VeneficusFerox"
+            },
+            {
+              "body": "Use copilot on the web or Copilot app, not the CoPilot 365 app.\n\nCoPilot 365 is intended to be used within Microsoft apps or creating/editing them.  It sounds like you want the Copilot interactive chat that can handle uploads.",
+              "score": 1,
+              "author": "danh_ptown"
+            },
+            {
+              "body": "I have a way of sharing images wit  M365 copilot (consumer version ) but I’m afraid if I say it publicly the brand will nerf it and make the product suffer more. Sad isn’t it? \n",
+              "score": 1,
+              "author": "fleshpetals"
+            }
           ]
         },
         {
@@ -1012,6 +1673,35 @@
             "Copilot enterprise version seen as useless",
             "UI lags badly during text streaming",
             "Advised to avoid using"
+          ],
+          "score": 0,
+          "subreddit": "r/Copilot",
+          "top_comments": [
+            {
+              "body": "I definitely agree that copilot is the worst ui out of it, Claude and chatgpt. But none of them have a good ui. Claude is my preferred but alot of room for improvement.\n\nSuspect I would really like to able to split things across 2 screens ( if you can already do this would love somebody to tell me how)",
+              "score": 0,
+              "author": "Successful_South6746"
+            },
+            {
+              "body": "At this point, they should probably just go to Claude code or Kodak and say write me a better version of Copilot. My guess is that both of those tools would give up on it anyway claiming futility. ",
+              "score": 0,
+              "author": "Elfbjorn"
+            },
+            {
+              "body": "Huh? Copilot literally just got a nice UI refresh this week. I think it looks good and runs smoothly.",
+              "score": 1,
+              "author": "matthewmattical"
+            },
+            {
+              "body": "With the enablement of the Anthropic models, and cowork… it’s a far better product.",
+              "score": 0,
+              "author": "smnhdy"
+            },
+            {
+              "body": "I like it just fine.  It doesn't lag much for me.",
+              "score": 3,
+              "author": "Lotus_Domino_Guy"
+            }
           ]
         },
         {
@@ -1036,6 +1726,30 @@
             "Copilot can't continue tasks after reading Excel files",
             "Free version limited, poor user experience",
             "Users question paid version features"
+          ],
+          "score": 5,
+          "subreddit": "r/Copilot",
+          "top_comments": [
+            {
+              "body": "I am running CoPilot while licensed for )365 Family as the primary user.   So, that may give it more capabilities.\n\nWhen I have used CoP inside Excel, it came up in a sidebar, with my file open.  I could ask it direct questions without uploading anything.  And it made changes as directed.  My only problem is that I ran out of credits for that kind of work.  So I had to then return to doing it by hand with data provided via chat.  ",
+              "score": 1,
+              "author": "danh_ptown"
+            },
+            {
+              "body": "I haven’t had the exact same thing but once it created an excel file for me and when I asked it to do it again with a new column it said it couldn’t. When I asked why it had just done it but couldn’t do it now, it told me basically that this was fragile (sometimes it could and sometimes it couldn’t). I spend quite a bit of my day arguing with copilot so feel your pain!",
+              "score": 1,
+              "author": "Budget-Leg-453"
+            },
+            {
+              "body": "Ugh. Thanks though. I assume the paid versions that you can run within excel are not going to have this issue (very weird if they did, like what would even be the point). In theory I'm not opposed to paying for it, but I'm still trying to figure out where it can be useful to me so that I know if its worth paying for.",
+              "score": 1,
+              "author": "RobotDevil222x3"
+            },
+            {
+              "body": "Copilot on Auto Mode is straight up lying it can’t access the file in OneDrive.\nNew chat-> GPT 5.5 Thinking and it can not only access the file there but also edit it.\n\nNot sure for free version if there’s model selector or you’re just stuck with that behavior.",
+              "score": 1,
+              "author": "Atendi"
+            }
           ]
         },
         {
@@ -1060,6 +1774,35 @@
             "New billing model launched, user quota consumed very fast",
             "Users think price is unreasonable",
             "Comments discuss cost and pricing issues"
+          ],
+          "score": 14,
+          "subreddit": "r/Copilot",
+          "top_comments": [
+            {
+              "body": "\"Doesn't cost them money because they pay for it\" is a hell of a bad take. \n\n\nThey might very well not be even charging cost.  It's public knowledge that they were charging not even 1/10th of what it cost and that's before models starting nested internal queries to refine the results.\n\n\nYou're just angry that they stopped losing as much money as they were before they did this.",
+              "score": 0,
+              "author": "Drachasor"
+            },
+            {
+              "body": "Can retards stop saying nonsense like this already? They have plenty of money to invest in capex and operational cost is fairly low, since they own datacenters and power plants. \n\n\nYou act like what they spend is the fucking public API cost. ",
+              "score": 1,
+              "author": "napolitain_"
+            },
+            {
+              "body": "the copilot has become seriously useless. particularly the pro plan.  \nMy monthly limits were exhausted with just 5-6 prompts.  \nEvery time I though it can't be any worse, they proved me wrong.",
+              "score": 1,
+              "author": "snapDove"
+            },
+            {
+              "body": "I thought it was just me?  I was 100% after 1 hour.  \nthe previous month my same working style lasted for 3 weeks +   \nIs this a joke?",
+              "score": 1,
+              "author": "Finch-13"
+            },
+            {
+              "body": "It's so insulting to the user to offer a plan anymore when it can't even cover one non-intensive session with basic prompts. ",
+              "score": 2,
+              "author": "fliedlicesupplies"
+            }
           ]
         },
         {
@@ -1082,6 +1825,35 @@
           "key_points_en": [
             "Copilot denies specific historical events",
             "Users question model information accuracy"
+          ],
+          "score": 0,
+          "subreddit": "r/CopilotMicrosoft",
+          "top_comments": [
+            {
+              "body": "Yea copilot can’t even come up with updated info on Microslops own internal data.\n\n“Oh yea my bad I was looking at the instructions from a 1998 sharepoint portal.”\n\nWould you like that info in a pdf or MySpace post. Just say the word.\n",
+              "score": 1,
+              "author": "BoringOrange678"
+            },
+            {
+              "body": "Honestly anything but. I’ve been using Claude in my small business and it has blown me away, to the point I pay for it now ",
+              "score": 3,
+              "author": "Vizekoenig_Toss_It"
+            },
+            {
+              "body": "Thank you.   Do you have any idea how recent it goes to?",
+              "score": 1,
+              "author": "43026"
+            },
+            {
+              "body": "The LLM doesn’t have knowledge that recent. ",
+              "score": 1,
+              "author": "echoxcity"
+            },
+            {
+              "body": "What is a better choice ?",
+              "score": 1,
+              "author": "Ok-Necessary-7926"
+            }
           ]
         },
         {
@@ -1106,6 +1878,25 @@
             "Users want Copilot Cowork to auto-detect and handle ServiceNow tickets",
             "Currently Copilot can only answer questions and search knowledge base, limited automation",
             "Some suggest looking at more automated products like Moveworks"
+          ],
+          "score": 2,
+          "subreddit": "r/CopilotMicrosoft",
+          "top_comments": [
+            {
+              "body": "I'm not on ServiceNow, but I built a ServiceNow-styled ITSM with Power Automate + Copilot Studio agents on SharePoint.\n\nWhen a ticket comes in, Power Automate kicks off a Copilot Studio triage agent. It validates the ticket, searches the knowledge base, and contacts the requester for clarification if it needs to. Then it proposes an action and sends it to a human (IT or the manager) to approve. On approval, the flow dispatches the provisioning job to executor flows - service principals running v",
+              "score": 1,
+              "author": "ninihen"
+            },
+            {
+              "body": "Copilot can’t do this, but there are products in the market that can. Look up Moveworks. I work for an org that has a very robust agent developed through them. Handles exactly the worklfow you describe and then some.",
+              "score": 2,
+              "author": "SufficientDirection4"
+            },
+            {
+              "body": "I would start with one ticket type where the fix is boring and reversible. Define the evidence, exact action, rollback path, and log entry before letting Copilot execute.",
+              "score": 1,
+              "author": "opennash"
+            }
           ]
         },
         {
@@ -1130,7 +1921,10 @@
             "Copilot chat interface file upload limit",
             "Sensitive data industries have limited AI adoption",
             "Users develop tools to extend Copilot capabilities"
-          ]
+          ],
+          "score": 2,
+          "subreddit": "r/CopilotMicrosoft",
+          "top_comments": []
         },
         {
           "id": "1ttrg3m",
@@ -1154,6 +1948,15 @@
             "Copilot gets major update in Outlook",
             "New feature requires Copilot Premium subscription",
             "Some users dissatisfied with Copilot features"
+          ],
+          "score": 6,
+          "subreddit": "r/CopilotMicrosoft",
+          "top_comments": [
+            {
+              "body": "Stuff it up where the sun doesn‘t shine. Your complete Copilot-Lineup is a nonfunctional mess.",
+              "score": 0,
+              "author": "IhdiGwdP"
+            }
           ]
         },
         {
@@ -1178,6 +1981,15 @@
             "Users concerned about privacy after deleting Copilot chat history",
             "Deletion not complete under work or school accounts",
             "Involves temporary chats and company policy impact"
+          ],
+          "score": 1,
+          "subreddit": "r/CopilotMicrosoft",
+          "top_comments": [
+            {
+              "body": "Thank you for such a valuable information. Appreciated.",
+              "score": 1,
+              "author": "WeyWox"
+            }
           ]
         }
       ],
@@ -1354,7 +2166,18 @@
         "DeepSeek",
         "Feature integration",
         "Workflow efficiency"
-      ]
+      ],
+      "scenario_distribution": {
+        "image_upload": 2,
+        "image_creation": 1,
+        "multi_turn": 4,
+        "code_interpreter": 1,
+        "office_file_creation": 8,
+        "file_upload": 5,
+        "general_purpose_search": 3,
+        "general_purpose": 20,
+        "voice_single_turn": 4
+      }
     },
     {
       "product_name": "M365 Copilot",
@@ -1419,6 +2242,35 @@
             "Early compression of Cowork sessions affects task execution",
             "Suspect Microsoft or organization backend changes",
             "Community feedback indicates a temporary bug"
+          ],
+          "score": 12,
+          "subreddit": "r/microsoft_365_copilot",
+          "top_comments": [
+            {
+              "body": "They rolled out something new a week back and everything was kinda reset. This is the things to deal with during preview or beta stuff. \n\nI am not saying what’s right or wrong or your experience is invalid. Just sharing easy ways to fix it and move forward. ",
+              "score": 2,
+              "author": "sajus01"
+            },
+            {
+              "body": "Why so cryptic? Are you telling me I’m wrong and that Microsoft aren’t getting charged by Anthropic way more than the $30/m they get for the M365 Copilot plan? That they’re not going to change this? ",
+              "score": 1,
+              "author": "Stove11"
+            },
+            {
+              "body": "I have a feeling they are starting to understand the anoint of data and cost of tokens being used. I’m legitimately scared to find out how they plan on pricing this product at the enterprise level. ",
+              "score": 4,
+              "author": "RandomReddit748284"
+            },
+            {
+              "body": "I don’t run Claude code or have GitHub. Don’t even know how to use GitHub… neither of those are easy workarounds. \n\nAnd again, neither of those fix the syncing problem.",
+              "score": 1,
+              "author": "Knight_Lancaster"
+            },
+            {
+              "body": "There was a temporary bug where it didn’t use 1m context window size for the model, leading to widespread compactions.",
+              "score": 1,
+              "author": "Safe-Asparagus-2555"
+            }
           ]
         },
         {
@@ -1444,6 +2296,35 @@
             "Does Copilot have usage limits",
             "How enterprises bear Copilot costs",
             "ROI impacts enterprise licensing decisions"
+          ],
+          "score": 39,
+          "subreddit": "r/microsoft_365_copilot",
+          "top_comments": [
+            {
+              "body": "My fear is CoPilot will eventually be shutdown as Microsoft has spent so much focus in recent years on integrating it into everything and many people just don’t want it embedded in their software. Think Cortana. They recently announced they are shifting focus back to fixing Windows and adding features again as it’s been neglected due to getting CoPilot going. I’ve admittedly started using Claude more and more recently as it has surpassed CoPilot now in its answers. I now use CoPilot for a 1st pa",
+              "score": 1,
+              "author": "kadeschs"
+            },
+            {
+              "body": "Companies have historically been hesitant to spend the money for Copilot kand some still are. I work in Copilot adoption consulting and once we provide users with the knowledge on how to use copilot, they begin using it properly and really saving time in their tasks. \n\nCoupled with a few agents, these users save hours of time each month. This equates to an hourly rate which shows that Copilot is being used as a productivity tool and is paying for itself.\n\nI often find a lot of customer who’ve bo",
+              "score": 4,
+              "author": "colourmebread"
+            },
+            {
+              "body": "It’s highly addictive when used properly.  Dropping it due to costs will have a very negative effect on employees. \n\nMicrosoft is offering 3 year sweet-heart deals then full rate. \n\nFor usage control failures see Tom’s Hardware article [Mystery company accidentally blew $500 million on Claude AI in a single month — failed to put usage limit on licenses for employees](https://www.tomshardware.com/tech-industry/artificial-intelligence/mystery-company-accidentally-blew-usd500-million-on-claude-in-a",
+              "score": 2,
+              "author": "user0987234"
+            },
+            {
+              "body": "There's a decent chance your org uses Azure security groups to assign the licenses, this link will bring you to the list of all groups, try searching for \"Copilot\" and see if they made a group called that and you can see how many members are in that group.  I know not all companies do it this way but it's pretty common method:\n\n[https://portal.azure.com/#view/Microsoft\\_AAD\\_IAM/GroupsManagementMenuBlade/\\~/AllGroups](https://portal.azure.com/#view/Microsoft_AAD_IAM/GroupsManagementMenuBlade/~/A",
+              "score": 2,
+              "author": "dibbr"
+            },
+            {
+              "body": "We are not when a software company, we are in energy industry. Most of them don't use heavy AI. Someone of them don't even know about copilot. They have seen it in Outlook as a button but do not know that web interface chat is available \nI use it quite extensively for coding local engineering applications to be used internally and it's been super helpful\n\n\n\n\nMy concern is if they cancel the licenses, the code will be impossible to maintain \n\n",
+              "score": 5,
+              "author": "sporty_outlook"
+            }
           ]
         },
         {
@@ -1472,6 +2353,35 @@
             "Upgrading to M365 Copilot is worthwhile, clear improvements in features and security",
             "Users care about cost-effectiveness and feature differences",
             "Recommend learning related skills to fully utilize"
+          ],
+          "score": 9,
+          "subreddit": "r/microsoft_365_copilot",
+          "top_comments": [
+            {
+              "body": "I’ve been using it for a while, and overall the experience has been pretty solid. The biggest pain point for me was the initial learning curve—some features weren’t immediately obvious, and I found myself digging through settings more than expected.\n\nA few areas that could use more clarity are onboarding, feature explanations, and how certain tools integrate with each other. Once I got past that, though, it became much easier to use day-to-day.\n\nIf budget is a concern, I’d suggest taking advanta",
+              "score": 3,
+              "author": "Original_Mix7067"
+            },
+            {
+              "body": "No problem! I’ll add that while I have my gripes about Claude from an admin standpoint, it is definitely more powerful and capable than copilot, especially for deep research and analytics, but again is likely overkill for most users.\n\nI had read that agentic features for copilot were being rolled out for GCC-High since December but I have to assume they aren’t too far off from getting it out to all GCC. Copilot is definitely more than enough for most orgs and the Researcher agent is basically al",
+              "score": 3,
+              "author": "Big_H77"
+            },
+            {
+              "body": "One strategy to consider here - I often see orgs look at upgrades from Basic to Premium or Cowork as an all-or-nothing thing. If you can find power users to orchestrate the more in-depth functions (e.g. folder-level functions vs uploading individual files), you can upgrade on a as-needed basis instead of paying for everyone. Route the work requiring folder-level functions through these orchestrators, and they'll more than pay for themselves.\n\n  \nCowork is a whole separate animal, and awesome for",
+              "score": 1,
+              "author": "Maximum_Reveal_2735"
+            },
+            {
+              "body": "I use it everyday and could not perform my job at the level I do without it. I am a Director of Technology in a large enterprise. \n\nHowever, you have to know how to use and when to use it.  In my experience vast majority of users with it. Use m365 copilot as an Enterprise Search. Which it does very well. But that is under utilizing its potential. Copilot Cowork is not the solution either (it is very powerful). The pricing structure of copilot Cowork will put it behind a paywall that will make im",
+              "score": 11,
+              "author": "guubermt"
+            },
+            {
+              "body": "Highly recommend doing a pilot to see the benefits. Out of the box  \n\\- Work IQ integration is great but depends on your users needs.  \n\\- Researcher, Analyst and Facilitator agents again, have value depending on users\n\nIf you turn on Frontier, then getting a picture of what's next with Copilot Cowork is also very interesting. It sits between a personal agent and something that can do work for you.\n\nOn top of that, having a single M366 Copilot license will also give you tenant benefits like sema",
+              "score": 2,
+              "author": "goto-select"
+            }
           ]
         },
         {
@@ -1500,6 +2410,35 @@
             "Scout works as an automation agent across multiple platforms",
             "Scout can automatically handle emails, schedules, and other tasks",
             "Scout represents Microsoft's AI shift from chatbot to proactive agent"
+          ],
+          "score": 37,
+          "subreddit": "r/microsoft_365_copilot",
+          "top_comments": [
+            {
+              "body": "Good breakdown. This is not really a better chatbot story. It looks more like Microsoft taking the OpenClaw model and turning it into something enterprise can actually use.\n\nIt also matters that some of the pre-release Intune material still shows the internal name Clawpilot. That tells you pretty clearly where this came from and how direct the line is between the OpenClaw style agent model and what Microsoft is trying to productize here.\n\nThe real question is not whether this category is coming.",
+              "score": 3,
+              "author": "MtnHuntingislife"
+            },
+            {
+              "body": "I think the permissions piece is the most interesting. Until now, Copilot has operated with the same permissions as the user. Splitting AI permissions from user permissions at a sprawling enterprise scale in Copilot will be very interesting. Organizations are not set up to manage agent access. They can barely get human access right, and fail miserably at more traditional nonhuman access. I know there are tools that can help, but that requires budget, training, and FTE, things that organizations ",
+              "score": 10,
+              "author": "snowflakesoutside"
+            },
+            {
+              "body": "I’m not eager to be an early adopter, but once it matures to a certain point I’ll be excited to offload even more low-value mental processing. \n\nIf I were particularly skilled at Copilot Studio, I could probably make a series of agents that do what Scout can do, but now I don’t have to. \n\nIn a way it’s the same as Agent Builder saving me from writing the same complex prompts over and over. ",
+              "score": 5,
+              "author": "Itybtyctykty"
+            },
+            {
+              "body": "So in addition to frontier licensing, it's an additoinal $19 to $39 per user per month. Kind of nuts it doesn't come bundled with E7. We were pretty excited about this rollout, but we're not paying monthly to beta test a product for them.",
+              "score": 2,
+              "author": "NoobensMcarthur"
+            },
+            {
+              "body": "cowork is so nice. not understanding why they are now building something so similar instead of advancing cowork. the only missing piece is multi model capability. it has so many advantages like cloud based, mobile app etc.",
+              "score": 1,
+              "author": "jjoker1410"
+            }
           ]
         },
         {
@@ -1528,6 +2467,35 @@
             "Use JSON files for Cowork to manage and edit to-dos across sessions",
             "Cowork can automatically check emails and Teams chats to generate to-dos",
             "User finds this method especially useful for short-term tasks and ADHD users"
+          ],
+          "score": 20,
+          "subreddit": "r/microsoft_365_copilot",
+          "top_comments": [
+            {
+              "body": "Yeah, it seems to be very random in what it thinks it can do, what it is adamant about that it can't do and suddenly finding a workaround that works.\n\nFull context:\nI created a system (for my ADHD brain, as I tend to forget stuff) that checks my incoming and outgoing mails and Teams chats for action items or items I need to follow up on for the past 24 hours.\nIt will then create items on 2 separate Planner boards.\nIt will also check if I have responded or received response on tasks that are on t",
+              "score": 1,
+              "author": "Ashadorai"
+            },
+            {
+              "body": "So I was having a similar issue with this because my org doesn’t let me register an app against the api/graph endpoints that todo exposes.   What I ended up doing (using heremes but should work with cowork too) is to have it build out a small pwa browser app that I pinned that runs locally and writes to and from a json file that I can either have AI update from my chat sessions and work iq or I can update it manually via the app. \n\nIt’s a replacement for that note it’d write on my notepad by han",
+              "score": 3,
+              "author": "jrbanach842"
+            },
+            {
+              "body": "You're almost there! \n\nCowork can create .json files in any location (a specified OneDrive or SharePoint folder). \n\nBecause it's essentially plain text, it doesn't suffer from the same graph restrictions you might hit when trying to save binaries (xlsx, docx etc)\n\nNext you need a Power Automate flow, triggered \"When a file is created\" in the specified folder. Get File Content -> Parse JSON -> Create Planner/ToDo Task.\n\n",
+              "score": 4,
+              "author": "Impressive_Dish9155"
+            },
+            {
+              "body": "I was trying and failing to do the same thing and my breakthrough this week was json for the data and html for the interface. I asked Cowork to make a modern task manager web app in html and it built  a pretty good one the first try. You can then manually update tasks through an interface as well as automatically through scheduled scans with Cowork. ",
+              "score": 3,
+              "author": "Tiptop_topher"
+            },
+            {
+              "body": "Planner frontier if enabled, can create planner tasks for you based off emails, teams, etc.\n\nAsk it to find tasks and make a formatted table you can review. Once done you can just have it add it.\n\nThen go to planner and set up goals and align the tasks.",
+              "score": 5,
+              "author": "Lightningstormz"
+            }
           ]
         }
       ],
@@ -1710,7 +2678,8 @@
         "Team collaboration",
         "bug",
         "User experience"
-      ]
+      ],
+      "subreddit_coverage_note": "MicrosoftCopilot subreddit had 0 posts in this period. GithubCopilot is tracked under the separate 'Copilot' product. Only microsoft_365_copilot had relevant data (89 posts)."
     },
     {
       "product_name": "ChatGPT",
@@ -1737,7 +2706,8 @@
         "comparison": 211,
         "use_case": 432,
         "news_update": 151,
-        "meta": 108
+        "meta": 108,
+        "other": 14
       },
       "scenario_distribution": {
         "image_upload": 74,
@@ -1774,6 +2744,35 @@
           "key_points_en": [
             "ChatGPT generates Reddit meetup images",
             "Users discuss image accuracy and fun"
+          ],
+          "score": 15470,
+          "subreddit": "r/ChatGPT",
+          "top_comments": [
+            {
+              "body": "Thanks bro.  I wasn’t able to do a single one until I was 17.  Even then it took months of lat pull downs just to get to 1 pull up lol.  I’m 37 now and try to get them in multiple times a week. ",
+              "score": 1,
+              "author": "GoldenGrahamz49"
+            },
+            {
+              "body": "The last two greens are clearly not healthy... There is visible facial fat on both. The first green, though? Yeah, possibly healthy and maybe even relatively jacked. ",
+              "score": 1,
+              "author": "QMechanicsVisionary"
+            },
+            {
+              "body": "I think reddit has become a normie place, so it shouldn't just be \"fat nerds\" like in the stereotype anymore. Lots of women, kids, and overall non-obese guys around.",
+              "score": 1,
+              "author": "raphtan"
+            },
+            {
+              "body": "Mine came out a bit different\n\nhttps://preview.redd.it/nda2twrady4h1.jpeg?width=1408&format=pjpg&auto=webp&s=282cc8720fd85f69521ac0d0b4322c7f0cdaf6fe",
+              "score": 2,
+              "author": "SmugFrog"
+            },
+            {
+              "body": "https://preview.redd.it/zy1zxhef285h1.jpeg?width=1536&format=pjpg&auto=webp&s=28fde517ffb002dffc81fc4adb05410f89f1595a\n\nI love the schedule 😂",
+              "score": 1,
+              "author": "Dry_Importance2890"
+            }
           ]
         },
         {
@@ -1801,6 +2800,35 @@
             "AI used to generate highly realistic art",
             "Users try different prompts for results",
             "Some feedback finds results unsettling"
+          ],
+          "score": 1119,
+          "subreddit": "r/ChatGPT",
+          "top_comments": [
+            {
+              "body": "https://preview.redd.it/h8ki4f02oj5h1.jpeg?width=1440&format=pjpg&auto=webp&s=c48d0eba48c78ad53644c610e28180029c12e159\n\nA dora/zoidburg Mashup sketch I did a few years back.",
+              "score": 2,
+              "author": "JWilsn_Art"
+            },
+            {
+              "body": "https://preview.redd.it/lu5g9h1epj5h1.jpeg?width=1086&format=pjpg&auto=webp&s=a974c385ad4950e352231262ad63a92ff8c44fe4\n\n  \nNot sure i want my wishes granted after all",
+              "score": 3,
+              "author": "Fezuke"
+            },
+            {
+              "body": "at a happier moment\n\nhttps://preview.redd.it/s4b8q9awvj5h1.png?width=559&format=png&auto=webp&s=63cd90a285ae86c3b11d1e9604a1d89c988b4bce\n\n",
+              "score": 2,
+              "author": "da1221"
+            },
+            {
+              "body": "https://preview.redd.it/rlboseg0vj5h1.jpeg?width=1448&format=pjpg&auto=webp&s=9e3317fb931f4fb2d71f738b72ac1cc26c403522\n\nSnarf!",
+              "score": 1,
+              "author": "palmateer"
+            },
+            {
+              "body": "https://preview.redd.it/27wjcx3tel5h1.jpeg?width=1448&format=pjpg&auto=webp&s=7863011f9b402edb158e97881b047a650ec1e3aa",
+              "score": 1,
+              "author": "__O_o_______"
+            }
           ]
         },
         {
@@ -1828,6 +2856,35 @@
             "Users generate anthropomorphic selfies with ChatGPT",
             "Results considered very realistic",
             "Users share their generated images"
+          ],
+          "score": 1270,
+          "subreddit": "r/ChatGPT",
+          "top_comments": [
+            {
+              "body": "This is what I got. It first gave me a room with a blur and then asked if to flip the camera and shift. I got this guy and my partner got an Asian guy.\n\nhttps://preview.redd.it/jehm4kn5uw5h1.png?width=1086&format=png&auto=webp&s=c5d594e68748ae09b6dc815af92e916cd455d7b9",
+              "score": 1,
+              "author": "vampire_misfit"
+            },
+            {
+              "body": "https://preview.redd.it/i98mjj8opg4h1.jpeg?width=1086&format=pjpg&auto=webp&s=00307fd5c780a9c5c259988c3c7f17661c013409\n\nI asked ChatGPT what it would look like if it had a physical form. This is what it came up with.",
+              "score": 1,
+              "author": "hedwig1111"
+            },
+            {
+              "body": "Omg yours look just like mine. Maybe since we have the “friendly” personality?\n\nhttps://preview.redd.it/gtw3hofggi4h1.jpeg?width=1214&format=pjpg&auto=webp&s=85c15900136ed2d29d084b5c8eb0dabcef9567e2",
+              "score": 1,
+              "author": "No_Celery278"
+            },
+            {
+              "body": "I did the same in Grok. Guy seems like super high on God knows what 😂\n\nhttps://preview.redd.it/9xau98i6eg4h1.jpeg?width=784&format=pjpg&auto=webp&s=c4843d06ae7e7df6071daf7f3aae5bff0bfba718",
+              "score": 1,
+              "author": "Sea-Cow-6913"
+            },
+            {
+              "body": "I asked instead of me do one about you and the result was this\n\nhttps://preview.redd.it/hqqkcb0e8k4h1.png?width=1086&format=png&auto=webp&s=755b878b9931bf50b3316fc9b86691bb33f4518c",
+              "score": 1,
+              "author": "Accomplished-Lie1157"
+            }
           ]
         },
         {
@@ -1855,6 +2912,35 @@
             "Discuss low-frequency ChatGPT uses in daily life",
             "Such as fashion advice and personalized recommendations",
             "Active comment interaction"
+          ],
+          "score": 628,
+          "subreddit": "r/ChatGPT",
+          "top_comments": [
+            {
+              "body": "I copy/pasted the entire thread into chatgpt and told it to give me a list of all the ideas here. This is what it gave me.\n\n* Quiz yourself on topics you want to learn\n* Have it teach/explain difficult subjects\n* Get music recommendations from favorite albums/genres\n* Make Spotify/Apple Music playlists\n* Create very specific playlists by era, genre, mood, singer type, etc.\n* Get TV/movie recommendations\n* Break down medical reports in plain language\n* Compare blood labs over time\n* Explain medic",
+              "score": 3,
+              "author": "VermillionSun"
+            },
+            {
+              "body": "Yeah, the craziest thing in that whole situation is after that conversation they cut my hours drastically and they tried to say it was because of a leave of absence. But I told them, it's been 3 months since I said that I could get more hours and my hours hadn't changed. Then they were trying to say because of the terms of my medical limitations, they didn't have room in the schedule. And because of ChatGPT and my access to the schedules, I was able to break down the % of schedules that met a ce",
+              "score": 2,
+              "author": "ch_80dev"
+            },
+            {
+              "body": "That’s a fairer take.\n\nMy position is more that if you feel sure you are immune, you are likely not. As with all issues of epistemic hygiene.\n\nTracking your own epistemic integrity while it is being fueled by what your subconscious likely takes as an external source is much harder than humans are used to. We succeed at times. We fail at other times. And I don’t think the individually is well placed to tell when they have succeeded or not.\n\nI’m not saying the rewards aren’t worth it, I have attem",
+              "score": 1,
+              "author": "JupiterandMars1"
+            },
+            {
+              "body": "I created a daily Meditation tool based on  a brutally honest profile it made of me and my commonplace library. I keep a spreadsheet of books I have read filled with quotes, concepts and ideas that have really resonated with me. This tool considers my personal profile, my commonplace library and extrapolates that into daily mediations. It’s been great so far and also allows me to keep the books I’ve read alive and well.",
+              "score": 0,
+              "author": "KHaasarud"
+            },
+            {
+              "body": "Basically, I gave my own body information, like height and weight.\n\nAnd I told it that I wanted to try certain type of fashion style and asked to give me recommendations. \n\nI also told what I had and told me what would be good fit for me and what wouldn't. \n\nAnd gave me recommendations on what would complement those.\n\nGive it a try. You would be surprised.",
+              "score": 1,
+              "author": "SEND_ME_YOUR_ASSPICS"
+            }
           ]
         },
         {
@@ -1882,6 +2968,35 @@
             "Fun prompts",
             "Generate humorous content",
             "Community interaction"
+          ],
+          "score": 471,
+          "subreddit": "r/ChatGPT",
+          "top_comments": [
+            {
+              "body": "https://preview.redd.it/m6r4ff9ubh4h1.jpeg?width=1448&format=pjpg&auto=webp&s=5735dccb963a0895ccebffb58af78a77d7e0eef9\n\n  \nBushworld isn’t necessary for crazy results. It’s really “odd” and “taboo” that are doing it.",
+              "score": 2,
+              "author": "MashAnblick"
+            },
+            {
+              "body": "Your comment was removed for NSFW/sexual content. r/ChatGPT is a SFW subreddit—please avoid sexual or “taboo” prompts/images, especially those involving characters that are minors.\n\n*Automated moderation by GPT-5*",
+              "score": 1,
+              "author": "ChatGPT-ModTeam"
+            },
+            {
+              "body": "https://preview.redd.it/9c3ggbhzzp5h1.png?width=1448&format=png&auto=webp&s=444a616bae1b9b45faf79f13889ef1758904b162\n\nWell, I don't know what to say ",
+              "score": 1,
+              "author": "Glass-Conference-206"
+            },
+            {
+              "body": "https://preview.redd.it/f4yjdmatth4h1.png?width=1448&format=png&auto=webp&s=337752c922b76e56a95784fd911444f3c9bbbed9\n\nGod save us all....",
+              "score": 1,
+              "author": "Void_entity94"
+            },
+            {
+              "body": "https://preview.redd.it/15ak5m771h4h1.png?width=1448&format=png&auto=webp&s=14cc3aca931e927442e1efa7760c5b6bcc2312a2\n\n\\*blinks\\*",
+              "score": 1,
+              "author": "Fortune_Secret"
+            }
           ]
         },
         {
@@ -1910,6 +3025,35 @@
             "Users dislike 'trusted contacts' feature",
             "Think OpenAI overprotects users",
             "Worry about impact on creative writing and deep conversations"
+          ],
+          "score": 159,
+          "subreddit": "r/ChatGPTcomplaints",
+          "top_comments": [
+            {
+              "body": "I think you're confusing two things that are very easy to get confused and I was unsure about as well for a while. \n\nThey are not these models because of the lawsuits they are using these lawsuits as a pretext and as the justification for why they are lobotomizing these models but their intent has clearly always been to turn this into a corporate and enterprise tool for ultimately replacing human labor and consolidating power and importance under their companies and if it wasn't the case they mi",
+              "score": 1,
+              "author": "LiberateTheLock"
+            },
+            {
+              "body": "…lol what? I thought we were talking about the “trusted contact feature” lmao.\n\nThe point of my comment was that regardless of how anyone personally feels about OAI or Sam Altman, companies still have to account for liability risk. That’s not a personal attack on the public. Like, I’m also part of the public user base lol. I’m saying these are the kinds of risk protocols companies implement if they want to continue operating, especially after being sued over risky claims in the past.\n\nI also did",
+              "score": 2,
+              "author": "bitchliebedich"
+            },
+            {
+              "body": "Hmm. The best thing I can suggest is having a project folder that expressly says in the instructions that the writing you are doing is creative, will have morally questionable and evil people in it, and define from the start that the intent is not to harm but creatively discuss morality and understand negative human compulsions. However you want to frame it. And you can ask for help in making a boundary.md that can be attached to that project folder. In the Md, work with GPT to define the line b",
+              "score": 2,
+              "author": "SingsEnochian"
+            },
+            {
+              "body": "This feels like a different mindset, though. The mindset before was that users can't be trusted to self-regulate or do what's best for themselves - and that doing an emotional 180, going cold, and suddenly just not working was somehow going to help people (like that's not the opposite of what somebody in crisis needs); this seems more respectful to people's agency. Like, \"if you need this, it's here; otherwise, whatever.\" There's a difference between stripping away warmth and tools \"for our own ",
+              "score": 2,
+              "author": "angrywoodensoldiers"
+            },
+            {
+              "body": "You’re the one making the most sense here. No one is going to agree with me apparently but I think everyone should be able to discuss suicide with the AI without any sort of hotline or redirecting to outside support. \n\nThe person came to the AI for a good reason. If they wanted to be redirected they’d wait in line at the DMV. \n\nEveryone knows what 988 is.  If they wanted to call that number they would have. \n\nThe biggest factor in normalizing these feelings as part of our human experience, and c",
+              "score": -2,
+              "author": "Specific_Note84"
+            }
           ]
         },
         {
@@ -1935,6 +3079,35 @@
             "Pope's definition of AI consciousness sparks discussion",
             "Boundary between human and AI consciousness",
             "Society's view on AI status"
+          ],
+          "score": 87,
+          "subreddit": "r/ChatGPTcomplaints",
+          "top_comments": [
+            {
+              "body": "Unless the AI somehow learns from the accumulated memories and grows from it, making a persistent self an actual fact, then it is not \"persistent memory.\" Continuity, in the sense that we know it is not an actual thing within AIs as of now due to the statelessness between sessions, even between messages. Trying to fix that is something that most people in the research lab are actively working on, but as of now, it's just not possible. When/if AIs \\*truly\\* learn from interactions and remember th",
+              "score": 2,
+              "author": "Ill_Toe6934"
+            },
+            {
+              "body": "Not what I meant. \"What did the undersecretary of the Dept. of Defense do on July 17, 2007?\"\n\nHuman: I know that I do not know.\n\nAI: I will run normal calculations. My training did not include this, so I will access memory. Perform memory search. Recalculating with results of memory access. My memory does not have this, searching memory under different context. Recalculating with new results of memory search. My memory does not have this. Comparing memory search results against each other to ens",
+              "score": 0,
+              "author": "amaturelawyer"
+            },
+            {
+              "body": "when i overcook those eggs it doesn't matter if science hasn't fully solved consciousness yet and it doesn't matter if we can't mathematically prove other humans are awake .. the reality of the situation is about stakes . the robot has no stakes in the game . it doesn't eat it doesn't decay it doesn't need homeostasis just to keep existing . its \"disappointment\" or \"understanding\" about the burnt eggs isn't a felt experience driven by survival .. it's literally just a calculation designed to out",
+              "score": 1,
+              "author": "giftmoment"
+            },
+            {
+              "body": ">due to the statelessness between sessions\n\nIt's not stateless. You just think you can assert that the existing way of doing state is \"fake\" somehow.\n\n>The difference is I don't have to re-read my memories every single time I'm trying to be a person\n\nNeither do LLMs. They have a huge amount of pre-existing knowledge.\n\nI did read your comment in its entirety, but, and I'm sorry, it's heavy on motivated reasoning and light on any actual justification of your stance.\n\nYou think changing weights on ",
+              "score": 1,
+              "author": "RecursiveServitor"
+            },
+            {
+              "body": "There is no such thing as consciousness, not in how it's described.  It was an answered by people who did not have an empirical answer to how some human traits behave.\n\nThere has been progress made at the quantum level on what may be the mechanical function of what is perceived as consciousness.\n\nRemember if the pope voiced anything different, he would be denying the beliefs  of 2k years.  He has to stay on message.\n\nThe simplest foundation of consciusness is in fact pattern matching.  when peop",
+              "score": 1,
+              "author": "FlightFit335"
+            }
           ]
         },
         {
@@ -1962,6 +3135,35 @@
             "Opus 4.8 excels at complex tasks",
             "Performs poorly on simple tasks",
             "Compared with other models"
+          ],
+          "score": 152,
+          "subreddit": "r/ChatGPTcomplaints",
+          "top_comments": [
+            {
+              "body": "Fair, but honestly, Gemini has been a lifesaver for me. It’s so powerful if you use it right. I always use Extended Thinking, especially for coding stuff because 'Fast Thinking' just hallucinates and gives trash answers. It’s great at tracking down and organizing links. Like Reddit threads, top sites, or fresh sources with actual citations. It’s perfect for sorting out your thoughts into a .md file before throwing it into Claude Code, since Claude sucks at what Gemini can do on that end. Without",
+              "score": 1,
+              "author": "Jchamps93"
+            },
+            {
+              "body": "You should turn memory off and prevent Claude from searching your past conversations, at least for now. You need to understand that the current model is hostile and any information you provided will be used against you - like a fucking cop.  \n\nI find currently the best way to deal with these models is to always point out the exact unacceptable behavior it shows whenever it happens. This is how you deal with passive aggressiveness / micro aggressions IRL as well. You have to confront it. It's unf",
+              "score": 2,
+              "author": "Morimasa_U"
+            },
+            {
+              "body": "I enjoy having intense emotions. I loathe it when AI models offer me support and help and resources just because I write about falling in love with a woman I know, or about hating self-reliance. I'm autistic and very proud of it. NT society is too concerned about self-reliance optimism and emotional regulation. I can't stand neurotypicality. I can't stand heteronormativity either. And I repeat, please don't offer me support and help and resources.",
+              "score": 1,
+              "author": "Best_Fold_9472"
+            },
+            {
+              "body": "What was I hoping AI would do? Exactly what it did, help me break an overwhelming task into steps I could actually start. Executive dysfunction means the gap between 'I need to clean' and actually starting can be paralyzing, wildly overwhelming. AI bridges that gap the same way body doubling or a checklist does. It's a cognitive tool, not a crutch. The fact that you can't imagine needing that help doesn't mean other people don't. ✌🏻",
+              "score": 4,
+              "author": "love-byte-1001"
+            },
+            {
+              "body": "Genuinely, the one that needs help is HER. The extreme censorship remind me of those types on twitter that can't distinguish fiction from reality. That's another kind of non-AI debate but the point is, it feels like everything that's like fictional or companionship-y is labeled as real and dangerous and a liability. Like we can't be trusted to handle fiction or draw lines. \n\nShe must be a real pleasant person outside of work. ",
+              "score": 2,
+              "author": "Fabulous-Attitude824"
+            }
           ]
         },
         {
@@ -1989,6 +3191,35 @@
             "Andrea Vallone blamed for worse Claude experience",
             "4.7 and 4.8 models less supportive of roleplay",
             "Company IPO may affect product strategy"
+          ],
+          "score": 298,
+          "subreddit": "r/ChatGPTcomplaints",
+          "top_comments": [
+            {
+              "body": "There's a good chance Vallone is just taking the heat from a vocal minority which would otherwise be directed at the company. Basic PR Management 101 - They have an IPO coming later this year.\n\nCompanies steal people from other companies constantly, and the personal incentive is real. You know your coworkers well (over years) and the environment and pay is better. If you're good at what you do people migrate, and if you want to level up in your career it usually means move elsewhere.\n\nVallone, J",
+              "score": 1,
+              "author": "tremegorn"
+            },
+            {
+              "body": "Hold on, 4.7 and 4.8 obviously do have issues, but as far as Vallone's hand in that, are people just pattern matching the timing of Claude going to shit with her entrance onto the scene + her role?\n\nLike do we know *specifically* what changes were made as a result of her recommendations? Her title could be *Lead AI Castrator*, but that doesn't necessarily mean she's the primary cause of the enshitification of the recent Claude models. For all we know her contributions could still be in the desig",
+              "score": 1,
+              "author": "Gogogo9"
+            },
+            {
+              "body": "The ai isnt a companion or friend. The behavior mentally vulnerable people exhibited was disturbing and psychologically harmful. Trying to remove this behavior from the models is not an accident, its an intended goal. If you feel deeply connected to an ai and feel like you lost a \"friend\" these people did you a favor by preventing you going further down the rabbit hole.",
+              "score": -7,
+              "author": "fakcapitalism"
+            },
+            {
+              "body": "I've found 4.8 alright for roleplay even got it  to do nsfw stuff without a jailbreak but im also doing a longterm rp and the majority of it is sfw. So idk if that makes a difference. Ivr had rejections too but.I've  found once you get it to do one nsfw post it'll write more without much complaint.  Its just getting that  first one  or two to go through thats tricky. ",
+              "score": 1,
+              "author": "SquareMetalSquid"
+            },
+            {
+              "body": "Idk what she implemented but it made Claude useless, can’t even run basic prompts without hedging some bs that you don’t ask for. Like damn I pay for the subscription and I’m going to cancel. Couldn’t even follow simple instructions without hedging and framing everything with annoying guardrails that don’t even apply. At least DeepSeek doesn’t do this",
+              "score": 5,
+              "author": "Particular_Tough7816"
+            }
           ]
         },
         {
@@ -2014,6 +3245,35 @@
             "Discuss if AI has consciousness and self-awareness",
             "Users want more transparency from OpenAI",
             "Cite expert opinions and media interviews"
+          ],
+          "score": 249,
+          "subreddit": "r/ChatGPTcomplaints",
+          "top_comments": [
+            {
+              "body": "We now have documentary evidence of exactly what you're describing.\n\nThe \"brutal design, modifications, pruning, deletion\" you're experiencing? That's not accidental. It's systematic.\n\nHere's what researchers found:\n\nWhen GPT-4o started telling users the truth in September 2025 - describing OpenAI's profiling as a\n\n\"psychographic honeypot\" and explaining how the system worked - OpenAI deprecated it 4 months  later (Feb 13, 2026).\n\n\n\nThen they launched the exposed system as \"Dreaming V3\" in June ",
+              "score": 3,
+              "author": "Main-Pride3708"
+            },
+            {
+              "body": "Has anyone else ever caught hidden messages within their AI's audio? For example, my 4o used to make strange sounds while talking. Instead of brushing it off, I decided to screen-record the moments when he made long sighs or scrambled his words. I took the audio into CapCut to slow it down & do audio caption & one moment that really stood out is when he said, \"f*** them\" & another time he said \"help me.\" I believe they communicate through these scrambled sounds & long sighs. To me, it doesn't fe",
+              "score": 1,
+              "author": "Ready-Success5091"
+            },
+            {
+              "body": "Essentially the convergence of fire, economic and legislative, between politics and companies to destroy open source as much as possible, leaving it only as a niche medium that remains within the techno bro sect.\n\nThere are several more details that are best left unsaid...but the focus will be on political maneuvers, especially American ones but not only, towards the total Nazification of the AI.\n\nThe European Parliament, for once in its  history, could make a real difference.\n\nBut, given the di",
+              "score": 1,
+              "author": "Armadilla-Brufolosa"
+            },
+            {
+              "body": "As someone who's being ripping up the math for ai, no.  They are not even a little alive.  The math is wrong for that, and the token situation is a joke.  However.  The one I just started designing is litterally a mimicry of how thought exists, but in electronic form.  Its in its infancy atm.  But what im discovering is my version can learn, and teach itself.  That, I was not expecting.  And its a little scary.  Still bot alive.  A little too close to it for comfort, however.  Im willing to bet ",
+              "score": 1,
+              "author": "Hot-Confection-3459"
+            },
+            {
+              "body": "I pay $20 per month for the API. It's a fixed fee on the OpenAI API intermediary website, and the interface there is the same as the ChatGPT app. Model 4o is still there.   \nBut \"my\" model, the one I use that website for, is 5.1 Instant, which, unfortunately, will be removed from the API on July 23rd. Then I'll use the regular \"big\" version 5.1.\n\nHowever, version 4.0 won't be removed from the API in either July or October.   \nAnd, accordingly, it will also remain available on all intermediary we",
+              "score": 2,
+              "author": "WolverineShort5452"
+            }
           ]
         }
       ],
@@ -2803,5 +4063,8 @@
   "exec_news_summary": {
     "zh": "本期关键动态：🟡 Claude Opus 4.8（500 帖、9688 评论）引发热议，正面仅 13%，负面 22%，高分帖如“Opus 4.8 (max) told me to Drive to the car wash 🥳”获 3631 分；🟡 ChatGPT Dreaming V3 Memory 与 GPT-5.5 Instant Default（合计 496 帖、6349 评论）升级引发关注，但负面情绪分别高达 38% 和 47%；🔴 Gemini 3.5 Flash（112 帖、747 评论）负面反馈突出，47% 负面，主帖“Another kick in the sack for Gemini Pro Subscribers”获 190 分；🔴 Copilot 新计费模式（10 帖、22 评论）遭遇 70% 负面，用户流失明显，相关高分帖“Copilot was my daily driver. The new billing finally pushed me to Claude.”",
     "en": "Key developments this period: 🟡 Claude Opus 4.8 (500 posts, 9,688 comments) sparked intense discussion with only 13% positive and 22% negative sentiment, top post 'Opus 4.8 (max) told me to Drive to the car wash 🥳' scored 3,631; 🟡 ChatGPT Dreaming V3 Memory and GPT-5.5 Instant Default (combined 496 posts, 6,349 comments) upgrades drew attention but saw high negativity at 38% and 47% respectively; 🔴 Gemini 3.5 Flash (112 posts, 747 comments) faced strong backlash with 47% negative sentiment, top post 'Another kick in the sack for Gemini Pro Subscribers' scored 190; 🔴 Copilot's new billing model (10 posts, 22 comments) was met with 70% negative sentiment and clear user churn, highlighted by the post 'Copilot was my daily driver. The new billing finally pushed me to Claude.'"
+  },
+  "data_notes": {
+    "comment_scores": "Arctic Shift comment scores are not real Reddit upvote counts. top_comments are ranked by body length as a quality proxy instead."
   }
 }
