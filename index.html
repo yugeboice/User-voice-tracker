@@ -953,7 +953,7 @@
       /* Load previous reports (oldest to newest order for chart) */
       for (var j = reportIndex.length - 1; j >= startIdx; j--) {
         try {
-          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1782201790');
+          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1782287208');
           if (resp.ok) {
             var data = await resp.json();
             allHistoricalReports.push(data);
@@ -968,7 +968,7 @@
 
     async function loadReportIndex() {
       try {
-        var resp = await fetch('data/reports/index.json?v=1782201790');
+        var resp = await fetch('data/reports/index.json?v=1782287208');
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
@@ -1060,6 +1060,20 @@
     function escapeHtml(str) {
       if (!str) return '';
       return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    /* Source platform badge. Backward-compatible: missing/'reddit' renders nothing
+       so legacy Reddit-only reports look unchanged. Non-reddit sources get a labeled pill. */
+    function sourceBadgeHtml(platform) {
+      var pf = platform || 'reddit';
+      var meta = {
+        reddit:        { label: 'Reddit',         color: '#FF4500' },
+        hackernews:    { label: 'HN',             color: '#FF6600' },
+        techcommunity: { label: 'Tech Community', color: '#0078D4' }
+      };
+      if (pf === 'reddit') return '';
+      var m = meta[pf] || { label: pf, color: '#6B7280' };
+      return '<span class="pill" style="background:'+hexToRgba(m.color,0.15)+';color:'+m.color+'">'+escapeHtml(m.label)+'</span>';
     }
 
     function truncate(str, len) {
@@ -2260,6 +2274,7 @@
         +'<div class="evidence-card-body">'
         +'<div class="evidence-card-meta">'
         +'<span class="pill" style="background:'+hexToRgba(post._color,0.15)+';color:'+post._color+'">'+escapeHtml(post._product)+'</span>'
+        +sourceBadgeHtml(post.source_platform)
         +'<span class="pill '+sentClass+'">'+sentLabel+'</span>'
         +(topicLabel?'<span class="pill pill-topic">'+escapeHtml(topicLabel)+'</span>':'')
         +'</div>'
@@ -2889,7 +2904,7 @@
       await loadReportIndex();
       await loadReportList();
       try {
-        var resp = await fetch('data/reports/latest.json?v=1782201790');
+        var resp = await fetch('data/reports/latest.json?v=1782287208');
         if (resp.ok) { reportData = await resp.json(); }
         else { resp = await fetch('report.json'); if (resp.ok) reportData = await resp.json(); }
         if (reportData) {
