@@ -1,6 +1,16 @@
 {
   "reports": [
     {
+      "file": "report_f0a678e1_20260510_185408.json",
+      "run_id": "f0a678e1",
+      "period_start": "2026-04-28",
+      "period_end": "2026-05-12",
+      "generated_at": 1778466167.644711,
+      "product_count": 5,
+      "total_posts": 11318,
+      "total_valid_posts": 7162
+    },
+    {
       "file": "report_e33d9e83_20260312_071321.json",
       "run_id": "e33d9e83",
       "period_start": "2026-01-27",
@@ -9,16 +19,6 @@
       "product_count": 4,
       "total_posts": 338,
       "total_valid_posts": 280
-    },
-    {
-      "file": "report_43c5af8e_20260312_071352.json",
-      "run_id": "43c5af8e",
-      "period_start": "2026-02-10",
-      "period_end": "2026-02-23",
-      "generated_at": 1774435688.3844168,
-      "product_count": 4,
-      "total_posts": 338,
-      "total_valid_posts": 304
     },
     {
       "file": "report_de61b91f_20260319_104928.json",
@@ -31,14 +31,14 @@
       "total_valid_posts": 727
     },
     {
-      "file": "report_9d8bb56c_20260331_091624.json",
-      "run_id": "9d8bb56c",
-      "period_start": "2026-03-02",
-      "period_end": "2026-03-16",
-      "generated_at": 1776146811.0507617,
+      "file": "report_db2ee453_20260330_092549.json",
+      "run_id": "db2ee453",
+      "period_start": "2026-03-16",
+      "period_end": "2026-03-30",
+      "generated_at": 1774935109.6097207,
       "product_count": 5,
-      "total_posts": 3041,
-      "total_valid_posts": 2328
+      "total_posts": 2052,
+      "total_valid_posts": 1638
     },
     {
       "file": "report_c7501b57_20260324_061024.json",
@@ -51,26 +51,6 @@
       "total_valid_posts": 597
     },
     {
-      "file": "report_db2ee453_20260330_092549.json",
-      "run_id": "db2ee453",
-      "period_start": "2026-03-16",
-      "period_end": "2026-03-30",
-      "generated_at": 1774935109.6097207,
-      "product_count": 5,
-      "total_posts": 2052,
-      "total_valid_posts": 1638
-    },
-    {
-      "file": "report_8e0776af_20260413_081418.json",
-      "run_id": "8e0776af",
-      "period_start": "2026-03-30",
-      "period_end": "2026-04-13",
-      "generated_at": 1777346510.8270574,
-      "product_count": 5,
-      "total_posts": 14554,
-      "total_valid_posts": 7324
-    },
-    {
       "file": "report_c2d17858_20260427_060903.json",
       "run_id": "c2d17858",
       "period_start": "2026-04-13",
@@ -81,24 +61,14 @@
       "total_valid_posts": 7670
     },
     {
-      "file": "report_f0a678e1_20260510_185408.json",
-      "run_id": "f0a678e1",
+      "file": "report_c1f59103_20260513_073943.json",
+      "run_id": "c1f59103",
       "period_start": "2026-04-28",
       "period_end": "2026-05-12",
-      "generated_at": 1778466167.644711,
+      "generated_at": 1778765622.405115,
       "product_count": 5,
       "total_posts": 11318,
-      "total_valid_posts": 7162
-    },
-    {
-      "file": "report_5c95f340_20260524_182431.json",
-      "run_id": "5c95f340",
-      "period_start": "2026-05-12",
-      "period_end": "2026-05-27",
-      "generated_at": 1779689856.128695,
-      "product_count": 5,
-      "total_posts": 11045,
-      "total_valid_posts": 6024
+      "total_valid_posts": 5791
     },
     {
       "file": "report_c0dfb8d8_20260607_233132.json",
@@ -111,14 +81,124 @@
       "total_valid_posts": 5439
     },
     {
+      "file": "report_b29a2a88_20260413_055442.json",
+      "run_id": "b29a2a88",
+      "period_start": "2026-03-30",
+      "period_end": "2026-04-12",
+      "generated_at": 1776115160.3695128,
+      "product_count": 4,
+      "total_posts": 13577,
+      "total_valid_posts": 6896
+    },
+    {
+      "file": "report_9d8bb56c_20260331_091624.json",
+      "run_id": "9d8bb56c",
+      "period_start": "2026-03-02",
+      "period_end": "2026-03-16",
+      "generated_at": 1776146811.0507617,
+      "product_count": 5,
+      "total_posts": 3041,
+      "total_valid_posts": 2328
+    },
+    {
+      "file": "report_9d8bb56c_20260331_085600.json",
+      "run_id": "9d8bb56c",
+      "period_start": "2026-03-02",
+      "period_end": "2026-03-15",
+      "generated_at": 1774947360.8996916,
+      "product_count": 5,
+      "total_posts": 2977,
+      "total_valid_posts": 2298
+    },
+    {
+      "file": "report_9d8bb56c_20260331_084211.json",
+      "run_id": "9d8bb56c",
+      "period_start": "2026-03-02",
+      "period_end": "2026-03-15",
+      "generated_at": 1774947088.4513216,
+      "product_count": 1,
+      "total_posts": 500,
+      "total_valid_posts": 421
+    },
+    {
+      "file": "report_9d8bb56c_20260331_083136.json",
+      "run_id": "9d8bb56c",
+      "period_start": "2026-03-02",
+      "period_end": "2026-03-15",
+      "generated_at": 1774945907.0243711,
+      "product_count": 0,
+      "total_posts": 0,
+      "total_valid_posts": 0
+    },
+    {
+      "file": "report_9d8bb56c_20260331_081255.json",
+      "run_id": "9d8bb56c",
+      "period_start": "2026-03-02",
+      "period_end": "2026-03-15",
+      "generated_at": 1774945689.6423275,
+      "product_count": 4,
+      "total_posts": 2477,
+      "total_valid_posts": 1877
+    },
+    {
+      "file": "report_8e0776af_20260413_081418.json",
+      "run_id": "8e0776af",
+      "period_start": "2026-03-30",
+      "period_end": "2026-04-13",
+      "generated_at": 1777346510.8270574,
+      "product_count": 5,
+      "total_posts": 14554,
+      "total_valid_posts": 7324
+    },
+    {
+      "file": "report_7fd7603b_20260709_070935.json",
+      "run_id": "7fd7603b",
+      "period_start": "2026-06-23",
+      "period_end": "2026-07-08",
+      "generated_at": 1783598445.776934,
+      "product_count": 5,
+      "total_posts": 13244,
+      "total_valid_posts": 7094
+    },
+    {
       "file": "report_73468489_20260621_200700.json",
       "run_id": "73468489",
       "period_start": "2026-06-11",
       "period_end": "2026-06-22",
-      "generated_at": 1782078257.4558873,
+      "generated_at": 1782286957.7463837,
       "product_count": 5,
       "total_posts": 9327,
       "total_valid_posts": 4848
+    },
+    {
+      "file": "report_6ec75227_20260413_055450.json",
+      "run_id": "6ec75227",
+      "period_start": "2026-03-30",
+      "period_end": "2026-04-12",
+      "generated_at": 1776115278.6136377,
+      "product_count": 4,
+      "total_posts": 13577,
+      "total_valid_posts": 6892
+    },
+    {
+      "file": "report_5c95f340_20260524_182431.json",
+      "run_id": "5c95f340",
+      "period_start": "2026-05-12",
+      "period_end": "2026-05-27",
+      "generated_at": 1779689856.128695,
+      "product_count": 5,
+      "total_posts": 11045,
+      "total_valid_posts": 6024
+    },
+    {
+      "file": "report_43c5af8e_20260312_071352.json",
+      "run_id": "43c5af8e",
+      "period_start": "2026-02-10",
+      "period_end": "2026-02-23",
+      "generated_at": 1774435688.3844168,
+      "product_count": 4,
+      "total_posts": 338,
+      "total_valid_posts": 304
     }
   ]
 }
