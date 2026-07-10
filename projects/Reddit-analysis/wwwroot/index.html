@@ -19,7 +19,7 @@
     })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Voice Tracker</title>
+  <title>AI Voice Tracker v20260710-1225</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
   <style>
@@ -484,6 +484,16 @@
     </div>
   </header>
 
+  <div id="releaseCallout" style="max-width:1400px;margin:12px auto 0;padding:12px 18px;background:linear-gradient(90deg,#eef4ff 0%,#f6f0ff 100%);border:1px solid #c7d6ff;border-left:4px solid #4f6df5;border-radius:10px;font-size:13.5px;line-height:1.7;color:#1a2b5c;position:relative;">
+    <button onclick="document.getElementById('releaseCallout').style.display='none'" style="position:absolute;top:6px;right:10px;background:transparent;border:0;font-size:16px;color:#8592b8;cursor:pointer;line-height:1">×</button>
+    <div style="font-weight:700;margin-bottom:4px">
+      <span data-i18n="releaseTitle">🎉 版本更新 · Release News</span>
+    </div>
+    <div data-i18n="releaseBody" data-i18n-html>
+      本期新增 <b>Community &amp; Tech Sites 数据源</b>（Hacker News、TechCrunch 等），并上线 <b>第三部分「场景体验分析」</b>（9 大场景 × 5 大产品的情感热力图与下钻）。欢迎体验，任何吐槽/反馈请直接告诉 dorisrao 😊
+    </div>
+  </div>
+
   <div class="container">
     <div class="page-layout">
     <!-- ===== LEFT SIDEBAR NAV ===== -->
@@ -508,6 +518,16 @@
       </a>
       <a class="sidenav-item" href="#sec-evidence" onclick="navClick(this)">
         <span>📋</span><span data-i18n="evidenceWall">原始帖子证据墙</span>
+      </a>
+      <div class="sidenav-group-label" data-i18n="sectionScenario">场景体验分析</div>
+      <a class="sidenav-item" href="#sec-scenario-heatmap" onclick="navClick(this)">
+        <span>🧩</span><span data-i18n="scenarioHeatmap">场景情感热力图</span>
+      </a>
+      <a class="sidenav-item" href="#sec-scenario-detail" onclick="navClick(this)">
+        <span>🔬</span><span data-i18n="scenarioDetail">场景下钻 (按产品)</span>
+      </a>
+      <a class="sidenav-item" href="#sec-scenario-source" onclick="navClick(this)">
+        <span>🧪</span><span data-i18n="scenarioSource">场景数据质量</span>
       </a>
       <div class="sidenav-group-label" data-i18n="sectionCommunityHeat">社区热度分析</div>
       <a class="sidenav-item" href="#sec-bubble" onclick="navClick(this)">
@@ -604,9 +624,38 @@
       <button id="showMoreBtn" class="show-more-btn hidden" onclick="showMoreEvidence()" data-i18n="loadMore">加载更多帖子</button>
     </div>
 
-    <!-- ===== SECTION III: Community Heat Analysis ===== -->
+    <!-- ===== SECTION III: Scenario Experience Analysis ===== -->
     <div class="page-section-divider">
       <span class="section-num">3</span>
+      <span class="section-label" data-i18n="sectionScenario">场景体验分析</span>
+      <span class="section-desc" data-i18n="sectionScenarioDesc">功能视角：9 大使用场景的声量与满意度</span>
+    </div>
+
+    <div class="section" id="sec-scenario-heatmap">
+      <div class="section-title" data-i18n="scenarioHeatmap">场景情感热力图</div>
+      <div class="card"><div class="card-body">
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px" data-i18n="scenarioHeatmapDesc">各产品 × 各场景的负面率（颜色越深越需关注；灰色=样本不足）</div>
+        <div id="scenarioHeatmapContainer" style="overflow-x:auto"></div>
+      </div></div>
+    </div>
+
+    <div class="section" id="sec-scenario-detail">
+      <div class="section-title" data-i18n="scenarioDetail">场景下钻 (按产品)</div>
+      <div id="scenarioProductTabs" class="product-tabs"></div>
+      <div id="scenarioDetailContent"></div>
+    </div>
+
+    <div class="section" id="sec-scenario-source">
+      <div class="section-title" data-i18n="scenarioSource">场景数据质量</div>
+      <div class="card"><div class="card-body">
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px" data-i18n="scenarioSourceDesc">关键词搜索来源占比越高，标签质量越需人工复核（官方子版块更可靠）</div>
+        <div id="scenarioSourceContainer" style="overflow-x:auto"></div>
+      </div></div>
+    </div>
+
+    <!-- ===== SECTION IV: Community Heat Analysis ===== -->
+    <div class="page-section-divider">
+      <span class="section-num">4</span>
       <span class="section-label" data-i18n="sectionCommunityHeat">社区热度分析</span>
       <span class="section-desc" data-i18n="sectionCommunityHeatDesc">趋势洞察：讨论量、互动量与历史变化</span>
     </div>
@@ -637,6 +686,8 @@
       <div id="historyStrip" class="history-strip"></div>
     </div>
 
+    <!-- ===== SECTION IV: Scenario section moved above ===== -->
+
     </div><!-- /main-content -->
     </div><!-- /page-layout -->
   </div>
@@ -658,6 +709,14 @@
     var PRODUCT_ORDER = ['M365 Copilot','ChatGPT','Gemini','Claude','Copilot','GitHub Copilot'];
     var SENTIMENT_COLORS = {positive:'#16A34A',negative:'#DC2626',neutral:'#6B7280',mixed:'#F59E0B'};
 
+    /* ======= SCENARIO ANALYSIS (Section IV) ======= */
+    var scenarioData = null;          /* latest_scenario.json */
+    var scenarioActiveProduct = '';   /* selected product tab in drilldown */
+    var SCENARIO_ORDER = ['general_purpose','image_creation','multi_turn','image_upload',
+      'file_upload','voice_single_turn','general_purpose_search','office_file_creation','code_interpreter'];
+    var SCEN_MIN_N = 30;   /* below this: statistically weak → gray out */
+    var SCEN_NOAVG_N = 10; /* below this: don't show average sentiment */
+
     /* Product → subreddit mapping for source links */
     var PRODUCT_SUBREDDITS = {
       'ChatGPT': ['ChatGPT','ChatGPTcomplaints'],
@@ -668,7 +727,7 @@
     };
 
     /* ======= I18N ======= */
-    var currentLang = 'zh';
+    var currentLang = 'en';
     var I18N = {
       zh: {
         title:'AI Voice Tracker', subtitle:'基于Reddit头部粉丝社区的AI产品用户声音追踪', loading:'加载报告数据...',
@@ -713,6 +772,17 @@
         sectionCrossProduct:'跨产品对比', sectionCrossProductDesc:'全局视角：产品间横向比较',
         sectionProductAnalysis:'产品深度分析', sectionProductAnalysisDesc:'逐一拆解：各产品详情与用户原声',
         sectionCommunityHeat:'社区热度分析', sectionCommunityHeatDesc:'趋势洞察：讨论量、互动量与历史变化',
+        sectionScenario:'场景体验分析', sectionScenarioDesc:'功能视角：9 大使用场景的声量与满意度',
+        scenarioHeatmap:'场景情感热力图', scenarioDetail:'场景下钻 (按产品)', scenarioSource:'场景数据质量',
+        scenarioHeatmapDesc:'各产品 × 各场景的负面率（颜色越深越需关注；灰色=样本不足）',
+        scenarioPickProduct:'选择产品查看场景明细', scenarioVol:'声量(帖)', scenarioNegRate:'负面率',
+        scenarioAvgSent:'平均情感', scenarioLowN:'样本不足', scenarioNoAvg:'样本过少，不计均值',
+        scenarioSourceDesc:'关键词搜索来源占比越高，标签质量越需人工复核（官方子版块更可靠）',
+        scenarioKeywordPct:'搜索来源占比', scenarioOfficialPct:'官方版块占比',
+        scenarioTopPosts:'代表帖子', scenarioNoScenarioData:'暂无场景数据（请先运行 scenario_analysis.py）',
+        scen_image_upload:'图片上传', scen_image_creation:'图像创建', scen_multi_turn:'多轮对话',
+        scen_code_interpreter:'代码解释器', scen_office_file_creation:'Office文件创建', scen_file_upload:'文件上传',
+        scen_general_purpose_search:'联网搜索', scen_general_purpose:'通用对话', scen_voice_single_turn:'语音(单轮)',
         dataLangNote:'',
         detailRead:'详细解读', topDiscussions:'热门讨论',
         navTitle:'导航', navGroupOverview:'总览', navGroupProduct:'产品', navGroupTrend:'趋势',
@@ -722,6 +792,8 @@
       },
       en: {
         title:'AI Voice Tracker', subtitle:"Tracking user sentiment from Reddit's top AI product communities", loading:'Loading report data...',
+        releaseTitle:'🎉 Release News',
+        releaseBody:'New this release: <b>Community &amp; Tech Sites data sources</b> (Hacker News, TechCrunch, etc.) and the brand-new <b>Section 3 — Scenario Experience Analysis</b> (9 usage scenarios × 5 products, with sentiment heatmap and drill-down). Try it out! Feedback and gripes welcome — ping dorisrao 😊',
         selectReport:'Select report...', execSummary:'Executive Summary', sentimentCompare:'Sentiment Comparison',
         count:'Count', percentage:'Percentage', hotTopics:'Hot Topics & Keywords', keywordCloud:'Keyword Cloud',
         productDeepDive:'Product Deep Dive', evidenceWall:'Evidence Wall', allProducts:'All Products',
@@ -763,6 +835,17 @@
         sectionCrossProduct:'Cross-Product Comparison', sectionCrossProductDesc:'Global view: horizontal comparison across products',
         sectionProductAnalysis:'Product Deep Dive', sectionProductAnalysisDesc:'Detailed analysis: per-product insights & user evidence',
         sectionCommunityHeat:'Community Heat Analysis', sectionCommunityHeatDesc:'Trends: discussion volume, engagement & historical changes',
+        sectionScenario:'Scenario Experience', sectionScenarioDesc:'Feature view: volume & sentiment across 9 usage scenarios',
+        scenarioHeatmap:'Scenario Sentiment Heatmap', scenarioDetail:'Scenario Drilldown (by product)', scenarioSource:'Scenario Data Quality',
+        scenarioHeatmapDesc:'Negative rate per product × scenario (darker = needs attention; gray = low sample)',
+        scenarioPickProduct:'Pick a product for scenario detail', scenarioVol:'Volume', scenarioNegRate:'Neg. Rate',
+        scenarioAvgSent:'Avg Sentiment', scenarioLowN:'Low sample', scenarioNoAvg:'Sample too small for average',
+        scenarioSourceDesc:'Higher keyword-search share = labels need more manual review (official subs are more reliable)',
+        scenarioKeywordPct:'Search-sourced %', scenarioOfficialPct:'Official-sub %',
+        scenarioTopPosts:'Representative posts', scenarioNoScenarioData:'No scenario data (run scenario_analysis.py first)',
+        scen_image_upload:'Image Upload', scen_image_creation:'Image Creation', scen_multi_turn:'Multi-Turn',
+        scen_code_interpreter:'Code Interpreter', scen_office_file_creation:'Office File Creation', scen_file_upload:'File Upload',
+        scen_general_purpose_search:'Web Search', scen_general_purpose:'General Purpose', scen_voice_single_turn:'Voice (single-turn)',
         dataLangNote:'Note: Analysis content is in Chinese, sourced from user discussions.',
         detailRead:'Full Breakdown', topDiscussions:'Top Discussions',
         navTitle:'Navigation', navGroupOverview:'Overview', navGroupProduct:'Products', navGroupTrend:'Trends',
@@ -810,7 +893,10 @@
       var elems = document.querySelectorAll('[data-i18n]');
       for (var i=0;i<elems.length;i++) {
         var key = elems[i].getAttribute('data-i18n');
-        if (I18N[currentLang][key]) elems[i].textContent = I18N[currentLang][key];
+        if (I18N[currentLang][key]) {
+          if (elems[i].hasAttribute('data-i18n-html')) elems[i].innerHTML = I18N[currentLang][key];
+          else elems[i].textContent = I18N[currentLang][key];
+        }
       }
       var placeholders = document.querySelectorAll('[data-i18n-placeholder]');
       for (var j=0;j<placeholders.length;j++) {
@@ -981,7 +1067,7 @@
           var opt = document.createElement('option');
           opt.value = r.file;
           var dateLabel = formatDateRange(r.period_start, r.period_end);
-          opt.textContent = dateLabel + ' (' + (r.total_valid_posts||0) + ' ' + t('posts') + ')';
+          opt.textContent = dateLabel + ' (' + (r.total_valid_posts||0) + ' valid ' + t('posts') + ')';
           sel.appendChild(opt);
         }
       } catch(e) { console.log('No report index available'); }
@@ -1060,6 +1146,20 @@
     function escapeHtml(str) {
       if (!str) return '';
       return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    /* Source platform badge. Backward-compatible: missing/'reddit' renders nothing
+       so legacy Reddit-only reports look unchanged. Non-reddit sources get a labeled pill. */
+    function sourceBadgeHtml(platform) {
+      var pf = platform || 'reddit';
+      var meta = {
+        reddit:        { label: 'Reddit',         color: '#FF4500' },
+        hackernews:    { label: 'HN',             color: '#FF6600' },
+        techcommunity: { label: 'Tech Community', color: '#0078D4' }
+      };
+      if (pf === 'reddit') return '';
+      var m = meta[pf] || { label: pf, color: '#6B7280' };
+      return '<span class="pill" style="background:'+hexToRgba(m.color,0.15)+';color:'+m.color+'">'+escapeHtml(m.label)+'</span>';
     }
 
     function truncate(str, len) {
@@ -1439,6 +1539,7 @@
       renderProductTabs(); renderDeepDive();
       renderEvidence(); renderBubbleChart();
       renderCrossProduct(); renderTrend(); renderHistory();
+      renderScenarioAll();
       applyI18n();
     }
 
@@ -1504,12 +1605,54 @@
             + '。最佳：' + best.product_name + ' ' + bestRate + '%' + worstSuffix;
         }
       } else {
-        if (currentLang === 'en') {
-          finding = best.product_name + ' leads at ' + bestRate + '% positive, '
-            + worst.product_name + ' trails at ' + worstRate + '%';
+        /* If we already have rich competitor_updates, show only a short header (avoid duplication) */
+        var hasRichUpdates = reportData && reportData.competitor_updates && reportData.competitor_updates.length > 0;
+        if (hasRichUpdates) {
+          if (currentLang === 'en') {
+            finding = '📊 ' + best.product_name + ' leads sentiment at ' + bestRate + '% positive; '
+              + worst.product_name + ' trails at ' + worstRate + '%.';
+          } else {
+            finding = '📊 ' + best.product_name + ' 正面率最高 ' + bestRate + '%，'
+              + worst.product_name + ' 最低 ' + worstRate + '%。';
+          }
         } else {
-          finding = best.product_name + ' 正面率最高 ' + bestRate + '%，'
-            + worst.product_name + ' 最低 ' + worstRate + '%';
+        /* Richer fallback: use volume + sentiment + top topic per product */
+        var topicLabels = { bug_report:'bug reports', feature_request:'feature requests',
+                            product_experience:'user experience', use_case:'use cases',
+                            news_update:'news', meta:'meta discussion', comparison:'comparisons',
+                            complaint:'complaints', praise:'praise' };
+        var topicLabelsZh = { bug_report:'Bug报告', feature_request:'功能请求',
+                              product_experience:'使用体验', use_case:'使用场景',
+                              news_update:'新闻资讯', meta:'元讨论', comparison:'产品对比',
+                              complaint:'投诉', praise:'好评' };
+        var lines = products.slice().sort(function(a,b){
+          return (b.valid_post_count||0) - (a.valid_post_count||0);
+        }).map(function(p){
+          var pr = Math.round(getPositiveRate(p.sentiment_distribution));
+          var nr = Math.round(getNegativeRate(p.sentiment_distribution));
+          var vol = p.valid_post_count || 0;
+          var td = p.topic_distribution || {};
+          var topT = Object.keys(td).sort(function(a,b){ return td[b]-td[a]; })[0];
+          var topCount = topT ? td[topT] : 0;
+          if (currentLang === 'en') {
+            var lbl = topicLabels[topT] || topT || '';
+            return '• ' + p.product_name + ': ' + vol + ' posts, ' + pr + '% pos / ' + nr + '% neg'
+              + (topT ? ' · top topic: ' + lbl + ' (' + topCount + ')' : '');
+          } else {
+            var lblZh = topicLabelsZh[topT] || topT || '';
+            return '• ' + p.product_name + '：' + vol + ' 帖，正 ' + pr + '% / 负 ' + nr + '%'
+              + (topT ? ' · 主要话题：' + lblZh + '（' + topCount + '）' : '');
+          }
+        });
+        var header;
+        if (currentLang === 'en') {
+          header = '📊 ' + best.product_name + ' leads sentiment at ' + bestRate + '% positive; '
+            + worst.product_name + ' trails at ' + worstRate + '%.';
+        } else {
+          header = '📊 ' + best.product_name + ' 正面率最高 ' + bestRate + '%，'
+            + worst.product_name + ' 最低 ' + worstRate + '%。';
+        }
+        finding = header + '\n' + lines.join('\n');
         }
       }
 
@@ -1559,7 +1702,7 @@
           }
         }
       }
-      el.innerHTML = escapeHtml(finding) + competitorLine;
+      el.innerHTML = escapeHtml(finding).replace(/\n/g, '<br>') + competitorLine;
       el.classList.remove('hidden');
     }
 
@@ -1607,10 +1750,23 @@
             if (!seen[key]) { seen[key] = true; subs.push(name); }
           }
         }
-        var sourceHtml = subs.map(function(sub) {
+        var sourceHtml = '';
+        var officialSubs = [];
+        var keywordCount = 0;
+        for (var si2=0; si2<subs.length; si2++) {
+          if (subs[si2].indexOf('_keyword_') === 0) {
+            keywordCount++;
+          } else {
+            officialSubs.push(subs[si2]);
+          }
+        }
+        sourceHtml = officialSubs.map(function(sub) {
           var name = sub.replace(/^r\//,'');
           return '<a href="https://www.reddit.com/r/'+escapeHtml(name)+'/" target="_blank" rel="noopener">r/'+escapeHtml(name)+'</a>';
         }).join(', ');
+        if (keywordCount > 0) {
+          sourceHtml += '<span style="color:var(--text-muted);font-size:11px;margin-left:4px">+' + keywordCount + ' keyword subs</span>';
+        }
 
         /* Delta vs previous period */
         var deltaHtml = '';
@@ -2129,11 +2285,20 @@
       }).join('') || '<li style="color:var(--text-muted)">'+t('noSuggestions')+'</li>';
     }
 
+    function _hasCJK(s){ return /[一-鿿㐀-䶿]/.test(s||''); }
+    function _stripCJKItems(arr){
+      if (currentLang !== 'en') return arr;
+      return (arr||[]).filter(function(it){
+        var txt = (it && it.text) || (typeof it==='string'?it:'') || '';
+        return !_hasCJK(txt);
+      });
+    }
+
     function getPainPoints(p) {
-      if (p.pain_points && p.pain_points.length > 0) return p.pain_points;
+      if (p.pain_points && p.pain_points.length > 0) return _stripCJKItems(p.pain_points);
       /* Fallback: parse from summary markdown */
       var parsed = extractFromSummary(L(p, 'summary'));
-      if (parsed.pain_points.length > 0) return parsed.pain_points;
+      if (parsed.pain_points.length > 0) return _stripCJKItems(parsed.pain_points);
       /* Last resort: extract key_points from negative posts */
       var negPosts = (p.typical_posts||[]).filter(function(t){return t.sentiment_label==='negative';});
       var results = [];
@@ -2152,9 +2317,9 @@
     }
 
     function getStrengths(p) {
-      if (p.strengths && p.strengths.length > 0) return p.strengths;
+      if (p.strengths && p.strengths.length > 0) return _stripCJKItems(p.strengths);
       var parsed = extractFromSummary(L(p, 'summary'));
-      if (parsed.strengths.length > 0) return parsed.strengths;
+      if (parsed.strengths.length > 0) return _stripCJKItems(parsed.strengths);
       /* Last resort: extract key_points from positive posts */
       var posPosts = (p.typical_posts||[]).filter(function(t){return t.sentiment_label==='positive';});
       var results = [];
@@ -2247,6 +2412,7 @@
         +'<div class="evidence-card-body">'
         +'<div class="evidence-card-meta">'
         +'<span class="pill" style="background:'+hexToRgba(post._color,0.15)+';color:'+post._color+'">'+escapeHtml(post._product)+'</span>'
+        +sourceBadgeHtml(post.source_platform)
         +'<span class="pill '+sentClass+'">'+sentLabel+'</span>'
         +(topicLabel?'<span class="pill pill-topic">'+escapeHtml(topicLabel)+'</span>':'')
         +'</div>'
@@ -2665,6 +2831,8 @@
             if (!dMatch) dMatch = dLine.match(/^(?:\d+\.|[-*])\s+\*\*(.+?)\*\*[：:]\s*(.+)/);
             /* Fallback: - **text**，rest or - **text** rest (no colon) */
             if (!dMatch) dMatch = dLine.match(/^(?:\d+\.|[-*])\s+\*\*(.+?)\*\*[，,。.\s]\s*(.+)/);
+            /* Fallback: bold anywhere after bullet, e.g. "- 用户对**xxx**需求..." or "- **xxx**成为..." */
+            if (!dMatch) dMatch = dLine.match(/^(?:\d+\.|[-*])\s+(?:.*?)\*\*(.+?)\*\*(.{2,})/);
             if (dMatch) {
               result.dynamics.push('**' + dMatch[1] + '** ' + dMatch[2]);
             }
@@ -2869,6 +3037,196 @@
       strip.innerHTML = html;
     }
 
+    /* ======= SCENARIO ANALYSIS RENDERERS (Section IV) ======= */
+    async function loadScenarioData() {
+      try {
+        var resp = await fetch('data/reports/latest_scenario.json');
+        if (resp.ok) { scenarioData = await resp.json(); }
+      } catch(e) { console.warn('No scenario data:', e); scenarioData = null; }
+    }
+
+    function scenLabel(key) { return t('scen_' + key); }
+
+    /* Ordered product list present in scenarioData, following PRODUCT_ORDER */
+    function scenarioProducts() {
+      if (!scenarioData || !scenarioData.products) return [];
+      var names = Object.keys(scenarioData.products);
+      names.sort(function(a,b){
+        var ia = PRODUCT_ORDER.indexOf(a), ib = PRODUCT_ORDER.indexOf(b);
+        return (ia===-1?99:ia) - (ib===-1?99:ib);
+      });
+      return names;
+    }
+
+    /* negative rate (0-100) for a product+scenario cell, or null if no data */
+    function scenNegRate(prod, scen) {
+      var sc = scenarioData.products[prod] && scenarioData.products[prod][scen];
+      if (!sc || !sc.count) return null;
+      return sc.negative / sc.count * 100;
+    }
+
+    function renderScenarioAll() {
+      if (!scenarioData) {
+        var ids = ['scenarioHeatmapContainer','scenarioDetailContent','scenarioSourceContainer'];
+        for (var i=0;i<ids.length;i++) {
+          var el = document.getElementById(ids[i]);
+          if (el) el.innerHTML = '<div style="font-size:13px;color:var(--text-muted);padding:16px">'+t('scenarioNoScenarioData')+'</div>';
+        }
+        var tabs = document.getElementById('scenarioProductTabs');
+        if (tabs) tabs.innerHTML = '';
+        return;
+      }
+      renderScenarioHeatmap();
+      renderScenarioTabs();
+      renderScenarioDetail();
+      renderScenarioSource();
+    }
+
+    /* ---- IV-1: 9×N negative-rate heatmap (scenarios as rows, products as cols) ---- */
+    function renderScenarioHeatmap() {
+      var container = document.getElementById('scenarioHeatmapContainer');
+      var prods = scenarioProducts();
+      if (!prods.length) { container.innerHTML = ''; return; }
+      var html = '<table class="heatmap-table"><thead><tr><th style="text-align:left">'+t('scenarioVol')+' ↓ / '+t('product')+' →</th>';
+      for (var pi=0; pi<prods.length; pi++)
+        html += '<th style="color:'+getProductColor(prods[pi])+'">'+escapeHtml(prods[pi])+'</th>';
+      html += '</tr></thead><tbody>';
+
+      for (var si=0; si<SCENARIO_ORDER.length; si++) {
+        var scen = SCENARIO_ORDER[si];
+        html += '<tr><td class="product-cell">'+scenLabel(scen)+'</td>';
+        for (var pj=0; pj<prods.length; pj++) {
+          var sc = scenarioData.products[prods[pj]][scen];
+          var n = sc ? sc.count : 0;
+          if (!n) { html += '<td style="color:var(--text-muted)">–</td>'; continue; }
+          var neg = sc.negative / n * 100;
+          if (n < SCEN_MIN_N) {
+            /* low sample: gray, show count small */
+            html += '<td style="background:#F3F4F6;color:#9CA3AF" title="'+t('scenarioLowN')+' (n='+n+')">'
+                 + Math.round(neg)+'%<span style="font-size:10px"> (n='+n+')</span></td>';
+          } else {
+            var intensity = Math.min(neg/100, 1);
+            var bg = hexToRgba(SENTIMENT_COLORS.negative, 0.08 + intensity*0.6);
+            html += '<td style="background:'+bg+'" title="n='+n+'">'
+                 + Math.round(neg)+'%<span style="font-size:10px;color:var(--text-muted)"> ('+n+')</span></td>';
+          }
+        }
+        html += '</tr>';
+      }
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+
+    /* ---- IV-2: product tabs + per-scenario drilldown ---- */
+    function renderScenarioTabs() {
+      var container = document.getElementById('scenarioProductTabs');
+      var prods = scenarioProducts();
+      if (!prods.length) { container.innerHTML=''; return; }
+      if (!scenarioActiveProduct || prods.indexOf(scenarioActiveProduct)===-1)
+        scenarioActiveProduct = prods[0];
+      var html = '';
+      for (var i=0; i<prods.length; i++) {
+        var name = prods[i], color = getProductColor(name), active = name===scenarioActiveProduct;
+        html += '<button class="product-tab'+(active?' active':'')+'" '
+              + 'style="'+(active?'background:'+color+';':'border-bottom-color:'+color)+'" '
+              + 'onclick="setScenarioProduct(\''+escapeHtml(name)+'\')">'+escapeHtml(name)+'</button>';
+      }
+      container.innerHTML = html;
+    }
+
+    function setScenarioProduct(name) {
+      scenarioActiveProduct = name;
+      renderScenarioTabs();
+      renderScenarioDetail();
+      applyI18n();
+    }
+
+    function renderScenarioDetail() {
+      var container = document.getElementById('scenarioDetailContent');
+      var prod = scenarioActiveProduct;
+      if (!prod || !scenarioData.products[prod]) { container.innerHTML=''; return; }
+      var scens = scenarioData.products[prod];
+      /* sort scenarios by count desc */
+      var keys = Object.keys(scens).filter(function(k){ return SCENARIO_ORDER.indexOf(k)!==-1 && scens[k].count>0; });
+      keys.sort(function(a,b){ return scens[b].count - scens[a].count; });
+
+      var html = '<div class="card"><div class="card-body"><table class="heatmap-table"><thead><tr>'
+        + '<th style="text-align:left">'+scenLabel('general_purpose').replace(/.*/,t('scenarioDetail'))+'</th>'
+        + '<th>'+t('scenarioVol')+'</th><th>'+t('scenarioNegRate')+'</th><th>'+t('scenarioAvgSent')+'</th>'
+        + '<th style="text-align:left">'+t('scenarioTopPosts')+'</th></tr></thead><tbody>';
+
+      for (var i=0;i<keys.length;i++) {
+        var scen = keys[i], sc = scens[scen], n = sc.count;
+        var neg = sc.negative / n * 100;
+        var lowN = n < SCEN_MIN_N, noAvg = n < SCEN_NOAVG_N;
+        var rowStyle = lowN ? ' style="opacity:0.55"' : '';
+        var negBg = lowN ? '#F3F4F6' : hexToRgba(SENTIMENT_COLORS.negative, 0.08+Math.min(neg/100,1)*0.55);
+        var avgCell = noAvg
+          ? '<span style="color:var(--text-muted);font-size:11px" title="'+t('scenarioNoAvg')+'">–</span>'
+          : '<span style="color:'+(sc.avg_score>=0?SENTIMENT_COLORS.positive:SENTIMENT_COLORS.negative)+';font-weight:700">'
+            + (sc.avg_score>=0?'+':'')+sc.avg_score+'</span>';
+        /* top post link */
+        var topLink = '';
+        if (sc.top_posts && sc.top_posts.length) {
+          var tp = sc.top_posts[0];
+          topLink = '<a href="'+escapeHtml(tp.url)+'" target="_blank" rel="noopener" style="font-size:12px;color:#4338CA">'
+                  + escapeHtml(tp.title)+'</a> <span style="font-size:11px;color:var(--text-muted)">▲'+tp.score+'</span>';
+        }
+        html += '<tr'+rowStyle+'><td class="product-cell">'+scenLabel(scen)
+              + (lowN?' <span style="font-size:10px;color:#9CA3AF">('+t('scenarioLowN')+')</span>':'')+'</td>'
+              + '<td style="font-weight:700">'+n+'</td>'
+              + '<td style="background:'+negBg+'">'+Math.round(neg)+'%</td>'
+              + '<td>'+avgCell+'</td>'
+              + '<td style="text-align:left;max-width:340px">'+topLink+'</td></tr>';
+      }
+      html += '</tbody></table></div></div>';
+      container.innerHTML = html;
+    }
+
+    /* ---- IV-3: data-quality (official vs keyword-search source share) ---- */
+    function renderScenarioSource() {
+      var container = document.getElementById('scenarioSourceContainer');
+      var cmp = scenarioData.scenario_comparison || {};
+      var prods = scenarioProducts();
+      /* Hide entire section if no keyword_search_pct data (all zeros = not meaningful) */
+      var hasData = false;
+      for (var _s in cmp) {
+        var _r = cmp[_s] || {};
+        for (var _p in _r) {
+          if (_r[_p] && _r[_p].keyword_search_pct && _r[_p].keyword_search_pct > 0) { hasData = true; break; }
+        }
+        if (hasData) break;
+      }
+      if (!hasData) {
+        var sec = document.getElementById('sec-scenario-source');
+        if (sec) sec.style.display = 'none';
+        var navItem = document.querySelector('a[href="#sec-scenario-source"]');
+        if (navItem) navItem.style.display = 'none';
+        return;
+      }
+      var html = '<table class="heatmap-table"><thead><tr><th style="text-align:left">'+t('scenarioSource')+'</th>';
+      for (var pi=0;pi<prods.length;pi++)
+        html += '<th style="color:'+getProductColor(prods[pi])+'">'+escapeHtml(prods[pi])+'</th>';
+      html += '</tr></thead><tbody>';
+      for (var si=0;si<SCENARIO_ORDER.length;si++) {
+        var scen = SCENARIO_ORDER[si];
+        var row = cmp[scen]; if (!row) continue;
+        html += '<tr><td class="product-cell">'+scenLabel(scen)+'</td>';
+        for (var pj=0;pj<prods.length;pj++) {
+          var cell = row[prods[pj]];
+          if (!cell || !cell.count) { html += '<td style="color:var(--text-muted)">–</td>'; continue; }
+          var kw = cell.keyword_search_pct || 0;
+          /* higher keyword share = more review needed → amber scale */
+          var intensity = Math.min(kw/100,1);
+          var bg = hexToRgba('#F59E0B', 0.08+intensity*0.55);
+          html += '<td style="background:'+bg+'" title="n='+cell.count+'">'+Math.round(kw)+'%</td>';
+        }
+        html += '</tr>';
+      }
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+
     /* ======= INIT ======= */
     (async function init() {
       await loadReportIndex();
@@ -2882,6 +3240,7 @@
           products.sort(function(a,b){ return (PRODUCT_ORDER.indexOf(a.product_name)===-1?99:PRODUCT_ORDER.indexOf(a.product_name)) - (PRODUCT_ORDER.indexOf(b.product_name)===-1?99:PRODUCT_ORDER.indexOf(b.product_name)); });
           buildAllPosts();
           await loadPrevReport();
+          await loadScenarioData();
           renderAll();
           /* Auto-select the latest report in dropdown */
           var sel = document.getElementById('reportSelector');
