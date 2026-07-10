@@ -19,7 +19,7 @@
     })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Voice Tracker v20260710-1207</title>
+  <title>AI Voice Tracker v20260710-1215</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
   <style>
@@ -484,6 +484,16 @@
     </div>
   </header>
 
+  <div id="releaseCallout" style="max-width:1400px;margin:12px auto 0;padding:12px 18px;background:linear-gradient(90deg,#eef4ff 0%,#f6f0ff 100%);border:1px solid #c7d6ff;border-left:4px solid #4f6df5;border-radius:10px;font-size:13.5px;line-height:1.7;color:#1a2b5c;position:relative;">
+    <button onclick="document.getElementById('releaseCallout').style.display='none'" style="position:absolute;top:6px;right:10px;background:transparent;border:0;font-size:16px;color:#8592b8;cursor:pointer;line-height:1">×</button>
+    <div style="font-weight:700;margin-bottom:4px">
+      <span data-i18n="releaseTitle">🎉 版本更新 · Release News</span>
+    </div>
+    <div data-i18n="releaseBody" data-i18n-html>
+      本期新增 <b>Community &amp; Tech Sites 数据源</b>（Hacker News、TechCrunch 等），并上线 <b>第三部分「场景体验分析」</b>（9 大场景 × 5 大产品的情感热力图与下钻）。欢迎体验，任何吐槽/反馈请直接告诉 Doris 😊
+    </div>
+  </div>
+
   <div class="container">
     <div class="page-layout">
     <!-- ===== LEFT SIDEBAR NAV ===== -->
@@ -782,6 +792,8 @@
       },
       en: {
         title:'AI Voice Tracker', subtitle:"Tracking user sentiment from Reddit's top AI product communities", loading:'Loading report data...',
+        releaseTitle:'🎉 Release News',
+        releaseBody:'New this release: <b>Community &amp; Tech Sites data sources</b> (Hacker News, TechCrunch, etc.) and the brand-new <b>Section 3 — Scenario Experience Analysis</b> (9 usage scenarios × 5 products, with sentiment heatmap and drill-down). Try it out! Feedback and gripes welcome — ping Doris 😊',
         selectReport:'Select report...', execSummary:'Executive Summary', sentimentCompare:'Sentiment Comparison',
         count:'Count', percentage:'Percentage', hotTopics:'Hot Topics & Keywords', keywordCloud:'Keyword Cloud',
         productDeepDive:'Product Deep Dive', evidenceWall:'Evidence Wall', allProducts:'All Products',
@@ -881,7 +893,10 @@
       var elems = document.querySelectorAll('[data-i18n]');
       for (var i=0;i<elems.length;i++) {
         var key = elems[i].getAttribute('data-i18n');
-        if (I18N[currentLang][key]) elems[i].textContent = I18N[currentLang][key];
+        if (I18N[currentLang][key]) {
+          if (elems[i].hasAttribute('data-i18n-html')) elems[i].innerHTML = I18N[currentLang][key];
+          else elems[i].textContent = I18N[currentLang][key];
+        }
       }
       var placeholders = document.querySelectorAll('[data-i18n-placeholder]');
       for (var j=0;j<placeholders.length;j++) {
@@ -1024,7 +1039,7 @@
       /* Load previous reports (oldest to newest order for chart) */
       for (var j = reportIndex.length - 1; j >= startIdx; j--) {
         try {
-          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1783656580');
+          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1783656837');
           if (resp.ok) {
             var data = await resp.json();
             allHistoricalReports.push(data);
@@ -1039,7 +1054,7 @@
 
     async function loadReportIndex() {
       try {
-        var resp = await fetch('data/reports/index.json?v=1783656580');
+        var resp = await fetch('data/reports/index.json?v=1783656837');
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
@@ -3025,7 +3040,7 @@
     /* ======= SCENARIO ANALYSIS RENDERERS (Section IV) ======= */
     async function loadScenarioData() {
       try {
-        var resp = await fetch('data/reports/latest_scenario.json?v=1783656580');
+        var resp = await fetch('data/reports/latest_scenario.json?v=1783656837');
         if (resp.ok) { scenarioData = await resp.json(); }
       } catch(e) { console.warn('No scenario data:', e); scenarioData = null; }
     }
@@ -3217,7 +3232,7 @@
       await loadReportIndex();
       await loadReportList();
       try {
-        var resp = await fetch('data/reports/latest.json?v=1783656580');
+        var resp = await fetch('data/reports/latest.json?v=1783656837');
         if (resp.ok) { reportData = await resp.json(); }
         else { resp = await fetch('report.json'); if (resp.ok) reportData = await resp.json(); }
         if (reportData) {
