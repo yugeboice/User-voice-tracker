@@ -671,34 +671,34 @@
         "CopilotMicrosoft",
         "CopilotPro"
       ],
-      "post_count": 286,
-      "valid_post_count": 194,
-      "filtered_count": 92,
+      "post_count": 128,
+      "valid_post_count": 128,
+      "filtered_count": 250,
       "source_breakdown": {
         "reddit": 286
       },
-      "summary": "**Reddit社区Copilot竞品情报摘要（2026-06-23 至 2026-07-08）**\n\n本期共分析194条有效帖子，社区整体情感以正面为主（70%），但负面与混合情绪（共18%）集中反映了用户对Copilot核心体验的质疑和不满。正面情绪主要源于用户对Copilot生成创意方案和部分功能强大的认可（如“Copilot is lowkey amazing”），但同时也指出其能力受限。\n\n**话题分布显示，产品体验（product_experience）为最受关注话题（108条），用户集中讨论Copilot在实际使用中的表现。**许多用户分享了Copilot在日常办公（如PowerPoint）中的应用，但也指出其实际用途有限，需升级至高级版才能获得更佳体验（如“在PPT中的实际用途有限, 升级到高级版后功能有所提升”）。新闻更新、用例分享和功能请求也有一定讨论热度，显示用户对产品动态和功能完善有持续关注。\n\n**主要痛点集中在以下几个方面：**\n1. **错误信息与“编造”现象突出。** 多个高互动负面帖（如“Copilot just making things up”、“Shocked”）反映Copilot经常给出错误或虚构的答案，甚至在用户上传截图纠正后仍坚持错误，严重影响信任度。\n2. **记忆与上下文能力不足。** 用户普遍反映Copilot难以记住上传内容，缺乏持久上下文，无法建立知识库（如“Is there a way to teach copilot?”、“Replicating Claude 'Projects' or Gemini 'Gems'”），与Claude、Gemini等竞品相比明显落后。\n3. **功能不透明与表现不一致。** 有用户抱怨Copilot会话实例表现差异大，功能边界模糊（“This might be the most infuriating product MS has ever shipped”）。\n4. **任务失败导致实际损失。** 如有用户因Copilot误判登录状态，错过律师预约（“Missed a first time appointment with a lawyer because of Copilot”）。\n5. **使用限制。** 用户反馈每日对话次数受限，影响连续使用体验（“Are There Now Daily Limits for Chat on Copilot?”）。\n\n**用户赞赏的功能主要集中在创意生成和部分办公场景的效率提升，但普遍期望Copilot能增强记忆、支持知识库构建、提升上下文理解能力，并希望功能透明、表现一致。**\n\n**与竞品对比方面，用户多次提及Claude的“Projects”和Gemini的“Gems”具备更强的持久上下文和知识管理能力，认为Copilot在此方面亟需改进。部分用户还质疑Copilot所用模型是否为原生OpenAI，关注其技术底座和能力边界。**\n\n**可操作洞察：**\n- 优先提升Copilot的上下文记忆与知识库能力，缩小与Claude、Gemini等竞品差距。\n- 加强对错误信息的识别与修正机制，提升答案准确率，减少“编造”现象。\n- 提高功能透明度，优化用户引导，减少因系统误判导致的实际损失。\n- 评估并适当放宽对话次数等使用限制，提升用户连续体验。\n- 针对办公场景，持续优化PPT等高频功能，强化高级版的差异化价值。\n\n整体来看，Copilot虽获部分用户认可，但核心能力短板已成为社区主要关注点，亟需产品团队针对性优化。",
+      "summary": "⚠️ 数据清洗说明：本期原始数据中检出 158 条来自 Be10X/B10X 印度培训营的模板式帖子（如『BE10X session on Copilot』、『Amazing Copilot session』），全部为 score≈0、评论≈0 的无信号刷屏内容，已剔除。以下分析基于清洗后的 128 条真实帖。\n\n本期 Reddit 社区对 Copilot 的态度依然偏负面偏中性：128 条有效帖中，负面 30 条 (23%)、正面仅 20 条 (16%)、中性 72 条 (56%)。负面率明显高于正面率，且高热度讨论（20+ 评论）几乎全为差评。\n\n主要痛点集中在四个方向：\n1) **胡编乱造严重**：《Copilot just making things up》(21 评论)反映 Copilot 频繁给出错误答案，即便用户上传截图纠正仍坚持错误；\n2) **上下文/记忆缺失**：用户反复抱怨 Copilot 无法记住上传的文件与设定，《This might be the most infuriating product MS has ever shipped》(13 评论)直接对比 Claude Projects 与 Gemini Gems 的知识库能力，认为 Copilot 明显落后；\n3) **会话不一致**：《Shocked》(14 评论)指出每个 Chat 是独立实例、功能边界不透明，导致体验混乱；\n4) **对生产力造成实际损失**：《Is there a way to teach copilot?》(17 评论)有用户因 Copilot 误判登录状态错过重要预约。\n\n正面反馈稀少且集中在 PPT/Excel 等办公场景的创意生成，如 《Copilot is lowkey amazing》(14 评论)，但用户同时指出免费版能力有限、需升级 Pro 版才能获得更好体验。\n\n**竞品对比**：多条帖明确点名 Copilot 相对 Claude/Gemini 的差距，尤其是持久上下文、知识库管理与模型可靠性。部分用户质疑 Copilot 是否为原生 GPT。\n\n**可操作建议**：(1) 优先补齐持久记忆与知识库能力，追赶 Claude Projects/Gemini Gems；(2) 加强幻觉抑制与自我纠错机制，重建准确性信任；(3) 统一会话能力边界，减少『每个 chat 不一样』的挫败感；(4) 修复登录状态误判等致命误导型 bug。",
       "sentiment_distribution": {
-        "positive": 136,
-        "negative": 31,
-        "neutral": 21,
+        "positive": 20,
+        "negative": 30,
+        "neutral": 72,
         "mixed": 6
       },
       "topic_distribution": {
-        "model_capability": 4,
-        "product_experience": 108,
+        "product_experience": 27,
+        "use_case": 6,
+        "model_capability": 3,
         "feature_request": 11,
+        "news_update": 3,
         "bug_report": 11,
         "comparison": 9,
-        "use_case": 14,
-        "news_update": 24,
-        "meta": 13
+        "meta": 58
       },
       "typical_posts": [
         {
           "id": "1uhip09",
           "title": "Copilot just making things up",
-          "body": "At work, we are only allowed to use copilot. Ive used for basic things in the past, eg reoerding etc.\n\nWe've had some new software snd I told my mansger onwas going to block half a day to get to grips with it. She suggested I use copilot as she uses it for everything. \n\nI had doubts  (i usually lear",
+          "body": "At work, we are only allowed to use copilot. Ive used for basic things in the past, eg reoerding etc.\n\nWe've had some new software snd I told my mansger onwas going to block half a day to get to grips with it. She suggested I use copilot as she uses it for everything. \n\nI had doubts  (i usually learn best by clicking around(, but I'm over capacity so decided to give it a go. There was something I couldn't figure out so I asked ' can you xyz on xyz software' it replied that you could!  And gave m",
           "author": "Old_Constant2671",
           "url": "https://www.reddit.com/r/Copilot/comments/1uhip09/copilot_just_making_things_up/",
           "source_platform": "reddit",
@@ -712,18 +712,12 @@
             "Copilot给出错误的操作指导",
             "用户上传截图后Copilot仍坚持错误答案",
             "最终通过Google查证Copilot错误"
-          ],
-          "sentiment_reason_en": "The user is very dissatisfied with Copilot giving wrong and confidently misleading guidance, affecting work efficiency.",
-          "key_points_en": [
-            "Copilot gives incorrect operational guidance",
-            "Copilot insists on wrong answers even after user uploads screenshots",
-            "User verifies Copilot's error via Google"
           ]
         },
         {
           "id": "1ul3emq",
           "title": "Shocked",
-          "body": "I have to use co-pilot at work for client security and compliance. I was previously using Claude, and I’m shocked at how bad co-pilot is. Can’t complete tasks, when it does it doesn’t follow the prompts, it makes information up. I’m genuinely confused and shocked by this. \n\nDoes anyone have any tips",
+          "body": "I have to use co-pilot at work for client security and compliance. I was previously using Claude, and I’m shocked at how bad co-pilot is. Can’t complete tasks, when it does it doesn’t follow the prompts, it makes information up. I’m genuinely confused and shocked by this. \n\nDoes anyone have any tips for how to get co-pilot to actually provide real answers and follow the prompts laid out? My last response from co-pilot when I pushed back after it didn’t follow the prompt was to use Claude and pas",
           "author": "tackledonbloor",
           "url": "https://www.reddit.com/r/Copilot/comments/1ul3emq/shocked/",
           "source_platform": "reddit",
@@ -737,12 +731,40 @@
             "Copilot无法完成任务",
             "经常编造信息",
             "与Claude对比体验差"
-          ],
-          "sentiment_reason_en": "After comparison, the user thinks Copilot is much worse than Claude, cannot complete tasks and often fabricates information, expressing strong dissatisfaction.",
-          "key_points_en": [
-            "Copilot cannot complete tasks",
-            "Frequently fabricates information",
-            "Poor experience compared to Claude"
+          ]
+        },
+        {
+          "id": "1ui3qm5",
+          "title": "Straight from Copilot",
+          "body": "",
+          "author": "crog62",
+          "url": "https://www.reddit.com/r/Copilot/comments/1ui3qm5/straight_from_copilot/",
+          "source_platform": "reddit",
+          "num_comments": 15,
+          "created_utc": "2026-06-28T17:48:23+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.0,
+          "sentiment_reason": "",
+          "topic_category": "meta",
+          "key_points": []
+        },
+        {
+          "id": "1ul9cxn",
+          "title": "This might be the most infuriating product MS has ever shipped",
+          "body": "And that is a HIGH bar to clear, but let me explain. For whatever reason, each chat is a different instance of copilot. Not that it doesn't learn about you (it does sometimes) but each session has different capabilities that aren't made remotely visible to the user. Not only that but most people don't even KNOW copilot does this, so they're wondering how all their dreams came to life before their eyes one week, then next week it looked like a 2nd grader messed up all the formatting in Word. If y",
+          "author": "6FunnyGiraffes",
+          "url": "https://www.reddit.com/r/Copilot/comments/1ul9cxn/this_might_be_the_most_infuriating_product_ms_has/",
+          "source_platform": "reddit",
+          "num_comments": 13,
+          "created_utc": "2026-07-02T05:34:54+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.8,
+          "sentiment_reason": "用户强烈批评Copilot每个会话实例表现不一致，功能不透明，导致体验极差。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "会话实例表现不一致",
+            "功能不透明",
+            "用户体验极差"
           ]
         },
         {
@@ -762,160 +784,6 @@
             "Copilot难以记住用户上传的内容",
             "用户希望建立知识库或改进记忆",
             "需要反复提醒AI读取文档"
-          ],
-          "sentiment_reason_en": "User complains about Copilot's poor memory, cannot consistently remember uploaded contracts, seeks improvement methods, and comments mention the need to constantly remind the AI.",
-          "key_points_en": [
-            "Copilot has difficulty remembering uploaded content",
-            "User wants to build a knowledge base or improve memory",
-            "Need to repeatedly remind AI to read documents"
-          ]
-        },
-        {
-          "id": "1ul9cxn",
-          "title": "This might be the most infuriating product MS has ever shipped",
-          "body": "And that is a HIGH bar to clear, but let me explain. For whatever reason, each chat is a different instance of copilot. Not that it doesn't learn about you (it does sometimes) but each session has different capabilities that aren't made remotely visible to the user. Not only that but most people don",
-          "author": "6FunnyGiraffes",
-          "url": "https://www.reddit.com/r/Copilot/comments/1ul9cxn/this_might_be_the_most_infuriating_product_ms_has/",
-          "source_platform": "reddit",
-          "num_comments": 13,
-          "created_utc": "2026-07-02T05:34:54+00:00",
-          "sentiment_label": "negative",
-          "sentiment_score": -0.8,
-          "sentiment_reason": "用户强烈批评Copilot每个会话实例表现不一致，功能不透明，导致体验极差。",
-          "topic_category": "product_experience",
-          "key_points": [
-            "会话实例表现不一致",
-            "功能不透明",
-            "用户体验极差"
-          ],
-          "sentiment_reason_en": "User strongly criticizes Copilot for inconsistent performance in each session instance, lack of transparency in functions, leading to a very poor experience.",
-          "key_points_en": [
-            "Session instances perform inconsistently",
-            "Functions are not transparent",
-            "Very poor user experience"
-          ]
-        },
-        {
-          "id": "1uky5d9",
-          "title": "Missed a first time appointment with a lawyer because of Copilot",
-          "body": " had a long awaited appointment with a lawyer about a serious matter. I was to meet with him virtually online using Micro. Teams. I was new to it, having always used Zoom in the past. I managed to get into Micro. Teams and thought I was the first one there waiting for the meeting with the lawyer to ",
-          "author": "lovetoswim12",
-          "url": "https://www.reddit.com/r/Copilot/comments/1uky5d9/missed_a_first_time_appointment_with_a_lawyer/",
-          "source_platform": "reddit",
-          "num_comments": 12,
-          "created_utc": "2026-07-01T21:08:18+00:00",
-          "sentiment_label": "negative",
-          "sentiment_score": -0.8,
-          "sentiment_reason": "用户因过度依赖Copilot的建议而错过了重要的律师预约，对Copilot的建议准确性表示强烈不满。",
-          "topic_category": "product_experience",
-          "key_points": [
-            "Copilot未能正确判断用户是否已成功登录Teams",
-            "Copilot建议用户无需联系律师，导致错过预约",
-            "用户对Copilot的技术支持能力表示质疑"
-          ],
-          "sentiment_reason_en": "User missed an important lawyer appointment due to over-reliance on Copilot's suggestions and expresses strong dissatisfaction with the accuracy of Copilot's advice.",
-          "key_points_en": [
-            "Copilot failed to correctly determine if user was logged into Teams",
-            "Copilot advised user not to contact lawyer, causing missed appointment",
-            "User questions Copilot's technical support ability"
-          ]
-        },
-        {
-          "id": "1umbk6w",
-          "title": "Copilot is lowkey amazing",
-          "body": "So ive bitched about copilot so much both to its face and everywhere online maybe that's why its finally doing what I want? Lol idk but within about 5 minutes I pitched my idea of a modern ekranoplan as a restaurant/bar booze cruise type of thing and it came up with this. All the branding, the logo,",
-          "author": "6FunnyGiraffes",
-          "url": "https://www.reddit.com/r/Copilot/comments/1umbk6w/copilot_is_lowkey_amazing/",
-          "source_platform": "reddit",
-          "num_comments": 14,
-          "created_utc": "2026-07-03T11:11:01+00:00",
-          "sentiment_label": "positive",
-          "sentiment_score": 0.7,
-          "sentiment_reason": "用户认为Copilot非常强大，能够快速生成创意方案，但也提到有时功能受限。",
-          "topic_category": "product_experience",
-          "key_points": [
-            "Copilot生成创意方案",
-            "功能强大但有时受限"
-          ],
-          "sentiment_reason_en": "User thinks Copilot is very powerful, can quickly generate creative solutions, but also mentions that functions are sometimes limited.",
-          "key_points_en": [
-            "Copilot generates creative solutions",
-            "Powerful but sometimes limited"
-          ]
-        },
-        {
-          "id": "1umcsxk",
-          "title": "[M365 Copilot Enterprise] Replicating Claude \"Projects\" or Gemini \"Gems\" for persistent context?",
-          "body": "I am restricted to M365 Copilot (Enterprise) due to data sensitivity, so external models are not an option. My primary struggle is the lack of a persistent, dedicated workspace.\n\nIn Claude (Projects) or Gemini (Gems), you can define a static, continuously updated set of system instructions and core ",
-          "author": "Disastrous_Visit_454",
-          "url": "https://www.reddit.com/r/CopilotPro/comments/1umcsxk/m365_copilot_enterprise_replicating_claude/",
-          "source_platform": "reddit",
-          "num_comments": 10,
-          "created_utc": "2026-07-03T12:12:31+00:00",
-          "sentiment_label": "negative",
-          "sentiment_score": -0.4,
-          "sentiment_reason": "用户对M365 Copilot缺乏持久上下文工作区表示不满，并认为与Claude和Gemini相比存在明显不足。",
-          "topic_category": "comparison",
-          "key_points": [
-            "Copilot缺乏持久上下文",
-            "与Claude/Gemini对比",
-            "RAG机制导致上下文稀释"
-          ],
-          "sentiment_reason_en": "User is dissatisfied with M365 Copilot's lack of persistent context workspace and thinks it is clearly inferior to Claude and Gemini.",
-          "key_points_en": [
-            "Copilot lacks persistent context",
-            "Compared with Claude/Gemini",
-            "RAG mechanism dilutes context"
-          ]
-        },
-        {
-          "id": "1um801j",
-          "title": "M365 Copilot Enterprise: Are the \"GPT\" labels native OpenAI models, and what is the true context window?",
-          "body": "I am using M365 Copilot (Enterprise) and constantly hitting memory limits where the model loses the conversational thread during long document analysis.\n\nOur tenant now displays a model selector with \"GPT 5.5\" under an explicit \"OpenAI\" label, including a \"deeper thoughts\" (reasoning) mode.\n\nI have ",
-          "author": "Disastrous_Visit_454",
-          "url": "https://www.reddit.com/r/CopilotPro/comments/1um801j/m365_copilot_enterprise_are_the_gpt_labels_native/",
-          "source_platform": "reddit",
-          "num_comments": 11,
-          "created_utc": "2026-07-03T07:48:51+00:00",
-          "sentiment_label": "mixed",
-          "sentiment_score": -0.2,
-          "sentiment_reason": "用户对Copilot的模型真实性和上下文窗口提出质疑，并反馈在长文档分析时经常遇到记忆丢失问题。",
-          "topic_category": "model_capability",
-          "key_points": [
-            "质疑模型是否为原生OpenAI",
-            "上下文窗口不足",
-            "长文档分析时易丢失上下文"
-          ],
-          "sentiment_reason_en": "User questions Copilot's model authenticity and context window, and reports frequent memory loss issues when analyzing long documents.",
-          "key_points_en": [
-            "Questions if model is native OpenAI",
-            "Insufficient context window",
-            "Context easily lost during long document analysis"
-          ]
-        },
-        {
-          "id": "1ufomy5",
-          "title": "I've noticed the Copilot output quality has crashed severaly from start of the year.",
-          "body": "Ever since they stopped letting you pick which GPT model to use I've noticed quality started to dip more and more, later they dropped even the option for think longer now. and Smart went from a good default setting to the only one and it now feels like I'm talking to like the free model in google se",
-          "author": "RealAbd121",
-          "url": "https://www.reddit.com/r/CopilotPro/comments/1ufomy5/ive_noticed_the_copilot_output_quality_has/",
-          "source_platform": "reddit",
-          "num_comments": 8,
-          "created_utc": "2026-06-25T22:26:57+00:00",
-          "sentiment_label": "negative",
-          "sentiment_score": -0.8,
-          "sentiment_reason": "用户强烈抱怨Copilot输出质量大幅下降，模型选择和记忆能力变差，转而使用其他AI工具。",
-          "topic_category": "product_experience",
-          "key_points": [
-            "Copilot输出质量显著下降",
-            "无法选择模型和深度思考选项",
-            "记忆和事实一致性变差"
-          ],
-          "sentiment_reason_en": "User strongly complains about Copilot's output quality dropping significantly, model selection and memory ability worsening, and switches to other AI tools.",
-          "key_points_en": [
-            "Copilot output quality has dropped significantly",
-            "Cannot choose model or deep thinking options",
-            "Memory and factual consistency have worsened"
           ]
         },
         {
@@ -935,12 +803,81 @@
             "Copilot在PPT中的实际用途有限",
             "升级到高级版后功能有所提升",
             "用户对Copilot的价值存在疑问"
-          ],
-          "sentiment_reason_en": "Comments include complaints about Copilot's limited role in PPT and recognition of improved features after upgrade.",
-          "key_points_en": [
-            "Copilot's actual use in PPT is limited",
-            "Features improved after upgrading to premium",
-            "Users question Copilot's value"
+          ]
+        },
+        {
+          "id": "1umbk6w",
+          "title": "Copilot is lowkey amazing",
+          "body": "So ive bitched about copilot so much both to its face and everywhere online maybe that's why its finally doing what I want? Lol idk but within about 5 minutes I pitched my idea of a modern ekranoplan as a restaurant/bar booze cruise type of thing and it came up with this. All the branding, the logo, rhe design, the text, none of it is mine. So copilot is insanely capable but it is not always allowed to do this (and also I apologize for using so much electricity and water on this nonsense but its",
+          "author": "6FunnyGiraffes",
+          "url": "https://www.reddit.com/r/Copilot/comments/1umbk6w/copilot_is_lowkey_amazing/",
+          "source_platform": "reddit",
+          "num_comments": 14,
+          "created_utc": "2026-07-03T11:11:01+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.7,
+          "sentiment_reason": "用户认为Copilot非常强大，能够快速生成创意方案，但也提到有时功能受限。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Copilot生成创意方案",
+            "功能强大但有时受限"
+          ]
+        },
+        {
+          "id": "1umcsxk",
+          "title": "[M365 Copilot Enterprise] Replicating Claude \"Projects\" or Gemini \"Gems\" for persistent context?",
+          "body": "I am restricted to M365 Copilot (Enterprise) due to data sensitivity, so external models are not an option. My primary struggle is the lack of a persistent, dedicated workspace.\n\nIn Claude (Projects) or Gemini (Gems), you can define a static, continuously updated set of system instructions and core documents. The model treats this as an isolated foundational truth, allowing it to provide complex logical advice across multiple files while still pulling in fresh web or external data when prompted.",
+          "author": "Disastrous_Visit_454",
+          "url": "https://www.reddit.com/r/CopilotPro/comments/1umcsxk/m365_copilot_enterprise_replicating_claude/",
+          "source_platform": "reddit",
+          "num_comments": 10,
+          "created_utc": "2026-07-03T12:12:31+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.4,
+          "sentiment_reason": "用户对M365 Copilot缺乏持久上下文工作区表示不满，并认为与Claude和Gemini相比存在明显不足。",
+          "topic_category": "comparison",
+          "key_points": [
+            "Copilot缺乏持久上下文",
+            "与Claude/Gemini对比",
+            "RAG机制导致上下文稀释"
+          ]
+        },
+        {
+          "id": "1um801j",
+          "title": "M365 Copilot Enterprise: Are the \"GPT\" labels native OpenAI models, and what is the true context window?",
+          "body": "I am using M365 Copilot (Enterprise) and constantly hitting memory limits where the model loses the conversational thread during long document analysis.\n\nOur tenant now displays a model selector with \"GPT 5.5\" under an explicit \"OpenAI\" label, including a \"deeper thoughts\" (reasoning) mode.\n\nI have two technical questions pls:\n\n1. **Model Authenticity:** Are these actually the native OpenAI models running under the hood with identical reasoning capabilities, or is this a Microsoft-specific RAG p",
+          "author": "Disastrous_Visit_454",
+          "url": "https://www.reddit.com/r/CopilotPro/comments/1um801j/m365_copilot_enterprise_are_the_gpt_labels_native/",
+          "source_platform": "reddit",
+          "num_comments": 11,
+          "created_utc": "2026-07-03T07:48:51+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户对Copilot的模型真实性和上下文窗口提出质疑，并反馈在长文档分析时经常遇到记忆丢失问题。",
+          "topic_category": "model_capability",
+          "key_points": [
+            "质疑模型是否为原生OpenAI",
+            "上下文窗口不足",
+            "长文档分析时易丢失上下文"
+          ]
+        },
+        {
+          "id": "1up4ueb",
+          "title": "Are There Now Daily Limits for Chat on Copilot?",
+          "body": "You've reached your daily chat limit? It only used to limit photo generated images? ",
+          "author": "Imaginary_Dig_5334",
+          "url": "https://www.reddit.com/r/Copilot/comments/1up4ueb/are_there_now_daily_limits_for_chat_on_copilot/",
+          "source_platform": "reddit",
+          "num_comments": 9,
+          "created_utc": "2026-07-06T17:55:00+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.7,
+          "sentiment_reason": "用户反馈Copilot出现新的每日对话次数限制，影响正常使用，引发困惑和不满。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "每日对话次数限制",
+            "限制不仅限于图片生成",
+            "部分用户认为是临时故障"
           ]
         }
       ],
@@ -969,7 +906,7 @@
         "模型质疑",
         "竞品领先"
       ],
-      "summary_en": "**Reddit Community Copilot Competitive Intelligence Summary (2026-06-23 to 2026-07-08)**\n\nA total of 194 valid posts were analyzed in this period. Overall community sentiment is predominantly positive (70%), but negative and mixed emotions (totaling 18%) are mainly focused on doubts and dissatisfaction regarding Copilot’s core experience. Positive sentiment primarily stems from users’ recognition of Copilot’s creative solution generation and some powerful features (e.g., “Copilot is lowkey amazing”), but its limitations are also noted.\n\n**Topic distribution shows that product experience (product_experience) is the most discussed topic (108 posts), with users focusing on Copilot’s real-world performance.** Many users shared their applications of Copilot in daily office work (such as PowerPoint), but also pointed out its limited practical use and the need to upgrade to the premium version for a better experience (e.g., “实际用途有限, 升级到高级版后功能有所提升” – “limited practical use in PPT, features improved after upgrading to premium”). News updates, use case sharing, and feature requests also generated considerable discussion, indicating ongoing user interest in product developments and feature enhancements.\n\n**Key pain points are concentrated in the following areas:**\n1. **Prominent issues with incorrect information and “hallucination.”** Multiple highly-interacted negative posts (e.g., “Copilot just making things up,” “Shocked”) reflect that Copilot frequently provides incorrect or fabricated answers, and even insists on errors after users upload screenshots for correction, severely impacting trust.\n2. **Insufficient memory and contextual capability.** Users widely report that Copilot struggles to remember uploaded content, lacks persistent context, and cannot build a knowledge base (e.g., “Is there a way to teach copilot?”, “Replicating Claude 'Projects' or Gemini 'Gems'”), falling noticeably behind competitors like Claude and Gemini.\n3. **Lack of transparency and inconsistent performance.** Some users complain about significant differences between Copilot conversation instances and unclear feature boundaries (“This might be the most infuriating product MS has ever shipped”).\n4. **Task failures leading to real losses.** For example, a user missed a first-time appointment with a lawyer due to Copilot misjudging their login status (“Missed a first time appointment with a lawyer because of Copilot”).\n5. **Usage restrictions.** Users report daily conversation limits, affecting the continuity of their experience (“Are There Now Daily Limits for Chat on Copilot?”).\n\n**Users mainly appreciate Copilot’s creative generation and efficiency improvements in certain office scenarios, but generally expect Copilot to enhance memory, support knowledge base construction, improve contextual understanding, and hope for greater feature transparency and consistent performance.**\n\n**In terms of competitor comparison, users frequently mention that Claude’s “Projects” and Gemini’s “Gems” offer stronger persistent context and knowledge management capabilities, believing Copilot urgently needs improvement in this area. Some users also question whether the model used by Copilot is native OpenAI, expressing concern about its technical foundation and capability boundaries.**\n\n**Actionable Insights:**\n- Prioritize enhancing Copilot’s contextual memory and knowledge base capabilities to narrow the gap with competitors like Claude and Gemini.\n- Strengthen mechanisms for identifying and correcting incorrect information to improve answer accuracy and reduce “hallucination.”\n- Increase feature transparency, optimize user guidance, and reduce real losses caused by system misjudgments.\n- Evaluate and appropriately relax usage restrictions such as conversation limits to improve continuous user experience.\n- For office scenarios, continuously optimize high-frequency features like PPT and reinforce the differentiated value of the premium version.\n\nOverall, while Copilot has gained recognition from some users, its core capability shortcomings have become the main focus of the community and urgently require targeted optimization by the product team.",
+      "summary_en": "⚠️ Data cleaning note: 158 template-style posts from a Be10X/B10X training-camp spam wave (e.g. \"BE10X session on Copilot\", \"Amazing Copilot session\") were removed. They had score≈0 and no engagement. Analysis below is based on the cleaned 128 real posts.\n\nCommunity sentiment toward Copilot this period remains net-negative: of 128 valid posts, 30 (23%) are negative vs only 20 (16%) positive and 72 (56%) neutral. High-engagement threads (20+ comments) are almost entirely complaints.\n\nMain pain points cluster around four themes:\n1) **Hallucinations / making things up**: \"Copilot just making things up\" (21 comments) — users report Copilot doubles down on wrong answers even after being shown screenshots;\n2) **Missing memory & context**: \"This might be the most infuriating product MS has ever shipped\" (13 comments) — users directly contrast Claude Projects and Gemini Gems, saying Copilot lags badly on knowledge-base capability;\n3) **Inconsistent sessions**: \"Shocked\" (14 comments) — each chat behaves as a different instance with opaque capabilities;\n4) **Real productivity loss**: \"Is there a way to teach copilot?\" (17 comments) — one user missed a lawyer appointment because Copilot misjudged their login state.\n\nPositive feedback is thin, mostly around PPT/Excel creative generation (e.g. \"Copilot is lowkey amazing\" (14 comments)), but users note the free tier is limited.\n\n**Competitor gap**: Multiple posts explicitly call out Copilot's gap vs Claude/Gemini on persistent context, knowledge management, and reliability.\n\n**Actionable recommendations**: (1) Close the persistent-memory & knowledge-base gap vs Claude Projects / Gemini Gems; (2) Strengthen hallucination suppression and self-correction to rebuild trust; (3) Unify capability boundaries across chat sessions; (4) Fix critical UX bugs like login-state misjudgment.",
       "keywords_en": [
         "Fabricated answers",
         "Hallucination",
@@ -991,37 +928,37 @@
         "Impressive",
         "Model doubts",
         "Competitors ahead"
-      ]
+      ],
+      "spam_filter_note": "Removed 158 Be10x/B10x training-camp spam posts (identical \"session on Copilot\" template)"
     },
     {
       "product_name": "M365 Copilot",
-      "subreddit": "GithubCopilot+microsoft_365_copilot",
+      "subreddit": "microsoft_365_copilot",
       "subreddits": [
-        "GithubCopilot",
         "microsoft_365_copilot"
       ],
-      "post_count": 399,
-      "valid_post_count": 319,
+      "post_count": 185,
+      "valid_post_count": 185,
       "filtered_count": 80,
       "source_breakdown": {
         "reddit": 399
       },
-      "summary": "竞品情报摘要：M365 Copilot（2026-06-23至2026-07-08，r/GithubCopilot+microsoft_365_copilot）\n\n1. 社区整体情感及驱动因素  \n本期社区情感以负面为主（36%），正面和中性各占28%，混合情感6%。负面情绪主要由Copilot的价格、额度限制、使用体验不佳等问题驱动。例如，热门帖子“Why do companies still choose GitHub Copilot?”和“Company setting 100$ monthly token cap”均集中讨论价格无优势及配额机制受限，用户普遍认为Copilot的性价比不足，尤其是在企业场景下额度消耗过快，导致使用受限。\n\n2. 主要讨论话题及其重要性  \n最受关注的话题为产品体验（70条）、bug反馈（56条）、功能需求（53条）、新闻更新（43条）和社区meta讨论（41条）。产品体验和bug反馈反映出用户对实际使用过程中的痛点高度敏感，功能需求则显示用户对产品改进的强烈期望。新闻更新如“Claude Sonnet 5 is generally available for GitHub Copilot”表明用户对新模型和功能的关注度高。\n\n3. 用户主要痛点或投诉  \n- 额度/Token限制：多条高互动负面帖子（如“Copilot Max额度消耗极快”、“For business and enterprise users how many ai credits are y’all burning through?”）反映企业和个人用户普遍不满额度消耗快、上限低，影响正常使用。\n- 价格问题：用户认为Copilot价格无明显优势，尤其与竞品对比后性价比不足。\n- 使用体验：如“is it me or does MS copilot suck?”，用户反馈在Word等场景下文本格式调整出错，Copilot的上下文管理机制被认为无效，影响实际办公效率。\n\n4. 用户赞赏或期望的功能  \n- 新模型上线：如“Claude Fable 5 is back for GitHub Copilot”，用户对新模型表现和体验给予积极评价，期待更多高性能模型集成。\n- 订阅模式与灵活性：用户希望有更灵活的订阅和额度管理方式，减少因配额限制带来的使用障碍。\n- 对比讨论显示，用户希望Copilot能在价格、额度和功能上向竞品看齐，提升整体体验。\n\n5. 与竞品的对比讨论  \n多条帖子对比了Copilot与其他AI工具（如Claude系列），在价格、额度、模型表现等方面进行讨论。用户普遍认为，Copilot在额度和价格上不具优势，部分竞品（如Claude Sonnet 5）在模型能力和订阅灵活性上表现更优。\n\n6. 对产品团队的可操作洞察  \n- 优先优化额度管理和价格策略，提升企业和高频用户的性价比体验，避免因额度限制流失核心用户。\n- 加强产品在实际办公场景（如Word、Excel等）的稳定性和上下文理解能力，减少bug和误操作。\n- 加快引入和集成高性能AI模型，满足用户对新技术的期待。\n- 考虑推出更灵活的订阅和额度方案，满足不同规模用户需求，提升市场竞争力。\n\n综上，M365 Copilot当前面临额度、价格和体验三大核心挑战，需在产品策略和功能优化上快速响应用户反馈，以提升用户满意度和市场份额。",
+      "summary": "⚠️ 数据清洗说明：本期已剔除 r/GithubCopilot 子版块（214 条），该社区实际属于 GitHub Copilot IDE 编程产品，与 M365 Copilot 面向 Office/企业协作的定位不同。清洗后仅保留 r/microsoft_365_copilot 共 185 条真实帖。\n\n本期 M365 Copilot 的社区舆情相对平衡：185 条有效帖中，正面 56 条 (30%)、负面 41 条 (22%)、中性 77 条 (42%)。正面略高于负面，但中性占比过半，说明大量讨论集中在企业部署、许可证、集成设置等偏『运维/落地』话题，情绪不激烈。\n\n**主要痛点**：\n1) 《is it me or does MS copilot suck?》(55 评论)\n2) 《About to toss in the towel and move to Claude Cowork》(41 评论)\n3) 《Copilot Cowork vs Claude Cowork cost comparison》(27 评论)\n常见问题包括：Copilot 许可证策略与授权范围混乱、Word/Excel/Outlook 集成不稳定、企业管理员配置成本高、部分功能被限制或延迟推出。\n\n**用户认可**：\n- 《I spent last week running Copilot sessions for executives. The questions they as》(26 评论)\n亮点集中在与 Office 生态的深度集成、企业合规能力以及新推出的 Agent/Scout 功能受到关注。\n\n**竞品对比**：企业用户对比时更关注『能否在合规前提下使用 Claude/GPT-5』，多条帖讨论 M365 Copilot 引入 Claude 模型选项后的实际体验。\n\n**可操作建议**：(1) 简化许可证与授权 UI，降低 IT 管理员采购决策成本；(2) 优化 Word/Excel 内嵌 Copilot 的稳定性和响应速度；(3) 加强新 Agent 能力的企业级文档与最佳实践；(4) 向社区透明沟通 Claude 模型接入的适用范围与合规边界。",
       "sentiment_distribution": {
-        "positive": 90,
-        "negative": 117,
-        "neutral": 92,
-        "mixed": 20
+        "positive": 56,
+        "negative": 41,
+        "neutral": 77,
+        "mixed": 11
       },
       "topic_distribution": {
-        "model_capability": 7,
-        "product_experience": 70,
-        "feature_request": 53,
-        "bug_report": 56,
-        "comparison": 23,
-        "use_case": 26,
-        "news_update": 43,
-        "meta": 41
+        "feature_request": 25,
+        "comparison": 2,
+        "bug_report": 21,
+        "meta": 55,
+        "product_experience": 36,
+        "model_capability": 4,
+        "news_update": 26,
+        "use_case": 16
       },
       "scenario_distribution": {
         "image_upload": 0,
@@ -1036,113 +973,28 @@
       },
       "typical_posts": [
         {
-          "id": "1uidq6b",
-          "title": "Why do companies still choose GitHub Copilot?",
-          "body": "I’m trying to understand the value of GitHub Copilot, and I’m honestly confused.\n\nFrom what I see:\n\n* No clear **pricing advantage** vs using APIs directly (often worse).\n* **Limited token flexibility**, and overages can cost more than buying from providers.\n* **Locked into the Copilot ecosystem**, ",
-          "author": "No-Corgi-8007",
-          "url": "https://www.reddit.com/r/GithubCopilot/comments/1uidq6b/why_do_companies_still_choose_github_copilot/",
+          "id": "1uoplls",
+          "title": "I spent last week running Copilot sessions for executives. The questions they asked were not the ones I prepared for.",
+          "body": "Last week was back-to-back M365 Copilot briefings with executive audiences, 30 minutes for each one of them. I walked in with a features walkthrough. Big mistake, it survived about four minutes.\n\nHere are the top 5 questions I have been asked, consolidated, with some explainers.\n\n**1. “Which AI is reading our data?”** The model picker made this a real question. Copilot is no longer one model: depending on tenant settings there is Auto, Anthropic models, OpenAI models. Admins can switch model fam",
+          "author": "Difficult-Sugar-4862",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uoplls/i_spent_last_week_running_copilot_sessions_for/",
           "source_platform": "reddit",
-          "num_comments": 133,
-          "created_utc": "2026-06-29T00:41:21+00:00",
-          "sentiment_label": "negative",
-          "sentiment_score": -0.3,
-          "sentiment_reason": "用户认为Copilot在价格、灵活性和独特性方面没有优势，质疑企业为何选择该产品。",
-          "topic_category": "comparison",
-          "key_points": [
-            "Copilot价格无优势",
-            "灵活性和配额机制受限",
-            "企业选择原因被质疑"
-          ],
-          "scenario_tags": [],
-          "sentiment_reason_en": "The user thinks Copilot has no advantage in price, flexibility, or uniqueness, and questions why enterprises choose this product.",
-          "key_points_en": [
-            "Copilot has no price advantage",
-            "Flexibility and quota mechanism are limited",
-            "Enterprise choice is questioned"
-          ]
-        },
-        {
-          "id": "1ue9t20",
-          "title": "Company setting 100$ monthly token cap",
-          "body": "Is it just me or is this ridiculously low? Escpecially with api prices I'll get nowhere on this. What token caps does other people have and does anyone have any tip on how to make this work?",
-          "author": "Melodic-Ebb-7781",
-          "url": "https://www.reddit.com/r/GithubCopilot/comments/1ue9t20/company_setting_100_monthly_token_cap/",
-          "source_platform": "reddit",
-          "num_comments": 83,
-          "created_utc": "2026-06-24T10:32:23+00:00",
-          "sentiment_label": "negative",
-          "sentiment_score": -0.5,
-          "sentiment_reason": "用户认为公司设置的token上限过低，担心无法满足实际需求。",
-          "topic_category": "product_experience",
-          "key_points": [
-            "公司设置每月100美元token上限",
-            "用户认为额度过低",
-            "寻求其他用户的应对经验"
-          ],
-          "scenario_tags": [],
-          "sentiment_reason_en": "The user thinks the company’s token limit is too low and worries it can't meet actual needs.",
-          "key_points_en": [
-            "Company sets $100 monthly token limit",
-            "User thinks the quota is too low",
-            "Seeks advice from other users"
-          ]
-        },
-        {
-          "id": "1uiq6sx",
-          "title": "I'm done with Copilot",
-          "body": "I’m currently paying $100/month for the Copilot Max tier to access Opus 4.8, and somehow, I am STILL running out of credits in the middle of the month. I’m officially pulling the plug.\n\nFor context, I’m an embedded systems engineer. I recently started a heavy firmware porting project, migrating from",
-          "author": "Both_Community1608",
-          "url": "https://www.reddit.com/r/GithubCopilot/comments/1uiq6sx/im_done_with_copilot/",
-          "source_platform": "reddit",
-          "num_comments": 72,
-          "created_utc": "2026-06-29T11:45:52+00:00",
-          "sentiment_label": "negative",
-          "sentiment_score": -0.9,
-          "sentiment_reason": "用户对Copilot Max额度消耗过快和上下文管理机制极度不满，决定弃用。",
-          "topic_category": "product_experience",
-          "key_points": [
-            "Copilot Max额度消耗极快",
-            "上下文管理机制被认为无效",
-            "用户决定停止使用Copilot"
-          ],
-          "scenario_tags": [],
-          "sentiment_reason_en": "The user is extremely dissatisfied with Copilot Max's rapid quota consumption and context management, and decides to stop using it.",
-          "key_points_en": [
-            "Copilot Max quota is used up very quickly",
-            "Context management is considered ineffective",
-            "User decides to stop using Copilot"
-          ]
-        },
-        {
-          "id": "1ukwaw3",
-          "title": "Claude Fable 5 is back for GitHub Copilot users",
-          "body": "Exciting news, we've just **re-enabled Claude Fable 5** for GitHub Copilot users. If you tried it during the brief window before and missed it, it's available again now.\n\n[https://x.com/github/status/2072408565843923382?s=20](https://x.com/github/status/2072408565843923382?s=20)",
-          "author": "jukasper",
-          "url": "https://www.reddit.com/r/GithubCopilot/comments/1ukwaw3/claude_fable_5_is_back_for_github_copilot_users/",
-          "source_platform": "reddit",
-          "num_comments": 66,
-          "created_utc": "2026-07-01T19:59:41+00:00",
+          "num_comments": 26,
+          "created_utc": "2026-07-06T06:44:24+00:00",
           "sentiment_label": "positive",
-          "sentiment_score": 0.6,
-          "sentiment_reason": "帖子本身为新功能上线公告，评论中有用户表达了积极体验，也有讨论其他模型的优缺点，整体偏正面。",
-          "topic_category": "news_update",
+          "sentiment_score": 0.3,
+          "sentiment_reason": "用户分享为高管演示Copilot的经历，强调高管关注数据处理和成本等实际问题，整体语气积极。",
+          "topic_category": "product_experience",
           "key_points": [
-            "Claude Fable 5重新上线",
-            "用户讨论模型表现和使用体验",
-            "部分用户关注价格和可用性"
-          ],
-          "scenario_tags": [],
-          "sentiment_reason_en": "This post is a new feature announcement. Comments include positive experiences and discussion of other models’ pros and cons. Overall sentiment is positive.",
-          "key_points_en": [
-            "Claude Fable 5 is relaunched",
-            "Users discuss model performance and experience",
-            "Some users focus on price and availability"
+            "高管关注AI处理数据的方式",
+            "成本和合规性是主要关切",
+            "演示内容需贴合实际业务需求"
           ]
         },
         {
           "id": "1uevraq",
           "title": "is it me or does MS copilot suck?",
-          "body": "is it me or does MS copilot suck? for being based on what i assume is openai's work, it really sucks. chatgpt runs circles around it. i'm using it in word, on a specific page i asked it the simplest of things, to adjust text formatting in a certain way (i was specific) and suddenly it started moving",
+          "body": "is it me or does MS copilot suck? for being based on what i assume is openai's work, it really sucks. chatgpt runs circles around it. i'm using it in word, on a specific page i asked it the simplest of things, to adjust text formatting in a certain way (i was specific) and suddenly it started moving text on to it from another page. a couple more prompts later and suddenly it told me to wait until tomorrow or configure priority usage. for a 1st impression, it's horrible. stay away. go with claude",
           "author": "fsantiago0704482",
           "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uevraq/is_it_me_or_does_ms_copilot_suck/",
           "source_platform": "reddit",
@@ -1156,123 +1008,12 @@
             "Copilot在Word中调整文本格式时出错",
             "多次尝试后出现优先级配置和等待提示",
             "对比ChatGPT和Claude，认为Copilot远逊于竞品"
-          ],
-          "scenario_tags": [],
-          "sentiment_reason_en": "The user strongly complains about Copilot’s performance in Word, calling it confusing and poor, and advises others not to use it.",
-          "key_points_en": [
-            "Copilot makes errors adjusting text format in Word",
-            "Priority and wait prompts appear after multiple attempts",
-            "Compared to ChatGPT and Claude, Copilot is seen as much worse"
-          ]
-        },
-        {
-          "id": "1ujxv35",
-          "title": "Claude Sonnet 5 is generally available for GitHub Copilot",
-          "body": "Let us know what you think :)  \n  \n[https://github.blog/changelog/2026-06-30-claude-sonnet-5-is-generally-available-for-github-copilot/](https://github.blog/changelog/2026-06-30-claude-sonnet-5-is-generally-available-for-github-copilot/)",
-          "author": "jukasper",
-          "url": "https://www.reddit.com/r/GithubCopilot/comments/1ujxv35/claude_sonnet_5_is_generally_available_for_github/",
-          "source_platform": "reddit",
-          "num_comments": 51,
-          "created_utc": "2026-06-30T18:47:39+00:00",
-          "sentiment_label": "neutral",
-          "sentiment_score": 0.2,
-          "sentiment_reason": "主要为新模型上线的通知，评论区有讨论但整体情绪中性。",
-          "topic_category": "news_update",
-          "key_points": [
-            "Claude Sonnet 5在Copilot上线",
-            "用户关心订阅模式和可用性",
-            "部分用户讨论模型优劣"
-          ],
-          "scenario_tags": [],
-          "sentiment_reason_en": "Mainly a new model launch notice. Comments discuss but overall sentiment is neutral.",
-          "key_points_en": [
-            "Claude Sonnet 5 is available in Copilot",
-            "Users care about subscription and availability",
-            "Some users discuss model strengths and weaknesses"
-          ]
-        },
-        {
-          "id": "1uls69n",
-          "title": "For business and enterprise users how many ai credits are y’all burning through?",
-          "body": "I’ve had to revert back to doing most things on my own and using copilot when I really need to but man every time I use it just burns through all my ai credits.",
-          "author": "wombatpup55",
-          "url": "https://www.reddit.com/r/GithubCopilot/comments/1uls69n/for_business_and_enterprise_users_how_many_ai/",
-          "source_platform": "reddit",
-          "num_comments": 44,
-          "created_utc": "2026-07-02T19:34:27+00:00",
-          "sentiment_label": "negative",
-          "sentiment_score": -0.4,
-          "sentiment_reason": "用户抱怨Copilot消耗AI积分过快，导致不得不减少使用，表达了不满。",
-          "topic_category": "product_experience",
-          "key_points": [
-            "Copilot使用时AI积分消耗很快",
-            "用户被迫减少Copilot使用频率",
-            "部分用户考虑更换AI平台"
-          ],
-          "scenario_tags": [],
-          "sentiment_reason_en": "The user complains Copilot consumes AI points too quickly, forcing them to reduce usage and expressing dissatisfaction.",
-          "key_points_en": [
-            "Copilot uses AI points quickly",
-            "User is forced to use Copilot less",
-            "Some users consider switching AI platforms"
-          ]
-        },
-        {
-          "id": "1ujeisc",
-          "title": "My comapny provides Github Copilot via business plan but I think its 3k credits",
-          "body": "Which model would be ideal to use? I have heard that the plans does mot matter as credits burn so quickly?",
-          "author": "nandhu-44",
-          "url": "https://www.reddit.com/r/GithubCopilot/comments/1ujeisc/my_comapny_provides_github_copilot_via_business/",
-          "source_platform": "reddit",
-          "num_comments": 43,
-          "created_utc": "2026-06-30T04:01:40+00:00",
-          "sentiment_label": "negative",
-          "sentiment_score": -0.3,
-          "sentiment_reason": "用户对Copilot企业版3k credits额度过低表示不满，并寻求更优模型选择建议。",
-          "topic_category": "feature_request",
-          "key_points": [
-            "企业版Copilot额度消耗过快",
-            "讨论不同模型对额度的影响",
-            "对比其他AI工具的额度优势"
-          ],
-          "scenario_tags": [],
-          "sentiment_reason_en": "The user is dissatisfied with Copilot enterprise 3k credits being too low, and seeks better model suggestions.",
-          "key_points_en": [
-            "Copilot enterprise quota is used up quickly",
-            "Discussion of different models' impact on quota",
-            "Comparison of quota advantages with other AI tools"
-          ]
-        },
-        {
-          "id": "1umrukp",
-          "title": "A polite question for GH Copilot users.",
-          "body": "First of all, I mainly use open-weight models. I use MiniMax M3 on Opencode Go, have a 1-year subscription to Neuralwatt for GLM 5.2, 1-year subscriptions to Kimi and Mimo, and occasionally use the official DeepSeek API. I also have a 1-year subscription to Gemini AI Pro, but since Gemini no longer ",
-          "author": "Aromatic-Document638",
-          "url": "https://www.reddit.com/r/GithubCopilot/comments/1umrukp/a_polite_question_for_gh_copilot_users/",
-          "source_platform": "reddit",
-          "num_comments": 43,
-          "created_utc": "2026-07-03T22:18:23+00:00",
-          "sentiment_label": "mixed",
-          "sentiment_score": 0.2,
-          "sentiment_reason": "用户对Copilot的token使用限制表示不满，但也承认其在某些方面有优势，整体评价复杂。",
-          "topic_category": "comparison",
-          "key_points": [
-            "Copilot的token使用限制较严格",
-            "对比多种AI工具的使用体验和价格",
-            "关注agent能力和集成方式"
-          ],
-          "scenario_tags": [],
-          "sentiment_reason_en": "The user is dissatisfied with Copilot’s token usage limits, but admits it has advantages in some areas. Overall evaluation is mixed.",
-          "key_points_en": [
-            "Copilot's token usage is strictly limited",
-            "Comparison of experience and price with various AI tools",
-            "Focus on agent capabilities and integration"
           ]
         },
         {
           "id": "1ue6yq5",
           "title": "About to toss in the towel and move to Claude Cowork",
-          "body": "We bought a subscription to Copilot because we need AI tools in my business (accounting) but the word on Claude varies --some say it's very secure, others say 'you can use it, just remove all sensitive data'.  And....Copilot is great, except for the 30% of the time it literally does not work at all.",
+          "body": "We bought a subscription to Copilot because we need AI tools in my business (accounting) but the word on Claude varies --some say it's very secure, others say 'you can use it, just remove all sensitive data'.  And....Copilot is great, except for the 30% of the time it literally does not work at all. It can't access a word or excel document THAT IS ACTUALLY OPEN.  (Current response:  Sorry — I can’t access either the attached workbook or the current document right now because the file/document fe",
           "author": "CFOSGila",
           "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1ue6yq5/about_to_toss_in_the_towel_and_move_to_claude/",
           "source_platform": "reddit",
@@ -1286,13 +1027,139 @@
             "Copilot无法访问已打开或上传的文件",
             "频繁出现文件获取失败提示",
             "考虑转用Claude等竞品"
-          ],
-          "scenario_tags": [],
-          "sentiment_reason_en": "The user says Copilot cannot access or process open or uploaded Word/Excel files 30% of the time, affecting business use.",
-          "key_points_en": [
-            "Copilot cannot access open or uploaded files",
-            "Frequent file access failure prompts",
-            "Considering switching to Claude or other competitors"
+          ]
+        },
+        {
+          "id": "1ulik3i",
+          "title": "How much does Copilot Cowork cost? Real-Life Examples",
+          "body": "Microsoft 365 Copilot enters a new era. On June 16, 2026, Microsoft made Copilot Cowork generally available worldwide — an agentic AI experience that no longer just suggests, but plans, executes and delivers multi-step work across your Microsoft 365 tenant.\n\n🚩 Video: [https://www.youtube.com/watch?v=KRqz\\_4RDbqQ](https://www.youtube.com/watch?v=KRqz_4RDbqQ)\n\nBut with great power comes a brand new bill. Cowork introduces usage-based billing in Copilot Credits ($0.01/credit, PayGo or P3 prepaid), ",
+          "author": "SzymonBochniak",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1ulik3i/how_much_does_copilot_cowork_cost_reallife/",
+          "source_platform": "reddit",
+          "num_comments": 34,
+          "created_utc": "2026-07-02T13:38:48+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": 0.1,
+          "sentiment_reason": "用户对Cowork的节省时间表示认可，但对计费模式和成本控制表达了担忧和不满。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Cowork节省了大量时间",
+            "计费和预算管理成为主要关注点",
+            "用户对微软应加强成本控制和功能完善有期待"
+          ]
+        },
+        {
+          "id": "1umy49a",
+          "title": "Copilot Cowork vs Claude Cowork cost comparison",
+          "body": "Interested in others who've compared running the same tasks with the same data and models in both claude and copilot cowork. Microsoft said it's 30-40% cheaper but we are finding that is absolutely false marketing. Our users are blowing through their limits the first day in copilot cowork. I've been running the same tasks across both platforms for comparison and everything costs drastically more in copilot cowork than it does in claude cowork.   \nWhat are you all seeing at your companies?  \nPlea",
+          "author": "Embarrassed_Yam_6110",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1umy49a/copilot_cowork_vs_claude_cowork_cost_comparison/",
+          "source_platform": "reddit",
+          "num_comments": 27,
+          "created_utc": "2026-07-04T03:19:53+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.7,
+          "sentiment_reason": "用户对Copilot Cowork的实际成本远高于微软宣传表示强烈不满，并指出用户很快就用完额度，体验不佳。",
+          "topic_category": "comparison",
+          "key_points": [
+            "Copilot Cowork实际成本高于微软宣传",
+            "用户额度消耗过快",
+            "与Claude Cowork对比后体验不佳"
+          ]
+        },
+        {
+          "id": "1uikdzk",
+          "title": "I run Copilot for a large org. Here's my personal list of where it actually falls down. Argue with me.",
+          "body": "I've spent about a year running Microsoft Copilot inside a large enterprise. Real tenant, real users, real procurement fights. I like the product. I also think this community is too polite about where it breaks, so here is the honest version, and I want you to argue with me, rank it, and add the ones I missed.\n\nStart with the two that scared me most, because they are the ones almost nobody catches until it's live.\n\n**1. Copilot does not create a leak. It surfaces the oversharing you already had.",
+          "author": "Difficult-Sugar-4862",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uikdzk/i_run_copilot_for_a_large_org_heres_my_personal/",
+          "source_platform": "reddit",
+          "num_comments": 14,
+          "created_utc": "2026-06-29T06:19:34+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户肯定产品价值但详细列举了多个实际问题和不足，社区反馈也有正有负。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Copilot权限透明性带来数据暴露风险",
+            "模型表现受限于微软的内容过滤",
+            "实际应用中存在准确率和易用性问题"
+          ]
+        },
+        {
+          "id": "1ulnzv2",
+          "title": "Copilot Cowork Use Cases and Costs",
+          "body": "I tracked my Cowork usage for the week or so between the GA announcement and consumption billing taking effect. Here’s a summary of what I did and the associated costs:\n\n🟢 **Light Tasks (100–300 credits)**\n\n**Anonymise ticket data (Run 1)** 🎫\n\n* Prompt: Anonymise two ticket extracts.\n* Sources: 2 x Excel files\n* Outputs: 2 x Excel files\n* Credits: 38.3 | PAYG Cost: £0.381\n\n**Anonymise ticket data (Run 2)** 🎫\nPrompt: Anonymise two ticket extracts (repeat exercise).\n\n* Sources: 2 x Excel files\n* O",
+          "author": "ncdlloyd",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1ulnzv2/copilot_cowork_use_cases_and_costs/",
+          "source_platform": "reddit",
+          "num_comments": 21,
+          "created_utc": "2026-07-02T17:02:47+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": 0.2,
+          "sentiment_reason": "用户详细分享了Copilot Cowork的实际使用场景和成本，评论区对ROI和成本效益有争议，整体评价复杂。",
+          "topic_category": "use_case",
+          "key_points": [
+            "实际记录Copilot Cowork的使用和费用",
+            "涉及数据匿名化和网页生成等任务",
+            "ROI和成本效益存在争议"
+          ]
+        },
+        {
+          "id": "1udw1de",
+          "title": "Frontier access ends 6-30-26. To keep using Cowork, your organization needs a usage-based plan.",
+          "body": "I haven't clicked the request access button yet, but this sucks because Cowork feels beta and we'll be metered. All my scheduled tasks stopped working, and everything feels so slow. It was working great a few weeks ago, and it was my hidden AI gem. ",
+          "author": "phillysdon04",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1udw1de/frontier_access_ends_63026_to_keep_using_cowork/",
+          "source_platform": "reddit",
+          "num_comments": 19,
+          "created_utc": "2026-06-23T22:45:34+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.6,
+          "sentiment_reason": "用户对Cowork即将转为计量收费且功能不稳定、任务中断和数据丢失表示强烈不满。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Cowork即将结束免费试用转为计量收费",
+            "任务调度停止且系统变慢",
+            "用户反馈数据丢失和计费策略配置失败"
+          ]
+        },
+        {
+          "id": "1uirixp",
+          "title": "Copilot Limitation!",
+          "body": "My Copilot business license doesn't serve any useful purpose. I have been trying for weeks for Copilot to summarize my Inbox on daily basis, which has about 400 emails per day. But Copilot always checks only about 20-25 emails, when I push for more it throws all kind of excuses. How to overcome this hard limit?",
+          "author": "Raro2828",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uirixp/copilot_limitation/",
+          "source_platform": "reddit",
+          "num_comments": 22,
+          "created_utc": "2026-06-29T12:46:25+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.8,
+          "sentiment_reason": "用户对Copilot邮箱摘要功能的硬性限制表示强烈不满，影响实际用途。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "Copilot邮箱摘要有处理数量上限",
+            "无法满足大量邮件摘要需求",
+            "尝试多种方法仍受限"
+          ]
+        },
+        {
+          "id": "1umku11",
+          "title": "Is commercial/Enterprise just going to stand idle as Microsoft tries to rob their users blind?",
+          "body": "Microsoft shouldn’t be getting away with the pay model change. Especially after duping Enterprise into providing all of their sensitive information with these “security” arrangements they made to make copilot attractive to enterprise/commercial \n\nOn a side note, if you don’t think that Microsoft is actively parsing all of this data they claim to be secured in “safe environments”, you’re a fool. That’s a conversation for another day. \n\nI work at a subsidiary to one of the largest insurance broker",
+          "author": "MTheModernist_",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1umku11/is_commercialenterprise_just_going_to_stand_idle/",
+          "source_platform": "reddit",
+          "num_comments": 26,
+          "created_utc": "2026-07-03T17:34:59+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.8,
+          "sentiment_reason": "用户强烈批评微软Copilot的付费模式变更，认为企业用户被误导并担忧数据安全问题。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "对Copilot付费模式变更表示不满",
+            "担忧企业数据安全与隐私",
+            "企业被动接受微软策略"
           ]
         }
       ],
@@ -1321,7 +1188,7 @@
         "办公效率低",
         "灵活订阅"
       ],
-      "summary_en": "Competitive Intelligence Summary: M365 Copilot (2026-06-23 to 2026-07-08, r/GithubCopilot+microsoft_365_copilot)\n\n1. Overall Community Sentiment and Driving Factors  \nThis period’s community sentiment is predominantly negative (36%), with positive and neutral each accounting for 28%, and mixed sentiment at 6%. Negative sentiment is mainly driven by issues such as Copilot’s pricing, quota limitations, and subpar user experience. For example, popular posts like “Why do companies still choose GitHub Copilot?” and “Company setting 100$ monthly token cap” focus on the lack of price advantage and restrictive quota mechanisms. Users generally believe Copilot lacks cost-effectiveness, especially in enterprise scenarios where quotas are quickly depleted, leading to usage constraints.\n\n2. Main Discussion Topics and Their Importance  \nThe most discussed topics are product experience (70 posts), bug reports (56 posts), feature requests (53 posts), news updates (43 posts), and community meta discussions (41 posts). Product experience and bug reports reflect users’ high sensitivity to pain points in actual usage, while feature requests indicate strong expectations for product improvement. News updates such as “Claude Sonnet 5 is generally available for GitHub Copilot” show high user interest in new models and features.\n\n3. Key User Pain Points or Complaints  \n- Quota/Token limitations: Multiple highly interactive negative posts (e.g., “Copilot Max额度消耗极快”, “For business and enterprise users how many ai credits are y’all burning through?”) reflect widespread dissatisfaction among enterprise and individual users regarding rapid quota consumption and low caps, which impact normal usage.\n- Pricing issues: Users feel Copilot lacks a clear price advantage, especially when compared to competitors, resulting in insufficient cost-effectiveness.\n- User experience: Posts like “is it me or does MS copilot suck?” highlight issues such as text formatting errors in Word and ineffective context management mechanisms, which negatively affect actual work efficiency.\n\n4. Features Users Appreciate or Expect  \n- New model launches: Posts like “Claude Fable 5 is back for GitHub Copilot” show users’ positive feedback on new model performance and experience, with expectations for more high-performance model integrations.\n- Subscription model and flexibility: Users hope for more flexible subscription and quota management options to reduce usage barriers caused by quota restrictions.\n- Comparative discussions indicate that users want Copilot to match competitors in terms of pricing, quotas, and features to enhance the overall experience.\n\n5. Comparative Discussions with Competitors  \nMultiple posts compare Copilot with other AI tools (such as the Claude series), discussing aspects like pricing, quotas, and model performance. Users generally believe Copilot lacks advantages in quotas and pricing, while some competitors (e.g., Claude Sonnet 5) perform better in model capabilities and subscription flexibility.\n\n6. Actionable Insights for the Product Team  \n- Prioritize optimizing quota management and pricing strategies to enhance cost-effectiveness for enterprise and high-frequency users, preventing core user churn due to quota limitations.\n- Strengthen product stability and context understanding in real office scenarios (such as Word, Excel, etc.), reducing bugs and misoperations.\n- Accelerate the introduction and integration of high-performance AI models to meet user expectations for new technologies.\n- Consider launching more flexible subscription and quota plans to meet the needs of users of different scales and enhance market competitiveness.\n\nIn summary, M365 Copilot currently faces three core challenges: quotas, pricing, and user experience. Rapid response to user feedback in product strategy and feature optimization is required to improve user satisfaction and market share.",
+      "summary_en": "⚠️ Data cleaning note: The r/GithubCopilot subreddit (214 posts) was removed this period, as it belongs to the GitHub Copilot IDE coding product, not M365 Copilot's Office/enterprise scope. Only r/microsoft_365_copilot with 185 real posts is retained.\n\nM365 Copilot's community sentiment is relatively balanced: of 185 valid posts, 56 (30%) are positive vs 41 (22%) negative and 77 (42%) neutral. Positive slightly edges out negative, but the majority-neutral posts indicate discussion is dominated by deployment, licensing, and integration topics rather than heated emotion.\n\n**Main pain points**:\n1) \"is it me or does MS copilot suck?\" (55 comments)\n2) \"About to toss in the towel and move to Claude Cowork\" (41 comments)\n3) \"Copilot Cowork vs Claude Cowork cost comparison\" (27 comments)\nCommon issues: confusing license/entitlement scope, unstable Word/Excel/Outlook integration, high admin configuration cost, and delayed or gated feature rollouts.\n\n**Strengths noted**:\n- \"I spent last week running Copilot sessions for executives. The questions they as\" (26 comments)\nPraised areas include deep Office ecosystem integration, enterprise compliance, and the new Agent/Scout capabilities.\n\n**Competitor gap**: Enterprise users focus on \"can we use Claude/GPT-5 while staying compliant\", with multiple threads discussing the actual experience of M365 Copilot's Claude model option.\n\n**Actionable recommendations**: (1) Simplify licensing/entitlement UI to reduce IT admin cost; (2) Stabilize in-app Copilot in Word/Excel and improve latency; (3) Publish enterprise-grade docs and best practices for the new Agent features; (4) Communicate transparently the scope and compliance boundary of the Claude model integration.",
       "keywords_en": [
         "Quota limitation",
         "High pricing",
@@ -1343,7 +1210,8 @@
         "Unstable performance",
         "Low productivity",
         "Flexible plans"
-      ]
+      ],
+      "spam_filter_note": "Removed r/GithubCopilot posts (belongs to GitHub Copilot IDE product, not M365 Copilot)"
     },
     {
       "product_name": "ChatGPT",
@@ -1856,452 +1724,5 @@
       }
     }
   },
-  "cross_product_comparison_en": "# July 2026 Reddit AI Product Competitive Comparison Report\n\n## 1. User Satisfaction Comparison\n\n- **Copilot**: Highest user satisfaction, with 70% positive sentiment. Users appreciate its efficiency improvements in creative generation and office scenarios, but express clear dissatisfaction with its limited context memory and knowledge base capabilities.\n- **Claude**: Community sentiment is divided, with 32% positive and 26% negative. Users recognize its functional performance and personalization abilities, but service stability, billing mechanisms, and advanced feature quotas are sources of significant controversy.\n- **ChatGPT**: 44% negative sentiment, 26% positive. Users praise innovative use cases and image generation features, but “hallucinated answers,” instruction misinterpretation, and company policies generate substantial dissatisfaction.\n- **M365 Copilot**: 36% negative sentiment, 28% positive. Enterprise users react strongly to pricing, quota limits, and poor office scenario experience, while some users focus on the positive experience brought by new model integration.\n- **Gemini**: Lowest satisfaction, with negative sentiment as high as 56% and only 15% positive. Users are particularly dissatisfied with declining output quality, unfair resource allocation, and hallucination issues, leading to a high risk of community attrition.\n\n## 2. Community Satisfaction Extremes and Reasons\n\n- **Most Satisfied: Copilot Community**\n  - Reason: Significant efficiency improvements in office scenarios, recognized creative generation capabilities, and ongoing feature optimization leading to positive feedback.\n- **Least Satisfied: Gemini Community**\n  - Reason: Declining model output quality, severe hallucination issues, and unfair resource allocation have triggered concentrated outbreaks of user attrition and negative sentiment.\n\n## 3. Common Pain Points\n\n- **“Hallucinated Answers” Are Widespread**: ChatGPT, Gemini, and Copilot are all criticized by users for generating false or incorrect content, lacking an “I don’t know” mechanism, which impacts trust.\n- **Insufficient Context Memory and Knowledge Base Capabilities**: Particularly prominent in Copilot and M365 Copilot; users want AI to remember historical content and support knowledge management.\n- **Pricing and Quota Limitations**: M365 Copilot, Claude, and Copilot all receive user feedback about rapid quota depletion and non-transparent pricing, affecting the experience of high-frequency and enterprise users.\n- **Product Stability and Bugs**: Claude, ChatGPT, and M365 Copilot all face issues such as service interruptions and frequent bugs, impacting daily use.\n\n## 4. Unique Strengths and Weaknesses of Each Product\n\n- **Copilot**\n  - Strengths: High integration in office scenarios, strong creative generation capabilities, high user recognition.\n  - Weaknesses: Poor context memory, knowledge base capabilities lag behind Claude and Gemini.\n- **Claude**\n  - Strengths: Strong personalization and complex task handling, some models (e.g., Sonnet 5) praised for reasoning abilities.\n  - Weaknesses: Poor service stability, billing mechanisms and advanced feature quotas are controversial.\n- **ChatGPT**\n  - Strengths: Rich innovative features, outstanding image generation and artistic style diversity.\n  - Weaknesses: Hallucinated answers, instruction misinterpretation, some users question its innovativeness.\n- **M365 Copilot**\n  - Strengths: Enterprise-level integration, focus on new model introduction.\n  - Weaknesses: High price, strict quota limits, many bugs in office scenarios, cost-effectiveness questioned.\n- **Gemini**\n  - Strengths: Some users consider its political neutrality relatively good.\n  - Weaknesses: Declining output quality, severe hallucination issues, unfair resource allocation, high community negative sentiment.\n\n## 5. Emerging Competitive Dynamics and Shifts in User Preferences\n\n- **Advanced models and personalization capabilities are becoming competitive focal points**, with products like Claude Sonnet 5 and Fable 5 attracting attention. User demand for complex task handling and context retention is rising.\n- **Users are demanding greater transparency in pricing and quotas**, with enterprise and high-frequency users extremely sensitive to cost-effectiveness; quota limitations are a primary cause of attrition.\n- **Knowledge base and persistent context capabilities are key differentiators**, with Copilot users calling for parity with Claude “Projects” and Gemini “Gems.”\n- **Community enthusiasm for product innovation and real-world use case sharing is rising**, with innovative features and practical tips driving positive discussions.\n\n## 6. Actionable Recommendations\n\n1. **Prioritize enhancement of context memory and knowledge base capabilities** to narrow the gap with competitors like Claude and Gemini, meeting advanced user needs.\n2. **Optimize hallucination detection and “I don’t know” mechanisms** to improve AI answer accuracy and user trust.\n3. **Adjust pricing and quota strategies to improve cost-effectiveness**, offering more flexible subscription and quota options for enterprise and high-frequency users to reduce attrition.\n4. **Accelerate integration of high-performance models and feature innovation** to strengthen product differentiation and meet user needs for complex tasks and innovative scenarios.\n5. **Strengthen community communication and positive guidance**, respond transparently to user concerns, encourage high-quality use case and experience sharing, and improve overall satisfaction.\n\n---\n\n**Conclusion**: Competition among current AI products is fierce, with user demand for high performance, cost-effectiveness, and knowledge management capabilities continuing to rise. Product teams must focus on core pain points, respond rapidly to market changes, and strengthen differentiation to stabilize and expand their user base.",
-  "competitor_updates": [
-    {
-      "product": "ChatGPT",
-      "icon": "🟡",
-      "title": "GPT-5.6三层模型预览",
-      "title_en": "GPT-5.6 Three-Tier Preview",
-      "body": "OpenAI预览了GPT-5.6 Sol、Terra、Luna三层模型，强调推理能力和安全性。Reddit上有278篇帖子、4249条评论，正面17%，负面44%。用户关注定价、模型表现及美国政府评估合作。",
-      "body_en": "OpenAI previewed the GPT-5.6 Sol, Terra, and Luna models, focusing on reasoning and safety. On Reddit, 278 posts and 4249 comments discussed the news, with 17% positive and 44% negative sentiment. Users debated pricing, model performance, and US government evaluation.",
-      "sentiment": "mixed",
-      "key_points": [
-        "三层模型体系取代传统版本号",
-        "Sol旗舰模型推理能力突出",
-        "安全机制和政府合作受关注",
-        "Reddit讨论热烈，负面声音较多"
-      ],
-      "key_points_en": [
-        "Three-tier model replaces version numbers",
-        "Sol model excels in reasoning tasks",
-        "Safety and US government evaluation highlighted",
-        "High Reddit engagement, mostly negative"
-      ],
-      "sources": [
-        {
-          "id": "1ugw2cz",
-          "title": "Sam Altman unsure about gpt 5.6 release outside of US",
-          "score": 630,
-          "comments": 113,
-          "url": "https://www.reddit.com/r/ChatGPT/comments/1ugw2cz/"
-        },
-        {
-          "id": "1uj8kbf",
-          "title": "Anyone notice how personified ChatGPT is lately?",
-          "score": 511,
-          "comments": 236,
-          "url": "https://www.reddit.com/r/ChatGPT/comments/1uj8kbf/"
-        },
-        {
-          "id": "1udjw2m",
-          "title": "ChatGPT has done 80% of my job for 2 years",
-          "score": 332,
-          "comments": 101,
-          "url": "https://www.reddit.com/r/ChatGPT/comments/1udjw2m/"
-        },
-        {
-          "id": "1uheaiw",
-          "title": "OpenAI used 4o to evaluate their newest 5.6 model because 4o' s ratings are \"consistent with human ratings\"",
-          "score": 310,
-          "comments": 58,
-          "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1uheaiw/"
-        }
-      ],
-      "stats": {
-        "posts": 278,
-        "comments": 4249,
-        "score": 7603,
-        "classified": 278,
-        "pos": 48,
-        "neg": 121,
-        "mix": 22,
-        "neu": 87,
-        "pos_pct": 17,
-        "neg_pct": 44
-      }
-    },
-    {
-      "product": "Claude",
-      "icon": "🟢",
-      "title": "Claude Fable 5全球恢复",
-      "title_en": "Claude Fable 5 Restored",
-      "body": "Claude Fable 5因出口管制解除于7月1日全球恢复，Reddit有500篇帖子、16048条评论，正面24%，负面20%。用户热烈欢迎回归，关注新安全措施和使用限制。",
-      "body_en": "Claude Fable 5 was globally restored on July 1 after export controls were lifted. Reddit saw 500 posts and 16,048 comments, with 24% positive and 20% negative sentiment. Users welcomed its return and discussed new safeguards and usage limits.",
-      "sentiment": "positive",
-      "key_points": [
-        "Fable 5全球重新上线",
-        "出口管制解除",
-        "新安全措施引发讨论",
-        "Reddit用户积极反馈"
-      ],
-      "key_points_en": [
-        "Fable 5 restored globally",
-        "Export controls lifted",
-        "New cybersecurity safeguards discussed",
-        "Positive Reddit user response"
-      ],
-      "sources": [
-        {
-          "id": "1uk5st3",
-          "title": "Fable 5 is coming back!",
-          "score": 5124,
-          "comments": 484,
-          "url": "https://www.reddit.com/r/ClaudeAI/comments/1uk5st3/"
-        },
-        {
-          "id": "1ukvjyn",
-          "title": "Fable 5 is back.",
-          "score": 2400,
-          "comments": 388,
-          "url": "https://www.reddit.com/r/ClaudeAI/comments/1ukvjyn/"
-        },
-        {
-          "id": "1ukynrw",
-          "title": "Friendly reminder to have Fable 5 write skills NOW to tell Opus 4.8 how it should behave and think when Fable becomes pay-per-usage.",
-          "score": 2126,
-          "comments": 188,
-          "url": "https://www.reddit.com/r/ClaudeAI/comments/1ukynrw/"
-        },
-        {
-          "id": "1un0byt",
-          "title": "I cut my Fable token usage by 99.99%. I rewrote my entire codebase on a single grain of rice",
-          "score": 2028,
-          "comments": 121,
-          "url": "https://www.reddit.com/r/ClaudeAI/comments/1un0byt/"
-        }
-      ],
-      "stats": {
-        "posts": 500,
-        "comments": 16048,
-        "score": 51145,
-        "classified": 500,
-        "pos": 121,
-        "neg": 99,
-        "mix": 48,
-        "neu": 232,
-        "pos_pct": 24,
-        "neg_pct": 20
-      }
-    },
-    {
-      "product": "Claude",
-      "icon": "🟢",
-      "title": "Claude Sonnet 5发布",
-      "title_en": "Claude Sonnet 5 Launch",
-      "body": "Claude Sonnet 5以接近Opus智能、低价和原生工具集成为卖点。Reddit相关话题热度高，Fable 5和Sonnet 5相关帖子均超2000分，用户关注性价比和新功能。",
-      "body_en": "Claude Sonnet 5 launched with near-Opus intelligence at lower pricing and native tool use. Reddit posts on Sonnet 5 and Fable 5 exceeded 2,000 upvotes, with users focused on value and new features.",
-      "sentiment": "positive",
-      "key_points": [
-        "Sonnet 5智能接近Opus",
-        "API定价优惠",
-        "原生工具集成提升体验",
-        "Reddit关注性价比"
-      ],
-      "key_points_en": [
-        "Sonnet 5 approaches Opus intelligence",
-        "Introductory API pricing",
-        "Native tool integration",
-        "Reddit users highlight value"
-      ],
-      "sources": [
-        {
-          "id": "1uk5st3",
-          "title": "Fable 5 is coming back!",
-          "score": 5124,
-          "comments": 484,
-          "url": "https://www.reddit.com/r/ClaudeAI/comments/1uk5st3/"
-        },
-        {
-          "id": "1ukvjyn",
-          "title": "Fable 5 is back.",
-          "score": 2400,
-          "comments": 388,
-          "url": "https://www.reddit.com/r/ClaudeAI/comments/1ukvjyn/"
-        },
-        {
-          "id": "1ukynrw",
-          "title": "Friendly reminder to have Fable 5 write skills NOW to tell Opus 4.8 how it should behave and think when Fable becomes pay-per-usage.",
-          "score": 2126,
-          "comments": 188,
-          "url": "https://www.reddit.com/r/ClaudeAI/comments/1ukynrw/"
-        },
-        {
-          "id": "1un0byt",
-          "title": "I cut my Fable token usage by 99.99%. I rewrote my entire codebase on a single grain of rice",
-          "score": 2028,
-          "comments": 121,
-          "url": "https://www.reddit.com/r/ClaudeAI/comments/1un0byt/"
-        }
-      ],
-      "stats": {
-        "posts": 500,
-        "comments": 16048,
-        "score": 51145,
-        "classified": 500,
-        "pos": 121,
-        "neg": 99,
-        "mix": 48,
-        "neu": 232,
-        "pos_pct": 24,
-        "neg_pct": 20
-      }
-    },
-    {
-      "product": "Gemini",
-      "icon": "🟡",
-      "title": "Gemini 3.5 Pro推迟发布",
-      "title_en": "Gemini 3.5 Pro Delayed",
-      "body": "Gemini 3.5 Pro因需额外预训练推迟至7月17日发布。Reddit有127篇帖子、1426条评论，正面25%，负面29%。用户对延迟表达不满，期待新功能。",
-      "body_en": "Gemini 3.5 Pro's launch was delayed to July 17 for additional pre-training. Reddit saw 127 posts and 1,426 comments, with 25% positive and 29% negative sentiment. Users expressed frustration over the delay but anticipation for new features.",
-      "sentiment": "mixed",
-      "key_points": [
-        "3.5 Pro推迟至7月17日",
-        "用户对延迟不满",
-        "期待数学和图像生成提升",
-        "Reddit讨论热烈"
-      ],
-      "key_points_en": [
-        "3.5 Pro delayed to July 17",
-        "User frustration over delay",
-        "Anticipation for math and image upgrades",
-        "Active Reddit discussion"
-      ],
-      "sources": [
-        {
-          "id": "1uh4byc",
-          "title": "Waiting for Gemini 3.5 Pro Like",
-          "score": 311,
-          "comments": 24,
-          "url": "https://www.reddit.com/r/GeminiAI/comments/1uh4byc/"
-        },
-        {
-          "id": "1umjmd0",
-          "title": "Gemini 3.5 Pro to launch around July 17th . 2 weeks from now . By: Leo",
-          "score": 290,
-          "comments": 75,
-          "url": "https://www.reddit.com/r/GeminiAI/comments/1umjmd0/"
-        },
-        {
-          "id": "1uk05mn",
-          "title": "Google is launching EVERYTHING but Gemini 3.5 Pro 💀",
-          "score": 224,
-          "comments": 49,
-          "url": "https://www.reddit.com/r/GeminiAI/comments/1uk05mn/"
-        },
-        {
-          "id": "1uem3s1",
-          "title": "Google delays Gemini 3.5 Pro launch to July as it tweaks its new frontier AI model",
-          "score": 220,
-          "comments": 69,
-          "url": "https://www.reddit.com/r/GeminiAI/comments/1uem3s1/"
-        }
-      ],
-      "stats": {
-        "posts": 127,
-        "comments": 1426,
-        "score": 2508,
-        "classified": 127,
-        "pos": 32,
-        "neg": 37,
-        "mix": 14,
-        "neu": 44,
-        "pos_pct": 25,
-        "neg_pct": 29
-      }
-    },
-    {
-      "product": "Copilot",
-      "icon": "🟢",
-      "title": "Copilot启用令牌计费",
-      "title_en": "Copilot Token Billing Active",
-      "body": "GitHub Copilot全面启用AI积分计费，支持用户级预算控制。Reddit有165篇帖子、35条评论，正面68%，负面4%。用户普遍认可灵活计费和成本管理。",
-      "body_en": "GitHub Copilot activated token-based billing with user-level budget controls. On Reddit, 165 posts and 35 comments showed 68% positive and only 4% negative sentiment. Users generally welcomed the flexibility and improved cost management.",
-      "sentiment": "positive",
-      "key_points": [
-        "AI积分计费全面上线",
-        "支持预算和成本中心管理",
-        "用户反馈积极",
-        "企业成本可控性提升"
-      ],
-      "key_points_en": [
-        "Token-based billing now active",
-        "Supports budget and cost center controls",
-        "Positive user feedback",
-        "Improved enterprise cost management"
-      ],
-      "sources": [
-        {
-          "id": "1ukzgna",
-          "title": "My favorite part about paying for cowork...",
-          "score": 16,
-          "comments": 5,
-          "url": "https://www.reddit.com/r/CopilotPro/comments/1ukzgna/"
-        },
-        {
-          "id": "1ul9cxn",
-          "title": "This might be the most infuriating product MS has ever shipped",
-          "score": 15,
-          "comments": 13,
-          "url": "https://www.reddit.com/r/Copilot/comments/1ul9cxn/"
-        },
-        {
-          "id": "1um801j",
-          "title": "M365 Copilot Enterprise: Are the \"GPT\" labels native OpenAI models, and what is the true context window?",
-          "score": 10,
-          "comments": 11,
-          "url": "https://www.reddit.com/r/CopilotPro/comments/1um801j/"
-        },
-        {
-          "id": "1uj76bx",
-          "title": "Managing Copilot Cowork Credit Increase Requests",
-          "score": 2,
-          "comments": 0,
-          "url": "https://www.reddit.com/r/Copilot/comments/1uj76bx/"
-        }
-      ],
-      "stats": {
-        "posts": 165,
-        "comments": 35,
-        "score": 166,
-        "classified": 165,
-        "pos": 113,
-        "neg": 6,
-        "mix": 1,
-        "neu": 45,
-        "pos_pct": 68,
-        "neg_pct": 4
-      }
-    },
-    {
-      "product": "M365 Copilot",
-      "icon": "🟡",
-      "title": "M365 Copilot涨价及授权",
-      "title_en": "M365 Copilot Price Hike",
-      "body": "M365 Copilot价格上调，Copilot捆绑新套餐。Reddit有83篇帖子、889条评论，正面22%，负面35%。用户关注成本上升和授权变化，部分表达不满。",
-      "body_en": "M365 Copilot raised prices and bundled Copilot into new plans. Reddit had 83 posts and 889 comments, with 22% positive and 35% negative sentiment. Users discussed increased costs and licensing changes, with some expressing dissatisfaction.",
-      "sentiment": "mixed",
-      "key_points": [
-        "Copilot价格上涨",
-        "新套餐捆绑Copilot",
-        "用户担忧成本增加",
-        "Reddit负面反馈较多"
-      ],
-      "key_points_en": [
-        "Copilot price increases",
-        "Copilot bundled in new plans",
-        "User concerns over higher costs",
-        "Notable negative Reddit feedback"
-      ],
-      "sources": [
-        {
-          "id": "1uoplls",
-          "title": "I spent last week running Copilot sessions for executives. The questions they asked were not the ones I prepared for.",
-          "score": 129,
-          "comments": 26,
-          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uoplls/"
-        },
-        {
-          "id": "1uidq6b",
-          "title": "Why do companies still choose GitHub Copilot?",
-          "score": 88,
-          "comments": 133,
-          "url": "https://www.reddit.com/r/GithubCopilot/comments/1uidq6b/"
-        },
-        {
-          "id": "1uikdzk",
-          "title": "I run Copilot for a large org. Here's my personal list of where it actually falls down. Argue with me.",
-          "score": 45,
-          "comments": 14,
-          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uikdzk/"
-        },
-        {
-          "id": "1umy49a",
-          "title": "Copilot Cowork vs Claude Cowork cost comparison",
-          "score": 28,
-          "comments": 27,
-          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1umy49a/"
-        }
-      ],
-      "stats": {
-        "posts": 83,
-        "comments": 889,
-        "score": 620,
-        "classified": 83,
-        "pos": 18,
-        "neg": 29,
-        "mix": 11,
-        "neu": 25,
-        "pos_pct": 22,
-        "neg_pct": 35
-      }
-    },
-    {
-      "product": "Claude",
-      "icon": "🟡",
-      "title": "Claude Fable 5内容审查",
-      "title_en": "Claude Fable 5 Censorship",
-      "body": "Claude Fable 5恢复后加强了内容安全和网络安全任务限制。Reddit有216篇帖子、3599条评论，正面20%，负面32%。部分用户质疑隐私和内容审查。",
-      "body_en": "After restoration, Claude Fable 5 implemented stricter content and cybersecurity task restrictions. Reddit had 216 posts and 3,599 comments, with 20% positive and 32% negative sentiment. Some users raised concerns about privacy and censorship.",
-      "sentiment": "mixed",
-      "key_points": [
-        "内容和网络安全限制加强",
-        "部分用户质疑隐私保护",
-        "Reddit负面讨论上升",
-        "安全措施引发争议"
-      ],
-      "key_points_en": [
-        "Stricter content and cybersecurity safeguards",
-        "User concerns about privacy",
-        "Increased negative Reddit discussion",
-        "Controversy over new safety measures"
-      ],
-      "sources": [
-        {
-          "id": "1ujila1",
-          "title": "Anthropic embedded spyware in Claude Code — and attempted to hide it from you",
-          "score": 1621,
-          "comments": 329,
-          "url": "https://www.reddit.com/r/ClaudeAI/comments/1ujila1/"
-        },
-        {
-          "id": "1uk5ihe",
-          "title": "Claude Mythos 5/Fable 5 export restrictions lifted",
-          "score": 1260,
-          "comments": 175,
-          "url": "https://www.reddit.com/r/ClaudeAI/comments/1uk5ihe/"
-        },
-        {
-          "id": "1ukaogz",
-          "title": "100% Have Fable 5 do this with your coding projects before it disappears from plan usage on July 7th.",
-          "score": 584,
-          "comments": 119,
-          "url": "https://www.reddit.com/r/ClaudeAI/comments/1ukaogz/"
-        },
-        {
-          "id": "1upenm6",
-          "title": "the J-space paper is the best thing anthropic has shipped in a while. claude’s weights are closed so i built the live viewer for an open model instead",
-          "score": 442,
-          "comments": 53,
-          "url": "https://www.reddit.com/r/ClaudeAI/comments/1upenm6/"
-        }
-      ],
-      "stats": {
-        "posts": 216,
-        "comments": 3599,
-        "score": 7580,
-        "classified": 216,
-        "pos": 44,
-        "neg": 70,
-        "mix": 19,
-        "neu": 83,
-        "pos_pct": 20,
-        "neg_pct": 32
-      }
-    }
-  ],
-  "exec_news_summary": {
-    "zh": "本期关键动态：🟡 Claude Fable 5（500 帖、16,048 评论）回归引发热议，24% 正面、20% 负面，最高贴高达 5,124 分，用户关注功能变动与计费模式；🔴 Claude Fable 5 暂停与审查（500 帖、5,510 评论）负面情绪上升，仅 4% 正面、9% 负面，关于“嵌入间谍软件”与导出限制的讨论热度高（最高 1,621 分）；🟡 GPT-5.6（278 帖、4,249 评论）传闻不断，17% 正面、44% 负面，用户担忧地区发布与模型评测方式（最高贴 630 分）；🟡 Gemini 3.5 Flash/Omni（267 帖、2,521 评论）关注度提升，正负面评价接近（28%/36%），用户期待 Pro 版上线及新功能表现。",
-    "en": "Key developments this period: 🟡 Claude Fable 5 (500 posts, 16,048 comments) sparked intense discussion on its return, with 24% positive and 20% negative sentiment, and a top post score of 5,124 as users focused on feature changes and new billing; 🔴 Claude Fable 5 suspension and censorship (500 posts, 5,510 comments) saw rising negative sentiment (only 4% positive, 9% negative), with heated debate over 'embedded spyware' and export restrictions (top post 1,621); 🟡 GPT-5.6 rumors (278 posts, 4,249 comments) generated 17% positive and 44% negative sentiment, with concerns about regional rollout and model evaluation methods (top post 630); 🟡 Gemini 3.5 Flash/Omni (267 posts, 2,521 comments) drew increased attention, with balanced sentiment (28% positive, 36% negative) as users anticipated the Pro launch and assessed new features."
-  }
+  "cross_product_comparison_en": "# July 2026 Reddit AI Product Competitive Comparison Report\n\n## 1. User Satisfaction Comparison\n\n- **Copilot**: Highest user satisfaction, with 70% positive sentiment. Users appreciate its efficiency improvements in creative generation and office scenarios, but express clear dissatisfaction with its limited context memory and knowledge base capabilities.\n- **Claude**: Community sentiment is divided, with 32% positive and 26% negative. Users recognize its functional performance and personalization abilities, but service stability, billing mechanisms, and advanced feature quotas are sources of significant controversy.\n- **ChatGPT**: 44% negative sentiment, 26% positive. Users praise innovative use cases and image generation features, but “hallucinated answers,” instruction misinterpretation, and company policies generate substantial dissatisfaction.\n- **M365 Copilot**: 36% negative sentiment, 28% positive. Enterprise users react strongly to pricing, quota limits, and poor office scenario experience, while some users focus on the positive experience brought by new model integration.\n- **Gemini**: Lowest satisfaction, with negative sentiment as high as 56% and only 15% positive. Users are particularly dissatisfied with declining output quality, unfair resource allocation, and hallucination issues, leading to a high risk of community attrition.\n\n## 2. Community Satisfaction Extremes and Reasons\n\n- **Most Satisfied: Copilot Community**\n  - Reason: Significant efficiency improvements in office scenarios, recognized creative generation capabilities, and ongoing feature optimization leading to positive feedback.\n- **Least Satisfied: Gemini Community**\n  - Reason: Declining model output quality, severe hallucination issues, and unfair resource allocation have triggered concentrated outbreaks of user attrition and negative sentiment.\n\n## 3. Common Pain Points\n\n- **“Hallucinated Answers” Are Widespread**: ChatGPT, Gemini, and Copilot are all criticized by users for generating false or incorrect content, lacking an “I don’t know” mechanism, which impacts trust.\n- **Insufficient Context Memory and Knowledge Base Capabilities**: Particularly prominent in Copilot and M365 Copilot; users want AI to remember historical content and support knowledge management.\n- **Pricing and Quota Limitations**: M365 Copilot, Claude, and Copilot all receive user feedback about rapid quota depletion and non-transparent pricing, affecting the experience of high-frequency and enterprise users.\n- **Product Stability and Bugs**: Claude, ChatGPT, and M365 Copilot all face issues such as service interruptions and frequent bugs, impacting daily use.\n\n## 4. Unique Strengths and Weaknesses of Each Product\n\n- **Copilot**\n  - Strengths: High integration in office scenarios, strong creative generation capabilities, high user recognition.\n  - Weaknesses: Poor context memory, knowledge base capabilities lag behind Claude and Gemini.\n- **Claude**\n  - Strengths: Strong personalization and complex task handling, some models (e.g., Sonnet 5) praised for reasoning abilities.\n  - Weaknesses: Poor service stability, billing mechanisms and advanced feature quotas are controversial.\n- **ChatGPT**\n  - Strengths: Rich innovative features, outstanding image generation and artistic style diversity.\n  - Weaknesses: Hallucinated answers, instruction misinterpretation, some users question its innovativeness.\n- **M365 Copilot**\n  - Strengths: Enterprise-level integration, focus on new model introduction.\n  - Weaknesses: High price, strict quota limits, many bugs in office scenarios, cost-effectiveness questioned.\n- **Gemini**\n  - Strengths: Some users consider its political neutrality relatively good.\n  - Weaknesses: Declining output quality, severe hallucination issues, unfair resource allocation, high community negative sentiment.\n\n## 5. Emerging Competitive Dynamics and Shifts in User Preferences\n\n- **Advanced models and personalization capabilities are becoming competitive focal points**, with products like Claude Sonnet 5 and Fable 5 attracting attention. User demand for complex task handling and context retention is rising.\n- **Users are demanding greater transparency in pricing and quotas**, with enterprise and high-frequency users extremely sensitive to cost-effectiveness; quota limitations are a primary cause of attrition.\n- **Knowledge base and persistent context capabilities are key differentiators**, with Copilot users calling for parity with Claude “Projects” and Gemini “Gems.”\n- **Community enthusiasm for product innovation and real-world use case sharing is rising**, with innovative features and practical tips driving positive discussions.\n\n## 6. Actionable Recommendations\n\n1. **Prioritize enhancement of context memory and knowledge base capabilities** to narrow the gap with competitors like Claude and Gemini, meeting advanced user needs.\n2. **Optimize hallucination detection and “I don’t know” mechanisms** to improve AI answer accuracy and user trust.\n3. **Adjust pricing and quota strategies to improve cost-effectiveness**, offering more flexible subscription and quota options for enterprise and high-frequency users to reduce attrition.\n4. **Accelerate integration of high-performance models and feature innovation** to strengthen product differentiation and meet user needs for complex tasks and innovative scenarios.\n5. **Strengthen community communication and positive guidance**, respond transparently to user concerns, encourage high-quality use case and experience sharing, and improve overall satisfaction.\n\n---\n\n**Conclusion**: Competition among current AI products is fierce, with user demand for high performance, cost-effectiveness, and knowledge management capabilities continuing to rise. Product teams must focus on core pain points, respond rapidly to market changes, and strengthen differentiation to stabilize and expand their user base."
 }
