@@ -1637,20 +1637,20 @@
     },
     "Copilot": {
       "sentiment": {
-        "positive": 136,
-        "negative": 31,
-        "neutral": 21,
+        "positive": 20,
+        "negative": 30,
+        "neutral": 72,
         "mixed": 6
       },
       "topics": {
-        "model_capability": 4,
-        "product_experience": 108,
+        "product_experience": 27,
+        "use_case": 6,
+        "model_capability": 3,
         "feature_request": 11,
+        "news_update": 3,
         "bug_report": 11,
         "comparison": 9,
-        "use_case": 14,
-        "news_update": 24,
-        "meta": 13
+        "meta": 58
       },
       "scenarios": {
         "image_upload": 0,
@@ -1666,20 +1666,20 @@
     },
     "M365 Copilot": {
       "sentiment": {
-        "positive": 90,
-        "negative": 117,
-        "neutral": 92,
-        "mixed": 20
+        "positive": 56,
+        "negative": 41,
+        "neutral": 77,
+        "mixed": 11
       },
       "topics": {
-        "model_capability": 7,
-        "product_experience": 70,
-        "feature_request": 53,
-        "bug_report": 56,
-        "comparison": 23,
-        "use_case": 26,
-        "news_update": 43,
-        "meta": 41
+        "feature_request": 25,
+        "comparison": 2,
+        "bug_report": 21,
+        "meta": 55,
+        "product_experience": 36,
+        "model_capability": 4,
+        "news_update": 26,
+        "use_case": 16
       },
       "scenarios": {
         "image_upload": 0,
