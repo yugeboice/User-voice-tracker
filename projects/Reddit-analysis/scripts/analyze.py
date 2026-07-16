@@ -16,6 +16,8 @@ Usage:
 import argparse
 import json
 import logging
+import os
+import re
 import sqlite3
 import sys
 import uuid
@@ -37,6 +39,25 @@ LLM_MODEL = "gpt-4"
 LLM_TIMEOUT = 300
 BATCH_SIZE = 15  # Posts per LLM call
 
+# Be10x/B10x "session on Copilot" training-camp spam. These are near-identical
+# promotional posts flooding Copilot subreddits — dropped BEFORE the LLM filter
+# so they never reach analysis or the report.
+SPAM_RE = re.compile(
+    r'\b(be?10x|be10x|b10x|'
+    r'session on copilot|session for the copilot|amazing copilot session|'
+    r'joined be10x|copilot session|copilot sesstion|b10x session|be10x session|'
+    r'session on (m365|microsoft 365|power bi)[^.]{0,30}copilot|'
+    r'had.{0,20}session.{0,20}copilot|copilot is amazing session)\b',
+    re.IGNORECASE,
+)
+
+
+def is_spam_post(post: dict) -> bool:
+    """Regex pre-filter for Be10x/B10x session spam. Checks title + body."""
+    text = f"{post.get('title', '')} {post.get('body', '')}"
+    return bool(SPAM_RE.search(text))
+
+
 # Fallback LLM endpoints (tried in order). Keep GPT family for sentiment consistency.
 LLM_FALLBACKS = [
     ("http://localhost:4141", "gpt-4"),
@@ -52,6 +73,18 @@ TOPIC_TAXONOMY = [
     "use_case",
     "news_update",
     "meta",
+]
+
+SCENARIO_TAXONOMY = [
+    "image_upload",
+    "image_creation",
+    "multi_turn",
+    "code_interpreter",
+    "office_file_creation",
+    "file_upload",
+    "general_purpose_search",
+    "general_purpose",
+    "voice_single_turn",
 ]
 
 logging.basicConfig(
@@ -91,7 +124,8 @@ CREATE TABLE IF NOT EXISTS post_analysis (
     sentiment_reason TEXT,
     key_points      TEXT,
     is_typical      INTEGER DEFAULT 0,
-    typical_reason  TEXT
+    typical_reason  TEXT,
+    scenario_tags   TEXT
 );
 
 CREATE TABLE IF NOT EXISTS reports (
@@ -114,6 +148,11 @@ CREATE INDEX IF NOT EXISTS idx_reports_run ON reports(run_id);
 
 def init_analysis_db(conn: sqlite3.Connection):
     conn.executescript(ANALYSIS_SCHEMA)
+    # Migration: add scenario_tags column if missing
+    try:
+        conn.execute("SELECT scenario_tags FROM post_analysis LIMIT 1")
+    except sqlite3.OperationalError:
+        conn.execute("ALTER TABLE post_analysis ADD COLUMN scenario_tags TEXT")
     conn.commit()
 
 
@@ -246,8 +285,25 @@ def filter_posts(posts: list[dict], endpoint: str, model: str) -> list[dict]:
     """Use LLM to filter out invalid/low-value posts. Returns analysis dicts."""
     results = []
 
-    for i in range(0, len(posts), BATCH_SIZE):
-        batch = posts[i : i + BATCH_SIZE]
+    # Pre-filter: drop Be10x/B10x session spam via regex before spending LLM calls.
+    spam_count = 0
+    llm_posts = []
+    for p in posts:
+        if is_spam_post(p):
+            spam_count += 1
+            results.append({
+                "post_id": p["id"],
+                "valid": False,
+                "reason": "Be10x/B10x session-on-Copilot promotional spam (regex pre-filter)",
+            })
+        else:
+            llm_posts.append(p)
+    if spam_count:
+        log.info("Spam pre-filter removed %d Be10x/B10x posts (%d remain for LLM)",
+                 spam_count, len(llm_posts))
+
+    for i in range(0, len(llm_posts), BATCH_SIZE):
+        batch = llm_posts[i : i + BATCH_SIZE]
         posts_for_llm = []
         for p in batch:
             posts_for_llm.append({
@@ -277,7 +333,7 @@ Posts:
 Respond ONLY with a JSON array:
 [{{"post_id": "xxx", "valid": true, "reason": ""}}]"""
 
-        log.info("Filtering batch %d-%d of %d posts...", i + 1, min(i + BATCH_SIZE, len(posts)), len(posts))
+        log.info("Filtering batch %d-%d of %d posts...", i + 1, min(i + BATCH_SIZE, len(llm_posts)), len(llm_posts))
         response = call_llm(
             prompt,
             system_prompt="You are a JSON-only API. Output ONLY valid JSON arrays with no markdown, no code fences, no explanation. Start your response with [ and end with ].",
@@ -335,12 +391,249 @@ For each post, determine:
 3. sentiment_label: "positive", "negative", "neutral", or "mixed"
 4. sentiment_reason: One sentence in Chinese explaining why (reference specific user concerns/praise)
 5. key_points: Array of 1-3 key discussion points in Chinese
+6. scenario_tags: Array of 0 or more applicable scenarios from [{", ".join(SCENARIO_TAXONOMY)}].
+
+   ===== CRITICAL SCOPE RULE — READ FIRST =====
+   Scenario tags describe USER EXPERIENCE WITH THE MAINLINE CHAT PRODUCT
+   (ChatGPT chat at chatgpt.com / Claude.ai chat / Gemini app or gemini.google.com).
+   Return [] when the post has NO actual in-chat usage (see EXCLUDE list).
+   Otherwise tag ONLY the SPECIFIC features the user actually used.
+   When in doubt about whether a feature was used -> DO NOT tag it.
+   general_purpose is for posts where in-chat usage IS described but no other specific
+   feature applies. It is NOT a default add-on tag and NOT a catch-all for any AI
+   discussion.
+
+   ===== TAG SELECTION RULES =====
+   1. Multi-label IS allowed when the user genuinely used multiple distinct features.
+      Examples:
+      - Upload a CSV and ask the chat to summarize into a table -> [file_upload, office_file_creation]
+      - Upload a screenshot and have a multi-turn back-and-forth -> [image_upload, multi_turn]
+      - Use ChatGPT Search then chat about the results -> [general_purpose_search]
+        (general_purpose is NOT added — the search is the activity)
+      - Generate a chart in Code Interpreter from a CSV -> [file_upload, code_interpreter]
+   2. general_purpose is MUTUALLY EXCLUSIVE with other scenarios.
+      - If ANY specific scenario (image_*, multi_turn, file_upload, code_interpreter,
+        office_file_creation, general_purpose_search, voice_single_turn) applies,
+        DO NOT add general_purpose on top.
+      - Use general_purpose ONLY when the user clearly used the chat but no specific
+        feature applies (general Q&A, casual chat, life advice, generic complaints
+        about answer quality WITH USAGE DESCRIPTION).
+   3. multi_turn requires EXPLICIT memory / context-loss / multi-message language.
+      A single complaint, a single question, a model preference debate, image gen
+      issues, or "AI tool switching" musings are NOT multi_turn.
+   4. file_upload requires the user to UPLOAD A SPECIFIC FILE INTO THE CHAT.
+      "Drive integration", "MCP connectors", "artifacts hosting", "Canvas broken"
+      are NOT file_upload — they are integration/feature talk.
+   5. code_interpreter requires DIRECT EVIDENCE of in-chat code execution (output,
+      chart, plot, "ran X", "executed"). Outcome stories like "wrote my thesis with
+      Claude" or "built a website with ChatGPT" are NOT code_interpreter.
+
+   ===== EXCLUDE — return [] when post has NO in-chat usage =====
+   - Standalone coding tools with no chat usage: Claude Code, Codex CLI, Cursor, aider,
+     cline, antigravity, opencode, Continue, VS Code / JetBrains extensions, IDE plugins
+   - API / SDK usage, MCP server development, custom agents/apps the user built
+   - Self-promotion: "I built X with Claude Code", "Check out my prompt/template/library"
+   - Pure billing / quota / rate-limit / pricing / subscription complaints
+   - Pure news, leaks, version-bump announcements, model release posts
+   - Pure memes / jokes / cryptic one-liners / "What the hell?" with no scenario context
+   - Pure model rants / one-line opinions ("Opus 4.6 was peak", "And so it begins",
+     "Screw You OpenAI", "Is it fixed?") with no description of any actual chat usage
+   - Pure model-version routing complaints without usage context
+   - Generic "AI tool switching" / "bouncing between AIs" musings with no concrete
+     in-chat usage described
+   - Persona fiction / "A day as ChatGPT" creative writing about the AI
+   - Vague meta-discussion ("does vibe coding feel like X?") without describing usage
+   - "Best model for X?" comparison questions with NO description of actual chat usage
+
+   ===== SCENARIO DEFINITIONS =====
+
+   - image_upload
+     MUST: User uploaded/pasted/attached an image into the chat for the AI to analyze,
+           describe, OCR, debug, identify, edit, restore, transform.
+           Or post explicitly discusses deleting/managing UPLOADED images/files in chat.
+     NOT: AI generated an image without an input image (-> image_creation only).
+          Post is purely about generated image quality (-> image_creation only).
+
+   - image_creation
+     MUST: User asked the chat to GENERATE an image (DALL-E, Imagen, native image gen,
+           "make me a picture", "draw X", "create an image of Y").
+           Or post complains about generated-image style / behavior of image gen.
+     NOT: User uploaded an image but did NOT ask for a new one (-> image_upload only).
+
+   - multi_turn
+     MUST: Post EXPLICITLY discusses one of:
+           - Memory feature (ChatGPT Memory, Claude Projects memory, Gemini memory)
+           - Custom instructions persisting across sessions
+           - "Chat resetting", "losing context", "forgetting earlier messages",
+             "context window full"
+           - Long conversation breakdown / drift in same thread
+           - User describes a concrete back-and-forth dialog with multiple turns
+     NOT: One-off questions, single complaints, generic dissatisfaction, version posts,
+          model-preference debates, image-gen complaints, tool-switching musings,
+          censorship/sensitivity complaints, "losing ideas in OLD chats" (that is
+          about searching old chats, not multi-turn), canvas / collaboration UI
+          complaints. DO NOT add multi_turn just because the user said something
+          negative about a model.
+
+   - code_interpreter
+     MUST: Post contains DIRECT EVIDENCE the chat RAN CODE in the conversation:
+           - Explicit names: "Advanced Data Analysis", "Code Interpreter",
+             "Analysis tool", "Run code"
+           - Output evidence: "it produced a chart/plot/visualization/graph",
+             "interactive viz appeared", "Gemini visualizations"
+           - Execution language: "ran Python in chat", "executed the code",
+             "Claude ran analysis on my data file"
+           - Music/media generated by running code in chat
+     NOT: STRICTLY EXCLUDE (all -> NOT code_interpreter):
+           - Claude Code / Codex CLI / Cursor / aider / any CLI / IDE / extension
+           - API / SDK code generation, MCP server work, agent frameworks
+           - "I used Claude for my thesis / SEO / website / coursework" (outcomes,
+             not execution)
+           - "Claude helped me build X" / "passed my thesis using Claude" (output
+             only, no execution evidence)
+           - Persona pieces / "A day as ChatGPT"
+           - "Is it fixed?" status posts with no usage
+           Rule: if the post only says the chat HELPED with code or the user got a
+           code-related outcome but no execution evidence -> general_purpose (if any
+           chat usage) or [] (if none).
+
+   - office_file_creation
+     MUST: User asked the chat to PRODUCE a Word doc / Excel/Google Sheet / PowerPoint
+           / PDF AS OUTPUT, AND there is evidence the chat actually attempted/produced one.
+     NOT: Uploading an office file for analysis (-> file_upload only, unless the chat
+          ALSO produced a new file). Generic writing assistance without an actual file
+          artifact. "Canvas broken?" / Canvas UI / "side-by-side Canvas" UI complaints
+          WITHOUT a specific creation request -> []. "Claude can't present HTML file" /
+          "ChatGPT can't make a usable file" without a concrete file the user is trying
+          to create is too vague -> [].
+
+   - file_upload
+     MUST: User explicitly UPLOADED a PDF / doc / spreadsheet / text file / code file
+           / screenshot of a doc INTO THE CHAT for AI to read, summarize, edit, or
+           analyze. Concrete file or document must be mentioned.
+     NOT: MCP / connector / Google Drive INTEGRATION talk without a specific upload.
+          "Drive source docs slow" = integration, not upload. "Artifacts hosting"
+          = external. Claude Code mentioning files = standalone tool. Building local
+          multi-AI apps. Mere mention of an upload limit.
+
+   - general_purpose_search
+     MUST: User used web search / browsing / live info lookup INSIDE THE CHAT,
+           with EXPLICIT evidence the chat actually fetched live web information:
+           - ChatGPT Search / Browse / "Search" tool usage explicitly mentioned
+           - Claude web search, Gemini grounded search explicitly mentioned
+           - Chat returned citations / links / web results in the conversation
+           - "Asked GPT to search for X online and it returned 10 sources"
+     NOT: Abstract "AI vs Google" musings. News about search features. Model
+          comparison without search. "I looked up my name through chatgpt" without
+          explicit search-mode mention is NOT search (could be from training data).
+          "Wants something to track progress" / "give me info on X" is generic Q&A,
+          not search. Be strict: when in doubt, do NOT tag search.
+
+   - general_purpose
+     MUST (mutually exclusive — use ONLY when no other specific scenario applies):
+           User describes ACTUAL in-chat usage of one of:
+           - General Q&A, learning, asking for advice ("I asked Claude how to...")
+           - Writing assistance, brainstorming, summarization (no file involved)
+           - Casual conversation, emotional support, life-coaching, companionship
+           - Generic answer-quality complaints WITH a usage description
+             ("ChatGPT keeps refusing when I ask about X")
+           - "How do you use ChatGPT for Y?" surveying community usage
+     STRICT NOT — do NOT use general_purpose for:
+           - Pure rants without usage ("Screw You OpenAI", "Gemini sucks")
+           - Pure model-comparison shopping ("best model for studying", "Claude or
+             ChatGPT?") without describing actual usage
+           - Self-promotion of own builds / prompts / templates
+           - Cryptic / promotional one-liners
+           - Pure billing/news/version posts
+           - Standalone-tool posts (Claude Code etc.)
+           - Pure memes / "What the hell is that supposed to mean?"
+
+   - voice_single_turn
+     MUST: Post mentions voice input/output, voice mode, speech-to-text, TTS,
+           advanced voice, Whisper, "talking to ChatGPT", read-aloud feature
+     NOT: No voice mention at all
+
+   ===== DECISION PROCEDURE =====
+   Step 1: Is the post ENTIRELY about EXCLUDE list items with ZERO in-chat usage? -> []
+   Step 2: For each specific scenario, ask "is there DIRECT EVIDENCE the user used
+           this feature in chat?" If YES, add it. If only HINTED or VAGUE, do NOT add.
+   Step 3: If at least one specific scenario from Step 2 applies, output JUST those
+           specific scenarios (DO NOT add general_purpose).
+   Step 4: If NO specific scenario applies, ask "does the post describe actual
+           in-chat usage (not just opinions, not just version talk, not just rants,
+           not just self-promo)?" If YES -> [general_purpose]. If NO -> [].
+   Step 5: When uncertain between tagging and []: prefer the LESS aggressive choice
+           (drop the tag). False positives hurt more than false negatives here.
+
+   ===== QUICK SANITY CHECKS =====
+   - "I used Claude for my thesis / SEO / building a website" (no execution evidence)
+     -> [general_purpose]   (NOT code_interpreter, NOT file_upload)
+   - "I built a budget gate for Claude Code" / "Check out my prompt template"
+     -> []   (self-promo of standalone tool/prompt)
+   - "How do you use ChatGPT?" / "ChatGPT pisses me off when it refuses X"
+     -> [general_purpose]
+   - "Gemini Pro shared quota?" / "Opus 4.8 limit?" / "Opus 4.6 was peak" /
+     "And so it begins" / "Screw You OpenAI" / "Is it fixed?"
+     -> []   (no usage described)
+   - "Best model for studying?" / "Claude Pro or ChatGPT Plus?" (pure shopping)
+     -> []   (no usage described)
+   - "What the hell is that supposed to mean?" (cryptic)
+     -> []   (unless body describes usage)
+   - "Canvas broken?" / "Restore the Collaborative Canvas workflow" / "Lost
+     side-by-side Canvas access"
+     -> []   (UI complaints without a specific creation request)
+   - "I uploaded a PDF and asked it to summarize"
+     -> [file_upload]   (NOT [file_upload, general_purpose])
+   - "Got ChatGPT to make a chart of my expenses from my CSV"
+     -> [file_upload, code_interpreter]
+   - "Claude keeps forgetting earlier turns" / "ChatGPT lost my context"
+     -> [multi_turn]
+   - "I keep losing good ideas in OLD chats" (about searching past chats)
+     -> []   (not multi_turn — that's chat history navigation)
+   - "Anyone bouncing between AI tools?"
+     -> []   (tool-switching musing)
+   - "Did ChatGPT get more censored?"
+     -> [general_purpose]   (chat usage implied, not multi_turn)
+   - "A day as ChatGPT" (persona fiction)
+     -> []
+   - "Drive docs are slow with Claude" (integration, not upload)
+     -> []
+   - "Opus 4.8 in CC v2.1.154" (Claude Code version note)
+     -> []
+   - "Asked ChatGPT to roast me and create an image"
+     -> [image_creation]   (NOT [image_creation, general_purpose])
+   - "ChatGPT keeps using painting style for my images" / "There needs to be a toggle
+     for image generation"
+     -> [image_creation]   (NOT +multi_turn, NOT +general_purpose)
+   - "Gemini hates the 'analyze' feature when I submit an image"
+     -> [image_upload]   (NOT +image_creation)
+   - "Is there any way to select all when deleting photos/files in chat?"
+     -> [image_upload, file_upload]   (managing uploaded content)
+   - "Canvas broken?" / "Restore the Collaborative Canvas workflow" / "Lost access
+     to side-by-side Canvas"
+     -> []   (UI feature complaints WITHOUT a specific document creation request)
+   - "Claude can't present HTML file" / "ChatGPT cannot make a usable file"
+     -> []   (vague file complaints; no specific creation request described)
+   - "Looked up my name through ChatGPT" (no search-mode mention)
+     -> [general_purpose]   (NOT search — could be training-data lookup)
+   - "Want to make something that tracks my progress"
+     -> [general_purpose]   (Q&A about ideas, not search)
+   - "Link Claude to Insta to summarize posts?" (integration question)
+     -> []   (no actual usage)
+   - "Strange Audio Glitch (Unprompted Voices & Sounds)" without voice-mode mention
+     -> []   (audio glitch != voice feature)
+   - "What AI are you using alongside ChatGPT?" (community survey)
+     -> []   (tool-comparison, no usage)
+   - "Would you buy a ChatGPT robot I'm building?" (self-promo of hardware)
+     -> []
+   - "claude for presentations" (interest in usage, no actual usage)
+     -> [general_purpose]   (curious about presentations, no concrete creation)
 
 Posts:
 {json.dumps(posts_for_llm, ensure_ascii=False)}
 
 Respond ONLY with a JSON array:
-[{{"post_id": "xxx", "topic_category": "...", "sentiment_score": 0.0, "sentiment_label": "...", "sentiment_reason": "...", "key_points": ["..."]}}]"""
+[{{"post_id": "xxx", "topic_category": "...", "sentiment_score": 0.0, "sentiment_label": "...", "sentiment_reason": "...", "key_points": ["..."], "scenario_tags": ["..."]}}]"""
 
         log.info("Analyzing batch %d-%d...", i + 1, min(i + BATCH_SIZE, len(posts)))
         response = call_llm(
@@ -351,7 +644,12 @@ Respond ONLY with a JSON array:
         parsed = parse_json_response(response)
 
         if parsed and isinstance(parsed, list):
-            results.extend(parsed)
+            # Flatten in case LLM returned nested list [[{...}]]
+            for item in parsed:
+                if isinstance(item, dict):
+                    results.append(item)
+                elif isinstance(item, list):
+                    results.extend(item)
         else:
             log.warning("Analysis LLM parse failed for batch, using defaults")
             for p in batch:
@@ -559,8 +857,15 @@ def select_typical_posts(
     analysis_map: dict,
     count: int = 5,
 ) -> list[str]:
-    """Select typical/representative posts based on engagement and analysis richness."""
+    """Select typical/representative posts based on engagement and analysis richness.
+
+    Source-aware: guarantees at least one slot for each source_platform that has
+    valid posts (best-scored from each), then fills remaining slots by global score.
+    This ensures low-engagement sources (e.g. TechCommunity posts that carry
+    num_comments=0) are still showcased, not crowded out by high-comment Reddit posts.
+    """
     scored = []
+    platform_of = {}
     for p in posts:
         pid = p["id"]
         analysis = analysis_map.get(pid, {})
@@ -575,9 +880,41 @@ def select_typical_posts(
             + abs(analysis.get("sentiment_score", 0)) * 10  # Strong sentiment = more interesting
         )
         scored.append((pid, score))
+        platform_of[pid] = p.get("source_platform") or "reddit"
 
     scored.sort(key=lambda x: -x[1])
-    return [pid for pid, _ in scored[:count]]
+
+    # 1) Guarantee one representative per platform (best-scored), in score order.
+    selected: list[str] = []
+    seen_platforms: set = set()
+    for pid, _ in scored:
+        plat = platform_of[pid]
+        if plat not in seen_platforms:
+            seen_platforms.add(plat)
+            selected.append(pid)
+            if len(selected) >= count:
+                return selected
+
+    # 2) Fill remaining slots by global score, skipping already-picked posts.
+    for pid, _ in scored:
+        if pid not in selected:
+            selected.append(pid)
+            if len(selected) >= count:
+                break
+    return selected[:count]
+
+
+def compute_source_breakdown(posts: list[dict]) -> dict:
+    """Count posts per source platform for a product.
+
+    Backward-compatible: posts from Reddit-only DBs lack the source_platform
+    key, so they default to 'reddit'. Returns e.g. {"reddit": 1650, "hackernews": 65}.
+    """
+    breakdown: dict = {}
+    for p in posts:
+        platform = p.get("source_platform") or "reddit"
+        breakdown[platform] = breakdown.get(platform, 0) + 1
+    return breakdown
 
 
 def _generate_report_index(reports_dir: Path):
@@ -624,6 +961,9 @@ def run_analysis(
     start_date: str = None,
     end_date: str = None,
     max_posts_per_sub: int = 0,
+    db_path: Path = None,
+    output_path: str = None,
+    scratch: bool = False,
 ) -> dict:
     """Run full analysis pipeline.
 
@@ -635,9 +975,15 @@ def run_analysis(
 
     If max_posts_per_sub > 0, only analyze the top N posts (by score) per subreddit.
     This is useful to match reference period volumes for high-volume subreddits.
+
+    db_path overrides the source database (default: data/reddit.db).
+    output_path overrides the report output file path.
+    scratch=True disables all online-publish side effects (latest.json, index.json,
+    wwwroot sync) so isolated validation runs never touch deployed artifacts.
     """
 
-    conn = sqlite3.connect(str(DB_PATH))
+    active_db = Path(db_path) if db_path else DB_PATH
+    conn = sqlite3.connect(str(active_db))
     conn.row_factory = sqlite3.Row
     init_analysis_db(conn)
 
@@ -771,6 +1117,7 @@ def run_analysis(
                 merged_typical = pc["all_typical_ids"]
                 sentiment_counts = {"positive": 0, "negative": 0, "neutral": 0, "mixed": 0}
                 topic_counts = {t: 0 for t in TOPIC_TAXONOMY}
+                scenario_counts = {s: 0 for s in SCENARIO_TAXONOMY}
                 for a in merged_map.values():
                     if a.get("is_valid", True):
                         lbl = a.get("sentiment_label", "neutral")
@@ -778,10 +1125,14 @@ def run_analysis(
                         tc = a.get("topic_category", "meta")
                         if tc in topic_counts:
                             topic_counts[tc] += 1
-                chart_data = {"sentiment": sentiment_counts, "topics": topic_counts}
+                        for st in a.get("scenario_tags", []):
+                            if st in scenario_counts:
+                                scenario_counts[st] += 1
+                chart_data = {"sentiment": sentiment_counts, "topics": topic_counts, "scenarios": scenario_counts}
                 product_chart_data[product_name] = chart_data
+                global_typical = select_typical_posts(merged_posts, merged_map, count=10)
                 typical_posts_data = []
-                for tid in merged_typical[:10]:
+                for tid in global_typical:
                     post = next((p for p in merged_posts if p["id"] == tid), None)
                     if post:
                         a = merged_map.get(tid, {})
@@ -790,13 +1141,15 @@ def run_analysis(
                             "body": (post.get("body") or "")[:300],
                             "author": post.get("author", ""),
                             "url": post["url"],
+                            "source_platform": post.get("source_platform") or "reddit",
                             "num_comments": post.get("num_comments", 0),
                             "created_utc": post.get("created_utc", ""),
                             "sentiment_label": a.get("sentiment_label", "neutral"),
                             "sentiment_score": a.get("sentiment_score", 0.0),
                             "sentiment_reason": a.get("sentiment_reason", ""),
                             "topic_category": a.get("topic_category", ""),
-                            "key_points": a.get("key_points", []),
+                    "key_points": a.get("key_points", []),
+                            "scenario_tags": a.get("scenario_tags", []),
                         })
                 subreddits_label = "+".join(pc["subreddits"])
                 summary = generate_product_summary(
@@ -814,9 +1167,11 @@ def run_analysis(
                     "post_count": pc["total_posts"],
                     "valid_post_count": pc["total_valid"],
                     "filtered_count": pc["total_filtered"],
+                    "source_breakdown": compute_source_breakdown(merged_posts),
                     "summary": summary,
                     "sentiment_distribution": sentiment_counts,
                     "topic_distribution": topic_counts,
+                    "scenario_distribution": scenario_counts,
                     "typical_posts": typical_posts_data,
                     "pain_points": structured.get("pain_points", []),
                     "strengths": structured.get("strengths", []),
@@ -875,8 +1230,8 @@ def run_analysis(
                 """INSERT OR REPLACE INTO post_analysis
                    (id, run_id, post_id, is_valid, filter_reason, topic_category,
                     sentiment_score, sentiment_label, sentiment_reason, key_points,
-                    is_typical, typical_reason)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    is_typical, typical_reason, scenario_tags)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 (
                     str(uuid.uuid4())[:8],
                     run_id,
@@ -890,6 +1245,7 @@ def run_analysis(
                     json.dumps(analysis.get("key_points", []), ensure_ascii=False),
                     1 if analysis.get("is_typical") else 0,
                     analysis.get("typical_reason", ""),
+                    json.dumps(analysis.get("scenario_tags", []), ensure_ascii=False),
                 ),
             )
         conn.commit()
@@ -943,6 +1299,7 @@ def run_analysis(
         # Build chart data from merged
         sentiment_counts = {"positive": 0, "negative": 0, "neutral": 0, "mixed": 0}
         topic_counts = {t: 0 for t in TOPIC_TAXONOMY}
+        scenario_counts = {s: 0 for s in SCENARIO_TAXONOMY}
         for a in merged_map.values():
             if a.get("is_valid", True):
                 lbl = a.get("sentiment_label", "neutral")
@@ -950,13 +1307,21 @@ def run_analysis(
                 tc = a.get("topic_category", "meta")
                 if tc in topic_counts:
                     topic_counts[tc] += 1
+                for st in a.get("scenario_tags", []):
+                    if st in scenario_counts:
+                        scenario_counts[st] += 1
 
-        chart_data = {"sentiment": sentiment_counts, "topics": topic_counts}
+        chart_data = {"sentiment": sentiment_counts, "topics": topic_counts, "scenarios": scenario_counts}
         product_chart_data[product_name] = chart_data
 
-        # Build typical posts data from merged
+        # Build typical posts data from merged.
+        # Re-rank across the FULL merged pool (all subreddits incl. non-reddit
+        # sources) instead of concatenating per-subreddit top-5s, so high-value
+        # posts from any source can surface (the old [:10] truncation dropped
+        # later-iterated subs entirely).
+        global_typical = select_typical_posts(merged_posts, merged_map, count=10)
         typical_posts_data = []
-        for tid in merged_typical[:10]:
+        for tid in global_typical:
             post = next((p for p in merged_posts if p["id"] == tid), None)
             if post:
                 a = merged_map.get(tid, {})
@@ -966,6 +1331,7 @@ def run_analysis(
                     "body": (post.get("body") or "")[:300],
                     "author": post.get("author", ""),
                     "url": post["url"],
+                    "source_platform": post.get("source_platform") or "reddit",
                     "num_comments": post.get("num_comments", 0),
                     "created_utc": post.get("created_utc", ""),
                     "sentiment_label": a.get("sentiment_label", "neutral"),
@@ -998,6 +1364,7 @@ def run_analysis(
             "post_count": pc["total_posts"],
             "valid_post_count": pc["total_valid"],
             "filtered_count": pc["total_filtered"],
+            "source_breakdown": compute_source_breakdown(merged_posts),
             "summary": summary,
             "sentiment_distribution": sentiment_counts,
             "topic_distribution": topic_counts,
@@ -1067,24 +1434,36 @@ def run_analysis(
     # Save report JSON to file
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
     report_json_str = json.dumps(all_report_data, indent=2, ensure_ascii=False)
-    report_filename = f"report_{run_id}_{now.strftime('%Y%m%d_%H%M%S')}.json"
-    report_path = REPORTS_DIR / report_filename
-    report_path.write_text(report_json_str, encoding="utf-8")
 
-    # Also update latest.json
-    (REPORTS_DIR / "latest.json").write_text(report_json_str, encoding="utf-8")
+    if scratch:
+        # ISOLATION MODE: write ONLY to the explicit scratch output path.
+        # Never touch latest.json, index.json, or wwwroot (deployed artifacts).
+        if output_path:
+            report_path = Path(output_path)
+        else:
+            report_path = REPORTS_DIR / f"_SCRATCH_report_{run_id}_{now.strftime('%Y%m%d_%H%M%S')}.json"
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(report_json_str, encoding="utf-8")
+        log.info("SCRATCH mode: wrote report to %s (no latest.json/index.json/wwwroot sync)", report_path)
+    else:
+        report_filename = f"report_{run_id}_{now.strftime('%Y%m%d_%H%M%S')}.json"
+        report_path = Path(output_path) if output_path else (REPORTS_DIR / report_filename)
+        report_path.write_text(report_json_str, encoding="utf-8")
 
-    # Generate index.json for all reports
-    _generate_report_index(REPORTS_DIR)
+        # Also update latest.json
+        (REPORTS_DIR / "latest.json").write_text(report_json_str, encoding="utf-8")
 
-    # Sync to wwwroot for frontend
-    wwwroot_reports = Path(__file__).resolve().parent.parent / "wwwroot" / "data" / "reports"
-    if wwwroot_reports.exists():
-        import shutil
-        shutil.copy2(report_path, wwwroot_reports / report_filename)
-        (wwwroot_reports / "latest.json").write_text(report_json_str, encoding="utf-8")
-        shutil.copy2(REPORTS_DIR / "index.json", wwwroot_reports / "index.json")
-        log.info("Synced report to wwwroot")
+        # Generate index.json for all reports
+        _generate_report_index(REPORTS_DIR)
+
+        # Sync to wwwroot for frontend
+        wwwroot_reports = Path(__file__).resolve().parent.parent / "wwwroot" / "data" / "reports"
+        if wwwroot_reports.exists():
+            import shutil
+            shutil.copy2(report_path, wwwroot_reports / report_path.name)
+            (wwwroot_reports / "latest.json").write_text(report_json_str, encoding="utf-8")
+            shutil.copy2(REPORTS_DIR / "index.json", wwwroot_reports / "index.json")
+            log.info("Synced report to wwwroot")
 
     conn.close()
 
@@ -1095,7 +1474,7 @@ def run_analysis(
     log.info("Posts analyzed: %d (filtered: %d)", total_posts_analyzed, total_filtered)
     log.info("Products: %s", ", ".join(product_summaries.keys()))
     log.info("Report saved: %s", report_path)
-    log.info("Database: %s", DB_PATH)
+    log.info("Database: %s", active_db)
 
     return all_report_data
 
@@ -1117,6 +1496,13 @@ def main():
                         help="Analysis period end date, inclusive (overrides --days)")
     parser.add_argument("--max-posts-per-sub", type=int, default=0, metavar="N",
                         help="Max posts per subreddit (0=all, sorted by score desc)")
+    parser.add_argument("--db", default=None, metavar="PATH",
+                        help="Source SQLite DB (default: data/reddit.db). Use for isolated/scratch runs.")
+    parser.add_argument("--output", default=None, metavar="PATH",
+                        help="Explicit report output path (default: data/reports/report_<id>_<ts>.json)")
+    parser.add_argument("--scratch", action="store_true",
+                        help="Isolation mode: write ONLY to --output (or a _SCRATCH_ file); "
+                             "skip latest.json, index.json, and wwwroot sync.")
     args = parser.parse_args()
 
     # Auto-detect working LLM endpoint if user didn't override
@@ -1137,8 +1523,9 @@ def main():
             log.error("No LLM endpoint available. Tried: %s", [f[0] for f in LLM_FALLBACKS])
             sys.exit(1)
 
-    if not DB_PATH.exists():
-        log.error("Database not found at %s. Run scrape.py first.", DB_PATH)
+    active_db = Path(args.db) if args.db else DB_PATH
+    if not active_db.exists():
+        log.error("Database not found at %s. Run scrape.py first.", active_db)
         sys.exit(1)
 
     run_analysis(
@@ -1149,6 +1536,9 @@ def main():
         start_date=args.start_date,
         end_date=args.end_date,
         max_posts_per_sub=args.max_posts_per_sub,
+        db_path=active_db,
+        output_path=args.output,
+        scratch=args.scratch,
     )
 
 

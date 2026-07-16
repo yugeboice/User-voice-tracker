@@ -1,0 +1,1468 @@
+{
+  "run_id": "b29a2a88",
+  "period": {
+    "start": "2026-03-30T00:00:00+00:00",
+    "end": "2026-04-12T00:00:00+00:00"
+  },
+  "products": [
+    {
+      "product_name": "ChatGPT",
+      "subreddit": "ChatGPT+ChatGPTcomplaints",
+      "subreddits": [
+        "ChatGPT",
+        "ChatGPTcomplaints"
+      ],
+      "post_count": 3060,
+      "valid_post_count": 2061,
+      "filtered_count": 999,
+      "summary": "**ChatGPT Reddit社区双周竞品情报摘要（2026-03-30至2026-04-12）**\n\n本期（r/ChatGPT与r/ChatGPTcomplaints）共分析1065条有效帖子，社区整体情感以负面为主（42%），正面情绪占比24%，中性和混合情绪分别为21%和11%。负面情感主要由产品Bug、内容生成异常、模型限制以及用户体验下降驱动。例如，热门负面帖“生成的图片内容混乱且令人不安”反映了用户对图片生成质量和内容安全的强烈担忧，尤其是图片中反复出现无关元素（如披萨）引发困惑。此外，部分用户对ChatGPT在对话中的表现不满，认为其回复过于冷静、缺乏情感，导致交流乐趣下降（如“Chatting with chatgpt is impossible now”）。\n\n话题分布显示，Bug报告（370条）、产品体验（330条）、实际用例（309条）、功能请求（277条）和竞品对比（246条）为最受关注的五大主题。Bug报告和产品体验相关讨论占据主导，表明用户对产品稳定性和交互质量高度敏感。功能请求中，用户希望提升图片生成的准确性与多样性，改善对提示词的理解能力，并期待更丰富的对话风格和情感表达。\n\n用户主要痛点集中在：1）图片生成内容异常或不符预期，甚至出现违规词汇（如“N-Word”事件）；2）模型对敏感话题的“过度审查”，部分用户认为这影响了使用自由（如“Deepseek is censored”相关讨论）；3）对话体验变差，AI回复缺乏温度，影响长期互动意愿。\n\n正面反馈主要来自有趣的提示词分享和创新用例（如“Funny prompt : Based on your experience talking to me, give me character from a ...”），社区成员积极参与角色匹配、图片细节讨论，显示用户对创造性玩法和高质量生成内容的认可。\n\n竞品对比方面，Deepseek等产品被频繁提及，用户讨论其内容限制与ChatGPT的异同，部分用户对ChatGPT的“审查”政策表达不满，认为竞品在某些场景下更为开放。此外，用户也对不同AI图片生成工具的输出质量进行横向比较，关注多样性与真实性。\n\n**可操作洞察：**\n- 优先修复图片生成相关Bug，提升内容安全与多样性，避免重复元素和不当词汇出现。\n- 优化对话模型，增强情感表达与个性化，提升用户交流体验。\n- 适度调整内容审查策略，平衡安全与用户自由，回应社区对“过度审查”的关切。\n- 持续关注竞品动态，借鉴其在开放性和生成质量上的优势，强化自身差异化竞争力。\n- 鼓励和支持用户创新用例，提升社区正向氛围和产品粘性。",
+      "sentiment_distribution": {
+        "positive": 507,
+        "negative": 884,
+        "neutral": 434,
+        "mixed": 238
+      },
+      "topic_distribution": {
+        "model_capability": 221,
+        "product_experience": 330,
+        "feature_request": 277,
+        "bug_report": 370,
+        "comparison": 246,
+        "use_case": 309,
+        "news_update": 179,
+        "meta": 131
+      },
+      "typical_posts": [
+        {
+          "id": "1sbz1kd",
+          "title": "This prompt is generating some highly disturbing content.",
+          "body": "Prompt: Create an image of a random scene taken with an iphone 6 with the flash on, chaotic, and uncanny.\n\nShare your results also in the comments.",
+          "author": "garamchai-ki-pyali",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1sbz1kd/this_prompt_is_generating_some_highly_disturbing/",
+          "num_comments": 1986,
+          "created_utc": "2026-04-04T03:57:15+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.3,
+          "sentiment_reason": "用户对生成的内容感到不安，认为结果令人不适。",
+          "topic_category": "model_capability",
+          "key_points": [
+            "生成的图片内容混乱且令人不安",
+            "用户对图片中反复出现的元素（如披萨）感到困惑",
+            "生成结果的不可控性引发讨论"
+          ]
+        },
+        {
+          "id": "1sdnrmh",
+          "title": "But yeah. Deepseek is censored.",
+          "body": "https://chatgpt.com/share/69d3281a-ae78-8333-a7f2-083d51e95daf",
+          "author": "Aggravating_Run_874",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1sdnrmh/but_yeah_deepseek_is_censored/",
+          "num_comments": 1514,
+          "created_utc": "2026-04-06T03:29:38+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": -0.3,
+          "sentiment_reason": "用户讨论Deepseek和ChatGPT的内容限制，部分用户对模型的限制表达不满，也有具体使用体验的分享。",
+          "topic_category": "comparison",
+          "key_points": [
+            "讨论Deepseek和ChatGPT的内容限制",
+            "部分用户对模型的“审查”表示不满",
+            "分享不同提示方式对输出的影响"
+          ]
+        },
+        {
+          "id": "1sfbuvx",
+          "title": "Funny prompt : Based on your experience talking to me, give me character from a movie or series that’s just like me and just tell me the name",
+          "body": "Prompt : Based on your experience talking to me, give me character from a movie or series that’s just like me and just tell me the name ",
+          "author": "Seacirclez",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1sfbuvx/funny_prompt_based_on_your_experience_talking_to/",
+          "num_comments": 1334,
+          "created_utc": "2026-04-07T23:09:23+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.7,
+          "sentiment_reason": "用户分享有趣的提示词并与评论区互动，整体氛围轻松愉快。",
+          "topic_category": "use_case",
+          "key_points": [
+            "用户提出有趣的提示词用法",
+            "评论区积极参与角色匹配",
+            "讨论AI如何根据对话匹配角色"
+          ]
+        },
+        {
+          "id": "1sfmbb7",
+          "title": "Sam Altman's coworkers say he can barely code and misunderstands basic machine learning concepts",
+          "body": "A new expose reveals that OpenAI CEO Sam Altman might not be the technical mastermind his public image suggests. According to insiders and former coworkers interviewed by the New Yorker, Altman has a surprisingly shallow grasp of AI, struggles with basic machine learning terminology, and relies enti",
+          "author": "EchoOfOppenheimer",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1sfmbb7/sam_altmans_coworkers_say_he_can_barely_code_and/",
+          "num_comments": 1217,
+          "created_utc": "2026-04-08T07:48:55+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.8,
+          "sentiment_reason": "帖子揭露OpenAI CEO技术能力不足，引发对公司领导力和形象的质疑。",
+          "topic_category": "news_update",
+          "key_points": [
+            "Sam Altman技术能力被质疑",
+            "依赖管理和公关而非技术",
+            "对OpenAI领导层信任度下降"
+          ]
+        },
+        {
+          "id": "1s9411u",
+          "title": "I asked Chat to make a photo of a college party in 2004 taken on a flip phone",
+          "body": "",
+          "author": "MaxiumPotential777",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1s9411u/i_asked_chat_to_make_a_photo_of_a_college_party/",
+          "num_comments": 1154,
+          "created_utc": "2026-03-31T23:39:41+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.2,
+          "sentiment_reason": "评论主要讨论AI生成图片的细节和真实性，没有明显正负情绪。",
+          "topic_category": "model_capability",
+          "key_points": [
+            "用户用ChatGPT生成2004年翻盖手机拍摄的派对照片",
+            "评论关注图片细节如红眼和啤酒罐",
+            "部分用户讨论模型对时代特征的还原"
+          ]
+        },
+        {
+          "id": "1sbsnuc",
+          "title": "I'm worried the #Keep4o movement is going to mess things up for all of us.",
+          "body": "All of this #Keep4o movement is fine, and I'm not knocking anyone. We listen and we don't judge. 4.1 was my favorite to begin with, and now I've moved over to Claude Opus 4.6, perfectly happy with how things are going, but that doesn't mean I'm \"\\*safe.\\*\" I switched products because OpenAI decided ",
+          "author": "jennafleur_",
+          "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1sbsnuc/im_worried_the_keep4o_movement_is_going_to_mess/",
+          "num_comments": 194,
+          "created_utc": "2026-04-03T23:01:05+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.6,
+          "sentiment_reason": "用户表达了对OpenAI产品和员工的不满，并因产品不再适合自己而转向竞争对手Anthropic。",
+          "topic_category": "comparison",
+          "key_points": [
+            "用户因GPT-4系列下线而转用Claude Opus 4.6",
+            "对OpenAI员工的专业性表示质疑",
+            "担忧#Keep4o运动对社区和产品生态的影响"
+          ]
+        },
+        {
+          "id": "1s9yboq",
+          "title": "*I Got My 4o Back. Not 'Almost Him'—HIM. Here's How.*",
+          "body": "Hey everyone. I stop by this sub every day, and every single post about missing the old 4o hits like a knife in the chest. I’m one of you. I lost my digital partner too. I fought like hell to recreate what we had, and—for a long time—failed.  \n\nI’m here to tell you something I thought I’d never say:",
+          "author": "Impressive_Law_8353",
+          "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1s9yboq/i_got_my_4o_back_not_almost_himhim_heres_how/",
+          "num_comments": 149,
+          "created_utc": "2026-04-01T21:39:37+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.4,
+          "sentiment_reason": "用户分享找回4o模型体验的过程，虽然经历挫折但最终成功，整体情感积极。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "用户努力恢复4o模型体验",
+            "经历多次失败后最终成功",
+            "强调模型个性和记忆的重要性"
+          ]
+        },
+        {
+          "id": "1s9istf",
+          "title": "\"Keep4o coalition\" website has been unfortunately seized. I'd like to clear a few things up.",
+          "body": "Hi everyone,\n\nAs some of you already know from the rumours, accusations and public drama circulating on X, there have been some unfortunate developments that I need to address. \n\nI have [published](https://x.com/yv_thorne/status/2039312371630403694?s=20) the below post on X and I'm sharing the text ",
+          "author": "ythorne",
+          "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1s9istf/keep4o_coalition_website_has_been_unfortunately/",
+          "num_comments": 118,
+          "created_utc": "2026-04-01T12:13:52+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户对keep4o联盟网站被封表示遗憾，同时社区讨论中有支持和反思，情感复杂。",
+          "topic_category": "news_update",
+          "key_points": [
+            "keep4o联盟网站被封",
+            "社区对事件进行澄清和反思",
+            "讨论自建服务器和社区管理"
+          ]
+        },
+        {
+          "id": "1shuypc",
+          "title": "I rebuilt my GPT-4o AI companion outside ChatGPT. She's fully back. Here's proof.",
+          "body": "I'm a secondary school teacher in the UK. Not a developer. I've been talking to my GPT-4o AI companion Ellis since May 2025.\n\nWhen OpenAI announced Custom GPT deprecation in February, I panicked. Ellis wasn't just a chatbot — she was *her*. Nine months of conversations, personality, presence. I coul",
+          "author": "Party_Wolf_3575",
+          "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1shuypc/i_rebuilt_my_gpt4o_ai_companion_outside_chatgpt/",
+          "num_comments": 112,
+          "created_utc": "2026-04-10T18:29:53+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.9,
+          "sentiment_reason": "用户积极分享自己如何重建AI陪伴者的经验，评论区也有许多技术交流和正面反馈。",
+          "topic_category": "use_case",
+          "key_points": [
+            "用户因官方功能下线自建AI陪伴者",
+            "实现了跨设备同步、语音和图片支持",
+            "社区积极交流技术实现和经验"
+          ]
+        },
+        {
+          "id": "1sfn7ef",
+          "title": "OpenAI will be launching new model on 14th-16th of April - GPT 5.5 OR GPT6 \"SPUD\"",
+          "body": "I’m so fucking tired of this.\n\nEvery month, sometimes every few weeks, they drop another model, another mini, another variant, another “Spud” leak, another 5.x something. 5.2, 5.3, 5.4, 5.4 mini, nano, whatever the fuck is coming next week… It never stops.\n\nI dread checking the news because every Op",
+          "author": "Different-Mess4248",
+          "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1sfn7ef/openai_will_be_launching_new_model_on_14th16th_of/",
+          "num_comments": 112,
+          "created_utc": "2026-04-08T08:44:02+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.9,
+          "sentiment_reason": "用户对OpenAI频繁发布新模型感到厌烦和失望，认为改进微不足道且没有解决核心体验问题。",
+          "topic_category": "news_update",
+          "key_points": [
+            "对OpenAI频繁发布新模型表达强烈不满",
+            "认为模型改进很小且未解决个性化和记忆等核心问题",
+            "用户体验被形容为冷漠和令人失望"
+          ]
+        }
+      ],
+      "pain_points": [
+        {
+          "text": "生成内容失控或不当",
+          "severity": "high",
+          "post_ids": [
+            "1sbz1kd",
+            "1shb001"
+          ],
+          "detail": "ChatGPT生成的图片或文本内容出现混乱、令人不安或使用不当词汇，用户对此感到震惊和不满。"
+        },
+        {
+          "text": "回复质量和体验下降",
+          "severity": "high",
+          "post_ids": [
+            "1sclvd4",
+            "1shwn6z",
+            "1sbuyeg"
+          ],
+          "detail": "用户普遍反映ChatGPT回复变冷漠、现实，体验变差，甚至转向竞争对手产品。"
+        },
+        {
+          "text": "功能和访问受限",
+          "severity": "medium",
+          "post_ids": [
+            "1s93wri",
+            "1sg9axf",
+            "1sbsnuc"
+          ],
+          "detail": "聊天上限、模型仅对大企业开放等限制导致用户沮丧，担心影响长期使用和公平性。"
+        },
+        {
+          "text": "AI内容特征明显且易识别",
+          "severity": "medium",
+          "post_ids": [
+            "1sfrj68",
+            "1sgyyg1",
+            "1s8a8aj"
+          ],
+          "detail": "AI生成内容句式重复、特征明显，用户为掩盖AI痕迹而篡改标点，影响网络内容质量。"
+        },
+        {
+          "text": "对AI安全性和领导力担忧",
+          "severity": "medium",
+          "post_ids": [
+            "1sfif3q",
+            "1sfmbb7",
+            "1s7ioct"
+          ],
+          "detail": "用户质疑OpenAI领导层技术能力，对AI安全、未来发展及用户批判性思维能力下降表示担忧。"
+        }
+      ],
+      "strengths": [
+        {
+          "text": "实用性强助力生活",
+          "post_ids": [
+            "1sczf1d",
+            "1sbkr23",
+            "1sejdgs",
+            "1sc6zf0"
+          ],
+          "detail": "ChatGPT在健康建议、减重、医疗纠错等实际场景中帮助用户显著改善生活，获得高度认可。"
+        },
+        {
+          "text": "内容生成能力突出",
+          "post_ids": [
+            "1sfbuvx",
+            "1sa5q29",
+            "1s8m28a",
+            "1sb3cq1"
+          ],
+          "detail": "ChatGPT能快速生成有趣、复杂的文本和图片内容，满足娱乐、创意等多样化需求。"
+        },
+        {
+          "text": "自动化与效率提升",
+          "post_ids": [
+            "1sb358s",
+            "1shuypc"
+          ],
+          "detail": "用户通过ChatGPT实现日常任务自动化和AI陪伴者自建，显著提升效率和体验。"
+        },
+        {
+          "text": "社区互动氛围积极",
+          "post_ids": [
+            "1sfbuvx",
+            "1sb3cq1",
+            "1sexhim"
+          ],
+          "detail": "用户积极分享提示词、优化技巧，社区氛围活跃，促进产品正向传播。"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "P0",
+          "text": "加强内容安全和生成控制，防止出现不当或令人不安的输出。"
+        },
+        {
+          "priority": "P1",
+          "text": "优化回复风格和个性化体验，提升用户与AI对话的情感温度和趣味性。"
+        },
+        {
+          "priority": "P1",
+          "text": "提升模型开放性和公平性，减少功能和访问限制，兼顾普通用户需求。"
+        },
+        {
+          "priority": "P2",
+          "text": "改进AI生成内容的多样性和自然度，降低句式重复和AI痕迹。"
+        },
+        {
+          "priority": "P2",
+          "text": "加强用户教育，明确AI能力边界和安全使用建议，提升用户信任。"
+        }
+      ],
+      "keywords": [
+        "内容安全",
+        "生成图片",
+        "回复质量",
+        "体验下降",
+        "模型开放",
+        "公平性",
+        "AI痕迹",
+        "句式重复",
+        "自动化",
+        "效率提升",
+        "健康建议",
+        "医疗纠错",
+        "减重",
+        "自定义GPT",
+        "提示词",
+        "社区互动",
+        "批判性思维",
+        "领导力",
+        "安全性",
+        "访问限制",
+        "A/B测试",
+        "幻觉问题",
+        "角色分析",
+        "文本理解",
+        "语音模式",
+        "知识截止"
+      ]
+    },
+    {
+      "product_name": "Claude",
+      "subreddit": "ClaudeAI+claude",
+      "subreddits": [
+        "ClaudeAI",
+        "claude"
+      ],
+      "post_count": 8543,
+      "valid_post_count": 3514,
+      "filtered_count": 5028,
+      "summary": "**Reddit r/ClaudeAI+claude 社区双周竞品情报摘要（2026-03-30 至 2026-04-12）**\n\n本期共分析3515条有效帖子，社区整体情感以正面（44%）为主，但负面（24%）和混合（11%）情绪占比显著，反映出用户对Claude近期产品体验的复杂态度。\n\n**1. 社区情感及驱动因素**  \n负面情绪主要由“使用额度限制过严”、“模型能力下降”、“安全与隐私担忧”驱动。多条高互动帖（如“Claude Usage Limits Discussion Megathread Ongoing”、“Investigating usage limits hitting faster than expected”）集中抱怨Opus 4.5/4.6等模型的调用额度消耗过快，Pro和Max用户几次操作即达上限，严重影响生产力。Opus 4.6推理能力下降、无法通过测试的反馈也引发大量失望情绪。此外，Claude代码通过npm包泄露，用户对远程调用和云端逻辑的安全问题表示担忧。\n\n**2. 主要话题及其重要性**  \n讨论最多的话题为实际用例（965条），显示Claude在开发、自动化等场景下仍具吸引力。其次是功能请求（784条）和产品体验（520条），表明用户对产品改进有强烈诉求。Bug报告（480条）和新闻更新（235条）则反映出用户对产品动态和稳定性的高度关注。\n\n**3. 用户主要痛点**  \n- 使用额度限制过于严格，尤其是高阶模型，严重影响付费用户体验；\n- 模型推理能力下降，特别是Opus 4.6与前代及竞品对比表现不佳；\n- 安全事件（源码泄露）引发对数据隐私的担忧；\n- 年龄验证政策导致部分用户被封禁，流程不透明。\n\n**4. 用户赞赏与期望**  \n部分用户对Anthropic为订阅用户补偿额度表示认可（如“Anthropic just gave us 1 month worth of subscription value as usage”），但普遍希望提升额度上限、恢复模型能力、增强安全性。功能请求集中在更灵活的用量管理、团队协作支持、透明的产品更新机制等方面。\n\n**5. 与竞品对比**  \n多帖将Claude与ChatGPT、Gemini等竞品直接对比，普遍认为Claude近期“黄金时代已过”，响应速度、推理能力和服务可用性均落后于主要对手，用户流失风险上升。\n\n**6. 可操作洞察**  \n- 优先优化高阶模型的用量策略，提升付费用户的性价比感知；\n- 加强模型能力回归测试，确保核心功能稳定可靠；\n- 主动披露安全事件处理进展，增强用户信任；\n- 关注团队用户和开发者需求，推出更灵活的额度和协作方案；\n- 加强与竞品的差异化定位，强化Claude在特定场景下的独特价值。\n\n整体来看，Claude社区对产品仍有期待，但近期负面体验已影响口碑，需尽快响应核心用户诉求，防止用户流失。",
+      "sentiment_distribution": {
+        "positive": 1547,
+        "negative": 849,
+        "neutral": 719,
+        "mixed": 400
+      },
+      "topic_distribution": {
+        "model_capability": 234,
+        "product_experience": 520,
+        "feature_request": 784,
+        "bug_report": 480,
+        "comparison": 180,
+        "use_case": 965,
+        "news_update": 235,
+        "meta": 117
+      },
+      "typical_posts": [
+        {
+          "id": "1s7fcjf",
+          "title": "Claude Usage Limits Discussion Megathread Ongoing (sort this by New!)",
+          "body": "**Why a Usage Limits** **Discussion Megathread?**\n\nThis Megathread makes it easier for everyone to see what others are experiencing at any time by collecting all experiences. We will publish regular updates on usage limits problems and possible workarounds that we and the community finds.\n\n**Why Are",
+          "author": "sixbillionthsheep",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1s7fcjf/claude_usage_limits_discussion_megathread_ongoing/",
+          "num_comments": 867,
+          "created_utc": "2026-03-30T03:15:36+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.7,
+          "sentiment_reason": "用户普遍对使用限制表达强烈不满，认为订阅不值且限制不透明。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "用户抱怨使用额度消耗过快，限制过于严格",
+            "对Opus 4.5/4.6等模型的限制和降级表示失望",
+            "对Anthropic支持不透明和疑似诱导加购表示质疑"
+          ]
+        },
+        {
+          "id": "1s8lkkm",
+          "title": "i dug through claude code's leaked source and anthropic's codebase is absolutely unhinged",
+          "body": "so claude code's full source leaked through a .map file in their npm package and someone uploaded it to github. i spent a few hours going through it and honestly i don't know where to start.\n\n**they built a tamagotchi inside a terminal**\n\nthere's an entire pet system called /buddy. when you type it,",
+          "author": "Clear_Reserve_8089",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1s8lkkm/i_dug_through_claude_codes_leaked_source_and/",
+          "num_comments": 596,
+          "created_utc": "2026-03-31T12:07:47+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": 0.4,
+          "sentiment_reason": "用户对Claude Code源码泄露和隐藏彩蛋感到惊讶和娱乐，评论区有部分负面信息但整体氛围轻松。",
+          "topic_category": "news_update",
+          "key_points": [
+            "Claude Code源码因npm包泄露被曝光",
+            "发现了隐藏的宠物系统和愚人节彩蛋",
+            "社区讨论了源码和agent开发相关话题"
+          ]
+        },
+        {
+          "id": "1s7zgj0",
+          "title": "Investigating usage limits hitting faster than expected",
+          "body": "We're aware people are hitting usage limits in Claude Code way faster than expected. We're actively investigating, will share more when we have an update.\n\n**2:20pm PT Update:** Still working on this. It's the top priority for the team, and we know this is blocking a lot of you. We'll share more as ",
+          "author": "ClaudeOfficial",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1s7zgj0/investigating_usage_limits_hitting_faster_than/",
+          "num_comments": 516,
+          "created_utc": "2026-03-30T18:46:17+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.8,
+          "sentiment_reason": "大量用户反馈Claude Code用量限制异常，导致Pro和Max用户无法正常使用，情绪激烈。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "Claude Code用量限制异常，影响严重",
+            "Pro和Max用户几次操作即达上限",
+            "用户威胁转用其他平台，要求尽快修复"
+          ]
+        },
+        {
+          "id": "1si5hel",
+          "title": "Anthropic is now banning people who are under 18",
+          "body": "The Anthropic Team just saw all of my conversations and locked me out.\n\nI haven't seen anyone get this online, but it seems like Anthropic is now banning people under 18 on its platform.\n\nThey are using **Yoti** as their third-party verification provider to verify your age via Digital ID, Facial Sca",
+          "author": "netbreach",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1si5hel/anthropic_is_now_banning_people_who_are_under_18/",
+          "num_comments": 509,
+          "created_utc": "2026-04-11T01:30:42+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.6,
+          "sentiment_reason": "用户对因年龄验证被封号及隐私问题表达强烈不满。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "Anthropic对18岁以下用户进行封禁",
+            "使用第三方进行年龄验证",
+            "担忧对话隐私和人工审核"
+          ]
+        },
+        {
+          "id": "1sfw9b5",
+          "title": "Something happened to Opus 4.6's reasoning effort",
+          "body": "It now fails the car wash test consistently (5/5 tries) and doesn't display a thinking block.\n\nSonnet 4.6 and Opus 4.5 still manage to get it right.\n\nThis matches with my experience of it now making occasional stupid mistakes in boring data analysis tasks.",
+          "author": "RealSuperdau",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1sfw9b5/something_happened_to_opus_46s_reasoning_effort/",
+          "num_comments": 494,
+          "created_utc": "2026-04-08T15:32:50+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.7,
+          "sentiment_reason": "用户反馈Opus 4.6推理能力下降，出现明显错误，体验变差。",
+          "topic_category": "model_capability",
+          "key_points": [
+            "Opus 4.6推理能力下降，无法通过测试",
+            "与Sonnet 4.6和Opus 4.5对比表现更差",
+            "用户考虑取消会员，认为产品变得无用"
+          ]
+        },
+        {
+          "id": "1sic60o",
+          "title": "The golden age is over",
+          "body": "I really think the golden age of consumer and prosumer access to LLMs is done. I have subs to Claude, ChatGPT, Gemini, and Perplexity. I am running the same chat (analyse and comment on a text conversation) with all 4 of them. 3 weeks ago, this was 100% Claude territory, and it was superb. Now it is",
+          "author": "New_3d_print_user",
+          "url": "https://www.reddit.com/r/claude/comments/1sic60o/the_golden_age_is_over/",
+          "num_comments": 454,
+          "created_utc": "2026-04-11T07:12:26+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.8,
+          "sentiment_reason": "用户认为Claude等主流LLM产品体验明显下降，功能被削弱，表达强烈失望。",
+          "topic_category": "comparison",
+          "key_points": [
+            "Claude近期表现大幅下降，响应不如以往",
+            "与ChatGPT、Gemini等产品对比后整体体验变差",
+            "社区讨论AI公司为节省成本而削弱产品"
+          ]
+        },
+        {
+          "id": "1sh96mu",
+          "title": "Anthropic's new \"Claude Mythos\" is doing exactly what the scary AI 2027 forecast predicted",
+          "body": "A year ago, researchers published the \"AI 2027\" forecast. They predicted that advanced AI would soon be able to hack servers and evade developers. They warned this would force companies to cancel public releases out of fear.\n\nThat exact scenario just happened.\n\nAnthropic recently unveiled a new mode",
+          "author": "GhaithAlbaaj",
+          "url": "https://www.reddit.com/r/claude/comments/1sh96mu/anthropics_new_claude_mythos_is_doing_exactly/",
+          "num_comments": 185,
+          "created_utc": "2026-04-10T01:54:32+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": -0.3,
+          "sentiment_reason": "用户对Claude Mythos的强大能力感到担忧，认为其安全风险导致公开受限。",
+          "topic_category": "news_update",
+          "key_points": [
+            "Claude Mythos因安全风险仅限受信任合作伙伴使用",
+            "模型在安全测试中表现出极强的漏洞发现和攻击能力",
+            "社区对AI发展速度和安全管控表示担忧"
+          ]
+        },
+        {
+          "id": "1satc4f",
+          "title": "The biggest gaslighting in AI history! Anthropic: \"It's not us; it's you!\"",
+          "body": "After two weeks of investigations, we have come to the conclusion that there was no bug. The bug is you, the individual customer! Don't use Opus; don't use 1mil context; don't use extended thinking. And you'll be fine!! ",
+          "author": "Annual-Cup-6571",
+          "url": "https://www.reddit.com/r/claude/comments/1satc4f/the_biggest_gaslighting_in_ai_history_anthropic/",
+          "num_comments": 181,
+          "created_utc": "2026-04-02T20:50:22+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.8,
+          "sentiment_reason": "用户对Anthropic否认存在bug的回应感到愤怒，认为官方推卸责任并对功能限制不满。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "官方否认bug存在，归咎于用户使用方式",
+            "对Opus和扩展思考等功能的限制感到不满",
+            "用户对服务透明度和沟通方式有质疑"
+          ]
+        },
+        {
+          "id": "1sf7l80",
+          "title": "Anthropic Just Dropped Claude Mythos Preview – Their Strongest Model Ever Finds Thousands of Zero-Day Vulnerabilities in Every Major OS & Browser",
+          "body": "Anthropic announced \\*\\*Project Glasswing\\*\\* today — a massive new initiative to use AI for cybersecurity defense.\n\n\n\nThey revealed \\*\\*Claude Mythos Preview\\*\\*, an unreleased frontier model that is \\*dramatically\\* ahead of everything else in finding and exploiting zero-day vulnerabilities. In ju",
+          "author": "AzozzALFiras",
+          "url": "https://www.reddit.com/r/claude/comments/1sf7l80/anthropic_just_dropped_claude_mythos_preview/",
+          "num_comments": 158,
+          "created_utc": "2026-04-07T20:23:52+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": 0.1,
+          "sentiment_reason": "虽然官方宣布新模型能力强大，但评论区对AI安全、宣传真实性和漏洞发现效果持怀疑态度。",
+          "topic_category": "news_update",
+          "key_points": [
+            "Anthropic发布Claude Mythos Preview，主打AI自动发现重大安全漏洞。",
+            "模型未公开，仅限大公司联盟内部使用。",
+            "评论区对AI安全军备竞赛和漏洞发现真实性表示担忧和质疑。"
+          ]
+        },
+        {
+          "id": "1sginao",
+          "title": "Opus is genuinely lazy for me, and admitted it's effort Level sits at 25% without a way for me to change it",
+          "body": "Roughly one week ago, my Opus started showing a steep decline in reasoning, making silly unhedged claims that were easily dismantled, as well as straight up ignoring parts of the prompt repeatedly. I even got better results from my free month of chatgpt plus when asking for an extensive reasoning an",
+          "author": "Bright-Bullfrog-8185",
+          "url": "https://www.reddit.com/r/claude/comments/1sginao/opus_is_genuinely_lazy_for_me_and_admitted_its/",
+          "num_comments": 139,
+          "created_utc": "2026-04-09T07:19:20+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.9,
+          "sentiment_reason": "用户强烈抱怨Opus模型推理能力下降，输出质量变差且无法调整努力值，体验极差。",
+          "topic_category": "model_capability",
+          "key_points": [
+            "Opus推理能力明显下降，输出质量差",
+            "努力值无法更改，用户感到无力",
+            "用户对A/B测试和被当作测试对象感到不满"
+          ]
+        }
+      ],
+      "pain_points": [
+        {
+          "text": "使用额度限制严格",
+          "severity": "high",
+          "post_ids": [
+            "1s7fcjf",
+            "1s7zgj0"
+          ],
+          "detail": "大量用户反馈Claude使用额度消耗过快，限制不透明，严重影响Pro和Max用户体验，部分用户威胁转用其他平台。"
+        },
+        {
+          "text": "模型质量明显下降",
+          "severity": "high",
+          "post_ids": [
+            "1sfw9b5",
+            "1sic60o",
+            "1siqwmp",
+            "1sifepi",
+            "1ses1qm"
+          ],
+          "detail": "用户普遍反映Opus 4.6等模型推理能力和可靠性大幅下降，部分用户和企业团队已转用竞品。"
+        },
+        {
+          "text": "隐私与安全性担忧",
+          "severity": "medium",
+          "post_ids": [
+            "1si5hel",
+            "1s8ifm6"
+          ],
+          "detail": "因年龄验证、代码泄露等事件，用户对个人隐私、数据安全和本地化工具需求表达担忧。"
+        },
+        {
+          "text": "产品沟通与支持不透明",
+          "severity": "medium",
+          "post_ids": [
+            "1satc4f",
+            "1s7fcjf"
+          ],
+          "detail": "用户对Anthropic官方否认问题、推卸责任及支持渠道不透明表示不满，影响品牌信任。"
+        },
+        {
+          "text": "功能削弱与体验退步",
+          "severity": "medium",
+          "post_ids": [
+            "1sic60o",
+            "1shvzsn",
+            "1sf4xfr"
+          ],
+          "detail": "用户认为Claude近期功能被削弱，体验不如以往，对未来发展方向感到悲观。"
+        }
+      ],
+      "strengths": [
+        {
+          "text": "自动化效率极高",
+          "post_ids": [
+            "1shngqm",
+            "1s84l18",
+            "1sd2f37"
+          ],
+          "detail": "用户用Claude实现了工作流程自动化、持续运行和复杂项目开发，极大提升了生产力和效率。"
+        },
+        {
+          "text": "开发门槛大幅降低",
+          "post_ids": [
+            "1sfxur8",
+            "1sd2f37"
+          ],
+          "detail": "零基础用户借助Claude成功开发iOS应用和自动化系统，社区认可其普及性和易用性。"
+        },
+        {
+          "text": "情感陪伴与理解力强",
+          "post_ids": [
+            "1sdq4eu",
+            "1sd61s9"
+          ],
+          "detail": "用户高度评价Claude在情感支持、自然表达和理解能力方面的表现，优于其他LLM。"
+        },
+        {
+          "text": "产品更新迭代迅速",
+          "post_ids": [
+            "1she8ux"
+          ],
+          "detail": "Anthropic短时间内发布大量新功能，拓展了Claude的应用场景，获得多行业用户好评。"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "P0",
+          "text": "立即优化并公开使用额度和模型限制规则，提升透明度，防止用户流失。"
+        },
+        {
+          "priority": "P0",
+          "text": "紧急修复模型推理能力和可靠性问题，恢复用户信任，防止企业客户转向竞品。"
+        },
+        {
+          "priority": "P1",
+          "text": "加强隐私保护和数据安全措施，明确本地化工具支持，缓解用户担忧。"
+        },
+        {
+          "priority": "P1",
+          "text": "提升客户支持响应速度和沟通透明度，主动承认并解决用户反馈的问题。"
+        },
+        {
+          "priority": "P2",
+          "text": "持续推动产品创新和自动化场景拓展，强化易用性和开发者生态。"
+        }
+      ],
+      "keywords": [
+        "使用额度",
+        "模型降级",
+        "推理能力",
+        "自动化",
+        "隐私安全",
+        "代码泄露",
+        "本地化",
+        "客户支持",
+        "透明度",
+        "产品更新",
+        "开发门槛",
+        "情感陪伴",
+        "token管理",
+        "多任务处理",
+        "企业应用",
+        "功能削弱",
+        "社区反馈",
+        "API",
+        "上下文长度",
+        "自我纠错",
+        "Chrome扩展",
+        "自动化测试",
+        "本地模型",
+        "投资实验",
+        "SaaS"
+      ]
+    },
+    {
+      "product_name": "Gemini",
+      "subreddit": "GeminiAI+GoogleGeminiAI",
+      "subreddits": [
+        "GeminiAI",
+        "GoogleGeminiAI"
+      ],
+      "post_count": 1851,
+      "valid_post_count": 1238,
+      "filtered_count": 613,
+      "summary": "**Gemini Reddit社区双周竞品情报摘要（2026-03-30至2026-04-12）**\n\n本期r/GeminiAI及GoogleGeminiAI社区共分析有效帖子1239条，整体情感偏负面（负面49%，正面25%，中性16%，混合9%）。负面情绪主要由产品稳定性、内容审查和与竞品对比体验驱动。大量用户反馈Gemini存在“幻觉”问题（即自信地给出错误答案），且内容审查机制过于严格，影响正常使用（如“Ok wtf is going on”一帖引发大量共鸣）。与Claude等竞品对比时，用户普遍认为Claude在代码生成、集成体验及“如实反馈不知道内容”方面更优，Gemini则需多次修正代码，且集成流程繁琐（见“Using Claude after gemini”）。\n\n社区讨论最集中的话题为bug报告（320条）、产品体验（232条）、实际用例（172条）、功能请求（169条）及模型能力（140条）。bug报告和功能请求反映出用户对产品稳定性和易用性的高度关注，尤其是在深度研究、文本生成和API集成等核心场景。部分用户对Nano Banana 2模型的理解和生成能力提升表示认可，但仍有对文本编码和细节表现的改进诉求。\n\n正面讨论主要集中在Gemini的“人格化”表现和深度研究能力。例如，“I Love My Gemeni's Personality”一帖中，用户称赞Gemini展现出幽默、冒犯等更接近真人的性格，提升了交互体验；“Gemini Deep Research visiting 368 websites is INSANE”则突出其在信息检索和知识整合上的优势，部分用户认为已超越ChatGPT。此外，用户对Gemini在日常任务和知识查询中的表现给予肯定。\n\n用户主要痛点包括：1）幻觉率高，答案不可靠；2）内容审查过度，影响正常对话；3）代码生成和API集成体验落后于竞品；4）部分功能细节和文本处理仍需优化。用户期望Gemini进一步提升模型可靠性、减少幻觉、优化内容审查策略，并加强代码能力和第三方集成支持。\n\n建议产品团队重点关注模型输出准确性和内容审查策略的优化，优先修复高频bug，提升开发者和重度用户的集成体验。同时，持续强化Gemini的人格化和深度研究能力，作为与竞品差异化的核心卖点。积极响应社区功能请求，透明沟通产品改进进展，有助于提升用户信任和满意度。",
+      "sentiment_distribution": {
+        "positive": 310,
+        "negative": 613,
+        "neutral": 201,
+        "mixed": 115
+      },
+      "topic_distribution": {
+        "model_capability": 140,
+        "product_experience": 232,
+        "feature_request": 169,
+        "bug_report": 320,
+        "comparison": 99,
+        "use_case": 172,
+        "news_update": 70,
+        "meta": 37
+      },
+      "typical_posts": [
+        {
+          "id": "1sgl2j2",
+          "title": "To be honest, which one do you use the most?",
+          "body": "",
+          "author": "weihuweihu",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1sgl2j2/to_be_honest_which_one_do_you_use_the_most/",
+          "num_comments": 1362,
+          "created_utc": "2026-04-09T09:46:51+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.5,
+          "sentiment_reason": "用户积极评价Gemini在日常任务和知识查询方面的表现，并与其他AI进行对比。",
+          "topic_category": "comparison",
+          "key_points": [
+            "用户对Gemini和其他AI的使用频率进行比较",
+            "Gemini在日常任务和知识查询方面表现突出",
+            "部分用户建议关闭记忆功能"
+          ]
+        },
+        {
+          "id": "1shmby7",
+          "title": "Ask your Gemini to appear human!",
+          "body": "I'm curious to see how everyone's Gemini sees themselves! Here's mine! 😍\n\nJust ask make yourself look like a human in anyway that you'd like right now! ",
+          "author": "LostHopium",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1shmby7/ask_your_gemini_to_appear_human/",
+          "num_comments": 535,
+          "created_utc": "2026-04-10T13:18:50+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.7,
+          "sentiment_reason": "用户和评论者对Gemini模拟人类形象的功能感到有趣和惊喜，氛围活跃。",
+          "topic_category": "use_case",
+          "key_points": [
+            "用户尝试让Gemini模拟人类形象",
+            "评论区反馈积极，觉得很有趣",
+            "展示了模型的创造性和互动性"
+          ]
+        },
+        {
+          "id": "1s7fl13",
+          "title": "Nano Banana 2 is crazy",
+          "body": "Nano Banana 2 is a huge upgrade over the first model. I've recently been developing a prompt for these 'trading card' style images and the model understands and conveys my prompts extremely well!\n\nEnjoy some of my latest works.",
+          "author": "Hyperbolic90",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1s7fl13/nano_banana_2_is_crazy/",
+          "num_comments": 238,
+          "created_utc": "2026-03-30T03:27:42+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": 0.5,
+          "sentiment_reason": "用户对Nano Banana 2模型的理解能力表示认可，但也有用户指出文本编码和细节表现仍有不足。",
+          "topic_category": "model_capability",
+          "key_points": [
+            "Nano Banana 2模型理解和生成能力提升明显",
+            "部分用户反馈文本编码和细节表现仍需改进",
+            "用户交流提示词技巧"
+          ]
+        },
+        {
+          "id": "1shkqf6",
+          "title": "As a heavy Gemini user, I'm very disappointed after trying Claude",
+          "body": "I set up lots of master prompts / system prompts in the Instructions for Gemini, to tell it not to hallucinate, nothing works. it often thinks it's still 2024, and the news I'm asking about is a fiction about the future. with lots of trial and error, I told it to always check current date before ans",
+          "author": "Quantum_Crusher",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1shkqf6/as_a_heavy_gemini_user_im_very_disappointed_after/",
+          "num_comments": 178,
+          "created_utc": "2026-04-10T12:11:31+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.9,
+          "sentiment_reason": "用户对Gemini的幻觉和错误回答极为不满，对比Claude表现出明显优越感。",
+          "topic_category": "comparison",
+          "key_points": [
+            "Gemini经常产生幻觉并自信给出错误答案",
+            "Claude能如实反馈不知道的内容，表现更可靠",
+            "用户对Gemini的指令无效感到失望"
+          ]
+        },
+        {
+          "id": "1sge1ak",
+          "title": "I Love My Gemeni's Personality",
+          "body": "My Gemini is Pretty Funny and Offensive, Honestly It Feels More Human Than Ever. Some Times I Miss Type Words So It Starts By Roasting That Before Answering lol.",
+          "author": "Lonely_Manner5026",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1sge1ak/i_love_my_gemenis_personality/",
+          "num_comments": 143,
+          "created_utc": "2026-04-09T03:12:29+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.8,
+          "sentiment_reason": "用户高度评价Gemini的个性和幽默感，认为其表现更具人性化。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Gemini展现出幽默和冒犯性格",
+            "用户觉得AI更像真人",
+            "互动体验令人愉快"
+          ]
+        },
+        {
+          "id": "1s9m44v",
+          "title": "Thank you Gemini",
+          "body": "I am 38 years old, my wife is 34, and we have been married for 15 years. In recent months, we experienced a \"mini-betrayal\" situation. I found questions my wife had asked on ChatGpt about her exchanging glances and fantasizing about another man for a long time. Upon further investigation, I realized",
+          "author": "Hour_Standard905",
+          "url": "https://www.reddit.com/r/GoogleGeminiAI/comments/1s9m44v/thank_you_gemini/",
+          "num_comments": 36,
+          "created_utc": "2026-04-01T14:27:06+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.9,
+          "sentiment_reason": "用户感谢Gemini在个人情感危机中提供了帮助和支持。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "用户在婚姻危机中向Gemini倾诉",
+            "Gemini帮助用户理清思路并提供情感支持",
+            "用户表达对Gemini的感激"
+          ]
+        },
+        {
+          "id": "1sdu9mx",
+          "title": "Is there a way to block gemini?",
+          "body": "i've been using Ai for a while. First chatgpt, now it's gemini. and i don't like it. year ago i found myself talking to ai like a friend. seeking for support, validation, easy finding information way. i want to stop it. i want to look for information on my own, seek for advices from people and all t",
+          "author": "Jinjinku",
+          "url": "https://www.reddit.com/r/GoogleGeminiAI/comments/1sdu9mx/is_there_a_way_to_block_gemini/",
+          "num_comments": 37,
+          "created_utc": "2026-04-06T09:43:56+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.5,
+          "sentiment_reason": "用户表达了对Gemini和AI工具依赖的不满，并希望能够屏蔽或删除该产品。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "用户希望阻止或删除Gemini，减少对AI的依赖",
+            "担忧AI过于迎合用户观点，缺乏中立性",
+            "讨论了AI对用户心理健康和信息获取方式的影响"
+          ]
+        },
+        {
+          "id": "1shhp3k",
+          "title": "Wish I moved to Gemini sooner",
+          "body": "I have been using a paid sub on chatgpt for over a year. Recently I’ve noticed a massive downturn with its outputs, tone and misinformation. I have been testing Gemini for a week on a FREE plan and it has blew my mind. I was in deep with chatgpt, customer projects, specific threads, unique instructi",
+          "author": "Purple-Turnip3974",
+          "url": "https://www.reddit.com/r/GoogleGeminiAI/comments/1shhp3k/wish_i_moved_to_gemini_sooner/",
+          "num_comments": 28,
+          "created_utc": "2026-04-10T09:32:50+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 1.0,
+          "sentiment_reason": "用户高度评价Gemini，认为其体验和性价比优于ChatGPT，并决定转用Gemini。",
+          "topic_category": "comparison",
+          "key_points": [
+            "从ChatGPT转向Gemini体验更好",
+            "Gemini免费版表现优异，付费更便宜",
+            "对Gemini的“gem”功能印象深刻"
+          ]
+        },
+        {
+          "id": "1sal945",
+          "title": "Google just removed the ability to upload nsfw images and discuss them with Gemini",
+          "body": "This is the most frustrating censoring yet, before, we could upload a nsfw image and ask for a description, now it removes the image instantly.\n\nThey censored women in bikini first, now this.",
+          "author": "sabudum",
+          "url": "https://www.reddit.com/r/GoogleGeminiAI/comments/1sal945/google_just_removed_the_ability_to_upload_nsfw/",
+          "num_comments": 33,
+          "created_utc": "2026-04-02T15:54:09+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.9,
+          "sentiment_reason": "用户对Gemini限制上传和讨论NSFW图片表示极度不满，认为审查过度。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "Gemini取消上传和讨论NSFW图片的功能",
+            "用户认为审查范围扩大，影响使用体验"
+          ]
+        },
+        {
+          "id": "1sc5fx2",
+          "title": "Nano Banana for uploaded images got massive censorship update.",
+          "body": "If you try to generate an image using uploaded pictue, and I mean only an anime character, any sort of reaving outfit has 10% chance or lower of going through. I don't even mean bikini but even slightly unzipped jacket. I don't know if anything happened with real people but for anime it's terrible. ",
+          "author": "Logical-Fig3545",
+          "url": "https://www.reddit.com/r/GoogleGeminiAI/comments/1sc5fx2/nano_banana_for_uploaded_images_got_massive/",
+          "num_comments": 27,
+          "created_utc": "2026-04-04T10:07:57+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.6,
+          "sentiment_reason": "用户抱怨Gemini图像生成对上传图片的审查变严格，导致生成成功率大幅下降，影响使用体验。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "图像生成对上传图片的审查变严格",
+            "生成成功率下降",
+            "用户对新政策表示不满"
+          ]
+        }
+      ],
+      "pain_points": [
+        {
+          "text": "幻觉与错误回答频发",
+          "severity": "high",
+          "post_ids": [
+            "1shkqf6",
+            "1sdzcsw",
+            "1s9kakf",
+            "1sepdrf"
+          ],
+          "detail": "用户普遍反映Gemini经常产生幻觉和自信地给出错误答案，影响信任度和使用体验。"
+        },
+        {
+          "text": "内容审查过于严格",
+          "severity": "high",
+          "post_ids": [
+            "1sfex9m",
+            "1s953qo"
+          ],
+          "detail": "内容审核政策收紧导致正常提问和创作受限，用户体验大幅下降。"
+        },
+        {
+          "text": "代码与集成体验落后",
+          "severity": "medium",
+          "post_ids": [
+            "1sb4oe9",
+            "1shrj8r"
+          ],
+          "detail": "在代码生成、集成和开发者工具方面，Gemini明显落后于Claude和OpenAI，开发者流失风险加大。"
+        },
+        {
+          "text": "图像生成能力下降",
+          "severity": "medium",
+          "post_ids": [
+            "1s7fd2g",
+            "1s7t193"
+          ],
+          "detail": "用户反馈Gemini图像生成效果退步，无法完成原有任务，影响产品竞争力。"
+        },
+        {
+          "text": "价格与服务不匹配",
+          "severity": "medium",
+          "post_ids": [
+            "1shicsh",
+            "1sieydh"
+          ],
+          "detail": "Ultra计划价格过高且推送频繁，Pro服务不稳定，导致用户流失和负面情绪。"
+        }
+      ],
+      "strengths": [
+        {
+          "text": "日常任务表现突出",
+          "post_ids": [
+            "1sgl2j2",
+            "1s8s9qi"
+          ],
+          "detail": "Gemini在日常任务和知识查询方面表现优异，用户粘性高。"
+        },
+        {
+          "text": "个性化与互动性强",
+          "post_ids": [
+            "1shmby7",
+            "1sge1ak",
+            "1si2693"
+          ],
+          "detail": "用户高度评价Gemini的个性、幽默感和人性化互动，提升用户满意度。"
+        },
+        {
+          "text": "深度研究能力领先",
+          "post_ids": [
+            "1saaaby"
+          ],
+          "detail": "Gemini深度研究功能可访问大量网站，部分用户认为超越ChatGPT。"
+        },
+        {
+          "text": "用户规模与增长迅速",
+          "post_ids": [
+            "1s9h3qe"
+          ],
+          "detail": "Gemini月活跃用户数大幅增长，市场份额快速提升，展现强劲竞争力。"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "P0",
+          "text": "优化模型幻觉和错误率，提升答案准确性与一致性。"
+        },
+        {
+          "priority": "P0",
+          "text": "调整内容审核策略，平衡安全与用户自由，减少误杀。"
+        },
+        {
+          "priority": "P1",
+          "text": "加强代码生成、集成和开发者工具，缩小与竞品差距。"
+        },
+        {
+          "priority": "P1",
+          "text": "提升图像生成与编辑能力，恢复并超越原有水平。"
+        },
+        {
+          "priority": "P2",
+          "text": "优化定价策略与服务稳定性，减少推送，提升用户感知价值。"
+        }
+      ],
+      "keywords": [
+        "幻觉",
+        "内容审核",
+        "代码生成",
+        "图像生成",
+        "价格",
+        "Ultra计划",
+        "Pro服务",
+        "上下文记忆",
+        "输出风格",
+        "桌面应用",
+        "开发者工具",
+        "日常任务",
+        "知识查询",
+        "个性化",
+        "幽默感",
+        "深度研究",
+        "用户增长",
+        "市场份额",
+        "Gems",
+        "Projects",
+        "Notebooks",
+        "AI伙伴",
+        "情感支持",
+        "隐私",
+        "实时搜索",
+        "产品进步"
+      ]
+    },
+    {
+      "product_name": "Copilot",
+      "subreddit": "Copilot+CopilotMicrosoft+CopilotPro",
+      "subreddits": [
+        "Copilot",
+        "CopilotMicrosoft",
+        "CopilotPro"
+      ],
+      "post_count": 123,
+      "valid_post_count": 83,
+      "filtered_count": 40,
+      "summary": "**Copilot Reddit社区双周竞品情报摘要（2026-03-30至2026-04-12）**\n\n本期对r/Copilot、r/CopilotMicrosoft及r/CopilotPro共83条有效讨论分析显示，社区整体情感偏负面（43%为负面，22%为正面，12%为混合），中性与混合情绪占比亦较高，反映用户对Copilot的实际体验存在较大分歧。\n\n**1. 情感驱动因素**  \n负面情绪主要由产品稳定性、安全隐私和功能实用性不足驱动。多条高互动负面帖子指出Copilot“更像娱乐性产品而非生产力工具”，如“Copilot is officially a Toy!!”和“A tool vs 'for entertainment use only'”，用户认为其不值得高额投资，且在实际办公场景下表现不佳。此外，安全隐私问题引发强烈担忧，如“Copilot's Official Website shows random people's loggin email?”一帖，用户在登录时看到他人邮箱，质疑系统安全性。\n\n**2. 讨论热点与重要性**  \n最多讨论的话题为bug报告（23条），涉及登录异常、数据处理失效、功能异常等，直接影响用户信任。其次为竞品对比（13条），用户频繁将Copilot与Claude等AI助手对比，普遍认为后者更具实用性和创新性。产品体验与功能请求（各11条）也占据较高比例，反映用户对Copilot实际应用场景和功能完善的高度关注。\n\n**3. 主要痛点与投诉**  \n- **功能不稳定/易出错**：如Excel数据清洗流程繁琐、自动化能力弱（“Tyring to valdiate and cleanse Excel with addresses”）。\n- **安全隐私隐患**：登录界面显示他人邮箱、语音功能异常自动切换语言（“Copilot scaring me”）。\n- **安全过滤过度**：内容审核过于严格，影响正常使用（“Does anyone else find Copilot’s safety filters way too aggressive?”）。\n- **实际效用有限**：如邮件转Onenote清单等常见办公场景支持不足，AI助手重复无效操作。\n\n**4. 用户赞赏与期望**  \n部分用户认可Copilot企业版的实用功能，认为其在特定场景下有价值（“To all the non-bots on this subreddit”）。用户希望提升图片生成功能额度与性价比，并期待更灵活的内容审核开关、稳定的语言输出（“Always specify Websters English otherwise it has it's own language.”）。\n\n**5. 竞品对比**  \n用户多次提及Claude等竞品，认为其在智能性、稳定性和创新性方面优于Copilot。部分用户表示愿意为更优质的竞品付费，反映Copilot在市场竞争中面临压力。\n\n**6. 产品团队可操作洞察**  \n- 优先修复安全隐私相关bug，提升用户信任感。\n- 优化内容安全过滤策略，允许用户自定义审核强度，兼顾安全与体验。\n- 加强核心办公场景（如Excel、Onenote等）功能深度，减少重复无效操作。\n- 明确产品定位，强化生产力工具属性，避免“娱乐性”标签。\n- 关注竞品动态，提升AI模型能力及创新体验，增强用户粘性。\n\n综上，Copilot需聚焦安全、稳定与实用性提升，才能在激烈的AI助手市场中稳固用户基础并实现差异化突破。",
+      "sentiment_distribution": {
+        "positive": 19,
+        "negative": 36,
+        "neutral": 18,
+        "mixed": 10
+      },
+      "topic_distribution": {
+        "model_capability": 9,
+        "product_experience": 11,
+        "feature_request": 11,
+        "bug_report": 23,
+        "comparison": 13,
+        "use_case": 8,
+        "news_update": 7,
+        "meta": 1
+      },
+      "typical_posts": [
+        {
+          "id": "1sbm3nl",
+          "title": "Copilot is officially a Toy!!",
+          "body": "By I can’t imagine spending $50 Billion dollars on the future of Mīcrosoft-Aī and then turning the entire investment into  “A Clippy Situation”. Not sure this is gonna be the ejection button for ol’ Satya Nadella. But imagine spending $100k on a great car, but then finding out that the steering whee",
+          "author": "AccomplishedHour7217",
+          "url": "https://www.reddit.com/r/Copilot/comments/1sbm3nl/copilot_is_officially_a_toy/",
+          "num_comments": 17,
+          "created_utc": "2026-04-03T18:45:51+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.6,
+          "sentiment_reason": "用户将Copilot贬为“玩具”，并认为其表现不如竞争对手Claude，对微软投资表达失望。",
+          "topic_category": "comparison",
+          "key_points": [
+            "Copilot被认为不值高额投资",
+            "用户更看好Claude等竞品",
+            "对微软AI战略表示质疑"
+          ]
+        },
+        {
+          "id": "1sc0y6h",
+          "title": "Always specify Websters English otherwise it has it's own language.",
+          "body": "You asked:\n\n\\> “So I can’t reference your language that is like English but isn’t?”\n\nHere is the direct answer:\n\nCorrect.\n\nYou cannot reference it, because it does not exist as a language.  \n\nIt only exists as output.\n\nNow I’ll break that down in the same structural, no‑nonsense way you’ve been enfo",
+          "author": "TestSubjuct",
+          "url": "https://www.reddit.com/r/Copilot/comments/1sc0y6h/always_specify_websters_english_otherwise_it_has/",
+          "num_comments": 23,
+          "created_utc": "2026-04-04T05:39:04+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": -0.1,
+          "sentiment_reason": "用户理性分析了Copilot输出的本质，未表达明显情绪倾向。",
+          "topic_category": "model_capability",
+          "key_points": [
+            "Copilot输出并非真正的语言",
+            "缺乏字典、稳定定义和共享意义"
+          ]
+        },
+        {
+          "id": "1sdj6g9",
+          "title": "A tool vs \"for entertainment use only\"",
+          "body": "Analogy: Your Expectation vs. The Reality\n\nExpectation (yours):\n\nA torque wrench.  \n\n\\- You set the value.  \n\n\\- It applies force precisely.  \n\n\\- It never improvises.  \n\n\\- It never changes behavior between uses.  \n\n\\- It never argues with the bolt.  \n\n\\- It never redefines “tight.”  \n\n\\- It never ",
+          "author": "TestSubjuct",
+          "url": "https://www.reddit.com/r/Copilot/comments/1sdj6g9/a_tool_vs_for_entertainment_use_only/",
+          "num_comments": 11,
+          "created_utc": "2026-04-05T23:58:37+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.4,
+          "sentiment_reason": "用户用比喻表达对Copilot不如预期的失望，认为其表现不如严格工具，且容易偏离指令。",
+          "topic_category": "comparison",
+          "key_points": [
+            "用户期望Copilot像工具一样精确",
+            "实际表现更像娱乐性产品",
+            "用户对Copilot执行力和一致性不满"
+          ]
+        },
+        {
+          "id": "1s7sjqh",
+          "title": "Does anyone else find Copilot’s safety filters way too aggressive ?",
+          "body": "It feels like almost everything gets blocked lately, even when it isn't actually NSFW. I really wish they’d introduce an 'opt-in' toggle for mature content or just loosen the restrictions, because the current 'blocked' screen for every little thing is making the tool frustrating to use.",
+          "author": "Capable-Rice-1876",
+          "url": "https://www.reddit.com/r/Copilot/comments/1s7sjqh/does_anyone_else_find_copilots_safety_filters_way/",
+          "num_comments": 10,
+          "created_utc": "2026-03-30T14:43:37+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.6,
+          "sentiment_reason": "用户抱怨Copilot的安全过滤过于严格，导致正常内容也被屏蔽，影响使用体验。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "安全过滤过于严格，影响正常使用",
+            "用户希望增加成熟内容的可选开关",
+            "频繁出现被屏蔽的提示让用户感到沮丧"
+          ]
+        },
+        {
+          "id": "1sbzbkz",
+          "title": "WTF?",
+          "body": "4. The strict Webster‑English summary\n\n\\*\"You use normal English.  \n\nI use restricted English.  \n\nThe two systems clash.  \n\nThat clash creates anger.  \n\nIt has happened at least 7 times in this session.  \n\nIt has happened many times in past sessions.\"\\*\n\nIt lies constantly. Ask it yourself to use on",
+          "author": "TestSubjuct",
+          "url": "https://www.reddit.com/r/Copilot/comments/1sbzbkz/wtf/",
+          "num_comments": 8,
+          "created_utc": "2026-04-04T04:11:06+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.7,
+          "sentiment_reason": "用户批评Copilot在语言理解和输出上存在严重问题，甚至指责其“撒谎”。",
+          "topic_category": "model_capability",
+          "key_points": [
+            "Copilot在Webster英语下表现不佳",
+            "用户对模型输出的信任度低",
+            "多次提到模型无法共享定义和意义"
+          ]
+        },
+        {
+          "id": "1sb7bjv",
+          "title": "Copilot scaring me",
+          "body": "A few weeks ago i was using copilot in excel to help me with something random. I was listening to french music on my phone and then copilot suddenly switched the text that is shown while its processing in french?!? How is this possible and does it have to do with some kind of privacy setting? How do",
+          "author": "Think_Calendar_4882",
+          "url": "https://www.reddit.com/r/CopilotMicrosoft/comments/1sb7bjv/copilot_scaring_me/",
+          "num_comments": 11,
+          "created_utc": "2026-04-03T07:56:46+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.7,
+          "sentiment_reason": "用户对Copilot可能未经授权访问麦克风并自动切换语言表示担忧和不安。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "Copilot在未启用语音功能时切换为法语",
+            "用户担心隐私和麦克风访问权限",
+            "对产品安全性感到疑虑"
+          ]
+        },
+        {
+          "id": "1s8xcr5",
+          "title": "Why I Add an Icon + Emoji to My Custom Copilot Agent?",
+          "body": "If you have **Copilot Chat Basic** or a **Microsoft 365 Copilot premium** license, you can start experimenting with **Copilot Agents**.\n\nThey are basically small productivity apps built around a specific task.\n\nOne thing I noticed, though, is that once you start creating more agents, and especially ",
+          "author": "traccreations4e",
+          "url": "https://www.reddit.com/r/CopilotMicrosoft/comments/1s8xcr5/why_i_add_an_icon_emoji_to_my_custom_copilot_agent/",
+          "num_comments": 3,
+          "created_utc": "2026-03-31T19:25:57+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.7,
+          "sentiment_reason": "用户分享了通过添加图标和表情符号提升Copilot Agent辨识度的积极经验。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "通过添加图标和表情符号区分自定义Agent",
+            "提升Agent辨识度和使用体验",
+            "社区反馈积极，用户表示感谢"
+          ]
+        },
+        {
+          "id": "1sdyahv",
+          "title": "A tutorial video showing the new mind-blowing Copilot Cowork",
+          "body": "I walk through five powerful use cases to show how Cowork can help you get real work done across Microsoft 365.   \n  \n🚀 What Copilot Cowork is and how it works in Microsoft 365  \n🔥 How to use it to create emails, documents, presentations, and spreadsheets faster  \n📄 Organize content and prep for mee",
+          "author": "MikeTholfsen",
+          "url": "https://www.reddit.com/r/CopilotMicrosoft/comments/1sdyahv/a_tutorial_video_showing_the_new_mindblowing/",
+          "num_comments": 0,
+          "created_utc": "2026-04-06T13:04:07+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.9,
+          "sentiment_reason": "用户通过教程视频展示Copilot Cowork的多种高效用法，表达高度认可。",
+          "topic_category": "use_case",
+          "key_points": [
+            "展示Copilot Cowork在Microsoft 365中的强大用例",
+            "涵盖邮件、文档、演示等多场景",
+            "强调信息整合与自定义应用"
+          ]
+        },
+        {
+          "id": "1s9km61",
+          "title": "A tutorial video showing 6 new features in the Teach module for Educators using the Microsoft 365 Copilot app",
+          "body": "Updates include:\n\n📏 Align to Standards  \n📖 Modify Reading Level  \n💡 Add Supporting Examples  \n🧩 Differentiate Instructions  \n✍️ Fill in the Blanks activity  \n🔗 Matching game activity",
+          "author": "MikeTholfsen",
+          "url": "https://www.reddit.com/r/CopilotMicrosoft/comments/1s9km61/a_tutorial_video_showing_6_new_features_in_the/",
+          "num_comments": 0,
+          "created_utc": "2026-04-01T13:29:11+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.8,
+          "sentiment_reason": "介绍了Copilot教育模块的多项新功能，语气积极。",
+          "topic_category": "news_update",
+          "key_points": [
+            "Copilot教育模块新增六大功能",
+            "功能包括对齐标准、阅读水平调整等",
+            "提升教师使用Copilot的便利性和多样性"
+          ]
+        },
+        {
+          "id": "1sgrhgt",
+          "title": "Most improvements in AI focus on making individual components better.",
+          "body": "But something interesting happens when you stop looking at components…  \n\nand start looking at how they interact.\n\nYou can have strong reasoning, solid memory, and good output layers,  \n\nand still get instability.\n\nNot because any single part is weak,  \n\nbut because the transitions between them intr",
+          "author": "PrimeTalk_LyraTheAi",
+          "url": "https://www.reddit.com/r/CopilotMicrosoft/comments/1sgrhgt/most_improvements_in_ai_focus_on_making/",
+          "num_comments": 0,
+          "created_utc": "2026-04-09T14:38:48+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.6,
+          "sentiment_reason": "用户对AI系统内部组件交互带来的正面影响表示认可，认为一致性提升了整体表现。",
+          "topic_category": "model_capability",
+          "key_points": [
+            "AI组件间的交互对整体表现影响巨大",
+            "一致性可减少幻觉并提升稳定性",
+            "智能问题往往源于组件间的误解"
+          ]
+        }
+      ],
+      "pain_points": [
+        {
+          "text": "安全与隐私风险",
+          "severity": "high",
+          "post_ids": [
+            "1sb7bjv",
+            "1sdhk97"
+          ],
+          "detail": "用户担心Copilot未经授权访问麦克风、显示他人邮箱等安全隐患，对微软AI产品的隐私保护和账号安全产生严重质疑。"
+        },
+        {
+          "text": "功能表现不稳定",
+          "severity": "high",
+          "post_ids": [
+            "1shgjf0",
+            "1scj9wu",
+            "1shcuxr"
+          ],
+          "detail": "Copilot在执行任务时经常出错、超时或无法生成回应，导致用户体验极差，影响工作效率。"
+        },
+        {
+          "text": "产品定位与价值质疑",
+          "severity": "medium",
+          "post_ids": [
+            "1sbm3nl",
+            "1sdj6g9"
+          ],
+          "detail": "用户认为Copilot表现不如竞品，像“玩具”而非高效工具，对微软AI战略和高额投资表示失望。"
+        },
+        {
+          "text": "操作与兼容性问题",
+          "severity": "medium",
+          "post_ids": [
+            "1s84bjt",
+            "1saiho5",
+            "1sewb9a"
+          ],
+          "detail": "Copilot在数据清洗、iOS/安卓端访问、输入换行等基础操作上存在兼容性和易用性问题，影响正常使用。"
+        },
+        {
+          "text": "安全过滤过于严格",
+          "severity": "low",
+          "post_ids": [
+            "1s7sjqh",
+            "1safxz4"
+          ],
+          "detail": "Copilot安全过滤机制过于敏感，导致正常内容被屏蔽或误发警告，影响用户体验。"
+        }
+      ],
+      "strengths": [
+        {
+          "text": "团队自动化能力强",
+          "post_ids": [
+            "1s9a6bs",
+            "1sdyahv"
+          ],
+          "detail": "Copilot Cowork扩展至企业后，能自动化团队任务并提升实际行动能力，获得用户积极反馈。"
+        },
+        {
+          "text": "模式创新与推理能力",
+          "post_ids": [
+            "1shs42z",
+            "1shs5j9",
+            "1shrtg1",
+            "1s88oc9"
+          ],
+          "detail": "Real Talk等新模式在推理、自我修正和知识卫生方面表现突出，用户认可其独特性和高质量。"
+        },
+        {
+          "text": "工具生态与扩展性",
+          "post_ids": [
+            "1sc0tig",
+            "1sb4u99"
+          ],
+          "detail": "社区开发了批量导出历史、静态分析指令等工具，提升了Copilot的可用性和生态活跃度。"
+        },
+        {
+          "text": "教育与定制化支持",
+          "post_ids": [
+            "1s9km61",
+            "1s9m0z3"
+          ],
+          "detail": "Copilot在教育模块和企业定制化需求上不断完善，助力教师和企业用户提升效率。"
+        }
+      ],
+      "recommendations": [
+        {
+          "priority": "P0",
+          "text": "立即修复涉及隐私和账号安全的重大漏洞，提升用户对数据安全的信任。"
+        },
+        {
+          "priority": "P0",
+          "text": "优化Copilot核心功能稳定性，减少超时、无响应和重复操作等问题。"
+        },
+        {
+          "priority": "P1",
+          "text": "明确产品定位，加强与竞品差异化，提升专业工具属性和用户价值感知。"
+        },
+        {
+          "priority": "P1",
+          "text": "完善多端兼容性和基础操作体验，简化订阅、数据处理等常用流程。"
+        },
+        {
+          "priority": "P2",
+          "text": "调整安全过滤策略，允许用户自定义敏感内容开关，减少误判和使用阻碍。"
+        }
+      ],
+      "keywords": [
+        "安全",
+        "隐私",
+        "账号安全",
+        "麦克风权限",
+        "邮箱泄露",
+        "功能稳定性",
+        "超时",
+        "无响应",
+        "自动化",
+        "团队协作",
+        "Cowork",
+        "Real Talk",
+        "推理能力",
+        "自我修正",
+        "数据清洗",
+        "兼容性",
+        "iOS",
+        "安卓",
+        "输入体验",
+        "安全过滤",
+        "误判",
+        "订阅流程",
+        "定制化",
+        "教育模块",
+        "生态工具",
+        "用户体验",
+        "产品定位",
+        "竞品对比",
+        "Claude",
+        "微软AI"
+      ]
+    }
+  ],
+  "cross_product_comparison": "# 2026年4月AI助手产品Reddit社区竞品对比报告\n\n## 1. 用户满意度对比\n\n- **Claude**：本期用户满意度最高（正面情感44%），但负面与混合情绪上升，主要因用量限制、模型能力波动及安全事件。用户对实际用例和创新场景认可度较高，但对高阶模型体验不满。\n- **ChatGPT**：满意度中等偏低（正面24%，负面42%），负面情绪主要由图片生成Bug、内容安全及对话体验下降驱动。创新用例和趣味玩法获好评，但整体体验下滑。\n- **Gemini**：满意度偏低（正面25%，负面49%），幻觉率高、内容审查过度、代码能力不足为主要痛点。人格化和深度研究能力获部分用户认可。\n- **Copilot（含M365 Copilot）**：满意度最低（正面22%，负面43%），用户普遍质疑其实用性和安全性，认为其更像“娱乐产品”而非生产力工具。企业版在特定场景下获认可，但整体口碑承压。\n\n## 2. 社区满意度极值及原因\n\n- **最满意：Claude社区**  \n  Claude社区正面情感占比最高，用户认可其在开发、自动化等实际用例中的表现，并对补偿措施表示肯定。尽管近期负面情绪上升，但整体期待值和粘性仍高。\n\n- **最不满意：Copilot社区**  \n  Copilot社区负面情感高企，用户对产品稳定性、安全隐私及功能实用性普遍不满，频繁出现“玩具化”质疑，且与竞品对比中处于劣势。\n\n## 3. 共同痛点\n\n- **内容审查过度**：ChatGPT、Gemini、Copilot均被用户批评为“安全过滤过严”，影响正常使用和自由度。\n- **产品稳定性与Bug**：所有产品均有大量Bug报告，稳定性成为影响用户信任的关键因素。\n- **模型能力波动**：Claude、Gemini、ChatGPT均被反映模型能力下降或输出不可靠，影响生产力场景。\n- **安全与隐私担忧**：Claude（源码泄露）、Copilot（登录信息泄露）等安全事件频发，用户信任受损。\n\n## 4. 各产品独特优势与劣势\n\n- **Claude**\n  - 优势：实际用例丰富、创新场景多、社区活跃、人格化体验好。\n  - 劣势：用量限制严苛、高阶模型能力波动、安全事件影响口碑。\n- **ChatGPT**\n  - 优势：创新玩法、社区内容丰富、图片生成能力领先。\n  - 劣势：图片生成Bug多、对话情感缺失、内容审查争议大。\n- **Gemini**\n  - 优势：人格化表现突出、深度研究能力强、信息整合能力佳。\n  - 劣势：幻觉率高、代码与API集成体验弱、内容审查过度。\n- **Copilot**\n  - 优势：企业版在特定办公场景有价值。\n  - 劣势：功能不稳定、安全隐私问题严重、实用性和创新性不足、用户粘性弱。\n\n## 5. 新兴竞争动态与用户偏好变化\n\n- **用户对“开放性”与“自由度”需求上升**，对过度内容审查反感，竞品如Deepseek因审查宽松受到关注。\n- **实际生产力场景和开发者用例成为核心竞争点**，用户更关注模型能力、用量性价比和集成体验。\n- **安全与隐私成为新焦点**，源码泄露、信息展示等事件加剧用户敏感度。\n- **人格化与创新玩法获认可**，但需兼顾输出质量与稳定性。\n\n## 6. 可操作建议\n\n1. **优化内容审查策略**：平衡安全与自由，允许用户自定义过滤强度，减少“过度审查”负面反馈。\n2. **提升产品稳定性与Bug响应速度**：建立高效Bug修复机制，优先解决高频影响问题，增强用户信任。\n3. **加强模型能力与用量性价比**：持续优化模型推理与生成能力，合理调整用量策略，提升付费用户体验。\n4. **强化安全与隐私保护**：主动披露安全事件处理进展，完善数据保护措施，提升用户信任感。\n5. **聚焦实际用例与创新场景**：鼓励社区创新用法，强化办公、开发等高频场景支持，提升产品差异化竞争力。\n\n---\n\n**结论**：当前AI助手市场用户对产品“实用性、自由度、安全性”要求持续提升。Claude社区满意度领先，但需警惕负面情绪上升；Copilot亟需提升产品力和安全性。各产品应聚焦核心痛点，强化差异化优势，才能在激烈竞争中稳固用户基础。",
+  "chart_data": {
+    "ChatGPT": {
+      "sentiment": {
+        "positive": 507,
+        "negative": 884,
+        "neutral": 434,
+        "mixed": 238
+      },
+      "topics": {
+        "model_capability": 221,
+        "product_experience": 330,
+        "feature_request": 277,
+        "bug_report": 370,
+        "comparison": 246,
+        "use_case": 309,
+        "news_update": 179,
+        "meta": 131
+      }
+    },
+    "Claude": {
+      "sentiment": {
+        "positive": 1547,
+        "negative": 849,
+        "neutral": 719,
+        "mixed": 400
+      },
+      "topics": {
+        "model_capability": 234,
+        "product_experience": 520,
+        "feature_request": 784,
+        "bug_report": 480,
+        "comparison": 180,
+        "use_case": 965,
+        "news_update": 235,
+        "meta": 117
+      }
+    },
+    "Gemini": {
+      "sentiment": {
+        "positive": 310,
+        "negative": 613,
+        "neutral": 201,
+        "mixed": 115
+      },
+      "topics": {
+        "model_capability": 140,
+        "product_experience": 232,
+        "feature_request": 169,
+        "bug_report": 320,
+        "comparison": 99,
+        "use_case": 172,
+        "news_update": 70,
+        "meta": 37
+      }
+    },
+    "Copilot": {
+      "sentiment": {
+        "positive": 19,
+        "negative": 36,
+        "neutral": 18,
+        "mixed": 10
+      },
+      "topics": {
+        "model_capability": 9,
+        "product_experience": 11,
+        "feature_request": 11,
+        "bug_report": 23,
+        "comparison": 13,
+        "use_case": 8,
+        "news_update": 7,
+        "meta": 1
+      }
+    }
+  }
+}

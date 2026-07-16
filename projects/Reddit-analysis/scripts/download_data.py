@@ -1,5 +1,6 @@
 """
 Download data files from Azure Blob Storage to local data/ directory.
+Uses AAD authentication (DefaultAzureCredential).
 
 Usage:
     python download_data.py          # Download all data files
@@ -26,25 +27,27 @@ def main():
         with open(CONFIG_FILE) as f:
             config = json.load(f)
         blob_cfg = config.get("azure_blob", {})
-        conn_str = blob_cfg.get("connection_string", "").strip()
+        account_url = blob_cfg.get("account_url", "").strip()
         container = blob_cfg.get("container_name", "reddit-analysis-data").strip()
     except Exception as e:
         print(f"[ERROR] Could not read {CONFIG_FILE}: {e}")
         return
 
-    if not conn_str:
-        print("[ERROR] azure_blob.connection_string not set in share.config.json")
-        print("  Copy the connection string from Azure portal > Storage Account > Access keys")
+    if not account_url:
+        print("[ERROR] azure_blob.account_url not set in share.config.json")
+        print("  Set it to https://<account>.blob.core.windows.net")
         return
 
     try:
         from azure.storage.blob import BlobServiceClient
+        from azure.identity import DefaultAzureCredential
     except ImportError:
-        print("[ERROR] azure-storage-blob not installed.")
-        print("  Run: pip install azure-storage-blob")
+        print("[ERROR] azure-storage-blob or azure-identity not installed.")
+        print("  Run: pip install azure-storage-blob azure-identity")
         return
 
-    client = BlobServiceClient.from_connection_string(conn_str)
+    credential = DefaultAzureCredential()
+    client = BlobServiceClient(account_url, credential=credential)
     container_client = client.get_container_client(container)
 
     try:

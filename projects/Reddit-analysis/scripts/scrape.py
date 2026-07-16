@@ -4,6 +4,13 @@ Reddit Competitive Intelligence Scraper
 Scrapes Reddit subreddits via RSS feeds (no API key required).
 Collects posts and comments, stores in SQLite database.
 
+IMPORTANT: Comments must ALWAYS be scraped unless the user explicitly says
+to skip them. The --skip-comments flag exists for rare cases only.
+Comments are essential for sentiment analysis (top 5 by score are fed to LLM).
+
+For historical data beyond RSS reach, use backfill_arctic.py which fetches
+from Arctic Shift API and includes real upvote scores.
+
 Usage:
     python scrape.py --subreddits ChatGPT,ClaudeAI,Gemini,GithubCopilot,MicrosoftCopilot --days 14
 """
@@ -31,6 +38,7 @@ SUBREDDIT_MAP = {
     # ChatGPT
     "ChatGPT": {"product": "ChatGPT", "display": "r/ChatGPT"},
     "ChatGPTcomplaints": {"product": "ChatGPT", "display": "r/ChatGPTcomplaints"},
+    "OpenAI": {"product": "ChatGPT", "display": "r/OpenAI"},
     # Claude
     "ClaudeAI": {"product": "Claude", "display": "r/ClaudeAI"},
     "claude": {"product": "Claude", "display": "r/claude"},
@@ -126,7 +134,10 @@ def upsert_subreddit(conn: sqlite3.Connection, sub_id: str, info: dict):
     conn.execute(
         """INSERT INTO subreddits (id, product_name, display_name, url, last_scraped_at)
            VALUES (?, ?, ?, ?, ?)
-           ON CONFLICT(id) DO UPDATE SET last_scraped_at=excluded.last_scraped_at""",
+           ON CONFLICT(id) DO UPDATE SET
+               product_name=excluded.product_name,
+               display_name=excluded.display_name,
+               last_scraped_at=excluded.last_scraped_at""",
         (
             sub_id,
             info["product"],
@@ -657,13 +668,19 @@ def main():
     )
     parser.add_argument("--days", type=int, default=14, help="Time window in days (default: 14)")
     parser.add_argument("--limit", type=int, default=200, help="Max posts per subreddit (default: 200)")
-    parser.add_argument("--skip-comments", action="store_true", help="Skip comment scraping")
+    parser.add_argument("--skip-comments", action="store_true",
+                        help="Skip comment scraping (NOT recommended — only use if explicitly instructed)")
     parser.add_argument("--lumina-enrich", type=int, default=0, metavar="N",
                         help="Deep-enrich top N posts via Lumina Search API (requires localhost:8400)")
     args = parser.parse_args()
 
     subreddits = [s.strip() for s in args.subreddits.split(",") if s.strip()]
     log.info("Starting scrape: subreddits=%s, days=%d, limit=%d", subreddits, args.days, args.limit)
+
+    if args.skip_comments:
+        log.warning("⚠️  --skip-comments is enabled. Comments will NOT be scraped.")
+        log.warning("   Only use this flag if the user explicitly instructed you to skip comments.")
+        log.warning("   Comments are critical for sentiment analysis — do NOT skip by default.")
 
     scrape_all(
         subreddits=subreddits,

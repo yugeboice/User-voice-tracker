@@ -30,3 +30,23 @@ tmp_check.js
 .DS_Store
 Thumbs.db
 scripts/share.config.json
+
+# Logs & runtime data (session-generated)
+data/*.txt
+data/*.json
+data/*.db
+data/*.db-*
+data/*.bak_external
+data/_scratch_*/
+data/_tc_board.html
+data/_test_*.db
+
+# Scratch / probe / one-off fix scripts
+scripts/_*.py
+scripts/fix_*.py
+
+# Audit outputs
+scenario_audit_*/
+
+# lscache
+*.lscache

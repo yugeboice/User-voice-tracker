@@ -272,6 +272,22 @@ def is_already_translated(report_data: dict) -> bool:
     return True
 
 
+def _save_progress(data: dict, report_path: Path):
+    """Incrementally save translation progress to prevent loss on interruption."""
+    report_path.write_text(
+        json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+    # Also update latest.json if this is the latest report
+    latest_path = REPORTS_DIR / "latest.json"
+    if latest_path.exists():
+        latest_data = json.loads(latest_path.read_text(encoding="utf-8"))
+        if latest_data.get("run_id") == data.get("run_id"):
+            latest_path.write_text(
+                json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8"
+            )
+    log.info("  [checkpoint] Progress saved.")
+
+
 def translate_report(report_path: Path, endpoint: str, model: str, force: bool = False) -> bool:
     """Translate a single report JSON file, adding _en fields in-place."""
     log.info("=" * 60)
@@ -293,6 +309,7 @@ def translate_report(report_path: Path, endpoint: str, model: str, force: bool =
         log.info("[1/5] Translating cross-product comparison...")
         data["cross_product_comparison_en"] = translate_markdown(cpc, endpoint, model)
         llm_calls += 1
+        _save_progress(data, report_path)
     elif cpc:
         log.info("[1/5] Cross-product comparison: already translated, skipping.")
     else:
@@ -307,6 +324,7 @@ def translate_report(report_path: Path, endpoint: str, model: str, force: bool =
             log.info("  Summary: %s (%d chars)", name, len(summary))
             p["summary_en"] = translate_markdown(summary, endpoint, model)
             llm_calls += 1
+            _save_progress(data, report_path)
         elif summary:
             log.info("  Summary: %s (already done, skipping)", name)
         else:
@@ -350,6 +368,8 @@ def translate_report(report_path: Path, endpoint: str, model: str, force: bool =
         if translated.get("keywords"):
             p["keywords_en"] = translated["keywords"]
 
+        _save_progress(data, report_path)
+
     # 4. Translate typical_posts per product (1 LLM call per product)
     log.info("[4/5] Translating typical posts...")
     for i, p in enumerate(products):
@@ -371,6 +391,8 @@ def translate_report(report_path: Path, endpoint: str, model: str, force: bool =
                 post["sentiment_reason_en"] = tp.get("sentiment_reason", "")
                 post["key_points_en"] = tp.get("key_points", [])
 
+        _save_progress(data, report_path)
+
     # 5. Extract bilingual keywords per product via LLM (1 call per product)
     log.info("[5/5] Extracting bilingual keywords...")
     for i, p in enumerate(products):
@@ -391,6 +413,8 @@ def translate_report(report_path: Path, endpoint: str, model: str, force: bool =
             p["keywords"] = kw_result.get("zh", [])
             p["keywords_en"] = kw_result.get("en", [])
             log.info("    -> %d zh, %d en keywords", len(p["keywords"]), len(p["keywords_en"]))
+
+        _save_progress(data, report_path)
 
     # Save updated JSON
     report_path.write_text(

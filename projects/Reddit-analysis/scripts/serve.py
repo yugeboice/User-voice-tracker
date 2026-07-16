@@ -13,6 +13,7 @@ import logging
 import sqlite3
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
+from urllib.parse import urlparse, parse_qs
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 WWWROOT_DIR = PROJECT_DIR / "wwwroot"
@@ -66,6 +67,11 @@ class DashboardHandler(SimpleHTTPRequestHandler):
             self.serve_report_by_id(report_id)
             return
 
+        # API: semantic search
+        if self.path.startswith("/api/reddit/search"):
+            self.serve_search()
+            return
+
         # Default: serve static files
         super().do_GET()
 
@@ -92,24 +98,38 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         self.send_json_file(report_files[0])
 
     def serve_report_list(self):
-        """List all available reports."""
+        """List all available reports (reads curated index.json first, falls back to file scan)."""
+        index_path = REPORTS_DIR / "index.json"
+        if index_path.exists():
+            try:
+                idx = json.loads(index_path.read_text(encoding="utf-8"))
+                self.send_json(idx.get("reports", []))
+                return
+            except Exception:
+                pass
+
+        # Fallback: scan report files
         if not REPORTS_DIR.exists():
             self.send_json([])
             return
 
         reports = []
         for f in sorted(REPORTS_DIR.glob("report_*.json"), reverse=True):
+            if "_analysis_" in f.name:
+                continue
             try:
                 data = json.loads(f.read_text(encoding="utf-8"))
+                period = data.get("period", {})
+                products = data.get("products", [])
+                total_valid = sum(p.get("valid_post_count", 0) for p in products)
                 reports.append({
-                    "id": f.stem,
-                    "filename": f.name,
-                    "date": (data.get("period", {}).get("end", ""))[:10],
-                    "products": len(data.get("products", [])),
-                    "total_posts": sum(
-                        p.get("valid_post_count", p.get("post_count", 0))
-                        for p in data.get("products", [])
-                    ),
+                    "file": f.name,
+                    "run_id": data.get("run_id", ""),
+                    "period_start": period.get("start", "")[:10],
+                    "period_end": period.get("end", "")[:10],
+                    "product_count": len(products),
+                    "total_posts": sum(p.get("post_count", 0) for p in products),
+                    "total_valid_posts": total_valid,
                 })
             except Exception:
                 continue
@@ -128,6 +148,26 @@ class DashboardHandler(SimpleHTTPRequestHandler):
                 return
 
         self.send_error(404, f"Report {report_id} not found")
+
+    def serve_search(self):
+        """Semantic search via embedding similarity."""
+        parsed = urlparse(self.path)
+        params = parse_qs(parsed.query)
+        q = params.get("q", [""])[0]
+        if not q:
+            self.send_json({"error": "Missing 'q' parameter"})
+            return
+        top_k = int(params.get("top_k", ["10"])[0])
+        product = params.get("product", [None])[0]
+        try:
+            from embed import search as embed_search, init_db as embed_init_db
+            conn = embed_init_db()
+            results = embed_search(conn, q, top_k=top_k, product=product)
+            conn.close()
+            self.send_json({"query": q, "count": len(results), "results": results})
+        except Exception as e:
+            log.error("Search failed: %s", e)
+            self.send_json({"error": str(e), "results": []})
 
     def send_json_file(self, filepath: Path):
         """Send a JSON file as response."""

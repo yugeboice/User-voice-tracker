@@ -727,7 +727,9 @@
     };
 
     /* ======= I18N ======= */
-    var currentLang = 'en';
+    /* Default to Chinese so the highlighted lang button (中文) matches the rendered content.
+       Was 'en' which contradicted the header button that defaults to active=zh. */
+    var currentLang = 'zh';
     var I18N = {
       zh: {
         title:'AI Voice Tracker', subtitle:'基于Reddit头部粉丝社区的AI产品用户声音追踪', loading:'加载报告数据...',
@@ -3229,6 +3231,9 @@
 
     /* ======= INIT ======= */
     (async function init() {
+      /* Static-label i18n on load; currentLang ('zh') already matches the active
+         header button, so no full setLang/renderAll here (reportData is still null). */
+      applyI18n();
       await loadReportIndex();
       await loadReportList();
       try {

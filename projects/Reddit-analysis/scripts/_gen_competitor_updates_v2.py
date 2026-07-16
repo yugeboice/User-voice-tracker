@@ -10,9 +10,9 @@ NEWS_PATH = sys.argv[2]
 ENDPOINT = sys.argv[3]
 MODEL = sys.argv[4]
 DB_PATH = "data/reddit.db"
-RUN_ID = "c1f59103"
-PERIOD_START = "2026-04-28"
-PERIOD_END = "2026-05-12"
+RUN_ID = "7fd7603b"
+PERIOD_START = "2026-06-23"
+PERIOD_END = "2026-07-07"
 
 with open(REPORT_PATH, 'r', encoding='utf-8') as f:
     report = json.load(f)
@@ -29,23 +29,29 @@ product_subreddits = {
     "Claude": ["ClaudeAI", "claude"],
     "Gemini": ["GeminiAI", "GoogleGeminiAI"],
     "Copilot": ["Copilot", "CopilotMicrosoft", "CopilotPro"],
-    "M365 Copilot": ["microsoft_365_copilot", "MicrosoftCopilot"],
+    "M365 Copilot": ["microsoft_365_copilot", "MicrosoftCopilot", "GithubCopilot"],
 }
 
 # For each news event, find related posts by keyword search
 news_keywords = {
-    "GPT-5.5": {"product": "ChatGPT", "keywords": ["5.5", "gpt-5.5", "gpt 5.5", "new model", "default model", "instant"]},
-    "GPT Image": {"product": "ChatGPT", "keywords": ["image 2", "image gen", "image generation", "dall"]},
-    "Memory Sources": {"product": "ChatGPT", "keywords": ["memory", "personali", "remember"]},
-    "Opus 4.7": {"product": "Claude", "keywords": ["opus 4.7", "opus", "4.7", "new model"]},
-    "Claude Connectors": {"product": "Claude", "keywords": ["connector", "blender", "adobe", "creative"]},
-    "Claude M365": {"product": "Claude", "keywords": ["microsoft", "m365", "excel", "powerpoint", "word", "add-in"]},
-    "Gemini Drop": {"product": "Gemini", "keywords": ["gemini drop", "april", "nano banana", "lyria", "music", "notebooklm", "mac app"]},
-    "Gemini File Gen": {"product": "Gemini", "keywords": ["file", "generate", "docx", "xlsx", "pdf"]},
-    "Copilot Sign-up Pause": {"product": "Copilot", "keywords": ["pause", "sign up", "signup", "can't subscribe", "waitlist"]},
-    "Copilot Opus Removed": {"product": "Copilot", "keywords": ["opus", "removed", "pro+", "model", "tier"]},
-    "GPT-5.5 Copilot": {"product": "Copilot", "keywords": ["5.5", "gpt-5.5", "new model"]},
-    "M365 Updates": {"product": "M365 Copilot", "keywords": ["agent", "voice", "wake word", "researcher", "connector"]},
+    "GPT-5.6 Rumors": {"product": "ChatGPT", "keywords": ["5.6", "gpt-5.6", "ember", "beacon", "new model", "faster", "slower", "codex"]},
+    "ChatGPT Scheduled Tasks": {"product": "ChatGPT", "keywords": ["scheduled", "task", "reminder", "pulse", "recurring", "monitor"]},
+    "ChatGPT Record Replay": {"product": "ChatGPT", "keywords": ["record", "replay", "workflow", "skill", "reusable"]},
+    "Claude Fable 5 Launch": {"product": "Claude", "keywords": ["fable", "fable 5", "mythos", "most powerful", "best model", "new model"]},
+    "Claude Fable 5 Suspended": {"product": "Claude", "keywords": ["suspend", "shut down", "export control", "commerce", "removed", "disabled", "gone"]},
+    "Claude Fable Token Cost": {"product": "Claude", "keywords": ["token", "expensive", "burn", "cost", "drain", "limit", "2x", "double", "wallet"]},
+    "Claude Fable Censorship": {"product": "Claude", "keywords": ["censor", "degrade", "sabotage", "self-limit", "restrict", "refuse", "guardrail", "safety"]},
+    "Claude Opus 4.8 Flagship": {"product": "Claude", "keywords": ["opus 4.8", "4.8", "flagship", "dynamic workflow"]},
+    "Gemini 3.5 Flash": {"product": "Gemini", "keywords": ["3.5 flash", "gemini 3.5", "new default", "i/o", "faster"]},
+    "Gemini Omni": {"product": "Gemini", "keywords": ["omni", "video generation", "video edit", "multimodal", "create"]},
+    "Antigravity Platform": {"product": "Gemini", "keywords": ["antigravity", "gemini cli", "agent platform", "managed agent"]},
+    "GitHub Copilot Token Billing": {"product": "Copilot", "keywords": ["token", "credit", "billing", "usage-based", "pricing", "cost", "expensive", "10x", "50x"]},
+    "GitHub Copilot Agentic Workflows": {"product": "Copilot", "keywords": ["agentic", "workflow", "agent", "cloud agent", "auto mode"]},
+    "Copilot App GA": {"product": "Copilot", "keywords": ["app", "desktop", "copilot app", "generally available"]},
+    "M365 Copilot Claude Integration": {"product": "M365 Copilot", "keywords": ["claude", "anthropic", "model choice", "multiple model", "flexibility"]},
+    "M365 Copilot Licensing": {"product": "M365 Copilot", "keywords": ["license", "licensing", "restrict", "limit", "word", "excel", "copilot license"]},
+    "M365 Scout Agent": {"product": "M365 Copilot", "keywords": ["scout", "personal agent", "always-on", "autopilot"]},
+    "GitHub Copilot Model Deprecation": {"product": "M365 Copilot", "keywords": ["deprecat", "opus 4.6", "gpt-4.1", "gpt-5.2", "removed", "retire"]},
 }
 
 def find_related_posts(product, keywords, limit=4):
@@ -144,7 +150,7 @@ for name, data in events_data.items():
     )
 
 prompt = f"""You are writing competitor update cards for an AI competitive intelligence dashboard.
-Period: 2026-04-28 to 2026-05-11.
+Period: 2026-06-11 to 2026-06-21.
 
 ## News Events This Period:
 {news}

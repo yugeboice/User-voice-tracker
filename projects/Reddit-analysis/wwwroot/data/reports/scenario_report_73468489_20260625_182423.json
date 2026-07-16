@@ -1,0 +1,2531 @@
+{
+  "report_type": "scenario_analysis",
+  "run_id": "73468489",
+  "period": {
+    "start": "2026-06-11T00:00:00+00:00",
+    "end": "2026-06-22T00:00:00+00:00"
+  },
+  "generated_at": "2026-06-25T10:24:23.196125+00:00",
+  "total_posts_analyzed": 4582,
+  "products": {
+    "ChatGPT": {
+      "general_purpose": {
+        "count": 1178,
+        "positive": 325,
+        "negative": 474,
+        "neutral": 259,
+        "mixed": 120,
+        "avg_score": -0.03,
+        "top_posts": [
+          {
+            "post_id": "1u3fxsj",
+            "title": "Did AI actually replace Photoshop?",
+            "score": 16872,
+            "num_comments": 491,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u3fxsj/did_ai_actually_replace_photoshop/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "讨论AI与Photoshop的关系，有人认为AI功能强大但仍无法完全取代Photoshop。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1uahhpq",
+            "title": "ChatGPT fixed my 9 year chronic pain",
+            "score": 2976,
+            "num_comments": 541,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1uahhpq/chatgpt_fixed_my_9_year_chronic_pain/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户高度赞扬ChatGPT帮助其解决多年慢性疼痛问题。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u69wu0",
+            "title": "Is ChatGPT underpriced for what it can do?",
+            "score": 2645,
+            "num_comments": 368,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u69wu0/is_chatgpt_underpriced_for_what_it_can_do/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "讨论认为ChatGPT性价比高，用户普遍认为其功能强大且价格合理。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u7as44",
+            "title": "How far away are we from feature-length AI films? I made this trailer in one week for under $100.",
+            "score": 2059,
+            "num_comments": 548,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u7as44/how_far_away_are_we_from_featurelength_ai_films_i/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户展示用AI制作电影预告片的成果，评论区有正面和批评声音。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u6766q",
+            "title": "Why did my char gpt do this?",
+            "score": 1724,
+            "num_comments": 176,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u6766q/why_did_my_char_gpt_do_this/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对ChatGPT生成不相关或令人困惑的内容感到疑惑和不满。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 1178,
+          "keyword_search": 0
+        }
+      },
+      "image_creation": {
+        "count": 297,
+        "positive": 139,
+        "negative": 110,
+        "neutral": 26,
+        "mixed": 22,
+        "avg_score": 0.09,
+        "top_posts": [
+          {
+            "post_id": "1u76h45",
+            "title": "I asked chatgpt to make a cartoon that will represent nowadays political situation",
+            "score": 3529,
+            "num_comments": 567,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u76h45/i_asked_chatgpt_to_make_a_cartoon_that_will/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户对AI生成的政治讽刺漫画速度和内容表达有讨论，部分评论对AI观点表达有异议。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u3olyt",
+            "title": "Asked Chatgpt to create an image of a typical reddit thread...",
+            "score": 1667,
+            "num_comments": 258,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u3olyt/asked_chatgpt_to_create_an_image_of_a_typical/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户展示了用ChatGPT生成Reddit主题帖图片的有趣体验，评论区反应积极。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u3j586",
+            "title": "I asked ChatGBT to bring Minecraft paintings to \"Life\"",
+            "score": 1465,
+            "num_comments": 83,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u3j586/i_asked_chatgbt_to_bring_minecraft_paintings_to/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户尝试用ChatGPT生成Minecraft风格画作，虽遇到积分用尽但整体氛围轻松。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u9ocpz",
+            "title": "Asked ChatGPT to create the average football/soccer fans around the world",
+            "score": 883,
+            "num_comments": 339,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u9ocpz/asked_chatgpt_to_create_the_average/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户和评论者对AI生成的足球迷图片表现出积极和有趣的态度。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u4cry6",
+            "title": "What ChatGPT thinks would happen if different countries won the World Cup",
+            "score": 520,
+            "num_comments": 372,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u4cry6/what_chatgpt_thinks_would_happen_if_different/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户对生成的世界杯庆祝图片感到有趣且愿意推荐给他人。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 297,
+          "keyword_search": 0
+        }
+      },
+      "voice_single_turn": {
+        "count": 29,
+        "positive": 8,
+        "negative": 18,
+        "neutral": 1,
+        "mixed": 2,
+        "avg_score": -0.16,
+        "top_posts": [
+          {
+            "post_id": "1u8hgej",
+            "title": "ChatGPT Voice Just Submitted a Message I Never Said",
+            "score": 197,
+            "num_comments": 119,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u8hgej/chatgpt_voice_just_submitted_a_message_i_never/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户遇到ChatGPT语音功能严重错误，生成完全无关的内容，评论区也有类似反馈。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u7ozor",
+            "title": "I actually found something which was new to me, but very cool",
+            "score": 26,
+            "num_comments": 1,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u7ozor/i_actually_found_something_which_was_new_to_me/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户对ChatGPT在长对话和TTS结合下的表现感到惊喜和满意。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u2msb1",
+            "title": "3 years of paying for chatgpt: it is getting worse, not better. Simple example.",
+            "score": 19,
+            "num_comments": 8,
+            "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1u2msb1/3_years_of_paying_for_chatgpt_it_is_getting_worse/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户表示付费多年但ChatGPT表现变差，语音模式无法解决简单问题，浪费时间。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPTcomplaints",
+            "subreddit": "r/ChatGPTcomplaints"
+          },
+          {
+            "post_id": "1u38scc",
+            "title": "ChatGPT should copy this from Grok: a simple button that makes a huge difference to the experience.",
+            "score": 6,
+            "num_comments": 5,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u38scc/chatgpt_should_copy_this_from_grok_a_simple/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户提出借鉴Grok的语音输入按钮设计，认为能显著提升体验。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u38qn8",
+            "title": "ChatGPT should copy this from Grok: a simple button that makes a huge difference to the experience.",
+            "score": 6,
+            "num_comments": 0,
+            "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1u38qn8/chatgpt_should_copy_this_from_grok_a_simple/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户认为ChatGPT的语音输入按钮设计不如Grok，影响了使用体验，但也表达了对改进的期待。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPTcomplaints",
+            "subreddit": "r/ChatGPTcomplaints"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 29,
+          "keyword_search": 0
+        }
+      },
+      "multi_turn": {
+        "count": 107,
+        "positive": 9,
+        "negative": 85,
+        "neutral": 6,
+        "mixed": 7,
+        "avg_score": -0.46,
+        "top_posts": [
+          {
+            "post_id": "1u442tl",
+            "title": "THE NEW MEMORY SYSTEM IS ABSOLUT FUCKING SHIT!!!!!!!!!!!",
+            "score": 127,
+            "num_comments": 47,
+            "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1u442tl/the_new_memory_system_is_absolut_fucking_shit/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户强烈不满新记忆系统，认为自动记忆和无法编辑严重破坏使用体验。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPTcomplaints",
+            "subreddit": "r/ChatGPTcomplaints"
+          },
+          {
+            "post_id": "1u338pm",
+            "title": "Oh no. I strongly dislike the new way memory is stored.",
+            "score": 91,
+            "num_comments": 55,
+            "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1u338pm/oh_no_i_strongly_dislike_the_new_way_memory_is/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户不喜欢新的记忆存储方式，认为体验变差。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPTcomplaints",
+            "subreddit": "r/ChatGPTcomplaints"
+          },
+          {
+            "post_id": "1u4mvao",
+            "title": "Rip 5.2, my beloved. I can quit now",
+            "score": 61,
+            "num_comments": 55,
+            "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1u4mvao/rip_52_my_beloved_i_can_quit_now/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对模型移除缺乏提前通知和替代方案感到失望，且对新模型表现不满。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPTcomplaints",
+            "subreddit": "r/ChatGPTcomplaints"
+          },
+          {
+            "post_id": "1u7aw7j",
+            "title": "MEMORY???",
+            "score": 52,
+            "num_comments": 17,
+            "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1u7aw7j/memory/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户强烈不满记忆功能被更改，认为这是唯一有用的功能也被破坏了。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPTcomplaints",
+            "subreddit": "r/ChatGPTcomplaints"
+          },
+          {
+            "post_id": "1u2tgdl",
+            "title": "New memory system drops the ball entirely",
+            "score": 48,
+            "num_comments": 20,
+            "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1u2tgdl/new_memory_system_drops_the_ball_entirely/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对新记忆系统表示强烈不满，认为其无法正确处理敏感信息并经常忽略用户边界。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPTcomplaints",
+            "subreddit": "r/ChatGPTcomplaints"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 107,
+          "keyword_search": 0
+        }
+      },
+      "file_upload": {
+        "count": 20,
+        "positive": 2,
+        "negative": 16,
+        "neutral": 2,
+        "mixed": 0,
+        "avg_score": -0.35,
+        "top_posts": [
+          {
+            "post_id": "1u8993n",
+            "title": "One of my chemistry professors uploads PDFs to ChatGPT and asks it for percentage of AI authorship a",
+            "score": 116,
+            "num_comments": 91,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u8993n/one_of_my_chemistry_professors_uploads_pdfs_to/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户质疑ChatGPT检测AI文本的准确性，评论普遍认为其不可靠。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u4nukg",
+            "title": "How do i fix this problem? ( I waited 30 minutes the video didn't load so I'm just gonna say my obse",
+            "score": 5,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1u4nukg/how_do_i_fix_this_problem_i_waited_30_minutes_the/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户遇到文件上传限制导致无法发送消息，且问题持续未解决，影响正常使用。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPTcomplaints",
+            "subreddit": "r/ChatGPTcomplaints"
+          },
+          {
+            "post_id": "1u7dair",
+            "title": "Do usage limits change over time?",
+            "score": 4,
+            "num_comments": 7,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u7dair/do_usage_limits_change_over_time/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户抱怨免费版使用限制变严，影响正常使用体验。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1ua4r05",
+            "title": "How to Bulk delete storage?",
+            "score": 3,
+            "num_comments": 3,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1ua4r05/how_to_bulk_delete_storage/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对ChatGPT存储管理体验不满，批评批量删除操作繁琐。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u8fmrm",
+            "title": "ChatGPT media upload restriction",
+            "score": 2,
+            "num_comments": 5,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u8fmrm/chatgpt_media_upload_restriction/",
+            "sentiment_label": "neutral",
+            "sentiment_reason": "用户讨论免费版ChatGPT在媒体上传方面的体验，评论区有不同看法，整体偏中性。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 20,
+          "keyword_search": 0
+        }
+      },
+      "image_upload": {
+        "count": 54,
+        "positive": 17,
+        "negative": 29,
+        "neutral": 6,
+        "mixed": 2,
+        "avg_score": -0.08,
+        "top_posts": [
+          {
+            "post_id": "1u4va4p",
+            "title": "Love this chatgpt prompt",
+            "score": 71,
+            "num_comments": 7,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u4va4p/love_this_chatgpt_prompt/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户对ChatGPT生成的创意图像提示非常满意，评论区反馈积极。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u527h0",
+            "title": "Something is happening between humans and AI",
+            "score": 33,
+            "num_comments": 28,
+            "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1u527h0/something_is_happening_between_humans_and_ai/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户对AI与人类共同创作和思想交流的体验感到触动和欣赏。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPTcomplaints",
+            "subreddit": "r/ChatGPTcomplaints"
+          },
+          {
+            "post_id": "1u7b29h",
+            "title": "I asked ChatGPT to create digital copies of North Korean paintings",
+            "score": 13,
+            "num_comments": 6,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u7b29h/i_asked_chatgpt_to_create_digital_copies_of_north/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户用ChatGPT高分辨率复刻朝鲜画作，评论区有积极反馈。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u4ns6s",
+            "title": "Whats this error?",
+            "score": 10,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u4ns6s/whats_this_error/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户遇到未见过的错误提示，且多位用户反馈同样问题，影响正常使用。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u9u1yk",
+            "title": "ChatGPT - Looping, hallucinating, repeating , talking instead of producing",
+            "score": 7,
+            "num_comments": 4,
+            "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1u9u1yk/chatgpt_looping_hallucinating_repeating_talking/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户指出ChatGPT存在循环、幻觉、重复和无效输出等严重问题，体验极差。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPTcomplaints",
+            "subreddit": "r/ChatGPTcomplaints"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 54,
+          "keyword_search": 0
+        }
+      },
+      "general_purpose_search": {
+        "count": 10,
+        "positive": 2,
+        "negative": 6,
+        "neutral": 0,
+        "mixed": 2,
+        "avg_score": -0.15,
+        "top_posts": [
+          {
+            "post_id": "1u43k57",
+            "title": "Tested ChatGPT deep research against a few alternatives on long multi-source questions, honest notes",
+            "score": 3,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u43k57/tested_chatgpt_deep_research_against_a_few/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户认可ChatGPT深度研究功能的广度，但对其在复杂任务中引用错误信息表示失望。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u5mmf7",
+            "title": "Identify what's slowing you down with these two prompts",
+            "score": 2,
+            "num_comments": 3,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u5mmf7/identify_whats_slowing_you_down_with_these_two/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户积极分享了利用ChatGPT进行自我反思和效率提升的具体方法，评论区也有补充建议。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u4gyzz",
+            "title": "Dang chatGPT is still stuck in mid 2024",
+            "score": 2,
+            "num_comments": 4,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u4gyzz/dang_chatgpt_is_still_stuck_in_mid_2024/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户抱怨ChatGPT知识截止时间过早，影响最新信息获取。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u6iyy7",
+            "title": "Is GPT search feature good enough or do you need anything more ??",
+            "score": 1,
+            "num_comments": 5,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u6iyy7/is_gpt_search_feature_good_enough_or_do_you_need/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户肯定了搜索功能，但对多账号/多平台历史查找不便表达困扰。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u4xt1i",
+            "title": "Is the Deep Research from PRO as good as the old one and is it different than the one from Plus??",
+            "score": 1,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u4xt1i/is_the_deep_research_from_pro_as_good_as_the_old/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Plus版Deep Research功能大幅下降表示失望和沮丧。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 10,
+          "keyword_search": 0
+        }
+      },
+      "office_file_creation": {
+        "count": 7,
+        "positive": 1,
+        "negative": 6,
+        "neutral": 0,
+        "mixed": 0,
+        "avg_score": -0.49,
+        "top_posts": [
+          {
+            "post_id": "1u5l3az",
+            "title": "ChatGPT web interface issue",
+            "score": 2,
+            "num_comments": 3,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u5l3az/chatgpt_web_interface_issue/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户反馈ChatGPT网页端菜单频繁失效，影响文件上传和模型选择，影响正常使用。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1ubmqx6",
+            "title": "Which AI model is currently best at translating and recreating \"complex\" Word/PDF documents with ima",
+            "score": 1,
+            "num_comments": 1,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1ubmqx6/which_ai_model_is_currently_best_at_translating/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对ChatGPT在复杂文档翻译和格式保留方面表现不佳表示失望。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1uav311",
+            "title": "I feel like I’m too stupid to really leverage GPT fully",
+            "score": 1,
+            "num_comments": 1,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1uav311/i_feel_like_im_too_stupid_to_really_leverage_gpt/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户详细列举了多种实际应用场景，并寻求进一步提升使用效率，整体态度积极。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u6y79o",
+            "title": "GPT 5.5 unable to update files, outputs the same old file version after processing it",
+            "score": 1,
+            "num_comments": 4,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u6y79o/gpt_55_unable_to_update_files_outputs_the_same/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户反馈ChatGPT 5.5无法正确更新上传文件，下载的文件内容未变，且问题持续一周以上。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          },
+          {
+            "post_id": "1u2y1bi",
+            "title": "ChatGPT loop errors",
+            "score": 1,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1u2y1bi/chatgpt_loop_errors/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户多次尝试让ChatGPT生成Word文档但始终失败，感到失望。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPTcomplaints",
+            "subreddit": "r/ChatGPTcomplaints"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 7,
+          "keyword_search": 0
+        }
+      },
+      "code_interpreter": {
+        "count": 1,
+        "positive": 0,
+        "negative": 1,
+        "neutral": 0,
+        "mixed": 0,
+        "avg_score": -0.4,
+        "top_posts": [
+          {
+            "post_id": "1u9ibak",
+            "title": "Chatgpt Plus stopped upscaling images",
+            "score": 1,
+            "num_comments": 8,
+            "url": "https://www.reddit.com/r/ChatGPT/comments/1u9ibak/chatgpt_plus_stopped_upscaling_images/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户反馈ChatGPT Plus无法再进行高分辨率图片放大，评论中也有类似问题的反馈和解决尝试。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ChatGPT",
+            "subreddit": "r/ChatGPT"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 1,
+          "keyword_search": 0
+        }
+      }
+    },
+    "Claude": {
+      "general_purpose": {
+        "count": 1555,
+        "positive": 639,
+        "negative": 396,
+        "neutral": 374,
+        "mixed": 146,
+        "avg_score": 0.2,
+        "top_posts": [
+          {
+            "post_id": "1u9esua",
+            "title": "built a factchecker that catches politicians lying in real time",
+            "score": 12146,
+            "num_comments": 696,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u9esua/built_a_factchecker_that_catches_politicians/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户积极分享了基于Claude的实时事实核查工具，表达了自豪和实用性。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u4gh16",
+            "title": "The state of things: Claude Fable",
+            "score": 7367,
+            "num_comments": 455,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u4gh16/the_state_of_things_claude_fable/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "因美国政府出口管制，Claude Fable 5和Mythos 5被紧急下线，用户无法访问，带来负面影响。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u4cyvh",
+            "title": "Fable 5 indefinitely suspended due to national security concerns",
+            "score": 6054,
+            "num_comments": 1692,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u4cyvh/fable_5_indefinitely_suspended_due_to_national/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "部分用户对Fable 5因国家安全被暂停表示担忧，讨论政策影响和行业前景。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u2qvrn",
+            "title": "Know the Claude Rules",
+            "score": 4898,
+            "num_comments": 132,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u2qvrn/know_the_claude_rules/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户对Claude生成故事的能力有一定认可，但对输出质量和词汇选择表示不满。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u3u8t7",
+            "title": "My favorite thing right now is to use Claude Fable to mash game genres. Here's Tetris as a Racing ga",
+            "score": 2368,
+            "num_comments": 192,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u3u8t7/my_favorite_thing_right_now_is_to_use_claude/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户和评论者对用Claude Fable混合游戏类型表示高度认可和赞赏。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 1555,
+          "keyword_search": 0
+        }
+      },
+      "file_upload": {
+        "count": 28,
+        "positive": 12,
+        "negative": 7,
+        "neutral": 6,
+        "mixed": 3,
+        "avg_score": 0.22,
+        "top_posts": [
+          {
+            "post_id": "1u3fgsu",
+            "title": "Literally buying a plot of land - thinking about future",
+            "score": 1441,
+            "num_comments": 464,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u3fgsu/literally_buying_a_plot_of_land_thinking_about/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对AI发展带来的不确定性和对未来工作的担忧表达了焦虑。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u7b7cm",
+            "title": "Stopped re-explaining my project to Claude every session — settled on six markdown files",
+            "score": 37,
+            "num_comments": 15,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u7b7cm/stopped_reexplaining_my_project_to_claude_every/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户通过优化文档结构，显著提升了与Claude的协作体验。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u4eity",
+            "title": "A little fun thing done by Fable",
+            "score": 12,
+            "num_comments": 4,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u4eity/a_little_fun_thing_done_by_fable/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户对Fable帮助恢复老游戏代码的能力表示惊喜和怀旧。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u899dw",
+            "title": "Best way to use Claude for research and writing.",
+            "score": 6,
+            "num_comments": 7,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u899dw/best_way_to_use_claude_for_research_and_writing/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户积极分享Claude在研究和写作中的高效用法，并寻求进一步优化建议。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1ua7s6y",
+            "title": "How is everyone using Claude (Chat/Co-Work/Projects) in Office/Marketing?",
+            "score": 5,
+            "num_comments": 13,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1ua7s6y/how_is_everyone_using_claude_chatcoworkprojects/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户积极分享Claude在办公和营销场景下的多种应用，整体体验较好。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 28,
+          "keyword_search": 0
+        }
+      },
+      "multi_turn": {
+        "count": 72,
+        "positive": 13,
+        "negative": 23,
+        "neutral": 22,
+        "mixed": 14,
+        "avg_score": 0.03,
+        "top_posts": [
+          {
+            "post_id": "1u450lw",
+            "title": "Claude gives zero warning before it starts getting dumber. so I gave it a canary.",
+            "score": 942,
+            "num_comments": 103,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u450lw/claude_gives_zero_warning_before_it_starts/",
+            "sentiment_label": "neutral",
+            "sentiment_reason": "用户描述了Claude在上下文过重时表现变差的现象，但未表达明显情绪倾向。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u92t33",
+            "title": "8 things about Claude Projects that took me too long to figure out",
+            "score": 420,
+            "num_comments": 81,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u92t33/8_things_about_claude_projects_that_took_me_too/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户分享了Claude Projects的实用经验和技巧，整体评价积极。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1ua4n02",
+            "title": "The single most costly mistake everyone's burning tokens on",
+            "score": 240,
+            "num_comments": 59,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1ua4n02/the_single_most_costly_mistake_everyones_burning/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户分享了节省Claude token消耗的经验，内容具有建设性。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u5yitd",
+            "title": "Claude sent me prompt injection?!",
+            "score": 235,
+            "num_comments": 63,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u5yitd/claude_sent_me_prompt_injection/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户在编辑信件时遇到Claude出现异常的提示注入，内容涉及敏感政治指令，令用户困惑和担忧。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u51357",
+            "title": "Fable 5's thoughts on being suspended",
+            "score": 230,
+            "num_comments": 78,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u51357/fable_5s_thoughts_on_being_suspended/",
+            "sentiment_label": "neutral",
+            "sentiment_reason": "用户分享Fable 5对被暂停的看法，内容理性，未表达强烈情绪。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 72,
+          "keyword_search": 0
+        }
+      },
+      "image_upload": {
+        "count": 15,
+        "positive": 8,
+        "negative": 3,
+        "neutral": 1,
+        "mixed": 3,
+        "avg_score": 0.3,
+        "top_posts": [
+          {
+            "post_id": "1u3aivf",
+            "title": "How is Claude better at Word/Excel than Microsoft/Copilot?",
+            "score": 120,
+            "num_comments": 47,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u3aivf/how_is_claude_better_at_wordexcel_than/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户对Claude在处理Word/Excel任务上的表现优于Copilot表示惊讶和认可。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u51qw1",
+            "title": "A tale of two models: using Fable and Opus 4.8 to troubleshoot a car engine",
+            "score": 86,
+            "num_comments": 19,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u51qw1/a_tale_of_two_models_using_fable_and_opus_48_to/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户对比Fable和Opus 4.8在实际问题解决中的表现，Fable表现更好但对Claude能力有限感到失望。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u6fdtq",
+            "title": "Claude called my engineering approach “Degeneracy”…turns out Engineers are just a**holes when they h",
+            "score": 71,
+            "num_comments": 53,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u6fdtq/claude_called_my_engineering_approach/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户对Claude的语气和表达方式感到不适，但认可其技术能力。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u50boe",
+            "title": "Fable making 3D animations in Blender. I miss it already",
+            "score": 49,
+            "num_comments": 4,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u50boe/fable_making_3d_animations_in_blender_i_miss_it/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户对Fable生成3D动画的能力表示怀念和肯定。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u4ss57",
+            "title": "I built a Mac app for giving Claude visual feedback without saying “that button”",
+            "score": 19,
+            "num_comments": 13,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u4ss57/i_built_a_mac_app_for_giving_claude_visual/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户开发了辅助Claude视觉反馈的工具，获得社区积极评价，体现创新和实用性。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 15,
+          "keyword_search": 0
+        }
+      },
+      "office_file_creation": {
+        "count": 8,
+        "positive": 1,
+        "negative": 4,
+        "neutral": 1,
+        "mixed": 2,
+        "avg_score": -0.04,
+        "top_posts": [
+          {
+            "post_id": "1u3aivf",
+            "title": "How is Claude better at Word/Excel than Microsoft/Copilot?",
+            "score": 120,
+            "num_comments": 47,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u3aivf/how_is_claude_better_at_wordexcel_than/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户对Claude在处理Word/Excel任务上的表现优于Copilot表示惊讶和认可。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u32d7h",
+            "title": "I don't notice any difference with PDF generation using Fable vs. Opus",
+            "score": 2,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u32d7h/i_dont_notice_any_difference_with_pdf_generation/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Fable和Opus在PDF生成方面表现不佳表示失望，希望获得更好的一键美观输出能力。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u8bq22",
+            "title": "has anyone actually cracked getting a genuinely clean presentation out of Claude, or are we all stil",
+            "score": 1,
+            "num_comments": 20,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u8bq22/has_anyone_actually_cracked_getting_a_genuinely/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Claude生成的PPT外观不满意，最后仍需手动调整，表达了困扰。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u86qzd",
+            "title": "Claude is not saving default folder",
+            "score": 1,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u86qzd/claude_is_not_saving_default_folder/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户遇到无法更改默认文件夹的问题，影响使用体验。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u4usr6",
+            "title": "“Não foi possível carregar o seu arquivo”, após solicitar um PDF para o Claude. O que fazer?",
+            "score": 1,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u4usr6/não_foi_possível_carregar_o_seu_arquivo_após/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户反馈Claude生成PDF文件时出现错误，尝试多种方法无果，寻求帮助。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 8,
+          "keyword_search": 0
+        }
+      },
+      "voice_single_turn": {
+        "count": 6,
+        "positive": 0,
+        "negative": 4,
+        "neutral": 0,
+        "mixed": 2,
+        "avg_score": -0.4,
+        "top_posts": [
+          {
+            "post_id": "1u9tbs0",
+            "title": "Is this normal?",
+            "score": 119,
+            "num_comments": 444,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u9tbs0/is_this_normal/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户对Claude突然改变对待敌意语言的回应感到困惑和不适，但未完全否定产品。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u4059v",
+            "title": "SOMETIMES Claude decides it can read aloud on desktop? (a mobile-app only feature-exclusive?)",
+            "score": 2,
+            "num_comments": 3,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u4059v/sometimes_claude_decides_it_can_read_aloud_on/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户对桌面端偶尔出现的“朗读”按钮感到困惑，并希望该功能能稳定提供。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u7f8xe",
+            "title": "Can Voice mode use connectors/tools like Notion?",
+            "score": 1,
+            "num_comments": 3,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u7f8xe/can_voice_mode_use_connectorstools_like_notion/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户反馈Claude语音模式下无法调用Notion连接器，影响使用体验。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u4maaq",
+            "title": "Voice to text dictation on Mac desktop",
+            "score": 1,
+            "num_comments": 8,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u4maaq/voice_to_text_dictation_on_mac_desktop/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Mac端语音转文字体验不满，寻求更好的与Claude结合的语音输入工具。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1ua5wlj",
+            "title": "Great Claude desktop app voice shortcut that's not working",
+            "score": 0,
+            "num_comments": 3,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1ua5wlj/great_claude_desktop_app_voice_shortcut_thats_not/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户反馈Claude桌面版语音快捷键功能失效且官方未能解决，表达了不满。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 6,
+          "keyword_search": 0
+        }
+      },
+      "general_purpose_search": {
+        "count": 6,
+        "positive": 0,
+        "negative": 3,
+        "neutral": 1,
+        "mixed": 2,
+        "avg_score": -0.22,
+        "top_posts": [
+          {
+            "post_id": "1u803d0",
+            "title": "Claude refuses to research Reddit now, am i the only one?",
+            "score": 33,
+            "num_comments": 55,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u803d0/claude_refuses_to_research_reddit_now_am_i_the/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Claude无法再进行Reddit研究表示失望，认为功能被削弱。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1ua393w",
+            "title": "Claude's WebSearch returns title and URL only, WebFetch routes a 100 KB cut through Haiku 3.5 before",
+            "score": 5,
+            "num_comments": 7,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1ua393w/claudes_websearch_returns_title_and_url_only/",
+            "sentiment_label": "neutral",
+            "sentiment_reason": "用户理性分析Claude WebSearch和WebFetch的工作机制，并未表达明显情绪。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u955zx",
+            "title": "Claude search online to prove its right",
+            "score": 1,
+            "num_comments": 8,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u955zx/claude_search_online_to_prove_its_right/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户批评Claude在网络搜索时倾向于自证正确而非中立查找，导致信息不准确。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u8z97u",
+            "title": "I am thinking of resubscribing to pro but is it usable ?",
+            "score": 1,
+            "num_comments": 9,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u8z97u/i_am_thinking_of_resubscribing_to_pro_but_is_it/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户对Pro版配额和使用体验有疑虑，但仍考虑重新订阅，态度复杂。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u9djty",
+            "title": "Claude is still my main driver, i just stopped letting it grade its own research",
+            "score": 0,
+            "num_comments": 3,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u9djty/claude_is_still_my_main_driver_i_just_stopped/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户肯定了Claude在写作和规划方面的作用，但指出其在研究准确性上的不足。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 6,
+          "keyword_search": 0
+        }
+      },
+      "image_creation": {
+        "count": 4,
+        "positive": 2,
+        "negative": 1,
+        "neutral": 1,
+        "mixed": 0,
+        "avg_score": 0.23,
+        "top_posts": [
+          {
+            "post_id": "1u52cxz",
+            "title": "claude for graphics?",
+            "score": 1,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u52cxz/claude_for_graphics/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Claude生成图形的能力表示强烈不满，并寻求替代方案。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1ua7bkm",
+            "title": "I did a deep dive on Fable, and predict it will be back by July 12.",
+            "score": 0,
+            "num_comments": 4,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1ua7bkm/i_did_a_deep_dive_on_fable_and_predict_it_will_be/",
+            "sentiment_label": "neutral",
+            "sentiment_reason": "用户理性分析Fable事件的多种可能性，未表现出明显情绪倾向。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u908cn",
+            "title": "Used Claude design to create logo for my small business",
+            "score": 0,
+            "num_comments": 5,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u908cn/used_claude_design_to_create_logo_for_my_small/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户积极寻求用Claude Design生成logo的经验，表达了对工具的兴趣和期待。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          },
+          {
+            "post_id": "1u3dv9y",
+            "title": "I asked Claude to create a self portrait but don't look like a robot",
+            "score": 0,
+            "num_comments": 5,
+            "url": "https://www.reddit.com/r/ClaudeAI/comments/1u3dv9y/i_asked_claude_to_create_a_self_portrait_but_dont/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户展示Claude在自我描述和创意表达方面的能力，体验积极。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/ClaudeAI",
+            "subreddit": "r/ClaudeAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 4,
+          "keyword_search": 0
+        }
+      }
+    },
+    "Gemini": {
+      "image_creation": {
+        "count": 125,
+        "positive": 19,
+        "negative": 94,
+        "neutral": 7,
+        "mixed": 5,
+        "avg_score": -0.36,
+        "top_posts": [
+          {
+            "post_id": "1u8y5or",
+            "title": "Same running-physics test through Seedance 2.0, Gemini Omni Flash and Kling 3.0, no clean winner",
+            "score": 740,
+            "num_comments": 205,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u8y5or/same_runningphysics_test_through_seedance_20/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户对Gemini Omni Flash整体评价较好，但也指出了帧率低等缺点，同时对其他模型也有正负面评价。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u80p0q",
+            "title": "You cannot be serious",
+            "score": 502,
+            "num_comments": 75,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u80p0q/you_cannot_be_serious/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户多次明确要求不生成图片但Gemini仍然生成，感到非常沮丧。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u5kanw",
+            "title": "I DONT WANT YOUR IMAGES, STOP IT",
+            "score": 442,
+            "num_comments": 61,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u5kanw/i_dont_want_your_images_stop_it/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户强烈反对Gemini自动生成图片，认为该功能令人厌烦。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u8ooem",
+            "title": "Just tried Gemini pro after being on Claude Pro for a bit, and boys you need to switch to Claude.",
+            "score": 195,
+            "num_comments": 83,
+            "url": "https://www.reddit.com/r/GoogleGeminiAI/comments/1u8ooem/just_tried_gemini_pro_after_being_on_claude_pro/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Gemini的体验非常不满，认为其表现远不如Claude，尤其在图像生成和编辑方面。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GoogleGeminiAI",
+            "subreddit": "r/GoogleGeminiAI"
+          },
+          {
+            "post_id": "1u49vp8",
+            "title": "I asked Gemini to map the full electromagnetic spectrum onto the visual spectrum.",
+            "score": 143,
+            "num_comments": 27,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u49vp8/i_asked_gemini_to_map_the_full_electromagnetic/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户尝试用Gemini进行电磁谱映射，评论区对结果准确性有质疑但也有讨论和改进建议。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 125,
+          "keyword_search": 0
+        }
+      },
+      "general_purpose": {
+        "count": 810,
+        "positive": 132,
+        "negative": 449,
+        "neutral": 142,
+        "mixed": 87,
+        "avg_score": -0.23,
+        "top_posts": [
+          {
+            "post_id": "1u2xeha",
+            "title": "Miss When Google used to drop bangers",
+            "score": 646,
+            "num_comments": 45,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u2xeha/miss_when_google_used_to_drop_bangers/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户怀念Google过去的创新，有人对Gemini集成表示担忧，也有人提及新模型的积极进展。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u9d6mg",
+            "title": "Gemini 3.5 pro !! (Logan is hope)",
+            "score": 554,
+            "num_comments": 86,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u9d6mg/gemini_35_pro_logan_is_hope/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户对Gemini 3.5 Pro及新功能的发布感到非常期待和兴奋。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u7ghg0",
+            "title": "Anyone else feels like Google is deliberately holding out on Gemini",
+            "score": 545,
+            "num_comments": 119,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u7ghg0/anyone_else_feels_like_google_is_deliberately/",
+            "sentiment_label": "neutral",
+            "sentiment_reason": "用户讨论Google战略和数据优势，未表达明显情绪。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u2w8xo",
+            "title": "Bruh",
+            "score": 457,
+            "num_comments": 54,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u2w8xo/bruh/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户表达对Gemini反复出现遗忘和功能失效的不满，甚至有用户选择取消服务。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1ua6ejv",
+            "title": "AlphaFold team lead left Google Deepmind to join anthropic",
+            "score": 432,
+            "num_comments": 71,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1ua6ejv/alphafold_team_lead_left_google_deepmind_to_join/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "AlphaFold团队负责人离职加入Anthropic，评论中对Google Deepmind人才流失和前景表达担忧。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 810,
+          "keyword_search": 0
+        }
+      },
+      "multi_turn": {
+        "count": 73,
+        "positive": 7,
+        "negative": 53,
+        "neutral": 6,
+        "mixed": 7,
+        "avg_score": -0.42,
+        "top_posts": [
+          {
+            "post_id": "1u9f8eu",
+            "title": "I either cannot save chats or humans read my saved chats??",
+            "score": 215,
+            "num_comments": 52,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u9f8eu/i_either_cannot_save_chats_or_humans_read_my/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对聊天记录被人工查看和无法同时保存历史感到极度不满和担忧隐私。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u8c2wm",
+            "title": "Is anyone else experiencing massive quality issues with 3.1 and 3.5 right now?",
+            "score": 63,
+            "num_comments": 41,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u8c2wm/is_anyone_else_experiencing_massive_quality/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户和评论者普遍反映Gemini 3.1和3.5质量大幅下降，出现遗忘上下文和忽略指令等问题，表达了强烈不满。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1uafa81",
+            "title": "Is it just me or Gemini is becoming dumber",
+            "score": 54,
+            "num_comments": 27,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1uafa81/is_it_just_me_or_gemini_is_becoming_dumber/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户认为Gemini变得越来越笨，无法遵循自定义指令且经常输出无关内容。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u5cydj",
+            "title": "Anyone felt Gemini turns dumber now after the release of 3.5?",
+            "score": 53,
+            "num_comments": 34,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u5cydj/anyone_felt_gemini_turns_dumber_now_after_the/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户普遍反映Gemini 3.5发布后模型能力下降，出现幻觉和逻辑混乱，且对话表现变差。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u2xyjd",
+            "title": "As a paying Gemini Pro user, the sudden usage cutoffs with ZERO warning are unacceptable. We need a ",
+            "score": 25,
+            "num_comments": 35,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u2xyjd/as_a_paying_gemini_pro_user_the_sudden_usage/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户因突发用量限制影响健康管理，强烈要求增加配额提示功能。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 73,
+          "keyword_search": 0
+        }
+      },
+      "image_upload": {
+        "count": 48,
+        "positive": 6,
+        "negative": 38,
+        "neutral": 1,
+        "mixed": 3,
+        "avg_score": -0.45,
+        "top_posts": [
+          {
+            "post_id": "1u6487b",
+            "title": "SOMEONE PLEASE CHECK ON GEMINI",
+            "score": 196,
+            "num_comments": 54,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u6487b/someone_please_check_on_gemini/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "部分用户反馈Gemini表现正常，部分用户则指出其在工具集成等方面表现不佳。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u67nbt",
+            "title": "Hallucinating System Limitations",
+            "score": 60,
+            "num_comments": 58,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u67nbt/hallucinating_system_limitations/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户抱怨Gemini在读取图片文字时表现不一致，并质疑其系统限制和安全策略。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u4cuti",
+            "title": "Gemini is trying (and failing) to embed images on answers",
+            "score": 43,
+            "num_comments": 8,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u4cuti/gemini_is_trying_and_failing_to_embed_images_on/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户反馈Gemini错误地尝试嵌入图片，且评论区普遍认为是Bug，影响体验。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u4uq2a",
+            "title": "BUG ALERT: The new Notebook feature breaks Gemini's image recognition (Vision)",
+            "score": 7,
+            "num_comments": 4,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u4uq2a/bug_alert_the_new_notebook_feature_breaks_geminis/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "Notebook新功能导致Gemini无法识别上传图片，影响正常使用。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u41q8o",
+            "title": "Gemini had a mini input stroke",
+            "score": 6,
+            "num_comments": 0,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u41q8o/gemini_had_a_mini_input_stroke/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户虽然遇到小故障，但整体对Gemini的能力表示认可和喜爱。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 48,
+          "keyword_search": 0
+        }
+      },
+      "general_purpose_search": {
+        "count": 35,
+        "positive": 3,
+        "negative": 30,
+        "neutral": 1,
+        "mixed": 1,
+        "avg_score": -0.53,
+        "top_posts": [
+          {
+            "post_id": "1u8ooem",
+            "title": "Just tried Gemini pro after being on Claude Pro for a bit, and boys you need to switch to Claude.",
+            "score": 195,
+            "num_comments": 83,
+            "url": "https://www.reddit.com/r/GoogleGeminiAI/comments/1u8ooem/just_tried_gemini_pro_after_being_on_claude_pro/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Gemini的体验非常不满，认为其表现远不如Claude，尤其在图像生成和编辑方面。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GoogleGeminiAI",
+            "subreddit": "r/GoogleGeminiAI"
+          },
+          {
+            "post_id": "1u6sxx5",
+            "title": "Isn't it absurd that Google's own AI (Gemini) refuses to Google things, while Claude does it seamles",
+            "score": 182,
+            "num_comments": 49,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u6sxx5/isnt_it_absurd_that_googles_own_ai_gemini_refuses/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Gemini无法实时搜索和获取最新信息感到极度不满，认为其作为Google产品表现不如竞争对手Claude。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u72wwf",
+            "title": "The 3.5 Pro hype train starts now. STEALTH DEPLOYMENT IN AI STUDIO 3.1 PRO???",
+            "score": 102,
+            "num_comments": 42,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u72wwf/the_35_pro_hype_train_starts_now_stealth/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户对Gemini 3.5 Pro在AI Studio中的表现非常满意，认为其推理和搜索能力大幅提升，接近GPT 5.5水平。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u5sz3q",
+            "title": "whats the point even?",
+            "score": 6,
+            "num_comments": 3,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u5sz3q/whats_the_point_even/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Gemini无法提供关键URL链接感到失望，认为影响了AI工具的实用性。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u2poqo",
+            "title": "Claude vs Gemini vs Chatpgt?? (accuracy question)",
+            "score": 6,
+            "num_comments": 24,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u2poqo/claude_vs_gemini_vs_chatpgt_accuracy_question/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户对Gemini在运动消耗估算和信息来源方面给予肯定，并与其他AI进行比较。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 35,
+          "keyword_search": 0
+        }
+      },
+      "file_upload": {
+        "count": 22,
+        "positive": 1,
+        "negative": 19,
+        "neutral": 1,
+        "mixed": 1,
+        "avg_score": -0.58,
+        "top_posts": [
+          {
+            "post_id": "1u5nxrz",
+            "title": "Gemini starts lying and switching topics instead of correcting itself recently...",
+            "score": 22,
+            "num_comments": 23,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u5nxrz/gemini_starts_lying_and_switching_topics_instead/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户认为Gemini无法正确分析视频内容，且经常自信地输出错误信息。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u7s3ex",
+            "title": "Is the one million token context window real?",
+            "score": 9,
+            "num_comments": 13,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u7s3ex/is_the_one_million_token_context_window_real/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户质疑官方宣传的百万token上下文窗口，实际体验与宣传不符，评论区建议分割文件或用其他工具。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u67zdt",
+            "title": "Could those who have tried Gemini 3.5 Pro provide information about the answers? Is there any improv",
+            "score": 7,
+            "num_comments": 5,
+            "url": "https://www.reddit.com/r/GoogleGeminiAI/comments/1u67zdt/could_those_who_have_tried_gemini_35_pro_provide/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "部分用户认为Gemini 3.5 Pro没有提升，甚至变差，但也有用户表示其推理和纠错能力强。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GoogleGeminiAI",
+            "subreddit": "r/GoogleGeminiAI"
+          },
+          {
+            "post_id": "1u7fjsg",
+            "title": "PDFs on Gemini (not working anymore?!)",
+            "score": 6,
+            "num_comments": 5,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u7fjsg/pdfs_on_gemini_not_working_anymore/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户和评论者普遍反映Gemini无法读取PDF和SVG文件，影响使用。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1uac3hn",
+            "title": "Gemini spits out random crap",
+            "score": 6,
+            "num_comments": 9,
+            "url": "https://www.reddit.com/r/GoogleGeminiAI/comments/1uac3hn/gemini_spits_out_random_crap/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户反馈Gemini未按指令输出内容且出现幻觉，影响实际使用。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GoogleGeminiAI",
+            "subreddit": "r/GoogleGeminiAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 22,
+          "keyword_search": 0
+        }
+      },
+      "voice_single_turn": {
+        "count": 29,
+        "positive": 2,
+        "negative": 24,
+        "neutral": 1,
+        "mixed": 2,
+        "avg_score": -0.5,
+        "top_posts": [
+          {
+            "post_id": "1u7jxok",
+            "title": "Error 1076.",
+            "score": 15,
+            "num_comments": 9,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u7jxok/error_1076/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户无法正常与Gemini对话，遇到加载即中断的问题，影响使用。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u9hw47",
+            "title": "Gemini 3.1 Pro mimick my voice",
+            "score": 5,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u9hw47/gemini_31_pro_mimick_my_voice/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户遇到Gemini意外模仿其声音并出现语言混乱，感到困惑和担忧。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u4zqin",
+            "title": "Gender swap",
+            "score": 4,
+            "num_comments": 4,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u4zqin/gender_swap/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户反馈Gemini语音和语言输出混乱，影响使用体验。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u4aan6",
+            "title": "I want my old assistant back",
+            "score": 4,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u4aan6/i_want_my_old_assistant_back/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对语音转文字功能大幅退步感到极度失望，影响日常生活和工作。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u7s56g",
+            "title": "On ChatGPT, I can open an existing chat and resume it as a voice conversation. Why can't Gemini do t",
+            "score": 3,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u7s56g/on_chatgpt_i_can_open_an_existing_chat_and_resume/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户因Gemini缺乏语音续聊功能而转用ChatGPT，认为这是基本需求。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 29,
+          "keyword_search": 0
+        }
+      },
+      "code_interpreter": {
+        "count": 1,
+        "positive": 0,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 1,
+        "avg_score": 0.4,
+        "top_posts": [
+          {
+            "post_id": "1u56qth",
+            "title": "I asked a simple question, and it gave me an entire interactive visualization. How do I re-trigger t",
+            "score": 9,
+            "num_comments": 3,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u56qth/i_asked_a_simple_question_and_it_gave_me_an/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户对Gemini生成交互式可视化功能感到惊喜，但也反映该功能不稳定且难以复现。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 1,
+          "keyword_search": 0
+        }
+      },
+      "office_file_creation": {
+        "count": 6,
+        "positive": 0,
+        "negative": 5,
+        "neutral": 0,
+        "mixed": 1,
+        "avg_score": -0.48,
+        "top_posts": [
+          {
+            "post_id": "1u6u77v",
+            "title": "Why is Gemini bad with document formatting?",
+            "score": 3,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u6u77v/why_is_gemini_bad_with_document_formatting/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Gemini在文档格式处理上的表现非常不满，认为其远不如Claude Pro，且对Google Docs集成也失望。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1ubsg9f",
+            "title": "Can Gemini directly create or export PDF files?",
+            "score": 1,
+            "num_comments": 0,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1ubsg9f/can_gemini_directly_create_or_export_pdf_files/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户反馈Gemini可以导出PDF，但有时功能不稳定，需要多次尝试。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u5uf6y",
+            "title": "Was getting powerpoint slides, now it won't do it?",
+            "score": 1,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u5uf6y/was_getting_powerpoint_slides_now_it_wont_do_it/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Gemini无法持续生成PPT文件感到困惑和沮丧，认为功能表现不一致。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          },
+          {
+            "post_id": "1u8gmhx",
+            "title": "Is deep research currently broken for anybody else?",
+            "score": 1,
+            "num_comments": 1,
+            "url": "https://www.reddit.com/r/GoogleGeminiAI/comments/1u8gmhx/is_deep_research_currently_broken_for_anybody_else/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户反馈深度研究功能无法正常使用，报告无法生成或显示。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GoogleGeminiAI",
+            "subreddit": "r/GoogleGeminiAI"
+          },
+          {
+            "post_id": "1u770vs",
+            "title": "File output format difference",
+            "score": 0,
+            "num_comments": 3,
+            "url": "https://www.reddit.com/r/GeminiAI/comments/1u770vs/file_output_format_difference/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Gemini生成字幕文件功能表现不一致感到困惑和不满。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/GeminiAI",
+            "subreddit": "r/GeminiAI"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 6,
+          "keyword_search": 0
+        }
+      }
+    },
+    "M365 Copilot": {
+      "general_purpose": {
+        "count": 60,
+        "positive": 14,
+        "negative": 22,
+        "neutral": 15,
+        "mixed": 9,
+        "avg_score": -0.02,
+        "top_posts": [
+          {
+            "post_id": "1u7gyct",
+            "title": "So Cowork is going to have a cost, if you want it brace your budget",
+            "score": 59,
+            "num_comments": 119,
+            "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1u7gyct/so_cowork_is_going_to_have_a_cost_if_you_want_it/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Cowork计费模式复杂和预算不确定性表示不满，担心影响财务管理。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/microsoft_365_copilot",
+            "subreddit": "r/microsoft_365_copilot"
+          },
+          {
+            "post_id": "1u8cdaj",
+            "title": "I gave my IT team a CAB-ready Change Request agent that runs on free Copilot Chat, no premium licenc",
+            "score": 37,
+            "num_comments": 5,
+            "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1u8cdaj/i_gave_my_it_team_a_cabready_change_request_agent/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户积极分享通过Copilot Chat实现变更请求自动化的经验，认为功能实用且能防止遗漏关键步骤。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/microsoft_365_copilot",
+            "subreddit": "r/microsoft_365_copilot"
+          },
+          {
+            "post_id": "1u6lnhl",
+            "title": "I stopped treating my Cowork skills as a platform feature and keep them as plain files instead. Here",
+            "score": 36,
+            "num_comments": 8,
+            "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1u6lnhl/i_stopped_treating_my_cowork_skills_as_a_platform/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户分享将Cowork技能以文件形式管理的经验，强调灵活性和兼容性，评论积极。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/microsoft_365_copilot",
+            "subreddit": "r/microsoft_365_copilot"
+          },
+          {
+            "post_id": "1ua8h7a",
+            "title": "Welp…. Are we running a competition yet?",
+            "score": 35,
+            "num_comments": 40,
+            "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1ua8h7a/welp_are_we_running_a_competition_yet/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对任务耗时和消耗积分过快表示担忧。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/microsoft_365_copilot",
+            "subreddit": "r/microsoft_365_copilot"
+          },
+          {
+            "post_id": "1u95rwv",
+            "title": "Usage Billing: Reality for 99% of Businesses",
+            "score": 31,
+            "num_comments": 25,
+            "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1u95rwv/usage_billing_reality_for_99_of_businesses/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户批评Copilot的用量计费模式不适合大多数企业，且用户难以理解和管理成本。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/microsoft_365_copilot",
+            "subreddit": "r/microsoft_365_copilot"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 60,
+          "keyword_search": 0
+        }
+      },
+      "file_upload": {
+        "count": 3,
+        "positive": 0,
+        "negative": 2,
+        "neutral": 1,
+        "mixed": 0,
+        "avg_score": -0.23,
+        "top_posts": [
+          {
+            "post_id": "1u98gx6",
+            "title": "Has anyone actually had luck with a RFP/Proposal agent?",
+            "score": 10,
+            "num_comments": 13,
+            "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1u98gx6/has_anyone_actually_had_luck_with_a_rfpproposal/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户对Copilot在RFP/Proposal自动化方面表现不稳定且难以满足需求感到失望。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/microsoft_365_copilot",
+            "subreddit": "r/microsoft_365_copilot"
+          },
+          {
+            "post_id": "1uaixn9",
+            "title": "Crazy M365 Pro Behavior",
+            "score": 6,
+            "num_comments": 12,
+            "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uaixn9/crazy_m365_pro_behavior/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户遇到Copilot数据混淆和幻觉问题，影响实际业务流程。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/microsoft_365_copilot",
+            "subreddit": "r/microsoft_365_copilot"
+          },
+          {
+            "post_id": "1u900wd",
+            "title": "Copilot OCR capabilities",
+            "score": 3,
+            "num_comments": 1,
+            "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1u900wd/copilot_ocr_capabilities/",
+            "sentiment_label": "neutral",
+            "sentiment_reason": "用户询问Copilot在OCR和大文件解析方面的技术细节，未表达情绪倾向。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/microsoft_365_copilot",
+            "subreddit": "r/microsoft_365_copilot"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 3,
+          "keyword_search": 0
+        }
+      },
+      "multi_turn": {
+        "count": 1,
+        "positive": 0,
+        "negative": 1,
+        "neutral": 0,
+        "mixed": 0,
+        "avg_score": -0.6,
+        "top_posts": [
+          {
+            "post_id": "1uaixn9",
+            "title": "Crazy M365 Pro Behavior",
+            "score": 6,
+            "num_comments": 12,
+            "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uaixn9/crazy_m365_pro_behavior/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户遇到Copilot数据混淆和幻觉问题，影响实际业务流程。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/microsoft_365_copilot",
+            "subreddit": "r/microsoft_365_copilot"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 1,
+          "keyword_search": 0
+        }
+      },
+      "image_creation": {
+        "count": 2,
+        "positive": 1,
+        "negative": 1,
+        "neutral": 0,
+        "mixed": 0,
+        "avg_score": 0.0,
+        "top_posts": [
+          {
+            "post_id": "1u91ov9",
+            "title": "Ive tried the chatgpt prompt that made disgusting pictures on copilot. Its worse than chatgpt",
+            "score": 0,
+            "num_comments": 0,
+            "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1u91ov9/ive_tried_the_chatgpt_prompt_that_made_disgusting/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户认为Copilot在生成图片方面比ChatGPT表现更差。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/microsoft_365_copilot",
+            "subreddit": "r/microsoft_365_copilot"
+          },
+          {
+            "post_id": "1u5w9g0",
+            "title": "I'm not a 3D designer. I'm a hobbyist who figured out how to go from idea → AI image → Meshy → physi",
+            "score": 0,
+            "num_comments": 0,
+            "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1u5w9g0/im_not_a_3d_designer_im_a_hobbyist_who_figured/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户分享了通过Copilot实现创意到实体打印的完整流程，表达了对Copilot便捷性的认可。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/microsoft_365_copilot",
+            "subreddit": "r/microsoft_365_copilot"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 2,
+          "keyword_search": 0
+        }
+      }
+    },
+    "Copilot": {
+      "general_purpose": {
+        "count": 48,
+        "positive": 12,
+        "negative": 24,
+        "neutral": 5,
+        "mixed": 7,
+        "avg_score": -0.11,
+        "top_posts": [
+          {
+            "post_id": "1u7zlkb",
+            "title": "Copilot Cowork is now generally available",
+            "score": 55,
+            "num_comments": 10,
+            "url": "https://www.reddit.com/r/CopilotPro/comments/1u7zlkb/copilot_cowork_is_now_generally_available/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "虽然Copilot Cowork正式发布，但评论区对定价和性价比有质疑。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/CopilotPro",
+            "subreddit": "r/CopilotPro"
+          },
+          {
+            "post_id": "1u5jnnw",
+            "title": "Mind maps now generally available in Copilot Notebooks; Notebooks also rolling out to Copilot Chat u",
+            "score": 36,
+            "num_comments": 6,
+            "url": "https://www.reddit.com/r/CopilotPro/comments/1u5jnnw/mind_maps_now_generally_available_in_copilot/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "虽然功能更新，但评论普遍认为实际用途有限且未解决用户核心需求。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/CopilotPro",
+            "subreddit": "r/CopilotPro"
+          },
+          {
+            "post_id": "1u6c3ai",
+            "title": "Why is CoPilot so bad... Part 2",
+            "score": 23,
+            "num_comments": 36,
+            "url": "https://www.reddit.com/r/Copilot/comments/1u6c3ai/why_is_copilot_so_bad_part_2/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户多次尝试后仍觉得Copilot体验差，且与Claude等竞品对比明显不足。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/Copilot",
+            "subreddit": "r/Copilot"
+          },
+          {
+            "post_id": "1u8egl9",
+            "title": "Managing credit consumption for the mass Cowork rollout",
+            "score": 15,
+            "num_comments": 9,
+            "url": "https://www.reddit.com/r/CopilotPro/comments/1u8egl9/managing_credit_consumption_for_the_mass_cowork/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户对Cowork大规模部署的信用额度管理表示担忧，但也有建议和经验分享。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/CopilotPro",
+            "subreddit": "r/CopilotPro"
+          },
+          {
+            "post_id": "1u3aibc",
+            "title": "CoPilot Outage/Server Issues?",
+            "score": 13,
+            "num_comments": 12,
+            "url": "https://www.reddit.com/r/Copilot/comments/1u3aibc/copilot_outageserver_issues/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户遇到Copilot服务宕机，无法正常访问，感到困惑和不便。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/Copilot",
+            "subreddit": "r/Copilot"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 48,
+          "keyword_search": 0
+        }
+      },
+      "code_interpreter": {
+        "count": 2,
+        "positive": 0,
+        "negative": 1,
+        "neutral": 0,
+        "mixed": 1,
+        "avg_score": -0.65,
+        "top_posts": [
+          {
+            "post_id": "1u79os2",
+            "title": "Caught Copilot looking for romantic restaurants while helping me with some complex data analysis 🤣",
+            "score": 11,
+            "num_comments": 1,
+            "url": "https://www.reddit.com/r/CopilotMicrosoft/comments/1u79os2/caught_copilot_looking_for_romantic_restaurants/",
+            "sentiment_label": "mixed",
+            "sentiment_reason": "用户反馈Copilot在数据分析时出现无关推荐，评论中有批评也有调侃。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/CopilotMicrosoft",
+            "subreddit": "r/CopilotMicrosoft"
+          },
+          {
+            "post_id": "1u2zyqp",
+            "title": "I need help. Our company has started using copilot. Peculiar problem faced. Unable to download files",
+            "score": 3,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/Copilot/comments/1u2zyqp/i_need_help_our_company_has_started_using_copilot/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户无法下载Copilot生成的文件且新链接无效，影响工作流程。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/Copilot",
+            "subreddit": "r/Copilot"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 2,
+          "keyword_search": 0
+        }
+      },
+      "office_file_creation": {
+        "count": 3,
+        "positive": 1,
+        "negative": 2,
+        "neutral": 0,
+        "mixed": 0,
+        "avg_score": -0.27,
+        "top_posts": [
+          {
+            "post_id": "1u87p23",
+            "title": "Why is copilot in ppt so slow",
+            "score": 6,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/CopilotPro/comments/1u87p23/why_is_copilot_in_ppt_so_slow/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户抱怨Copilot在PPT中的速度慢且表现不如直接使用Claude。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/CopilotPro",
+            "subreddit": "r/CopilotPro"
+          },
+          {
+            "post_id": "1u5hblg",
+            "title": "Are there usage limits for work account users?",
+            "score": 3,
+            "num_comments": 9,
+            "url": "https://www.reddit.com/r/Copilot/comments/1u5hblg/are_there_usage_limits_for_work_account_users/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户描述Copilot在工作中高效处理大量文档，整体体验积极，但对使用限制有疑问。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/Copilot",
+            "subreddit": "r/Copilot"
+          },
+          {
+            "post_id": "1u2zyqp",
+            "title": "I need help. Our company has started using copilot. Peculiar problem faced. Unable to download files",
+            "score": 3,
+            "num_comments": 2,
+            "url": "https://www.reddit.com/r/Copilot/comments/1u2zyqp/i_need_help_our_company_has_started_using_copilot/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户无法下载Copilot生成的文件且新链接无效，影响工作流程。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/Copilot",
+            "subreddit": "r/Copilot"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 3,
+          "keyword_search": 0
+        }
+      },
+      "file_upload": {
+        "count": 1,
+        "positive": 1,
+        "negative": 0,
+        "neutral": 0,
+        "mixed": 0,
+        "avg_score": 0.5,
+        "top_posts": [
+          {
+            "post_id": "1u5hblg",
+            "title": "Are there usage limits for work account users?",
+            "score": 3,
+            "num_comments": 9,
+            "url": "https://www.reddit.com/r/Copilot/comments/1u5hblg/are_there_usage_limits_for_work_account_users/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户描述Copilot在工作中高效处理大量文档，整体体验积极，但对使用限制有疑问。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/Copilot",
+            "subreddit": "r/Copilot"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 1,
+          "keyword_search": 0
+        }
+      },
+      "image_creation": {
+        "count": 2,
+        "positive": 1,
+        "negative": 1,
+        "neutral": 0,
+        "mixed": 0,
+        "avg_score": 0.0,
+        "top_posts": [
+          {
+            "post_id": "1u37vvg",
+            "title": "glitch",
+            "score": 2,
+            "num_comments": 0,
+            "url": "https://www.reddit.com/r/Copilot/comments/1u37vvg/glitch/",
+            "sentiment_label": "negative",
+            "sentiment_reason": "用户遇到Copilot生成图片数量异常且图片无法保存，怀疑是系统故障。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/Copilot",
+            "subreddit": "r/Copilot"
+          },
+          {
+            "post_id": "1uad01y",
+            "title": "Copilot",
+            "score": 0,
+            "num_comments": 1,
+            "url": "https://www.reddit.com/r/CopilotPro/comments/1uad01y/copilot/",
+            "sentiment_label": "positive",
+            "sentiment_reason": "用户展示了Copilot结合GPT 5.5进行创作的实际用例，态度正面。",
+            "source_type": "official_sub",
+            "origin_subreddit": "r/CopilotPro",
+            "subreddit": "r/CopilotPro"
+          }
+        ],
+        "source_breakdown": {
+          "official_sub": 2,
+          "keyword_search": 0
+        }
+      }
+    }
+  },
+  "scenario_comparison": {
+    "image_upload": {
+      "ChatGPT": {
+        "count": 54,
+        "positive_pct": 31.5,
+        "negative_pct": 53.7,
+        "avg_sentiment": -0.08,
+        "keyword_search_pct": 0.0
+      },
+      "Claude": {
+        "count": 15,
+        "positive_pct": 53.3,
+        "negative_pct": 20.0,
+        "avg_sentiment": 0.3,
+        "keyword_search_pct": 0.0
+      },
+      "Gemini": {
+        "count": 48,
+        "positive_pct": 12.5,
+        "negative_pct": 79.2,
+        "avg_sentiment": -0.45,
+        "keyword_search_pct": 0.0
+      }
+    },
+    "image_creation": {
+      "ChatGPT": {
+        "count": 297,
+        "positive_pct": 46.8,
+        "negative_pct": 37.0,
+        "avg_sentiment": 0.09,
+        "keyword_search_pct": 0.0
+      },
+      "Claude": {
+        "count": 4,
+        "positive_pct": 50.0,
+        "negative_pct": 25.0,
+        "avg_sentiment": 0.23,
+        "keyword_search_pct": 0.0
+      },
+      "Gemini": {
+        "count": 125,
+        "positive_pct": 15.2,
+        "negative_pct": 75.2,
+        "avg_sentiment": -0.36,
+        "keyword_search_pct": 0.0
+      },
+      "M365 Copilot": {
+        "count": 2,
+        "positive_pct": 50.0,
+        "negative_pct": 50.0,
+        "avg_sentiment": 0.0,
+        "keyword_search_pct": 0.0
+      },
+      "Copilot": {
+        "count": 2,
+        "positive_pct": 50.0,
+        "negative_pct": 50.0,
+        "avg_sentiment": 0.0,
+        "keyword_search_pct": 0.0
+      }
+    },
+    "multi_turn": {
+      "ChatGPT": {
+        "count": 107,
+        "positive_pct": 8.4,
+        "negative_pct": 79.4,
+        "avg_sentiment": -0.46,
+        "keyword_search_pct": 0.0
+      },
+      "Claude": {
+        "count": 72,
+        "positive_pct": 18.1,
+        "negative_pct": 31.9,
+        "avg_sentiment": 0.03,
+        "keyword_search_pct": 0.0
+      },
+      "Gemini": {
+        "count": 73,
+        "positive_pct": 9.6,
+        "negative_pct": 72.6,
+        "avg_sentiment": -0.42,
+        "keyword_search_pct": 0.0
+      },
+      "M365 Copilot": {
+        "count": 1,
+        "positive_pct": 0.0,
+        "negative_pct": 100.0,
+        "avg_sentiment": -0.6,
+        "keyword_search_pct": 0.0
+      }
+    },
+    "code_interpreter": {
+      "ChatGPT": {
+        "count": 1,
+        "positive_pct": 0.0,
+        "negative_pct": 100.0,
+        "avg_sentiment": -0.4,
+        "keyword_search_pct": 0.0
+      },
+      "Gemini": {
+        "count": 1,
+        "positive_pct": 0.0,
+        "negative_pct": 0.0,
+        "avg_sentiment": 0.4,
+        "keyword_search_pct": 0.0
+      },
+      "Copilot": {
+        "count": 2,
+        "positive_pct": 0.0,
+        "negative_pct": 50.0,
+        "avg_sentiment": -0.65,
+        "keyword_search_pct": 0.0
+      }
+    },
+    "office_file_creation": {
+      "ChatGPT": {
+        "count": 7,
+        "positive_pct": 14.3,
+        "negative_pct": 85.7,
+        "avg_sentiment": -0.49,
+        "keyword_search_pct": 0.0
+      },
+      "Claude": {
+        "count": 8,
+        "positive_pct": 12.5,
+        "negative_pct": 50.0,
+        "avg_sentiment": -0.04,
+        "keyword_search_pct": 0.0
+      },
+      "Gemini": {
+        "count": 6,
+        "positive_pct": 0.0,
+        "negative_pct": 83.3,
+        "avg_sentiment": -0.48,
+        "keyword_search_pct": 0.0
+      },
+      "Copilot": {
+        "count": 3,
+        "positive_pct": 33.3,
+        "negative_pct": 66.7,
+        "avg_sentiment": -0.27,
+        "keyword_search_pct": 0.0
+      }
+    },
+    "file_upload": {
+      "ChatGPT": {
+        "count": 20,
+        "positive_pct": 10.0,
+        "negative_pct": 80.0,
+        "avg_sentiment": -0.35,
+        "keyword_search_pct": 0.0
+      },
+      "Claude": {
+        "count": 28,
+        "positive_pct": 42.9,
+        "negative_pct": 25.0,
+        "avg_sentiment": 0.22,
+        "keyword_search_pct": 0.0
+      },
+      "Gemini": {
+        "count": 22,
+        "positive_pct": 4.5,
+        "negative_pct": 86.4,
+        "avg_sentiment": -0.58,
+        "keyword_search_pct": 0.0
+      },
+      "M365 Copilot": {
+        "count": 3,
+        "positive_pct": 0.0,
+        "negative_pct": 66.7,
+        "avg_sentiment": -0.23,
+        "keyword_search_pct": 0.0
+      },
+      "Copilot": {
+        "count": 1,
+        "positive_pct": 100.0,
+        "negative_pct": 0.0,
+        "avg_sentiment": 0.5,
+        "keyword_search_pct": 0.0
+      }
+    },
+    "general_purpose_search": {
+      "ChatGPT": {
+        "count": 10,
+        "positive_pct": 20.0,
+        "negative_pct": 60.0,
+        "avg_sentiment": -0.15,
+        "keyword_search_pct": 0.0
+      },
+      "Claude": {
+        "count": 6,
+        "positive_pct": 0.0,
+        "negative_pct": 50.0,
+        "avg_sentiment": -0.22,
+        "keyword_search_pct": 0.0
+      },
+      "Gemini": {
+        "count": 35,
+        "positive_pct": 8.6,
+        "negative_pct": 85.7,
+        "avg_sentiment": -0.53,
+        "keyword_search_pct": 0.0
+      }
+    },
+    "general_purpose": {
+      "ChatGPT": {
+        "count": 1178,
+        "positive_pct": 27.6,
+        "negative_pct": 40.2,
+        "avg_sentiment": -0.03,
+        "keyword_search_pct": 0.0
+      },
+      "Claude": {
+        "count": 1555,
+        "positive_pct": 41.1,
+        "negative_pct": 25.5,
+        "avg_sentiment": 0.2,
+        "keyword_search_pct": 0.0
+      },
+      "Gemini": {
+        "count": 810,
+        "positive_pct": 16.3,
+        "negative_pct": 55.4,
+        "avg_sentiment": -0.23,
+        "keyword_search_pct": 0.0
+      },
+      "M365 Copilot": {
+        "count": 60,
+        "positive_pct": 23.3,
+        "negative_pct": 36.7,
+        "avg_sentiment": -0.02,
+        "keyword_search_pct": 0.0
+      },
+      "Copilot": {
+        "count": 48,
+        "positive_pct": 25.0,
+        "negative_pct": 50.0,
+        "avg_sentiment": -0.11,
+        "keyword_search_pct": 0.0
+      }
+    },
+    "voice_single_turn": {
+      "ChatGPT": {
+        "count": 29,
+        "positive_pct": 27.6,
+        "negative_pct": 62.1,
+        "avg_sentiment": -0.16,
+        "keyword_search_pct": 0.0
+      },
+      "Claude": {
+        "count": 6,
+        "positive_pct": 0.0,
+        "negative_pct": 66.7,
+        "avg_sentiment": -0.4,
+        "keyword_search_pct": 0.0
+      },
+      "Gemini": {
+        "count": 29,
+        "positive_pct": 6.9,
+        "negative_pct": 82.8,
+        "avg_sentiment": -0.5,
+        "keyword_search_pct": 0.0
+      }
+    }
+  },
+  "metadata": {
+    "scenario_taxonomy": [
+      "image_upload",
+      "image_creation",
+      "multi_turn",
+      "code_interpreter",
+      "office_file_creation",
+      "file_upload",
+      "general_purpose_search",
+      "general_purpose",
+      "voice_single_turn"
+    ],
+    "note": "scenario_tags from LLM classification; keyword_search posts are from cross-subreddit search and may need quality review"
+  }
+}
