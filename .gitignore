@@ -86,3 +86,6 @@ net8.0/
 
 # Screenshots generated at runtime
 wwwroot/screenshots/
+
+# MSBuild language service cache
+*.lscache
