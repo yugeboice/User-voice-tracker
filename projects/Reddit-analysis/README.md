@@ -33,16 +33,43 @@ A scheduled task runs automatically every other Monday at 00:00 SGT (Asia/Singap
 
 ## Pipeline Overview
 
-The analysis pipeline runs in 6 stages:
+**`run.py` is the single unified entry point** — a pure-Python orchestrator that runs every stage in order. `auto_pipeline.sh` is now just a thin wrapper that calls `run.py` (kept for backward compatibility with old schedules / muscle memory).
+
+The pipeline runs the following stages. By default it **stops before Deploy** (Stage 6/7 are gated behind `--deploy`, mirroring the old confirmation gate):
 
 ```
-┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
-│  0. News      │───▶│  1. Scrape    │───▶│  2. Analyze   │───▶│  3. Translate │───▶│  4. Deploy   │───▶│  5. Notify   │
-│  (search)     │    │  (data)       │    │  (LLM)       │    │  (LLM)       │    │  (gh-pages)  │    │  (Teams)     │
-└──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘
- Lumina Search       backfill_arctic.py   analyze.py         translate.py        deploy.py           notify.py
-                     scrape.py (fallback)
+ DATA COLLECTION                        ANALYSIS                                       PUBLISH (gated: --deploy)
+┌────────────┐ ┌────────────┐ ┌────────────┐   ┌──────────┐ ┌──────────┐ ┌────────────┐ ┌────────────┐   ┌──────────┐ ┌──────────┐
+│ 0. News    │▶│ 1. Scrape  │▶│ 2. Keyword │ ▶ │3. Analyze│▶│4. Scenario│▶│4b. Embed  │▶│4c. Competi.│▶│5.Translate│ ▶ │6. Deploy │▶│7. Notify │
+│  (Lumina)  │ │  (official)│ │ (cross-sub)│   │  (LLM)   │ │  (LLM)   │ │ (vectors) │ │ (news×RDT) │ │  (LLM)   │   │(gh-pages)│ │ (Teams)  │
+└────────────┘ └────────────┘ └────────────┘   └──────────┘ └──────────┘ └────────────┘ └────────────┘   └──────────┘ └──────────┘
+ lumina_       backfill_       backfill_        analyze.py   scenario_     embed.py      _gen_competitor  translate.py   deploy.py   notify.py
+ client.py     arctic.py       arctic.py                     analysis.py                 _updates_v2.py
+                               --keyword
 ```
+
+### File Handoff Relationships
+
+The stages are decoupled via files on disk, so any stage can be re-run independently:
+
+```
+lumina_client.py ──────────────▶ data/news_context_P{N}.md ──┐
+                                                              │
+backfill_arctic.py ────────────▶ data/reddit.db ─────────────┤
+                                                              ▼
+analyze.py ──▶ data/reports/report_{id}.json                 (Stage 4c reads BOTH
+          └──▶ data/latest_run.json  ◀── machine-readable     the report + news context)
+                   │  handoff (run_id, report_path,
+                   │  report_basename, period_start/end,
+                   │  posts_analyzed, products)
+                   ▼
+   run.py reads latest_run.json to drive Stages 4/4b/4c/5/6/7
+   (scenario_analysis.py --run-id, embed.py, _gen_competitor_updates_v2.py,
+    translate.py --file, deploy.py, notify.py)
+```
+
+- **`data/latest_run.json`** is the key contract: `analyze.py` writes it at the end; `run.py` reads it to locate the report and pass `run_id` / `report_basename` to downstream stages. If it's missing, the pipeline aborts after analysis.
+- **Stage 4c** (`_gen_competitor_updates_v2.py`) must run from the project root (uses relative `data/` paths) and consumes both the report JSON and the newest `news_context_*.md`. It runs **before** translate so the new fields also get English translations.
 
 ### Stage 0: News Context Search (NEW)
 
@@ -187,17 +214,37 @@ PYTHONIOENCODING=utf-8 venv/Scripts/python serve.py
 # Open http://localhost:8407
 ```
 
-### One-Click Pipeline
+### One-Click Pipeline (`run.py` — recommended)
+
+`run.py` is the single unified entry point. It auto-resolves the date range (default: last Monday minus 14 days) if you don't pass `--start-date` / `--end-date`.
 
 ```bash
-# Full pipeline: scrape → analyze → translate → deploy → notify → serve
+# Full data + analysis (STOPS before deploy — prints a confirmation gate)
+PYTHONIOENCODING=utf-8 venv/Scripts/python run.py \
+    --start-date 2026-05-05 --end-date 2026-05-18
+
+# Auto date range (last Monday - 14 days)
 PYTHONIOENCODING=utf-8 venv/Scripts/python run.py
 
+# Full pipeline INCLUDING deploy + Teams notification
+PYTHONIOENCODING=utf-8 venv/Scripts/python run.py ... --deploy
+
+# Deploy + notify, then serve the dashboard
+PYTHONIOENCODING=utf-8 venv/Scripts/python run.py ... --deploy --serve
+
 # Partial runs
-PYTHONIOENCODING=utf-8 venv/Scripts/python run.py --scrape-only
-PYTHONIOENCODING=utf-8 venv/Scripts/python run.py --analyze-only   # includes translate
-PYTHONIOENCODING=utf-8 venv/Scripts/python run.py --serve-only
+PYTHONIOENCODING=utf-8 venv/Scripts/python run.py --scrape-only    # Stage 0/1/2 only
+PYTHONIOENCODING=utf-8 venv/Scripts/python run.py --analyze-only   # Stage 3/4/4b/4c/5 (needs prior data)
+PYTHONIOENCODING=utf-8 venv/Scripts/python run.py --serve-only     # just serve dashboard
 ```
+
+**Useful flags:** `--skip-news`, `--skip-keyword`, `--skip-scenario`, `--skip-embed`, `--skip-competitor`, `--skip-comments`, `--subreddits`, `--llm-endpoint`, `--model`, `--port`.
+
+> `auto_pipeline.sh` still works but is deprecated — it just forwards to `run.py` and stops before deploy.
+> ```bash
+> ./auto_pipeline.sh                       # auto date range
+> ./auto_pipeline.sh 2026-05-05 2026-05-18 # explicit range
+> ```
 
 ## Data Storage
 
@@ -265,27 +312,43 @@ Reddit-analysis/
 ├── README.md                # This file
 ├── .gitignore
 ├── scripts/
-│   ├── backfill_arctic.py       # Arctic Shift historical data scraper (preferred)
-│   ├── scrape.py                # Reddit RSS scraper (fallback)
-│   ├── analyze.py               # LLM analysis pipeline (6-step)
-│   ├── translate.py             # Bilingual translation with checkpointing
+│   │  ── Entry point ──
+│   ├── run.py                   # ★ SINGLE unified pipeline entry (all stages)
+│   ├── auto_pipeline.sh         # Deprecated wrapper → forwards to run.py
+│   │  ── Stage 0: News ──
+│   ├── lumina_client.py         # Lumina Search API → data/news_context_P{N}.md
+│   │  ── Stage 1/2: Data collection ──
+│   ├── backfill_arctic.py       # Arctic Shift scraper (preferred); --keyword for cross-sub
+│   ├── scrape.py                # Reddit RSS scraper (fallback, no scores)
+│   ├── backfill_browser.py      # Browser-based backfill (rarely used)
+│   ├── download_data.py         # Download data from Azure Blob
+│   │  ── Stage 3: LLM analysis ──
+│   ├── analyze.py               # 6-step LLM analysis → report JSON + latest_run.json
+│   │  ── Stage 4/4b/4c: Enrichment ──
+│   ├── scenario_analysis.py     # Scenario analysis module (--run-id)
+│   ├── embed.py                 # Generate embeddings/vectors for posts
+│   ├── _gen_competitor_updates_v2.py  # news × Reddit competitor updates (real sources)
+│   │  ── Stage 5: Translation ──
+│   ├── translate.py             # Bilingual zh→en translation with checkpointing
+│   ├── inject_en.py             # Inject English translations into reports
+│   │  ── Stage 6/7: Publish (gated) ──
+│   ├── deploy.py                # Deploy to GitHub Pages + Azure Blob upload
+│   ├── notify.py                # Teams/Telegram notifications
+│   ├── serve.py                 # Dashboard dev server (port 8407)
+│   │  ── Support / fixups ──
 │   ├── fix_reports.py           # Regenerate product summaries from DB (resume bug fix)
 │   ├── fix_display.py           # Extract structured data from markdown summaries
-│   ├── serve.py                 # Dashboard dev server (port 8407)
-│   ├── run.py                   # One-click pipeline orchestrator
-│   ├── deploy.py                # Deploy to GitHub Pages + Azure Blob upload
-│   ├── download_data.py         # Download data from Azure Blob
-│   ├── notify.py                # Teams/Telegram notifications
-│   ├── lumina_client.py         # Lumina Search API wrapper
-│   ├── inject_en.py             # Inject English translations into reports
 │   ├── _gen_exec_summary.py     # Generate executive_summary from news context
-│   ├── _gen_competitor_updates_v2.py  # Generate competitor_updates with real Reddit sources
-│   ├── share.config.json        # Azure Blob connection string (not committed)
+│   ├── collect_hackernews.py    # (aux) Hacker News collector
+│   ├── collect_techcommunity.py # (aux) Tech Community collector
+│   ├── share.config.json        # Azure Blob + Teams webhook config (secrets → .local.json)
 │   ├── requirements.txt
+│   ├── vendor/                  # Vendored 3rd-party scrapers
 │   └── venv/                    # Python virtual environment (not committed)
 ├── data/                    # Runtime data (gitignored)
 │   ├── reddit.db                # SQLite database
 │   ├── news_context_P{N}.md     # News context per analysis period (Stage 0 output)
+│   ├── latest_run.json          # ★ Machine-readable handoff (analyze.py → run.py)
 │   └── reports/                 # Report JSONs
 └── wwwroot/                 # Dashboard static site
     ├── index.html               # Dashboard SPA (bilingual zh/en)
@@ -315,3 +378,13 @@ Reddit-analysis/
 - 5-second delay between comment fetches
 - 60-second cooldown between subreddits
 - Exponential backoff on 429 responses
+
+## Changelog
+
+### 2026-07-22 — Unified pipeline entry point
+- **`run.py` is now the single unified orchestrator** (pure Python). It runs all stages: 0 News → 1 Scrape → 2 Keyword → 3 Analyze → 4 Scenario → 4b Embed → 4c Competitor → 5 Translate → 6 Deploy → 7 Notify. Deploy/Notify gated behind `--deploy`.
+- **`auto_pipeline.sh` reduced to a thin wrapper** that forwards to `run.py` (kept for backward compatibility; still stops before deploy).
+- **`analyze.py` now emits `data/latest_run.json`** — a machine-readable handoff (run_id, report_path, report_basename, period start/end, posts_analyzed, products) that `run.py` reads to drive downstream stages.
+- **`lumina_client.py`** gained news-context fetch/build + CLI (Stage 0), writing `data/news_context_P{N}.md`.
+- **`_gen_competitor_updates_v2.py`** (Stage 4c) parameterized to take report path, news path, endpoint, model; runs from project root and before translate so new fields get translated.
+- Merged into `m365-core/arena` under `projects/Reddit-analysis/` (branch `users/dorisrao/add-reddit-analysis`). Secret-bearing `share.config.json` excluded — arena keeps placeholders.
