@@ -1041,7 +1041,7 @@
       /* Load previous reports (oldest to newest order for chart) */
       for (var j = reportIndex.length - 1; j >= startIdx; j--) {
         try {
-          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1784803782');
+          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1784803805');
           if (resp.ok) {
             var data = await resp.json();
             allHistoricalReports.push(data);
@@ -1056,7 +1056,7 @@
 
     async function loadReportIndex() {
       try {
-        var resp = await fetch('data/reports/index.json?v=1784803782');
+        var resp = await fetch('data/reports/index.json?v=1784803805');
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
@@ -3042,7 +3042,7 @@
     /* ======= SCENARIO ANALYSIS RENDERERS (Section IV) ======= */
     async function loadScenarioData() {
       try {
-        var resp = await fetch('data/reports/latest_scenario.json?v=1784803782');
+        var resp = await fetch('data/reports/latest_scenario.json?v=1784803805');
         if (resp.ok) { scenarioData = await resp.json(); }
       } catch(e) { console.warn('No scenario data:', e); scenarioData = null; }
     }
@@ -3237,7 +3237,7 @@
       await loadReportIndex();
       await loadReportList();
       try {
-        var resp = await fetch('data/reports/latest.json?v=1784803782');
+        var resp = await fetch('data/reports/latest.json?v=1784803805');
         if (resp.ok) { reportData = await resp.json(); }
         else { resp = await fetch('report.json'); if (resp.ok) reportData = await resp.json(); }
         if (reportData) {
