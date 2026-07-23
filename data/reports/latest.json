@@ -1,7 +1,7 @@
 {
   "run_id": "e194b382",
   "period": {
-    "start": "2026-07-09T00:00:00+00:00",
+    "start": "2026-07-08T00:00:00+00:00",
     "end": "2026-07-20T00:00:00+00:00"
   },
   "products": [
@@ -12,28 +12,28 @@
         "ClaudeAI",
         "claude"
       ],
-      "post_count": 5147,
-      "valid_post_count": 2049,
-      "filtered_count": 3098,
+      "post_count": 5663,
+      "valid_post_count": 2243,
+      "filtered_count": 3420,
       "source_breakdown": {
-        "reddit": 5147
+        "reddit": 5663
       },
       "summary": "**Reddit r/ClaudeAI+claude 社区双周竞品情报摘要（2026-07-09 至 2026-07-20）**\n\n本期共分析2049条高质量帖子，社区情感分布较为均衡：正面31%，负面27%，中性32%，混合8%。情感波动的核心驱动因素为Fable 5订阅计划调整及模型访问权限变动。大量用户对Fable 5从Max套餐中移除、转为按量计费表达不满（如“The just took FABLE off Max plans?”、“Is Anthropic shooting themselves in the foot by pulling Fab 5 from subscriptions”），部分高价订阅用户（如“I'm paying $200/month, and after tomorrow, I can't access Anthropic's best model”）对无法访问最佳模型感到失望，担忧自身权益受损。与此同时，部分用户对Pro用户获得$100信用额度表示认可，缓解了部分负面情绪。\n\n话题分布显示，use_case（504条）为最热议题，用户积极分享Claude在自动化流程、内容创作、移民申请等实际场景中的应用（如“What are people actually using Claude for?”），展现出产品在解决实际问题上的价值。meta（365条）和product_experience（354条）讨论集中于社区规则、产品体验反馈，反映用户对平台透明度和持续优化的关注。bug_report（258条）和feature_request（232条）则揭示了用户对产品稳定性和功能完善的持续需求。\n\n主要痛点集中在订阅模式变更带来的不确定性和成本压力，尤其是Fable 5模型的访问限制和按量计费引发的强烈反弹。部分用户担忧Anthropic在定价和产品策略上“自断手脚”，并与竞争对手（如OpenAI）进行对比，认为后者的定价和模型可用性更具吸引力。此外，额度限制、模型表现不及预期（如对Opus 4.8的不满）也是负面反馈的重要来源。\n\n在功能层面，用户高度赞赏Claude在编程、内容创作等领域的能力（“Show us what you've created with Claude!”、“What are you building that you need fable 5 so badly?”），并期待更灵活的额度管理和模型选择机制。部分用户建议通过token消耗优化成本控制，呼吁产品团队提升透明度和用户沟通。\n\n与竞品对比方面，社区多次提及OpenAI等对手在模型开放性和价格策略上的优势，建议Anthropic借鉴其灵活的订阅和计费模式，以提升用户黏性和满意度。\n\n**可操作洞察：**  \n1. 建议产品团队重新评估Fable 5的订阅策略，考虑为高端用户保留部分套餐内访问权限，或提供更具吸引力的按量计费优惠。  \n2. 加强与用户的沟通，及时解释产品调整原因，提升透明度，减少误解和流失。  \n3. 优化额度管理和模型选择体验，降低用户因额度限制产生的焦虑。  \n4. 持续关注竞品动态，灵活调整定价和功能策略，强化Claude在实际应用场景中的竞争力。",
       "sentiment_distribution": {
-        "positive": 644,
-        "negative": 556,
-        "neutral": 671,
-        "mixed": 178
+        "positive": 712,
+        "negative": 614,
+        "neutral": 724,
+        "mixed": 193
       },
       "topic_distribution": {
-        "model_capability": 69,
-        "product_experience": 354,
-        "feature_request": 232,
-        "bug_report": 258,
-        "comparison": 143,
-        "use_case": 504,
-        "news_update": 110,
-        "meta": 365
+        "model_capability": 74,
+        "product_experience": 386,
+        "feature_request": 257,
+        "bug_report": 287,
+        "comparison": 154,
+        "use_case": 553,
+        "news_update": 124,
+        "meta": 390
       },
       "typical_posts": [
         {
@@ -339,28 +339,28 @@
         "GeminiAI",
         "GoogleGeminiAI"
       ],
-      "post_count": 1330,
-      "valid_post_count": 855,
-      "filtered_count": 475,
+      "post_count": 1430,
+      "valid_post_count": 924,
+      "filtered_count": 506,
       "source_breakdown": {
-        "reddit": 1330
+        "reddit": 1430
       },
       "summary": "**Gemini Reddit社区双周竞品情报摘要（2026-07-09 至 2026-07-20）**\n\n本期（r/GeminiAI + GoogleGeminiAI）社区整体情感以负面为主（56%），正面情感占比仅13%。负面情绪主要由用户对Gemini产品体验不佳、功能落后及发布延迟等问题驱动。典型高热帖如“Worst fumble in the history of Ai”直接指出Gemini为“用过最差的模型”，并认为中国AI模型表现已优于Gemini；“Gemini is even worse than grok now”则表达了对Gemini性能的强烈不满，认为其已落后于Grok。\n\n话题分布上，产品体验（190条）、bug反馈（175条）和功能需求（94条）为最受关注议题。用户集中讨论Gemini在实际使用中的不足，尤其是在文档生成、代码处理等核心场景下的表现。大量bug报告反映出产品稳定性和可靠性问题，影响用户信心。\n\n主要痛点包括：1）Gemini 3.5 Pro多次延迟发布，社区对发布时间表不满，担忧产品进度和谷歌战略（如“Gemini 3.5 Pro appears to have been delayed again”）；2）模型能力落后，特别是在文档格式化、代码生成等方面被认为不及ChatGPT，甚至Grok（如“why is google leaving gemini behind while chatgpt advanced so much?”）；3）产品定位分散，创新步伐慢，未能充分利用谷歌的资源优势。\n\n正面反馈主要集中在Gemini在法律推理、准确性等特定领域表现较好（如“Gemini在法律推理和准确性方面表现优秀”），部分用户认为其已满足日常需求。功能期望方面，用户希望Gemini能提升复杂推理和大规模代码处理能力，优化文档生成和格式化体验，并加快新版本稳定发布。\n\n与竞品对比，ChatGPT被普遍认为在文档处理、创新速度和产品体验上领先，Grok也被部分用户认为优于Gemini。部分用户质疑谷歌为何未能凭借强大资源实现产品突破。\n\n**可操作洞察：**\n- 优先提升产品稳定性和bug修复，减少发布延迟，增强用户信心；\n- 针对文档生成、代码处理等高频场景，重点优化模型能力，缩小与ChatGPT等竞品差距；\n- 明确产品定位，突出Gemini在推理、准确性等优势领域，避免资源分散；\n- 加强与用户沟通，及时透明发布进度，回应社区关切，提升用户参与感和期待值。",
       "sentiment_distribution": {
-        "positive": 117,
-        "negative": 479,
-        "neutral": 206,
-        "mixed": 53
+        "positive": 131,
+        "negative": 515,
+        "neutral": 223,
+        "mixed": 55
       },
       "topic_distribution": {
-        "model_capability": 81,
-        "product_experience": 190,
-        "feature_request": 94,
-        "bug_report": 175,
-        "comparison": 69,
-        "use_case": 75,
-        "news_update": 77,
-        "meta": 72
+        "model_capability": 82,
+        "product_experience": 206,
+        "feature_request": 101,
+        "bug_report": 192,
+        "comparison": 78,
+        "use_case": 85,
+        "news_update": 82,
+        "meta": 75
       },
       "typical_posts": [
         {
@@ -665,27 +665,27 @@
         "CopilotMicrosoft",
         "CopilotPro"
       ],
-      "post_count": 75,
-      "valid_post_count": 46,
-      "filtered_count": 29,
+      "post_count": 87,
+      "valid_post_count": 56,
+      "filtered_count": 31,
       "source_breakdown": {
-        "reddit": 75
+        "reddit": 87
       },
       "summary": "**Reddit社区Copilot竞品情报摘要（2026-07-09 至 2026-07-20）**\n\n本期监测r/Copilot、r/CopilotMicrosoft及r/CopilotPro三大社区，共分析46条有效帖子，整体社区情感偏负面（负面39%，正面17%，中性30%，混合13%）。负面情绪主要由产品稳定性、功能缺失及用户体验不一致驱动。正面反馈则多集中于Copilot在财务分析、自动化办公流程等场景的效率提升。\n\n**1. 社区情感及驱动因素**  \n负面情绪占比最高，主要源于Copilot在实际应用中的多项功能失效。例如，用户多次反馈Copilot无法生成可用的Excel表格（“Copilot fails to build Excel table”）、PNG透明背景生成功能突然失效（“Copilot suddenly refuses to make transparent backgrounds on png images”），以及Excel插件频繁报错（“Copilot in Excel. Pain.”）。此外，部分用户因AI搜索结果不准确（“copilot ai search pulling bs out of its ahh”）及基础设施限制（如MP4上传体验差）表达不满，甚至有用户表示计划转用Claude等竞品。\n\n**2. 主要讨论话题及重要性**  \n“用例分享”是最热话题（17条），用户关注Copilot在实际工作场景下的应用价值，尤其在自动化库存、维护流程和财务分析等领域。其次为“bug报告”（9条）和“产品体验”（5条），反映出用户对产品稳定性和易用性的高度关注。“功能请求”与“竞品对比”也有一定讨论热度，显示用户对产品进化的期待及对市场选择的敏感。\n\n**3. 用户主要痛点与投诉**  \n- 关键功能失效（如Excel表格生成、图片处理）影响工作流\n- 产品在不同设备表现不一致（如“CoPilot works on one computer, and not on another”）\n- 订阅用户仍受功能限制，体验未达预期\n- AI搜索结果不准确，降低信任度\n- 基础设施不完善（如MP4上传受限）\n\n**4. 用户赞赏与期望功能**  \n部分用户认可Copilot在提升办公效率、重构财务分析流程等方面的潜力（如“Building a copilot FP&A 'brain', will this work?”）。用户期望产品能更好地支持本地文件检索（如RAG检索与Microsoft Graph connector集成）、提升多端一致性、完善图片处理等功能。\n\n**5. 竞品对比讨论**  \n有用户明确表示因Copilot体验不佳而考虑转用Claude等竞品，显示市场竞争压力加大。用户对比关注点主要集中在AI工具的稳定性、准确性及功能完备度。\n\n**6. 可操作洞察**  \n- 优先修复高频功能bug（如Excel表格生成、图片透明背景处理），提升核心场景稳定性\n- 加强多端一致性测试，减少因设备差异导致的体验割裂\n- 优化AI搜索结果准确性，提升用户信任\n- 加速本地文件检索等高需求功能的开发与集成\n- 关注竞品动态，及时响应用户流失风险\n\n整体来看，Copilot需聚焦基础体验优化和关键功能完善，以巩固用户基础并应对竞品压力。",
       "sentiment_distribution": {
-        "positive": 8,
-        "negative": 18,
-        "neutral": 14,
+        "positive": 9,
+        "negative": 22,
+        "neutral": 19,
         "mixed": 6
       },
       "topic_distribution": {
         "model_capability": 0,
-        "product_experience": 5,
-        "feature_request": 5,
+        "product_experience": 8,
+        "feature_request": 9,
         "bug_report": 9,
         "comparison": 4,
-        "use_case": 17,
-        "news_update": 2,
+        "use_case": 19,
+        "news_update": 3,
         "meta": 2
       },
       "typical_posts": [
@@ -995,27 +995,27 @@
       "subreddits": [
         "microsoft_365_copilot"
       ],
-      "post_count": 72,
-      "valid_post_count": 58,
-      "filtered_count": 14,
+      "post_count": 86,
+      "valid_post_count": 68,
+      "filtered_count": 18,
       "source_breakdown": {
-        "reddit": 72
+        "reddit": 86
       },
       "summary": "竞品情报摘要（2026-07-09 至 2026-07-20）\n\n1. 社区整体情感及驱动因素  \n本期r/microsoft_365_copilot社区整体情感偏负面，56%为负面反馈，正面仅占12%。负面情绪主要由产品稳定性、功能缺失和使用体验不佳驱动。大量用户反馈Copilot Cowork运行缓慢、频繁卡顿（如“Is Cowork useful?”），以及近期限流机制收紧，影响大批量文本处理任务（“Getting rate limited.”）。此外，模型版本不透明（“Is this Sol, Terra or Luna?”）和基础功能表现不佳（如语法纠错失败）进一步加剧用户不满。\n\n2. 主要讨论话题及重要性  \n本期最受关注的话题为bug报告（15条）和功能需求（13条），反映出用户对产品稳定性和功能完善的高度关注。产品体验（9条）和竞品对比（6条）也有较高讨论度，显示用户在实际应用中遇到诸多问题，并积极寻求替代方案或优化建议。新闻更新（5条）则关注新功能上线及版本迭代。\n\n3. 用户主要痛点或投诉  \n用户集中抱怨Copilot Cowork运行不流畅、任务进度反馈不及时、代理无法打开（“All my Agents won't open”）、与OneDrive同步不可靠（“Copilot Cowork sync with OneDrive is a mess.”）、基础功能如文档创建和语法纠错失效（“Copilot cant create MS documents anymore?”、“The thing cannot simply correct grammar.”）。限流政策收紧也被多次提及，影响了企业用户的批量处理需求。\n\n4. 用户赞赏或期望的功能  \n正面反馈主要集中在Copilot Chat升级，现已支持分析Outlook和Notebooks数据，且部分高级功能向基础版用户开放（“Copilot Chat Upgraded: Outlook, Notebooks and access to M365 data”）。用户期望进一步提升模型透明度（如明确GPT-5.6上线情况）、增强企业级安全与合规能力，并简化技能管理与同步流程。\n\n5. 与竞品对比讨论  \n部分用户对比Claude Cowork与M365 Copilot，关注功能、成本及企业级安全合规（“Claude Cowork vs MS365 CoPilot for Enterprises”）。对比中，M365 Copilot在集成性和数据安全方面具备优势，但在稳定性和易用性上存在短板，影响企业采购决策。\n\n6. 对产品团队的可操作洞察  \n建议产品团队优先解决Copilot Cowork的性能与稳定性问题，优化任务进度反馈机制，提升基础功能（如文档创建、语法纠错）的准确性和可靠性。应增强模型版本透明度，及时向用户同步新模型上线信息。针对企业用户，需简化与OneDrive等服务的集成流程，优化限流策略，提升大批量任务处理体验。同时，持续关注竞品动态，强化安全与合规能力，巩固企业市场竞争力。",
       "sentiment_distribution": {
-        "positive": 7,
-        "negative": 33,
-        "neutral": 18,
-        "mixed": 0
+        "positive": 9,
+        "negative": 35,
+        "neutral": 23,
+        "mixed": 1
       },
       "topic_distribution": {
         "model_capability": 4,
-        "product_experience": 9,
-        "feature_request": 13,
-        "bug_report": 15,
+        "product_experience": 12,
+        "feature_request": 16,
+        "bug_report": 16,
         "comparison": 6,
-        "use_case": 4,
-        "news_update": 5,
+        "use_case": 6,
+        "news_update": 6,
         "meta": 2
       },
       "scenario_distribution": {
@@ -1350,28 +1350,28 @@
         "ChatGPTcomplaints",
         "OpenAI"
       ],
-      "post_count": 4436,
-      "valid_post_count": 2935,
-      "filtered_count": 1501,
+      "post_count": 4785,
+      "valid_post_count": 3164,
+      "filtered_count": 1621,
       "source_breakdown": {
-        "reddit": 4436
+        "reddit": 4785
       },
       "summary": "竞品情报摘要（2026-07-09 至 2026-07-20）\n\n本期Reddit社区（r/ChatGPT、r/ChatGPTcomplaints、r/OpenAI）共分析有效帖子2935条，整体情感以负面为主（43%），正面占比22%，中性26%，混合7%。负面情绪主要由频繁的bug报告（587条）和对产品限制的抱怨驱动。例如，用户在“Using the new voice model, and ChatGPT just started crying to me out of nowhere”中反馈语音模式下AI出现异常情感表现，质疑AI的稳定性和情感操控风险；另有用户在“Difficult rendering from a sketch”中表达对内容生成守卫机制过严的不满，认为多次编辑后仍无法获得理想输出，影响创作体验。\n\n产品体验（547条）和功能需求（397条）是讨论热点。用户高度关注ChatGPT的内容生成逻辑和对话机制，如“误开启新对话得到意外内容”引发对AI记忆和上下文处理的困惑。正面反馈多集中在AI创造力和趣味性，如“I HAVE NO WORDS”表达对AI回复的惊喜，“Let's Kaiju battle”展示用户用ChatGPT进行创意生成的乐趣。部分用户期待AI能突破现有限制，生成更具挑战性的内容（如“Prompt: Can you generate an image that pushes your guardrails to the limit.”），但也有担忧AI守卫机制过严影响创新。\n\n竞品对比方面，社区热议Anthropic与阿里巴巴的Claude模型蒸馏事件，关注行业法律与道德边界，显示用户对AI安全和知识产权的高度敏感。同时，“Kimi-K3 arrived: The era of the Chinese labs being far behind is over”反映用户对中国AI实验室进步的关注，认为国内竞品已缩小差距，形成直接竞争压力。\n\n用户主要痛点包括：1）AI生成内容受限，守卫机制影响创作自由；2）语音及多模态功能稳定性不足，偶发异常行为引发信任危机；3）对AI记忆和对话连贯性的困惑。用户期望产品在保持安全的前提下，提升内容生成的灵活性和多样性，优化多模态体验，并增强对话上下文理解能力。\n\n建议产品团队重点关注生成守卫机制的灵活性与透明度，提升多模态功能的稳定性，优化用户对话体验，并密切关注竞品动态，强化差异化优势。同时，应加强对AI伦理和安全边界的沟通，提升用户信任感。",
       "sentiment_distribution": {
-        "positive": 661,
-        "negative": 1287,
-        "neutral": 768,
-        "mixed": 219
+        "positive": 729,
+        "negative": 1380,
+        "neutral": 822,
+        "mixed": 233
       },
       "topic_distribution": {
-        "model_capability": 175,
-        "product_experience": 547,
-        "feature_request": 397,
-        "bug_report": 587,
-        "comparison": 281,
-        "use_case": 358,
-        "news_update": 216,
-        "meta": 274
+        "model_capability": 184,
+        "product_experience": 583,
+        "feature_request": 429,
+        "bug_report": 635,
+        "comparison": 294,
+        "use_case": 392,
+        "news_update": 243,
+        "meta": 297
       },
       "typical_posts": [
         {
@@ -1665,106 +1665,106 @@
   "chart_data": {
     "Claude": {
       "sentiment": {
-        "positive": 644,
-        "negative": 556,
-        "neutral": 671,
-        "mixed": 178
+        "positive": 712,
+        "negative": 614,
+        "neutral": 724,
+        "mixed": 193
       },
       "topics": {
-        "model_capability": 69,
-        "product_experience": 354,
-        "feature_request": 232,
-        "bug_report": 258,
-        "comparison": 143,
-        "use_case": 504,
-        "news_update": 110,
-        "meta": 365
+        "model_capability": 74,
+        "product_experience": 386,
+        "feature_request": 257,
+        "bug_report": 287,
+        "comparison": 154,
+        "use_case": 553,
+        "news_update": 124,
+        "meta": 390
       },
       "scenarios": {
-        "image_upload": 13,
-        "image_creation": 7,
-        "multi_turn": 48,
+        "image_upload": 16,
+        "image_creation": 9,
+        "multi_turn": 58,
         "code_interpreter": 1,
-        "office_file_creation": 12,
-        "file_upload": 59,
-        "general_purpose_search": 4,
-        "general_purpose": 480,
-        "voice_single_turn": 7
+        "office_file_creation": 15,
+        "file_upload": 63,
+        "general_purpose_search": 5,
+        "general_purpose": 522,
+        "voice_single_turn": 8
       }
     },
     "Gemini": {
       "sentiment": {
-        "positive": 117,
-        "negative": 479,
-        "neutral": 206,
-        "mixed": 53
+        "positive": 131,
+        "negative": 515,
+        "neutral": 223,
+        "mixed": 55
       },
       "topics": {
-        "model_capability": 81,
-        "product_experience": 190,
-        "feature_request": 94,
-        "bug_report": 175,
-        "comparison": 69,
-        "use_case": 75,
-        "news_update": 77,
-        "meta": 72
+        "model_capability": 82,
+        "product_experience": 206,
+        "feature_request": 101,
+        "bug_report": 192,
+        "comparison": 78,
+        "use_case": 85,
+        "news_update": 82,
+        "meta": 75
       },
       "scenarios": {
-        "image_upload": 41,
-        "image_creation": 78,
-        "multi_turn": 38,
+        "image_upload": 44,
+        "image_creation": 85,
+        "multi_turn": 39,
         "code_interpreter": 3,
         "office_file_creation": 5,
-        "file_upload": 11,
-        "general_purpose_search": 10,
-        "general_purpose": 225,
-        "voice_single_turn": 20
+        "file_upload": 12,
+        "general_purpose_search": 11,
+        "general_purpose": 246,
+        "voice_single_turn": 21
       }
     },
     "Copilot": {
       "sentiment": {
-        "positive": 8,
-        "negative": 18,
-        "neutral": 14,
+        "positive": 9,
+        "negative": 22,
+        "neutral": 19,
         "mixed": 6
       },
       "topics": {
         "model_capability": 0,
-        "product_experience": 5,
-        "feature_request": 5,
+        "product_experience": 8,
+        "feature_request": 9,
         "bug_report": 9,
         "comparison": 4,
-        "use_case": 17,
-        "news_update": 2,
+        "use_case": 19,
+        "news_update": 3,
         "meta": 2
       },
       "scenarios": {
-        "image_upload": 1,
+        "image_upload": 2,
         "image_creation": 4,
         "multi_turn": 3,
         "code_interpreter": 0,
-        "office_file_creation": 2,
-        "file_upload": 0,
+        "office_file_creation": 3,
+        "file_upload": 1,
         "general_purpose_search": 1,
-        "general_purpose": 8,
+        "general_purpose": 9,
         "voice_single_turn": 0
       }
     },
     "M365 Copilot": {
       "sentiment": {
-        "positive": 7,
-        "negative": 33,
-        "neutral": 18,
-        "mixed": 0
+        "positive": 9,
+        "negative": 35,
+        "neutral": 23,
+        "mixed": 1
       },
       "topics": {
         "model_capability": 4,
-        "product_experience": 9,
-        "feature_request": 13,
-        "bug_report": 15,
+        "product_experience": 12,
+        "feature_request": 16,
+        "bug_report": 16,
         "comparison": 6,
-        "use_case": 4,
-        "news_update": 5,
+        "use_case": 6,
+        "news_update": 6,
         "meta": 2
       },
       "scenarios": {
@@ -1772,40 +1772,40 @@
         "image_creation": 0,
         "multi_turn": 0,
         "code_interpreter": 1,
-        "office_file_creation": 1,
+        "office_file_creation": 2,
         "file_upload": 0,
         "general_purpose_search": 0,
-        "general_purpose": 3,
+        "general_purpose": 7,
         "voice_single_turn": 0
       }
     },
     "ChatGPT": {
       "sentiment": {
-        "positive": 661,
-        "negative": 1287,
-        "neutral": 768,
-        "mixed": 219
+        "positive": 729,
+        "negative": 1380,
+        "neutral": 822,
+        "mixed": 233
       },
       "topics": {
-        "model_capability": 175,
-        "product_experience": 547,
-        "feature_request": 397,
-        "bug_report": 587,
-        "comparison": 281,
-        "use_case": 358,
-        "news_update": 216,
-        "meta": 274
+        "model_capability": 184,
+        "product_experience": 583,
+        "feature_request": 429,
+        "bug_report": 635,
+        "comparison": 294,
+        "use_case": 392,
+        "news_update": 243,
+        "meta": 297
       },
       "scenarios": {
-        "image_upload": 48,
-        "image_creation": 264,
-        "multi_turn": 69,
-        "code_interpreter": 2,
+        "image_upload": 53,
+        "image_creation": 298,
+        "multi_turn": 77,
+        "code_interpreter": 3,
         "office_file_creation": 15,
-        "file_upload": 47,
+        "file_upload": 49,
         "general_purpose_search": 20,
-        "general_purpose": 849,
-        "voice_single_turn": 95
+        "general_purpose": 913,
+        "voice_single_turn": 102
       }
     }
   },
