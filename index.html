@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -478,8 +478,8 @@
         <option value="" data-i18n="selectReport">选择报告...</option>
       </select>
       <div class="lang-toggle-group">
-        <button class="lang-btn active" data-lang="zh" onclick="setLang('zh')">中文</button>
-        <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+        <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
       </div>
     </div>
   </header>
@@ -519,14 +519,14 @@
       <a class="sidenav-item" href="#sec-evidence" onclick="navClick(this)">
         <span>📋</span><span data-i18n="evidenceWall">原始帖子证据墙</span>
       </a>
-      <div class="sidenav-group-label" data-i18n="sectionScenario">场景体验分析</div>
-      <a class="sidenav-item" href="#sec-scenario-heatmap" onclick="navClick(this)">
+      <div class="sidenav-group-label" data-i18n="sectionScenario" style="display:none">场景体验分析</div>
+      <a class="sidenav-item" href="#sec-scenario-heatmap" onclick="navClick(this)" style="display:none">
         <span>🧩</span><span data-i18n="scenarioHeatmap">场景情感热力图</span>
       </a>
-      <a class="sidenav-item" href="#sec-scenario-detail" onclick="navClick(this)">
+      <a class="sidenav-item" href="#sec-scenario-detail" onclick="navClick(this)" style="display:none">
         <span>🔬</span><span data-i18n="scenarioDetail">场景下钻 (按产品)</span>
       </a>
-      <a class="sidenav-item" href="#sec-scenario-source" onclick="navClick(this)">
+      <a class="sidenav-item" href="#sec-scenario-source" onclick="navClick(this)" style="display:none">
         <span>🧪</span><span data-i18n="scenarioSource">场景数据质量</span>
       </a>
       <div class="sidenav-group-label" data-i18n="sectionCommunityHeat">社区热度分析</div>
@@ -624,7 +624,8 @@
       <button id="showMoreBtn" class="show-more-btn hidden" onclick="showMoreEvidence()" data-i18n="loadMore">加载更多帖子</button>
     </div>
 
-    <!-- ===== SECTION III: Scenario Experience Analysis ===== -->
+    <!-- ===== SECTION III: Scenario Experience Analysis (hidden) ===== -->
+    <div id="scenarioSectionWrap" style="display:none">
     <div class="page-section-divider">
       <span class="section-num">3</span>
       <span class="section-label" data-i18n="sectionScenario">场景体验分析</span>
@@ -651,6 +652,7 @@
         <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px" data-i18n="scenarioSourceDesc">关键词搜索来源占比越高，标签质量越需人工复核（官方子版块更可靠）</div>
         <div id="scenarioSourceContainer" style="overflow-x:auto"></div>
       </div></div>
+    </div>
     </div>
 
     <!-- ===== SECTION IV: Community Heat Analysis ===== -->
@@ -729,7 +731,7 @@
     /* ======= I18N ======= */
     /* Default to Chinese so the highlighted lang button (中文) matches the rendered content.
        Was 'en' which contradicted the header button that defaults to active=zh. */
-    var currentLang = 'zh';
+    var currentLang = 'en';
     var I18N = {
       zh: {
         title:'AI Voice Tracker', subtitle:'基于Reddit头部粉丝社区的AI产品用户声音追踪', loading:'加载报告数据...',
@@ -1041,7 +1043,7 @@
       /* Load previous reports (oldest to newest order for chart) */
       for (var j = reportIndex.length - 1; j >= startIdx; j--) {
         try {
-          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1784803956');
+          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1784860126');
           if (resp.ok) {
             var data = await resp.json();
             allHistoricalReports.push(data);
@@ -1056,7 +1058,7 @@
 
     async function loadReportIndex() {
       try {
-        var resp = await fetch('data/reports/index.json?v=1784803956');
+        var resp = await fetch('data/reports/index.json?v=1784860126');
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
@@ -1541,7 +1543,7 @@
       renderProductTabs(); renderDeepDive();
       renderEvidence(); renderBubbleChart();
       renderCrossProduct(); renderTrend(); renderHistory();
-      renderScenarioAll();
+      /* renderScenarioAll(); // scenario module hidden */
       applyI18n();
     }
 
@@ -3042,7 +3044,7 @@
     /* ======= SCENARIO ANALYSIS RENDERERS (Section IV) ======= */
     async function loadScenarioData() {
       try {
-        var resp = await fetch('data/reports/latest_scenario.json?v=1784803956');
+        var resp = await fetch('data/reports/latest_scenario.json?v=1784860126');
         if (resp.ok) { scenarioData = await resp.json(); }
       } catch(e) { console.warn('No scenario data:', e); scenarioData = null; }
     }
@@ -3237,7 +3239,7 @@
       await loadReportIndex();
       await loadReportList();
       try {
-        var resp = await fetch('data/reports/latest.json?v=1784803956');
+        var resp = await fetch('data/reports/latest.json?v=1784860126');
         if (resp.ok) { reportData = await resp.json(); }
         else { resp = await fetch('report.json'); if (resp.ok) reportData = await resp.json(); }
         if (reportData) {
