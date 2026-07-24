@@ -1043,7 +1043,7 @@
       /* Load previous reports (oldest to newest order for chart) */
       for (var j = reportIndex.length - 1; j >= startIdx; j--) {
         try {
-          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1784860126');
+          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1784864593');
           if (resp.ok) {
             var data = await resp.json();
             allHistoricalReports.push(data);
@@ -1058,7 +1058,7 @@
 
     async function loadReportIndex() {
       try {
-        var resp = await fetch('data/reports/index.json?v=1784860126');
+        var resp = await fetch('data/reports/index.json?v=1784864593');
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
@@ -2310,11 +2310,11 @@
         var kps = LA(negPosts[i], 'key_points');
         for (var j=0;j<kps.length && results.length<5;j++) {
           if (kps[j].length > 4) {
-            results.push({text:kps[j], severity:'medium'});
+            results.push({text:kps[j], severity:'medium', post_ids:[negPosts[i].id]});
           }
         }
         if (results.length === 0 && negPosts[i].title && negPosts[i].title.length > 4) {
-          results.push({text:negPosts[i].title, severity:'medium'});
+          results.push({text:negPosts[i].title, severity:'medium', post_ids:[negPosts[i].id]});
         }
       }
       return results;
@@ -2331,8 +2331,11 @@
         var kps = LA(posPosts[i], 'key_points');
         for (var j=0;j<kps.length && results.length<5;j++) {
           if (kps[j].length > 4) {
-            results.push({text:kps[j]});
+            results.push({text:kps[j], post_ids:[posPosts[i].id]});
           }
+        }
+        if (results.length === 0 && posPosts[i].title && posPosts[i].title.length > 4) {
+          results.push({text:posPosts[i].title, post_ids:[posPosts[i].id]});
         }
       }
       return results;
@@ -3044,7 +3047,7 @@
     /* ======= SCENARIO ANALYSIS RENDERERS (Section IV) ======= */
     async function loadScenarioData() {
       try {
-        var resp = await fetch('data/reports/latest_scenario.json?v=1784860126');
+        var resp = await fetch('data/reports/latest_scenario.json?v=1784864593');
         if (resp.ok) { scenarioData = await resp.json(); }
       } catch(e) { console.warn('No scenario data:', e); scenarioData = null; }
     }
@@ -3239,7 +3242,7 @@
       await loadReportIndex();
       await loadReportList();
       try {
-        var resp = await fetch('data/reports/latest.json?v=1784860126');
+        var resp = await fetch('data/reports/latest.json?v=1784864593');
         if (resp.ok) { reportData = await resp.json(); }
         else { resp = await fetch('report.json'); if (resp.ok) reportData = await resp.json(); }
         if (reportData) {
