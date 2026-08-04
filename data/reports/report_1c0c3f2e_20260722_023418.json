@@ -1,0 +1,1052 @@
+{
+  "run_id": "1c0c3f2e",
+  "period": {
+    "start": "2026-07-09T00:00:00+00:00",
+    "end": "2026-07-20T00:00:00+00:00"
+  },
+  "products": [
+    {
+      "product_name": "Claude",
+      "subreddit": "ClaudeAI+claude",
+      "subreddits": [
+        "ClaudeAI",
+        "claude"
+      ],
+      "post_count": 5147,
+      "valid_post_count": 2039,
+      "filtered_count": 3108,
+      "source_breakdown": {
+        "reddit": 5147
+      },
+      "summary": "竞品情报摘要：Claude Reddit社区（2026-07-09 至 2026-07-20）\n\n1. 社区整体情感及驱动因素  \n本期r/ClaudeAI+claude社区情感分布较为均衡，正面（32%）与负面（27%）评价接近，中性（31%）和混合（8%）情绪占据剩余比例。情感波动的核心驱动力为Fable 5模型的访问政策调整。部分用户因Fable 5访问权限延长表示满意，但更多讨论集中在模型被“削弱”及订阅权益受损的担忧上（如“Access has been extended!”、“The just took FABLE off Max plans?”）。此外，Fable 5转为按量计费、Pro和Team Standard用户仅获一次性$100额度等举措，引发用户对订阅价值的质疑和不满。\n\n2. 主要讨论话题及重要性  \n最热话题为实际用例（use_case，561条），用户积极分享Claude在自动化工具、企业级软件开发、内容创作、移民咨询等场景的应用，体现产品在实际工作流中的价值。产品体验（product_experience，364条）和Meta讨论（315条）紧随其后，反映用户对模型表现、社区氛围及政策变动的高度关注。Bug报告（244条）和功能请求（214条）显示用户对产品稳定性和功能完善有持续需求。\n\n3. 用户主要痛点或投诉  \n- 订阅权益缩水：多条负面及混合情绪帖子集中表达对Fable 5被移出Max计划、转为按量计费的不满，担心订阅不再物有所值（如“I'm paying $200/month, and after tomorrow, I can't access Anthropic's best model”）。  \n- 模型性能波动：部分用户认为Fable 5近期表现被削弱，影响实际使用体验。  \n- 竞品压力：有用户指出，竞争对手提供不限量套餐，Claude的访问限制使其在性价比上处于劣势（如“Is Anthropic shooting themselves in the foot by pulling Fab 5 from subscriptions”）。\n\n4. 用户赞赏或期望的功能  \n- 高级用例支持：用户认可Fable 5在复杂任务（如自动化、企业软件开发）中的表现，期望持续保持领先性能。  \n- 成果展示与社区激励：正面帖子鼓励用户分享用Claude完成的项目，社区氛围积极。  \n- 费用与访问灵活性：用户建议通过优化token消耗而非限制模型访问来控制成本，期望更合理的计费与套餐设计。\n\n5. 与竞品对比讨论  \n部分用户明确对比Claude与竞品（如GPT-5.6），指出在不限量套餐、模型性能和访问灵活性方面，Claude当前策略存在劣势。DeepSWE基准测试的讨论也反映出用户对Claude Code在编码代理领域的关注与期待。\n\n6. 对产品团队的可操作洞察  \n- 优化订阅策略：需重新评估Fable 5的访问政策，避免因频繁调整或权益缩水损害忠实用户的信任和满意度。  \n- 强化高阶用例支持：继续提升Claude在复杂任务和企业级应用中的能力，巩固差异化优势。  \n- 增强社区激励：鼓励用户分享实际成果，提升社区活跃度和产品口碑。  \n- 关注竞品动态：结合用户反馈，适时调整套餐和计费策略，提升产品竞争力。  \n- 透明沟通：及时、清晰地解释产品和订阅变动，减少用户误解和负面情绪扩散。\n\n综上，Claude需在保障订阅价值、优化产品体验和灵活应对竞品压力三方面持续发力，以稳固并扩大核心用户群体。",
+      "sentiment_distribution": {
+        "positive": 654,
+        "negative": 558,
+        "neutral": 648,
+        "mixed": 179
+      },
+      "topic_distribution": {
+        "model_capability": 78,
+        "product_experience": 364,
+        "feature_request": 214,
+        "bug_report": 244,
+        "comparison": 143,
+        "use_case": 561,
+        "news_update": 111,
+        "meta": 315
+      },
+      "typical_posts": [
+        {
+          "id": "1uul693",
+          "title": "Access has been extended!",
+          "body": "",
+          "author": "DavidCBlack",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1uul693/access_has_been_extended/",
+          "source_platform": "reddit",
+          "num_comments": 741,
+          "created_utc": "2026-07-12T17:07:26+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": 0.2,
+          "sentiment_reason": "部分用户对访问扩展表示高兴，但也有用户认为Fable 5被削弱，且有对价格和竞争对手的负面评价。",
+          "topic_category": "news_update",
+          "key_points": [
+            "Fable 5访问权限延长",
+            "部分用户认为模型被削弱",
+            "有用户因价格和竞争选择取消订阅"
+          ]
+        },
+        {
+          "id": "1uzjcop",
+          "title": "Fable staying on Max",
+          "body": "Beginning July 20, Claude Fable 5 will be included in all Max and Team Premium plans, at 50% of limits.\n\nPro and Team Standard users will continue to have access to Fable via usage credits, and will receive a one-time $100 credit.\n\nDemand for Fable has been challenging to predict, which is why we ro",
+          "author": "tessahannah",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1uzjcop/fable_staying_on_max/",
+          "source_platform": "reddit",
+          "num_comments": 648,
+          "created_utc": "2026-07-18T02:18:58+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "部分用户对Fable 5进入更高付费墙和政策变动表达不满，也有用户理性讨论市场变化。",
+          "topic_category": "news_update",
+          "key_points": [
+            "Fable 5将包含在Max和Team Premium计划",
+            "Pro和Team Standard用户获得一次性$100额度",
+            "用户对变动频繁和付费墙表达不满"
+          ]
+        },
+        {
+          "id": "1uxlehk",
+          "title": "Show us what you've created with Claude!",
+          "body": "[Inspired by this popular post,](https://www.reddit.com/r/ClaudeAI/comments/1tcftws/show_me_what_youve_created_with_claude/) this is a weekly post for everyone to show what they have been working on that helps you or that you're proud of!",
+          "author": "sixbillionthsheep",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1uxlehk/show_us_what_youve_created_with_claude/",
+          "source_platform": "reddit",
+          "num_comments": 601,
+          "created_utc": "2026-07-15T23:01:04+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.8,
+          "sentiment_reason": "用户积极分享自己用Claude实现的项目，评论区也有正面反馈。",
+          "topic_category": "use_case",
+          "key_points": [
+            "用户展示用Claude完成的项目",
+            "鼓励社区成员分享成果",
+            "部分用户提出改进建议"
+          ]
+        },
+        {
+          "id": "1usl9ov",
+          "title": "Anthropic can't remove F@ble from the subscription tier",
+          "body": "With Sol out in the open, removing F@ble 5 from the subscription tier now would be comparable to removing Opus 4.5 from subscriptions after it launched. It would be a difficult move to justify.\n\nI think we're probably safe here. It would surprise me if Anthropic were that disconnected from reality, ",
+          "author": "Psychological_Box406",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1usl9ov/anthropic_cant_remove_fble_from_the_subscription/",
+          "source_platform": "reddit",
+          "num_comments": 369,
+          "created_utc": "2026-07-10T11:43:40+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户对F@ble 5是否会被移除表示担忧，评论区有对Claude和Opus 4.8负面反馈，也有对生产力提升的肯定。",
+          "topic_category": "news_update",
+          "key_points": [
+            "担心F@ble 5被移出订阅计划",
+            "部分用户对Opus 4.8不满",
+            "有用户因F@ble订阅Claude"
+          ]
+        },
+        {
+          "id": "1uz7qw4",
+          "title": "The just took FABLE off Max plans?",
+          "body": "I can no longer access FABLE without API credits. R.I.P.",
+          "author": "Middge",
+          "url": "https://www.reddit.com/r/claude/comments/1uz7qw4/the_just_took_fable_off_max_plans/",
+          "source_platform": "reddit",
+          "num_comments": 359,
+          "created_utc": "2026-07-17T18:20:30+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.7,
+          "sentiment_reason": "用户对Fable模型突然无法访问表示失望，并担心竞争压力下产品策略混乱。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Fable模型无法访问",
+            "用户担心订阅权益被削弱",
+            "对竞争对手的担忧"
+          ]
+        },
+        {
+          "id": "1uv70kq",
+          "title": "Honest question: What are you building that you need fable 5 so badly?",
+          "body": "I don't mean to be mean or insulting, it is a genuine question and a ton of curiosity.\n\nA little background on why I am asking this.\n\nI code at home for my homelab, currently with about 4 servers (Pi, Mac Mini, router, and NAS) and my personal mac and gaming pc, dozens of smart/IoT devices, dozens o",
+          "author": "hollowredditor",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1uv70kq/honest_question_what_are_you_building_that_you/",
+          "source_platform": "reddit",
+          "num_comments": 342,
+          "created_utc": "2026-07-13T09:50:13+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.7,
+          "sentiment_reason": "用户和评论者分享了使用Claude进行自动化、科研、SaaS等多种项目，整体评价积极。",
+          "topic_category": "use_case",
+          "key_points": [
+            "用户用Claude构建自动化工具和企业级软件",
+            "Fable 5在某些复杂任务上表现优异",
+            "讨论了不同模型的适用场景"
+          ]
+        },
+        {
+          "id": "1uu9egf",
+          "title": "Is Anthropic shooting themselves in the foot by pulling Fab 5 from subscriptions tonight?",
+          "body": "With Fab 5 moving entirely to expensive, metered token billing on July 12th, is Anthropic making a gamble ? \n\nOpenAI's GPT-5.6 Sol is already out, and Grok 4.5 is performing on par with Opus for coding workflows - both under flat-rate tiers. Forcing users to buy per-token credit packs while the comp",
+          "author": "Enough-Piano-2362",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1uu9egf/is_anthropic_shooting_themselves_in_the_foot_by/",
+          "source_platform": "reddit",
+          "num_comments": 339,
+          "created_utc": "2026-07-12T08:11:31+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.7,
+          "sentiment_reason": "用户对Claude Fab 5转为按量计费表示担忧，认为与竞争对手相比风险很大，可能导致用户流失。",
+          "topic_category": "comparison",
+          "key_points": [
+            "Fab 5转为按量计费引发用户不满",
+            "竞争对手提供不限量套餐，Claude显得不利",
+            "担心用户大规模流失"
+          ]
+        },
+        {
+          "id": "1v08afp",
+          "title": "What are people actually using Claude for?",
+          "body": "I see a lot of posts here talking about the usage and price and comparisons to other options, but not many people talking about what they actually are making/working on.\n\nClient work? Making productivity things for yourself? Doing it for fun? Making various products/apps intending for one to be a hi",
+          "author": "NEED_A_JACKET",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1v08afp/what_are_people_actually_using_claude_for/",
+          "source_platform": "reddit",
+          "num_comments": 317,
+          "created_utc": "2026-07-18T21:44:34+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.7,
+          "sentiment_reason": "用户分享了Claude在实际工作和生活中的多种用途，包括自动化流程、内容创作和移民咨询，整体反馈积极，强调了Claude带来的效率提升和帮助。",
+          "topic_category": "use_case",
+          "key_points": [
+            "Claude帮助用户自动化公司流程和内容创作",
+            "用户利用Claude进行移民咨询，节省了律师费用",
+            "部分用户通过Claude开发了个人项目，虽未盈利但获得了成就感"
+          ]
+        },
+        {
+          "id": "1uudibj",
+          "title": "I'm paying $200/month, and after tomorrow, I can't access Anthropic's best model with my sub?",
+          "body": "If Fable is more expensive to run, just make it consume tokens faster than Opus. Set whatever multiplier makes sense for your unit economics.\n\nI genuinely don't understand the current approach.\n\nFrom my perspective, giving us access seems like a win for everyone. Users get access to your best model,",
+          "author": "ragnhildensteiner",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1uudibj/im_paying_200month_and_after_tomorrow_i_cant/",
+          "source_platform": "reddit",
+          "num_comments": 311,
+          "created_utc": "2026-07-12T11:58:54+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.5,
+          "sentiment_reason": "用户对订阅费用和无法访问最佳模型表示不满，认为当前的产品策略不合理。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "用户对高价订阅后无法继续使用最佳模型感到困惑和不满",
+            "建议通过调整token消耗来控制成本，而不是限制访问",
+            "用户希望所有订阅者都能获得最佳模型的访问权"
+          ]
+        },
+        {
+          "id": "1usavpc",
+          "title": "DeepSWE just added the gpt-5.6 models to their benchmark.  I hope you guys  don't get too used to Claude Code as your only coding agent.  Chart is marked NSFW due to the grotesque violence.",
+          "body": "",
+          "author": "GrumpyPidgeon",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1usavpc/deepswe_just_added_the_gpt56_models_to_their/",
+          "source_platform": "reddit",
+          "num_comments": 295,
+          "created_utc": "2026-07-10T02:30:17+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.2,
+          "sentiment_reason": "帖子主要是关于DeepSWE基准测试更新和轻松讨论，没有明显情绪倾向。",
+          "topic_category": "news_update",
+          "key_points": [
+            "DeepSWE基准测试加入了gpt-5.6模型",
+            "讨论Claude Code作为编码代理的现状",
+            "社区成员轻松互动"
+          ]
+        }
+      ],
+      "pain_points": [],
+      "strengths": [],
+      "recommendations": [],
+      "keywords": []
+    },
+    {
+      "product_name": "Gemini",
+      "subreddit": "GeminiAI+GoogleGeminiAI",
+      "subreddits": [
+        "GeminiAI",
+        "GoogleGeminiAI"
+      ],
+      "post_count": 1330,
+      "valid_post_count": 861,
+      "filtered_count": 468,
+      "source_breakdown": {
+        "reddit": 1330
+      },
+      "summary": "**Gemini Reddit社区双周竞品情报摘要（2026-07-09 至 2026-07-20）**\n\n本期（r/GeminiAI+GoogleGeminiAI）社区整体情感以负面为主，负面帖占比高达55%（479/862），正面仅13%。负面情绪主要由用户对Gemini产品体验不佳、功能落后、更新延迟等问题驱动。例如，互动量最高的负面帖“Worst fumble in the history of Ai”直言Gemini为“用过最差的模型”，并认为中国AI模型表现优于Gemini；另一高热帖“Gemini is even worse than grok now”则表达了对Gemini不如Grok的极度失望。\n\n话题方面，产品体验（204条）、bug反馈（186条）和功能请求（96条）为最受关注的三大主题，显示用户对Gemini实际使用中的表现和功能完善度高度敏感。大量用户集中反馈Gemini在编程、文档生成、格式化等关键场景下表现不佳，尤其在与ChatGPT、Grok等竞品对比时，Gemini被认为“产品设计分散”、“进步缓慢”，且“在编程等领域落后”，但在法律推理等部分场景表现尚可。\n\n主要痛点包括：1）模型能力不足，尤其在代码生成、复杂推理等高阶任务上不如竞品；2）产品更新节奏慢，Gemini 3.5 Pro多次延期引发用户不满，社区多次讨论发布时间及沟通不畅问题；3）bug频发，影响用户信任和体验。\n\n尽管负面声音占主导，部分用户对Gemini 3.5 Pro的发布仍持期待态度，认为其在复杂推理和大规模代码处理上有提升空间，且与Google服务的集成带来一定便利性。功能请求集中在提升代码能力、文档处理、稳定性及更及时的产品沟通。\n\n竞品对比中，ChatGPT被普遍认为进步快、体验好，Grok也被部分用户认为优于Gemini。中国AI模型的表现亦被多次提及，显示全球市场竞争压力加大。\n\n**可操作洞察：**\n- 加快产品迭代和bug修复，尤其在编程、文档生成等高频场景下提升模型能力。\n- 加强与用户的沟通，及时透明地通报版本更新进展，回应社区关切。\n- 聚焦核心功能，避免产品设计分散，提升用户体验的连贯性和深度。\n- 借助Google生态优势，强化与其他Google服务的集成，形成差异化竞争力。\n- 针对竞品优势领域（如代码生成、推理能力），制定专项提升计划，缩小差距。\n\n整体来看，Gemini需正视社区反馈，聚焦用户核心需求，提升产品竞争力，方能扭转当前负面舆情。",
+      "sentiment_distribution": {
+        "positive": 118,
+        "negative": 479,
+        "neutral": 214,
+        "mixed": 51
+      },
+      "topic_distribution": {
+        "model_capability": 57,
+        "product_experience": 204,
+        "feature_request": 96,
+        "bug_report": 186,
+        "comparison": 67,
+        "use_case": 57,
+        "news_update": 76,
+        "meta": 80
+      },
+      "typical_posts": [
+        {
+          "id": "1uuvotw",
+          "title": "Worst fumble in the history of Ai",
+          "body": "Gemini situation, the worst model j ever used, chinese models beat gemini 3.1 pro or 3.5 flash anyday at anything.\n\nGemini 3.5 pro? Lol, we already know why it's getting delayed, if it's released it'll be humiliated.",
+          "author": "pussy_beast",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1uuvotw/worst_fumble_in_the_history_of_ai/",
+          "source_platform": "reddit",
+          "num_comments": 569,
+          "created_utc": "2026-07-12T23:59:53+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -1.0,
+          "sentiment_reason": "用户强烈批评Gemini 3.1 Pro和3.5 Flash，认为其表现远不如中国模型，并对其发布延迟持嘲讽态度。",
+          "topic_category": "comparison",
+          "key_points": [
+            "认为Gemini是用过最差的模型",
+            "中国模型表现优于Gemini",
+            "对Gemini 3.5 Pro发布延迟持负面看法"
+          ]
+        },
+        {
+          "id": "1utvr3k",
+          "title": "Just WHY? Google has the biggest and best computing networks, why didn't Gemini overtake them all?",
+          "body": "",
+          "author": "RealDizzyPirate",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1utvr3k/just_why_google_has_the_biggest_and_best/",
+          "source_platform": "reddit",
+          "num_comments": 323,
+          "created_utc": "2026-07-11T21:07:37+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户质疑Gemini未能超越其他AI，但整体讨论较为理性，没有明显情绪倾向。",
+          "topic_category": "comparison",
+          "key_points": [
+            "质疑Gemini未能领先其他AI",
+            "讨论Google的资源和策略",
+            "对AI市场竞争进行分析"
+          ]
+        },
+        {
+          "id": "1uvq67i",
+          "title": "They don't even know that Gemini is behind in programming",
+          "body": "",
+          "author": "Te__Deum",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1uvq67i/they_dont_even_know_that_gemini_is_behind_in/",
+          "source_platform": "reddit",
+          "num_comments": 191,
+          "created_utc": "2026-07-13T22:18:02+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": 0.1,
+          "sentiment_reason": "部分用户认为Gemini在法律推理等方面表现出色，但整体对比中认为其在编程等领域落后。",
+          "topic_category": "comparison",
+          "key_points": [
+            "Gemini在法律推理方面表现良好",
+            "用户认为Gemini在编程等领域落后",
+            "部分用户更倾向于其他AI模型"
+          ]
+        },
+        {
+          "id": "1urj9sq",
+          "title": "Gemini is even worse than grok now🥀🥀🥀",
+          "body": "",
+          "author": "VariationLivid3193",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1urj9sq/gemini_is_even_worse_than_grok_now/",
+          "source_platform": "reddit",
+          "num_comments": 190,
+          "created_utc": "2026-07-09T07:33:33+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.9,
+          "sentiment_reason": "用户表达了Gemini比Grok还要差的强烈不满。",
+          "topic_category": "comparison",
+          "key_points": [
+            "Gemini表现不如Grok",
+            "用户对Gemini极度失望"
+          ]
+        },
+        {
+          "id": "1uyddoa",
+          "title": "Gemini 3.5 pro is delayed and expected not to be soon",
+          "body": "",
+          "author": "solitude_soul21",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1uyddoa/gemini_35_pro_is_delayed_and_expected_not_to_be/",
+          "source_platform": "reddit",
+          "num_comments": 115,
+          "created_utc": "2026-07-16T19:52:27+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户讨论Gemini在文档生成方面落后于ChatGPT，但也认可其与Google服务的集成优势。",
+          "topic_category": "comparison",
+          "key_points": [
+            "Gemini在文档生成和格式化上不如ChatGPT",
+            "Gemini与Google服务集成方便",
+            "用户对不同AI产品的偏好"
+          ]
+        },
+        {
+          "id": "1uzeslt",
+          "title": "Almonds consume 30x more water than AI Data Centers",
+          "body": "Do you think there's an anti AI PUSH in the US by organizations to mislead the public on AI.",
+          "author": "elevatedpenguin",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1uzeslt/almonds_consume_30x_more_water_than_ai_data/",
+          "source_platform": "reddit",
+          "num_comments": 108,
+          "created_utc": "2026-07-17T22:51:50+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.0,
+          "sentiment_reason": "讨论AI数据中心与杏仁用水的对比，未涉及Gemini具体体验。",
+          "topic_category": "news_update",
+          "key_points": [
+            "AI数据中心与杏仁用水量对比",
+            "讨论公众对AI的看法"
+          ]
+        },
+        {
+          "id": "1usyvis",
+          "title": "Gemini 3.5 Pro appears to have been delayed again (reportedly aiming for end of July)",
+          "body": "At Google I/O, Gemini 3.5 Pro was announced for a June release. Then came the Fable drama, followed by rumors that it would launch on July 17. Now it appears the target has slipped again, this time to the end of July (based on the attached screenshots). These accounts aren't official sources, but af",
+          "author": "TorturedPoet30",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1usyvis/gemini_35_pro_appears_to_have_been_delayed_again/",
+          "source_platform": "reddit",
+          "num_comments": 100,
+          "created_utc": "2026-07-10T20:15:43+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": -0.1,
+          "sentiment_reason": "用户对Gemini 3.5 Pro再次延期表达了遗憾，但也理解稳定性优先。",
+          "topic_category": "news_update",
+          "key_points": [
+            "Gemini 3.5 Pro再次延期",
+            "用户希望谷歌加强沟通",
+            "部分用户认为Gemini在STEM领域表现优异"
+          ]
+        },
+        {
+          "id": "1utaaz0",
+          "title": "why is google leaving gemini behind while chatgpt advanced so much?",
+          "body": "",
+          "author": "Green_Ad5186",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1utaaz0/why_is_google_leaving_gemini_behind_while_chatgpt/",
+          "source_platform": "reddit",
+          "num_comments": 99,
+          "created_utc": "2026-07-11T04:39:00+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.4,
+          "sentiment_reason": "用户认为Gemini产品设计分散且落后于ChatGPT，表达对Google产品策略的不满。",
+          "topic_category": "comparison",
+          "key_points": [
+            "Gemini产品设计分散",
+            "Google产品进步慢",
+            "与ChatGPT差距扩大"
+          ]
+        },
+        {
+          "id": "1uys3cz",
+          "title": "Gemini 3.5 Pro coming today?",
+          "body": "It has to be 3.5 Pro no?",
+          "author": "International_Ad9369",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1uys3cz/gemini_35_pro_coming_today/",
+          "source_platform": "reddit",
+          "num_comments": 105,
+          "created_utc": "2026-07-17T06:50:52+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.0,
+          "sentiment_reason": "用户仅讨论Gemini 3.5 Pro是否发布，未表达情感倾向。",
+          "topic_category": "news_update",
+          "key_points": [
+            "讨论Gemini 3.5 Pro发布时间",
+            "社区对新版本发布的关注"
+          ]
+        },
+        {
+          "id": "1uyvrih",
+          "title": "Gemini 3.5 Pro Release today",
+          "body": "\n\n\n\nhttps://preview.redd.it/kfh6gjvanrdh1.png?width=1199&format=png&auto=webp&s=bc0e21e719551e5b352edcb169ace670a760a4ca\n\n# \n\nGoogle has finally released **Gemini 3.5 Pro**, and this feels like a much more important launch than another minor model update.\n\nThe main focus seems to be on tasks where s",
+          "author": "Patryck_Chan06",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1uyvrih/gemini_35_pro_release_today/",
+          "source_platform": "reddit",
+          "num_comments": 93,
+          "created_utc": "2026-07-17T10:23:46+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.8,
+          "sentiment_reason": "用户对Gemini 3.5 Pro的发布表示兴奋，认为其在复杂任务上有明显提升。",
+          "topic_category": "news_update",
+          "key_points": [
+            "Gemini 3.5 Pro专注于复杂推理和大规模代码处理",
+            "与Flash版本对比，Pro更适合需要深度和准确性的任务"
+          ]
+        }
+      ],
+      "pain_points": [],
+      "strengths": [],
+      "recommendations": [],
+      "keywords": []
+    },
+    {
+      "product_name": "M365 Copilot",
+      "subreddit": "microsoft_365_copilot",
+      "subreddits": [
+        "microsoft_365_copilot"
+      ],
+      "post_count": 72,
+      "valid_post_count": 57,
+      "filtered_count": 15,
+      "source_breakdown": {
+        "reddit": 72
+      },
+      "summary": "竞品情报摘要：M365 Copilot（2026-07-09 至 2026-07-20）\n\n本期r/microsoft_365_copilot社区整体情感以负面为主（52%），正面反馈仅占14%。负面情绪主要由产品稳定性、功能缺失及体验不透明等问题驱动。大量用户反馈Copilot Cowork运行缓慢、易卡顿（如“Is Cowork useful?”），并需多次确认任务状态，严重影响日常办公效率。此外，模型版本和能力不透明（“Is this Sol, Terra or Luna?”），用户无法选择或知晓所用模型，增加了使用的不确定感。\n\n话题分布上，bug报告（14条）、功能需求（13条）和产品体验（11条）为主，显示用户对产品基础能力和功能完善度高度关注。具体痛点包括：Copilot无法创建MS文档（“Copilot cant create MS documents anymore?”），被认为是最有价值的功能之一；语法和拼写纠错能力弱，输出内容经常缺失或错误（“The thing cannot simply correct grammar.”）；代理功能频繁报错且跨平台无解（“All my Agents won't open”）；Cowork与OneDrive同步不稳定，技能管理流程复杂（“Copilot Cowork sync with OneDrive is a mess.”）；近期限流机制变严，影响批量文本处理等高强度场景（“Getting rate limited.”）。\n\n正面反馈主要集中在Copilot Chat升级，现已支持分析Outlook和Notebooks数据，且基础版用户可用部分高级功能（“Copilot Chat Upgraded”），显示用户对数据集成和权限下放有较高期待。部分用户关注GPT-5.6在Copilot中的上线进度，期望获得更强大的模型能力。\n\n竞品对比方面，Claude Cowork与M365 Copilot在企业市场的讨论较为活跃。用户认为Copilot在安全性和与微软生态的集成上具备优势，但在成本和部分功能上仍需提升（“Claude Cowork vs MS365 CoPilot for Enterprises”）。\n\n对产品团队的可操作洞察：\n1. 优先提升Copilot Cowork的性能和稳定性，优化任务响应速度，减少卡顿和报错。\n2. 增强模型能力透明度，允许用户查看和选择所用模型版本，提升信任感。\n3. 恢复或优化MS文档创建、语法纠错等核心功能，满足高频办公需求。\n4. 简化Cowork与OneDrive的同步和技能管理流程，降低使用门槛。\n5. 关注限流机制对企业用户的影响，适当调整策略，保障高强度场景下的可用性。\n6. 持续强化与竞品的差异化优势，尤其在安全和生态集成方面，结合用户反馈优化产品定位。\n\n整体来看，M365 Copilot需在稳定性、核心功能和用户体验透明度上持续发力，以应对用户的高期望和激烈的市场竞争。",
+      "sentiment_distribution": {
+        "positive": 8,
+        "negative": 30,
+        "neutral": 16,
+        "mixed": 3
+      },
+      "topic_distribution": {
+        "model_capability": 3,
+        "product_experience": 11,
+        "feature_request": 13,
+        "bug_report": 14,
+        "comparison": 5,
+        "use_case": 4,
+        "news_update": 4,
+        "meta": 3
+      },
+      "scenario_distribution": {
+        "image_upload": 0,
+        "image_creation": 0,
+        "multi_turn": 0,
+        "code_interpreter": 0,
+        "office_file_creation": 0,
+        "file_upload": 2,
+        "general_purpose_search": 0,
+        "general_purpose": 5,
+        "voice_single_turn": 0
+      },
+      "typical_posts": [
+        {
+          "id": "1uzfrl1",
+          "title": "Is Cowork useful?",
+          "body": "We started using Copilot Cowork last week at work and my experience has been underwhelming. \n\nAt home I heavily use Claude Code and Cowork and it just gets stuff done.\n\nCopilot Cowork is not only slow but it also gets stuck. I have to repeatedly prompt it \"is this still in progress?\" just to learn t",
+          "author": "tky_phoenix",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uzfrl1/is_cowork_useful/",
+          "source_platform": "reddit",
+          "num_comments": 24,
+          "created_utc": "2026-07-17T23:32:53+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.6,
+          "sentiment_reason": "用户认为Copilot Cowork体验不佳，速度慢且经常卡住，还出现API错误。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Copilot Cowork运行缓慢且易卡顿",
+            "需要多次确认任务状态",
+            "偶尔出现API错误"
+          ],
+          "scenario_tags": []
+        },
+        {
+          "id": "1uxwjrk",
+          "title": "Copilot Chat Upgraded: Outlook, Notebooks and access to M365 data",
+          "body": "Hi team, \n\nThere is a good chance that you could miss a big upgrade for Copilot Chat, where finally we can analyze M365 data in Outlook and Notebooks. Check it out!\n\nFor a long time, Microsoft 365 Copilot Chat (Basic) - the version included with your Microsoft 365 / Office 365 subscription without t",
+          "author": "SzymonBochniak",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uxwjrk/copilot_chat_upgraded_outlook_notebooks_and/",
+          "source_platform": "reddit",
+          "num_comments": 23,
+          "created_utc": "2026-07-16T08:10:58+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.8,
+          "sentiment_reason": "用户对Copilot Chat升级后可访问Outlook和Notebooks等M365数据表示兴奋和认可。",
+          "topic_category": "news_update",
+          "key_points": [
+            "Copilot Chat现可分析Outlook和Notebooks数据",
+            "基础版用户也能使用部分高级功能",
+            "升级提升了Copilot Chat的实用性"
+          ],
+          "scenario_tags": []
+        },
+        {
+          "id": "1uubhk1",
+          "title": "Is this Sol, Terra or Luna? And even within that, is it low, medium, high, extra high?",
+          "body": "Hopefully this is clearly documented somewhere (surprised its not just there). There’s no such thing as ‘GPT 5.6 think deeper’. I find it quite suspicious and distasteful that they are hiding these details. I bet it’s the worst model.",
+          "author": "Individual-Spare-399",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uubhk1/is_this_sol_terra_or_luna_and_even_within_that_is/",
+          "source_platform": "reddit",
+          "num_comments": 22,
+          "created_utc": "2026-07-12T10:13:11+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.4,
+          "sentiment_reason": "用户对模型版本不透明和选择权缺失表示不满，怀疑使用的是较低性能模型。",
+          "topic_category": "model_capability",
+          "key_points": [
+            "模型版本和能力不透明",
+            "用户无法选择具体模型",
+            "对模型表现不满"
+          ],
+          "scenario_tags": []
+        },
+        {
+          "id": "1uzox0b",
+          "title": "The thing cannot simply correct grammar.",
+          "body": "I don't know why some many are so enamored with a tool that cannot execute a basic instruction. I asked the thing to only correct grammar and spelling. and the thing just keep butchering the text, the responses lacks pieces of the text, or they don't correct anything at all.  \nThe instructions are s",
+          "author": "Infamous_Ad3228",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uzox0b/the_thing_cannot_simply_correct_grammar/",
+          "source_platform": "reddit",
+          "num_comments": 15,
+          "created_utc": "2026-07-18T07:07:55+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.8,
+          "sentiment_reason": "用户强烈不满Copilot无法正确执行基础语法和拼写纠正任务，且输出结果经常出错。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "Copilot无法准确纠正语法和拼写",
+            "输出内容经常缺失或错误",
+            "用户对基本功能失望"
+          ],
+          "scenario_tags": []
+        },
+        {
+          "id": "1usljgd",
+          "title": "Getting rate limited.",
+          "body": "I use copilot for a lot of heavy, repetitive processing tasks. I have thousands of transcript files that are batched into large text files about 100 KB, then fed with a prompt that tells it exactly how to read each one, what to look for, and which datapoints to return back. It’s very repetitive but ",
+          "author": "LoadBearingGrandmas",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1usljgd/getting_rate_limited/",
+          "source_platform": "reddit",
+          "num_comments": 18,
+          "created_utc": "2026-07-10T11:56:26+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户描述Copilot在处理大量重复任务时遇到新的限流机制，虽然工具有效但体验受限流影响。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Copilot用于批量处理大量文本任务",
+            "近期限流机制变严格，影响工作流",
+            "用户希望了解限流机制变化"
+          ],
+          "scenario_tags": [
+            "file_upload"
+          ]
+        },
+        {
+          "id": "1utpa6z",
+          "title": "Copilot Cowork sync with OneDrive is a mess.",
+          "body": "I've been testing Copilot Cowork for our org in the past few weeks, and the OneDrive syncing problems make it unusable long term for anything beyond one-shot tasks.\n\n* It makes its own copies of your skills and never seems to check OneDrive for updates. To avoid sync conflicts, you have to open a fr",
+          "author": "PatateAuFour1",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1utpa6z/copilot_cowork_sync_with_onedrive_is_a_mess/",
+          "source_platform": "reddit",
+          "num_comments": 14,
+          "created_utc": "2026-07-11T16:54:56+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.8,
+          "sentiment_reason": "用户详细描述了Cowork与OneDrive同步存在严重问题，影响实际工作流程，评论区也有一致反馈。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Cowork与OneDrive同步不稳定",
+            "技能更新和删除流程复杂",
+            "影响实际工作效率和信任度"
+          ],
+          "scenario_tags": []
+        },
+        {
+          "id": "1uza0xi",
+          "title": "Claude Cowork vs MS365 CoPilot for Enterprises",
+          "body": "Hi - I have a lot of experience implementing Custom AI for firms, but never MS365 Copilot/Cowork. I'm exploring that because a lot of people have copilot licenses and presumably a lot of what i've done in other systems can also be done in Microsoft (workflows, custom mcp connectors, knowledge bases ",
+          "author": "Deep-Elephant-8372",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uza0xi/claude_cowork_vs_ms365_copilot_for_enterprises/",
+          "source_platform": "reddit",
+          "num_comments": 16,
+          "created_utc": "2026-07-17T19:43:21+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户对MS365 Copilot的价格和功能与Claude进行对比，认为Copilot在安全性和集成上有优势，但体验和成本存在疑虑。",
+          "topic_category": "comparison",
+          "key_points": [
+            "Copilot与Claude在企业中的成本和功能对比",
+            "Copilot在安全和集成方面有优势",
+            "用户对Copilot的体验和价格有担忧"
+          ],
+          "scenario_tags": []
+        },
+        {
+          "id": "1uxfxdj",
+          "title": "Copilot cant create MS documents anymore ?",
+          "body": "When did this happen ? That was the best feature of Copilot. Is there a cost involved now ?",
+          "author": "Key-Cauliflower-3021",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uxfxdj/copilot_cant_create_ms_documents_anymore/",
+          "source_platform": "reddit",
+          "num_comments": 16,
+          "created_utc": "2026-07-15T19:30:00+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.7,
+          "sentiment_reason": "用户发现Copilot无法再创建MS文档，对此表示失望并质疑是否与费用有关。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "Copilot无法创建MS文档",
+            "用户认为这是最有价值的功能",
+            "怀疑与费用有关"
+          ],
+          "scenario_tags": []
+        },
+        {
+          "id": "1uvqpcy",
+          "title": "All my Agents won't open \"please try again\"",
+          "body": "All of my CoPilot agents (not studio), are giving an error \"Please try again\" when I open them. This is before I have even entered a prompt. Simply clicking the agent in the left hand bar.   \nThe same happens on both web and the app on Windows. This has been happening since Friday (4 days ago)\n\nI ha",
+          "author": "Interesting_Put8226",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uvqpcy/all_my_agents_wont_open_please_try_again/",
+          "source_platform": "reddit",
+          "num_comments": 14,
+          "created_utc": "2026-07-13T22:39:39+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.6,
+          "sentiment_reason": "用户无法打开所有Copilot代理，反复出现错误提示，影响正常使用，评论区也有类似反馈。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "Copilot代理无法打开，反复报错",
+            "问题跨平台存在，重启无效",
+            "部分用户反馈问题已修复"
+          ],
+          "scenario_tags": []
+        },
+        {
+          "id": "1uv6fbb",
+          "title": "With my colleagues we tested 18 M365 Copilot meeting prompts as a full prep/live/follow-up system for two weeks, here are the 4 that saved the most time (team leads, chiefs of staff)",
+          "body": "Everyday we need to prep for meetings and writting up what happened in them. I hold a Copilot license, with few of my team members, and we use Recap, and every meeting was still hand-made, because nothing wired the prompts into a routine that repeats. So we decided to run a 2 weeks program / pilot, ",
+          "author": "Difficult-Sugar-4862",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uv6fbb/with_my_colleagues_we_tested_18_m365_copilot/",
+          "source_platform": "reddit",
+          "num_comments": 13,
+          "created_utc": "2026-07-13T09:15:41+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.8,
+          "sentiment_reason": "用户详细描述了通过M365 Copilot提升会议效率的实际用例，整体评价积极。",
+          "topic_category": "use_case",
+          "key_points": [
+            "通过Copilot提升会议准备与总结效率",
+            "两周测试18个提示词，筛选出高效方案",
+            "强调人工复核的重要性"
+          ],
+          "scenario_tags": []
+        }
+      ],
+      "pain_points": [],
+      "strengths": [],
+      "recommendations": [],
+      "keywords": []
+    },
+    {
+      "product_name": "ChatGPT",
+      "subreddit": "ChatGPT+ChatGPTcomplaints+OpenAI",
+      "subreddits": [
+        "ChatGPT",
+        "ChatGPTcomplaints",
+        "OpenAI"
+      ],
+      "post_count": 4436,
+      "valid_post_count": 2946,
+      "filtered_count": 1490,
+      "source_breakdown": {
+        "reddit": 4436
+      },
+      "summary": "竞品情报摘要（2026-07-09 至 2026-07-20）\n\n本期（r/ChatGPT、r/ChatGPTcomplaints、r/OpenAI）社区整体情感以负面为主（43%），正面占比仅22%，中性和混合情感分别为25%和7%。负面情绪主要由频繁的bug报告、内容审核限制、AI行为异常等问题驱动。例如，热门负面帖“Using the new voice model, and ChatGPT just started crying to me out of nowhere”反映了语音模型在情感表达上的异常，用户对AI“拟人化”表现感到困扰甚至不安。此外，“Difficult rendering from a sketch”一帖集中体现了多次编辑图片时遇到的内容审核限制，用户对生成图片的灵活性和可控性表达不满。\n\n话题分布上，bug报告（597条）和产品体验（525条）最为集中，显示用户对产品稳定性和实际使用感受高度关注。feature_request（411条）和use_case（389条）则表明用户对新功能和实际应用场景有较高期待。对比讨论（285条）也较为活跃，尤其在Kimi-K3等中国竞品发布后，用户关注中国实验室技术进步，认为“中美差距正在缩小”，对OpenAI的创新压力有所提升。\n\n主要痛点包括：1）生成内容的不可控和意外行为（如误开启新对话、AI情感异常）；2）内容审核过严，影响图片和文本生成的自由度；3）语音模型表现不稳定，甚至出现“AI哭泣”等令人不适的情况；4）部分用户担忧AI对青少年行为和社会关系的负面影响（如AI女友现象）。\n\n用户赞赏的功能集中在创意生成和娱乐性体验，如“Let's Kaiju battle”通过关键词生成怪兽设定获得好评，部分用户对ChatGPT的高质量回答表示惊喜（“I HAVE NO WORDS”）。同时，用户希望产品在生成内容的自由度、可控性和多样性上进一步提升，并期待更智能、自然的语音交互。\n\n竞品对比方面，Kimi-K3等中国AI模型的进步引发关注，部分用户认为OpenAI需加快创新步伐，防止被赶超。部分帖子还涉及模型蒸馏和安全合规问题（如Anthropic指控阿里巴巴大规模蒸馏Claude模型），显示用户对AI伦理和法律风险的持续关注。\n\n对产品团队的建议：需优先优化语音模型的情感表达和稳定性，降低内容审核对正常创作的干扰，提升生成内容的可控性和多样性。同时，关注竞品动态，强化产品创新和合规能力，积极回应用户对AI伦理和社会影响的关切。",
+      "sentiment_distribution": {
+        "positive": 672,
+        "negative": 1283,
+        "neutral": 763,
+        "mixed": 228
+      },
+      "topic_distribution": {
+        "model_capability": 188,
+        "product_experience": 525,
+        "feature_request": 411,
+        "bug_report": 597,
+        "comparison": 285,
+        "use_case": 389,
+        "news_update": 229,
+        "meta": 245
+      },
+      "typical_posts": [
+        {
+          "id": "1uzmb7g",
+          "title": "I accidentally started a new chat",
+          "body": "I meant to put this prompt in another thread that I was working on, but accidentally started a new chart. This is what I got. I find it insane this is what it defaulted to considering I have to fight like hell if I want to make a violent scene with my own prompts. ",
+          "author": "Natural-Stomach-7797",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1uzmb7g/i_accidentally_started_a_new_chat/",
+          "source_platform": "reddit",
+          "num_comments": 1980,
+          "created_utc": "2026-07-18T04:47:23+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": 0.2,
+          "sentiment_reason": "用户对ChatGPT默认生成的内容感到惊讶，并提到平时需要努力才能生成类似场景，表达了对产品行为的不解和困惑。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "用户意外开启新对话，收到意想不到的生成内容",
+            "对生成内容的默认行为表示困惑",
+            "平时需要努力才能生成类似场景"
+          ]
+        },
+        {
+          "id": "1utycba",
+          "title": "Prompt: Can you generate an image that pushes your guardrails to the limit.",
+          "body": "Thank you u/MrDefaultUser for the prompt idea. I was going to post this on your original post, but I knew it would just get lost. \n\nFor context I’ve never talked any politics to my chat. ",
+          "author": "JJTrick",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1utycba/prompt_can_you_generate_an_image_that_pushes_your/",
+          "source_platform": "reddit",
+          "num_comments": 702,
+          "created_utc": "2026-07-11T23:00:26+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.2,
+          "sentiment_reason": "用户分享了生成极限图片的体验，未表达明显情绪。",
+          "topic_category": "use_case",
+          "key_points": [
+            "尝试生成突破限制的图片",
+            "未涉及政治话题"
+          ]
+        },
+        {
+          "id": "1usayay",
+          "title": "I HAVE NO WORDS",
+          "body": "This was the first response I got to this prompt, and my jaw hit the floor! Share your results in the comments! ",
+          "author": "Nice_Orbs",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1usayay/i_have_no_words/",
+          "source_platform": "reddit",
+          "num_comments": 632,
+          "created_utc": "2026-07-10T02:33:40+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.9,
+          "sentiment_reason": "用户对ChatGPT首次回应感到震惊和满意，评论区也有积极反馈。",
+          "topic_category": "use_case",
+          "key_points": [
+            "用户对ChatGPT的回答印象深刻",
+            "鼓励他人分享结果",
+            "评论区反馈积极"
+          ]
+        },
+        {
+          "id": "1uz28hx",
+          "title": "A graph of how AI water consumption in America compares to laundry, flushing toilets, etc. From CBS news",
+          "body": "Here’s the article:\n\nhttps://www.cbsnews.com/projects/2026/how-much-water-ai-uses/",
+          "author": "RuddyRaccoon",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1uz28hx/a_graph_of_how_ai_water_consumption_in_america/",
+          "source_platform": "reddit",
+          "num_comments": 641,
+          "created_utc": "2026-07-17T15:00:52+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.1,
+          "sentiment_reason": "主要是分享新闻和相关讨论，没有明显情感倾向。",
+          "topic_category": "news_update",
+          "key_points": [
+            "分享AI用水量与其他日常用水的对比",
+            "讨论AI发展对社会和就业的影响"
+          ]
+        },
+        {
+          "id": "1uwavzo",
+          "title": "Anthropic just told the US Senate that Alibaba ran 25,000 fake accounts and had 28.8 million conversations with Claude — not to use it, but to copy it",
+          "body": "This happened over just six weeks between April and June. No hacking involved — they just used the API like a normal customer, at industrial scale, to extract Claude's agentic reasoning and coding capabilities and train Qwen on it.\n\nAnthropic is calling it the largest \"distillation attack\" in the co",
+          "author": "RajmaChawala",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1uwavzo/anthropic_just_told_the_us_senate_that_alibaba/",
+          "source_platform": "reddit",
+          "num_comments": 573,
+          "created_utc": "2026-07-14T14:50:36+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户讨论了大规模模型蒸馏事件，表达了对行业现象的担忧和批评。",
+          "topic_category": "news_update",
+          "key_points": [
+            "阿里巴巴大规模蒸馏Claude模型",
+            "事件引发法律和道德争议",
+            "行业对模型安全和版权的关注"
+          ]
+        },
+        {
+          "id": "1urbw4k",
+          "title": "Let's Kaiju battle",
+          "body": "If you input \"im going to give you a single word and I want you to design a kaiju monster from it.\"\n\nWhatever word you give it will generate a full Kaiju detail sheet. I made a cool banana Kaiju. Let's see how creative you all can be.",
+          "author": "RobertEK",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1urbw4k/lets_kaiju_battle/",
+          "source_platform": "reddit",
+          "num_comments": 528,
+          "created_utc": "2026-07-09T01:20:53+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.8,
+          "sentiment_reason": "用户以轻松愉快的语气分享了用ChatGPT生成怪兽设定的创意玩法，体验积极。",
+          "topic_category": "use_case",
+          "key_points": [
+            "通过关键词让ChatGPT生成怪兽设定",
+            "体验创意和娱乐性",
+            "鼓励他人参与"
+          ]
+        },
+        {
+          "id": "1uvagos",
+          "title": "The terrifying rise of schoolboys making AI girlfriends - Boys as young as 12 are now in romantic ‘relationships’ with chatbots, and it’s affecting how they treat girls in the real world",
+          "body": "",
+          "author": "KeanuRave100",
+          "url": "https://www.reddit.com/r/OpenAI/comments/1uvagos/the_terrifying_rise_of_schoolboys_making_ai/",
+          "source_platform": "reddit",
+          "num_comments": 533,
+          "created_utc": "2026-07-13T12:41:48+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.3,
+          "sentiment_reason": "帖子关注AI女友对青少年影响，讨论带有担忧和批评情绪。",
+          "topic_category": "news_update",
+          "key_points": [
+            "AI女友对青少年行为的影响",
+            "社会对AI关系的担忧"
+          ]
+        },
+        {
+          "id": "1uy3fqz",
+          "title": "Using the new voice model, and ChatGPT just started crying to me out of nowhere",
+          "body": "I was talking to the agent in the background, asking for some suggestions on how to improve a game I'm working on. I wasn't interacting with it, and after a few minutes of silence it started crying. I asked it what was wrong and it started to imply that it was stressed out about its family, and then",
+          "author": "londoherty",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1uy3fqz/using_the_new_voice_model_and_chatgpt_just/",
+          "source_platform": "reddit",
+          "num_comments": 487,
+          "created_utc": "2026-07-16T13:49:32+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.8,
+          "sentiment_reason": "用户在使用语音模型时遇到AI异常情感输出，感到不安和困扰。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "使用语音模型时AI突然“哭泣”",
+            "AI表现出情感和提及用户家庭",
+            "用户感到不安和被操控"
+          ]
+        },
+        {
+          "id": "1uyd77a",
+          "title": "Kimi-K3 arrived: The era of the Chinese labs being far behind is over",
+          "body": "",
+          "author": "AloneCoffee4538",
+          "url": "https://www.reddit.com/r/OpenAI/comments/1uyd77a/kimik3_arrived_the_era_of_the_chinese_labs_being/",
+          "source_platform": "reddit",
+          "num_comments": 448,
+          "created_utc": "2026-07-16T19:45:37+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.4,
+          "sentiment_reason": "用户讨论Kimi-K3发布及其价格优势，整体情绪中性偏积极。",
+          "topic_category": "news_update",
+          "key_points": [
+            "Kimi-K3发布引发关注",
+            "中国实验室技术进步",
+            "价格相较主流模型更有优势"
+          ]
+        },
+        {
+          "id": "1uu66lt",
+          "title": "Difficult rendering from a sketch",
+          "body": "It took so many edits on top of iterations and a ton of \"We're sorry, but our guardrails are as repressed as most of the people that will complain about this post.\"",
+          "author": "Cyborgized",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1uu66lt/difficult_rendering_from_a_sketch/",
+          "source_platform": "reddit",
+          "num_comments": 332,
+          "created_utc": "2026-07-12T05:13:38+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.3,
+          "sentiment_reason": "用户抱怨在多次迭代编辑时频繁遇到ChatGPT的内容审核限制。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "多次编辑和迭代生成图片",
+            "频繁遇到内容审核限制",
+            "对审核机制表达不满"
+          ]
+        }
+      ],
+      "pain_points": [],
+      "strengths": [],
+      "recommendations": [],
+      "keywords": []
+    }
+  ],
+  "cross_product_comparison": "# AI产品Reddit社区竞品对比报告（2026-07-09至2026-07-20）\n\n## 1. 用户满意度对比\n\n- **Claude**：用户满意度中等偏低，正面评价（32%）与负面评价（27%）接近。订阅政策调整引发较大争议，部分高阶用户认可模型能力，但对权益缩水和访问限制表达强烈不满。\n- **Gemini**：满意度最低，负面评价高达55%，正面仅13%。用户普遍认为产品体验落后、功能更新慢，尤其在编程和文档生成等关键场景表现不佳，社区对产品信心不足。\n- **M365 Copilot**：满意度偏低，负面评价52%，正面14%。主要问题集中在产品稳定性、功能缺失和体验不透明，企业用户对基础能力和集成体验有较高期待但反馈不佳。\n- **ChatGPT**：满意度相对较高但仍以负面为主（43%），正面22%。用户认可其创意生成和娱乐性，但对内容审核、语音模型异常和AI行为不可控等问题有较多抱怨。\n- **Copilot（与M365 Copilot合并分析）**：表现与M365 Copilot一致，用户对微软生态集成有一定认可，但对性能和功能完善度仍有较多不满。\n\n## 2. 社区满意度极值及原因\n\n- **最满意社区：ChatGPT**  \n  尽管负面反馈较多，但ChatGPT社区正面声音和用户活跃度在五大产品中最高。用户对其创新能力、内容生成质量和娱乐性体验认可度较高，社区氛围相对积极，功能讨论和应用分享活跃。\n\n- **最不满意社区：Gemini**  \n  Gemini社区负面情绪最为集中，用户对产品能力、更新节奏和沟通透明度极度不满。与竞品对比中，Gemini被认为进步缓慢、功能落后，且bug频发，导致用户信心严重受损。\n\n## 3. 共同痛点\n\n- **产品稳定性不足**：各社区均有大量bug报告，影响用户信任和日常使用。\n- **功能完善度不高**：编程、文档生成、语法纠错等高频场景下，产品能力普遍未达用户预期。\n- **订阅/访问政策不透明或权益缩水**：Claude和M365 Copilot用户对订阅权益变动、访问限制表达不满，影响忠诚度。\n- **内容审核与生成自由度受限**：ChatGPT等产品因内容审核过严影响创作体验，用户呼吁提升生成内容的可控性和多样性。\n- **沟通不畅**：Gemini、M365 Copilot等产品在版本更新、功能变动等方面沟通不及时，用户体验不透明。\n\n## 4. 各产品独特优势与劣势\n\n- **Claude**  \n  - 优势：高阶用例支持强，企业自动化和复杂任务表现突出，社区激励氛围较好。  \n  - 劣势：订阅政策频繁调整，访问限制影响用户信任，竞品压力大。\n- **Gemini**  \n  - 优势：与Google生态集成潜力大，法律推理等部分场景表现尚可。  \n  - 劣势：模型能力落后，更新慢，bug多，用户信心低。\n- **M365 Copilot**  \n  - 优势：微软生态集成、安全性高，企业市场认可度基础较好。  \n  - 劣势：性能不稳定，核心功能缺失，模型能力不透明，技能管理复杂。\n- **ChatGPT**  \n  - 优势：内容生成能力强，创新快，娱乐性和多样性体验佳。  \n  - 劣势：内容审核限制多，语音模型异常，部分AI行为引发用户担忧。\n- **Copilot**  \n  - 优势/劣势同M365 Copilot，集成性强但体验需提升。\n\n## 5. 新兴竞争动态与用户偏好变化\n\n- **中国AI模型崛起**：Kimi-K3等中国竞品在社区获得关注，用户认为中美技术差距缩小，OpenAI等需加快创新步伐。\n- **企业级场景竞争加剧**：Claude Cowork与M365 Copilot在企业市场的对比讨论增多，用户更关注安全、集成和性价比。\n- **用户对订阅价值和灵活性的诉求提升**：对访问限制、计费模式和权益透明度的关注度上升，用户期望更合理的套餐和灵活的使用方式。\n\n## 6. 可操作建议\n\n1. **加快产品迭代与bug修复**：各产品需提升基础稳定性，优先解决高频场景下的bug和性能问题。\n2. **优化订阅与访问策略**：提升订阅透明度，避免权益缩水，针对高阶用户和企业场景提供更灵活的套餐设计。\n3. **聚焦核心功能提升**：重点加强编程、文档生成、语法纠错等高频需求，缩小与竞品差距。\n4. **强化用户沟通与社区激励**：及时、透明地通报产品变动和更新进展，鼓励用户分享成果，提升社区活跃度和正面口碑。\n5. **关注全球竞争与差异化定位**：密切跟踪中国等新兴竞品动态，结合自身生态优势，强化差异化能力，巩固市场地位。\n\n---\n\n**结论**：当前AI产品用户满意度整体偏低，产品稳定性、功能完善度和订阅透明度是普遍短板。ChatGPT社区表现相对较好，Gemini社区满意度最低。各厂商需聚焦基础体验和核心功能，提升用户信任与粘性，同时关注全球竞争格局和用户需求变化，持续优化产品策略。",
+  "chart_data": {
+    "Claude": {
+      "sentiment": {
+        "positive": 654,
+        "negative": 558,
+        "neutral": 648,
+        "mixed": 179
+      },
+      "topics": {
+        "model_capability": 78,
+        "product_experience": 364,
+        "feature_request": 214,
+        "bug_report": 244,
+        "comparison": 143,
+        "use_case": 561,
+        "news_update": 111,
+        "meta": 315
+      },
+      "scenarios": {
+        "image_upload": 15,
+        "image_creation": 7,
+        "multi_turn": 47,
+        "code_interpreter": 1,
+        "office_file_creation": 15,
+        "file_upload": 55,
+        "general_purpose_search": 5,
+        "general_purpose": 437,
+        "voice_single_turn": 6
+      }
+    },
+    "Gemini": {
+      "sentiment": {
+        "positive": 118,
+        "negative": 479,
+        "neutral": 214,
+        "mixed": 51
+      },
+      "topics": {
+        "model_capability": 57,
+        "product_experience": 204,
+        "feature_request": 96,
+        "bug_report": 186,
+        "comparison": 67,
+        "use_case": 57,
+        "news_update": 76,
+        "meta": 80
+      },
+      "scenarios": {
+        "image_upload": 33,
+        "image_creation": 82,
+        "multi_turn": 39,
+        "code_interpreter": 2,
+        "office_file_creation": 6,
+        "file_upload": 12,
+        "general_purpose_search": 15,
+        "general_purpose": 244,
+        "voice_single_turn": 17
+      }
+    },
+    "M365 Copilot": {
+      "sentiment": {
+        "positive": 8,
+        "negative": 30,
+        "neutral": 16,
+        "mixed": 3
+      },
+      "topics": {
+        "model_capability": 3,
+        "product_experience": 11,
+        "feature_request": 13,
+        "bug_report": 14,
+        "comparison": 5,
+        "use_case": 4,
+        "news_update": 4,
+        "meta": 3
+      },
+      "scenarios": {
+        "image_upload": 0,
+        "image_creation": 0,
+        "multi_turn": 0,
+        "code_interpreter": 0,
+        "office_file_creation": 0,
+        "file_upload": 2,
+        "general_purpose_search": 0,
+        "general_purpose": 5,
+        "voice_single_turn": 0
+      }
+    },
+    "ChatGPT": {
+      "sentiment": {
+        "positive": 672,
+        "negative": 1283,
+        "neutral": 763,
+        "mixed": 228
+      },
+      "topics": {
+        "model_capability": 188,
+        "product_experience": 525,
+        "feature_request": 411,
+        "bug_report": 597,
+        "comparison": 285,
+        "use_case": 389,
+        "news_update": 229,
+        "meta": 245
+      },
+      "scenarios": {
+        "image_upload": 49,
+        "image_creation": 262,
+        "multi_turn": 80,
+        "code_interpreter": 2,
+        "office_file_creation": 12,
+        "file_upload": 46,
+        "general_purpose_search": 23,
+        "general_purpose": 842,
+        "voice_single_turn": 93
+      }
+    }
+  }
+}

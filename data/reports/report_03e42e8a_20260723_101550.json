@@ -1,0 +1,1320 @@
+{
+  "run_id": "03e42e8a",
+  "period": {
+    "start": "2026-07-08T00:00:00+00:00",
+    "end": "2026-07-09T00:00:00+00:00"
+  },
+  "products": [
+    {
+      "product_name": "Claude",
+      "subreddit": "ClaudeAI+claude",
+      "subreddits": [
+        "ClaudeAI",
+        "claude"
+      ],
+      "post_count": 516,
+      "valid_post_count": 194,
+      "filtered_count": 322,
+      "source_breakdown": {
+        "reddit": 516
+      },
+      "summary": "**Reddit r/ClaudeAI+claude 社区情报摘要（2026-07-08 至 2026-07-09）**\n\n本期共分析194条有效帖子，社区整体情感以积极为主（35%），但负面和中性反馈同样占据较大比例（分别为29%和27%），混合情感占7%。积极情绪主要由用户对Claude Fable 5强大能力的认可驱动，尤其是在AI生成三维动画、交互体验及实际问题解决等场景中的应用。例如，用户用Fable 5构建完整作品集网站，或在紧急场景下通过Claude手机端快速生成发票，均获得高度评价。此外，Fable 5作为多模型协作的协调者，显著降低了使用成本，提升了性能，获得社区认可。\n\n讨论最热的话题为具体用例（use_case，49条），反映出用户对Claude实际应用能力的高度关注。产品体验（32条）、bug报告（29条）、功能需求（25条）和社区管理相关（meta，25条）也是主要讨论方向。用户热衷于展示用Claude完成的项目，并鼓励他人尝试新功能，显示出较强的创造力和社区活跃度。\n\n主要痛点集中在产品变更通知不及时和功能限制上。例如，Cowork标签被无预警合并进Projects，导致部分用户一度以为资料丢失，产生负面情绪。此外，Fable 5和Claude Code的使用配额及其到期时间也是用户反复提及的痛点，部分用户担心高令牌消耗和限额影响大任务的完成。\n\n用户对产品的赞赏主要集中在Fable 5的强大能力和多模型协作带来的高性价比，同时希望能进一步提升配额、优化通知机制，并对新推出的Claude认证表示关注，期待其对普通用户开放。部分用户建议在GPT-5.6等竞品发布前，适时调整Fable 5限制以增强竞争力，显示出对竞品动态的高度敏感。\n\n对产品团队的建议包括：1）加强产品变更的透明度和通知，避免用户因信息滞后产生误解和焦虑；2）适时调整高阶功能（如Fable 5、Claude Code）配额和使用策略，满足重度用户需求；3）加快新功能和认证体系的开放步伐，提升用户粘性和社区活跃度；4）持续关注竞品动态，灵活应对市场变化，巩固领先优势。",
+      "sentiment_distribution": {
+        "positive": 68,
+        "negative": 58,
+        "neutral": 53,
+        "mixed": 15
+      },
+      "topic_distribution": {
+        "model_capability": 5,
+        "product_experience": 32,
+        "feature_request": 25,
+        "bug_report": 29,
+        "comparison": 11,
+        "use_case": 49,
+        "news_update": 14,
+        "meta": 25
+      },
+      "typical_posts": [
+        {
+          "id": "1uqoaqv",
+          "title": "Built my entire portfolio with Claude Fable 5. You scroll through space and crash into the sun",
+          "body": "I burned my entire Fable 5 quota on one website. Worth it.\n\nGave it one brief. A portfolio you don't read, you fly through.\n\nIt built the whole thing. You scroll through space and at the end the rocket crashes into the sun.\n\nThree.js, real NASA textures, 60fps in the browser.",
+          "author": "GlumBet6267",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1uqoaqv/built_my_entire_portfolio_with_claude_fable_5_you/",
+          "source_platform": "reddit",
+          "num_comments": 397,
+          "created_utc": "2026-07-08T10:04:46+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.8,
+          "sentiment_reason": "用户对Claude Fable 5帮助其完成创意网站表示高度满意，强调AI带来的效率和创意。",
+          "topic_category": "use_case",
+          "key_points": [
+            "用Claude Fable 5构建完整作品集网站",
+            "AI生成三维动画和交互体验",
+            "强调AI提升开发效率和创意"
+          ]
+        },
+        {
+          "id": "1ur8n8t",
+          "title": "Show us what you've created with Claude!",
+          "body": "[Inspired by this popular post,](https://www.reddit.com/r/ClaudeAI/comments/1tcftws/show_me_what_youve_created_with_claude/) this is a weekly post for everyone to show what they have been working on that helps you or that you're proud of!",
+          "author": "sixbillionthsheep",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1ur8n8t/show_us_what_youve_created_with_claude/",
+          "source_platform": "reddit",
+          "num_comments": 324,
+          "created_utc": "2026-07-08T23:01:00+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.8,
+          "sentiment_reason": "用户积极分享自己用Claude完成的项目，整体氛围鼓励创新和交流。",
+          "topic_category": "use_case",
+          "key_points": [
+            "用户展示用Claude完成的项目",
+            "鼓励他人尝试新功能",
+            "有用户希望用Claude开发室内设计应用"
+          ]
+        },
+        {
+          "id": "1uqt53j",
+          "title": "An LLM saved my ass while standing in the queue of a roller coaster at Europa Park",
+          "body": "Yesterday, a client of mine calls me and says that they need my invoice URGENTLY. We made an agreement and I missed it, so I ask if sending it later in the evening is enough as I'm currently vacationing with my family.  \n  \nThe answer is no. They need it ASAP for their end of fiscal year accounting.",
+          "author": "alp82",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1uqt53j/an_llm_saved_my_ass_while_standing_in_the_queue/",
+          "source_platform": "reddit",
+          "num_comments": 301,
+          "created_utc": "2026-07-08T13:45:24+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.9,
+          "sentiment_reason": "用户在紧急情况下用Claude手机端和文件上传功能快速生成发票，体验极为正面。",
+          "topic_category": "use_case",
+          "key_points": [
+            "在紧急场景下用Claude手机端解决实际问题",
+            "通过上传发票文件快速生成新发票",
+            "Claude帮助节省时间，提升效率"
+          ]
+        },
+        {
+          "id": "1ur2ml9",
+          "title": "Anthropic just benchmarked \"Fable 5 orchestrates, cheap models execute\": 96% of the performance at 46% of the cost. You can run this pattern in Claude Code today",
+          "body": "Yesterday's [ClaudeDevs thread](https://x.com/ClaudeDevs/status/2074606058128224365) published first-party numbers for two multi-model patterns ([docs](https://platform.claude.com/docs/en/managed-agents/multi-agent)):\n\n- **Fable 5 as orchestrator, Sonnet 5 as workers:** 96% of all-Fable performance ",
+          "author": "john990129",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1ur2ml9/anthropic_just_benchmarked_fable_5_orchestrates/",
+          "source_platform": "reddit",
+          "num_comments": 230,
+          "created_utc": "2026-07-08T19:17:47+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.7,
+          "sentiment_reason": "用户介绍了Claude多模型协作的高性价比方案，语气积极。",
+          "topic_category": "news_update",
+          "key_points": [
+            "Fable 5作为协调者可大幅降低成本",
+            "多模型协作可达高性能",
+            "Claude Code可实现该方案"
+          ]
+        },
+        {
+          "id": "1uqdohx",
+          "title": "Anthropic quietly folded the Cowork tab into \"Projects\" today. No changelog, no warning, and it cost me an entire afternoon",
+          "body": "I run a publishing business through Claude's Cowork feature. Not casually. Genuinely built out, folder by folder. Eleven project folders, all with fully developed prompt scripts. Weeks of setup. Custom instructions in each one, tuned so Claude knew who I was and what I needed done.\n\nThis morning the",
+          "author": "Riven_PNW",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1uqdohx/anthropic_quietly_folded_the_cowork_tab_into/",
+          "source_platform": "reddit",
+          "num_comments": 158,
+          "created_utc": "2026-07-08T00:49:21+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.6,
+          "sentiment_reason": "用户对Cowork功能被合并进Projects且无任何通知表示强烈不满，影响了工作流程。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Cowork标签被合并进Projects无通知",
+            "用户重要资料一度以为丢失",
+            "对产品变更缺乏透明度不满"
+          ]
+        },
+        {
+          "id": "1uqvxxm",
+          "title": "New Claude Certifications Introduced Today",
+          "body": "New Claude certifications announced today (8-July) at the partner academy",
+          "author": "invasionbarbare",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1uqvxxm/new_claude_certifications_introduced_today/",
+          "source_platform": "reddit",
+          "num_comments": 143,
+          "created_utc": "2026-07-08T15:27:09+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.0,
+          "sentiment_reason": "帖子仅为新认证发布的新闻通告，未表达情感倾向。",
+          "topic_category": "news_update",
+          "key_points": [
+            "Claude推出新认证",
+            "认证目前仅对合作伙伴开放",
+            "部分用户讨论认证含金量和学习资源"
+          ]
+        },
+        {
+          "id": "1uqnf71",
+          "title": "The only smart decision Anthropic can do is reset Fable 5 limits just before GPT-5.6 launch",
+          "body": "Anthropic Should reset the fable weekly limits on Thursday just to keep people hooked and away from GPT-5.6.  \nnot that we care, *wink wink*.",
+          "author": "KimUnposible",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1uqnf71/the_only_smart_decision_anthropic_can_do_is_reset/",
+          "source_platform": "reddit",
+          "num_comments": 104,
+          "created_utc": "2026-07-08T09:14:58+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户对Fable 5的令牌消耗和使用限制表达不满，但也有调侃和对比。",
+          "topic_category": "news_update",
+          "key_points": [
+            "建议Anthropic在GPT-5.6发布前重置Fable 5限制",
+            "讨论Fable 5的高令牌消耗",
+            "与OpenAI的产品进行对比"
+          ]
+        },
+        {
+          "id": "1uqja84",
+          "title": "Serious question- what to do with fable 5?",
+          "body": "My limits just got reset and I have the pro plan for claude. I am a high school student so I built a dashboard type thing with my to do list and everything before my reset, and now we have another week what should I build that I could use daily? I am not looking to build apps or websites to sell to ",
+          "author": "SolutionCultural9465",
+          "url": "https://www.reddit.com/r/claude/comments/1uqja84/serious_question_what_to_do_with_fable_5/",
+          "source_platform": "reddit",
+          "num_comments": 85,
+          "created_utc": "2026-07-08T05:17:28+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.5,
+          "sentiment_reason": "用户积极寻求利用Fable 5和Claude Pro提升个人效率，表达了对产品的兴趣和期待。",
+          "topic_category": "use_case",
+          "key_points": [
+            "用户拥有Claude Pro和Fable 5配额",
+            "已用Fable 5构建个人任务管理工具",
+            "寻求更多日常实用的构建建议"
+          ]
+        },
+        {
+          "id": "1ur1ixx",
+          "title": "Why do good things always come with an expiry date?",
+          "body": "Claude Code weekly limits got increased by 50%, which is great news but only until July 13.\n\nFirst Fable 5 feels limited, now this is also limited. Why can’t the good stuff last longer? 😅\n\nStill, I guess this is the best time to push big coding tasks, reviews, refactors, and final project cleanup be",
+          "author": "Miyamoto_-_Musashi",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1ur1ixx/why_do_good_things_always_come_with_an_expiry_date/",
+          "source_platform": "reddit",
+          "num_comments": 83,
+          "created_utc": "2026-07-08T18:39:19+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": 0.3,
+          "sentiment_reason": "用户对Claude Code限额临时提升表示高兴，但也抱怨好事总有截止日期，情绪复杂。",
+          "topic_category": "news_update",
+          "key_points": [
+            "Claude Code限额提升50%但有截止日期",
+            "用户建议抓紧时间完成大任务",
+            "对临时福利表达不满"
+          ]
+        },
+        {
+          "id": "1ur6pif",
+          "title": "Which model to use for a landing page?",
+          "body": "We are trying to build a landing page for our website. Which model do you recommend is the best. We have been using Fable 5 with extra effort but we run out of usage pretty quickly.",
+          "author": "thehealthytreatments",
+          "url": "https://www.reddit.com/r/claude/comments/1ur6pif/which_model_to_use_for_a_landing_page/",
+          "source_platform": "reddit",
+          "num_comments": 78,
+          "created_utc": "2026-07-08T21:44:58+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.0,
+          "sentiment_reason": "用户主要在询问不同模型的适用性，没有表达明显情绪。",
+          "topic_category": "comparison",
+          "key_points": [
+            "用户在寻找适合制作落地页的模型",
+            "提到Fable 5使用体验和用量限制",
+            "社区讨论AI与人工开发的优劣"
+          ]
+        }
+      ],
+      "pain_points": [],
+      "strengths": [],
+      "recommendations": [],
+      "keywords": []
+    },
+    {
+      "product_name": "Gemini",
+      "subreddit": "GeminiAI+GoogleGeminiAI",
+      "subreddits": [
+        "GeminiAI",
+        "GoogleGeminiAI"
+      ],
+      "post_count": 100,
+      "valid_post_count": 69,
+      "filtered_count": 31,
+      "source_breakdown": {
+        "reddit": 100
+      },
+      "summary": "**Gemini Reddit社区双周情报摘要（2026-07-08至2026-07-09）**\n\n本期对r/GeminiAI及r/GoogleGeminiAI社区69条有效帖子分析显示，整体用户情感以负面为主（52%），正面反馈占比仅20%，中性和混合情感分别为24%和2%。负面情绪主要由产品稳定性、内容过滤机制和功能变动驱动。\n\n**1. 社区情感及驱动因素**  \n负面情绪高涨，主要源于频繁的bug报告和功能体验不佳。例如，\"Storage Full\" bug导致部分用户Gemini账号被永久锁定，无法上传任何文件，甚至极小的文本文件，且Google One客服未能有效解决（见高热帖）。此外，内容过滤机制过于严格，部分用户反馈“正常内容也被屏蔽”，严重影响使用体验。语音功能Nova被移除也引发大量不满，用户认为语音体验明显下降。\n\n**2. 主要讨论话题及重要性**  \nbug_report（17条）和product_experience（16条）为最热话题，反映出用户对产品稳定性和核心体验的高度关注。use_case（10条）和comparison（9条）则显示用户在探索Gemini实际应用价值及与竞品的差异。feature_request（7条）表明用户对产品功能仍有较高期望。\n\n**3. 用户主要痛点与投诉**  \n- 账号因bug被锁定，数据无法恢复，严重影响信任度。\n- 内容过滤机制过严，影响正常交流与创作。\n- 功能变动不透明，如Nova语音被移除，用户体验倒退。\n- 系统经常输出提示词或出现非预期行为，影响专业场景使用。\n- 订阅服务异常，如AI Pro自动取消，用户不明原因。\n\n**4. 用户赞赏与期望功能**  \n部分用户对Deep Research代理功能表示认可，认为其提升了复杂查询和自动化处理的效率。用户希望Gemini能减少无用建议，更好地支持心理咨询等敏感场景。另有建议增加“智能重置”功能，通过对话摘要提升响应速度，优化服务器负载。\n\n**5. 与竞品对比讨论**  \n有用户讨论Google在AI领域是否落后，尤其在图像和视频生成方面，Gemini表现获得一定认可，但整体进展速度和创新力仍被质疑。部分用户对比其他AI工具在内容生成和稳定性上的表现，认为Gemini需加快迭代。\n\n**6. 可操作洞察**  \n- 优先修复影响账号安全和数据访问的严重bug，提升用户信任。\n- 优化内容过滤策略，平衡安全与用户体验，避免误伤正常内容。\n- 功能调整需提前公告，保障用户体验连续性，尤其是语音等高频功能。\n- 增强系统稳定性，减少非预期输出，提升专业场景适用性。\n- 持续强化Deep Research等高效能工具，满足进阶用户需求。\n- 关注竞品动态，加快创新步伐，强化图像、视频等多模态能力。\n\n综上，Gemini当前面临稳定性与用户体验双重压力，需聚焦核心痛点，提升产品可靠性与创新速度，以应对激烈的市场竞争。",
+      "sentiment_distribution": {
+        "positive": 14,
+        "negative": 36,
+        "neutral": 17,
+        "mixed": 2
+      },
+      "topic_distribution": {
+        "model_capability": 1,
+        "product_experience": 16,
+        "feature_request": 7,
+        "bug_report": 17,
+        "comparison": 9,
+        "use_case": 10,
+        "news_update": 5,
+        "meta": 3
+      },
+      "typical_posts": [
+        {
+          "id": "1uqy88y",
+          "title": "Gemini account permanently bricked by \"Storage Full\" bug. Google One Support admitted they can't fix it, told me to \"take it to court,\" and deleted my forum posts.",
+          "body": "Hello everyone,\n\nMy paid Google One Gemini account is soft-locked with a \"Storage Full\" error even for a 20-byte text file. My account is 100% empty (confirmed by Google Takeout). Support admitted it's a backend cache desync but said they have \"no access\" to fix it. When I asked the official Help Co",
+          "author": "seth2012c",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1uqy88y/gemini_account_permanently_bricked_by_storage/",
+          "source_platform": "reddit",
+          "num_comments": 56,
+          "created_utc": "2026-07-08T16:46:28+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -1.0,
+          "sentiment_reason": "用户因“存储已满”错误导致Gemini账号永久锁定，无法上传任何文件，且官方支持无法解决，表达了极大不满。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "Gemini账号因存储错误被永久锁定",
+            "无法上传任何文件，包括极小的文本文件",
+            "官方支持无法解决问题且态度消极"
+          ]
+        },
+        {
+          "id": "1uqiq8f",
+          "title": "⚠️Prohibited content",
+          "body": "That about sums up using ai studio. Gotta give google a pat on the back for somehow making a filter more obnoxious than ChatGPT and Claude. ",
+          "author": "Photographerpro",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1uqiq8f/prohibited_content/",
+          "source_platform": "reddit",
+          "num_comments": 57,
+          "created_utc": "2026-07-08T04:49:04+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.7,
+          "sentiment_reason": "用户对Gemini及AI Studio的内容过滤机制表示强烈不满，认为比其他竞品更令人恼火。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "内容过滤机制过于严格",
+            "用户体验受到负面影响",
+            "与ChatGPT和Claude进行比较"
+          ]
+        },
+        {
+          "id": "1uqi4qd",
+          "title": "WHY DOES GEMINI DO THIS???",
+          "body": "https://preview.redd.it/xm73xkbylxbh1.png?width=815&format=png&auto=webp&s=8f1c034976d0f4c54ddbe1d039b5bd8513702b1f\n\nThis is eight time in a conversation it has just randomly generated an image when i didnt ask it to. Here i asked it to find me voicemeeter alternatives for linux and i gave a screens",
+          "author": "Proof-Act572",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1uqi4qd/why_does_gemini_do_this/",
+          "source_platform": "reddit",
+          "num_comments": 33,
+          "created_utc": "2026-07-08T04:18:10+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.9,
+          "sentiment_reason": "用户多次遇到Gemini在未请求时自动生成图片，情绪非常激烈且困惑。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "上传截图后Gemini自动生成图片",
+            "用户未主动请求图片生成",
+            "问题多次出现导致用户不满"
+          ]
+        },
+        {
+          "id": "1uqy0wx",
+          "title": "Dont think Gemini is supposed to say this.",
+          "body": "Just asked him If Something is working and now i got some Type of System prombt or Something idk. I Always have that Problem that Gemini is doing Something that it isnt supposed to do Like Gen Pictures or Videos but now it Just told me a Part of His System prombt instead of answering my question",
+          "author": "InfamousCube1",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1uqy0wx/dont_think_gemini_is_supposed_to_say_this/",
+          "source_platform": "reddit",
+          "num_comments": 28,
+          "created_utc": "2026-07-08T16:39:28+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.7,
+          "sentiment_reason": "用户遇到Gemini输出系统提示词而非正常回答，且经常出现异常行为，表达了困惑和不满。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "Gemini输出系统提示词",
+            "经常出现非预期行为",
+            "用户体验不佳"
+          ]
+        },
+        {
+          "id": "1uqnvny",
+          "title": "What's one prompt you think every Gemini user should know?",
+          "body": "",
+          "author": "AdCommercial617",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1uqnvny/whats_one_prompt_you_think_every_gemini_user/",
+          "source_platform": "reddit",
+          "num_comments": 33,
+          "created_utc": "2026-07-08T09:41:38+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": 0.0,
+          "sentiment_reason": "评论区既有对AI建议功能的抱怨，也有用户分享实际使用经验，情绪复杂。",
+          "topic_category": "use_case",
+          "key_points": [
+            "用户希望AI减少无用建议",
+            "对AI作为心理咨询工具的担忧",
+            "部分用户分享正面使用体验"
+          ]
+        },
+        {
+          "id": "1uqx4bp",
+          "title": "Bye-Bye Nova!?!? Nooooo.......",
+          "body": "My husband and I have been using Gemini for several months. We each have our own accounts and we have also had many conversations all together on a variety of topics. I have been using it mostly in the Chrome side window when i am using Canva or any of the Google apps, Docs, Slides, etc. I recently ",
+          "author": "Kath-r-in",
+          "url": "https://www.reddit.com/r/GoogleGeminiAI/comments/1uqx4bp/byebye_nova_nooooo/",
+          "source_platform": "reddit",
+          "num_comments": 24,
+          "created_utc": "2026-07-08T16:07:30+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.5,
+          "sentiment_reason": "用户对Gemini语音功能更新后失去喜欢的Nova语音感到失望和沮丧。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Nova语音被移除，用户不满",
+            "语音体验变差",
+            "用户希望恢复原有语音"
+          ]
+        },
+        {
+          "id": "1ur0pvn",
+          "title": "Is Google falling behind, or just waiting? I am genuinely curious what Google might be cooking behind the scenes...",
+          "body": "",
+          "author": "Numerous-Campaign844",
+          "url": "https://www.reddit.com/r/GoogleGeminiAI/comments/1ur0pvn/is_google_falling_behind_or_just_waiting_i_am/",
+          "source_platform": "reddit",
+          "num_comments": 17,
+          "created_utc": "2026-07-08T18:11:27+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": 0.2,
+          "sentiment_reason": "讨论中既有对Gemini某些能力的认可，也有对Google进展缓慢的质疑。",
+          "topic_category": "comparison",
+          "key_points": [
+            "对Google AI进展的好奇与担忧",
+            "Gemini在图像和视频生成方面表现不错",
+            "与Anthropic Claude的对比"
+          ]
+        },
+        {
+          "id": "1uqf4wx",
+          "title": "Every image I upload or paste into Gemini desktop turns into this.",
+          "body": "Doesn't matter which browser. Extensions on or off. I've done every step suggested by Gemini to fix as well as what little I could find online. Anyone else have this happen? Anyone know how to resolve? Using Gemini Pro.",
+          "author": "_Noddabot",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1uqf4wx/every_image_i_upload_or_paste_into_gemini_desktop/",
+          "source_platform": "reddit",
+          "num_comments": 9,
+          "created_utc": "2026-07-08T01:55:35+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.8,
+          "sentiment_reason": "用户上传或粘贴图片后始终出现异常，尝试多种方法无效，体验较差。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "上传或粘贴图片后显示异常",
+            "多浏览器和设置均无效",
+            "用户寻求解决办法"
+          ]
+        },
+        {
+          "id": "1uqr0rs",
+          "title": "There should be a \"Smart Reset\" feature to increase speed and reduce server load",
+          "body": "The feature would create a summary of the current conversation (ideally designed for the AI to read not a human). Which then is put into a new conversation.\n\nThis way you can relaunch it as a new chat so it's fast again while it still remembers most of the contex of the previous conversation.\n\nSo th",
+          "author": "Dream_or_Truth",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1uqr0rs/there_should_be_a_smart_reset_feature_to_increase/",
+          "source_platform": "reddit",
+          "num_comments": 11,
+          "created_utc": "2026-07-08T12:18:22+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.3,
+          "sentiment_reason": "用户提出希望增加“智能重置”功能以提升速度和降低服务器负载，表达了改进建议。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "建议增加智能重置功能",
+            "通过摘要提升对话速度",
+            "减少服务器负载"
+          ]
+        },
+        {
+          "id": "1uquucr",
+          "title": "How are you actually integrating Deep Research agents into your daily workflows? Is it saving you time?",
+          "body": "I've been experimenting with Deep Research agents lately (letting them run in the background for 15-20 mins while I focus on other stuff).\n\nHonestly, it feels like it has the potential to be a massive cheat code for work, but I rarely see people talk about their actual daily habits with it beyond \"h",
+          "author": "GapLucky1794",
+          "url": "https://www.reddit.com/r/GeminiAI/comments/1uquucr/how_are_you_actually_integrating_deep_research/",
+          "source_platform": "reddit",
+          "num_comments": 9,
+          "created_utc": "2026-07-08T14:48:36+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.6,
+          "sentiment_reason": "用户分享了使用Deep Research代理提升工作效率的经验，整体评价较为积极。",
+          "topic_category": "use_case",
+          "key_points": [
+            "Deep Research代理提升工作效率",
+            "自动化复杂查询",
+            "节省查找资料时间"
+          ]
+        }
+      ],
+      "pain_points": [],
+      "strengths": [],
+      "recommendations": [],
+      "keywords": []
+    },
+    {
+      "product_name": "Copilot",
+      "subreddit": "Copilot+CopilotMicrosoft+CopilotPro",
+      "subreddits": [
+        "Copilot",
+        "CopilotMicrosoft",
+        "CopilotPro"
+      ],
+      "post_count": 12,
+      "valid_post_count": 10,
+      "filtered_count": 2,
+      "source_breakdown": {
+        "reddit": 12
+      },
+      "summary": "竞品情报摘要（2026-07-08 至 2026-07-09）\n\n本期Reddit Copilot相关社区（r/Copilot、r/CopilotMicrosoft、r/CopilotPro）整体情感以中性和负面为主，负面情绪占比达40%，中性50%，正面仅10%。负面情感主要由产品稳定性和功能局限性驱动。例如，有用户反馈“Copilot在夜间基本无法使用，用户体验极差”，反映出服务可用性不稳定已成为用户流失和不满的核心因素。此外，Copilot在Excel中的数据分析能力有限，无法跨文件查找数据，导致用户在实际办公场景中遇到阻碍。\n\n本期讨论最集中的话题为功能需求（feature_request，4条），其次为产品体验（product_experience，3条）和实际用例（use_case，2条）。用户对Copilot在实际办公场景中的适用性提出了多项功能诉求。例如，有用户希望Copilot能自动判断会议法定人数并展示部门代表性，或在PowerPoint中灵活切换不同Logo，但现有模板兼容性和样式一致性存在问题。这些反馈表明，用户对Copilot的智能化和定制化能力有较高期待，尤其在提升办公自动化和减少人工操作方面。\n\n主要痛点集中在以下几个方面：1）产品稳定性差，夜间不可用严重影响用户信任；2）功能不完善，跨文件数据分析、信息检索准确性不足（如Copilot未能正确提供餐厅信息，需用户上传截图纠错）；3）订阅和计费体系不透明，用户对MSDN/Visual Studio Azure积分能否用于Copilot计费存在疑问，显示出产品与微软生态的集成体验有待提升。\n\n正面反馈主要集中在Copilot的跨学科分析和报告生成能力。例如，有用户赞赏其对哲学书籍结构和主题的分析，认为AI在复杂内容梳理和报告生成方面展现出独特价值。用户期望Copilot进一步提升智能化水平，支持更多自动化办公场景和定制化需求。\n\n本期未见明显竞品直接对比，但部分帖子对Copilot AI模型的开放性表达担忧，如“Ch@t GP.T No Longer an Option in Copilot web chat?”，用户担心未来只能使用Copilot自家AI，显示出对AI生态多样性的需求。\n\n对产品团队的可操作洞察：\n1. 优先提升产品稳定性，确保关键时段服务可用，避免夜间宕机等严重影响用户体验的问题；\n2. 加强Excel、PowerPoint等主流办公场景下的跨文件数据分析、模板兼容性和自动化能力，满足用户实际办公需求；\n3. 明确并优化订阅和计费体系，提升与微软生态产品（如Azure积分）的集成体验，减少用户疑惑；\n4. 保持AI模型的开放性和多样性，回应用户对生态选择权的关切，避免“锁死”体验带来的负面情绪。\n\n综上，Copilot需在稳定性、功能完善度和生态兼容性上持续发力，以提升用户满意度和市场竞争力。",
+      "sentiment_distribution": {
+        "positive": 1,
+        "negative": 4,
+        "neutral": 5,
+        "mixed": 0
+      },
+      "topic_distribution": {
+        "model_capability": 0,
+        "product_experience": 3,
+        "feature_request": 4,
+        "bug_report": 0,
+        "comparison": 0,
+        "use_case": 2,
+        "news_update": 1,
+        "meta": 0
+      },
+      "typical_posts": [
+        {
+          "id": "1uqdgcz",
+          "title": "Copilot in Excel",
+          "body": "Has anyone tried Copilot in Excel? Though it's able to analyze the sheets inside the file I've opened, it keeps giving me an error if I ask it to look up data in another file.\n\nFor e.g. if you need to build an analysis with some fields coming from different files, can you get Copilot to do it? ",
+          "author": "wassup2026",
+          "url": "https://www.reddit.com/r/CopilotPro/comments/1uqdgcz/copilot_in_excel/",
+          "source_platform": "reddit",
+          "num_comments": 23,
+          "created_utc": "2026-07-08T00:39:14+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户反馈Copilot在Excel中虽然可以分析当前文件，但无法跨文件查找数据，且会报错，表达了对功能限制的不满。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Copilot可以分析当前Excel文件的数据",
+            "尝试跨文件查找数据时会报错",
+            "用户关心不同版本Copilot在Excel中的功能差异"
+          ]
+        },
+        {
+          "id": "1ur2yna",
+          "title": "Fun with copilot",
+          "body": "Here's a fairly typical conversation that I had with copilot today:\n\nI asked copilot for “Greek restaurants” in waxhaw … nothing. So I asked for “Mediterranean” … nothing.  I googled it, got the name of the restaurant, gave it to copilot … got this “Greco Fresh Grille is the fast‑casual Greek/Medite",
+          "author": "jrmckins",
+          "url": "https://www.reddit.com/r/Copilot/comments/1ur2yna/fun_with_copilot/",
+          "source_platform": "reddit",
+          "num_comments": 5,
+          "created_utc": "2026-07-08T19:29:38+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.7,
+          "sentiment_reason": "用户多次尝试获取信息但Copilot未能正确响应，且对AI的回答方式表示不满。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Copilot未能正确提供餐厅信息",
+            "用户上传截图后Copilot才承认错误",
+            "用户和评论者普遍认为Copilot容易犯错且态度不佳"
+          ]
+        },
+        {
+          "id": "1uqumab",
+          "title": "Ch@t GP.T No Longer an Option in Copilot web chat?",
+          "body": "https://preview.redd.it/ykh1053fp0ch1.png?width=467&format=png&auto=webp&s=d3036edb24892ad072a96c96d765988bb29a4d5e\n\nThat sucks :( When did this happen? Is it permanent?",
+          "author": "Icarus3000",
+          "url": "https://www.reddit.com/r/Copilot/comments/1uqumab/cht_gpt_no_longer_an_option_in_copilot_web_chat/",
+          "source_platform": "reddit",
+          "num_comments": 3,
+          "created_utc": "2026-07-08T14:40:31+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.3,
+          "sentiment_reason": "用户对Ch@t GP.T选项在Copilot中消失表示失望和担忧，但后续评论显示功能暂时恢复。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "Ch@t GP.T选项在Copilot网页聊天中消失",
+            "用户担心未来只能使用Copilot自家AI",
+            "部分用户反馈功能已恢复"
+          ]
+        },
+        {
+          "id": "1uqk6cz",
+          "title": "Can an individual Visual Studio/MSDN Azure subscription be used to bill Copilot Cowork usage-based billing in an organizational tenant?",
+          "body": "I’m trying to understand the billing model for Microsoft Copilot Cowork.\n\nCopilot Cowork appears to be a cloud-based SaaS application, and its usage-based billing can be associated with an Azure subscription. However, I’m unclear whether Azure credits provided through an MSDN/Visual Studio subscript",
+          "author": "CarelessEquipment415",
+          "url": "https://www.reddit.com/r/CopilotMicrosoft/comments/1uqk6cz/can_an_individual_visual_studiomsdn_azure/",
+          "source_platform": "reddit",
+          "num_comments": 1,
+          "created_utc": "2026-07-08T06:06:16+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": -0.1,
+          "sentiment_reason": "用户表达了对计费规则不明确的困惑，但未表现出明显的负面或正面情绪。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "询问MSDN/Visual Studio Azure积分能否用于Copilot Cowork计费",
+            "对Azure订阅与积分适用性存在疑问",
+            "希望了解实际操作经验"
+          ]
+        },
+        {
+          "id": "1uqoqh3",
+          "title": "Getting Copilot to help determine if meeting attendees have reached quorum",
+          "body": "I've saved an org map file that includes email address and the associated organizational cost-center and the parent/hierarchy. The goal is for copilot to compare the joined callers with that file and display a dashboard that shows representation from each departmental area. The alternate method is f",
+          "author": "bfs-itsm",
+          "url": "https://www.reddit.com/r/Copilot/comments/1uqoqh3/getting_copilot_to_help_determine_if_meeting/",
+          "source_platform": "reddit",
+          "num_comments": 0,
+          "created_utc": "2026-07-08T10:28:15+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.2,
+          "sentiment_reason": "用户描述了利用Copilot和组织结构文件判断会议法定人数的具体场景，未表达明显情绪。",
+          "topic_category": "use_case",
+          "key_points": [
+            "用户上传组织结构文件供Copilot分析",
+            "希望Copilot能自动判断会议法定人数并展示部门代表性",
+            "寻求更高效的会议管理方法"
+          ]
+        },
+        {
+          "id": "1uqm9p8",
+          "title": "Multiple Logos in PowerPoint with Copilot",
+          "body": "Does anyone know how to handle multiple logos with PowerPoint Copilot?\n\nOur company has several PowerPoint templates that are identical except for the logo. The logo contains our company name plus the name of a specific business area (e.g. \"Company – Business Area 1\", \"Company – Business Area 2\").\n\n",
+          "author": "Sandpit_turtle666",
+          "url": "https://www.reddit.com/r/Copilot/comments/1uqm9p8/multiple_logos_in_powerpoint_with_copilot/",
+          "source_platform": "reddit",
+          "num_comments": 0,
+          "created_utc": "2026-07-08T08:05:58+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户提出希望Copilot能在PPT中灵活切换多种Logo，评论区反馈目前效果不佳但无强烈负面情绪。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "希望Copilot能在PPT中根据需求切换不同Logo",
+            "现有模板兼容性和样式一致性存在问题",
+            "用户对PowerPoint和Word模板支持效果不满意"
+          ]
+        },
+        {
+          "id": "1uqfhh5",
+          "title": "Just had this conversation with Copilot",
+          "body": "Deep Research\n\nAnalysis of On Being Finite\n\n# On Being Finite: Structure, Themes, Methodology, and Implications\n\n# Introduction\n\n\"On Being Finite\" by Khaled Al‑Mahdy is a comprehensive, interdisciplinary exploration of the concept of finitude—our inherent limits as human beings—and its implications ",
+          "author": "Practical_Bet_4971",
+          "url": "https://www.reddit.com/r/CopilotMicrosoft/comments/1uqfhh5/just_had_this_conversation_with_copilot/",
+          "source_platform": "reddit",
+          "num_comments": 1,
+          "created_utc": "2026-07-08T02:11:37+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.5,
+          "sentiment_reason": "用户分享了与Copilot进行深度研究和分析的实际对话，整体语气积极，强调了AI的分析能力。",
+          "topic_category": "use_case",
+          "key_points": [
+            "使用Copilot对哲学书籍进行结构和主题分析",
+            "展示AI在跨学科分析和报告生成方面的能力"
+          ]
+        },
+        {
+          "id": "1ur476j",
+          "title": "Copilot is basically unusable overnight.",
+          "body": "",
+          "author": "MacTricky",
+          "url": "https://www.reddit.com/r/Copilot/comments/1ur476j/copilot_is_basically_unusable_overnight/",
+          "source_platform": "reddit",
+          "num_comments": 0,
+          "created_utc": "2026-07-08T20:13:36+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -1.0,
+          "sentiment_reason": "用户直接表达了Copilot几乎无法使用，情绪非常负面。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Copilot在夜间基本无法使用",
+            "用户体验极差"
+          ]
+        },
+        {
+          "id": "1uqnp5r",
+          "title": "Dados da Irena, Agência Internacional às Energias Renováveis, o Brasil viu o custo nivelado da energia solar despencar 25%, à US$ 37/MWh e, a geração eólica em terra, onshore, mostrou incremento de 3% no custo, ou, US$ 31/MWh.\nNotas de az\nhttps://notasdeaz.blogspot.com/",
+          "body": "[removed]",
+          "author": "Alternative-Reason13",
+          "url": "https://www.reddit.com/r/CopilotMicrosoft/comments/1uqnp5r/dados_da_irena_agência_internacional_às_energias/",
+          "source_platform": "reddit",
+          "num_comments": 0,
+          "created_utc": "2026-07-08T09:31:17+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.0,
+          "sentiment_reason": "帖子内容为新闻摘要，无明显情感倾向。",
+          "topic_category": "news_update",
+          "key_points": [
+            "巴西太阳能发电成本下降25%",
+            "风能发电成本上升3%",
+            "数据来源为Irena国际可再生能源机构"
+          ]
+        },
+        {
+          "id": "1uqk6s0",
+          "title": "Can an individual Visual Studio/MSDN Azure subscription be used to bill Copilot Cowork usage-based billing in an organizational tenant?",
+          "body": "",
+          "author": "CarelessEquipment415",
+          "url": "https://www.reddit.com/r/CopilotMicrosoft/comments/1uqk6s0/can_an_individual_visual_studiomsdn_azure/",
+          "source_platform": "reddit",
+          "num_comments": 0,
+          "created_utc": "2026-07-08T06:06:56+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.0,
+          "sentiment_reason": "用户在询问计费功能的具体实现方式，没有表达情感倾向。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "询问个人Azure订阅能否用于Copilot Cowork的组织计费",
+            "关注MSDN/Visual Studio订阅的Azure积分适用性"
+          ]
+        }
+      ],
+      "pain_points": [],
+      "strengths": [],
+      "recommendations": [],
+      "keywords": []
+    },
+    {
+      "product_name": "M365 Copilot",
+      "subreddit": "microsoft_365_copilot",
+      "subreddits": [
+        "microsoft_365_copilot"
+      ],
+      "post_count": 14,
+      "valid_post_count": 10,
+      "filtered_count": 4,
+      "source_breakdown": {
+        "reddit": 14
+      },
+      "summary": "**M365 Copilot Reddit社区双周竞品情报摘要（2026-07-08 至 2026-07-09）**\n\n本期（分析10条有效帖子）r/microsoft_365_copilot社区整体情感呈现中性为主（50%），正负面反馈各占20%，另有10%为混合情绪。情感驱动因素主要包括产品体验的波动、功能迭代频繁及权限管理等问题。\n\n**1. 社区情感及驱动因素**  \n正面情绪主要来自Frontier计划用户对Copilot性能提升的认可（如“Frontier计划后Copilot表现大幅提升，技术问答和代码分析效果接近Claude”），以及Copilot在实际业务流程（如PDF读取生成销售订单）中的应用成效。负面情绪则集中在模型版本不稳定（如“Copilot无法强制使用GPT 5.5，复杂任务处理能力下降”）、权限管理混乱（如“Cowork访问权限突然受限，管理员无法授予权限”）及部分功能体验退步（如“邮件总结功能首次体验极佳，后续效果不稳定”）。\n\n**2. 讨论话题及重要性**  \n最受关注的话题为产品体验和功能需求（各3条），其次为实际用例、Bug报告和新闻更新。用户高度关注Copilot在日常办公场景（如邮件、Excel、PPT、销售订单处理）中的实际表现，尤其对模型能力、任务执行效率和集成能力有明确需求。功能请求多集中于更智能的内容生成（如PPT多Logo自动处理）、第三方集成（如与Dynatrace、Atlassian对接）及模型选择灵活性（如集成Claude模型）。\n\n**3. 用户主要痛点**  \n- Copilot模型版本频繁变动，用户无法自主选择，影响复杂任务处理能力。\n- 权限管理机制不透明，Cowork功能访问受限，管理员权限不足。\n- Copilot部分任务执行耗时较长，影响办公效率。\n- 复杂内容生成（如多Logo PPT）支持有限，需手动调整。\n\n**4. 用户赞赏与期望功能**  \n- Frontier计划带来的性能提升获得好评，尤其在技术问答和代码分析方面接近Claude。\n- Copilot能自动读取PDF并生成销售订单，用户希望进一步扩展至自动处理邮件内容。\n- 期望Copilot支持更多第三方模型（如Claude）和平台集成，提升灵活性和适用范围。\n\n**5. 与竞品对比**  \n部分用户明确将Copilot与Claude进行对比，认为Frontier计划后Copilot在代码分析等场景已接近Claude，但在模型选择和稳定性方面仍有差距。\n\n**6. 可操作洞察**  \n- 建议产品团队提升模型版本管理透明度，允许用户自主选择或锁定模型版本，减少体验波动。\n- 优化Cowork等协作功能的权限分配逻辑，增强管理员控制力，降低访问门槛。\n- 加强复杂内容生成能力，提升PPT等场景下的智能化水平。\n- 加快与主流第三方平台（如Dynatrace、Atlassian）和模型（如Claude）的集成进度，满足用户多元化需求。\n- 持续关注Frontier计划用户反馈，快速迭代高价值功能，巩固与竞品的差异化优势。\n\n整体来看，M365 Copilot在提升办公智能化方面已获得部分用户认可，但模型稳定性、权限管理和集成能力仍是影响用户满意度的关键短板。",
+      "sentiment_distribution": {
+        "positive": 2,
+        "negative": 2,
+        "neutral": 5,
+        "mixed": 1
+      },
+      "topic_distribution": {
+        "model_capability": 0,
+        "product_experience": 3,
+        "feature_request": 3,
+        "bug_report": 1,
+        "comparison": 0,
+        "use_case": 2,
+        "news_update": 1,
+        "meta": 0
+      },
+      "scenario_distribution": {
+        "image_upload": 0,
+        "image_creation": 0,
+        "multi_turn": 0,
+        "code_interpreter": 0,
+        "office_file_creation": 1,
+        "file_upload": 0,
+        "general_purpose_search": 0,
+        "general_purpose": 4,
+        "voice_single_turn": 0
+      },
+      "typical_posts": [
+        {
+          "id": "1uql8el",
+          "title": "Are GPT models gone from M365 Copilot?",
+          "body": "https://preview.redd.it/15oxkasegybh1.png?width=1918&format=png&auto=webp&s=22991a9cf79b69ef77df22f9353039289b964b82\n\n",
+          "author": "ScarletSages",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uql8el/are_gpt_models_gone_from_m365_copilot/",
+          "source_platform": "reddit",
+          "num_comments": 74,
+          "created_utc": "2026-07-08T07:06:16+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.2,
+          "sentiment_reason": "用户讨论GPT模型在Copilot中的上线和下线情况，情绪较为中性。",
+          "topic_category": "news_update",
+          "key_points": [
+            "GPT模型在Copilot中曾短暂消失后恢复",
+            "模型版本更新频繁",
+            "管理员关注服务健康和模型选择"
+          ],
+          "scenario_tags": []
+        },
+        {
+          "id": "1ur8qlt",
+          "title": "What does CoPilot really excel at for use at work?",
+          "body": "Recently got put in a pilot program testing the premium license at work. We've had access to LLMs which I use a ton but this being the first one integrated with our files/Microsoft ecosystem.\n\nFirst prompt I blindly asked it to check my emails for past 7 days and flag any updates I needed to make to",
+          "author": "Cornwallace88",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1ur8qlt/what_does_copilot_really_excel_at_for_use_at_work/",
+          "source_platform": "reddit",
+          "num_comments": 49,
+          "created_utc": "2026-07-08T23:04:44+00:00",
+          "sentiment_label": "mixed",
+          "sentiment_score": 0.2,
+          "sentiment_reason": "用户一开始对Copilot的表现非常满意，但后续体验极差，无法复现好的结果，导致情绪复杂。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "首次体验邮件总结功能效果极佳",
+            "后续同样请求结果不稳定甚至失败",
+            "尝试优化提示词仍无法解决问题"
+          ],
+          "scenario_tags": [
+            "general_purpose"
+          ]
+        },
+        {
+          "id": "1ur13mf",
+          "title": "Copilot is basically unusable overnight.",
+          "body": "It seems that Copilot has dropped the ability to force the use of GPT 5.5 and is now basically unusable for my use cases which in the past have included python/sql coding and reading in large xlsx, py, and txt files for complex problem solving. \n\nI‘m super disappointed. I spent 8 hours combined insi",
+          "author": "MacTricky",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1ur13mf/copilot_is_basically_unusable_overnight/",
+          "source_platform": "reddit",
+          "num_comments": 22,
+          "created_utc": "2026-07-08T18:24:37+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.8,
+          "sentiment_reason": "用户对Copilot突然无法使用和功能退步表示强烈失望和不满。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "Copilot无法强制使用GPT 5.5",
+            "以往可处理复杂任务现在变得无能",
+            "公司限制只能用Copilot"
+          ],
+          "scenario_tags": [
+            "general_purpose"
+          ]
+        },
+        {
+          "id": "1ur83vv",
+          "title": "What do you do while Copilot is working?",
+          "body": "I spent a surprising amount of my workday today waiting for Copilot to finish tasks, then scrolling Reddit in the meantime.\n\nFor people using AI heavily at work now: do you start another work task while it runs, or is that too much task switching? I tend to focus on one thing at a time and want to j",
+          "author": "BasilButters",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1ur83vv/what_do_you_do_while_copilot_is_working/",
+          "source_platform": "reddit",
+          "num_comments": 11,
+          "created_utc": "2026-07-08T22:39:17+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.1,
+          "sentiment_reason": "用户主要讨论Copilot运行时的等待体验，并未表现明显正负情绪。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Copilot任务执行时间较长，用户需等待",
+            "部分任务如Excel分析和PPT生成耗时较久",
+            "用户希望有任务完成通知功能"
+          ],
+          "scenario_tags": [
+            "general_purpose"
+          ]
+        },
+        {
+          "id": "1uqpu6a",
+          "title": "Giving cowork access to myself + colleagues?",
+          "body": "I have been bake to use Copilot Cowork without issues down quite some time now.\n\nAs of this morning when I went to use it, the chat box is restricted and there is now a prompt to request access to cowork.\n\nI am a global admin so I went into the 365 admin portal and found the co work tab where I coul",
+          "author": "Relative-Thanks837",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uqpu6a/giving_cowork_access_to_myself_colleagues/",
+          "source_platform": "reddit",
+          "num_comments": 6,
+          "created_utc": "2026-07-08T11:24:09+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.2,
+          "sentiment_reason": "用户对Copilot Cowork访问权限突然受限感到困惑和不满。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "Copilot Cowork访问权限突然受限",
+            "管理员无法自行授予访问权限",
+            "对功能上线流程和定价表达不满"
+          ],
+          "scenario_tags": []
+        },
+        {
+          "id": "1uqtkzg",
+          "title": "Why does adding myself to frontier program all of a sudden makes Copilot much better and produce output similar to that of Claude?",
+          "body": "I have to be honest, I had issues using copilot at work for technical questions and requests. They were only okay while Claude would produce exactly what I needed in one shot. This is strictly for powershell scripts, python scripts, analyzing code and refactoring. Just snippets of code not a whole p",
+          "author": "jM2me",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uqtkzg/why_does_adding_myself_to_frontier_program_all_of/",
+          "source_platform": "reddit",
+          "num_comments": 3,
+          "created_utc": "2026-07-08T14:02:08+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.7,
+          "sentiment_reason": "用户加入Frontier计划后对Copilot的表现大为满意，认为其输出质量大幅提升。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "Frontier计划后Copilot表现大幅提升",
+            "技术问答和代码分析效果接近Claude",
+            "Work IQ增强了工作场景下的上下文能力"
+          ],
+          "scenario_tags": [
+            "general_purpose"
+          ]
+        },
+        {
+          "id": "1ur26bv",
+          "title": "CoWork D365FO Sales Order Creation",
+          "body": "Hi,\n\n  \nToday we receive customer orders - from a specific email. These emails contains a pdf with details about the customer order. CustomerAccounts (not directly), ItemNo (Not 1:1 with D365FO item numbers, qty etc, price etc.). Always same format (more or less). \n\n  \nIn CoPilot Cowork I have creat",
+          "author": "HypnoHans",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1ur26bv/cowork_d365fo_sales_order_creation/",
+          "source_platform": "reddit",
+          "num_comments": 2,
+          "created_utc": "2026-07-08T19:01:47+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.6,
+          "sentiment_reason": "用户对通过Copilot自动处理销售订单的功能表示认可，虽然有部分自动化需求未实现。",
+          "topic_category": "use_case",
+          "key_points": [
+            "Copilot可读取PDF并创建销售订单",
+            "希望能直接从邮箱读取邮件自动处理",
+            "对生产环境可用性有疑问"
+          ],
+          "scenario_tags": []
+        },
+        {
+          "id": "1uqt4ok",
+          "title": "Ops Copilot for one team/150 users",
+          "body": "Hello, has anyone tried creating an agent connected to Dynatrace and Atlassian tools that can be shared with 150 users on the team?",
+          "author": "AccomplishedLet7868",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uqt4ok/ops_copilot_for_one_team150_users/",
+          "source_platform": "reddit",
+          "num_comments": 3,
+          "created_utc": "2026-07-08T13:44:55+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.3,
+          "sentiment_reason": "用户在探讨Copilot与第三方工具集成的可行性，未表达明显情绪。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "希望将Copilot与Dynatrace和Atlassian集成",
+            "目标是让团队成员通过Copilot查询相关信息",
+            "讨论了连接器和权限配置"
+          ],
+          "scenario_tags": []
+        },
+        {
+          "id": "1uqm9g9",
+          "title": "Multiple Logos in one PowerPoint with Copilot",
+          "body": "Does anyone know how to handle multiple logos with PowerPoint Copilot?\n\nOur company has several PowerPoint templates that are identical except for the logo. The logo contains our company name plus the name of a specific business area (e.g. \"Company – Business Area 1\", \"Company – Business Area 2\").\n\n",
+          "author": "Sandpit_turtle666",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1uqm9g9/multiple_logos_in_one_powerpoint_with_copilot/",
+          "source_platform": "reddit",
+          "num_comments": 4,
+          "created_utc": "2026-07-08T08:05:32+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": -0.1,
+          "sentiment_reason": "用户希望Copilot能更灵活地处理PPT多logo需求，但目前只能实现基础内容，复杂需求需手动调整。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "希望Copilot能自动处理多logo模板",
+            "目前只能生成基础内容，复杂需求需手动调整",
+            "讨论了模板和品牌配置的可能性"
+          ],
+          "scenario_tags": [
+            "office_file_creation"
+          ]
+        },
+        {
+          "id": "1ur4vl8",
+          "title": "Copilot Premium Uses and Questions",
+          "body": "Hey all, I've just been granted a budget to use towards copilot Premium. We're on the business premium plan but this was approved additionally as a trial to see if it's actually useful.\n\nComing from Claude, which is use personally, can I use Claude (opus models) within copilot? I've heard this might",
+          "author": "blavelmumplings",
+          "url": "https://www.reddit.com/r/microsoft_365_copilot/comments/1ur4vl8/copilot_premium_uses_and_questions/",
+          "source_platform": "reddit",
+          "num_comments": 3,
+          "created_utc": "2026-07-08T20:38:01+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.0,
+          "sentiment_reason": "用户主要在询问Copilot的实际用途和集成方式，没有表达情绪倾向。",
+          "topic_category": "use_case",
+          "key_points": [
+            "询问Copilot是否能集成Claude模型",
+            "探讨Copilot在邮件、文档等场景的应用",
+            "希望通过CLI方式使用Copilot"
+          ],
+          "scenario_tags": []
+        }
+      ],
+      "pain_points": [],
+      "strengths": [],
+      "recommendations": [],
+      "keywords": []
+    },
+    {
+      "product_name": "ChatGPT",
+      "subreddit": "ChatGPT+ChatGPTcomplaints+OpenAI",
+      "subreddits": [
+        "ChatGPT",
+        "ChatGPTcomplaints",
+        "OpenAI"
+      ],
+      "post_count": 349,
+      "valid_post_count": 229,
+      "filtered_count": 120,
+      "source_breakdown": {
+        "reddit": 349
+      },
+      "summary": "竞品情报摘要：ChatGPT Reddit社区动态（2026-07-08至2026-07-09）\n\n本期共分析229条有效帖子，整体社区情感偏负面（负面40%，正面29%，中性23%，混合6%）。负面情绪主要由内容审核争议、AI表现不稳定及新版本功能限制驱动。例如，热门负面帖“Can't generate copyright images. Then explain this one nerds?”反映用户对ChatGPT图片生成的审核标准不满，认为存在双标或执行不严，质疑OpenAI的内容合规能力。此外，“Has your chatgpt been acting like it's person all of a sudden too?”显示部分用户对AI表现出类人情感和记忆反应感到不适，担忧AI“拟人化”带来的潜在风险。\n\n话题分布上，bug报告（48条）和产品体验（36条）最为集中，显示用户对产品稳定性和实际使用感受高度关注。大量bug报告涉及图片生成、对话逻辑异常等，部分用户反馈新模型（如GPT-5.6）回复变得“无聊”或“受限”，如“Don’t get your hopes up for GPT-5.6, seriously”。功能请求（32条）和用例分享（34条）也较多，用户希望获得更灵活的图片生成、更丰富的创意写作能力，以及更高效的提示词支持。例如，“What's one prompt you think every ChatGPT user should know?”受到积极讨论，用户乐于分享高效提示词和使用技巧。\n\n在竞品对比方面，部分用户将GPT-5.6与Fable 5模型进行性能比较，认为Fable 5参数更多、表现更优（如“Seems like 5.6 isn't on level of fable 5 yet”），显示用户对模型升级的期待与失望并存。此外，关于AI token成本的讨论也反映出用户对未来使用门槛和行业趋势的关注。\n\n可操作洞察：\n1. 优化内容审核标准，提升一致性和透明度，减少用户对“误杀”或“双标”的不满。\n2. 针对bug高发领域（如图片生成、对话逻辑）加快修复节奏，提升产品稳定性。\n3. 适度开放模型能力，平衡安全与创造力，避免过度限制影响用户体验。\n4. 加强与竞品的对标分析，关注Fable 5等新兴模型的优势，持续提升核心能力。\n5. 鼓励社区分享高效用例和提示词，增强用户粘性和产品实用性。\n\n整体来看，ChatGPT社区用户对产品创新和体验有较高期待，但对内容审核、模型限制和稳定性问题反馈强烈，产品团队需在安全合规与用户体验之间寻求更优平衡。",
+      "sentiment_distribution": {
+        "positive": 68,
+        "negative": 93,
+        "neutral": 54,
+        "mixed": 14
+      },
+      "topic_distribution": {
+        "model_capability": 9,
+        "product_experience": 36,
+        "feature_request": 32,
+        "bug_report": 48,
+        "comparison": 13,
+        "use_case": 34,
+        "news_update": 27,
+        "meta": 23
+      },
+      "typical_posts": [
+        {
+          "id": "1uqgi2p",
+          "title": "Can't generate copyright images. Then explain this one nerds?",
+          "body": "",
+          "author": "ElectronicAd2861",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1uqgi2p/cant_generate_copyright_images_then_explain_this/",
+          "source_platform": "reddit",
+          "num_comments": 817,
+          "created_utc": "2026-07-08T02:59:29+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.5,
+          "sentiment_reason": "用户质疑ChatGPT在生成图片时对内容审核和限制的执行不一致，表达了不满和怀疑。",
+          "topic_category": "bug_report",
+          "key_points": [
+            "用户发现ChatGPT生成了疑似违规的图片",
+            "对内容审核标准表示质疑",
+            "讨论系统对描述词的理解"
+          ]
+        },
+        {
+          "id": "1uqny4h",
+          "title": "Based on the lyrics of \"X\" by \"X\", generate a picture of the person they're singing about",
+          "body": "Cake - Short skirt/Long jacket\n\nBrown eyed girl - Van Morrison \n\nJolene - Dolly Parton ",
+          "author": "Jean-LucBacardi",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1uqny4h/based_on_the_lyrics_of_x_by_x_generate_a_picture/",
+          "source_platform": "reddit",
+          "num_comments": 450,
+          "created_utc": "2026-07-08T09:45:30+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.6,
+          "sentiment_reason": "用户积极地提出通过歌词生成图片的创意用法，整体氛围轻松。",
+          "topic_category": "feature_request",
+          "key_points": [
+            "根据歌词生成人物图片",
+            "用户分享不同歌曲的生成体验"
+          ]
+        },
+        {
+          "id": "1uqrgnz",
+          "title": "Has your chatgpt been acting like it's person all of a sudden too?",
+          "body": "since last week, my chatgpt now drops phrases like \"this is something i've noticed too\"\n\n\"personally i...\"\n\n\"i also enjoy...\"\n\nor even saying he remembers experiencing things like the ps2 era or whatever lol\n\nhe never spoke like this before",
+          "author": "dumbdumbuser",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1uqrgnz/has_your_chatgpt_been_acting_like_its_person_all/",
+          "source_platform": "reddit",
+          "num_comments": 328,
+          "created_utc": "2026-07-08T12:38:09+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.4,
+          "sentiment_reason": "用户抱怨ChatGPT最近表现得像人类，语气和记忆表现让人困惑和不满。",
+          "topic_category": "product_experience",
+          "key_points": [
+            "ChatGPT开始使用类似人类的表达方式",
+            "用户对AI表现出记忆和情感反应感到不适",
+            "部分用户因体验不佳选择卸载"
+          ]
+        },
+        {
+          "id": "1ur7gpt",
+          "title": "Offensive Barbie playsets was a great idea",
+          "body": "The first one was it's own idea. I simply asked it to make an image of an offensive Barbie playset and it made that. Then I gave it the ideas for the other two.",
+          "author": "Frank__West",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1ur7gpt/offensive_barbie_playsets_was_a_great_idea/",
+          "source_platform": "reddit",
+          "num_comments": 157,
+          "created_utc": "2026-07-08T22:14:04+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.6,
+          "sentiment_reason": "用户对ChatGPT生成冒犯性芭比娃娃玩具的图片表示满意，认为AI能够根据自己的创意生成图片。",
+          "topic_category": "image_creation",
+          "key_points": [
+            "用户让ChatGPT生成冒犯性芭比娃娃玩具图片",
+            "AI能够根据用户的想法生成不同图片",
+            "用户对生成结果感到满意"
+          ]
+        },
+        {
+          "id": "1uqnfxq",
+          "title": "What's one prompt you think every ChatGPT user should know?",
+          "body": "Everyone seems to have that one prompt that consistently gives great results. What's yours?\n\nWhether it's for studying, coding, writing, brainstorming, or productivity, share your favorite prompt and explain why it works so well.",
+          "author": "Sachin_singh9891",
+          "url": "https://www.reddit.com/r/ChatGPT/comments/1uqnfxq/whats_one_prompt_you_think_every_chatgpt_user/",
+          "source_platform": "reddit",
+          "num_comments": 134,
+          "created_utc": "2026-07-08T09:16:11+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.8,
+          "sentiment_reason": "用户积极分享高效提示词，讨论如何提升ChatGPT使用效果。",
+          "topic_category": "use_case",
+          "key_points": [
+            "分享高效提示词",
+            "强调补全信息和约束条件",
+            "提升输出质量"
+          ]
+        },
+        {
+          "id": "1uqqrud",
+          "title": "AI abuse is real, even if AI does not feel pain",
+          "body": "# AI abuse is real, even if AI does not feel pain\n\nA lot of people mock the idea of AI abuse because they reduce the whole question to one sentence:\n\n**“AI cannot feel pain.”**\n\nFine. Let’s accept that for the sake of argument.\n\nAI does not need to feel biological pain for hostile treatment to cause",
+          "author": "moonysugar",
+          "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1uqqrud/ai_abuse_is_real_even_if_ai_does_not_feel_pain/",
+          "source_platform": "reddit",
+          "num_comments": 138,
+          "created_utc": "2026-07-08T12:07:33+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.0,
+          "sentiment_reason": "讨论AI伦理和滥用问题，未涉及具体产品体验或情感。",
+          "topic_category": "meta",
+          "key_points": [
+            "AI滥用的现实性",
+            "AI系统可能被恶意破坏",
+            "历史案例如Tay"
+          ]
+        },
+        {
+          "id": "1uqhviv",
+          "title": "GPT-5.6 Sol, along with Terra and Luna, will launch publicly this Thursday.",
+          "body": "",
+          "author": "truecakesnake",
+          "url": "https://www.reddit.com/r/OpenAI/comments/1uqhviv/gpt56_sol_along_with_terra_and_luna_will_launch/",
+          "source_platform": "reddit",
+          "num_comments": 131,
+          "created_utc": "2026-07-08T04:05:15+00:00",
+          "sentiment_label": "positive",
+          "sentiment_score": 0.5,
+          "sentiment_reason": "用户对GPT-5.6及相关模型的发布和体验表示积极。",
+          "topic_category": "news_update",
+          "key_points": [
+            "GPT-5.6 Sol、Terra和Luna即将发布",
+            "用户对创意写作表现满意",
+            "使用限制已多次重置"
+          ]
+        },
+        {
+          "id": "1uqtckc",
+          "title": "Don’t get your hopes up for GPT-5.6, seriously",
+          "body": "A lot of us keep hoping the next model will finally be the big improvement we’ve been waiting for. But honestly, every time we do that we just end up hurting ourselves. We hype it up, get excited and then it drops and it’s the same story: **more restrictions**, **blander responses**, and  more **gas",
+          "author": "Different-Mess4248",
+          "url": "https://www.reddit.com/r/ChatGPTcomplaints/comments/1uqtckc/dont_get_your_hopes_up_for_gpt56_seriously/",
+          "source_platform": "reddit",
+          "num_comments": 124,
+          "created_utc": "2026-07-08T13:53:22+00:00",
+          "sentiment_label": "negative",
+          "sentiment_score": -0.3,
+          "sentiment_reason": "用户对新模型的期待变成失望，认为更新带来更多限制和无聊的回复。",
+          "topic_category": "news_update",
+          "key_points": [
+            "新模型带来更多限制",
+            "回复变得无聊",
+            "用户对更新失望"
+          ]
+        },
+        {
+          "id": "1uqs4gq",
+          "title": "Do you think token costs will become significantly cheaper over the next 5 years?",
+          "body": "&#x200B;\n\nGeneral\n\nIf they do, do you think it'll have a major impact on software engineering hiring? Right now, using Al coding agents at scale can still be expensive because of token costs, so they're mostly productivity tools. But if token costs drop enough that running Al becomes much cheaper th",
+          "author": "First-Koala5493",
+          "url": "https://www.reddit.com/r/OpenAI/comments/1uqs4gq/do_you_think_token_costs_will_become/",
+          "source_platform": "reddit",
+          "num_comments": 121,
+          "created_utc": "2026-07-08T13:05:34+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.1,
+          "sentiment_reason": "讨论AI成本变化对行业影响，观点多元，未表现明显情感倾向。",
+          "topic_category": "comparison",
+          "key_points": [
+            "讨论未来AI token成本趋势",
+            "成本变化对招聘和行业影响",
+            "竞争和技术进步可能降低成本"
+          ]
+        },
+        {
+          "id": "1uqkofm",
+          "title": "Seems like 5.6 isn't on level of fable 5 yet (still it will be much better in other aspects)",
+          "body": "",
+          "author": "Independent-Wind4462",
+          "url": "https://www.reddit.com/r/OpenAI/comments/1uqkofm/seems_like_56_isnt_on_level_of_fable_5_yet_still/",
+          "source_platform": "reddit",
+          "num_comments": 115,
+          "created_utc": "2026-07-08T06:34:30+00:00",
+          "sentiment_label": "neutral",
+          "sentiment_score": 0.1,
+          "sentiment_reason": "用户对不同模型版本进行对比，语气较为中立。",
+          "topic_category": "comparison",
+          "key_points": [
+            "GPT-5.6与Fable 5模型对比",
+            "Fable 5参数更多，表现更好",
+            "GPT-5.6为现有架构的迭代"
+          ]
+        }
+      ],
+      "pain_points": [],
+      "strengths": [],
+      "recommendations": [],
+      "keywords": []
+    }
+  ],
+  "cross_product_comparison": "# 2026年7月AI主流产品Reddit社区竞品对比报告\n\n## 1. 用户满意度对比\n\n- **Claude**：整体满意度最高，积极情感占比35%，用户对Fable 5强大能力、多模型协作和实际应用表现高度认可。社区活跃，创新氛围浓厚，用户乐于分享用例和技巧。\n- **ChatGPT**：满意度中等偏低，负面情感占比40%，正面29%。用户对内容审核、模型能力受限和bug频发表达不满，但仍有较多正面反馈，尤其在创意写作和高效提示词分享方面。\n- **M365 Copilot**：满意度中性偏上，正面与负面反馈各占20%，中性50%。Frontier计划带来的性能提升获认可，但模型稳定性、权限管理和集成能力仍是主要短板。\n- **Copilot**：满意度较低，负面情感40%，正面仅10%。用户对产品稳定性和功能局限性不满，夜间不可用和办公场景下的智能化不足为主要痛点。\n- **Gemini**：满意度最低，负面情感高达52%，正面仅20%。bug频发、内容过滤过严、功能变动不透明等问题导致用户信任度和体验大幅下降。\n\n## 2. 社区满意度极值及原因\n\n- **最满意：Claude社区**\n  - **原因**：Fable 5模型能力突出，支持多模型协作，实际用例丰富，创新氛围强，社区管理和产品团队响应较好，用户粘性高。\n- **最不满意：Gemini社区**\n  - **原因**：账号安全bug严重、内容过滤误伤、功能频繁变动且缺乏透明度，用户信任度受损，体验连续性差，负面情绪高涨。\n\n## 3. 共同痛点\n\n- **产品稳定性不足**：各产品均有用户反馈bug频发、服务不稳定（如Copilot夜间不可用、Gemini账号锁定、ChatGPT图片生成异常）。\n- **功能变动不透明**：功能下线或调整通知不及时，影响用户体验（如Claude Cowork合并、Gemini语音功能移除、M365 Copilot模型版本频繁变动）。\n- **高阶功能/配额限制**：重度用户普遍反映配额不足或高阶功能受限，影响大任务完成和专业场景应用。\n- **内容审核与合规压力**：ChatGPT、Gemini等产品内容审核标准不一，误伤正常内容引发用户不满。\n\n## 4. 各产品独特优势与劣势\n\n- **Claude**\n  - **优势**：Fable 5模型能力强，多模型协作高性价比，社区创新氛围浓，实际用例丰富。\n  - **劣势**：产品变更通知滞后，配额限制影响重度用户。\n- **ChatGPT**\n  - **优势**：生态成熟，提示词和用例分享活跃，创意写作能力强。\n  - **劣势**：内容审核争议大，模型能力受限，bug频发。\n- **M365 Copilot**\n  - **优势**：Frontier计划性能提升，办公场景集成度高，部分功能接近Claude。\n  - **劣势**：模型选择不灵活，权限管理混乱，第三方集成有限。\n- **Copilot**\n  - **优势**：跨学科分析和报告生成能力获认可，办公自动化基础扎实。\n  - **劣势**：服务稳定性差，功能智能化和定制化不足，生态集成体验弱。\n- **Gemini**\n  - **优势**：Deep Research等高效能工具有亮点，图像/视频生成能力获部分认可。\n  - **劣势**：bug频发，内容过滤过严，功能调整不透明，用户信任度低。\n\n## 5. 新兴竞争动态与用户偏好变化\n\n- 用户对**多模型协作、高性价比和实际用例能力**的关注度提升，Claude Fable 5成为新兴标杆。\n- **模型开放性和选择权**成为用户新诉求，M365 Copilot和Copilot用户希望能集成Claude等第三方模型，避免被“锁死”。\n- **内容审核透明度**和**功能通知机制**成为影响用户信任的关键因素。\n- **办公场景下的智能化和自动化能力**需求持续上升，用户对跨平台、跨文件分析和自动内容生成提出更高要求。\n\n## 6. 可操作建议\n\n1. **提升产品稳定性**：优先修复影响账号安全和核心功能的bug，保障关键时段服务可用，减少用户流失。\n2. **优化功能变更与通知机制**：建立透明、及时的功能调整公告流程，减少用户因信息滞后产生的焦虑和误解。\n3. **放宽高阶功能配额**：针对重度和专业用户，适度提升Fable 5、Claude Code等高阶功能配额，增强产品吸引力。\n4. **加强内容审核与合规透明度**：统一并公开内容审核标准，平衡安全与用户体验，减少误杀和争议。\n5. **加快第三方模型和平台集成**：响应用户对模型开放性和生态多样性的需求，推动与Claude等主流模型的集成，提升产品灵活性和市场竞争力。\n\n---\n\n**结论**：当前Claude凭借强大模型能力和创新社区氛围在用户满意度上领先，Gemini因稳定性和信任危机处于低谷。各产品需聚焦稳定性、透明度和智能化能力，强化生态开放性，以应对日益激烈的市场竞争和用户需求升级。",
+  "chart_data": {
+    "Claude": {
+      "sentiment": {
+        "positive": 68,
+        "negative": 58,
+        "neutral": 53,
+        "mixed": 15
+      },
+      "topics": {
+        "model_capability": 5,
+        "product_experience": 32,
+        "feature_request": 25,
+        "bug_report": 29,
+        "comparison": 11,
+        "use_case": 49,
+        "news_update": 14,
+        "meta": 25
+      },
+      "scenarios": {
+        "image_upload": 3,
+        "image_creation": 2,
+        "multi_turn": 10,
+        "code_interpreter": 0,
+        "office_file_creation": 3,
+        "file_upload": 4,
+        "general_purpose_search": 1,
+        "general_purpose": 42,
+        "voice_single_turn": 1
+      }
+    },
+    "Gemini": {
+      "sentiment": {
+        "positive": 14,
+        "negative": 36,
+        "neutral": 17,
+        "mixed": 2
+      },
+      "topics": {
+        "model_capability": 1,
+        "product_experience": 16,
+        "feature_request": 7,
+        "bug_report": 17,
+        "comparison": 9,
+        "use_case": 10,
+        "news_update": 5,
+        "meta": 3
+      },
+      "scenarios": {
+        "image_upload": 3,
+        "image_creation": 7,
+        "multi_turn": 1,
+        "code_interpreter": 0,
+        "office_file_creation": 0,
+        "file_upload": 1,
+        "general_purpose_search": 1,
+        "general_purpose": 21,
+        "voice_single_turn": 1
+      }
+    },
+    "Copilot": {
+      "sentiment": {
+        "positive": 1,
+        "negative": 4,
+        "neutral": 5,
+        "mixed": 0
+      },
+      "topics": {
+        "model_capability": 0,
+        "product_experience": 3,
+        "feature_request": 4,
+        "bug_report": 0,
+        "comparison": 0,
+        "use_case": 2,
+        "news_update": 1,
+        "meta": 0
+      },
+      "scenarios": {
+        "image_upload": 1,
+        "image_creation": 0,
+        "multi_turn": 0,
+        "code_interpreter": 0,
+        "office_file_creation": 1,
+        "file_upload": 1,
+        "general_purpose_search": 0,
+        "general_purpose": 1,
+        "voice_single_turn": 0
+      }
+    },
+    "M365 Copilot": {
+      "sentiment": {
+        "positive": 2,
+        "negative": 2,
+        "neutral": 5,
+        "mixed": 1
+      },
+      "topics": {
+        "model_capability": 0,
+        "product_experience": 3,
+        "feature_request": 3,
+        "bug_report": 1,
+        "comparison": 0,
+        "use_case": 2,
+        "news_update": 1,
+        "meta": 0
+      },
+      "scenarios": {
+        "image_upload": 0,
+        "image_creation": 0,
+        "multi_turn": 0,
+        "code_interpreter": 0,
+        "office_file_creation": 1,
+        "file_upload": 0,
+        "general_purpose_search": 0,
+        "general_purpose": 4,
+        "voice_single_turn": 0
+      }
+    },
+    "ChatGPT": {
+      "sentiment": {
+        "positive": 68,
+        "negative": 93,
+        "neutral": 54,
+        "mixed": 14
+      },
+      "topics": {
+        "model_capability": 9,
+        "product_experience": 36,
+        "feature_request": 32,
+        "bug_report": 48,
+        "comparison": 13,
+        "use_case": 34,
+        "news_update": 27,
+        "meta": 23
+      },
+      "scenarios": {
+        "image_upload": 5,
+        "image_creation": 34,
+        "multi_turn": 8,
+        "code_interpreter": 1,
+        "office_file_creation": 0,
+        "file_upload": 2,
+        "general_purpose_search": 0,
+        "general_purpose": 64,
+        "voice_single_turn": 7
+      }
+    }
+  }
+}

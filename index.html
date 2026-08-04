@@ -519,14 +519,14 @@
       <a class="sidenav-item" href="#sec-evidence" onclick="navClick(this)">
         <span>📋</span><span data-i18n="evidenceWall">原始帖子证据墙</span>
       </a>
-      <div class="sidenav-group-label" data-i18n="sectionScenario" style="display:none">场景体验分析</div>
-      <a class="sidenav-item" href="#sec-scenario-heatmap" onclick="navClick(this)" style="display:none">
+      <div class="sidenav-group-label" data-i18n="sectionScenario">场景体验分析</div>
+      <a class="sidenav-item" href="#sec-scenario-heatmap" onclick="navClick(this)">
         <span>🧩</span><span data-i18n="scenarioHeatmap">场景情感热力图</span>
       </a>
-      <a class="sidenav-item" href="#sec-scenario-detail" onclick="navClick(this)" style="display:none">
+      <a class="sidenav-item" href="#sec-scenario-detail" onclick="navClick(this)">
         <span>🔬</span><span data-i18n="scenarioDetail">场景下钻 (按产品)</span>
       </a>
-      <a class="sidenav-item" href="#sec-scenario-source" onclick="navClick(this)" style="display:none">
+      <a class="sidenav-item" href="#sec-scenario-source" onclick="navClick(this)">
         <span>🧪</span><span data-i18n="scenarioSource">场景数据质量</span>
       </a>
       <div class="sidenav-group-label" data-i18n="sectionCommunityHeat">社区热度分析</div>
@@ -624,8 +624,8 @@
       <button id="showMoreBtn" class="show-more-btn hidden" onclick="showMoreEvidence()" data-i18n="loadMore">加载更多帖子</button>
     </div>
 
-    <!-- ===== SECTION III: Scenario Experience Analysis (hidden) ===== -->
-    <div id="scenarioSectionWrap" style="display:none">
+    <!-- ===== SECTION III: Scenario Experience Analysis ===== -->
+    <div id="scenarioSectionWrap">
     <div class="page-section-divider">
       <span class="section-num">3</span>
       <span class="section-label" data-i18n="sectionScenario">场景体验分析</span>
@@ -1043,7 +1043,7 @@
       /* Load previous reports (oldest to newest order for chart) */
       for (var j = reportIndex.length - 1; j >= startIdx; j--) {
         try {
-          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1784864593');
+          var resp = await fetch('data/reports/' + reportIndex[j].file + '?v=1785873027');
           if (resp.ok) {
             var data = await resp.json();
             allHistoricalReports.push(data);
@@ -1058,7 +1058,7 @@
 
     async function loadReportIndex() {
       try {
-        var resp = await fetch('data/reports/index.json?v=1784864593');
+        var resp = await fetch('data/reports/index.json?v=1785873027');
         if (!resp.ok) return;
         var data = await resp.json();
         reportIndex = data.reports || [];
@@ -1543,7 +1543,7 @@
       renderProductTabs(); renderDeepDive();
       renderEvidence(); renderBubbleChart();
       renderCrossProduct(); renderTrend(); renderHistory();
-      /* renderScenarioAll(); // scenario module hidden */
+      renderScenarioAll();
       applyI18n();
     }
 
@@ -3047,7 +3047,7 @@
     /* ======= SCENARIO ANALYSIS RENDERERS (Section IV) ======= */
     async function loadScenarioData() {
       try {
-        var resp = await fetch('data/reports/latest_scenario.json?v=1784864593');
+        var resp = await fetch('data/reports/latest_scenario.json?v=1785873027');
         if (resp.ok) { scenarioData = await resp.json(); }
       } catch(e) { console.warn('No scenario data:', e); scenarioData = null; }
     }
@@ -3242,7 +3242,7 @@
       await loadReportIndex();
       await loadReportList();
       try {
-        var resp = await fetch('data/reports/latest.json?v=1784864593');
+        var resp = await fetch('data/reports/latest.json?v=1785873027');
         if (resp.ok) { reportData = await resp.json(); }
         else { resp = await fetch('report.json'); if (resp.ok) reportData = await resp.json(); }
         if (reportData) {
